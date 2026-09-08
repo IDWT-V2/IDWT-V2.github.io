@@ -1,0 +1,23 @@
+{
+  "protocol_id": "20260907-localized-polarization-stationarity-v1",
+  "relationship": "Follow-up designed after the six-dimensional texture scan; not retroactively part of its protocol",
+  "claim_under_test": "The uniform-polarization fixed-envelope preparation is stationary under spatial polarization variations in both five and six dimensions",
+  "models": [5, 6],
+  "unchanged_physics": "Leading spin-magnetic closed-field kernel plus positive bare polarization-gradient cost; no scalar-exchange or additional vector channel",
+  "envelope": "Normalized unit-variance radial Gaussian in each ambient dimension",
+  "reference_ray": [1, 0, 0, 0],
+  "polarization_basis": "Fundamental Spin(5) module and one fundamental Spin(6) half-spin module, both C^4",
+  "wave_direction": "(e0+e4)/sqrt(2), retaining the first three visible axes in both models",
+  "texture": "z_epsilon=cos(epsilon*cos(q*w.x))*z0+sin(epsilon*cos(q*w.x))*v",
+  "wave_numbers": [0.5, 1.0, 2.0],
+  "variations": "All six real ray-orthogonal spinor tangent directions",
+  "normalized_stationarity_residual": "Gradient norm of E/(kappa*integral n^2); gradient kinetic contribution vanishes at the uniform reference",
+  "stationarity_tolerance": 1e-9,
+  "independent_gradient_tolerance": 1e-6,
+  "epsilon_values": [0.001, 0.0005],
+  "fourier_harmonics": 8,
+  "phase_samples": 256,
+  "quadrature_tolerance": 1e-13,
+  "failure_meaning": "A nonzero first variation rejects this uniform preparation, not the entire ambient dimension",
+  "scope": "Conditional field model comparison; not a measured electron response or a spatial-orbit replacement"
+}

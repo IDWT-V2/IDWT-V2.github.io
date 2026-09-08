@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Fixed circulation energy bound — IDWT V2</title>
+  <meta name="description" content="Auxiliary model only: An exact positive-square identity makes the circulating Hartree states global energy minima at fixed mean circulation.">
+  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-fixed-circulation-energy-bound/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Fixed circulation energy bound — IDWT V2">
+  <meta property="og:description" content="Auxiliary model only: An exact positive-square identity makes the circulating Hartree states global energy minima at fixed mean circulation.">
+  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-fixed-circulation-energy-bound/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Fixed circulation energy bound — IDWT V2">
+  <meta name="twitter:description" content="Auxiliary model only: An exact positive-square identity makes the circulating Hartree states global energy minima at fixed mean circulation.">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
+  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/IDWT-V2-site/" >Overview</a>
+      <a href="/IDWT-V2-site/theory/" >Theory</a>
+      <a href="/IDWT-V2-site/research/" aria-current="page">Research</a>
+      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
+      <a href="/IDWT-V2-site/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research / Cross-depth locking</p>
+      <h1>Fixed circulation energy bound</h1>
+      <p class="article-date">Updated <time datetime="2026-09-08">September 8, 2026</time></p>
+      
+      
+    </header>
+    <div class="article-body">
+<blockquote>
+<p>Summary: Auxiliary model only: An exact positive-square identity makes the circulating Hartree states global energy minima at fixed mean circulation.</p>
+</blockquote>
+<h2 id="interpretation-correction">Interpretation correction</h2>
+<p>This calculation concerns an auxiliary field or local spin model, not the
+actual electron orbit constructed in the 6D demo. Its stationary states,
+angular expectations, and stability results have not been mapped to that
+trajectory or its observer readout. They must not be used as a replacement
+for the existing orbit-shape derivation. See
+<a href="/IDWT-V2-site/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a>.</p>
+<h2 id="model-and-conserved-constraint">Model and conserved constraint</h2>
+<p>Use only the isolated flat six-dimensional scalar functional
+E = ⟨p²⟩ + (g/2) tr M², M = ⟨xxᵀ⟩, norm one, g &gt; 0.
+It is invariant under SO(6), and its Hamiltonian evolution conserves the
+angular-momentum tensor. In particular fix</p>
+<p><span class="math math-display" data-equation-id="idwt-68994a95344ca218-0" data-tex-sha256="d1000317efea6761094d06b5f398e83df036f21b81affef7dba4a2e036b4b7f1"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="script">J</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>a</mi><mo>=</mo><mn>1</mn></mrow><mn>3</mn></munderover><msub><mi>L</mi><mrow><mi>a</mi><mo separator="true">,</mo><mi>a</mi><mo>+</mo><mn>3</mn></mrow></msub><mo separator="true">,</mo><mspace width="2em"/><mo stretchy="false">⟨</mo><mi mathvariant="script">J</mi><mo stretchy="false">⟩</mo><mo>=</mo><mo>−</mo><mi>j</mi><mo separator="true">,</mo><mspace width="1em"/><mi>j</mi><mo>≥</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">
+\mathcal J=\sum_{a=1}^3L_{a,a+3},\qquad
+\langle\mathcal J\rangle=-j,\quad j\ge0.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7805em;vertical-align:-0.0972em;"></span><span class="mord mathcal" style="margin-right:0.1847em;">J</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:3.0682em;vertical-align:-1.2671em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8011em;"><span style="top:-1.8829em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2671em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">a</span><span class="mbin mtight">+</span><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">⟨</span><span class="mord mathcal" style="margin-right:0.1847em;">J</span><span class="mclose">⟩</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.</span></span></span></span></span></span></p>
+<p>j is an expectation constraint and need not be an integer. This is not a
+new quantization rule. The states φ_N constructed earlier have j = N.</p>
+<h2 id="exact-identity-without-a-gaussian-ansatz">Exact identity, without a Gaussian ansatz</h2>
+<p>For any positive oscillator scale ω, let N₊ count the circular oscillator
+quanta whose angular momentum has the opposite sign to the constraint.
+The oscillator identity is</p>
+<p><span class="math math-display" data-equation-id="idwt-68994a95344ca218-1" data-tex-sha256="e6f1506fca336d229adcddb7e7b6c3c14874d87f7f1891446c890780949405f1"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>p</mi><mn>2</mn></msup><mo>+</mo><msup><mi>ω</mi><mn>2</mn></msup><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>ω</mi><mi mathvariant="script">J</mi><mo>=</mo><mn>4</mn><mi>ω</mi><msub><mi>N</mi><mo>+</mo></msub><mo>+</mo><mn>6</mn><mi>ω</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+p^2+\omega^2r^2+2\omega\mathcal J
+=4\omega N_++6\omega.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.0585em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.9474em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">ω</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7805em;vertical-align:-0.0972em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.0359em;">ω</span><span class="mord mathcal" style="margin-right:0.1847em;">J</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8917em;vertical-align:-0.2083em;"></span><span class="mord">4</span><span class="mord mathnormal" style="margin-right:0.0359em;">ω</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2583em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">+</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">6</span><span class="mord mathnormal" style="margin-right:0.0359em;">ω</span><span class="mord">.</span></span></span></span></span></span></p>
+<p>Choose ω³ = g(j+3)/6 and m = ω²/g. Completing the matrix square gives
+the exact expectation identity</p>
+<p><span class="math math-display" data-equation-id="idwt-68994a95344ca218-2" data-tex-sha256="1e94107769cbc2e3b2582d68944648a09b7be0fb3bab55fbab9176ce3a864ccc"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>−</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mi>ω</mi><mo stretchy="false">(</mo><mi>j</mi><mo>+</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><mn>4</mn><mi>ω</mi><mo stretchy="false">⟨</mo><msub><mi>N</mi><mo>+</mo></msub><mo stretchy="false">⟩</mo><mo>+</mo><mfrac><mi>g</mi><mn>2</mn></mfrac><mi mathvariant="normal">∥</mi><mi>M</mi><mo>−</mo><mi>m</mi><msub><mi>I</mi><mn>6</mn></msub><msubsup><mi mathvariant="normal">∥</mi><mi>F</mi><mn>2</mn></msubsup><mo>≥</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">
+E-\frac32\omega(j+3)
+=4\omega\langle N_+\rangle
++\frac g2\|M-mI_6\|_F^2\ge0.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.0576em;">E</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.0359em;">ω</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">4</span><span class="mord mathnormal" style="margin-right:0.0359em;">ω</span><span class="mopen">⟨</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2583em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">+</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mclose">⟩</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.7936em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord">∥</span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.1141em;vertical-align:-0.25em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-2.453em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.</span></span></span></span></span></span></p>
+<p>No restriction to a fixed oscillator shell, a Gaussian, or an isotropic
+trial density was made in deriving the bound. Finite kinetic energy and
+second moments suffice for these quadratic-form identities.
+Equality requires no opposite-circulation occupation and M = mI₆.
+For every integer N ≥ 2 the earlier pure state φ_N satisfies both conditions
+at j = N. It is therefore a <strong>global constrained energy minimum</strong>, despite
+being excited relative to the unconstrained scalar ground state.</p>
+<h2 id="what-this-controls-dynamically">What this controls dynamically</h2>
+<p>At fixed initial j, the chosen ω is fixed. Both E and j are conserved by
+the isolated scalar evolution, so the entire right-hand side is conserved.
+An initially small energy excess controls the opposite-circulation
+occupation and the Frobenius deviation of M from mI at all times for which
+the evolution exists. Since N₊ has integer spectrum with gap one above its
+kernel, the squared Hilbert-space norm outside that kernel is also bounded
+by ⟨N₊⟩. This is a nonlinear invariant bound for these observables.</p>
+<p>It is not stability of a particular wavefunction modulo phase. Many states
+have the same constraints and second moments; their internal evolution and
+higher moments need not stay near one representative φ_N. No unique
+orientation, selected degree, or radiative lifetime follows. The result
+complements rather than replaces the linear spectral analysis.</p>
+<h2 id="cross-sector-boundary">Cross-sector boundary</h2>
+<p>The fixed nuclear embedding used in the 3-in-6 moment model breaks the
+mixed rotations generated by this J. For a general quadratic mean-field
+potential xᵀ W x, the covariance equations give</p>
+<p><span class="math math-display" data-equation-id="idwt-68994a95344ca218-3" data-tex-sha256="2109f233c506d086480401f6aff8596619e23533dd01007421345dc183139d06"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mi>d</mi><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo stretchy="false">⟨</mo><mi>L</mi><mo stretchy="false">⟩</mo><mo>=</mo><mn>2</mn><mo stretchy="false">[</mo><mi>W</mi><mo separator="true">,</mo><mi>M</mi><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+\frac{d}{dt}\langle L\rangle=2[W,M].
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">⟨</span><span class="mord mathnormal">L</span><span class="mclose">⟩</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.1389em;">W</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mclose">]</span><span class="mord">.</span></span></span></span></span></span></p>
+<p>Self-interaction W = gM makes this vanish. An added nuclear matrix need
+not commute with M, and the scalar constrained-minimum proof then cannot
+be carried across unchanged. Even initially isotropic M does not ensure
+that anisotropic W preserves the circulating stationary solution.
+Radiation and other channels can likewise exchange angular momentum.</p>
+<h2 id="reproduction">Reproduction</h2>
+<p><a href="/IDWT-V2-site/evidence/diagnostics/circulation-energy-checks/">circulation_energy_checks.py</a> checks the
+symbolic positive-square identity, saturation by φ₂, and arbitrary complex
+finite-Fock-state examples. The proof is the displayed operator identity,
+not sampling those examples.</p>
+<h2 id="related">Related</h2>
+<ul>
+<li><a href="/IDWT-V2-site/research/notes/20260906-circulating-isotropic-orbitals/">Circulating isotropic orbitals</a> — states saturating the fixed-circulation bound.</li>
+<li><a href="/IDWT-V2-site/research/notes/20260906-hartree-moment-spectral-stability/">Hartree moment spectral stability</a> — distinct linear result, now supplemented by conserved nonlinear observable bounds.</li>
+<li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a> — current proof boundaries and correction routes.</li>
+</ul>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/IDWT-V2-site/research/notes/20260906-circulating-isotropic-orbitals/">Circulating isotropic orbitals</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-hartree-moment-spectral-stability/">Hartree moment spectral stability</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#interpretation-correction">Interpretation correction</a></li><li class="toc-level-2"><a href="#model-and-conserved-constraint">Model and conserved constraint</a></li><li class="toc-level-2"><a href="#exact-identity-without-a-gaussian-ansatz">Exact identity, without a Gaussian ansatz</a></li><li class="toc-level-2"><a href="#what-this-controls-dynamically">What this controls dynamically</a></li><li class="toc-level-2"><a href="#cross-sector-boundary">Cross-sector boundary</a></li><li class="toc-level-2"><a href="#reproduction">Reproduction</a></li><li class="toc-level-2"><a href="#related">Related</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <p>A connected record of geometry, derivations, and research.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
+      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

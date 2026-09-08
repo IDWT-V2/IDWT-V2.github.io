@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Coherent orbit readout — IDWT V2</title>
+  <meta name="description" content="A selected-monomial readout of the coherent degree-L lift maps an actual CP3 trajectory to the demo&#39;s four coefficients, with explicit preparation and omitted-mode boundaries.">
+  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-coherent-orbit-readout/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Coherent orbit readout — IDWT V2">
+  <meta property="og:description" content="A selected-monomial readout of the coherent degree-L lift maps an actual CP3 trajectory to the demo&#39;s four coefficients, with explicit preparation and omitted-mode boundaries.">
+  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-coherent-orbit-readout/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Coherent orbit readout — IDWT V2">
+  <meta name="twitter:description" content="A selected-monomial readout of the coherent degree-L lift maps an actual CP3 trajectory to the demo&#39;s four coefficients, with explicit preparation and omitted-mode boundaries.">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
+  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/IDWT-V2-site/" >Overview</a>
+      <a href="/IDWT-V2-site/theory/" >Theory</a>
+      <a href="/IDWT-V2-site/research/" aria-current="page">Research</a>
+      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
+      <a href="/IDWT-V2-site/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research / Orbits and dynamics</p>
+      <h1>Coherent orbit readout</h1>
+      <p class="article-date">Updated <time datetime="2026-09-08">September 8, 2026</time></p>
+      
+      
+    </header>
+    <div class="article-body">
+<blockquote>
+<p>Summary: A selected-monomial readout of the coherent degree-L lift maps an actual CP3 trajectory to the demo's four coefficients, with explicit preparation and omitted-mode boundaries.</p>
+</blockquote>
+<h2 id="an-explicit-nonlinear-map-not-equality-of-spaces">An explicit nonlinear map, not equality of spaces</h2>
+<p>Recorded 2026-09-06 17:21 UTC. A normalized geometric Z in C4 has the
+coherent symmetric lift v_L(Z)=Z tensor-power L in Sym^L(C4), of norm one.
+In the normalized monomial basis, select the same four modes used by
+the demo. Their coefficients before the even/odd basis change are</p>
+<p><span class="math math-display" data-equation-id="idwt-ec8e20fcfa7cd6f6-0" data-tex-sha256="58555937cddca44351b926dda6888ad5c5f89d160351ca38bdc8a099c2448277"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>f</mi><mi>L</mi></msub><mo stretchy="false">(</mo><mi>Z</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">(</mo><msubsup><mi>Z</mi><mn>1</mn><mi>L</mi></msubsup><mo separator="true">,</mo><msubsup><mi>Z</mi><mn>2</mn><mi>L</mi></msubsup><mo separator="true">,</mo><msqrt><mi>L</mi></msqrt><msub><mi>Z</mi><mn>3</mn></msub><msubsup><mi>Z</mi><mn>4</mn><mrow><mi>L</mi><mo>−</mo><mn>1</mn></mrow></msubsup><mo separator="true">,</mo><msubsup><mi>Z</mi><mn>4</mn><mi>L</mi></msubsup><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+f_L(Z)=\left(Z_1^L,Z_2^L,\sqrt L Z_3Z_4^{L-1},Z_4^L\right).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0715em;">Z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.8em;vertical-align:-0.65em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.453em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.453em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9755em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="padding-left:0.833em;">L</span></span><span style="top:-2.9355em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.0645em;"><span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.4436em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">L</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2564em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.453em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">.</span></span></span></span></span></span></p>
+<p>Every component has the same degree, so [f_L(Z)] is independent of the
+homogeneous representative. It is defined wherever f_L is nonzero. For
+L&gt;=2 the base point [0:0:1:0] is excluded; at L=1 the map is the identity
+up to the stated basis choice. The clock and radial readout impose their
+additional nonzero-denominator restrictions as in the demo.</p>
+<p>Under the existing base generator G=diag(1,−1,−1,0), these components
+have weights (L,−L,−1,0). Their subspace is invariant under this action.
+Consequently applying f_L after the base evolution gives exactly the
+same four-coefficient evolution as applying the selected representation
+generator after f_L. The even/odd first-pair transformation gives the
+demo's L sigma_x block; the common central phase remains irrelevant.</p>
+<p>This is an explicit nonlinear map from an actual proposed sector point
+to the coefficient ray used by the displayed readout. It is not an
+identification of CP3 with the full section space or with a Dirac field.</p>
+<h2 id="preparation-reproducing-the-demo">Preparation reproducing the demo</h2>
+<p>For its A,B&gt;0 with A²+B²=1, define</p>
+<p><span class="math math-display" data-equation-id="idwt-ec8e20fcfa7cd6f6-1" data-tex-sha256="36458ff6a631578d272b9fcc24675addd98c05c4a3c11c6ec4481b1cc2660433"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>r</mi><mo>=</mo><mo stretchy="false">(</mo><mi>A</mi><mi mathvariant="normal">/</mi><mi>B</mi><msup><mo stretchy="false">)</mo><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mi>L</mi></mrow></msup><mo separator="true">,</mo><mspace width="2em"/><mi>D</mi><mo>=</mo><mn>2</mn><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>L</mi><mo>+</mo><mn>1</mn><mo separator="true">,</mo><mspace width="2em"/><msub><mi>Z</mi><mn>0</mn></msub><mo>=</mo><mfrac><mn>1</mn><msqrt><mi>D</mi></msqrt></mfrac><mo stretchy="false">(</mo><mi>r</mi><mo separator="true">,</mo><mi>r</mi><mo separator="true">,</mo><mn>1</mn><mi mathvariant="normal">/</mi><msqrt><mi>L</mi></msqrt><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+r=(A/B)^{1/L},\qquad D=2r^2+1/L+1,\qquad
+Z_0=\frac1{\sqrt D}(r,r,1/\sqrt L,1).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.188em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1/</span><span class="mord mathnormal mtight">L</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.9474em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1/</span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.2514em;vertical-align:-0.93em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.1833em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9267em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;padding-left:0.833em;">D</span></span><span style="top:-2.8867em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1133em;"><span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.93em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1/</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9755em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="padding-left:0.833em;">L</span></span><span style="top:-2.9355em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.0645em;"><span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></span></p>
+<p>Normalizing f_L(Z0) gives (A,A,B,B)/sqrt(2). The first-pair even/odd
+change gives exactly (A,0,B/sqrt(2),B/sqrt(2)), the demo's preparation.
+This construction selects a preparation; no bound-state dynamics has
+yet selected Z0 or its L dependence.</p>
+<p>For A=.6 and B=.8 the squared norm retained by this four-mode selection is</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">L</th>
+<th style="text-align:right">Retained norm squared</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">.3472222222</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">.1175774164</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:right">.0395175369</td>
+</tr>
+</tbody>
+</table></div>
+<p>For L&gt;1 there are many nonzero omitted coefficients in the full coherent
+lift. They have not been removed from the physical state by this algebra.
+If f_L is used as a deterministic detector readout, the detector coupling
+must justify which components it resolves and their normalization. If it
+is instead called a projected quantum state, postselection and its retained
+weight must be accounted for. The two interpretations are not interchangeable.</p>
+<h2 id="what-this-closes-and-what-remains">What this closes and what remains</h2>
+<p>Given the existing G, preparation, and selected-component readout, the
+coefficient trajectory and hence the demo's petal formula can now be
+obtained from one actual CP3 trajectory through an explicit map. This
+is useful progress on the previously unspecified coordinate-to-coefficient
+bridge. The map is not generally a symplectic identification and is not
+claimed to be a uniquely forced detector law.</p>
+<p>It does not show that the induced response model generates this particular
+G. Matching one instantaneous source spectrum remains insufficient.
+It also does not supply the intrinsic Dirac solution, the physical
+electromagnetic current, or the apparatus interaction. The ring's
+degree-zero obstruction remains; this construction treats L&gt;=1.</p>
+<h2 id="checks">Checks</h2>
+<p>The subsequent <a href="/IDWT-V2-site/research/notes/20260906-dimensional-precession-test/">dimensional precession test</a>
+constructs the same displayed formula from a circle in a smaller sector
+using a different chosen nonlinear readout. This bridge therefore does not
+establish a minimum particle depth unless the physical readout is restricted
+and justified independently. That counterexample is about identifiability
+of the displayed trace, not equality of the underlying trajectories.</p>
+<p><a href="/IDWT-V2-site/evidence/diagnostics/source-geometry-maps-checks/">source_geometry_maps_checks.py</a>
+checks normalized coherent coefficients, the retained norm, arbitrary
+homogeneous rescalings, equivariance under the selected G, and the exact
+petal readout at generic non-singular times for L=1,2,3,4.</p>
+<h2 id="related">Related</h2>
+<ul>
+<li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a> — current boundaries and results.</li>
+<li><a href="/IDWT-V2-site/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a> — preserves the actual-orbit target and distinctions between successive models.</li>
+<li><a href="/IDWT-V2-site/research/notes/20260906-geometric-response-operator/">Geometric response operator</a> — keeps the geometric four-component lift separate from an intrinsic field.</li>
+</ul>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-geometric-response-operator/">Geometric response operator</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-dimensional-precession-test/">Dimensional precession test</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#an-explicit-nonlinear-map-not-equality-of-spaces">An explicit nonlinear map, not equality of spaces</a></li><li class="toc-level-2"><a href="#preparation-reproducing-the-demo">Preparation reproducing the demo</a></li><li class="toc-level-2"><a href="#what-this-closes-and-what-remains">What this closes and what remains</a></li><li class="toc-level-2"><a href="#checks">Checks</a></li><li class="toc-level-2"><a href="#related">Related</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <p>A connected record of geometry, derivations, and research.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
+      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

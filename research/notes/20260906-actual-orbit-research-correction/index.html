@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Actual orbit research correction — IDWT V2</title>
+  <meta name="description" content="Restores the actual-orbit target and Coulomb-plus-precession history, separating the existing mechanism from auxiliary models and its unresolved physical source.">
+  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-actual-orbit-research-correction/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Actual orbit research correction — IDWT V2">
+  <meta property="og:description" content="Restores the actual-orbit target and Coulomb-plus-precession history, separating the existing mechanism from auxiliary models and its unresolved physical source.">
+  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-actual-orbit-research-correction/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Actual orbit research correction — IDWT V2">
+  <meta name="twitter:description" content="Restores the actual-orbit target and Coulomb-plus-precession history, separating the existing mechanism from auxiliary models and its unresolved physical source.">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
+  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/IDWT-V2-site/" >Overview</a>
+      <a href="/IDWT-V2-site/theory/" >Theory</a>
+      <a href="/IDWT-V2-site/research/" aria-current="page">Research</a>
+      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
+      <a href="/IDWT-V2-site/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research / Research overview</p>
+      <h1>Actual orbit research correction</h1>
+      <p class="article-date">Updated <time datetime="2026-09-08">September 8, 2026</time></p>
+      
+      
+    </header>
+    <div class="article-body">
+<blockquote>
+<p>Summary: Restores the actual-orbit target and Coulomb-plus-precession history, separating the existing mechanism from auxiliary models and its unresolved physical source.</p>
+</blockquote>
+<h2 id="correction-to-the-preceding-research-pass">Correction to the preceding research pass</h2>
+<p>The target in V2 is an actual electron orbit, represented by Hamiltonian
+evolution and its observer projection. It is not a conventional stationary
+electron orbital. The earlier assistant discussion substituted the latter
+as the target and incorrectly suggested that only circulation and second
+moments had been worked out. The existing
+<a href="/IDWT-V2-site/visualizations/orbit/">6D orbit demo</a> already
+specifies the complete projected curve and its time-occupation measure.</p>
+<p>The recent scalar Hartree and oscillator-state calculations remain correct
+within their stated auxiliary models. They do not establish the actual
+trajectory, the clock, the selected four-state orbit representation, or its
+observer map. Calling them progress toward the observed shapes without
+establishing this connection was unjustified. A stationary field carrying
+an angular expectation is not a derivation of a particle trajectory.
+The coupled scalar branch is an auxiliary field solution, not an established
+source for the demo's generator or proof of stability of its orbits.</p>
+<p>Some preserved note IDs and filenames contain “orbital”; they name the
+auxiliary calculation that was actually performed. Replacing that word
+everywhere with “orbit” would falsely relabel the mathematics. Those notes
+now carry this correction explicitly. Standard terms such as spin-orbit
+coupling and orbital angular momentum do not imply a conventional-orbital
+ontology and are retained where mathematically appropriate.</p>
+<h2 id="existing-orbit-construction">Existing orbit construction</h2>
+<h3 id="provenance-correction-coulomb-binding-plus-precession">Provenance correction: Coulomb binding plus precession</h3>
+<p>The user's stated starting point was a Coulomb-bound 6D orbit, with
+precession subsequently added to produce petals. The assistant's later
+framing as a search for forces to create an otherwise unexplained shape
+lost that history. Inspecting only the earliest trigonometric demo was
+insufficient; subsequent revisions contain the relevant construction.</p>
+<p>The history of <code>visualizations/6d-orbit-slice.html</code> records:</p>
+<ul>
+<li><code>ce71f75</code>: <code>computeShell</code> rotates the four-component direction in six
+coordinate planes, with rates <code>abs(I[i]-I[j])*W1</code>, where <code>I[i]=exp[i]+1</code>.
+It explicitly sets the precession lock κ = ω₁, takes component moduli,
+and combines them with commensurate phase motion to generate the path.
+The paths are computed from this motion, not spherical-harmonic surfaces.
+The assigned rates, phases, and small radial breathing term are not a
+numerical integration of an electron–nucleus force law. Its prose's
+closure and stability claims are not interchangeable.</li>
+<li><code>f2ad825</code>: explicitly clarifies that the <strong>direction of the trajectory</strong>
+in CP3 precesses, correcting the earlier wording “its amplitude precesses.”</li>
+<li><code>1f8a54a</code>: replaces the legacy rotation recipe with a specified
+norm-preserving Hamiltonian flow, an L-dependent exchange, and a
+relative-phase clock. This is a mathematical replacement, not evidence
+that the legacy ordered rotations obeyed that same Hamiltonian.</li>
+<li><code>c6d6bcf</code> and <code>4701c3a</code>: construct the exchange and clock as parts of one
+degree-L representation of a higher-dimensional symmetry action. Their
+frequency ratio follows within the selected construction; identifying
+its source with physical electromagnetism and fixing its rate remain
+conditional. Later corrections distinguish sector points from section
+coefficients and constrain the observer map.</li>
+</ul>
+<p>These revisions can be inspected with
+<code>git show &lt;commit&gt;:visualizations/6d-orbit-slice.html</code> from this repository.
+The earlier Coulomb-plus-confinement Hamiltonian in the page's prose
+(for example <code>c50ef57</code>) does not by itself derive the later precession
+term. The historical intent and the implemented dynamics must both be
+recorded without conflating them.</p>
+<p>The research baseline is therefore <strong>the existing orbit-plus-precession
+construction</strong>, not an arbitrary petal curve awaiting a mechanism.
+The next physical task is to derive or test that precession and its lock
+from the coupled electron–nucleus dynamics. Nuclear feedback is a candidate
+contribution or correction, not an already demonstrated prerequisite for
+petals. The recent nuclear-polarization diagnostic treats an electric
+dipole response; it has not calculated the induced magnetic feedback the
+user proposed.</p>
+<h3 id="current-mathematical-construction">Current mathematical construction</h3>
+<p>The demo distinguishes the sector coordinate [Z] in CP3, the orbit-state
+coefficient ray [c] in P(V_L), and the intrinsic Dirac field at [Z]. The
+four-state subspace V_L is selected inside the degree-L section space.
+For the specified Hamiltonian, [c(t)] = [exp(-iM_L t)c(0)]. With θ = ωt,
+the amplitude exchange and relative-phase clock give the aligned orbit</p>
+<p><span class="math math-display" data-equation-id="idwt-66249a70a7ec9e9c-0" data-tex-sha256="941e88d9cb523464f6dedee67a65f1502b2769e03236b70a91bfdad962e48fb2"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msubsup><mi mathvariant="normal">Γ</mi><mi>L</mi><mrow><mi>x</mi><mi>y</mi></mrow></msubsup><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><mi>R</mi><mi mathvariant="normal">∣</mi><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>L</mi><mi>θ</mi><mo stretchy="false">)</mo><mi mathvariant="normal">∣</mi><msup><mi>e</mi><mrow><mi>i</mi><mi>θ</mi></mrow></msup><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+\Gamma_L^{xy}(\theta)=R|\cos(L\theta)|e^{i\theta}.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.0758em;vertical-align:-0.2935em;"></span><span class="mord"><span class="mord">Γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7823em;"><span style="top:-2.4065em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span><span style="top:-3.1809em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2935em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.1491em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight" style="margin-right:0.0278em;">θ</span></span></span></span></span></span></span></span></span><span class="mord">.</span></span></span></span></span></span></p>
+<p>This has 2L radial maxima and intervening zeros for integer L ≥ 1. The
+L = 0 ring has a separately supplied clock completion, since the degree-zero
+section space alone is one-dimensional. The observer's finite registration
+density is the response-broadened time measure of this actual orbit:</p>
+<p><span class="math math-display" data-equation-id="idwt-66249a70a7ec9e9c-1" data-tex-sha256="aed1381017cd7d930100351b22c695477bb89e565b5e51ca822a64921787713b"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>ρ</mi><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">b</mi><mi mathvariant="normal">s</mi></mrow></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mi>T</mi></mfrac><msubsup><mo>∫</mo><mn>0</mn><mi>T</mi></msubsup><msub><mi>G</mi><mi>σ</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi mathvariant="normal">Γ</mi><mi>L</mi></msub><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>t</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+\rho_{\rm obs}(x)=\frac1T\int_0^T
+G_\sigma(x-\Gamma_L(t))\,dt.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">obs</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.5032em;vertical-align:-0.9119em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop op-symbol large-op" style="margin-right:0.4445em;position:relative;top:-0.0011em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5912em;"><span style="top:-1.7881em;margin-left:-0.4445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.8129em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9119em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">G</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">σ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">Γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">))</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span><span class="mord">.</span></span></span></span></span></span></p>
+<p>The shape construction and its internal frequency ratio are therefore
+present. Deriving why the physical bound system selects that representation
+and generator, how its clock locks to the electron–nucleus motion, and its
+electromagnetic curvature identification, physical rate, and observer
+response from the action remains open. This does not erase the conditional
+representation-theoretic lock already obtained. A successful derivation
+must connect to this construction rather than replace it with stationary
+oscillator densities.</p>
+<h2 id="scope-of-the-geometric-corrections">Scope of the geometric corrections</h2>
+<p>The characteristic-class obstructions concern full-rank global bundle
+identifications, not the existence of the coefficient trajectory in P(V_L).
+They do not invalidate the demo's orbit formula. The relation between the
+section-coefficient state, the sector coordinate, and the intrinsic field
+must retain the distinctions already made in the demo.</p>
+<h2 id="related">Related</h2>
+<ul>
+<li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a> — current proof boundaries and correction routes.</li>
+</ul>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#correction-to-the-preceding-research-pass">Correction to the preceding research pass</a></li><li class="toc-level-2"><a href="#existing-orbit-construction">Existing orbit construction</a></li><li class="toc-level-3"><a href="#provenance-correction-coulomb-binding-plus-precession">Provenance correction: Coulomb binding plus precession</a></li><li class="toc-level-3"><a href="#current-mathematical-construction">Current mathematical construction</a></li><li class="toc-level-2"><a href="#scope-of-the-geometric-corrections">Scope of the geometric corrections</a></li><li class="toc-level-2"><a href="#related">Related</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <p>A connected record of geometry, derivations, and research.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
+      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

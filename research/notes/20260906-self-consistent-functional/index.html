@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Self-consistent functional — IDWT V2</title>
+  <meta name="description" content="A reusable harmonic mean-field closure with explicit norm and variation assumptions.">
+  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-self-consistent-functional/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Self-consistent functional — IDWT V2">
+  <meta property="og:description" content="A reusable harmonic mean-field closure with explicit norm and variation assumptions.">
+  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-self-consistent-functional/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Self-consistent functional — IDWT V2">
+  <meta name="twitter:description" content="A reusable harmonic mean-field closure with explicit norm and variation assumptions.">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
+  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/IDWT-V2-site/" >Overview</a>
+      <a href="/IDWT-V2-site/theory/" >Theory</a>
+      <a href="/IDWT-V2-site/research/" aria-current="page">Research</a>
+      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
+      <a href="/IDWT-V2-site/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research / Historical source audits</p>
+      <h1>Self-consistent functional</h1>
+      <p class="article-date">Updated <time datetime="2026-09-08">September 8, 2026</time></p>
+      
+      
+    </header>
+    <div class="article-body">
+<h2 id="source-and-scope">Source and scope</h2>
+<p>Adapted from <code>IDWT_04_Gravity.md</code>, §3.10.2–3.10.5c, especially
+<a href="/IDWT-V2-site/evidence/sources/idwt_04_gravity/">the explicit functional</a>, near line 315.
+Status: checked algebra within a flat, scalar, fixed-norm mean-field model;
+not a derivation of the V2 master dynamics.</p>
+<h2 id="functional-and-stationary-equation">Functional and stationary equation</h2>
+<p>For real coordinates x,y in R^d, coupling g&gt;0, kinetic coefficient set to one,
+and Q = integral |Psi|^2 fixed, retain the source functional</p>
+<p><span class="math math-display" data-equation-id="idwt-bf698d7f6f311588-0" data-tex-sha256="5d8dfb2a65934a59627b7dc537d98d4e7e85eb2cf12ea0eb9768ee13ff19128b"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo stretchy="false">[</mo><mi mathvariant="normal">Ψ</mi><mo stretchy="false">]</mo><mo>=</mo><mo>∫</mo><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∇</mi><mi mathvariant="normal">Ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mfrac><mi>g</mi><mn>2</mn></mfrac><mo>∬</mo><mo stretchy="false">(</mo><mi>x</mi><mo>⋅</mo><mi>y</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mi mathvariant="normal">∣</mi><mi mathvariant="normal">Ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mi mathvariant="normal">∣</mi><mi mathvariant="normal">Ψ</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+E[\Psi]=\int |\nabla\Psi(x)|^2\,dx
++\frac g2\iint(x\cdot y)^2|\Psi(x)|^2|\Psi(y)|^2\,dx\,dy.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0576em;">E</span><span class="mopen">[</span><span class="mord">Ψ</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.2222em;vertical-align:-0.8622em;"></span><span class="mop op-symbol large-op" style="margin-right:0.4445em;position:relative;top:-0.0011em;">∫</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">∣∇Ψ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.222em;vertical-align:-0.862em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-symbol large-op" style="margin-right:0.4445em;position:relative;top:-0.001em;">∬</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.1141em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord">∣Ψ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord">∣Ψ</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mord">.</span></span></span></span></span></span></p>
+<p>Variation of E-mu Q gives</p>
+<p><span class="math math-display" data-equation-id="idwt-bf698d7f6f311588-1" data-tex-sha256="68ceab0aad958b2db04370005f4d5f1abaa7cfeb52591f97800c11761e20ff63"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo fence="true">[</mo><mo>−</mo><mi mathvariant="normal">Δ</mi><mo>+</mo><mi>g</mi><mo>∫</mo><mo stretchy="false">(</mo><mi>x</mi><mo>⋅</mo><mi>y</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mi mathvariant="normal">∣</mi><mi mathvariant="normal">Ψ</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mtext> </mtext><mi>d</mi><mi>y</mi><mo fence="true">]</mo></mrow><mi mathvariant="normal">Ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>μ</mi><mi mathvariant="normal">Ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+\left[-\Delta+g\int(x\cdot y)^2|\Psi(y)|^2\,dy\right]\Psi(x)=\mu\Psi(x).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">[</span></span><span class="mord">−</span><span class="mord">Δ</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-symbol large-op" style="margin-right:0.4445em;position:relative;top:-0.0011em;">∫</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord">∣Ψ</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">]</span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">Ψ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">μ</span><span class="mord">Ψ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></span></p>
+<p>For an isotropic density, its second moment is
+integral y_i y_j |Psi(y)|^2 dy = Q delta_ij &lt;r^2&gt;/d.
+Thus V(x)=lambda |x|^2, with lambda=g Q &lt;r^2&gt;/d.
+The normalized oscillator ground state has &lt;r^2&gt;=d/(2 sqrt(lambda)), so</p>
+<p><span class="math math-display" data-equation-id="idwt-bf698d7f6f311588-2" data-tex-sha256="32007567681144a4649f5d53a2bb3d0a0a2cd82826f72d7decf89f102d1fafa0"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>λ</mi><mo>=</mo><mo stretchy="false">(</mo><mi>g</mi><mi>Q</mi><mi mathvariant="normal">/</mi><mn>2</mn><msup><mo stretchy="false">)</mo><mrow><mn>2</mn><mi mathvariant="normal">/</mi><mn>3</mn></mrow></msup><mo separator="true">,</mo><mspace width="2em"/><mi mathvariant="normal">Ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msqrt><mi>Q</mi></msqrt><mtext> </mtext><msup><mi>λ</mi><mrow><mi>d</mi><mi mathvariant="normal">/</mi><mn>8</mn></mrow></msup><msup><mi>π</mi><mrow><mo>−</mo><mi>d</mi><mi mathvariant="normal">/</mi><mn>4</mn></mrow></msup><mi>exp</mi><mo>⁡</mo><mo stretchy="false">(</mo><mo>−</mo><msqrt><mi>λ</mi></msqrt><mtext> </mtext><mi mathvariant="normal">∣</mi><mi>x</mi><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+\lambda=(gQ/2)^{2/3},\qquad
+\Psi(x)=\sqrt Q\,\lambda^{d/8}\pi^{-d/4}
+\exp(-\sqrt\lambda\,|x|^2/2).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.188em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mord mathnormal">Q</span><span class="mord">/2</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2/3</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">Ψ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.2428em;vertical-align:-0.2617em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9783em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord mathnormal" style="padding-left:1em;">Q</span></span><span style="top:-2.9383em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.28em" viewBox="0 0 400000 1296" preserveAspectRatio="xMinYMin slice"><path d="M263,681c0.7,0,18,39.7,52,119
+c34,79.3,68.167,158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120
+c340,-704.7,510.7,-1060.3,512,-1067
+l0 -0
+c4.7,-7.3,11,-11,19,-11
+H40000v40H1012.3
+s-271.3,567,-271.3,567c-38.7,80.7,-84,175,-136,283c-52,108,-89.167,185.3,-111.5,232
+c-22.3,46.7,-33.8,70.3,-34.5,71c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1
+s-109,-253,-109,-253c-72.7,-168,-109.3,-252,-110,-252c-10.7,8,-22,16.7,-34,26
+c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26s76,-59,76,-59s76,-60,76,-60z
+M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2617em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mtight">/8</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathnormal mtight">d</span><span class="mord mtight">/4</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord">−</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9811em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="padding-left:0.833em;">λ</span></span><span style="top:-2.9411em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.0589em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord">/2</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></span></p>
+<p>The historical formula lambda=(g/2)^(2/3) is the Q=1 specialization.
+Choosing Q=1 is not a derivation of quantum charge discreteness.</p>
+<h2 id="transfer-conditions">Transfer conditions</h2>
+<ul>
+<li>This produces an isotropic stationary solution, not a proof that it is the
+unique physical background or that its full fluctuation spectrum is stable.</li>
+<li>The eigenvalue mu includes the full mean-field potential; the interaction
+appears with one-half its double integral in E. Do not equate mu Q with E.</li>
+<li>When expanding this functional in oscillator modes, retain the kinetic
+matrix and quartic term, or explicitly subtract the background potential
+already included in oscillator eigenvalues. Otherwise it is double-counted.</li>
+<li>A resonant-only quartic mode sum requires a justified rotating-wave or
+time-averaging reduction; index-resonance restrictions do not follow merely
+from expanding the static functional in a basis.</li>
+<li>The formula as written uses a fixed origin. A co-moving centroid prescription
+must be defined and varied consistently before claiming translation covariance.</li>
+<li>This closure does not identify oscillator eigenvalues with cumulative state
+counts, select occupied particle indices, or supply a physical lock frequency.</li>
+</ul>
+<h2 id="related">Related</h2>
+<ul>
+<li><a href="/IDWT-V2-site/research/notes/20260906-cross-sector-moment-kernel/">Cross-sector moment kernel</a> — generalizes the isotropic moment retained here.</li>
+<li><a href="/IDWT-V2-site/research/notes/20260906-normalized-oscillator-modes/">Normalized oscillator modes</a> — supplies the normalized stationary basis.</li>
+</ul>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/IDWT-V2-site/research/notes/20260906-cross-sector-moment-kernel/">Cross-sector moment kernel</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-normalized-oscillator-modes/">Normalized oscillator modes</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#source-and-scope">Source and scope</a></li><li class="toc-level-2"><a href="#functional-and-stationary-equation">Functional and stationary equation</a></li><li class="toc-level-2"><a href="#transfer-conditions">Transfer conditions</a></li><li class="toc-level-2"><a href="#related">Related</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <p>A connected record of geometry, derivations, and research.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
+      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

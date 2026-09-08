@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>diagnostic-suite-final.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/evidence/results/two-path-study/diagnostic-suite-final/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="diagnostic-suite-final.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/evidence/results/two-path-study/diagnostic-suite-final/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="diagnostic-suite-final.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
+  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/IDWT-V2-site/" >Overview</a>
+      <a href="/IDWT-V2-site/theory/" >Theory</a>
+      <a href="/IDWT-V2-site/research/" >Research</a>
+      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
+      <a href="/IDWT-V2-site/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>diagnostic-suite-final.json</h1>
+      
+      
+      
+    </header>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/IDWT-V2-site/assets/evidence/experiments/results/two-path-study/diagnostic-suite-final.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">interpreter</th><td>3.14.6 (main, Jun 11 2026, 00:00:00) [GCC 15.2.1 20260123 (Red Hat 15.2.1-7)]</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;interpreter&quot;: &quot;3.14.6 (main, Jun 11 2026, 00:00:00) [GCC 15.2.1 20260123 (Red Hat 15.2.1-7)]&quot;,
+  &quot;excluded&quot;: [
+    &quot;cylindrical_petal_continuation_checks.py&quot;,
+    &quot;fixed_casimir_petal_continuation_checks.py&quot;
+  ],
+  &quot;failures&quot;: [],
+  &quot;results&quot;: [
+    {
+      &quot;script&quot;: &quot;beam_adapted_frame_link_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.8483054100070149,
+      &quot;stdout&quot;: &quot;nu = cos^2(phi/2)\nA_J = ||Q1-Q2||_F^2 / 6\nPASS\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;chiral_geometry_selection_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 3.0780331681016833,
+      &quot;stdout&quot;: &quot;Minimum energy: -0.28269230769230763 ; normal stiffness: 2.6 ; source gap: 0.7538461538461537\nCompleted 788 evaluations across 20 runtime conditions.\n  chiral operator Hermitian: max residual 0\n  operator equals bivector pairing: max residual 8.88e-16\n  pure chiral bilinear complex structure: max residual 8.88e-16\n  exact joint completed square: max residual 2.13e-14\n  joint global minimum attained: max residual 3.33e-16\n  selected source rank one form: max residual 1.12e-16\n  self generated chiral gap: max residual 4.44e-16\n  same first order geometric dynamics: max residual 1.78e-15\n  rank one Berry curvature: max residual 7.11e-15\n  same induced FS metric: max residual 4.26e-14\n  unnormalized chiral density identity: max residual 1.42e-14\n  eliminated bivector density quartic: max residual 2.22e-15\n  chiral effective six flat nine positive modes: max residual 4.48e-10\n  nonzero canonical Berry pair: max residual 0\n  both chiralities restore component degeneracy: max residual 0\n  joint evolving spinor norm: max residual 3.65e-13\n  joint evolving energy: max residual 2.51e-12\nOne normalized chiral spinor plus a bivector cost selects CP3 and a Berry term; microscopic chirality, coupling, and spatial identification remain assumptions.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;circulating_hartree_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.9799319059820846,
+      &quot;stdout&quot;: &quot;PASS: isotropic position covariance, full-rank circulation, signed singlet source, and exact self-consistent omega at N=2.\nFinite BdG dimension: 296 ; distinct positive nonzero frequencies: [0.5398903 4.        4.6066714 4.8989795 5.1465617]\nLargest raw imaginary roundoff: 2.988585979543531e-08\nAnalytic moment discriminant is strictly positive; neutral/Jordan modes and nonlinear stability require separate treatment.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;circulation_energy_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.4525018989806995,
+      &quot;stdout&quot;: &quot;PASS: exact fixed-circulation energy-gap identity, N=2 saturation, and 20 arbitrary finite-Fock-state tests.\nThe constrained minimum is highly degenerate; no preferred particle degree or nuclear lock follows.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;ckm_count_audit_checks_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.4172754399478436,
+      &quot;stdout&quot;: &quot;PASS: separable rank, nonunique completions, J=0 versus J=-2/27 for the same rank-one kernel, and rank repair.\nPASS: derived-metric normalization can give identity while the ordinary polar factor gives a rotation; triangular counterexample.\nPASS: actual binomial support, positive interior determinant, nonunitarity, endpoints, and both possible single bottom bands.\nPASS: binomial polar factor at p=1/2, 70 digits; relative reconstruction 6.3386e-71 orthogonality 7.6987e-71\nPASS: binomial polar factor at p=1/2, 110 digits; relative reconstruction 1.6649e-111 orthogonality 3.1586e-111\n  |Q| row: 0.999999999971, 7.55045366878e-6, 2.89461264535e-11\n  |Q| row: 5.34095480142e-6, 0.707366017336, 0.706847449942\n  |Q| row: 5.33699844618e-6, 0.706847449922, 0.707366017357\nPASS: loss weights arise from a multi-Kraus channel, retain forbidden degree support, and are not a unitary channel.\nPASS: one-step support, non-permutation complex completion with J=0, and normalized coherent creation formula.\nALL CHECKS PASSED. No CKM parameter fit, amplitude reconstruction, or V2 master-operator derivation was performed.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;collective_precession_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.911205310956575,
+      &quot;stdout&quot;: &quot;  branch omega=-2.20256241898: maximum numerical real eigenvalue=0.665239842\n    perturbation-versus-linear errors: [1.3103432548517234e-10, 3.558852660031991e-11]\n  branch omega=0.5: maximum numerical real eigenvalue=1.9434309e-08\n  branch omega=1.70256241898: maximum numerical real eigenvalue=6.50047035e-09\nExact low-branch characteristic polynomial: x**4*(x**2 + 4)*(4*x**2 + 1)*(4*x**2 + 9)*(4*x**2 + 25)*(144*x**4 + 1324*x**2 + 1825)*(5435817984*x**8 + 96096780288*x**6 + 601412116420*x**4 + 1573811889137*x**2 + 1436009168896)/50096498540544\nExact zero algebraic multiplicity / nullity / nullity squared: 4 3 4\nCompleted 32 evaluations across 13 conditions.\n  three cubic branches: max residual 8.88e-16\n  same coupling on every branch: max residual 2.22e-15\n  relative equilibrium equations: max residual 2.22e-15\nOne example has no exponential linear growth but has neutral drift; nonlinear orbital stability and physical source selection are not proved.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;common_anchor_action_checks_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.031915546976961195,
+      &quot;stdout&quot;: &quot;D*=(1,15,18564)\nCase A d3=9.20130653516 d4=4.25937726721\nCase B d3=0.00049565322857 d4=0.00344164291145\nmismatch factors A/B: d3=18564 d4=1237.6\nPASS\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;completed_coulomb_petals_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 11.183028306928463,
+      &quot;stdout&quot;: &quot;N=1, L=1: clock=2.12132034356, max linear growth=0.457701343856, source norm squared=126.114105614\n  ten-turn perturbation: rotating-frame deviation=0.0116112898, radial deviation=7.92594636e-05\nN=1, L=2: clock=0.453730466088, max linear growth=7.16778761488e-07, source norm squared=15.0400869518\n  ten-turn perturbation: rotating-frame deviation=0.011477147, radial deviation=6.2603953e-05\nN=1, L=3: clock=0.299230566607, max linear growth=7.48646731917e-07, source norm squared=5.82394386616\n  ten-turn perturbation: rotating-frame deviation=0.0239617234, radial deviation=7.20600572e-05\nN=1, L=4: clock=0.223579960826, max linear growth=7.5806446432e-07, source norm squared=3.33468292914\nN=2, L=1: clock=1.3416407865, max linear growth=1.11809588609, source norm squared=47.8125019186\nN=2, L=2: clock=0.402749351016, max linear growth=0.359183643772, source norm squared=11.8511029453\nN=2, L=3: clock=0.255225288434, max linear growth=0.424991388621, source norm squared=5.90890775165\nN=2, L=4: clock=0.19050124818, max linear growth=0.452985621066, source norm squared=4.05290086226\ncommon norm L=2: clock=0.454619168037, positive source spectrum=[0.07408293 2.01168471 3.30872125], max real mode=7.09e-07\ncommon norm L=3: clock=0.318698166754, positive source spectrum=[1.62354101 1.70665083 3.07432229], max real mode=7.78e-07\ncommon norm L=4: clock=0.16280884313, positive source spectrum=[0.47026621 2.01069745 3.27657526], max real mode=6.19e-07\nCompleted 5377 evaluations across 27 conditions.\n  completed relative equilibrium residual: max residual 1.52e-13\n  completed rotating field vanishes: max residual 1.52e-13\n  completed exact trajectory: max residual 8.62e-09\n  completed trajectory energy: max residual 4.52e-09\n  completed signed rose projection: max residual 3.59e-09\n  completed full radius fixed: max residual 3.59e-09\n  completed full state recurrence: max residual 8.62e-09\n  completed Jacobian independent finite difference: max residual 7.38e-10\n  real unstable eigenpair: max residual 1.72e-15\n  completed unstable growth observed: max residual 1.98e-06\n  stable branch perturbation energy: max residual 3.97e-09\n  completed pair remains antipodal: max residual 0\n  common source norm across petal levels: max residual 8.05e-13\n  common norm branch rotating residual: max residual 2.95e-13\nCompleted-coupling relative equilibria exist; one-electron L=2,3,4 have no resolved exponential mode, while L=1 and all pair branches are unstable.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;correction_checks_2026_09_06.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.6549254030687734,
+      &quot;stdout&quot;: &quot;PASS: topology prerequisites, fixed-reference normalization, action/frequency distinction,\nrank-two orientation Hessian, projector and FS factors, Clifford commutator domain,\nbeam/fixed-ray distinction, mode-space dimensions, and muon benchmark error.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;coulomb_angular_response_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 9.882069543935359,
+      &quot;stdout&quot;: &quot;N=1, level=1: solved clock=0.8, source rate=0.8, initial quadratic/kinetic energy=0.68\nN=1, level=2: solved clock=0.8, source rate=1.6, initial quadratic/kinetic energy=2.6\nN=1, level=3: solved clock=0.8, source rate=2.4, initial quadratic/kinetic energy=5.8\nN=1, level=4: solved clock=0.8, source rate=3.2, initial quadratic/kinetic energy=10.28\nN=1, perturbation=0.0001, duration=15.7079633: position error=0.00488623707, radius error=0.000400114805\nN=1, perturbation=0.001, duration=15.7079633: position error=0.0487992807, radius error=0.00401144315\nN=1, quadratic completion: position error=1.86827488, radius error=0.595951209\nN=2, level=1: solved clock=0.569209979, source rate=0.569209979, initial quadratic/kinetic energy=0.52\nN=2, level=2: solved clock=0.569209979, source rate=1.13841996, initial quadratic/kinetic energy=1.6\nN=2, level=3: solved clock=0.569209979, source rate=1.70762994, initial quadratic/kinetic energy=3.4\nN=2, level=4: solved clock=0.569209979, source rate=2.27683992, initial quadratic/kinetic energy=5.92\nN=2, perturbation=0.0001, duration=22.0768628: position error=4.48655586, radius error=2.31760538, minimum pair distance=1.09153513\nN=2, perturbation=0.001, duration=22.0768628: position error=4.92008989, radius error=4.02402436, minimum pair distance=1.09128255\nN=2, quadratic completion: position error=2.53216451, radius error=0.527079102\nPair exponential growth rate=0.520404067288; measured amplification at t=8 is 64.2789706\nCompleted 9812 evaluations across 28 conditions.\n  radial kernel curvature identity: max residual 0\n  canonical energy gradient: max residual 1.25e-09\n  full reciprocal energy derivative: max residual 1.78e-09\n  total angular momentum derivative: max residual 1.14e-15\n  source coadjoint invariants derivative: max residual 2.39e-12\n  minimal coupling completed square: max residual 1.78e-15\n  zero source angular momentum is not spontaneously induced: max residual 0\n  exact reciprocal petal derivative: max residual 3.55e-09\n  autonomous versus exact motion: max residual 1.88e-09\n  coupled orbit energy conserved: max residual 6.02e-09\n  total angular momentum conserved: max residual 1.21e-09\n  source angular spectrum conserved: max residual 3.63e-10\n  six dimensional radius constant: max residual 1.09e-09\n  linear spatial projection is signed rose: max residual 1.88e-09\n  full state recurrence: max residual 1.88e-09\n  quadratic magnetic term size: max residual 2.84e-14\n  perturbed trajectory energy conservation: max residual 3.94e-09\n  quadratic completion energy conserved: max residual 1.01e-08\n  repelling electrons stay separated: max residual 2.19e-09\n  pair instability analytic growth rate: max residual 3.33e-16\n  predicted unstable growth observed: max residual 1.66e-08\nPrepared classical signed-rose solutions, not quantum shell selection or an identified nuclear EM law.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;coupled_circulation_bdg_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.2781962299486622,
+      &quot;stdout&quot;: &quot;PASS: independent two-field Bogoliubov matrix dimension 310\nDistinct positive active frequencies: [0.2834277 4.        4.6252866 4.7067872 4.8989795 4.9679209]\nLargest imaginary roundoff: 2.2664845109432e-08\nMatches exact moment polynomials; zero modes and nonlinear stability are not resolved numerically.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;coupled_circulation_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 11.57493171398528,
+      &quot;stdout&quot;: &quot;PASS: four coupled stationary parameter choices; exact 13x13 and 7x7 moment blocks exhaust 99 dimensions.\nSymmetric block: lambda**3*(lambda**2 + 16)*(lambda**2 + 24)*(169*lambda**6 + 7800*lambda**4 + 89856*lambda**2 + 7168)/169\nAntisymmetric block: lambda**5*(13*lambda**2 + 288)/13\nAll nonzero moment eigenvalues are imaginary; neutral Jordan behavior and nonlinear stability are not settled.\nPASS: equal-coupling family for every integer N&gt;=2; three positive squared frequencies lie in (0,16), (16,24), (24,32).\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;cp3_geometry_selection_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.2879072609357536,
+      &quot;stdout&quot;: &quot;Selected squared plane strength: 0.75 ; energy: -0.75 ; normal stiffness: 1.5\nSingle occupied source minimum energy: -0.125 ; rank-two squared strength: 0.75\nNormal-mode trajectory errors at epsilon=.01,.005: [3.3511543548248035e-05, 8.246100082542895e-06]\nCompleted 631 evaluations across 24 runtime conditions.\n  full source spectrum: max residual 4.75e-14\n  spectral energy formula: max residual 1.47e-13\n  independent energy gradient: max residual 5.54e-09\n  invariant potential has zero commutator flow: max residual 4.66e-15\n  minimum stationary: max residual 4.44e-16\n  complex structure selected at minimum: max residual 1.11e-16\n  global minimum attained: max residual 0\n  pure ray lies on selected minimum: max residual 2.66e-15\n  induced metric is eight times FS: max residual 1.42e-14\n  filled real band Berry curvature zero: max residual 1.11e-27\n  six flat and nine positive Hessian directions: max residual 7.9e-11\n  partial rank stationary examples: max residual 4.44e-16\n  partial rank energy ordering: max residual 0\n  uncondensed origin stationary: max residual 0\n  single occupation rank two minimum: max residual 0\n  single occupation penalizes other planes: max residual 6.66e-16\n  canonical amplitude energy conservation: max residual 6.16e-13\nCP3 minima are derived within an assumed skew-response model; occupation, amplitude kinetics, and identification with electron configuration remain to derive.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;cp5_gauge_bundle_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.1814721809932962,
+      &quot;stdout&quot;: &quot;Excluded rank-two Chern factor: h**2 + h + 1 ; K(CP3) coefficient: 1/2\nExcluded rank-two Chern factor: 3*h**2 + 3*h + 1 ; K(CP3) coefficient: -1/2\nPASS: exhaustive Chern-factor obstruction; auxiliary determinant and exterior charges; 4D anomaly sums; distinct spinor Chern characters; conditional twisted-Dirac indices.\nThe auxiliary bundle is globally admissible but is not the CP5 tangent carrier or a derived particle spectrum.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;cross_plane_response_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 2.478011916973628,
+      &quot;stdout&quot;: &quot;Finite-response convergence examples (dimensionless; no fitted atom):\n  s0=0.25, response frequency=1, endpoint errors=[1.8971386961386116e-05, 4.742759517784023e-06], fine diagnostics={&#39;energy&#39;: np.float64(2.1578330624549835e-06), &#39;constraint&#39;: np.float64(6.372680161348399e-14), &#39;charge&#39;: np.float64(9.325873406851315e-15), &#39;s_min&#39;: np.float64(0.011621962100118222), &#39;s_max&#39;: np.float64(0.25)}\n  s0=0.64, response frequency=2, endpoint errors=[0.00015810300104734942, 3.9522569477201674e-05], fine diagnostics={&#39;energy&#39;: np.float64(9.032636275052575e-06), &#39;constraint&#39;: np.float64(3.863576125695545e-14), &#39;charge&#39;: np.float64(1.709743457922741e-14), &#39;s_min&#39;: np.float64(0.2865587715300398), &#39;s_max&#39;: np.float64(0.6400000000000001)}\n  s0=0.888889, response frequency=4, endpoint errors=[0.0008843472944642938, 0.00022090146231526497], fine diagnostics={&#39;energy&#39;: np.float64(3.101266271232639e-06), &#39;constraint&#39;: np.float64(4.241051954068098e-14), &#39;charge&#39;: np.float64(2.1538326677728037e-14), &#39;s_min&#39;: np.float64(0.8659659300297685), &#39;s_max&#39;: np.float64(0.8888888888888888)}\nFast-response limit (s0=.36; prepared response velocity):\n  response frequency=5, max electron endpoint error=0.0152190928\n  response frequency=10, max electron endpoint error=0.00371429016\n  response frequency=20, max electron endpoint error=0.000952155725\n  response frequency=40, max electron endpoint error=0.000240221282\nAt s=8/9, source plane ratio 3:1:1 but induced/frozen trajectory difference: 0.07462595428999891\nCompleted 97 evaluations across 17 conditions.\n  completed square: max residual 2.22e-16\n  differential energy conservation: max residual 2.11e-15\n  differential rotation charges: max residual 8.88e-10\n  instantaneous source 3 1 1 rates: max residual 8.88e-16\n  interaction energy: max residual 1.78e-15\n  interaction rotation charges: max residual 2e-15\n  static elimination energy: max residual 1.67e-16\n  static flow equivalence: max residual 5.55e-17\nA response channel was assumed. No physical susceptibility, orbital clock, or atom was fitted or validated.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;cylindrical_molecular_shape_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 12.985811528051272,
+      &quot;stdout&quot;: &quot;trigonal: nuclear radius=0.1, radial-root R=0.963035924283, initial max |gradient|=4e-13\n  final max |gradient|=4e-13\n  Hessian eigenvalues=[3.1771472 3.1852268 3.1852269 7.6416055 7.6416055 7.6529172 8.9824354\n 8.9824354 8.9888996]\n  negative modes=0, near-zero modes=0\n  independent curvature error=2e-07\ntrigonal: nuclear radius=0.3, radial-root R=0.937604838763, initial max |gradient|=3.97e-14\n  final max |gradient|=3.97e-14\n  Hessian eigenvalues=[0.5484679 0.5571169 0.5571169 0.5859636 0.5859636 0.5981148 0.6520284\n 0.6520284 0.6590329]\n  negative modes=0, near-zero modes=0\n  independent curvature error=5.17e-09\ntrigonal: nuclear radius=0.6, radial-root R=1.19168570907, initial max |gradient|=2.35e-15\n  final max |gradient|=2.35e-15\n  Hessian eigenvalues=[0.0588992 0.0631514 0.0631514 0.0680811 0.0680811 0.0714926 0.1225595\n 0.1225595 0.1285175]\n  negative modes=0, near-zero modes=0\n  independent curvature error=1.06e-08\ntetrahedral: nuclear radius=0.1, radial-root R=0.980348602657, initial max |gradient|=0.0607\n  relaxed centres=[[ 8.0790282e-01 -3.2485051e-17  5.5498823e-01]\n [-1.4995073e-16  8.0790282e-01 -5.5498823e-01]\n [-8.0790282e-01 -3.4881275e-17  5.5498823e-01]\n [-1.0929684e-16 -8.0790282e-01 -5.5498823e-01]]\n  relaxed pair angles=[108.69956 108.69956 108.69956 108.69956 111.02582 111.02582]\n  final max |gradient|=1.02e-11\n  Hessian eigenvalues=[0.4561963 0.4638329 0.4647498 0.4647498 5.50014   5.5005785 5.5005785\n 5.5112595 5.7174304 5.7174304 5.7260084 5.7270443]\n  negative modes=0, near-zero modes=0\n  independent curvature error=1.05e-07\ntetrahedral: nuclear radius=0.3, radial-root R=0.901811769847, initial max |gradient|=0.03\n  relaxed centres=[[ 7.7157707e-01 -3.3480283e-17  4.6227992e-01]\n [ 1.9636627e-17  7.7157707e-01 -4.6227992e-01]\n [-7.7157707e-01  8.8371250e-18  4.6227992e-01]\n [ 1.2868587e-16 -7.7157707e-01 -4.6227992e-01]]\n  relaxed pair angles=[105.31619 105.31619 105.31619 105.31619 118.14528 118.14528]\n  final max |gradient|=9.81e-11\n  Hessian eigenvalues=[0.1835161 0.1947738 0.1947738 0.1954547 0.5254377 0.5254377 0.5255897\n 0.5348584 0.5937904 0.5937904 0.602108  0.608247 ]\n  negative modes=0, near-zero modes=0\n  independent curvature error=8.22e-06\ntetrahedral: nuclear radius=0.6, radial-root R=0.805967794082, initial max |gradient|=0.0136\n  relaxed centres=[[ 7.3860033e-01 -5.2579095e-17  3.1951192e-01]\n [ 8.7867292e-17  7.3860033e-01 -3.1951192e-01]\n [-7.3860033e-01 -1.2218061e-17  3.1951192e-01]\n [-2.0359618e-16 -7.3860033e-01 -3.1951192e-01]]\n  relaxed pair angles=[ 99.0697   99.0697   99.0697   99.0697  133.21424 133.21424]\n  final max |gradient|=7.77e-12\n  Hessian eigenvalues=[0.0500167 0.0650232 0.0650232 0.0737959 0.0990981 0.1012579 0.1012579\n 0.1074829 0.1434699 0.1440653 0.1440653 0.1716474]\n  negative modes=0, near-zero modes=0\n  independent curvature error=8.77e-09\nCompleted 24 evaluations across 5 conditions.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;cylindrical_nuclear_profile_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 14.036962352111004,
+      &quot;stdout&quot;: &quot;trigonal: nuclear radius=0.01, stable R=0.998986407384, radial slope=-9437.74478\ntrigonal: nuclear radius=0.03, stable R=0.993867571122, radial slope=-1012.90842\ntrigonal: nuclear radius=0.1, stable R=0.963036065243, radial slope=-76.5449655\ntrigonal: nuclear radius=0.3, stable R=0.937606436499, radial slope=-5.99580071\ntrigonal: nuclear radius=0.6, stable R=1.19168644544, radial slope=-1.28255659\ntetrahedral: nuclear radius=0.01, stable R=0.999588140567, radial slope=-5837.75993\ntetrahedral: nuclear radius=0.03, stable R=0.997253187154, radial slope=-642.782559\ntetrahedral: nuclear radius=0.1, stable R=0.980348565481, radial slope=-55.4964274\ntetrahedral: nuclear radius=0.3, stable R=0.901811745307, radial slope=-5.62379116\ntetrahedral: nuclear radius=0.6, stable R=0.80596785155, radial slope=-1.59962352\nCompleted 48 evaluations across 8 conditions.\n  finite nuclear potential continuous: max residual 0\n  finite nuclear force continuous: max residual 7.5e-07\n  finite-profile quadrature convergence: max residual 3.57e-07\nFinite cylindrical nuclear profiles give restoring cycle-averaged radii for both orbit-axis geometries. Electron-orbit self-consistency and full Floquet stability remain to be solved.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;cylindrical_refinement_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 203.80968140193727,
+      &quot;stdout&quot;: &quot;{\&quot;file\&quot;: \&quot;gauged-0064.json\&quot;, \&quot;h\&quot;: 0.0064, \&quot;period\&quot;: 20.672923354841945, \&quot;dop853_recurrence\&quot;: 4.264175705719852e-12, \&quot;radau_recurrence\&quot;: 1.4673145211392877e-11, \&quot;method_difference\&quot;: 1.0505704128580101e-11, \&quot;casimir_error\&quot;: 4.440892098500626e-16, \&quot;section_error\&quot;: 6.428847720762131e-20, \&quot;numerically_accepted\&quot;: true}\n{\&quot;file\&quot;: \&quot;polished-0096.json\&quot;, \&quot;h\&quot;: 0.0096, \&quot;period\&quot;: 20.567508940993605, \&quot;dop853_recurrence\&quot;: 5.994421805239019e-13, \&quot;radau_recurrence\&quot;: 3.405290155070084e-11, \&quot;method_difference\&quot;: 3.465063579576452e-11, \&quot;casimir_error\&quot;: 4.440892098500626e-16, \&quot;section_error\&quot;: 4.503449135725712e-26, \&quot;numerically_accepted\&quot;: true}\n{\&quot;file\&quot;: \&quot;segmented-0128.json\&quot;, \&quot;h\&quot;: 0.0128, \&quot;period\&quot;: 20.48965735631915, \&quot;dop853_recurrence\&quot;: 3.0539232971539837e-13, \&quot;radau_recurrence\&quot;: 4.571506589587663e-11, \&quot;method_difference\&quot;: 4.601915588046664e-11, \&quot;casimir_error\&quot;: 4.440892098500626e-16, \&quot;section_error\&quot;: 2.706108449270159e-25, \&quot;numerically_accepted\&quot;: true}\n{\&quot;file\&quot;: \&quot;gauged-016.json\&quot;, \&quot;h\&quot;: 0.016, \&quot;period\&quot;: 20.429859597275836, \&quot;dop853_recurrence\&quot;: 1.714930987885594e-13, \&quot;radau_recurrence\&quot;: 7.732313972098166e-12, \&quot;method_difference\&quot;: 7.86542201459468e-12, \&quot;casimir_error\&quot;: 1.7763568394002505e-15, \&quot;section_error\&quot;: 9.48155777138908e-23, \&quot;numerically_accepted\&quot;: true}\n{\&quot;file\&quot;: \&quot;gauged-020.json\&quot;, \&quot;h\&quot;: 0.02, \&quot;period\&quot;: 20.383758427749125, \&quot;dop853_recurrence\&quot;: 1.9305845074536637e-12, \&quot;radau_recurrence\&quot;: 2.7577087550368212e-11, \&quot;method_difference\&quot;: 2.5667756327229846e-11, \&quot;casimir_error\&quot;: 4.440892098500626e-16, \&quot;section_error\&quot;: 3.5361971186641933e-22, \&quot;numerically_accepted\&quot;: true}\n{\&quot;file\&quot;: \&quot;gauged-0256-final.json\&quot;, \&quot;h\&quot;: 0.0256, \&quot;period\&quot;: 20.36607769809035, \&quot;dop853_recurrence\&quot;: 1.0607530540255682e-12, \&quot;radau_recurrence\&quot;: 1.6135008582868575e-11, \&quot;method_difference\&quot;: 1.508017309930151e-11, \&quot;casimir_error\&quot;: 4.440892098500626e-16, \&quot;section_error\&quot;: 5.977672395402739e-25, \&quot;numerically_accepted\&quot;: true}\n{\&quot;file\&quot;: \&quot;gauged-040.json\&quot;, \&quot;h\&quot;: 0.04, \&quot;period\&quot;: 20.54421208060078, \&quot;dop853_recurrence\&quot;: 1.4236004284564666e-11, \&quot;radau_recurrence\&quot;: 6.000460417985871e-12, \&quot;method_difference\&quot;: 8.771497148562548e-12, \&quot;casimir_error\&quot;: 1.7763568394002505e-15, \&quot;section_error\&quot;: 1.883457167558742e-19, \&quot;numerically_accepted\&quot;: true}\n{\&quot;file\&quot;: \&quot;gauged-070.json\&quot;, \&quot;h\&quot;: 0.07, \&quot;period\&quot;: 21.880357507078553, \&quot;dop853_recurrence\&quot;: 1.8846437473539668e-11, \&quot;radau_recurrence\&quot;: 1.4596858776466055e-11, \&quot;method_difference\&quot;: 1.3672791015977648e-11, \&quot;casimir_error\&quot;: 4.440892098500626e-16, \&quot;section_error\&quot;: 6.199573901390521e-16, \&quot;numerically_accepted\&quot;: true}\n{\&quot;file\&quot;: \&quot;gauged-100.json\&quot;, \&quot;h\&quot;: 0.1, \&quot;period\&quot;: 24.623718949340567, \&quot;dop853_recurrence\&quot;: 2.4815722095366054e-11, \&quot;radau_recurrence\&quot;: 1.786075239939803e-11, \&quot;method_difference\&quot;: 9.634257140280631e-12, \&quot;casimir_error\&quot;: 1.7763568394002505e-15, \&quot;section_error\&quot;: 1.7826922752687982e-16, \&quot;numerically_accepted\&quot;: true}\n{\&quot;file\&quot;: \&quot;turning-0096.json\&quot;, \&quot;h\&quot;: 0.0096, \&quot;period\&quot;: 20.558807735241658, \&quot;dop853_recurrence\&quot;: 4.72564253122716e-13, \&quot;radau_recurrence\&quot;: 4.71263756721175e-12, \&quot;method_difference\&quot;: 4.266404808771789e-12, \&quot;casimir_error\&quot;: 8.881784197001252e-16, \&quot;section_error\&quot;: 2.883232363972345e-18, \&quot;numerically_accepted\&quot;: true}\nCompleted 130 checks. Cross-method acceptance is numerical, not interval-certified.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;dimensional_em_green_function_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.9999615789856762,
+      &quot;stdout&quot;: &quot;D=3: V ~ 1/(4 pi r), |E| ~ r^-2\nD=6: V ~ 1/(4 pi^3 R^4), |E| ~ R^-5\nPASS\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;dimensional_magnetic_kernel_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.7750586559996009,
+      &quot;stdout&quot;: &quot;{\n  \&quot;5\&quot;: {\n    \&quot;fourier_axis_weights\&quot;: [\n      0.3333333333333333,\n      0.26666666666666666,\n      0.2,\n      0.13333333333333333,\n      0.06666666666666667\n    ],\n    \&quot;sample_energy_range\&quot;: [\n      -0.8656432549463683,\n      -0.7258209992314151\n    ],\n    \&quot;ray_hessian_eigenvalues\&quot;: [\n      0.0,\n      0.0,\n      0.5333333108481497,\n      1.0666666216962994,\n      1.5999999325444492,\n      2.133333243392599\n    ]\n  },\n  \&quot;6\&quot;: {\n    \&quot;fourier_axis_weights\&quot;: [\n      0.2857142857142857,\n      0.23809523809523808,\n      0.19047619047619047,\n      0.14285714285714285,\n      0.09523809523809523,\n      0.047619047619047616\n    ],\n    \&quot;sample_energy_range\&quot;: [\n      -1.0000000000000009,\n      -0.9999999999999993\n    ],\n    \&quot;ray_hessian_eigenvalues\&quot;: [\n      -1.1102230246251565e-08,\n      -1.1102230246251565e-08,\n      -1.1102230246251565e-08,\n      -1.1102230246251565e-08,\n      -1.1102230246251565e-08,\n      -1.1102230246251565e-08\n    ]\n  },\n  \&quot;checks_completed\&quot;: 500,\n  \&quot;maximum_errors\&quot;: {\n    \&quot;closed-field projection idempotence\&quot;: 2.220446049250313e-16,\n    \&quot;directional kernel contraction\&quot;: 8.881784197001252e-16,\n    \&quot;five-dimensional directional response\&quot;: 8.881784197001252e-16,\n    \&quot;five-dimensional envelope response\&quot;: 7.771561172376096e-16,\n    \&quot;dimension-dependent isotropic projector average\&quot;: 0.0,\n    \&quot;entire selected CP1 fibre attains the bound\&quot;: 2.220446049250313e-16,\n    \&quot;six-dimensional direction-independent response\&quot;: 8.881784197001252e-16,\n    \&quot;six-dimensional envelope-independent CP3 energy\&quot;: 8.881784197001252e-16,\n    \&quot;all six ray directions stay flat\&quot;: 1.1102230246251565e-08,\n    \&quot;five-dimensional mixed-density completeness\&quot;: 4.440892098500626e-16,\n    \&quot;scalar exchange includes vector and bivector channels\&quot;: 5.551115123125783e-17\n  }\n}\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;dimensional_necessity_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.9946367159718648,
+      &quot;stdout&quot;: &quot;{\&quot;checks_completed\&quot;: 165, \&quot;scope\&quot;: \&quot;conditional mathematics; not electron identification\&quot;, \&quot;static_rank_examples\&quot;: [{\&quot;hidden\&quot;: 1, \&quot;response_rank\&quot;: 1, \&quot;total_with_direct_rank\&quot;: 3}, {\&quot;hidden\&quot;: 2, \&quot;response_rank\&quot;: 2, \&quot;total_with_direct_rank\&quot;: 3}, {\&quot;hidden\&quot;: 3, \&quot;response_rank\&quot;: 3, \&quot;total_with_direct_rank\&quot;: 3}], \&quot;averaging_counterexample\&quot;: {\&quot;instantaneous_rank\&quot;: 1, \&quot;averaged_rank\&quot;: 3, \&quot;average\&quot;: \&quot;I_3/3\&quot;, \&quot;rotating_coupling_is_prescribed\&quot;: true}, \&quot;equivariant_vector_coupling\&quot;: \&quot;B=b I_3; general proof in companion note\&quot;, \&quot;same_equation_5D_embedding_errors\&quot;: {\&quot;field\&quot;: 4.440892098500626e-16, \&quot;tangent\&quot;: 2.220446049250313e-16, \&quot;normal_forcing\&quot;: 0.0}}\nCompleted 165 explicit checks.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;electromagnetic_mixed_block_rank_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.8176907519809902,
+      &quot;stdout&quot;: &quot;simple bivector mixed block rank &lt;= 2\nrank two still suffices for unique SO(3) Procrustes orientation; see correction checks\ndepth-2 lift wholly in observed plane has mixed block E=0\nPASS\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;five_depth_orbit_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.0892805859912187,
+      &quot;stdout&quot;: &quot;Candidate response component indices (zero based): (2, 0)\nMissing-amplitude derivative norm: 0.763441361516796 ; horizontal real tangent rank: 6\nCompleted 3059 evaluations across 13 runtime conditions.\n  isometric three amplitude embedding: max residual 2.22e-16\n  exact generator intertwining: max residual 0\n  same demo preparation: max residual 5.55e-17\n  five depth sphere constraint: max residual 4.44e-16\n  same full geometric trajectory: max residual 1.14e-16\n  same selected coherent coefficients: max residual 1.14e-16\n  retained sphere phase invisible projectively: max residual 1.86e-16\n  unchanged planar petal readout: max residual 3.88e-15\n  missing amplitude pulse derivative: max residual 9.86e-08\nS5 and CP2 reproduce the prepared demo with the same embedded readout; the full reciprocal source and physical probe remain unproved.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;flat_nucleus_precession_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.2972617408959195,
+      &quot;stdout&quot;: &quot;Completed 1991 numerical evaluations across 16 conditions.\n  A conserved by RHS: maximum absolute residual 0\n  C conserved by RHS: maximum absolute residual 0\n  constant potential stationary: maximum absolute residual 0\n  constraint tangent: maximum absolute residual 7.65e-15\n  endpoint stationary: maximum absolute residual 2.65e-15\n  energy gradient: maximum absolute residual 2.3e-10\n  exact solution derivative: maximum absolute residual 7.34e-11\n  initial complex structure: maximum absolute residual 1.37e-13\n  initial invariant: maximum absolute residual 6.66e-15\n  integrated constraint: maximum absolute residual 1.82e-11\n  integrated energy: maximum absolute residual 9.33e-15\n  integrated versus exact: maximum absolute residual 1.33e-11\n  predicted recurrence: maximum absolute residual 1.58e-14\nIllustrative rates for s=.04,.25,.64: [np.float64(0.1882352941176471), np.float64(0.4705882352941177), np.float64(0.7529411764705884)]\nNo nuclear kernel, physical rate, petal readout, or experimental agreement was fitted or validated.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;flexible_nuclear_response_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 3.742002333048731,
+      &quot;stdout&quot;: &quot;Unstable radial slope=0.0485176186; growth scale sigma=0.2202671528\nLocal gyroscopic threshold |Omega|&gt;=sigma; trigonal clock=0.2992305666; margin=1.35849\n100-turn bounded probe amplification=3.26186279\nCompleted 61 evaluations across 13 conditions.\n  rotating coordinates do not stabilize: max residual 9.99e-16\n  gyroscopic energy conserved: max residual 2.41e-15\nPassive flexibility cannot stabilize the radial saddle.  A gyroscopic two-component response can do so locally, but its coefficient must be derived from the reciprocal nuclear-plane dynamics.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;free_electron_pair_quaternionic_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.7225545319961384,
+      &quot;stdout&quot;: &quot;PASS: symbolic generic quaternion identities; exact active commutant dimension 4.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;free_electron_pair_rotation_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 2.098442613030784,
+      &quot;stdout&quot;: &quot;PASS: computed R spectrum and trace; canonical split is 2+4, not a canonical 2+2+2.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;free_pair_equivariant_operator_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.924570525996387,
+      &quot;stdout&quot;: &quot;PASS: generic representative commutant dimensions 6/2/4; symmetric span P0,P4; no mixed maps.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;free_pair_scattering_mixed_rank_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.8566972670378163,
+      &quot;stdout&quot;: &quot;PASS: outer-product rank &lt;=1, two-product rank &lt;=2, and exact saturating examples.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;full_response_extension_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 7.7678383640013635,
+      &quot;stdout&quot;: &quot;N=1, source perturbation=0: projector displacement=3.88389069e-13, max source ground leakage=1.84297022e-14\nN=1, source perturbation=0.001: projector displacement=0.000759970474, max source ground leakage=9.99999073e-07\nN=1, source perturbation=0.01: projector displacement=0.00957419159, max source ground leakage=9.99906632e-05\nN=2, source perturbation=0: projector displacement=1.14722658e-13, max source ground leakage=4.88498131e-15\nN=2, source perturbation=0.001: projector displacement=0.000474056894, max source ground leakage=9.9999908e-07\nN=2, source perturbation=0.01: projector displacement=0.00680959367, max source ground leakage=9.99917975e-05\nN=1, initially exact petal velocity: max projector error=1.3980695, max planar readout error/R=1.98284246\nN=2, initially exact petal velocity: max projector error=1.29341196\nN=1, L=1, omega=0.2: physical residual lower bound=0.169703431\nN=1, L=1, omega=1: physical residual lower bound=0.708854473\nN=1, L=2, omega=0.2: physical residual lower bound=0.285646323\nN=1, L=2, omega=1: physical residual lower bound=0.762690646\nN=1, L=3, omega=0.2: physical residual lower bound=0.313588982\nN=1, L=3, omega=1: physical residual lower bound=0.774674132\nN=1, L=4, omega=0.2: physical residual lower bound=0.32418129\nN=1, L=4, omega=1: physical residual lower bound=0.779138801\nN=2, L=2, omega=0.2: physical residual lower bound=0.108834248\nN=2, L=2, omega=1: physical residual lower bound=0.570625481\nN=2, L=3, omega=0.2: physical residual lower bound=0.403551517\nN=2, L=3, omega=1: physical residual lower bound=0.666931532\nN=2, L=4, omega=0.2: physical residual lower bound=0.533267493\nN=2, L=4, omega=1: physical residual lower bound=0.703686241\nCompleted 2414 evaluations across 35 conditions.\n  full generator basis orthogonal: max residual 0\n  block isotropic static extension remains V of s: max residual 3.33e-16\n  complete moment reconstruction: max residual 6.66e-16\n  fixed occupied moment length: max residual 1.78e-15\n  old mixed channel block retained: max residual 1.11e-16\n  old mixed electron coupling retained: max residual 3.1e-17\n  joint energy gradient supplies reciprocal equations: max residual 4.4e-10\n  occupied orthogonality derivative: max residual 5.2e-17\n  all simultaneous rotation charges conserved: max residual 6.66e-16\n  joint minimum analytic value: max residual 4.44e-16\n  relaxed full source gives stationary occupied projector: max residual 1.39e-16\n  joint integration energy conservation: max residual 5.18e-12\n  one and two electron Pauli occupations conserved: max residual 5.05e-12\n  source norm conserved: max residual 2.77e-13\n  source density basis orthonormal: max residual 2.22e-16\n  analytic unit ball residual positive control: max residual 0\n  source rotation covariance: max residual 4.53e-16\n  exact rotating propagator matches independent integration: max residual 2.42e-13\n  exact initial petal velocity with physical source: max residual 1.73e-17\n  inverse design reproduces direct physical source response: max residual 1.18e-15\n  initially matched energy conservation: max residual 1.38e-10\n  initially matched Pauli conservation: max residual 4.2e-11\n  target occupied modes orthogonal: max residual 2.22e-16\n  norm constrained primal dual agreement: max residual 3.55e-15\n  paired selected modes retain petal readout: max residual 1.05e-15\nEqual full response tested. No petal attractor, spatial force law, or physical nuclear identification assumed.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;gapped_contact_source_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 2.4800296410685405,
+      &quot;stdout&quot;: &quot;Finite gapped contact example: delta=4, g=sqrt(25/32), hbar=2, a=.6\nSolved source rotating energy: -0.41150922726295736 shared precession rate: 0.4006985724329247\nLow-frequency harmonic-response continuation rate for the same kappa and Omega: .5\nFull-source tangent maximum numerical real part: 1.2289564227812143e-08 nullities: 3 4\nCompleted 375 evaluations across 21 conditions.\n  exact source ground energy: max residual 3.33e-16\n  eight dark source modes: max residual 1.78e-15\n  induced tensor expectation: max residual 1.11e-16\n  response saturation formula: max residual 1.67e-16\n  orientation slope finite difference: max residual 1.74e-10\n  gap fixes response frequency: max residual 0\n  linear step susceptibility: max residual 1.48e-13\n  source secular and rotation residual: max residual 5.55e-17\n  source rotating eigenvector: max residual 5.55e-17\n  electron rotating eigenvector: max residual 5.55e-17\n  electron exact rotating solution: max residual 8.13e-13\n  source exact rotating solution: max residual 2.16e-12\n  joint source energy conservation: max residual 9.75e-13\n  both projective norms conserved: max residual 1e-12\n  full tangent analytic versus finite difference: max residual 3.44e-10\nThe source carrier, coupling and gap are assumptions. No physical nuclear spectrum or petal selection was inferred.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;hidden_visible_lock_schur_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.7878640859853476,
+      &quot;stdout&quot;: &quot;spec(K_lock)={0 x3, 2k x3}\nSchur(K_lock)=0\nPASS\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;independent_audit_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 29.121584981912747,
+      &quot;stdout&quot;: &quot;{\&quot;runs\&quot;: [{\&quot;rtol\&quot;: 3e-09, \&quot;atol\&quot;: 3e-11, \&quot;substeps\&quot;: 180, \&quot;residual\&quot;: 4.2474781254890106e-07}, {\&quot;rtol\&quot;: 1e-12, \&quot;atol\&quot;: 1e-14, \&quot;substeps\&quot;: 1200, \&quot;residual\&quot;: 2.4157216630271113e-06}, {\&quot;rtol\&quot;: 2.5e-14, \&quot;atol\&quot;: 1e-15, \&quot;substeps\&quot;: 2400, \&quot;residual\&quot;: 2.4142280095680935e-06}], \&quot;endpoint_refinement\&quot;: 1.5010651670043138e-09, \&quot;coarse_endpoint_error\&quot;: 2.0801515530242983e-06, \&quot;recurrence_tolerance\&quot;: 1e-06, \&quot;numerically_accepted\&quot;: false, \&quot;homotopy\&quot;: 0.0064, \&quot;period\&quot;: 20.67292124525589, \&quot;casimir_error\&quot;: 8.881784197001252e-16}\n{\&quot;runs\&quot;: [{\&quot;rtol\&quot;: 3e-09, \&quot;atol\&quot;: 3e-11, \&quot;substeps\&quot;: 180, \&quot;residual\&quot;: 2.486885421206788e-07}, {\&quot;rtol\&quot;: 1e-12, \&quot;atol\&quot;: 1e-14, \&quot;substeps\&quot;: 1200, \&quot;residual\&quot;: 7.435726060211828e-06}, {\&quot;rtol\&quot;: 2.5e-14, \&quot;atol\&quot;: 1e-15, \&quot;substeps\&quot;: 2400, \&quot;residual\&quot;: 7.438962667977733e-06}], \&quot;endpoint_refinement\&quot;: 3.2395665488287486e-09, \&quot;coarse_endpoint_error\&quot;: 7.355575581441371e-06, \&quot;recurrence_tolerance\&quot;: 1e-06, \&quot;numerically_accepted\&quot;: false, \&quot;homotopy\&quot;: 0.0096, \&quot;period\&quot;: 20.567504684805566, \&quot;casimir_error\&quot;: 4.440892098500626e-16}\n{\&quot;runs\&quot;: [{\&quot;rtol\&quot;: 3e-09, \&quot;atol\&quot;: 3e-11, \&quot;substeps\&quot;: 180, \&quot;residual\&quot;: 5.239190756584686e-07}, {\&quot;rtol\&quot;: 1e-12, \&quot;atol\&quot;: 1e-14, \&quot;substeps\&quot;: 1200, \&quot;residual\&quot;: 5.3145366520873105e-06}, {\&quot;rtol\&quot;: 2.5e-14, \&quot;atol\&quot;: 1e-15, \&quot;substeps\&quot;: 2400, \&quot;residual\&quot;: 5.3144990771616465e-06}], \&quot;endpoint_refinement\&quot;: 9.891566664736461e-11, \&quot;coarse_endpoint_error\&quot;: 4.842632116670392e-06, \&quot;recurrence_tolerance\&quot;: 1e-06, \&quot;numerically_accepted\&quot;: false, \&quot;homotopy\&quot;: 0.0128, \&quot;period\&quot;: 20.48965107367895, \&quot;casimir_error\&quot;: 4.440892098500626e-16}\nCompleted 84 audit checks. Candidate classifications above are computed, not assumed.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;intrinsic_spinor_bundle_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.3399904980324209,
+      &quot;stdout&quot;: &quot;PASS: intrinsic CP3 half-spin ch=4+2H^2 +/-2H^3; no line twist trivializes it.\nCP3 real tangent has p1=4H^2 and Euler class 4H^3, unlike the fixed model R6 bundle.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;inverse_nuclear_kernel_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.0577748960349709,
+      &quot;stdout&quot;: &quot;Completed 188 evaluations across 18 conditions.\n  cusp left derivative: maximum residual 0\n  cusp right derivative: maximum residual 0\n  electron gradient finite difference: maximum residual 1.75e-10\n  inverse slope recovery: maximum residual 4.44e-16\n  linear inverse target flow: maximum residual 2.11e-10\n  linear target energy conservation: maximum residual 0\n  marginal gradient: maximum residual 0\n  nuclear marginal coefficient: maximum residual 1.11e-16\n  nuclear projector gradient finite difference: maximum residual 8.46e-11\n  one trajectory inverse nonuniqueness: maximum residual 0\n  quadratic kernel equals gamma s: maximum residual 1.11e-16\n  reciprocal rotation variation: maximum residual 1.67e-10\n  reconstructed rates: maximum residual 1.11e-16\n  simultaneous frame covariance: maximum residual 5.64e-14\n  smooth rounded rate: maximum residual 0\nRecovered synthetic V coefficients: [0.6000000000000003, 0.34999999999999953]\nBare-plane centralizer constraint rank: 15 of 15; smallest singular value: 2.0\nInverse candidates verified; neither a nuclear source nor a physical petal lock was derived.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;lower_dimension_response_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 2.179335249005817,
+      &quot;stdout&quot;: &quot;4D reciprocal rotating branch: omega=-2.14029012331; max evolution error=2.2e-11\n4D reciprocal rotating branch: omega=1.86890550792; max evolution error=2.42e-11\nOmega=4: 4D nonzero rate=3.86660858, 6D low rate=0.553359374; 6D static=0.542769231\nOmega=8: 4D nonzero rate=7.86545838, 6D low rate=0.545302803; 6D static=0.542769231\nOmega=16: 4D nonzero rate=15.8648831, 6D low rate=0.543396002; 6D static=0.542769231\nOmega=32: 4D nonzero rate=31.8645954, 6D low rate=0.542925517; 6D static=0.542769231\nCompleted 577 evaluations across 23 runtime conditions.\n  four dimensional J squared: max residual 1.41e-13\n  four dimensional s fixed: max residual 1.33e-13\n  four dimensional mixed norm fixed: max residual 8.9e-14\n  four dimensional static flow zero: max residual 7.06e-14\n  four dimensional finite source energy constant: max residual 1.03e-14\n  four dimensional harmonic energy constant: max residual 2.62e-14\n  six dimensional mixed norm variable: max residual 0\n  six dimensional mixed singular values: max residual 0\n  four dimensional vector versus matrix dynamics: max residual 1.11e-16\n  four dimensional energy derivative: max residual 6.22e-15\n  four dimensional rotation charge derivative: max residual 1.67e-15\n  four dimensional collective rotation equation: max residual 3.33e-15\n  four dimensional integrated collective rotation: max residual 2.42e-11\n  four dimensional evolving norm: max residual 6.33e-12\n  four dimensional evolving energy: max residual 2.13e-10\n  four dimensional evolving rotation charge: max residual 1.08e-10\n  chosen circle readout equals demo: max residual 4.77e-15\n6D is minimal for this static geometric mechanism, not proved necessary for precession or a chosen petal readout.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;magnetic_bivector_bridge_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.3216579309664667,
+      &quot;stdout&quot;: &quot;Completed 1100 evaluations across 15 runtime conditions.\n  closed two form projection idempotent: max residual 8.88e-16\n  closed two form orthogonal projection: max residual 4.58e-15\n  Fourier Bianchi constraint: max residual 1.33e-15\n  five closed field amplitudes per nonzero wavevector: max residual 1.11e-15\n  constrained magnetic completed square: max residual 7.11e-15\n  isotropic projection average one third: max residual 0\n  isotropic energy reduction one third: max residual 3.55e-15\n  Dirac square Pauli coefficient and sign: max residual 0\n  Dirac Pauli magnetization complex structure: max residual 7.77e-16\n  complex structure total skew norm: max residual 2.22e-15\n  complex structure closed response norm: max residual 9.99e-16\n  fixed profile joint CP3 field minimum identity: max residual 2.22e-16\nMinimal gauging supplies the cost and Pauli vertex; the Bianchi projector changes the response kernel and is not the unrestricted CP3 auxiliary model.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;master_chiral_bridge_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.1443003350868821,
+      &quot;stdout&quot;: &quot;Exchange coefficient match g^2/mu = 0.4000000000000001 ; kappa/2 = 0.4\nMixed one-particle energy: exact = 0.0 ; Gaussian closure = 0.30000000000000004\nCompleted 610 evaluations across 29 runtime conditions.\n  spatial alpha anticommutes with beta: max residual 0\n  six spatial Clifford directions: max residual 0\n  rest scalar current equals positive density: max residual 0\n  spatial rotations preserve rest half spinor: max residual 0\n  positive energy frame isometry: max residual 2.22e-16\n  positive energy eigenspace: max residual 1.33e-15\n  projected scalar current factor: max residual 2.22e-16\n  fixed frame kinetic term inherited: max residual 2.39e-15\n  exact nonforward scalar projection: max residual 2.24e-16\n  nonforward reciprocity: max residual 0\n  Clifford product scalar plus bivector: max residual 9.93e-16\n  derived bivector source coefficient: max residual 1.14e-16\n  position space scalar bivector sign: max residual 6.21e-17\n  momentum wedge generator Hermitian: max residual 2.22e-16\n  four mode anticommutation: max residual 0\n  exact Gaussian Fock versus Wick scalar energy: max residual 8.88e-16\n  mixed density bivector identity: max residual 6.66e-16\n  exchange polarization decomposition: max residual 8.33e-17\n  derived auxiliary coefficient match: max residual 1.11e-16\n  scalar exchange alone has no polarization torque: max residual 3.03e-17\n  exact one particle contact vanishes: max residual 0\n  exact mixed one particle contact zero: max residual 0\n  Gaussian closure counterexample for one particle mixture: max residual 0\n  classical Hamiltonian sign: max residual 0\nDirac projection is explicit; exchange matching needs fermionic quantization and a justified closure, not a silent rewrite of the classical scalar equation.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;moment_kernel_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.5134476060047746,
+      &quot;stdout&quot;: &quot;v=(1,1), (a,b,c)=(0.5,0.5,0.62996052), minimum covariance Hessian eigenvalue=3, susceptibility=0.12996052\nv=(2,0.3), (a,b,c)=(0.35582521,0.91873675,1.4057211), minimum covariance Hessian eigenvalue=0.27, susceptibility=1.1405046\nv=(4.6006533,0.5), (a,b,c)=(0.20710284,0.62821862,1), minimum covariance Hessian eigenvalue=0.75, susceptibility=0.39019534\nPASS: stationary covariance, full 27-dimensional Hessian, random convexity checks, mixed-block curvature, linear response, and Gaussian saturation identity.\nThese checks do not derive the embedding, a spinor lock, a kinetic clock, or the V2 master action.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;multicentre_visible_crossing_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 8.226858050911687,
+      &quot;stdout&quot;: &quot;L=2: 4 exact cylindrical-support encounters per clock turn; unsupported-coordinate norm=1\nL=3: 6 exact cylindrical-support encounters per clock turn; unsupported-coordinate norm=1\nL=4: 8 exact cylindrical-support encounters per clock turn; unsupported-coordinate norm=1\naxis geometry: signed L=3 maxima give 120 degrees; a constant-radius (1,2)-frequency 6D orbit gives four 109.471-degree directions\nfree-plane relaxation: exact isotropic rescaling; finite stiffness or rotational inertia is required for orientation backreaction\ntrigonal averaged force balance: R=1.89676096, radial slope=0.0485176186 (unstable)\ntetrahedral averaged force balance: no noncollision root on R in [0.2,0.95] or [1.05,4]\n3 ligands, L=3, z_lig=0: nearest visible centre=1.49986e-10, hidden there=1, max orbit deformation=1.9341e-09, recurrence=2.69409e-09\n3 ligands, L=3, z_lig=0.01: nearest visible centre=0.00215098, hidden there=0.997224, max orbit deformation=0.0538804, recurrence=0.0678766\n3 ligands, L=3, z_lig=0.03: nearest visible centre=0.00182325, hidden there=0.99568, max orbit deformation=0.171239, recurrence=0.224892\n3 ligands, L=3, z_lig=0.1: nearest visible centre=0.00462225, hidden there=0.985049, max orbit deformation=0.660813, recurrence=0.96262\n4 ligands, L=4, z_lig=0: nearest visible centre=1.28674e-10, hidden there=1, max orbit deformation=2.50292e-09, recurrence=1.79745e-09\n4 ligands, L=4, z_lig=0.01: nearest visible centre=0.00120326, hidden there=0.9978, max orbit deformation=0.0927988, recurrence=0.130902\n4 ligands, L=4, z_lig=0.03: nearest visible centre=0.00360886, hidden there=0.993398, max orbit deformation=0.276706, recurrence=0.392391\n4 ligands, L=4, z_lig=0.1: nearest visible centre=0.00223797, hidden there=0.978397, max orbit deformation=0.88523, recurrence=1.28358\nCompleted 189 evaluations across 18 conditions.\nExact cylindrical-support encounters are established geometrically. The hidden-localized force runs are rejected controls; operative molecular closure requires a finite-size cylindrical kernel.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;nuclear_feedback_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.4531318809604272,
+      &quot;stdout&quot;: &quot;2 petals: max nuclear dipole=0.10291495; 1-orbit fidelity=0.00033310061; max energy error=5.17e-08; combined/electron dipole-power diagnostic (+/-kappa)=5.29418/1.90481\n4 petals: max nuclear dipole=0.12270901; 1-orbit fidelity=0.0016087403; max energy error=7.37e-08; combined/electron dipole-power diagnostic (+/-kappa)=5.42243/1.86069\n6 petals: max nuclear dipole=0.12952451; 1-orbit fidelity=0.0023805883; max energy error=8.23e-08; combined/electron dipole-power diagnostic (+/-kappa)=5.48281/1.83936\nring embedded at degree 2: max nuclear dipole=0.12270901; 1-orbit fidelity=0.0016087403; max energy error=7.37e-08; combined/electron dipole-power diagnostic (+/-kappa)=5.42243/1.86069\nFixed-radius proton benchmark: |p_N/d_e|=7.55813e-18\nPASS: recoil, causal feedback algebra, passive response, hybrid modes, four reciprocal orbit integrations, energy convergence, and scale benchmark.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;nuclear_plane_rotor_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.94519856502302,
+      &quot;stdout&quot;: &quot;18-time-unit reciprocal rotor: energy error=2.57e-10, projector error=1.01e-11, visible momentum error=2.05e-15, rotation-charge error=5.12e-11\nCompleted 1256 evaluations across 11 conditions.\n  reciprocal rotor energy derivative: max residual 1.11e-10\n  visible total momentum derivative: max residual 1.39e-11\n  visible rotation charge derivative: max residual 2.78e-11\nThe flexible rank-three plane now has finite inertia and reciprocal backreaction.  No molecular periodic branch or microscopic parameter identification is asserted by this consistency test.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;nuclear_stability_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.28382935002446175,
+      &quot;stdout&quot;: &quot;Fixed-radius benchmark required polarizability enhancement: 1.32307778e+17\nOne-pole lossless relative resonance detuning: 3.77906732e-18\nMaximum sampled loss-identity absolute residual: 3.552713678800501e-15\nCompleted 40 check(s): coherent loss identity\nCompleted 40 check(s): positive loss for sampled amplitudes\nCompleted 1 check(s): constructed dark-mode residual\nCompleted 1 check(s): nuclear absorption breaks dark mode\nCompleted 1 check(s): frequency mismatch breaks dark mode\nCompleted 1 check(s): positive stiffness of constructed example\nCompleted 1 check(s): constructed cancellation frequency\nCompleted 1 check(s): off-frequency noncancellation\nCompleted 1 check(s): high-precision detuning identity\nCompleted 1 check(s): damping phase residual identity\n88 numerical consistency checks completed.\nNo experimental comparison or validation of the V2 physical assumptions was performed.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;operator_lift_kernel_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.990340624935925,
+      &quot;stdout&quot;: &quot;compression fixes A only; mixed/hidden blocks survive\neffective visible Schur block = A - B D^-1 C\nPASS\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;orbit_drive_origin_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.2277197310468182,
+      &quot;stdout&quot;: &quot;L=1: selected leakage squares=[3.33333333 2.66666667 2.66666667 2.33333333]; illustrative g/clock=0.9993335555\nL=2: selected leakage squares=[4.14285714 3.         2.85714286 2.42857143]; illustrative g/clock=1.9985720406\nL=3: selected leakage squares=[4.75 3.25 3.   2.5 ]; illustrative g/clock=2.9977511244\nL=4: selected leakage squares=[5.22222222 3.44444444 3.11111111 2.55555556]; illustrative g/clock=3.9968906163\nPASS: exact scalar compression, strictly positive leakage, gap-expansion surrogate, massive-Dirac resolvent sign, passive/active distinction, and degree&gt;=2 ring embeddings.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;orbit_electromagnetic_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.910730529925786,
+      &quot;stdout&quot;: &quot;L=1: ideal gaps=[1, 2]; +1 alignment delta/nu=1.11803399, planar point-source P/P_circle=1.88272246\nL=2: ideal gaps=[1, 2, 3, 4]; +1 alignment delta/nu=1.50000000, planar point-source P/P_circle=16.80500000\nL=3: ideal gaps=[1, 2, 3, 4, 6]; +1 alignment delta/nu=1.80277564, planar point-source P/P_circle=85.88942381\nPASS: circle, 2/4/6 petals, three detuned alignments, bilinear spectra, impulse response, and phase-sensitive probe. Conditional diagnostics only.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;orbit_exchange_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.5324378670193255,
+      &quot;stdout&quot;: &quot;PASS: exact perturbed Hamiltonian solution, ideal 2L petals, detuning floor, preparation floor, and state/image closure counterexamples.\nThese are actual-orbit kinematic checks; selecting this Hamiltonian from the projected action remains open.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;orbital_gap_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.9861105149611831,
+      &quot;stdout&quot;: &quot;PASS: pure linear orbital source has full rank 2; pure harmonic quadratic source has rank 4 and a nondegenerate projected spin ground ray.\nProjected quadratic spin eigenvalues: {-2,-2/3,2/3,2}. Full l=2 coupled spectrum: {-6 x20, +2 x60}.\nA chosen orbital can supply the source, but its selection and a controlled frozen-orbital approximation remain open.\nDelta, exact ground, gap, reduced-spin fidelity\n0.01, -5.995003125, 0.001667013, 0.500625000\n0.1, -5.950312488, 0.016700224, 0.506249512\n1, -5.531128874, 0.168918799, 0.562017367\n10, -3.403124237, 1.143212958, 0.890434405\n100, -2.159744816, 1.347178128, 0.998407639\nPASS: exact invariant 2x2 blocks, unique ground for positive orbital gap, and controlled large-gap spin fidelity.\nThe orbital projector penalty is an assumption; this does not derive a physical orbital selector.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;orbital_source_projection_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.9411125980550423,
+      &quot;stdout&quot;: &quot;PASS: pure linear orbital source has full rank 2; pure harmonic quadratic source has rank 4 and a nondegenerate projected spin ground ray.\nProjected quadratic spin eigenvalues: {-2,-2/3,2/3,2}. Full l=2 coupled spectrum: {-6 x20, +2 x60}.\nA chosen orbital can supply the source, but its selection and a controlled frozen-orbital approximation remain open.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;petal_response_residual_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 48.998321179067716,
+      &quot;stdout&quot;: &quot;L=1: s cosine amplitude=0.4608; max |ds/dtheta|=1.3824\n  omega=0.2: relative physical residual lower bound=0.0192371446; matrix refinement=1.13e-08\n  omega=1: relative physical residual lower bound=0.000775964816; matrix refinement=9.65e-10\nL=2: s cosine amplitude=0.471404520791; max |ds/dtheta|=1.41421356237\n  omega=0.2: relative physical residual lower bound=0.0269771778; matrix refinement=9.45e-09\n  omega=1: relative physical residual lower bound=0.000528084779; matrix refinement=9.31e-10\nL=3: s cosine amplitude=0.428107460448; max |ds/dtheta|=1.28432238135\n  omega=0.2: relative physical residual lower bound=0.0171180924; matrix refinement=9.37e-09\n  omega=1: relative physical residual lower bound=0.000403175251; matrix refinement=9.05e-10\nL=4: s cosine amplitude=0.389547611495; max |ds/dtheta|=1.16864283449\n  omega=0.2: relative physical residual lower bound=0.0133640611; matrix refinement=9.38e-09\n  omega=1: relative physical residual lower bound=0.00034498979; matrix refinement=9.09e-10\nCompleted 219 evaluations across 16 conditions.\n  target generator Pauli decomposition: max residual 0\n  Hermitian basis orthonormality: max residual 2.22e-16\n  known reciprocal rotating source passes inverse test: max residual 1.08e-14\n  analytic lock invariant along demo: max residual 4.44e-16\n  nonzero lock derivative formula: max residual 4.44e-16\n  orientation kernel conserves lock: max residual 0\n  same demo petal readout: max residual 2.36e-16\n  instantaneous arbitrary tensor can match target: max residual 3.61e-15\n  minimal on path correction restores ray velocity: max residual 2.24e-16\n  horizontal correction norm: max residual 8.88e-16\n  refinement retains target: max residual 0\nFinite numerical witnesses, not interval-certified bounds or exclusion of other lifts/parameters.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;progress_checks_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 2.43213053396903,
+      &quot;stdout&quot;: &quot;PASS: static/spectral Schur identities and square-root/projection distinction.\nPASS: projection retains the frequency-64 pole; 1/6 is its residue in this example.\nPASS: fundamental color generators, pair eigenvalue -2/3, sum -2, and color/mode separation.\nPASS: P(dP)P=0, including the complex-ray test.\nPASS: exact smooth-symbol spectra, multiplicities, traces, and single/double kernel tests.\nPoint-contact band ratio: 3515/17 = 206.764705882353\nSmooth-symbol band ratio: 9441729375/68902802 = 137.029686760779\nPASS: rank-one source-to-self-energy ratios for arbitrary symbolic sources, without fitting them.\nPASS: reference-frequency versus pre-contact-coefficient distinction and two-sided count weighting.\nCase A reference-frequency ratios: [9.201306535164823, 4.259377267212064, 1.0]\nCase B reference-frequency ratios: [0.0004956532285695337, 0.0034416429114512473, 1.0]\nAll finite checks passed. This does NOT validate an action-level V2 closure or predict a baryon mass.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;projected_current_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.2453816420165822,
+      &quot;stdout&quot;: &quot;L=1, full dimension=4: linear-symbol unforced frequencies [1, 2]; full D13 impulse response=0.002798806089; probe leakage norm=0\nL=2, full dimension=10: linear-symbol unforced frequencies [1]; full D13 impulse response=-0.0005553186684; probe leakage norm=0.1443375673\nL=3, full dimension=20: linear-symbol unforced frequencies [1]; full D13 impulse response=-0.002243940742; probe leakage norm=0.1428571429\nPASS: projected continuity defect, invariant-subspace closure, Gram charge, exact FS integrals, selection rule, and full-space weak-probe response.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;reciprocal_cylindrical_molecule_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 4.7435106060002,
+      &quot;stdout&quot;: &quot;Four-cylinder reciprocal integration maxima: {&#39;energy&#39;: 7.930819245771659e-08, &#39;momentum&#39;: np.float64(3.594347042223944e-15), &#39;rotation&#39;: np.float64(2.8730090528839014e-10), &#39;projector&#39;: np.float64(2.1841306541148242e-11)}\nCompleted 436 evaluations across 9 conditions.\n  multicentre reciprocal energy derivative: max residual 8.88e-10\n  multicentre visible momentum derivative: max residual 2.78e-11\n  multicentre visible rotation derivative: max residual 2.78e-11\nThe relative-source multi-nucleus cylindrical Hamiltonian is translationally invariant, reciprocal, and conservative. Periodic shooting and Floquet stability are the remaining tests.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;source_geometry_maps_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.1918702259426937,
+      &quot;stdout&quot;: &quot;degree 1 retained squared norm 1.0\ndegree 2 retained squared norm 0.3472222222222223\ndegree 3 retained squared norm 0.11757741644053449\ndegree 4 retained squared norm 0.039517536880604665\nCompleted 235 evaluations across 11 conditions.\n  pure ray complex structure: max residual 8.88e-16\n  source energy map: max residual 4.44e-16\n  relative symplectic normalization: max residual 1.78e-15\n  independent frame covariance: max residual 2.22e-16\n  demo preparation: max residual 1.11e-16\n  retained norm formula: max residual 1.11e-16\n  base section equivariance: max residual 6.21e-17\n  homogeneous covariance: max residual 1.14e-16\n  actual petal readout: max residual 2.36e-16\nGeometric maps verified; source selection, detector coupling, and intrinsic Dirac dynamics remain unproved.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;spin5_selection_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 3.431372224004008,
+      &quot;stdout&quot;: &quot;Universal spinor polynomial identities verified.\n{\n  \&quot;checks_completed\&quot;: 504,\n  \&quot;maximum_errors\&quot;: {\n    \&quot;joint completed square\&quot;: 7.105427357601002e-15,\n    \&quot;five-dimensional selected spectrum\&quot;: 2.7755575615628914e-16,\n    \&quot;bivector uniquely reconstructs ray\&quot;: 2.2355819889017596e-16,\n    \&quot;effective Hessian symmetry\&quot;: 0.0,\n    \&quot;six flat and four positive normal directions\&quot;: 1.7934692766270394e-09,\n    \&quot;induced bivector metric has two weights\&quot;: 0.0,\n    \&quot;nonzero projective Berry curvature\&quot;: 0.0,\n    \&quot;sharp singlet-triplet spectral distance\&quot;: 0.0,\n    \&quot;centrally symmetric spectral sum rule\&quot;: 0.0,\n    \&quot;evolving spinor norm\&quot;: 1.31117339208231e-13,\n    \&quot;reciprocal energy conservation\&quot;: 1.9115820037995945e-12,\n    \&quot;nonlinear distance-to-family energy identity\&quot;: 4.948992604614233e-14\n  },\n  \&quot;exact_identities\&quot;: [\n    \&quot;n.n=N^2\&quot;,\n    \&quot;b.b=2N^2\&quot;,\n    \&quot;B^2=-N^2 I+n n^T\&quot;,\n    \&quot;Bn=0\&quot;,\n    \&quot;S w=2N w\&quot;,\n    \&quot;S^2+2N S=8N w w^dagger\&quot;\n  ],\n  \&quot;effective_hessian_eigenvalues\&quot;: [\n    4.4836745427545566e-10,\n    4.4836745427545566e-10,\n    1.7934692766270394e-09,\n    1.7934692766270394e-09,\n    1.7934692766270394e-09,\n    1.7934692766270394e-09,\n    2.5999999999999996,\n    2.5999999999999996,\n    2.6000000000026002,\n    2.6000000000026002\n  ],\n  \&quot;induced_metric_eigenvalues_in_FS_unit_tangents\&quot;: [\n    4.0,\n    4.0,\n    4.0,\n    4.0,\n    8.0,\n    8.0\n  ],\n  \&quot;spectral_discriminator\&quot;: \&quot;For a&gt;=b&gt;0: gaps are 2b,2a,2(a+b); three equal positive gaps impossible.\&quot;,\n  \&quot;minimum_operator_norm_distance_to_singlet_triplet\&quot;: \&quot;Delta/4, allowing any scalar shift and spinor basis\&quot;,\n  \&quot;minimum_energy\&quot;: -0.18846153846153843\n}\nFive-dimensional polarization has a CP3 minimum family, but not the six-dimensional spectrum or induced metric.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;spin_orbit_source_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 12.989166307030246,
+      &quot;stdout&quot;: &quot;PASS: differential double commutator; simple-bivector double degeneracy; full versus mixed-only spectra; supplied two-plane locked ground ray.\nFull example spectrum: {-sqrt(10) x2, +sqrt(10) x2}; mixed-only: {-3,-1,1,3}.\nFrozen-symbol statements do not determine the spectrum after orbital projection or derive a V2 cross-sector source.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;spinor_response_poles_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 2.6636013759998605,
+      &quot;stdout&quot;: &quot;{\&quot;dimension\&quot;: 5, \&quot;frozen_source_gaps\&quot;: [0.37692307692307686, 0.37692307692307686, 0.7538461538461537], \&quot;paired_positive_frequencies\&quot;: [[2.457019794290937, 2.6454813327524755], [2.457019794290937, 2.6454813327524755], [2.368004332908406, 2.7449274098314826]], \&quot;remaining_normal_frequency\&quot;: 2.5495097567963922, \&quot;remaining_normal_pairs\&quot;: 4, \&quot;zero_modes\&quot;: 6, \&quot;derivative_error\&quot;: 1.0200951194860863e-11, \&quot;forced_susceptibility_error\&quot;: 1.7763568394002505e-15, \&quot;nonlinear_probes\&quot;: [{\&quot;epsilon\&quot;: 0.0001, \&quot;linearization_error\&quot;: 5.128459144179748e-05}, {\&quot;epsilon\&quot;: 1e-05, \&quot;linearization_error\&quot;: 5.128411574594604e-06}]}\n{\&quot;dimension\&quot;: 6, \&quot;frozen_source_gaps\&quot;: [0.7538461538461538, 0.7538461538461538, 0.7538461538461538], \&quot;paired_positive_frequencies\&quot;: [[2.3680043329084057, 2.744927409831483], [2.3680043329084057, 2.744927409831483], [2.3680043329084057, 2.744927409831483]], \&quot;remaining_normal_frequency\&quot;: 2.5495097567963922, \&quot;remaining_normal_pairs\&quot;: 9, \&quot;zero_modes\&quot;: 6, \&quot;derivative_error\&quot;: 9.85878045867139e-12, \&quot;forced_susceptibility_error\&quot;: 5.551115123125783e-16, \&quot;nonlinear_probes\&quot;: [{\&quot;epsilon\&quot;: 0.0001, \&quot;linearization_error\&quot;: 2.441514728214812e-05}, {\&quot;epsilon\&quot;: 1e-05, \&quot;linearization_error\&quot;: 2.44151266187621e-06}]}\nCompleted 93 reciprocal response checks.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;two_electron_com_relative_energy_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 3.2926766079617664,
+      &quot;stdout&quot;: &quot;V_rel = k/4 ||h-((Q1^T+Q2^T)/2)u||^2\nPASS\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;two_electron_depth6_checks_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.03138874704018235,
+      &quot;stdout&quot;: &quot;pair dimension=12, coincidence codimension=6\nangular bivector components=15\nbeam transverse dims=5, hidden transverse dims after 3D optics=3\nGaussian hidden small-ball coefficient=0.265961520267622\nexact-lock metric factor xi^2/u^2=2\ntrial base-kernel curvature coefficient=2N=24; exponent identification not derived\nPASS\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;two_electron_pair_invariant_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.8423961109947413,
+      &quot;stdout&quot;: &quot;PASS: Clifford-derived C_J=(4nu-1)/3 and A_J=4(1-nu)/3, including endpoints.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;two_electron_relative_lock_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 1.229043414001353,
+      &quot;stdout&quot;: &quot;A^T A = diag(nu,nu,1), nu=cos^2(phi/2)\nsigma(A)^2 = {nu,nu,1}\nnu |u|^2 &lt;= |h|^2 &lt;= |u|^2\nPASS\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;two_electron_scalar_quartic_check_2026_09_05.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 0.8294899039901793,
+      &quot;stdout&quot;: &quot;L_cross = -k J1 J2 - k(J1+J2)X - k X^2/2\nX-&gt;0: H_cross = +k J1 J2\nPASS\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    },
+    {
+      &quot;script&quot;: &quot;two_electron_shared_response_checks.py&quot;,
+      &quot;returncode&quot;: 0,
+      &quot;seconds&quot;: 16.326807406032458,
+      &quot;stdout&quot;: &quot;a=0.2: source energy=-0.647223765289, shared rate=0.118279749049\na=0.4: source energy=-0.579777848366, shared rate=0.244428017949\na=0.6: source energy=-0.462352822676, shared rate=0.390445033634\na=0.8: source energy=-0.28383623876, shared rate=0.585670679075\nCompleted 3728 evaluations across 22 conditions.\n  energy gradient matches both evolution equations: max residual 6.41e-10\n  random joint energy derivative: max residual 1.33e-15\n  occupied Gram derivative: max residual 3.47e-17\n  occupied frame gauge invariance: max residual 4.44e-16\n  energy frame invariance: max residual 0\n  orthogonal initial occupied modes: max residual 1.11e-16\n  total source tensor: max residual 2.22e-16\n  pair secular residual: max residual 1.11e-16\n  source rotating eigenvector: max residual 4.44e-16\n  occupied rotating invariant subspace: max residual 1.11e-16\n  exact occupied evolution: max residual 7.75e-12\n  exact shared source evolution: max residual 1.3e-11\n  joint conserved energy: max residual 2.51e-12\n  Pauli occupied orthogonality: max residual 1.31e-12\n  rank two projector: max residual 1.18e-12\n  two electron number: max residual 2.62e-12\n  source normalization: max residual 2.83e-12\n  exchange antisymmetry: max residual 5.55e-17\n  Slater normalization: max residual 2.62e-12\nExistence and conservation checked; perturbative stability and physical petal readout not established.\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <p>A connected record of geometry, derivations, and research.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
+      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

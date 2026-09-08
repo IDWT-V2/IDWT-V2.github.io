@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Reproducing the calculations — IDWT V2</title>
+  <meta name="description" content="This directory holds executable research separately from the readable modules and research notes. Python helper modules remain alongside the diagnostics that import them. See the diagnostic catalog for each calculation&#39;s">
+  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/evidence/reproduction/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Reproducing the calculations — IDWT V2">
+  <meta property="og:description" content="This directory holds executable research separately from the readable modules and research notes. Python helper modules remain alongside the diagnostics that import them. See the diagnostic catalog for each calculation&#39;s">
+  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/evidence/reproduction/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Reproducing the calculations — IDWT V2">
+  <meta name="twitter:description" content="This directory holds executable research separately from the readable modules and research notes. Python helper modules remain alongside the diagnostics that import them. See the diagnostic catalog for each calculation&#39;s">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
+  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/IDWT-V2-site/" >Overview</a>
+      <a href="/IDWT-V2-site/theory/" >Theory</a>
+      <a href="/IDWT-V2-site/research/" >Research</a>
+      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
+      <a href="/IDWT-V2-site/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>Reproducing the calculations</h1>
+      
+      
+      
+    </header>
+    <div class="article-body">
+<p>This directory holds executable research separately from the readable
+<a href="/IDWT-V2-site/theory/">modules</a> and <a href="/IDWT-V2-site/research/index/">research notes</a>.
+Python helper modules remain alongside the diagnostics that import them.
+See the <a href="/IDWT-V2-site/research/notes/20260906-diagnostic-catalog/">diagnostic catalog</a>
+for each calculation's scope and the links to its derivation.</p>
+<p>Run these commands from the repository root:</p>
+<pre><code class="language-sh">python3 -B experiments/idwt-v2.py
+OPENBLAS_NUM_THREADS=1 python3 -B experiments/run_checks.py --skip-continuation --jobs 2
+node experiments/tests/orbit-renderer.test.cjs
+</code></pre>
+<p>The selected suite includes the saved-state refinement audit but explicitly
+excludes two expensive continuation searches. Omit <code>--skip-continuation</code>
+to include them. Individual scripts can also be run directly.</p>
+<h2 id="recorded-evidence">Recorded evidence</h2>
+<p><a href="/IDWT-V2-site/evidence/results/"><code>results/</code></a> contains the existing numerical reports, input
+candidates, and frozen protocols. They were moved without changing their
+bytes. Historical logs may retain old workspace paths: those describe past
+runs, not current dependencies. Save each new run separately; do not rewrite
+earlier evidence to match a new outcome.</p>
+<p>The cylindrical refinement check automatically saves each completed report in
+<code>results/two-path-study/</code> with the current UTC date and time in its filename,
+for example <code>cross-method-verification-20260908T074500.123456Z.json</code>. It preserves
+existing reports, even if two runs generate the same timestamp. Use
+<code>--output-dir DIRECTORY</code> to choose another destination, <code>--no-save</code> for a
+read-only run, or <code>--output FILE</code> to choose an explicit new filename.</p>
+<p>Diagnostics locate their bundled inputs relative to their own script file,
+not a neighboring project or a fixed machine path. Python requires the
+scientific packages used by each calculation, including NumPy, SciPy,
+SymPy, and mpmath. The knowledge-base validator additionally uses PyYAML;
+the renderer test uses Node.js built-ins.</p>
+</div>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#recorded-evidence">Recorded evidence</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <p>A connected record of geometry, derivations, and research.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
+      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

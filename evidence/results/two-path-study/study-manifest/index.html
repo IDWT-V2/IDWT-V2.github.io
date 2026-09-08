@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>study-manifest.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/evidence/results/two-path-study/study-manifest/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="study-manifest.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/evidence/results/two-path-study/study-manifest/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="study-manifest.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
+  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/IDWT-V2-site/" >Overview</a>
+      <a href="/IDWT-V2-site/theory/" >Theory</a>
+      <a href="/IDWT-V2-site/research/" >Research</a>
+      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
+      <a href="/IDWT-V2-site/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>study-manifest.json</h1>
+      
+      
+      
+    </header>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/IDWT-V2-site/assets/evidence/experiments/results/two-path-study/study-manifest.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">orbit_path_seconds</th><td>1989</td></tr><tr><th scope="row">dimension_path_seconds</th><td>1801</td></tr><tr><th scope="row">final_diagnostic_suite_scripts</th><td>63</td></tr><tr><th scope="row">knowledge_base_notes_validated</th><td>167</td></tr><tr><th scope="row">optimized_mode_new_dimensional_scripts</th><td>4</td></tr><tr><th scope="row">source_hash_scope</th><td>End-of-study source versions, not a claim that every historical checkpoint used this exact version</td></tr><tr><th scope="row">physical_scope</th><td>Conditional model theorems and finite numerical diagnostics; no experimental identification or interval existence certificate</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;timing_utc&quot;: {
+    &quot;orbit_path_start&quot;: &quot;2026-09-08 04:36:52&quot;,
+    &quot;orbit_path_end&quot;: &quot;2026-09-08 05:10:01&quot;,
+    &quot;dimension_path_start&quot;: &quot;2026-09-08 05:10:01&quot;,
+    &quot;dimension_path_end&quot;: &quot;2026-09-08 05:40:02&quot;
+  },
+  &quot;orbit_path_seconds&quot;: 1989,
+  &quot;dimension_path_seconds&quot;: 1801,
+  &quot;final_diagnostic_suite_scripts&quot;: 63,
+  &quot;final_diagnostic_suite_failures&quot;: [],
+  &quot;explicit_suite_exclusions&quot;: [
+    &quot;cylindrical_petal_continuation_checks.py&quot;,
+    &quot;fixed_casimir_petal_continuation_checks.py&quot;
+  ],
+  &quot;knowledge_base_notes_validated&quot;: 167,
+  &quot;negative_controls_rejected&quot;: [
+    &quot;Added 1e-4 to five-dimensional velocity: field intertwining failed&quot;,
+    &quot;Doubled one spinor-bivector operator: universal norm identity failed&quot;,
+    &quot;Replaced reciprocal matrix exponential by identity: nonlinear response comparison failed&quot;
+  ],
+  &quot;optimized_mode_new_dimensional_scripts&quot;: 4,
+  &quot;source_hash_scope&quot;: &quot;End-of-study source versions, not a claim that every historical checkpoint used this exact version&quot;,
+  &quot;sha256&quot;: {
+    &quot;accurate_cylindrical_continuation.py&quot;: &quot;e155e0dfde8590353aaefb5a9f769201b783352eb4e17c9df9a515ef93948d26&quot;,
+    &quot;cylindrical_orbit_stability.py&quot;: &quot;446a8e36a8e98532cfbb3510300519046bb9cc683df124a4ea7677d17902d836&quot;,
+    &quot;cylindrical_refinement_checks.py&quot;: &quot;5c92787c00a3a7960862efeb54accf810816fb3dd8b29444f55f73c961ef7a7b&quot;,
+    &quot;dimensional_necessity_checks.py&quot;: &quot;61e6d2e3c5b2ee0792766e442308120c6b80f057333470b1f7c5632b26e0a173&quot;,
+    &quot;spin5_selection_checks.py&quot;: &quot;980171d89eb7f1c94f41cfc8134bcc1767bce06535aa4ec64244f83afcb35e1b&quot;,
+    &quot;spinor_response_poles_checks.py&quot;: &quot;6b34eeccc2c222a302f0ad533330651e20a0da06aa7bf118d127ff56efc69114&quot;,
+    &quot;dimensional_magnetic_kernel_checks.py&quot;: &quot;532592d3d21252e3c798da7272d1163cc8652e21e447079195f56f4fd48ede11&quot;
+  },
+  &quot;physical_scope&quot;: &quot;Conditional model theorems and finite numerical diagnostics; no experimental identification or interval existence certificate&quot;
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <p>A connected record of geometry, derivations, and research.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
+      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

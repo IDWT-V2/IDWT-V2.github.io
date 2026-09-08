@@ -1,0 +1,101 @@
+{
+  "checks_completed": 84,
+  "chart_casimir_error": 1.7763568394002505e-15,
+  "four_to_six_embedding_error": 2.220446049250313e-16,
+  "reciprocal_mass_errors": {
+    "canonical_velocity": 4.261702102326126e-10,
+    "energy": 2.220446049250313e-10,
+    "momentum": 2.220446049250313e-16,
+    "rotation": 2.7755575615628914e-10
+  },
+  "recurrence_audits": [
+    {
+      "runs": [
+        {
+          "rtol": 3e-09,
+          "atol": 3e-11,
+          "substeps": 180,
+          "residual": 4.2474781254890106e-07
+        },
+        {
+          "rtol": 1e-12,
+          "atol": 1e-14,
+          "substeps": 1200,
+          "residual": 2.4157216630271113e-06
+        },
+        {
+          "rtol": 2.5e-14,
+          "atol": 1e-15,
+          "substeps": 2400,
+          "residual": 2.4142280095680935e-06
+        }
+      ],
+      "endpoint_refinement": 1.5010651670043138e-09,
+      "coarse_endpoint_error": 2.0801515530242983e-06,
+      "recurrence_tolerance": 1e-06,
+      "numerically_accepted": false,
+      "homotopy": 0.0064,
+      "period": 20.67292124525589,
+      "casimir_error": 8.881784197001252e-16
+    },
+    {
+      "runs": [
+        {
+          "rtol": 3e-09,
+          "atol": 3e-11,
+          "substeps": 180,
+          "residual": 2.486885421206788e-07
+        },
+        {
+          "rtol": 1e-12,
+          "atol": 1e-14,
+          "substeps": 1200,
+          "residual": 7.435726060211828e-06
+        },
+        {
+          "rtol": 2.5e-14,
+          "atol": 1e-15,
+          "substeps": 2400,
+          "residual": 7.438962667977733e-06
+        }
+      ],
+      "endpoint_refinement": 3.2395665488287486e-09,
+      "coarse_endpoint_error": 7.355575581441371e-06,
+      "recurrence_tolerance": 1e-06,
+      "numerically_accepted": false,
+      "homotopy": 0.0096,
+      "period": 20.567504684805566,
+      "casimir_error": 4.440892098500626e-16
+    },
+    {
+      "runs": [
+        {
+          "rtol": 3e-09,
+          "atol": 3e-11,
+          "substeps": 180,
+          "residual": 5.239190756584686e-07
+        },
+        {
+          "rtol": 1e-12,
+          "atol": 1e-14,
+          "substeps": 1200,
+          "residual": 5.3145366520873105e-06
+        },
+        {
+          "rtol": 2.5e-14,
+          "atol": 1e-15,
+          "substeps": 2400,
+          "residual": 5.3144990771616465e-06
+        }
+      ],
+      "endpoint_refinement": 9.891566664736461e-11,
+      "coarse_endpoint_error": 4.842632116670392e-06,
+      "recurrence_tolerance": 1e-06,
+      "numerically_accepted": false,
+      "homotopy": 0.0128,
+      "period": 20.48965107367895,
+      "casimir_error": 4.440892098500626e-16
+    }
+  ],
+  "interpretation": "Checks verify diagnostics; candidate acceptance is a separate field."
+}

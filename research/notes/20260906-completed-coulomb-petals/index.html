@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Completed Coulomb petals — IDWT V2</title>
+  <meta name="description" content="The quadratically completed Coulomb–angular-source Hamiltonian has exact autonomous signed-rose relative equilibria; the one-electron L=2 and L=4 petal branches have no resolved exponential mode, while every tested antipodal pair branch is unstable.">
+  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-completed-coulomb-petals/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Completed Coulomb petals — IDWT V2">
+  <meta property="og:description" content="The quadratically completed Coulomb–angular-source Hamiltonian has exact autonomous signed-rose relative equilibria; the one-electron L=2 and L=4 petal branches have no resolved exponential mode, while every tested antipodal pair branch is unstable.">
+  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-completed-coulomb-petals/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Completed Coulomb petals — IDWT V2">
+  <meta name="twitter:description" content="The quadratically completed Coulomb–angular-source Hamiltonian has exact autonomous signed-rose relative equilibria; the one-electron L=2 and L=4 petal branches have no resolved exponential mode, while every tested antipodal pair branch is unstable.">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
+  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/IDWT-V2-site/" >Overview</a>
+      <a href="/IDWT-V2-site/theory/" >Theory</a>
+      <a href="/IDWT-V2-site/research/" aria-current="page">Research</a>
+      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
+      <a href="/IDWT-V2-site/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research / Orbits and dynamics</p>
+      <h1>Completed Coulomb petals</h1>
+      <p class="article-date">Updated <time datetime="2026-09-08">September 8, 2026</time></p>
+      
+      
+    </header>
+    <div class="article-body">
+<blockquote>
+<p>Summary: The quadratically completed Coulomb–angular-source Hamiltonian has exact autonomous signed-rose relative equilibria; the one-electron L=2 and L=4 petal branches have no resolved exponential mode, while every tested antipodal pair branch is unstable.</p>
+</blockquote>
+<h2 id="correction-to-the-first-completion-test">Correction to the first completion test</h2>
+<p>The preceding Coulomb-angular calculation added the quadratic term required
+by its uniform-connection interpretation to the initial conditions of the
+linear-coupling solution. Those data departed strongly from the old orbit.
+That test correctly rejected the old preparation, but it did <strong>not</strong> test
+whether the completed Hamiltonian has different petal solutions.</p>
+<p>Solving the completed relative-equilibrium equations answers that question:
+it does. During exploration, the canonical momentum equation was once
+transcribed with the wrong column-vector sign. The production Hamiltonian
+was correct. Re-deriving the equation from its tested energy gradient and
+correcting the solver changed the stability verdict materially; only the
+corrected calculation is recorded below.</p>
+<h2 id="completed-hamiltonian-and-target-rotation">Completed Hamiltonian and target rotation</h2>
+<p>Use the same six-coordinate classical Hamiltonian as the previous note,
+including the quadratic term:</p>
+<p><span class="math math-display" data-equation-id="idwt-357ca8fc75b87e16-0" data-tex-sha256="4fa0a0a200ff057625496f3a74b738e5075aab3a8cf139088e17cc806783bd94"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>H</mi><mo>=</mo><munder><mo>∑</mo><mi>i</mi></munder><mfrac><mrow><mi mathvariant="normal">∣</mi><msub><mi>p</mi><mi>i</mi></msub><mo>−</mo><mi>m</mi><mi>λ</mi><mi>C</mi><msub><mi>q</mi><mi>i</mi></msub><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>m</mi></mrow></mfrac><mo>−</mo><munder><mo>∑</mo><mi>i</mi></munder><mfrac><mi>k</mi><mrow><mi mathvariant="normal">∣</mi><msub><mi>q</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi></mrow></mfrac><mo>+</mo><munder><mo>∑</mo><mrow><mi>i</mi><mo>&lt;</mo><mi>j</mi></mrow></munder><mfrac><mi>γ</mi><mrow><mi mathvariant="normal">∣</mi><msub><mi>q</mi><mi>i</mi></msub><mo>−</mo><msub><mi>q</mi><mi>j</mi></msub><mi mathvariant="normal">∣</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><mo stretchy="false">⟨</mo><mi>C</mi><mo separator="true">,</mo><mi>C</mi><mo stretchy="false">⟩</mo></mrow><mrow><mn>2</mn><mi>I</mi></mrow></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+H=\sum_i\frac{|p_i-m\lambda Cq_i|^2}{2m}
+-\sum_i\frac{k}{|q_i|}+\sum_{i&lt;j}\frac{\gamma}{|q_i-q_j|}
++\frac{\langle C,C\rangle}{2I}.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.7688em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal">m</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">mλ</span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.6491em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.5213em;vertical-align:-1.4138em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">&lt;</span><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9721em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">⟨</span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mclose">⟩</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord">.</span></span></span></span></span></span></p>
+<p>The source remains a skew 6 by 6 coadjoint variable. Its magnitude and
+spectrum are conserved; this is not yet a mechanism that induces source
+angular momentum from zero. The test uses m=k=I=1, lambda=0.2 and, for
+two electrons, gamma=0.4. These are dimensionless model parameters rather
+than fitted atomic constants.</p>
+<p>Let Eab denote the unit skew generator and define</p>
+<p><span class="math math-display" data-equation-id="idwt-357ca8fc75b87e16-1" data-tex-sha256="b7b3ed2c319ca332d43973727f8c076ceb7400a8f1d2f95643ded56df6878c1b"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>A</mi><mi>L</mi></msub><mo>=</mo><mo>−</mo><mi>β</mi><mo stretchy="false">{</mo><msub><mi>E</mi><mn>12</mn></msub><mo>+</mo><msub><mi>E</mi><mn>45</mn></msub><mo>+</mo><mi>L</mi><mo stretchy="false">(</mo><msub><mi>E</mi><mn>14</mn></msub><mo>+</mo><msub><mi>E</mi><mn>25</mn></msub><mo stretchy="false">)</mo><mo stretchy="false">}</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
+A_L=-\beta\{E_{12}+E_{45}+L(E_{14}+E_{25})\}.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0576em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">12</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0576em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">45</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0576em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">14</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0576em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">25</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)}</span><span class="mord">.</span></span></span></span></span></span></p>
+<p>A relative equilibrium satisfies</p>
+<p><span class="math math-display" data-equation-id="idwt-357ca8fc75b87e16-2" data-tex-sha256="6cff1c1215cf1c75d2272d35f7e6ffcde49f52bec10c27d550fea284f5648ef0"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mover accent="true"><mi>q</mi><mo>˙</mo></mover><mi>i</mi></msub><mo>=</mo><msub><mi>A</mi><mi>L</mi></msub><msub><mi>q</mi><mi>i</mi></msub><mo separator="true">,</mo><mspace width="2em"/><msub><mover accent="true"><mi>p</mi><mo>˙</mo></mover><mi>i</mi></msub><mo>=</mo><msub><mi>A</mi><mi>L</mi></msub><msub><mi>p</mi><mi>i</mi></msub><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mi>C</mi><mo>˙</mo></mover><mo>=</mo><mo stretchy="false">[</mo><msub><mi>A</mi><mi>L</mi></msub><mo separator="true">,</mo><mi>C</mi><mo stretchy="false">]</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">
+\dot q_i=A_Lq_i,\qquad \dot p_i=A_Lp_i,
+\qquad\dot C=[A_L,C],
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8623em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord katex-accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0556em;"><span class="mord">˙</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord katex-accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">p</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0556em;"><span class="mord">˙</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.1146em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord katex-accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9202em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0556em;"><span class="mord">˙</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mclose">]</span><span class="mpunct">,</span></span></span></span></span></span></p>
+<p>together with the autonomous Hamilton equations. At q1=e1, canonical
+momentum is fixed by p1=m(A_L+lambda C)q1. For the antipodal pair,
+q2=-q1 and p2=-p1. The remaining vector and commutator equations determine
+C and beta numerically. No target trajectory occurs in the RHS; it occurs
+only as the relative-equilibrium ansatz whose residual must vanish.</p>
+<p>The computed residual is at most 1.52e-13. Independent integrations over
+a full clock turn agree with the exact group orbit to 8.62e-9, conserve
+energy to 4.52e-9, and return the full state to 8.62e-9.</p>
+<h2 id="actual-projected-trajectories">Actual projected trajectories</h2>
+<p>The first electron's first two Cartesian coordinates are exactly</p>
+<p><span class="math math-display" data-equation-id="idwt-357ca8fc75b87e16-3" data-tex-sha256="f8ab6b8e70c03330754c7022992e7c4d6556e07884058ae94b62d25ed89244fb"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>L</mi><mi>θ</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo separator="true">,</mo><mi>sin</mi><mo>⁡</mo><mi>θ</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>θ</mi><mo>=</mo><mi>β</mi><mi>t</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">
+(x,y)=\cos(L\theta)(\cos\theta,\sin\theta),
+\qquad\theta=\beta t,
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span><span class="mopen">(</span><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mord mathnormal">t</span><span class="mpunct">,</span></span></span></span></span></span></p>
+<p>while its full six-dimensional radius is one. This is an actual smooth
+six-coordinate orbit with a signed linear projection, not a stationary
+orbital and not a curve assigned after integration. Even L gives the same
+planar image as the visualization's modulus-folded construction: L=2 has
+four petals and L=4 has eight. Odd L remains a different image: L=1 is an
+offset circle and L=3 is a three-petal rose rather than the displayed two
+and six petals. The visualization's height readout is not derived here.</p>
+<p>The corrected solved branches are:</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">Electrons</th>
+<th style="text-align:right">L</th>
+<th style="text-align:right">Clock beta</th>
+<th style="text-align:right">Source squared norm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2.12132034356</td>
+<td style="text-align:right">126.114105614</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0.453730466088</td>
+<td style="text-align:right">15.0400869518</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0.299230566607</td>
+<td style="text-align:right">5.82394386616</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0.223579960826</td>
+<td style="text-align:right">3.33468292914</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1.34164078650</td>
+<td style="text-align:right">47.8125019186</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0.402749351016</td>
+<td style="text-align:right">11.8511029453</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0.255225288434</td>
+<td style="text-align:right">5.90890775165</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0.190501248180</td>
+<td style="text-align:right">4.05290086226</td>
+</tr>
+</tbody>
+</table></div>
+<p>Source norm here is &lt;C,C&gt; in model units. These particular unconstrained
+solutions differ in magnitude, but that is not necessary. Constraining
+&lt;C,C&gt;=15 and resolving produces spectrally stable one-electron branches:</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">L</th>
+<th style="text-align:right">Clock beta at common source norm</th>
+<th>Positive eigenvalues of iC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0.454619168037</td>
+<td>0.07408293, 2.01168471, 3.30872125</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0.318698166754</td>
+<td>1.62354101, 1.70665083, 3.07432229</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0.162808843130</td>
+<td>0.47026621, 2.01069745, 3.27657526</td>
+</tr>
+</tbody>
+</table></div>
+<p>Their equilibrium residuals are below 3e-13 and apparent maximum real
+linear parts below 8e-7. Therefore different total source strength is
+<strong>not</strong> required for L=2,3,4. Their full conserved spectra still differ,
+so integer L remains encoded in prepared source data rather than quantized
+dynamically by this model.</p>
+<h2 id="stability-result">Stability result</h2>
+<p>Linearize the full Hamiltonian equations in the co-rotating frame. The
+Jacobian contains Cartesian orbit variables and all fifteen source
+components. An independent central difference checks random Jacobian
+directions to 7.38e-10. For branches with a positive real eigenvalue,
+repeating the Jacobian with a five-times smaller step gives the same growth
+rate within 2e-6; direct perturbation integrations reproduce exp(sigma t)
+within 1.98e-6.</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">Electrons</th>
+<th style="text-align:right">L</th>
+<th style="text-align:right">Maximum real linear growth rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0.457701343856</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">below resolution; 7.17e-7 at the coarse step</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">below resolution; 7.49e-7 at the coarse step</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">below resolution; 7.58e-7 at the coarse step</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1.11809588609</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0.359183643772</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0.424991388621</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0.452985621066</td>
+</tr>
+</tbody>
+</table></div>
+<p>For the one-electron L=2,3,4 branches, the apparent real part shrinks
+approximately in proportion to the finite-difference step and reaches
+about 1e-7 at the finer step. There is no resolved exponential mode.
+This is linear spectral stability, not automatically nonlinear orbital
+stability: symmetry zero modes can produce drift.</p>
+<p>As finite nonlinear probes, deterministic perturbations of norm 1e-4 were
+integrated for ten clock turns. L=2 and L=3 had rotating-frame deviations
+0.01161, 0.01148, and 0.02396 respectively, with radius changes below 8e-5.
+These finite tests support
+bounded behavior on that interval but are not a theorem for all time or
+all perturbation directions.</p>
+<p>All four antipodal two-electron branches have resolved exponential modes.
+The completed magnetic term therefore does not stabilize that particular
+classical pair configuration. This does not exclude non-antipodal correlated
+motion or the separately checked antisymmetric carrier model.</p>
+<h2 id="what-is-finished-and-what-is-not">What is finished and what is not</h2>
+<p>The existence question for a consistent one-electron completion now has
+a positive answer: <strong>the quadratically completed autonomous Hamiltonian
+supports actual four- and eight-petal projected orbits, and those two tested
+branches have no resolved exponential linear instability.</strong> The earlier
+claim that quadratic completion simply destroys the petals was too broad;
+it destroys the old preparation but admits new relative equilibria.</p>
+<p>The physical theory is not finished in three respects. First, C=0 remains
+C=0, so the model does not induce the required source magnitude. Second,
+the integer frequency ratio is encoded in conserved initial source data.
+Third, the tested two-electron pair is unstable. A source with canonical
+amplitude and momentum can in principle be driven from zero, but its action,
+spectrum, and stable relative equilibria must be derived and tested rather
+than appended to force the desired answer.</p>
+<h2 id="reproduction-and-related-notes">Reproduction and related notes</h2>
+<p>The final normal and optimized runs completed 5,377 evaluations across
+27 conditions. Maximum equilibrium residual was 1.52e-13, full-turn
+trajectory error 8.62e-9, and perturbed stable-branch energy drift 3.97e-9.
+Three deliberately incorrect variants—wrong canonical force sign, omission
+of the quadratic force, and reversed source commutator—were rejected by
+independent equilibrium checks. The complete regression passed all 51
+diagnostic scripts and source checks; knowledge-base validation passed
+for 154 notes.</p>
+<ul>
+<li><a href="/IDWT-V2-site/evidence/diagnostics/completed-coulomb-petals-checks/">completed_coulomb_petals_checks.py</a> — solves, integrates, and linearizes the completed relative equilibria.</li>
+<li><a href="/IDWT-V2-site/research/notes/20260906-coulomb-angular-response/">Coulomb angular response</a> — baseline Hamiltonian and the old-preparation completion test corrected here.</li>
+<li><a href="/IDWT-V2-site/research/notes/20260906-two-electron-shared-response/">Two-electron shared response</a> — antisymmetric shared-source carrier result, distinct from the unstable Cartesian pair.</li>
+<li><a href="/IDWT-V2-site/research/notes/20260906-magnetic-bivector-master-bridge/">Magnetic bivector master bridge</a> — candidate field-theoretic origin and its remaining identification problem.</li>
+<li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a> — current project boundary.</li>
+<li><a href="/IDWT-V2-site/research/notes/20260906-multicentre-orbit-axes/">Multicentre orbit axes</a> — extension: connects actual-orbit directions to trigonal and tetrahedral nuclear geometry and separates visible coincidence from full-depth collision.</li>
+</ul>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-coulomb-angular-response/">Coulomb angular response</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-two-electron-shared-response/">Two-electron shared response</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-magnetic-bivector-master-bridge/">Magnetic bivector master bridge</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-multicentre-orbit-axes/">Multicentre orbit axes</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#correction-to-the-first-completion-test">Correction to the first completion test</a></li><li class="toc-level-2"><a href="#completed-hamiltonian-and-target-rotation">Completed Hamiltonian and target rotation</a></li><li class="toc-level-2"><a href="#actual-projected-trajectories">Actual projected trajectories</a></li><li class="toc-level-2"><a href="#stability-result">Stability result</a></li><li class="toc-level-2"><a href="#what-is-finished-and-what-is-not">What is finished and what is not</a></li><li class="toc-level-2"><a href="#reproduction-and-related-notes">Reproduction and related notes</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <p>A connected record of geometry, derivations, and research.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
+      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

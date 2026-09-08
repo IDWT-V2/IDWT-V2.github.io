@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>independent-audit-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/evidence/results/audit-2026-09-07/independent-audit-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="independent-audit-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/evidence/results/audit-2026-09-07/independent-audit-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="independent-audit-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
+  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/IDWT-V2-site/" >Overview</a>
+      <a href="/IDWT-V2-site/theory/" >Theory</a>
+      <a href="/IDWT-V2-site/research/" >Research</a>
+      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
+      <a href="/IDWT-V2-site/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>independent-audit-results.json</h1>
+      
+      
+      
+    </header>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/IDWT-V2-site/assets/evidence/experiments/results/audit-2026-09-07/independent-audit-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">checks_completed</th><td>84</td></tr><tr><th scope="row">chart_casimir_error</th><td>1.7763568394002505e-15</td></tr><tr><th scope="row">four_to_six_embedding_error</th><td>2.220446049250313e-16</td></tr><tr><th scope="row">interpretation</th><td>Checks verify diagnostics; candidate acceptance is a separate field.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;checks_completed&quot;: 84,
+  &quot;chart_casimir_error&quot;: 1.7763568394002505e-15,
+  &quot;four_to_six_embedding_error&quot;: 2.220446049250313e-16,
+  &quot;reciprocal_mass_errors&quot;: {
+    &quot;canonical_velocity&quot;: 4.261702102326126e-10,
+    &quot;energy&quot;: 2.220446049250313e-10,
+    &quot;momentum&quot;: 2.220446049250313e-16,
+    &quot;rotation&quot;: 2.7755575615628914e-10
+  },
+  &quot;recurrence_audits&quot;: [
+    {
+      &quot;runs&quot;: [
+        {
+          &quot;rtol&quot;: 3e-09,
+          &quot;atol&quot;: 3e-11,
+          &quot;substeps&quot;: 180,
+          &quot;residual&quot;: 4.2474781254890106e-07
+        },
+        {
+          &quot;rtol&quot;: 1e-12,
+          &quot;atol&quot;: 1e-14,
+          &quot;substeps&quot;: 1200,
+          &quot;residual&quot;: 2.4157216630271113e-06
+        },
+        {
+          &quot;rtol&quot;: 2.5e-14,
+          &quot;atol&quot;: 1e-15,
+          &quot;substeps&quot;: 2400,
+          &quot;residual&quot;: 2.4142280095680935e-06
+        }
+      ],
+      &quot;endpoint_refinement&quot;: 1.5010651670043138e-09,
+      &quot;coarse_endpoint_error&quot;: 2.0801515530242983e-06,
+      &quot;recurrence_tolerance&quot;: 1e-06,
+      &quot;numerically_accepted&quot;: false,
+      &quot;homotopy&quot;: 0.0064,
+      &quot;period&quot;: 20.67292124525589,
+      &quot;casimir_error&quot;: 8.881784197001252e-16
+    },
+    {
+      &quot;runs&quot;: [
+        {
+          &quot;rtol&quot;: 3e-09,
+          &quot;atol&quot;: 3e-11,
+          &quot;substeps&quot;: 180,
+          &quot;residual&quot;: 2.486885421206788e-07
+        },
+        {
+          &quot;rtol&quot;: 1e-12,
+          &quot;atol&quot;: 1e-14,
+          &quot;substeps&quot;: 1200,
+          &quot;residual&quot;: 7.435726060211828e-06
+        },
+        {
+          &quot;rtol&quot;: 2.5e-14,
+          &quot;atol&quot;: 1e-15,
+          &quot;substeps&quot;: 2400,
+          &quot;residual&quot;: 7.438962667977733e-06
+        }
+      ],
+      &quot;endpoint_refinement&quot;: 3.2395665488287486e-09,
+      &quot;coarse_endpoint_error&quot;: 7.355575581441371e-06,
+      &quot;recurrence_tolerance&quot;: 1e-06,
+      &quot;numerically_accepted&quot;: false,
+      &quot;homotopy&quot;: 0.0096,
+      &quot;period&quot;: 20.567504684805566,
+      &quot;casimir_error&quot;: 4.440892098500626e-16
+    },
+    {
+      &quot;runs&quot;: [
+        {
+          &quot;rtol&quot;: 3e-09,
+          &quot;atol&quot;: 3e-11,
+          &quot;substeps&quot;: 180,
+          &quot;residual&quot;: 5.239190756584686e-07
+        },
+        {
+          &quot;rtol&quot;: 1e-12,
+          &quot;atol&quot;: 1e-14,
+          &quot;substeps&quot;: 1200,
+          &quot;residual&quot;: 5.3145366520873105e-06
+        },
+        {
+          &quot;rtol&quot;: 2.5e-14,
+          &quot;atol&quot;: 1e-15,
+          &quot;substeps&quot;: 2400,
+          &quot;residual&quot;: 5.3144990771616465e-06
+        }
+      ],
+      &quot;endpoint_refinement&quot;: 9.891566664736461e-11,
+      &quot;coarse_endpoint_error&quot;: 4.842632116670392e-06,
+      &quot;recurrence_tolerance&quot;: 1e-06,
+      &quot;numerically_accepted&quot;: false,
+      &quot;homotopy&quot;: 0.0128,
+      &quot;period&quot;: 20.48965107367895,
+      &quot;casimir_error&quot;: 4.440892098500626e-16
+    }
+  ],
+  &quot;interpretation&quot;: &quot;Checks verify diagnostics; candidate acceptance is a separate field.&quot;
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <p>A connected record of geometry, derivations, and research.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
+      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

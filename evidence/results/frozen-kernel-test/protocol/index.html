@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>protocol.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/evidence/results/frozen-kernel-test/protocol/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="protocol.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/evidence/results/frozen-kernel-test/protocol/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="protocol.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
+  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
+  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/IDWT-V2-site/" >Overview</a>
+      <a href="/IDWT-V2-site/theory/" >Theory</a>
+      <a href="/IDWT-V2-site/research/" >Research</a>
+      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
+      <a href="/IDWT-V2-site/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>protocol.json</h1>
+      
+      
+      
+    </header>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/IDWT-V2-site/assets/evidence/experiments/results/frozen-kernel-test/protocol.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">protocol_id</th><td>20260907-frozen-magnetic-texture-v1</td></tr><tr><th scope="row">purpose</th><td>Test whether the existing six-dimensional magnetic response supports its uniform-polarization preparation when spatial polarization textures are admitted.</td></tr><tr><th scope="row">status</th><td>Frozen before computing texture Hessians or nonlinear texture energies</td></tr><tr><th scope="row">dimension</th><td>6</td></tr><tr><th scope="row">density</th><td>n(x)=(2*pi)^(-3)*exp(-|x|^2/2), integral n=1, fixed envelope</td></tr><tr><th scope="row">polarization</th><td>Unit four-component positive-band chiral spinor z(x); reference z0=(1,0,0,0)</td></tr><tr><th scope="row">kernel</th><td>P_k M=P_k*M+M*P_k with P_k=k*k^T/|k|^2 for nonzero k on R^6</td></tr><tr><th scope="row">energy</th><td>tau*integral n*|gradient z|^2 - kappa/2*integral |P_k Fourier[n J(z)]|^2 dk/(2*pi)^6</td></tr><tr><th scope="row">coefficients</th><td>tau=1/(2*m), g=e/(2*m), kappa=g^2/Z; hbar=1; no added restoring interaction</td></tr><tr><th scope="row">parameter_scope</th><td>Inherited illustrative Dirac-Maxwell benchmark, not measured six-dimensional electron parameters</td></tr><tr><th scope="row">dimensionless_strength</th><td>lambda=kappa*integral n^2/tau, integral n^2=(4*pi)^(-3)</td></tr><tr><th scope="row">texture_family</th><td>z=cos(epsilon*f(x))*z0 + sin(epsilon*f(x))*v, v any normalized ray-orthogonal complex spinor; f=sin(q*x0) or cos(q*x0)</td></tr><tr><th scope="row">reference_prediction_under_test</th><td>The inherited benchmark is stationary and has no negative energy curvature in the specified texture family</td></tr><tr><th scope="row">stronger_claim_under_test</th><td>Uniform polarization remains a local minimum throughout the predeclared positive-coupling stress cases</td></tr><tr><th scope="row">interpretation</th><td>A failed preparation does not refute spatial depth six. Survival is only for this perturbation family and does not prove full field or molecular stability.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;protocol_id&quot;: &quot;20260907-frozen-magnetic-texture-v1&quot;,
+  &quot;purpose&quot;: &quot;Test whether the existing six-dimensional magnetic response supports its uniform-polarization preparation when spatial polarization textures are admitted.&quot;,
+  &quot;status&quot;: &quot;Frozen before computing texture Hessians or nonlinear texture energies&quot;,
+  &quot;dimension&quot;: 6,
+  &quot;density&quot;: &quot;n(x)=(2*pi)^(-3)*exp(-|x|^2/2), integral n=1, fixed envelope&quot;,
+  &quot;polarization&quot;: &quot;Unit four-component positive-band chiral spinor z(x); reference z0=(1,0,0,0)&quot;,
+  &quot;kernel&quot;: &quot;P_k M=P_k*M+M*P_k with P_k=k*k^T/|k|^2 for nonzero k on R^6&quot;,
+  &quot;energy&quot;: &quot;tau*integral n*|gradient z|^2 - kappa/2*integral |P_k Fourier[n J(z)]|^2 dk/(2*pi)^6&quot;,
+  &quot;coefficients&quot;: &quot;tau=1/(2*m), g=e/(2*m), kappa=g^2/Z; hbar=1; no added restoring interaction&quot;,
+  &quot;reference_parameters&quot;: {&quot;mass&quot;: 1.3, &quot;charge&quot;: 0.7, &quot;maxwell&quot;: 1.8, &quot;width&quot;: 1.0},
+  &quot;parameter_scope&quot;: &quot;Inherited illustrative Dirac-Maxwell benchmark, not measured six-dimensional electron parameters&quot;,
+  &quot;dimensionless_strength&quot;: &quot;lambda=kappa*integral n^2/tau, integral n^2=(4*pi)^(-3)&quot;,
+  &quot;stress_strengths&quot;: [1.0, 8.0, 32.0, 128.0],
+  &quot;texture_family&quot;: &quot;z=cos(epsilon*f(x))*z0 + sin(epsilon*f(x))*v, v any normalized ray-orthogonal complex spinor; f=sin(q*x0) or cos(q*x0)&quot;,
+  &quot;wave_numbers&quot;: [0.25, 0.5, 1.0, 2.0, 4.0],
+  &quot;reference_prediction_under_test&quot;: &quot;The inherited benchmark is stationary and has no negative energy curvature in the specified texture family&quot;,
+  &quot;stronger_claim_under_test&quot;: &quot;Uniform polarization remains a local minimum throughout the predeclared positive-coupling stress cases&quot;,
+  &quot;failure_rules&quot;: {
+    &quot;stationarity_norm_above&quot;: 1e-9,
+    &quot;resolved_negative_hessian_eigenvalue_below&quot;: -1e-7,
+    &quot;near_zero&quot;: &quot;Within 1e-7 is unresolved, not stable&quot;,
+    &quot;independent_hessian_agreement_absolute_plus_relative&quot;: [1e-7, 0.002],
+    &quot;nonlinear_negative_witness&quot;: &quot;A refined direct texture energy below the uniform reference confirms failure for that prepared state&quot;
+  },
+  &quot;numerical_controls&quot;: {
+    &quot;epsilon_values&quot;: [0.02, 0.01, 0.005],
+    &quot;fourier_harmonics&quot;: [8, 12],
+    &quot;phase_sample_counts&quot;: [256, 512],
+    &quot;quadrature_absolute_tolerances&quot;: [1e-11, 1e-13]
+  },
+  &quot;interpretation&quot;: &quot;A failed preparation does not refute spatial depth six. Survival is only for this perturbation family and does not prove full field or molecular stability.&quot;,
+  &quot;exclusions&quot;: [&quot;changing the kernel after a failure&quot;, &quot;retuning the reference parameters after seeing results&quot;, &quot;adding compensating vector or scalar channels&quot;, &quot;identifying polarization fields with particle orbits&quot;, &quot;claiming experimental validation&quot;]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <p>A connected record of geometry, derivations, and research.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
+      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

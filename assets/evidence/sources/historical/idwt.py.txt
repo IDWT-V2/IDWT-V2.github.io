@@ -1,0 +1,98 @@
+# Historical excerpt: idwt.py
+
+Imported 2026-09-08. Historical evidence only; claims are not endorsed by V2.
+This is a local extract, not a link to or dependency on another repository.
+Original full-file SHA-256: `aca552fd65d09cb94d8097417d99efb85b78efffcd482c8f7a4a8930c4da6de3`.
+
+## Original source lines 2266–2318
+
+def _double_factorial(m):
+    r = 1
+    while m > 1:
+        r *= m
+        m -= 2
+    return r
+
+def _laguerre_half(n_r, u):
+    # generalized Laguerre L_{n_r}^{(1/2)}(u)
+    # via the standard three-term recurrence
+    a = 0.5
+    Lm1, L = 0.0, 1.0
+    for k in range(n_r):
+        Lm1, L = L, ((2*k + 1 + a - u) * L - (k + a) * Lm1) / (k + 1)
+    return L
+
+def overlap_J(n_r, s):
+    # closed form of int_0^inf L_{n_r}^{(1/2)}(u) e^{-s u} u^{1/2} du
+    #   = Gamma(n_r+3/2)/n_r! * (s-1)^n_r / s^(n_r+3/2),
+    #   Gamma(n_r+3/2) = sqrt(pi)(2 n_r+1)!!/2^(n_r+1)
+    gamma_half = (math.sqrt(math.pi)
+                  * _double_factorial(2*n_r + 1) / 2.0**(n_r + 1))
+    return gamma_half / math.factorial(n_r) * (s - 1.0)**n_r / s**(n_r + 1.5)
+
+def _overlap_J_numeric(n_r, s, umax=80.0, N=40000):
+    # midpoint quadrature, verifies the closed form without scipy
+    h = umax / N
+    tot = 0.0
+    for i in range(N):
+        u = (i + 0.5) * h
+        tot += _laguerre_half(n_r, u) * math.exp(-s * u) * math.sqrt(u)
+    return tot * h
+
+# kernel-fixed weight: e^{-u} (vacuum) x e^{-u/2} (mode)
+NONODE_S       = 1.5
+nonode_nr      = list(range(0, 7))
+nonode_closed  = {nr: overlap_J(nr, NONODE_S)
+                  for nr in nonode_nr}
+nonode_numeric = {nr: _overlap_J_numeric(nr, NONODE_S)
+                  for nr in nonode_nr}
+nonode_relerr  = {
+    nr: (abs(nonode_closed[nr] - nonode_numeric[nr])
+         / abs(nonode_numeric[nr]))
+    for nr in nonode_nr
+}
+# = 0 for nr >= 1 (sole zero)
+nonode_at_one  = {nr: overlap_J(nr, 1.0) for nr in nonode_nr}
+# (1/3)^{n_r}, never 0
+nonode_geom    = {
+    nr: ((NONODE_S - 1.0) / NONODE_S)**nr for nr in nonode_nr
+}
+nonode_no_zero_at_weight = all(abs(nonode_closed[nr]) > 0.0 for nr in nonode_nr)
+
+## Original source lines 8761–8797
+
+# =============================================================================
+# STEP 134 -- COUNTING NORMALIZATION FROM RATE CONSERVATION (EOM STEP)
+# =============================================================================
+# Closes the STEP 131 residual "derive the conditional normalization from
+# the EOM".  Both the mixing element and its reference come from the SAME
+# quartic kernel vertex: expanding Psi in sector modes, the vertex carries
+# amplitudes A_ij ~ chi_i(xi0) chi_j(xi0) x (channel factors common to all
+# pairs).  Therefore
+#     |A_ij|^2 / |A_ii|^2 = (I_i I_j)/(I_i^2) = I_j / I_i = S_i/S_j,
+# in which the channel multiplicity m0 AND the global amplitude cancel
+# exactly (verified below with an explicit amplitude factor).  Rate
+# conservation then fixes the diagonal: the fraction r = S_lo/S_hi diverted
+# into the heavier channel is missing from the lighter one, so the pair is
+#     (|V_mix|^2, |V_diag|^2) = (r, 1-r)  --  sin^2 and cos^2 of ONE angle.
+# This is WHY the data selected sin^2(theta) = r over tan^2(theta) = r
+# (STEP 131): mixing weights are RATE fractions of a conserved flow, not
+# components of a normalized state decomposition.  Consequence: exact
+# first-row unitarity is now an IDWT PREDICTION (rate conservation), with
+# |V_ud| = sqrt(1 - |V_us|^2 - |V_ub|^2) = 0.97446 vs PDG 0.97367(32) --
+# a +2.5 sigma tension, the known first-row-unitarity anomaly territory;
+# IDWT predicts the sum is exactly 1; recorded as an open residual.
+# Remaining 🔶 parent: the channel-amplitude identification (STEP 131 L1,
+# pointlike-equidistribution premise) and the cross-sector write-out.
+
+_amp_134 = _Fr41(7, 5)                          # arbitrary amplitude factor
+_Ii_134, _Ij_134 = _Fr41(1, 1), _Fr41(1, 20)    # channel intensities (d,s)
+_ratio_134 = ((_amp_134**2 * _Ii_134) * (_amp_134**2 * _Ij_134)) \
+    / (_amp_134**2 * _Ii_134)**2
+assert _ratio_134 == _Ij_134 / _Ii_134          # amplitude cancels exactly
+_r_134 = _Fr41(S(1, 3), S(4, 3))                # = 1/20
+assert _r_134 + (1 - _r_134) == 1               # unitary pair from conservation
+_Vus2_134 = ((1.0 + 1.0/240.0)**2) * float(_r_134)
+_Vud_134 = math.sqrt(1.0 - _Vus2_134 - 3.672e-3**2)
+_Vud_pull_134 = (_Vud_134 - 0.97367) / 0.00032  # PDG 2024
+assert 2.0 < _Vud_pull_134 < 3.0                # the recorded open tension
