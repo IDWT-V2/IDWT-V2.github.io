@@ -6,31 +6,31 @@
   <meta name="color-scheme" content="light">
   <title>Accurate cylindrical correction — IDWT V2</title>
   <meta name="description" content="Accuracy-controlled fixed-Casimir shooting revisits the rejected cylindrical candidates with analytic derivatives and independent endpoint checks.">
-  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260907-accurate-cylindrical-correction/">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20260907-accurate-cylindrical-correction/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Accurate cylindrical correction — IDWT V2">
   <meta property="og:description" content="Accuracy-controlled fixed-Casimir shooting revisits the rejected cylindrical candidates with analytic derivatives and independent endpoint checks.">
-  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260907-accurate-cylindrical-correction/">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20260907-accurate-cylindrical-correction/">
   <meta property="og:site_name" content="IDWT V2">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Accurate cylindrical correction — IDWT V2">
   <meta name="twitter:description" content="Accuracy-controlled fixed-Casimir shooting revisits the rejected cylindrical candidates with analytic derivatives and independent endpoint checks.">
-  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
-  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
-  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="masthead">
-    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
     <nav class="primary-nav" aria-label="Main navigation">
-      <a href="/IDWT-V2-site/" >Overview</a>
-      <a href="/IDWT-V2-site/theory/" >Theory</a>
-      <a href="/IDWT-V2-site/research/" aria-current="page">Research</a>
-      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
-      <a href="/IDWT-V2-site/evidence/" >Evidence</a>
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
     </nav>
-    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
   </header>
   <main id="main" class="article-shell" tabindex="-1">
   <article class="article">
@@ -91,10 +91,10 @@ This independently confirms the transverse instability rather than merely
 reading an eigenvalue from a numerical matrix.</p>
 <p>Evidence files:</p>
 <ul>
-<li><a href="/IDWT-V2-site/evidence/results/two-path-study/segmented-0128/">Corrected state</a> — same source spectrum as the archived start.</li>
-<li><a href="/IDWT-V2-site/evidence/results/two-path-study/stability-0128-confirmed/">Full-coordinate stability and nonlinear probes</a> — integration refinements, complete multipliers, source-tangent check, and direct growth measurements.</li>
+<li><a href="/evidence/results/two-path-study/segmented-0128/">Corrected state</a> — same source spectrum as the archived start.</li>
+<li><a href="/evidence/results/two-path-study/stability-0128-confirmed/">Full-coordinate stability and nonlinear probes</a> — integration refinements, complete multipliers, source-tangent check, and direct growth measurements.</li>
 </ul>
-<p><a href="/IDWT-V2-site/evidence/diagnostics/cylindrical-orbit-stability/">cylindrical_orbit_stability.py</a> reproduces
+<p><a href="/evidence/diagnostics/cylindrical-orbit-stability/">cylindrical_orbit_stability.py</a> reproduces
 these checks, including the otherwise omitted spatial perturbations.</p>
 <h2 id="continuation-beyond-the-original-endpoint">Continuation beyond the original endpoint</h2>
 <p>The corrected branch reaches <strong><span class="math" data-equation-id="idwt-e3db1ee02606660a-19" data-tex-sha256="e7f0b03651d9d43bf7734a989f5f32ae17d924729bc4b0de061919153d34f2cd"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>0.100</mn></mrow><annotation encoding="application/x-tex">h=0.100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">h</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.100</span></span></span></span></span></strong>, not the purely cylindrical
@@ -153,7 +153,7 @@ corrected further rather than silently counted as successful.</p>
 <p>Earlier table rows use the original independently refined integrator;
 the last three use the new segmented DOP853 verification. The complete,
 uniform results are in
-<a href="/IDWT-V2-site/evidence/results/two-path-study/cross-method-verification/">cross-method-verification.json</a>.
+<a href="/evidence/results/two-path-study/cross-method-verification/">cross-method-verification.json</a>.
 The <span class="math" data-equation-id="idwt-e3db1ee02606660a-33" data-tex-sha256="e7f0b03651d9d43bf7734a989f5f32ae17d924729bc4b0de061919153d34f2cd"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>0.100</mn></mrow><annotation encoding="application/x-tex">h=0.100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">h</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.100</span></span></span></span></span> and turning-point <span class="math" data-equation-id="idwt-e3db1ee02606660a-34" data-tex-sha256="ec67d1772960a7b053ecc86292b0a9abc8819166d3e13b642db37680459f166a"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>0.0096</mn></mrow><annotation encoding="application/x-tex">h=0.0096</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">h</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.0096</span></span></span></span></span> solver reports retain a <strong>failed
 legacy refinement gate</strong>: their medium-accuracy unsegmented integrations
 were not sufficiently converged. The fresh segmented cross-method test
@@ -205,7 +205,7 @@ unit multipliers. The hidden-side six-block has only unit-modulus multipliers
 within numerical accuracy. Omitting the third visible perturbation therefore
 removes a physically relevant instability from this diagnostic.</p>
 <h2 id="reproduction-commands">Reproduction commands</h2>
-<p><a href="/IDWT-V2-site/evidence/diagnostics/accurate-cylindrical-continuation/">accurate_cylindrical_continuation.py</a>
+<p><a href="/evidence/diagnostics/accurate-cylindrical-continuation/">accurate_cylindrical_continuation.py</a>
 reads the archived evidence, preserves it, corrects new states, and separately
 computes recurrence acceptance. Run from the repository root, supplying a fresh output
 path:</p>
@@ -213,15 +213,15 @@ path:</p>
 </code></pre>
 <h2 id="related">Related</h2>
 <ul>
-<li><a href="/IDWT-V2-site/research/notes/20260907-dimensional-necessity-response/">Dimensional necessity from response</a> — exact five-dimensional inclusion and the distinct higher-coupling hidden instability.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260907-cylindrical-petal-continuation/">Cylindrical petal continuation</a> — supplies the original candidates and the independent audit that rejected their previous acceptance.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260907-reciprocal-cylindrical-molecule/">Reciprocal cylindrical molecule</a> — supplies the later moving-nucleus and flexible-plane dynamics; a fixed-centre orbit alone does not establish molecular stability.</li>
+<li><a href="/research/notes/20260907-dimensional-necessity-response/">Dimensional necessity from response</a> — exact five-dimensional inclusion and the distinct higher-coupling hidden instability.</li>
+<li><a href="/research/notes/20260907-cylindrical-petal-continuation/">Cylindrical petal continuation</a> — supplies the original candidates and the independent audit that rejected their previous acceptance.</li>
+<li><a href="/research/notes/20260907-reciprocal-cylindrical-molecule/">Reciprocal cylindrical molecule</a> — supplies the later moving-nucleus and flexible-plane dynamics; a fixed-centre orbit alone does not establish molecular stability.</li>
 </ul>
 </div>
     
     <section class="related-reading" aria-labelledby="related-heading">
       <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
-      <ul><li><a href="/IDWT-V2-site/research/notes/20260907-cylindrical-petal-continuation/">Cylindrical petal continuation</a></li><li><a href="/IDWT-V2-site/research/notes/20260907-reciprocal-cylindrical-molecule/">Reciprocal cylindrical molecule</a></li><li><a href="/IDWT-V2-site/research/notes/20260907-dimensional-necessity-response/">Dimensional necessity from response</a></li></ul>
+      <ul><li><a href="/research/notes/20260907-cylindrical-petal-continuation/">Cylindrical petal continuation</a></li><li><a href="/research/notes/20260907-reciprocal-cylindrical-molecule/">Reciprocal cylindrical molecule</a></li><li><a href="/research/notes/20260907-dimensional-necessity-response/">Dimensional necessity from response</a></li></ul>
     </section>
     
   </article>
@@ -236,11 +236,11 @@ path:</p>
 </main>
 
   <footer class="site-footer">
-    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
     <p>A connected record of geometry, derivations, and research.</p>
     <nav aria-label="Footer navigation">
-      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
-      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
       <a href="#main">Back to top ↑</a>
     </nav>
   </footer>

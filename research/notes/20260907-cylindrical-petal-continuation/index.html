@@ -6,31 +6,31 @@
   <meta name="color-scheme" content="light">
   <title>Cylindrical petal continuation — IDWT V2</title>
   <meta name="description" content="Fixed-Casimir shooting supplies near-recurrent candidates, but independent integration refinement rejects the saved nonzero checkpoints at the stated closure tolerance.">
-  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260907-cylindrical-petal-continuation/">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20260907-cylindrical-petal-continuation/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Cylindrical petal continuation — IDWT V2">
   <meta property="og:description" content="Fixed-Casimir shooting supplies near-recurrent candidates, but independent integration refinement rejects the saved nonzero checkpoints at the stated closure tolerance.">
-  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260907-cylindrical-petal-continuation/">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20260907-cylindrical-petal-continuation/">
   <meta property="og:site_name" content="IDWT V2">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Cylindrical petal continuation — IDWT V2">
   <meta name="twitter:description" content="Fixed-Casimir shooting supplies near-recurrent candidates, but independent integration refinement rejects the saved nonzero checkpoints at the stated closure tolerance.">
-  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
-  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
-  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="masthead">
-    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
     <nav class="primary-nav" aria-label="Main navigation">
-      <a href="/IDWT-V2-site/" >Overview</a>
-      <a href="/IDWT-V2-site/theory/" >Theory</a>
-      <a href="/IDWT-V2-site/research/" aria-current="page">Research</a>
-      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
-      <a href="/IDWT-V2-site/evidence/" >Evidence</a>
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
     </nav>
-    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
   </header>
   <main id="main" class="article-shell" tabindex="-1">
   <article class="article">
@@ -46,7 +46,7 @@
 <p>Summary: Fixed-Casimir shooting supplies near-recurrent candidates, but independent integration refinement rejects the saved nonzero checkpoints at the stated closure tolerance.</p>
 </blockquote>
 <h2 id="independent-numerical-correction">Independent numerical correction</h2>
-<p><strong>Follow-up:</strong> <a href="/IDWT-V2-site/research/notes/20260907-accurate-cylindrical-correction/">Accurate cylindrical correction</a>
+<p><strong>Follow-up:</strong> <a href="/research/notes/20260907-accurate-cylindrical-correction/">Accurate cylindrical correction</a>
 revisits these states with a new independently tested corrector. The rejection
 below applies to the original saved states, not to every nearby solution.</p>
 <p>The earlier claim that this calculation certified a periodic micro-branch is
@@ -94,9 +94,9 @@ global error bound or an existence theorem. The force is continuous but its
 derivative changes at the nuclear-profile boundary; endpoint accuracy must
 be checked separately from the integrator's local error control.</p>
 <p>The original states, parameters, and source-file hashes are preserved in
-<a href="/IDWT-V2-site/evidence/results/audit-2026-09-07/continuation-candidates/">archived candidates</a>.
-<a href="/IDWT-V2-site/evidence/diagnostics/independent-audit-checks/">Independent audit checks</a> regenerate the
-<a href="/IDWT-V2-site/evidence/results/audit-2026-09-07/independent-audit-results/">refinement report</a>.
+<a href="/evidence/results/audit-2026-09-07/continuation-candidates/">archived candidates</a>.
+<a href="/evidence/diagnostics/independent-audit-checks/">Independent audit checks</a> regenerate the
+<a href="/evidence/results/audit-2026-09-07/independent-audit-results/">refinement report</a>.
 The continuation acceptance gate now requires a complete finite integration,
 fixed Casimirs, and independently refined closure before saving a checkpoint.</p>
 <h2 id="reduced-recurrence-problem">Reduced recurrence problem</h2>
@@ -247,24 +247,24 @@ rotation gauges must also be fixed explicitly.
 Only after reaching <span class="math" data-equation-id="idwt-326f5da43bccad92-83" data-tex-sha256="d0edb26d40e1ed50ac52cdd78c32cd4bfad62f15b29a063339e730ef0a1f0d7f"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">h=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">h</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span> should the full reciprocal moving-nucleus system be
 continued from the fixed-centre solution and its Floquet multipliers computed.</p>
 <h2 id="reproduction">Reproduction</h2>
-<p><a href="/IDWT-V2-site/evidence/diagnostics/cylindrical-petal-continuation-checks/">cylindrical_petal_continuation_checks.py</a>
+<p><a href="/evidence/diagnostics/cylindrical-petal-continuation-checks/">cylindrical_petal_continuation_checks.py</a>
 reproduces the exact start, verifies its local analytic Jacobian, integrates
 the monodromy and parameter sensitivity, tests first-order solvability, and
 performs two rank-aware corrections of the nonzero microstep.</p>
-<p><a href="/IDWT-V2-site/evidence/diagnostics/fixed-casimir-petal-continuation-checks/">fixed_casimir_petal_continuation_checks.py</a>
+<p><a href="/evidence/diagnostics/fixed-casimir-petal-continuation-checks/">fixed_casimir_petal_continuation_checks.py</a>
 constructs the two-sphere source chart and attempts continuation. It must
 reject a candidate that fails its independent integration-quality gate.</p>
 <h2 id="related">Related</h2>
 <ul>
-<li><a href="/IDWT-V2-site/research/notes/20260906-completed-coulomb-petals/">Completed Coulomb petals</a> — supplies the exact analytic branch at <span class="math" data-equation-id="idwt-326f5da43bccad92-84" data-tex-sha256="b97527925f36f2c2201943f3edf50b916c542295cd7f929bcdc7132b146847fb"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">h</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span>.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260907-reciprocal-cylindrical-molecule/">Reciprocal cylindrical molecule</a> — supplies the conservative target dynamics after fixed-centre continuation.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260907-cylindrical-molecular-shape-stability/">Cylindrical molecular shape stability</a> — gives stable nuclear configurations for the later moving-centre solve.</li>
+<li><a href="/research/notes/20260906-completed-coulomb-petals/">Completed Coulomb petals</a> — supplies the exact analytic branch at <span class="math" data-equation-id="idwt-326f5da43bccad92-84" data-tex-sha256="b97527925f36f2c2201943f3edf50b916c542295cd7f929bcdc7132b146847fb"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">h</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span>.</li>
+<li><a href="/research/notes/20260907-reciprocal-cylindrical-molecule/">Reciprocal cylindrical molecule</a> — supplies the conservative target dynamics after fixed-centre continuation.</li>
+<li><a href="/research/notes/20260907-cylindrical-molecular-shape-stability/">Cylindrical molecular shape stability</a> — gives stable nuclear configurations for the later moving-centre solve.</li>
 </ul>
 </div>
     
     <section class="related-reading" aria-labelledby="related-heading">
       <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
-      <ul><li><a href="/IDWT-V2-site/research/notes/20260907-reciprocal-cylindrical-molecule/">Reciprocal cylindrical molecule</a></li><li><a href="/IDWT-V2-site/research/notes/20260907-cylindrical-molecular-shape-stability/">Cylindrical molecular shape stability</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-completed-coulomb-petals/">Completed Coulomb petals</a></li><li><a href="/IDWT-V2-site/research/notes/20260907-accurate-cylindrical-correction/">Accurate cylindrical correction</a></li></ul>
+      <ul><li><a href="/research/notes/20260907-reciprocal-cylindrical-molecule/">Reciprocal cylindrical molecule</a></li><li><a href="/research/notes/20260907-cylindrical-molecular-shape-stability/">Cylindrical molecular shape stability</a></li><li><a href="/research/notes/20260906-completed-coulomb-petals/">Completed Coulomb petals</a></li><li><a href="/research/notes/20260907-accurate-cylindrical-correction/">Accurate cylindrical correction</a></li></ul>
     </section>
     
   </article>
@@ -279,11 +279,11 @@ reject a candidate that fails its independent integration-quality gate.</p>
 </main>
 
   <footer class="site-footer">
-    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
     <p>A connected record of geometry, derivations, and research.</p>
     <nav aria-label="Footer navigation">
-      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
-      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
       <a href="#main">Back to top ↑</a>
     </nav>
   </footer>

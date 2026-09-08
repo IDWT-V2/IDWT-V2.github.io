@@ -6,31 +6,31 @@
   <meta name="color-scheme" content="light">
   <title>Coupled circulating branch — IDWT V2</title>
   <meta name="description" content="Auxiliary model only: The coupled scalar 3-in-6 model admits excited circulating stationary states with an exact oscillatory linear moment spectrum along the equal-coupling family.">
-  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-coupled-circulating-branch/">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20260906-coupled-circulating-branch/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Coupled circulating branch — IDWT V2">
   <meta property="og:description" content="Auxiliary model only: The coupled scalar 3-in-6 model admits excited circulating stationary states with an exact oscillatory linear moment spectrum along the equal-coupling family.">
-  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-coupled-circulating-branch/">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20260906-coupled-circulating-branch/">
   <meta property="og:site_name" content="IDWT V2">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Coupled circulating branch — IDWT V2">
   <meta name="twitter:description" content="Auxiliary model only: The coupled scalar 3-in-6 model admits excited circulating stationary states with an exact oscillatory linear moment spectrum along the equal-coupling family.">
-  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
-  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
-  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="masthead">
-    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
     <nav class="primary-nav" aria-label="Main navigation">
-      <a href="/IDWT-V2-site/" >Overview</a>
-      <a href="/IDWT-V2-site/theory/" >Theory</a>
-      <a href="/IDWT-V2-site/research/" aria-current="page">Research</a>
-      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
-      <a href="/IDWT-V2-site/evidence/" >Evidence</a>
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
     </nav>
-    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
   </header>
   <main id="main" class="article-shell" tabindex="-1">
   <article class="article">
@@ -51,7 +51,7 @@ actual electron orbit constructed in the 6D demo. Its stationary states,
 angular expectations, and stability results have not been mapped to that
 trajectory or its observer readout. They must not be used as a replacement
 for the existing orbit-shape derivation. See
-<a href="/IDWT-V2-site/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a>.</p>
+<a href="/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a>.</p>
 <h2 id="1-same-functional-different-branch">1. Same functional, different branch</h2>
 <p>Use the positive rank-one, fixed-embedding 3-in-6 scalar functional from
 the ground-state moment test, with both norms and kinetic coefficients one.
@@ -163,10 +163,10 @@ index. The isolated fixed-circulation energy bound is not a proof of
 nonlinear stability for this coupled branch, since that mixed circulation
 is no longer separately conserved.</p>
 <h2 id="reproduction">Reproduction</h2>
-<p><a href="/IDWT-V2-site/evidence/diagnostics/coupled-circulation-checks/">coupled_circulation_checks.py</a> verifies
+<p><a href="/evidence/diagnostics/coupled-circulation-checks/">coupled_circulation_checks.py</a> verifies
 four stationary parameter choices and both exact characteristic polynomials,
 including the symbolic equal-coupling family.
-<a href="/IDWT-V2-site/evidence/diagnostics/coupled-circulation-bdg-checks/">coupled_circulation_bdg_checks.py</a>
+<a href="/evidence/diagnostics/coupled-circulation-bdg-checks/">coupled_circulation_bdg_checks.py</a>
 independently constructs the two-field Bogoliubov matrix at N = 2 from
 actual Fock amplitudes and quadratic interaction columns. The nonlinear
 coupling is entirely captured by nuclear shells 0,2 and electron shells
@@ -179,18 +179,18 @@ All couplings, embedding, field types, and normalization assumptions are
 the ones stated above; no observed constants were fitted.</p>
 <h2 id="related">Related</h2>
 <ul>
-<li><a href="/IDWT-V2-site/research/notes/20260906-spin-orbit-source-audit/">Spin-orbit source audit</a> — conditional derivative vertex needed before orbital current becomes a spin source.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260906-intrinsic-spinor-bridge-obstruction/">Intrinsic spinor bridge obstruction</a> — global restriction on turning fiber selection into base-coordinate locking.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260906-self-consistent-moment-lock-test/">Self-consistent moment lock test</a> — same coupled functional, with the distinct unrestricted ground-state result.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260906-circulating-isotropic-orbitals/">Circulating isotropic orbitals</a> — isolated equal-width construction generalized here.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260906-fixed-circulation-energy-bound/">Fixed circulation energy bound</a> — explains why the isolated energetic argument cannot establish coupled stability.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a> — current proof boundaries and correction routes.</li>
+<li><a href="/research/notes/20260906-spin-orbit-source-audit/">Spin-orbit source audit</a> — conditional derivative vertex needed before orbital current becomes a spin source.</li>
+<li><a href="/research/notes/20260906-intrinsic-spinor-bridge-obstruction/">Intrinsic spinor bridge obstruction</a> — global restriction on turning fiber selection into base-coordinate locking.</li>
+<li><a href="/research/notes/20260906-self-consistent-moment-lock-test/">Self-consistent moment lock test</a> — same coupled functional, with the distinct unrestricted ground-state result.</li>
+<li><a href="/research/notes/20260906-circulating-isotropic-orbitals/">Circulating isotropic orbitals</a> — isolated equal-width construction generalized here.</li>
+<li><a href="/research/notes/20260906-fixed-circulation-energy-bound/">Fixed circulation energy bound</a> — explains why the isolated energetic argument cannot establish coupled stability.</li>
+<li><a href="/research/notes/20260906-research-status/">Research status</a> — current proof boundaries and correction routes.</li>
 </ul>
 </div>
     
     <section class="related-reading" aria-labelledby="related-heading">
       <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
-      <ul><li><a href="/IDWT-V2-site/research/notes/20260906-self-consistent-moment-lock-test/">Self-consistent moment lock test</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-circulating-isotropic-orbitals/">Circulating isotropic orbitals</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-fixed-circulation-energy-bound/">Fixed circulation energy bound</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-spin-orbit-source-audit/">Spin-orbit source audit</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-intrinsic-spinor-bridge-obstruction/">Intrinsic spinor bridge obstruction</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a></li></ul>
+      <ul><li><a href="/research/notes/20260906-self-consistent-moment-lock-test/">Self-consistent moment lock test</a></li><li><a href="/research/notes/20260906-circulating-isotropic-orbitals/">Circulating isotropic orbitals</a></li><li><a href="/research/notes/20260906-fixed-circulation-energy-bound/">Fixed circulation energy bound</a></li><li><a href="/research/notes/20260906-research-status/">Research status</a></li><li><a href="/research/notes/20260906-spin-orbit-source-audit/">Spin-orbit source audit</a></li><li><a href="/research/notes/20260906-intrinsic-spinor-bridge-obstruction/">Intrinsic spinor bridge obstruction</a></li><li><a href="/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a></li></ul>
     </section>
     
   </article>
@@ -205,11 +205,11 @@ the ones stated above; no observed constants were fitted.</p>
 </main>
 
   <footer class="site-footer">
-    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
     <p>A connected record of geometry, derivations, and research.</p>
     <nav aria-label="Footer navigation">
-      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
-      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
       <a href="#main">Back to top ↑</a>
     </nav>
   </footer>

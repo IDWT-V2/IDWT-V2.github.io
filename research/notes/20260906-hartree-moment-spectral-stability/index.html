@@ -6,31 +6,31 @@
   <meta name="color-scheme" content="light">
   <title>Hartree moment spectral stability — IDWT V2</title>
   <meta name="description" content="Auxiliary model only: Exact moment closure gives real linear frequencies for the isotropic circulating Hartree branch without establishing nonlinear stability or selecting particle indices.">
-  <link rel="canonical" href="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-hartree-moment-spectral-stability/">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20260906-hartree-moment-spectral-stability/">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Hartree moment spectral stability — IDWT V2">
   <meta property="og:description" content="Auxiliary model only: Exact moment closure gives real linear frequencies for the isotropic circulating Hartree branch without establishing nonlinear stability or selecting particle indices.">
-  <meta property="og:url" content="https://fedgeno.github.io/IDWT-V2-site/research/notes/20260906-hartree-moment-spectral-stability/">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20260906-hartree-moment-spectral-stability/">
   <meta property="og:site_name" content="IDWT V2">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Hartree moment spectral stability — IDWT V2">
   <meta name="twitter:description" content="Auxiliary model only: Exact moment closure gives real linear frequencies for the isotropic circulating Hartree branch without establishing nonlinear stability or selecting particle indices.">
-  <link rel="stylesheet" href="/IDWT-V2-site/assets/reading.css">
-  <link rel="stylesheet" href="/IDWT-V2-site/assets/katex/katex.min.css">
-  <script defer src="/IDWT-V2-site/assets/reading.js"></script>
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="masthead">
-    <a class="wordmark" href="/IDWT-V2-site/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
     <nav class="primary-nav" aria-label="Main navigation">
-      <a href="/IDWT-V2-site/" >Overview</a>
-      <a href="/IDWT-V2-site/theory/" >Theory</a>
-      <a href="/IDWT-V2-site/research/" aria-current="page">Research</a>
-      <a href="/IDWT-V2-site/visualizations/" >Visualizations</a>
-      <a href="/IDWT-V2-site/evidence/" >Evidence</a>
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
     </nav>
-    <a class="search-link" href="/IDWT-V2-site/search/">Search <span aria-hidden="true">↗</span></a>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
   </header>
   <main id="main" class="article-shell" tabindex="-1">
   <article class="article">
@@ -51,7 +51,7 @@ actual electron orbit constructed in the 6D demo. Its stationary states,
 angular expectations, and stability results have not been mapped to that
 trajectory or its observer readout. They must not be used as a replacement
 for the existing orbit-shape derivation. See
-<a href="/IDWT-V2-site/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a>.</p>
+<a href="/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a>.</p>
 <h2 id="1-exact-moment-dynamics">1. Exact moment dynamics</h2>
 <p>Consider the single scalar equation i partial_t psi=(p^2+g x^T M x)psi,
 M=&lt;xx^T&gt;, g&gt;0, with unit conserved norm and the flat, fixed-centroid
@@ -137,7 +137,7 @@ The distinct positive field frequencies in the active block are approximately
 0.5398903, 4, 4.6066714, 4.8989795 and 5.1465617, along with their negatives
 and neutral modes. The non-cubic sqrt(24) and free-shell frequency 4 are
 included in this list.</p>
-<p><a href="/IDWT-V2-site/evidence/diagnostics/circulating-hartree-checks/">circulating_hartree_checks.py</a> compares
+<p><a href="/evidence/diagnostics/circulating-hartree-checks/">circulating_hartree_checks.py</a> compares
 the analytic roots with all 296 numerical eigenvalues. Raw near-zero
 eigenvalues have imaginary roundoff around 4e-8; nonzero modes agree with
 real values to numerical precision. The proof uses the analytic closure,
@@ -151,16 +151,16 @@ select the observed particle indices. The missing cross-sector, radiative,
 spinor, and background-selection dynamics remain essential.</p>
 <h2 id="related">Related</h2>
 <ul>
-<li><a href="/IDWT-V2-site/research/notes/20260906-fixed-circulation-energy-bound/">Fixed circulation energy bound</a> — nonlinear conserved-observable control, without a claim of stability of one wavefunction.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260906-coupled-circulating-branch/">Coupled circulating branch</a> — restores the nuclear sector and separately checks its linear spectrum.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260906-circulating-isotropic-orbitals/">Circulating isotropic orbitals</a> — explicit stationary state, normalization constraint, and conditional spin source.</li>
-<li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a> — current proof boundaries and correction routes.</li>
+<li><a href="/research/notes/20260906-fixed-circulation-energy-bound/">Fixed circulation energy bound</a> — nonlinear conserved-observable control, without a claim of stability of one wavefunction.</li>
+<li><a href="/research/notes/20260906-coupled-circulating-branch/">Coupled circulating branch</a> — restores the nuclear sector and separately checks its linear spectrum.</li>
+<li><a href="/research/notes/20260906-circulating-isotropic-orbitals/">Circulating isotropic orbitals</a> — explicit stationary state, normalization constraint, and conditional spin source.</li>
+<li><a href="/research/notes/20260906-research-status/">Research status</a> — current proof boundaries and correction routes.</li>
 </ul>
 </div>
     
     <section class="related-reading" aria-labelledby="related-heading">
       <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
-      <ul><li><a href="/IDWT-V2-site/research/notes/20260906-circulating-isotropic-orbitals/">Circulating isotropic orbitals</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-fixed-circulation-energy-bound/">Fixed circulation energy bound</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-coupled-circulating-branch/">Coupled circulating branch</a></li><li><a href="/IDWT-V2-site/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a></li></ul>
+      <ul><li><a href="/research/notes/20260906-circulating-isotropic-orbitals/">Circulating isotropic orbitals</a></li><li><a href="/research/notes/20260906-research-status/">Research status</a></li><li><a href="/research/notes/20260906-fixed-circulation-energy-bound/">Fixed circulation energy bound</a></li><li><a href="/research/notes/20260906-coupled-circulating-branch/">Coupled circulating branch</a></li><li><a href="/research/notes/20260906-actual-orbit-research-correction/">Actual orbit research correction</a></li></ul>
     </section>
     
   </article>
@@ -175,11 +175,11 @@ spinor, and background-selection dynamics remain essential.</p>
 </main>
 
   <footer class="site-footer">
-    <a class="wordmark" href="/IDWT-V2-site/">IDWT<span>V2</span></a>
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
     <p>A connected record of geometry, derivations, and research.</p>
     <nav aria-label="Footer navigation">
-      <a href="/IDWT-V2-site/research/notes/20260906-research-status/">Research status</a>
-      <a href="/IDWT-V2-site/about/">About this edition</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
       <a href="#main">Back to top ↑</a>
     </nav>
   </footer>
