@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Spectral analysis tools — IDWT V2</title>
+  <meta name="description" content="Exact tools for recurrence, continuum response, spectral robustness, Gaussian profile geometry, simplex regularization, and statistical calibration.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20260908-spectral-analysis-tools/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Spectral analysis tools — IDWT V2">
+  <meta property="og:description" content="Exact tools for recurrence, continuum response, spectral robustness, Gaussian profile geometry, simplex regularization, and statistical calibration.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20260908-spectral-analysis-tools/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Spectral analysis tools — IDWT V2">
+  <meta name="twitter:description" content="Exact tools for recurrence, continuum response, spectral robustness, Gaussian profile geometry, simplex regularization, and statistical calibration.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>Spectral analysis tools</h1>
+      <p class="article-date">Updated <time datetime="2026-09-08">September 8, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body">
+<p>These notes support the analysis of candidate V2 operators and numerical
+results. Each states the mathematical model and derives its consequences.
+Field amplitudes and profile parameters describe fields on the one nested
+physical manifold; all physical dimensions remain ordinary macroscopic
+spatial directions.</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/research/notes/20260908-spectral-survival-recurrence/">Spectral survival recurrence</a></td>
+<td>Computes mean return weight and distinguishes exact recurrence, approximate recurrence, and continuous-spectrum dephasing.</td>
+</tr>
+<tr>
+<td><a href="/research/notes/20260908-continuum-mode-memory/">Continuum mode memory</a></td>
+<td>Eliminates coupled modes exactly before making a decay approximation.</td>
+</tr>
+<tr>
+<td><a href="/research/notes/20260908-bounded-spectral-perturbations/">Bounded spectral perturbations</a></td>
+<td>Bounds frequency shifts and preserves separated spectral-cluster counts under a stated norm bound.</td>
+</tr>
+<tr>
+<td><a href="/research/notes/20260908-gaussian-mode-geometry/">Gaussian mode geometry</a></td>
+<td>Computes the overlap metric of normalized profiles and its Berry curvature.</td>
+</tr>
+<tr>
+<td><a href="/research/notes/20260908-simplex-spectral-zeta/">Simplex spectral zeta</a></td>
+<td>Continues a specified positive tower to zero and evaluates its regularized product with scale dependence intact.</td>
+</tr>
+<tr>
+<td><a href="/research/notes/20260908-isotropic-projection-fractions/">Isotropic projection fractions</a></td>
+<td>Calibrates squared spatial projections for an explicitly isotropic preparation.</td>
+</tr>
+<tr>
+<td><a href="/research/notes/20260908-fixed-null-calibration/">Fixed-null calibration</a></td>
+<td>Defines match probabilities, their valid combinations, and finite-simulation uncertainty.</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="/evidence/diagnostics/spectral-analysis-checks/">spectral_analysis_checks.py</a>
+provides finite checks through independent quadrature, matrix evolution,
+analytic continuation, and exact probability identities. Universal claims
+rest on the proofs in the notes.</p>
+<ul>
+<li>
+<p><a href="/research/notes/20260908-interaction-operator-tools/">Interaction operator tools</a> — companion tools for spatial kernels, profiles, and conservation.</p>
+</li>
+<li>
+<p><a href="/research/notes/20260908-resonance-profile-tools/">Resonance and profile tools</a> — explicit spatial and coupled-mode examples.</p>
+</li>
+</ul>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20260908-resonance-profile-tools/">Resonance and profile tools</a></li><li><a href="/research/notes/20260908-interaction-operator-tools/">Interaction operator tools</a></li><li><a href="/research/notes/20260908-spectral-survival-recurrence/">Spectral survival recurrence</a></li><li><a href="/research/notes/20260908-continuum-mode-memory/">Continuum mode memory</a></li><li><a href="/research/notes/20260908-bounded-spectral-perturbations/">Bounded spectral perturbations</a></li><li><a href="/research/notes/20260908-gaussian-mode-geometry/">Gaussian mode geometry</a></li><li><a href="/research/notes/20260908-simplex-spectral-zeta/">Simplex spectral zeta</a></li><li><a href="/research/notes/20260908-isotropic-projection-fractions/">Isotropic projection fractions</a></li><li><a href="/research/notes/20260908-fixed-null-calibration/">Fixed-null calibration</a></li></ul>
+    </section>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

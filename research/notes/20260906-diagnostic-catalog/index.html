@@ -37,7 +37,7 @@
     <header class="article-header">
       <p class="eyebrow">Research / Verification</p>
       <h1>Diagnostic catalog</h1>
-      <p class="article-date">Updated <time datetime="2026-09-08">September 8, 2026</time></p>
+      <p class="article-date">Updated <time datetime="2026-09-10">September 10, 2026</time></p>
       <p class="scope-label">exploratory not a module</p>
       
     </header>
@@ -57,6 +57,227 @@ verify auxiliary models. Their success does not establish the trajectories or
 stability of the actual electron orbits in the 6D demo.</p>
 <h2 id="existing-checks">Existing checks</h2>
 <ul>
+<li>
+<p><a href="/evidence/diagnostics/polarized-pulse-collision-checks/">polarized_pulse_collision_checks.py</a>
+checks exact collision geometry, independent nonlinear Hamiltonian evolution,
+reciprocal pulse delays, complex-polarization source cancellation and full
+spatial spectral radiation with direct forced-mode normalization.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/retarded-displacement-checks/">retarded_displacement_checks.py</a>
+checks the full spatial Hessian reduction, positive spectral moments,
+variational response bounds, soft logarithm and outgoing spatial modes.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/null-spatial-wave-checks/">null_spatial_wave_checks.py</a>
+checks exact finite null pulses, canonical spatial norms, complete moving
+planes and the independent complementary source and quartic action.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/spatial-charge-generator-checks/">spatial_charge_generator_checks.py</a>
+checks local charge continuity, complete spatial kinetic commutants,
+neutral-kernel evolution and orbital-plus-spin conservation.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/soft-photon-response-checks/">soft_photon_response_checks.py</a>
+checks full spatial symplectic/current integrals, complete reciprocal source
+feedback, photon phase and polarization response, the magnetic-moment benchmark,
+and the moving-frame normalization in
+<a href="/research/notes/20260910-canonical-spatial-spin/">canonical spin response</a>.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/collective-translation-wave-checks/">collective_translation_wave_checks.py</a>
+checks full-source translation waves, exact kinetic coefficients, normal
+and conjugate partners, physical-space identities and Cartesian refinement.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/spatial-polarization-structure-checks/">spatial_polarization_structure_checks.py</a>
+checks complete spatial Clifford descriptors, equal-current radial fields,
+reciprocal six-inside-ten rotation dynamics and omitted texture response
+through independent full spatial equations and nonlinear evolution.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/periodic-polarization-checks/">periodic_polarization_checks.py</a>
+checks full occupied-polarization sideband tensors, input-conditioned kernels,
+complete spectral residues and normal-momentum opening with spatial covariance.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/antilinear-dirac-checks/">antilinear_dirac_checks.py</a>
+checks complete spatial antilinear intertwiners, arbitrary-field scalar
+interference, nonlinear source transformations and nested projection compatibility.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/paired-periodic-response-checks/">paired_periodic_response_checks.py</a>
+checks both nonlinear nested Cartesian sources, scalar centers, deformation
+sidebands and independent full-field versus two-clock moment response.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/slow-shape-pole-checks/">slow_shape_pole_checks.py</a>
+checks full ordinary/conjugate shape resolvents, slow poles, signed canonical
+residues, radial refinement and the distinction between a small pole and total response.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/nested-bifrequency-checks/">nested_bifrequency_checks.py</a>
+checks complete anisotropic two-frequency fields with both profiles readjusted,
+independent spatial equations and the finite containing-source frequency limit.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/periodic-current-checks/">periodic_current_checks.py</a>
+checks the full spatial number-current sidebands, occupied-polarization
+selection, exact normal continuity and current reconstruction after feedback.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/radial-bifrequency-checks/">radial_bifrequency_checks.py</a>
+checks arbitrary complex radial profiles in the full spatial field,
+separate number and symplectic weights, nonlinear radial reconstruction,
+inherited oscillating growth and stationary current-clock derivatives.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/periodic-dirac-response-checks/">periodic_dirac_response_checks.py</a>
+checks complete periodic spatial source variations, exact finite spectral
+sideband criteria, independent time-dependent forcing and matched full-field
+and moment Floquet equations, including scalar-center response.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/source-frequency-checks/">source_frequency_checks.py</a>
+checks spatial bilinear and cubic source frequencies, normal transition
+clocks, exact normalized two-frequency solutions of the full field equation,
+current continuity, source curvature and normalized response scaling.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/incoming-shape-mode-checks/">incoming_shape_mode_checks.py</a>
+checks exact spatial helicity restriction bounds, complete ordinary/conjugate
+Dirac shape modes, reciprocal incoming and forced responses, and cancellation
+between spatial components at low forcing frequency.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/dirac-reflection-symmetry-checks/">dirac_reflection_symmetry_checks.py</a>
+checks full differential reflection symmetries, independent Cartesian
+spectral multiplicities, physical rotation commutators and scalar moment
+compression within one polarization multiplet.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/dirac-polarization-wave-checks/">dirac_polarization_wave_checks.py</a>
+checks the complete spatial polarization frame, gapless normal modes,
+exact nonlinear polarized waves, scalar source preservation and changing
+bound spatial currents.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/nested-shape-visibility-checks/">nested_shape_visibility_checks.py</a>
+checks persistent spatial kernels, independent exact rational ranks,
+common-coefficient Dirac feedback, complete lower breathing response
+and quadratic frequency barriers across nested depths.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/coupled-scalar-envelope-checks/">coupled_scalar_envelope_checks.py</a>
+checks reciprocal scalar envelope couplings from full nested spatial
+profile response, energy derivatives, common and relative amplitude
+modes, and the complete ordinary/conjugate stability matrix pencil.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/normal-dirac-transport-checks/">normal_dirac_transport_checks.py</a>
+checks exact normal boosts of full spatial Dirac modes, scalar source
+invariance, density and current normalization, polarization-dependent
+centroid shifts, and the specified scalar envelope action and spectrum.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/spatial-shape-transfer-checks/">spatial_shape_transfer_checks.py</a>
+checks complete polarized shape response, nested tensor restrictions,
+dynamical opening of static zeros, reciprocal weak-contact response,
+both spatial preparations and low/high-frequency completeness identities.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/nested-dirac-pair-checks/">nested_dirac_pair_checks.py</a>
+checks complete anisotropic spatial Dirac fields, independent radial
+representations, coupled nested profiles under one scalar coefficient,
+their scaling, and reciprocal derivatives of both partner sources.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/angular-dirac-response-checks/">angular_dirac_response_checks.py</a>
+checks full spatial dipole and quadrupole Dirac sources, their polarization
+Gram matrices, radial operators, reciprocal conjugate response, and the
+translation zero mode of the centered interaction. Independent full-field
+finite differences verify the source and its energy Hessian.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/spatial-dirac-mode-checks/">spatial_dirac_mode_checks.py</a>
+checks complete spatial rotation modes and currents, self-consistent scalar
+Dirac radial profiles, basis convergence, virial identities, and nonlinear
+evolution of an unstable radial perturbation.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/dressed-coupling-checks/">dressed_coupling_checks.py</a>
+verifies reconstructed spatial source vertices, their physical norm,
+full-operator energy shifts, and finite-frequency continuity identities.
+These three diagnostics write timestamped reports and retain their checks
+under Python optimization; physical particle and current identification
+remains subject to the assumptions of each model.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/spatial-coupling-mechanism-checks/">spatial_coupling_mechanism_checks.py</a>
+checks full photon transition matrices, balanced spatial rotation modes,
+nested embeddings, nonlocal source variations, quadrupole shape vertices,
+reciprocal scattering, direct wavepacket propagation, and neutral-doublet
+transport. Run <code>python experiments/spatial_coupling_mechanism_checks.py</code>;
+its timestamped report preserves previous evidence, and checks remain
+active under <code>python -O</code>. These are conditional mathematical mechanisms,
+not fitted particle couplings. Derivations are linked from
+<a href="/research/notes/20260908-generalized-sector-coupling/">Generalized sector coupling</a>.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/polarization-coupling-checks/">polarization_coupling_checks.py</a>
+checks two-sided polarization, photon-mode projection, nonlinear Dirac
+source derivatives, spatial source complementarity, finite-time response,
+and coherent spatial overlaps. See the spatial-polarization section of
+<a href="/research/notes/20260908-generalized-sector-coupling/">Generalized sector coupling</a>.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/generalized-coupling-checks/">generalized_coupling_checks.py</a>
+checks weighted spatial reciprocity, coupled energy conservation, canonical
+vertex normalization, same-field response rank, Gaussian coupling profiles,
+and neutral versus weak channel selection. See
+<a href="/research/notes/20260908-generalized-sector-coupling/">Generalized sector coupling</a>.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/resonance-profile-checks/">resonance_profile_checks.py</a>
+checks Coulomb integrals, zonal overlaps, cyclic spectra, dispersion response,
+radial form bounds, chiral mass curvature, quartic conservation, and rotation
+multiplicities. See <a href="/research/notes/20260908-resonance-profile-tools/">Resonance and profile tools</a>.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/spectral-analysis-checks/">spectral_analysis_checks.py</a>
+checks recurrence, continuum memory, bounded perturbations, Gaussian profile
+geometry, simplex zeta continuation, spatial projections, and null calibration.
+See <a href="/research/notes/20260908-spectral-analysis-tools/">Spectral analysis tools</a>
+for the full derivations and hypotheses.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/spatial-profile-checks/">spatial_profile_checks.py</a>
+checks spatial Gaussian contacts, harmonic confinement examples, and stress
+conservation under fibre integration. See the
+<a href="/research/notes/20260908-interaction-operator-tools/">Interaction operator tools</a>
+for the derivations and their domain assumptions.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/interaction-operator-checks/">interaction_operator_checks.py</a>
+checks normalized Green marginals, projected variations, colour singlets,
+angular parity, Dirac heat curvature, and anomaly identities.
+See the <a href="/research/notes/20260908-interaction-operator-tools/">Interaction operator tools</a>
+for the additions, their assumptions, and their application to V2.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/mass-transfer-checks/">mass_transfer_checks.py</a>
+checks exact band moments, oscillator convolutions and overlaps,
+weighted evaluation bounds, heat sums, and sphere counts.
+See the <a href="/research/notes/20260908-counting-mode-tools/">Counting mode tools</a>
+for their assumptions and the open resonance question.</p>
+</li>
+<li>
+<p><a href="/evidence/diagnostics/foundation-transfer-checks/">foundation_transfer_checks.py</a>
+verifies centred scalar variations and covariance, separated barrier and
+lift identities, and reciprocal simplex sums. See the <a href="/research/notes/20260908-nested-spatial-tools/">Nested spatial tools</a>
+for the assumptions of these conditional results.</p>
+</li>
 <li>
 <p><code>localized_polarization_stationarity_checks.py</code> compares spatial first
 variations in five and six dimensions under a separately fingerprinted
@@ -124,7 +345,7 @@ conditional common-anchor ratios.</p>
 <li>
 <p><code>two_electron_depth6_checks_2026_09_05.py</code> checks the dimensional counts,
 Gaussian unobserved-impact coefficient, and a conditional lock metric example.
-Its base-kernel exponent <span class="math" data-equation-id="idwt-e9af85529ca68933-0" data-tex-sha256="f7f919a56c0499295fadcaa6cfecf94e85a8d1df7a88ba8fd2c0b355ac9816ad"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">N=12</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">12</span></span></span></span></span> is a trial input, not a derived transfer of
+Its base-kernel exponent <span class="math" data-equation-id="idwt-f7f77940031b0e4d-0" data-tex-sha256="f7f919a56c0499295fadcaa6cfecf94e85a8d1df7a88ba8fd2c0b355ac9816ad"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">N=12</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">12</span></span></span></span></span> is a trial input, not a derived transfer of
 the electron mass-band degree to the base-coordinate interaction.</p>
 </li>
 <li>
@@ -193,11 +414,8 @@ Clifford-commutator domain, and numerical corrections.</p>
 <pre><code>python3 experiments/progress_checks_2026_09_05.py
 python3 experiments/ckm_count_audit_checks_2026_09_05.py
 </code></pre>
-<p>The <a href="/evidence/diagnostics/progress-checks-2026-09-05/">check script</a> uses SymPy, already used by the research session. It checks finite algebra and comparison operators. It does not install dependencies, modify the modules, fit an amplitude, solve the V2 master equation, or predict a baryon mass.</p>
+<p>The <a href="/evidence/diagnostics/progress-checks-2026-09-05/">check script</a> uses SymPy. It checks finite algebra and comparison operators. It does not install dependencies, modify the modules, fit an amplitude, solve the V2 master equation, or predict a baryon mass.</p>
 <p><strong>Status vocabulary:</strong> <em>checked algebra</em> denotes a verified identity or spectrum for the specified operator; <em>conditional mechanism</em> denotes a sufficient construction whose physical premises remain unproved; <em>source audit</em> records what particular inspected passages say; <em>withdrawn inference</em> identifies an earlier conclusion that exceeded its calculation; <em>open</em> denotes a remaining proof obligation.</p>
-<p>These labels and the filenames are for readers. This write does not change website discovery, publication settings, or module-index code. Existing physics modules and the earlier investigation ledger remain in place.</p>
-<h2 id="knowledge-base-maintenance">Knowledge-base maintenance</h2>
-<p>Run <code>python3 -B scripts/validate-kb.py</code> from the repository root to check the registry, IDs, tags, topic maps, local file links, and inbound references. It requires PyYAML. URL fragments and external websites are not checked. This is structural QA, not a physics test.</p>
 <h2 id="executable-links">Executable links</h2>
 <ul>
 <li>
@@ -309,9 +527,6 @@ python3 experiments/ckm_count_audit_checks_2026_09_05.py
 <p><a href="/evidence/diagnostics/moment-kernel-checks/">moment_kernel_checks.py</a> — coupled scalar ground-state covariance and source-response checks.</p>
 </li>
 <li>
-<p><a href="/evidence/diagnostics/validate-kb/">validate-kb.py</a> — read-only knowledge-base structural validation.</p>
-</li>
-<li>
 <p><a href="/evidence/diagnostics/beam-adapted-frame-link-check-2026-09-05/">beam_adapted_frame_link_check_2026_09_05.py</a> — finite diagnostic; see the scope descriptions above.</p>
 </li>
 <li>
@@ -380,7 +595,7 @@ python3 experiments/ckm_count_audit_checks_2026_09_05.py
     
     <section class="related-reading" aria-labelledby="related-heading">
       <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
-      <ul><li><a href="/research/notes/20260906-research-status/">Research status</a></li></ul>
+      <ul><li><a href="/research/notes/20260908-generalized-sector-coupling/">Generalized sector coupling</a></li><li><a href="/research/notes/20260908-resonance-profile-tools/">Resonance and profile tools</a></li><li><a href="/research/notes/20260906-research-status/">Research status</a></li><li><a href="/research/notes/20260908-nested-spatial-tools/">Nested spatial tools</a></li><li><a href="/research/notes/20260908-counting-mode-tools/">Counting mode tools</a></li><li><a href="/research/notes/20260908-interaction-operator-tools/">Interaction operator tools</a></li><li><a href="/research/notes/20260908-spectral-analysis-tools/">Spectral analysis tools</a></li><li><a href="/research/notes/20260910-canonical-spatial-spin/">Canonical spatial spin response</a></li></ul>
     </section>
     
   </article>
@@ -388,7 +603,7 @@ python3 experiments/ckm_count_audit_checks_2026_09_05.py
   <aside class="article-sidebar">
     <details class="page-toc" open>
       <summary>On this page</summary>
-      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#existing-checks">Existing checks</a></li><li class="toc-level-2"><a href="#reproduce-the-finite-checks">Reproduce the finite checks</a></li><li class="toc-level-2"><a href="#knowledge-base-maintenance">Knowledge-base maintenance</a></li><li class="toc-level-2"><a href="#executable-links">Executable links</a></li><li class="toc-level-2"><a href="#related">Related</a></li></ol></nav>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#existing-checks">Existing checks</a></li><li class="toc-level-2"><a href="#reproduce-the-finite-checks">Reproduce the finite checks</a></li><li class="toc-level-2"><a href="#executable-links">Executable links</a></li><li class="toc-level-2"><a href="#related">Related</a></li></ol></nav>
     </details>
   </aside>
   
