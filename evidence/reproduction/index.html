@@ -57,17 +57,14 @@ for each calculation's scope and the links to its derivation.</p>
 <p>Run these commands from the repository root:</p>
 <pre><code class="language-sh">python3 -B experiments/idwt-v2.py
 OPENBLAS_NUM_THREADS=1 python3 -B experiments/run_checks.py --skip-continuation --jobs 2
-node experiments/tests/orbit-renderer.test.cjs
 </code></pre>
 <p>The selected suite includes the saved-state refinement audit but explicitly
 excludes two expensive continuation searches. Omit <code>--skip-continuation</code>
 to include them. Individual scripts can also be run directly.</p>
 <h2 id="recorded-evidence">Recorded evidence</h2>
 <p><a href="/evidence/results/"><code>results/</code></a> contains the existing numerical reports, input
-candidates, and frozen protocols. They were moved without changing their
-bytes. Historical logs may retain old workspace paths: those describe past
-runs, not current dependencies. Save each new run separately; do not rewrite
-earlier evidence to match a new outcome.</p>
+candidates, and frozen protocols. Separate reports preserve the inputs,
+settings and results of each calculation for comparison.</p>
 <p>The cylindrical refinement check automatically saves each completed report in
 <code>results/two-path-study/</code> with the current UTC date and time in its filename,
 for example <code>cross-method-verification-20260908T074500.123456Z.json</code>. It preserves
@@ -77,8 +74,7 @@ read-only run, or <code>--output FILE</code> to choose an explicit new filename.
 <p>Diagnostics locate their bundled inputs relative to their own script file,
 not a neighboring project or a fixed machine path. Python requires the
 scientific packages used by each calculation, including NumPy, SciPy,
-SymPy, and mpmath. The knowledge-base validator additionally uses PyYAML;
-the renderer test uses Node.js built-ins.</p>
+SymPy, and mpmath.</p>
 </div>
     
   </article>
