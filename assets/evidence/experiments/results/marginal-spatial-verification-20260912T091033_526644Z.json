@@ -1,0 +1,156 @@
+{
+  "timestamp": "2026-09-12T09:10:33.526769+00:00",
+  "status": "passed",
+  "scope": "Compare full spatial fields under independent time and grid refinement.\n\nThe three arguments are JSON reports from marginal_spatial_pulses.py:\nthe reference, a coarser time step, and a coarser spatial grid. Each must\nhave its original matching NPZ file alongside it. No phase fitting or\nmass rescaling is performed when comparing the complex fields.\n",
+  "source_sha256": "6a4bb7916dd8b09b68854e6ee8bd920d6d412d0aeded3ea4322b14152e0d2388",
+  "spatial_source_sha256": "186cec031234a9abff1007797ffb72bca2397828d224649689905f72efe5589b",
+  "inputs": [
+    {
+      "report": "marginal-spatial-pulses-20260912T082953_572430Z.json",
+      "sha256": "94f9235c08d8d7dfe9da7f597174a2d12fc991efe490f45621cd19415dd31b98",
+      "raw": "marginal-spatial-pulses-20260912T082953_572430Z.npz",
+      "raw_sha256": "77284194575ef26a78a7d60cc99a1fc286b94f896e1756a3d5003d170cfaa98a"
+    },
+    {
+      "report": "marginal-spatial-pulses-20260912T084324_506942Z.json",
+      "sha256": "423fb4b28cc3c68f028a7299f6e75695e3505f7e656af73e5f40958c4c1f361b",
+      "raw": "marginal-spatial-pulses-20260912T084324_506942Z.npz",
+      "raw_sha256": "a87743565764b7d6e76e26ea9bbc09e80e684f6a866a5838855b4b414aa3a6bb"
+    },
+    {
+      "report": "marginal-spatial-pulses-20260912T090953_954200Z.json",
+      "sha256": "b4b190788f8903e98a1f89d0acb0a669c1e30a9667277cdef1a2706b1c519eab",
+      "raw": "marginal-spatial-pulses-20260912T090953_954200Z.npz",
+      "raw_sha256": "896e1c47a4c0552461a00be6d379b30102d7919a91f324a73a5057f3e29cb11b"
+    }
+  ],
+  "comparisons": [
+    {
+      "refinement": "time",
+      "fields": [
+        {
+          "initial_L2_difference": 0.0,
+          "final_L2_difference": 1.4818140725494635e-05,
+          "momentum_difference": 2.0926426591572067e-08,
+          "mode_purity_difference": 3.259733294402878e-07,
+          "mean_position_difference": 2.293544096687583e-05
+        },
+        {
+          "initial_L2_difference": 0.0,
+          "final_L2_difference": 1.6395307324874338e-05,
+          "momentum_difference": 2.092674836196018e-08,
+          "mode_purity_difference": 2.9551098901237083e-08,
+          "mean_position_difference": 1.1258999460181385e-07
+        }
+      ]
+    },
+    {
+      "refinement": "grid",
+      "fields": [
+        {
+          "initial_L2_difference": 3.1577350442803316e-16,
+          "final_L2_difference": 1.4194291168981493e-10,
+          "momentum_difference": 7.196465645620265e-13,
+          "mode_purity_difference": 4.1522341120980855e-14,
+          "mean_position_difference": 6.24389429049188e-12
+        },
+        {
+          "initial_L2_difference": 3.1918447176883665e-16,
+          "final_L2_difference": 5.303754816983247e-09,
+          "momentum_difference": 3.1608049511078207e-13,
+          "mode_purity_difference": 3.774758283725532e-15,
+          "mean_position_difference": 5.352593368534997e-13
+        }
+      ]
+    }
+  ],
+  "max_boundary_density": 9.15418686744358e-24,
+  "reference_initial": {
+    "time": 0.0,
+    "energy_above_rest": 0.25144668897478634,
+    "interaction_energy": 0.0014466889747864618,
+    "fields": [
+      {
+        "norm": 0.9999999999999996,
+        "mean_position": -12.000000000000002,
+        "momentum": 0.7499999999999998,
+        "mode_purity": 1.0000000000000002,
+        "boundary_density": 2.0170474632219663e-141
+      },
+      {
+        "norm": 1.0000000000000053,
+        "mean_position": 2.6020852139651968e-18,
+        "momentum": -4.690868461894315e-18,
+        "mode_purity": 1.0,
+        "boundary_density": 5.616559310004815e-189
+      }
+    ],
+    "rotation_moment_real": [
+      [
+        35.80000000000012,
+        0.0
+      ],
+      [
+        0.0,
+        10.200000000000056
+      ]
+    ],
+    "rotation_moment_imag": [
+      [
+        0.0,
+        -15.58075736284994
+      ],
+      [
+        15.58075736284994,
+        0.0
+      ]
+    ]
+  },
+  "reference_final": {
+    "time": 50.0,
+    "energy_above_rest": 0.25144667847996205,
+    "interaction_energy": 0.010974508637192213,
+    "fields": [
+      {
+        "norm": 1.0000000000008993,
+        "mean_position": 12.366950036004628,
+        "momentum": 0.6147747288753658,
+        "mode_purity": 0.9711931227111009,
+        "boundary_density": 1.2460602149303816e-27
+      },
+      {
+        "norm": 1.0000000000008873,
+        "mean_position": 0.028440827375121103,
+        "momentum": 0.13522527112513696,
+        "mode_purity": 0.9981038506530474,
+        "boundary_density": 1.688281257433313e-26
+      }
+    ],
+    "rotation_moment_real": [
+      [
+        35.80000000003224,
+        1.5782930518071225e-12
+      ],
+      [
+        1.5782930518071225e-12,
+        10.200000000008714
+      ]
+    ],
+    "rotation_moment_imag": [
+      [
+        0.0,
+        -15.58075736286341
+      ],
+      [
+        15.58075736286341,
+        0.0
+      ]
+    ]
+  },
+  "conserved_quantity_errors": {
+    "max_norm_drift": 8.992806499463768e-13,
+    "max_energy_drift": 3.6273026920996543e-07,
+    "max_total_momentum_drift": 5.029310301551959e-13,
+    "max_rotation_moment_drift": 3.840258249716178e-11
+  }
+}

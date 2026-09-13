@@ -1,0 +1,828 @@
+{
+  "timestamp_utc": "2026-09-12T01:17:07.852508+00:00",
+  "checks": 812,
+  "interpreter": "3.14.6 (main, Jun 11 2026, 00:00:00) [GCC 15.2.1 20260123 (Red Hat 15.2.1-7)]",
+  "optimized": true,
+  "maximum_scaled_residual": 0.010859614626962786,
+  "quick": false,
+  "sources": {
+    "experiments/mass_energy_response_checks.py": "5a39b9ddbcf1f4cc7d9a494481a371d6307d20fe8448b75eb52e5814be184bae",
+    "experiments/cp3_scalar_dirac.py": "4b7477054fedd1aa14c1aba0eb67410ef8d5192c8943a0a8317f4df73ccb2d6d",
+    "experiments/inverse_scalar_law_checks.py": "65d85d5c563160f06eb9cf4dfdc4eaa155c6ecb27f8f7b7f763b954906758df2"
+  },
+  "results": {
+    "symbolic": {
+      "assigned_indices": [
+        13,
+        35
+      ],
+      "real_depth": 6,
+      "simplex_ratio": "3515/17",
+      "free_ratio_upper_bound": "10*sqrt(91)/39",
+      "scope": "Exact branch-energy identities, limiting-ratio bounds and algebraic controls; these controls are not spatial field solutions. Analytic continuation rules out a constant target on an open norm interval only for branches connected analytically to the specified free eigenmodes."
+    },
+    "local_response_sum_rule": [
+      {
+        "law": "convex_polynomial",
+        "minimum_defect": 0.0,
+        "maximum_defect": 15.040000000000001
+      },
+      {
+        "law": "saturating",
+        "minimum_defect": 0.0,
+        "maximum_defect": 0.7574643749636669
+      },
+      {
+        "law": "nonconvex",
+        "minimum_defect": -0.08154074074074075,
+        "maximum_defect": 184.0
+      }
+    ],
+    "spatial": {
+      "branches": [
+        {
+          "real_depth": 6,
+          "spatial_index": 13,
+          "cutoff": 44,
+          "strength": 5e-09,
+          "canonical_norm": 1.0,
+          "frequency": 30.594119092077786,
+          "energy": 30.594118086817183,
+          "energy_frequency_factor": 0.9999999671420314,
+          "scalar_integral": 402.10424370951705,
+          "energy_curvature": 2.010521505579791e-06,
+          "finite_difference_curvature": 2.0104451436964155e-06,
+          "full_spatial_residual": 2.9304424286839195e-12,
+          "full_norm_response_residual": 7.324308974604316e-12,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 30.28817689599693,
+              "frequency": 30.594119071972575
+            },
+            {
+              "norm": 1.01,
+              "energy": 30.90005927783848,
+              "frequency": 30.594119112183
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 402.1041304408304,
+            "shape_coefficient": -5664.148824294589
+          },
+          "second_order_curvature": 2.0105215018264755e-06,
+          "second_order_curvature_relative_error": 1.8668369072827318e-09
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 13,
+          "cutoff": 44,
+          "strength": 1e-08,
+          "canonical_norm": 1.0,
+          "frequency": 30.59412110259971,
+          "energy": 30.59411909207794,
+          "energy_frequency_factor": 0.9999999342840488,
+          "scalar_integral": 402.1043569496243,
+          "energy_curvature": 4.02104470144403e-06,
+          "finite_difference_curvature": 4.020890287392831e-06,
+          "full_spatial_residual": 1.1719107097264759e-11,
+          "full_norm_response_residual": 2.929672803066109e-11,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 30.28817788125298,
+              "frequency": 30.594121062389267
+            },
+            {
+              "norm": 1.01,
+              "energy": 30.900060303304986,
+              "frequency": 30.594121142810163
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 402.1041304408304,
+            "shape_coefficient": -5664.148824294589
+          },
+          "second_order_curvature": 4.021044702897598e-06,
+          "second_order_curvature_relative_error": -3.61490060107883e-10,
+          "norm_susceptibility": 248691.59037003148,
+          "frozen_profile_curvature": 4.0210435718554075e-06,
+          "relaxed_curvature": 4.021044704113584e-06,
+          "shape_relaxation_correction": 1.1322581770729829e-12,
+          "near_resonance_growth": 2.831068712794149e-15,
+          "global_radial_growth": 3.197442310920451e-14,
+          "leading_shape_relaxation": 1.132829764858918e-12,
+          "refined_residuals": {
+            "stationary": 1.1719058285976806e-11,
+            "norm_response": 2.9296972738794227e-11
+          }
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 13,
+          "cutoff": 44,
+          "strength": 4e-08,
+          "canonical_norm": 1.0,
+          "frequency": 30.594133165749092,
+          "energy": 30.594125123648382,
+          "energy_frequency_factor": 0.9999997371358532,
+          "scalar_integral": 402.10503579012254,
+          "energy_curvature": 1.6084219520019967e-05,
+          "finite_difference_curvature": 1.6084129583759932e-05,
+          "full_spatial_residual": 1.874935441204001e-10,
+          "full_norm_response_residual": 4.687237876473845e-10,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 30.288183792795095,
+              "frequency": 30.5941330049069
+            },
+            {
+              "norm": 1.01,
+              "energy": 30.900066456110082,
+              "frequency": 30.59413332659129
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 402.1041304408304,
+            "shape_coefficient": -5664.148824294589
+          },
+          "second_order_curvature": 1.6084219593461928e-05,
+          "second_order_curvature_relative_error": -4.5660879521847164e-09
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 13,
+          "cutoff": 66,
+          "strength": 5e-09,
+          "canonical_norm": 1.0,
+          "frequency": 30.594119092077786,
+          "energy": 30.594118086817176,
+          "energy_frequency_factor": 0.9999999671420312,
+          "scalar_integral": 402.1042437095188,
+          "energy_curvature": 2.0105215055908775e-06,
+          "finite_difference_curvature": 2.0105161979699915e-06,
+          "full_spatial_residual": 4.2295043821468366e-14,
+          "full_norm_response_residual": 2.1593814245230757e-14,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 30.288176895996923,
+              "frequency": 30.594119071972575
+            },
+            {
+              "norm": 1.01,
+              "energy": 30.90005927783848,
+              "frequency": 30.594119112183
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 402.10413044083236,
+            "shape_coefficient": -5664.148824272601
+          },
+          "second_order_curvature": 2.0105215018264856e-06,
+          "second_order_curvature_relative_error": 1.8723460559755267e-09
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 13,
+          "cutoff": 66,
+          "strength": 1e-08,
+          "canonical_norm": 1.0,
+          "frequency": 30.59412110259971,
+          "energy": 30.594119092077932,
+          "energy_frequency_factor": 0.9999999342840484,
+          "scalar_integral": 402.1043569496266,
+          "energy_curvature": 4.021044701487229e-06,
+          "finite_difference_curvature": 4.020890287392831e-06,
+          "full_spatial_residual": 4.2149140291566884e-14,
+          "full_norm_response_residual": 2.1254057888808553e-14,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 30.28817788125298,
+              "frequency": 30.594121062389267
+            },
+            {
+              "norm": 1.01,
+              "energy": 30.900060303304972,
+              "frequency": 30.594121142810163
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 402.10413044083236,
+            "shape_coefficient": -5664.148824272601
+          },
+          "second_order_curvature": 4.0210447028976185e-06,
+          "second_order_curvature_relative_error": -3.5075198301370847e-10,
+          "norm_susceptibility": 248691.58999943465,
+          "frozen_profile_curvature": 4.0210435697480115e-06,
+          "relaxed_curvature": 4.021044702006189e-06,
+          "shape_relaxation_correction": 1.1322581774073694e-12,
+          "near_resonance_growth": 4.440892098500626e-16,
+          "global_radial_growth": 1.068637517894077e-10,
+          "leading_shape_relaxation": 1.1328297648545203e-12,
+          "refined_residuals": {
+            "stationary": 4.1610581618005897e-14,
+            "norm_response": 2.1250722051515293e-14
+          }
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 13,
+          "cutoff": 66,
+          "strength": 4e-08,
+          "canonical_norm": 1.0,
+          "frequency": 30.594133165749092,
+          "energy": 30.59412512364838,
+          "energy_frequency_factor": 0.9999997371358531,
+          "scalar_integral": 402.1050357901242,
+          "energy_curvature": 1.6084219519713117e-05,
+          "finite_difference_curvature": 1.6084200638033508e-05,
+          "full_spatial_residual": 4.124091525067402e-14,
+          "full_norm_response_residual": 2.336047771519095e-14,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 30.288183792795092,
+              "frequency": 30.5941330049069
+            },
+            {
+              "norm": 1.01,
+              "energy": 30.900066456110086,
+              "frequency": 30.59413332659129
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 402.10413044083236,
+            "shape_coefficient": -5664.148824272601
+          },
+          "second_order_curvature": 1.608421959346201e-05,
+          "second_order_curvature_relative_error": -4.5851706875765785e-09
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 13,
+          "cutoff": 90,
+          "strength": 5e-09,
+          "canonical_norm": 1.0,
+          "frequency": 30.594119092077786,
+          "energy": 30.59411808681718,
+          "energy_frequency_factor": 0.9999999671420313,
+          "scalar_integral": 402.10424370950824,
+          "energy_curvature": 2.0105215055908775e-06,
+          "finite_difference_curvature": 2.0105517251067795e-06,
+          "full_spatial_residual": 3.9389995232683956e-14,
+          "full_norm_response_residual": 2.057297632028195e-14,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 30.288176895996926,
+              "frequency": 30.594119071972575
+            },
+            {
+              "norm": 1.01,
+              "energy": 30.900059277838487,
+              "frequency": 30.594119112183
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 402.1041304408218,
+            "shape_coefficient": -5664.148824264797
+          },
+          "second_order_curvature": 2.0105215018264327e-06,
+          "second_order_curvature_relative_error": 1.872372257238908e-09
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 13,
+          "cutoff": 90,
+          "strength": 1e-08,
+          "canonical_norm": 1.0,
+          "frequency": 30.59412110259971,
+          "energy": 30.594119092077932,
+          "energy_frequency_factor": 0.9999999342840484,
+          "scalar_integral": 402.1043569496158,
+          "energy_curvature": 4.02104470148723e-06,
+          "finite_difference_curvature": 4.020890287392831e-06,
+          "full_spatial_residual": 3.992245934227128e-14,
+          "full_norm_response_residual": 2.0893921280388947e-14,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 30.28817788125298,
+              "frequency": 30.594121062389267
+            },
+            {
+              "norm": 1.01,
+              "energy": 30.900060303304972,
+              "frequency": 30.594121142810163
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 402.1041304408218,
+            "shape_coefficient": -5664.148824264797
+          },
+          "second_order_curvature": 4.021044702897513e-06,
+          "second_order_curvature_relative_error": -3.5072544868341993e-10,
+          "norm_susceptibility": 248691.58968000693,
+          "frozen_profile_curvature": 4.021043569747998e-06,
+          "relaxed_curvature": 4.021044702006176e-06,
+          "shape_relaxation_correction": 1.1322581774057692e-12,
+          "near_resonance_growth": 6.106226635438361e-15,
+          "global_radial_growth": 2.842170943040401e-14,
+          "leading_shape_relaxation": 1.1328297648529597e-12,
+          "refined_residuals": {
+            "stationary": 4.03691659178707e-14,
+            "norm_response": 2.0743873484920995e-14
+          },
+          "common_law_sensitivities": [
+            {
+              "potential_power": 2,
+              "density_scale": 1000000.0,
+              "perturbation_step": 0.05,
+              "predicted_energy_derivative": 2.010521784748079e-06,
+              "energy_derivative": 2.01052163362192e-06,
+              "predicted_frequency_derivative": 4.021044701754338e-06,
+              "frequency_derivative": 4.021044688329312e-06,
+              "perturbed_states": [
+                {
+                  "energy": 30.594118991551852,
+                  "frequency": 30.594120901547488,
+                  "full_spatial_residual": 4.067469890689827e-14
+                },
+                {
+                  "energy": 30.594119192604015,
+                  "frequency": 30.594121303651956,
+                  "full_spatial_residual": 4.083774486581512e-14
+                }
+              ]
+            },
+            {
+              "potential_power": 3,
+              "density_scale": 1000000.0,
+              "perturbation_step": 0.05,
+              "predicted_energy_derivative": 3.239973521989416e-08,
+              "energy_derivative": 3.239978951796729e-08,
+              "predicted_frequency_derivative": 9.719905246101823e-08,
+              "frequency_derivative": 9.719904880967078e-08,
+              "perturbed_states": [
+                {
+                  "energy": 30.59411909045794,
+                  "frequency": 30.594121097739762,
+                  "full_spatial_residual": 4.0152884980497815e-14
+                },
+                {
+                  "energy": 30.59411909369792,
+                  "frequency": 30.594121107459667,
+                  "full_spatial_residual": 4.0540697001181976e-14
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 13,
+          "cutoff": 90,
+          "strength": 4e-08,
+          "canonical_norm": 1.0,
+          "frequency": 30.594133165749092,
+          "energy": 30.594125123648375,
+          "energy_frequency_factor": 0.999999737135853,
+          "scalar_integral": 402.10503579011373,
+          "energy_curvature": 1.6084219519713117e-05,
+          "finite_difference_curvature": 1.6084307219443872e-05,
+          "full_spatial_residual": 4.039758265425007e-14,
+          "full_norm_response_residual": 2.4792089333122872e-14,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 30.2881837927951,
+              "frequency": 30.5941330049069
+            },
+            {
+              "norm": 1.01,
+              "energy": 30.900066456110082,
+              "frequency": 30.59413332659129
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 402.1041304408218,
+            "shape_coefficient": -5664.148824264797
+          },
+          "second_order_curvature": 1.6084219593461586e-05,
+          "second_order_curvature_relative_error": -4.585144375290895e-09
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 35,
+          "cutoff": 110,
+          "strength": 5e-09,
+          "canonical_norm": 1.0,
+          "frequency": 74.83321575483706,
+          "energy": 74.8331817451746,
+          "energy_frequency_factor": 0.9999995455271818,
+          "scalar_integral": 13603.864999030968,
+          "energy_curvature": 6.801925757039143e-05,
+          "finite_difference_curvature": 6.801840868320141e-05,
+          "full_spatial_residual": 6.163712617828374e-09,
+          "full_norm_response_residual": 1.5407867556287305e-08,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 74.08484959102717,
+              "frequency": 74.83321507464447
+            },
+            {
+              "norm": 1.01,
+              "energy": 75.58151390612387,
+              "frequency": 74.83321643502963
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 13603.891393960253,
+            "shape_coefficient": 1291102.9979751871
+          },
+          "second_order_curvature": 6.801926330435158e-05,
+          "second_order_curvature_relative_error": -8.429906273033083e-08
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 35,
+          "cutoff": 110,
+          "strength": 1e-08,
+          "canonical_norm": 1.0,
+          "frequency": 74.83328377399017,
+          "energy": 74.83321575480285,
+          "energy_frequency_factor": 0.9999990910570284,
+          "scalar_integral": 13603.837458776698,
+          "energy_curvature": 0.00013603809346280363,
+          "finite_difference_curvature": 0.00013603823845187435,
+          "full_spatial_residual": 2.4649188557068534e-08,
+          "full_norm_response_residual": 6.16116528234635e-08,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 74.08488292386485,
+              "frequency": 74.8332824136092
+            },
+            {
+              "norm": 1.01,
+              "energy": 75.58154859934467,
+              "frequency": 74.83328513437105
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 13603.891393960253,
+            "shape_coefficient": 1291102.9979751871
+          },
+          "second_order_curvature": 0.00013603813927780376,
+          "second_order_curvature_relative_error": -3.3678055555430575e-07,
+          "norm_susceptibility": 7350.882203544485,
+          "frozen_profile_curvature": 0.00013603837458443953,
+          "relaxed_curvature": 0.00013603809345734248,
+          "shape_relaxation_correction": -2.811270970514112e-10,
+          "near_resonance_growth": 0.00013419593460106682,
+          "global_radial_growth": 0.00013419593460106682,
+          "leading_shape_relaxation": -2.5822059959503744e-10,
+          "refined_residuals": {
+            "stationary": 2.4649188198210658e-08,
+            "norm_response": 6.161165235215058e-08
+          }
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 35,
+          "cutoff": 110,
+          "strength": 4e-08,
+          "canonical_norm": 1.0,
+          "frequency": 74.83369188396075,
+          "energy": 74.83341981099677,
+          "energy_frequency_factor": 0.9999963642985248,
+          "scalar_integral": 13603.648200302941,
+          "energy_curvature": 0.0005441403328598538,
+          "finite_difference_curvature": 0.0005441398798211594,
+          "full_spatial_residual": 3.938427656008442e-07,
+          "full_norm_response_residual": 9.838829384550784e-07,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 74.08508291936417,
+              "frequency": 74.83368644255651
+            },
+            {
+              "norm": 1.01,
+              "energy": 75.58175675704337,
+              "frequency": 74.83369732536316
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 13603.891393960253,
+            "shape_coefficient": 1291102.9979751871
+          },
+          "second_order_curvature": 0.0005441432611696296,
+          "second_order_curvature_relative_error": -5.381505174928414e-06
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 35,
+          "cutoff": 150,
+          "strength": 5e-09,
+          "canonical_norm": 1.0,
+          "frequency": 74.83321575483706,
+          "energy": 74.83318174517457,
+          "energy_frequency_factor": 0.9999995455271814,
+          "scalar_integral": 13603.86499910852,
+          "energy_curvature": 6.801925757039107e-05,
+          "finite_difference_curvature": 6.801869290029572e-05,
+          "full_spatial_residual": 1.636094738653504e-11,
+          "full_norm_response_residual": 4.0804280158393636e-11,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 74.08484959102712,
+              "frequency": 74.83321507464447
+            },
+            {
+              "norm": 1.01,
+              "energy": 75.58151390612389,
+              "frequency": 74.83321643502963
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 13603.891394037895,
+            "shape_coefficient": 1291102.9986194298
+          },
+          "second_order_curvature": 6.801926330473968e-05,
+          "second_order_curvature_relative_error": -8.43047738285918e-08
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 35,
+          "cutoff": 150,
+          "strength": 1e-08,
+          "canonical_norm": 1.0,
+          "frequency": 74.83328377399016,
+          "energy": 74.83321575480288,
+          "energy_frequency_factor": 0.999999091057029,
+          "scalar_integral": 13603.83745885376,
+          "energy_curvature": 0.00013603809347345898,
+          "finite_difference_curvature": 0.00013603767001768574,
+          "full_spatial_residual": 6.507882103271737e-11,
+          "full_norm_response_residual": 1.6203312501051822e-10,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 74.08488292386487,
+              "frequency": 74.8332824136092
+            },
+            {
+              "norm": 1.01,
+              "energy": 75.58154859934466,
+              "frequency": 74.83328513437105
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 13603.891394037895,
+            "shape_coefficient": 1291102.9986194298
+          },
+          "second_order_curvature": 0.00013603813927857977,
+          "second_order_curvature_relative_error": -3.3670793375684127e-07,
+          "norm_susceptibility": 7350.882200998437,
+          "frozen_profile_curvature": 0.000136038374592453,
+          "relaxed_curvature": 0.0001360380934653476,
+          "shape_relaxation_correction": -2.8112710540426454e-10,
+          "near_resonance_growth": 0.0001341959346033983,
+          "global_radial_growth": 0.0001341959346033983,
+          "leading_shape_relaxation": -2.5822059972388597e-10,
+          "refined_residuals": {
+            "stationary": 6.507976942268993e-11,
+            "norm_response": 1.6203366537248806e-10
+          }
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 35,
+          "cutoff": 150,
+          "strength": 4e-08,
+          "canonical_norm": 1.0,
+          "frequency": 74.83369188396075,
+          "energy": 74.83341981099674,
+          "energy_frequency_factor": 0.9999963642985243,
+          "scalar_integral": 13603.648200346875,
+          "energy_curvature": 0.0005441403328631143,
+          "finite_difference_curvature": 0.0005441407324724423,
+          "full_spatial_residual": 1.0145930922068873e-09,
+          "full_norm_response_residual": 2.5135831765156746e-09,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 74.08508291936417,
+              "frequency": 74.83368644255651
+            },
+            {
+              "norm": 1.01,
+              "energy": 75.5817567570434,
+              "frequency": 74.83369732536316
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 13603.891394037895,
+            "shape_coefficient": 1291102.9986194298
+          },
+          "second_order_curvature": 0.000544143261172729,
+          "second_order_curvature_relative_error": -5.381504878831933e-06
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 35,
+          "cutoff": 190,
+          "strength": 5e-09,
+          "canonical_norm": 1.0,
+          "frequency": 74.83321575483706,
+          "energy": 74.83318174517458,
+          "energy_frequency_factor": 0.9999995455271816,
+          "scalar_integral": 13603.864999057414,
+          "energy_curvature": 6.801925757039124e-05,
+          "finite_difference_curvature": 6.801911922593717e-05,
+          "full_spatial_residual": 2.5762973602897427e-13,
+          "full_norm_response_residual": 1.307402394359698e-13,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 74.08484959102717,
+              "frequency": 74.83321507464447
+            },
+            {
+              "norm": 1.01,
+              "energy": 75.58151390612392,
+              "frequency": 74.83321643502963
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 13603.891393986782,
+            "shape_coefficient": 1291102.9985468294
+          },
+          "second_order_curvature": 6.801926330448413e-05,
+          "second_order_curvature_relative_error": -8.430101428036352e-08
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 35,
+          "cutoff": 190,
+          "strength": 1e-08,
+          "canonical_norm": 1.0,
+          "frequency": 74.83328377399016,
+          "energy": 74.83321575480285,
+          "energy_frequency_factor": 0.9999990910570287,
+          "scalar_integral": 13603.837458802647,
+          "energy_curvature": 0.00013603809346990695,
+          "finite_difference_curvature": 0.0001360383805604215,
+          "full_spatial_residual": 2.600043663180677e-13,
+          "full_norm_response_residual": 1.409922126614508e-13,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 74.08488292386487,
+              "frequency": 74.8332824136092
+            },
+            {
+              "norm": 1.01,
+              "energy": 75.58154859934467,
+              "frequency": 74.83328513437105
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 13603.891393986782,
+            "shape_coefficient": 1291102.9985468294
+          },
+          "second_order_curvature": 0.0001360381392780687,
+          "second_order_curvature_relative_error": -3.367302875423306e-07,
+          "norm_susceptibility": 7350.882201237129,
+          "frozen_profile_curvature": 0.00013603837458959833,
+          "relaxed_curvature": 0.00013603809346249304,
+          "shape_relaxation_correction": -2.8112710529944524e-10,
+          "near_resonance_growth": 0.00013419593459762513,
+          "global_radial_growth": 0.00013419593459762513,
+          "leading_shape_relaxation": -2.582205997093659e-10,
+          "refined_residuals": {
+            "stationary": 2.395378391328858e-13,
+            "norm_response": 1.3089148294992309e-13
+          },
+          "common_law_sensitivities": [
+            {
+              "potential_power": 2,
+              "density_scale": 1000000.0,
+              "perturbation_step": 0.05,
+              "predicted_energy_derivative": 6.801918729401325e-05,
+              "energy_derivative": 6.801918701171417e-05,
+              "predicted_frequency_derivative": 0.00013603809346092124,
+              "frequency_derivative": 0.0001360380933590477,
+              "perturbed_states": [
+                {
+                  "energy": 74.83321235384317,
+                  "frequency": 74.83327697208442,
+                  "full_spatial_residual": 2.5954530319532596e-13
+                },
+                {
+                  "energy": 74.83321915576187,
+                  "frequency": 74.83329057589376,
+                  "full_spatial_residual": 2.5997140217394344e-13
+                }
+              ]
+            },
+            {
+              "potential_power": 3,
+              "density_scale": 1000000.0,
+              "perturbation_step": 0.05,
+              "predicted_energy_derivative": 9.169621061284181e-05,
+              "energy_derivative": 9.169621009164075e-05,
+              "predicted_frequency_derivative": 0.00027506958978312795,
+              "frequency_derivative": 0.00027506958886647226,
+              "perturbed_states": [
+                {
+                  "energy": 74.83321116986416,
+                  "frequency": 74.83327001986945,
+                  "full_spatial_residual": 2.4275482328025372e-11
+                },
+                {
+                  "energy": 74.83322033948517,
+                  "frequency": 74.83329752682833,
+                  "full_spatial_residual": 4.3339713269100935e-11
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "real_depth": 6,
+          "spatial_index": 35,
+          "cutoff": 190,
+          "strength": 4e-08,
+          "canonical_norm": 1.0,
+          "frequency": 74.83369188396075,
+          "energy": 74.83341981099673,
+          "energy_frequency_factor": 0.9999963642985242,
+          "scalar_integral": 13603.64820029578,
+          "energy_curvature": 0.0005441403328595711,
+          "finite_difference_curvature": 0.0005441405903638952,
+          "full_spatial_residual": 8.414639553993683e-13,
+          "full_norm_response_residual": 2.755615649692076e-12,
+          "shifted_norms": [
+            {
+              "norm": 0.99,
+              "energy": 74.08508291936415,
+              "frequency": 74.83368644255651
+            },
+            {
+              "norm": 1.01,
+              "energy": 75.58175675704337,
+              "frequency": 74.83369732536316
+            }
+          ],
+          "weak_shape_coefficients": {
+            "first_frequency_slope": 13603.891393986782,
+            "shape_coefficient": 1291102.9985468294
+          },
+          "second_order_curvature": 0.0005441432611706852,
+          "second_order_curvature_relative_error": -5.381507634183436e-06
+        }
+      ],
+      "common_law_ratios": [
+        {
+          "strength": 5e-09,
+          "energy_ratio": 2.445998983622272,
+          "frequency_ratio": 2.4460000148922343,
+          "ratio_norm_derivative": 1.0312700027270694e-06,
+          "ratio_disagreement": 1.0312699623149513e-06
+        },
+        {
+          "strength": 1e-08,
+          "energy_ratio": 2.4460000148911045,
+          "frequency_ratio": 2.4460020774262823,
+          "ratio_norm_derivative": 2.062535320312975e-06,
+          "ratio_disagreement": 2.0625351777603385e-06
+        },
+        {
+          "strength": 4e-08,
+          "energy_ratio": 2.4460062024507003,
+          "frequency_ratio": 2.4460144524617213,
+          "ratio_norm_derivative": 8.250013183719318e-06,
+          "ratio_disagreement": 8.250011021004866e-06
+        }
+      ]
+    },
+    "shape_asymptotics": [
+      {
+        "strength": 1e-09,
+        "relative_leading_error": 0.00887522881308822
+      },
+      {
+        "strength": 2e-09,
+        "relative_leading_error": 0.01774949659504821
+      }
+    ]
+  },
+  "scope": "Energy-frequency ratio compatibility, local scalar response sum rule and complete radial norm susceptibility on actual conditional CP3 fields. No physical norm selection, observed mass relation or full angular stability is derived."
+}

@@ -1,0 +1,478 @@
+{
+  "status": "passed",
+  "scope": "Declared mathematical analogues; no IDWT particle or mass fit.",
+  "frequency_units": {
+    "input_reference": "Existing fixed benchmarks in experiments/idwt-v2.py; no new mass data or integer fit.",
+    "electron_anchor_energy_eV": 27.526338612368022,
+    "families": [
+      {
+        "dimension": 2,
+        "particles": [
+          "W",
+          "Z",
+          "H"
+        ],
+        "counts": [
+          2926,
+          3321,
+          4560
+        ],
+        "individual_energy_units_eV": [
+          27467259.05673274,
+          27457994.5799458,
+          27456140.350877192
+        ],
+        "geometric_mean_unit_eV": 27460464.231841918,
+        "inverse_scale_ratio_to_electron": 1.0023988808044154e-06,
+        "fractional_unit_residuals": [
+          0.00024744027753698106,
+          -8.993481957442206e-05,
+          -0.00015745840741154815
+        ]
+      },
+      {
+        "dimension": 3,
+        "particles": [
+          "down",
+          "strange",
+          "bottom"
+        ],
+        "counts": [
+          1,
+          20,
+          889.2153844822974
+        ],
+        "individual_energy_units_eV": [
+          4700000.0,
+          4675000.0,
+          4704147.131277254
+        ],
+        "geometric_mean_unit_eV": 4693031.363477902,
+        "inverse_scale_ratio_to_electron": 5.865364298773589e-06,
+        "fractional_unit_residuals": [
+          0.0014848902516035878,
+          -0.003842157036968774,
+          0.002368568828637674
+        ]
+      },
+      {
+        "dimension": 4,
+        "particles": [
+          "up",
+          "charm",
+          "top"
+        ],
+        "counts": [
+          15,
+          8855,
+          1215450
+        ],
+        "individual_energy_units_eV": [
+          144000.0,
+          143760.58723884812,
+          141980.33650088444
+        ],
+        "geometric_mean_unit_eV": 143244.13321042532,
+        "inverse_scale_ratio_to_electron": 0.00019216381149747956,
+        "fractional_unit_residuals": [
+          0.005276773105006072,
+          0.003605411382985757,
+          -0.008822676930749895
+        ]
+      },
+      {
+        "dimension": 6,
+        "particles": [
+          "electron",
+          "muon"
+        ],
+        "counts": [
+          18564,
+          3838380
+        ],
+        "individual_energy_units_eV": [
+          27.526338612368022,
+          27.526814828130618
+        ],
+        "geometric_mean_unit_eV": 27.526576719219495,
+        "inverse_scale_ratio_to_electron": 0.9999913499286925,
+        "fractional_unit_residuals": [
+          -8.650071307458873e-06,
+          8.650146131605752e-06
+        ]
+      },
+      {
+        "dimension": 10,
+        "particles": [
+          "tau"
+        ],
+        "counts": [
+          64512240
+        ],
+        "individual_energy_units_eV": [
+          27.54407535686251
+        ],
+        "geometric_mean_unit_eV": 27.544075356862507,
+        "inverse_scale_ratio_to_electron": 0.9993560595422178,
+        "fractional_unit_residuals": [
+          2.220446049250313e-16
+        ]
+      }
+    ],
+    "neutrinos": {
+      "counts": [
+        2002.0,
+        11628.0,
+        65780.0
+      ],
+      "solar_unit_eV": 7.57576739172245e-07,
+      "atmospheric_unit_eV": 7.650562547396231e-07,
+      "inverse_solar_ratio": 36334719.88916168,
+      "inverse_atmospheric_ratio": 35979496.20284622
+    },
+    "radius_condition": "Length ratios also contain gamma_d/gamma_6 from the actual spatial operator."
+  },
+  "oscillator": {
+    "dimension": 2,
+    "target_degree": 4,
+    "amplitude": 0.3,
+    "wavevectors": [
+      [
+        0.5,
+        0.7071067811865476
+      ],
+      [
+        0.8660254037844386,
+        0.5
+      ],
+      [
+        1.118033988749895,
+        1.3228756555322954
+      ]
+    ],
+    "records": [
+      {
+        "cutoff": 16,
+        "phases": [
+          0,
+          0.7,
+          1.3
+        ],
+        "state_count": 15,
+        "local_projector": 0.8048659615932348,
+        "normalized_probe": 0.6880727498590689,
+        "occupied_energy_sum": 41.04197030022594,
+        "gap": 0.8241755399667348,
+        "perturbation_norm": 0.270905022311265
+      },
+      {
+        "cutoff": 16,
+        "phases": [
+          0.4,
+          1.1,
+          -0.2
+        ],
+        "state_count": 15,
+        "local_projector": 0.7919242787218204,
+        "normalized_probe": 0.7042999887878549,
+        "occupied_energy_sum": 40.77372678369195,
+        "gap": 0.8265734062141981,
+        "perturbation_norm": 0.2629255850716221
+      },
+      {
+        "cutoff": 24,
+        "phases": [
+          0,
+          0.7,
+          1.3
+        ],
+        "state_count": 15,
+        "local_projector": 0.8048577204911617,
+        "normalized_probe": 0.6880724094032854,
+        "occupied_energy_sum": 41.041970258183156,
+        "gap": 0.8241755033926612,
+        "perturbation_norm": 0.27526064156891167
+      },
+      {
+        "cutoff": 24,
+        "phases": [
+          0.4,
+          1.1,
+          -0.2
+        ],
+        "state_count": 15,
+        "local_projector": 0.7919295570492103,
+        "normalized_probe": 0.7042996386485344,
+        "occupied_energy_sum": 40.773726748702686,
+        "gap": 0.8265733848165118,
+        "perturbation_norm": 0.26852149741983816
+      },
+      {
+        "cutoff": 32,
+        "phases": [
+          0,
+          0.7,
+          1.3
+        ],
+        "state_count": 15,
+        "local_projector": 0.8048576705265947,
+        "normalized_probe": 0.6880724094027555,
+        "occupied_energy_sum": 41.041970258176704,
+        "gap": 0.8241755033349341,
+        "perturbation_norm": 0.27760488843276526
+      },
+      {
+        "cutoff": 32,
+        "phases": [
+          0.4,
+          1.1,
+          -0.2
+        ],
+        "state_count": 15,
+        "local_projector": 0.791929598867602,
+        "normalized_probe": 0.704299638648076,
+        "occupied_energy_sum": 40.773726748693335,
+        "gap": 0.8265733847924217,
+        "perturbation_norm": 0.2713909913700769
+      }
+    ],
+    "projector_derivative": {
+      "projector_derivative_norm": 0.17415823632488311,
+      "trace_derivative": -1.6886183931870561e-16,
+      "probe_derivative": 0.015086436990759768,
+      "finite_difference_error": 4.6086693042603204e-10
+    }
+  },
+  "quasiperiodic": {
+    "sites": 89,
+    "alpha_numerator": 55,
+    "hopping": 1,
+    "onsite_cosine_amplitude": 1.4,
+    "boundary": "periodic",
+    "records": [
+      {
+        "phase": 0.0,
+        "cutoff": -0.8917877369317126,
+        "state_count": 34,
+        "per_site_IDOS": 0.38202247191011235,
+        "local_site_zero": 0.1147717872298216,
+        "local_site_one": 0.6896224036901634,
+        "channel_zero_one": -0.2000599804402704,
+        "gap": 1.3040319353975671,
+        "spectrum_change": 0.0
+      },
+      {
+        "phase": 0.4,
+        "cutoff": -0.8917877369317126,
+        "state_count": 34,
+        "per_site_IDOS": 0.38202247191011235,
+        "local_site_zero": 0.11475724785897003,
+        "local_site_one": 0.49882369013180117,
+        "channel_zero_one": -0.15794769866999298,
+        "gap": 1.3040319353870236,
+        "spectrum_change": 1.0926917148879056e-09
+      },
+      {
+        "phase": 0.9,
+        "cutoff": -0.8917877369317126,
+        "state_count": 34,
+        "per_site_IDOS": 0.38202247191011235,
+        "local_site_zero": 0.13076219725254934,
+        "local_site_one": 0.2480606612182168,
+        "channel_zero_one": -0.1037048748988514,
+        "gap": 1.3040319353904848,
+        "spectrum_change": 8.387943672971687e-10
+      },
+      {
+        "phase": 3.882867324661542,
+        "cutoff": -0.8917877369317126,
+        "state_count": 34,
+        "per_site_IDOS": 0.38202247191011235,
+        "local_site_zero": 0.6896224036901557,
+        "local_site_one": 0.2418577410402774,
+        "channel_zero_one": -0.3908611946240294,
+        "gap": 1.3040319353975667,
+        "spectrum_change": 8.43769498715119e-15
+      }
+    ]
+  },
+  "checks": [
+    {
+      "label": "coordinate quadrature of plane wave",
+      "error": 2.331570581120568e-15
+    },
+    {
+      "label": "coordinate quadrature of plane wave",
+      "error": 2.110251102400358e-15
+    },
+    {
+      "label": "coordinate quadrature of plane wave",
+      "error": 1.8323442443051943e-15
+    },
+    {
+      "label": "oscillator count K=16, phases=(0, 0.7, 1.3)",
+      "error": null
+    },
+    {
+      "label": "bounded perturbation K=16, phases=(0, 0.7, 1.3)",
+      "error": null
+    },
+    {
+      "label": "oscillator count K=16, phases=(0.4, 1.1, -0.2)",
+      "error": null
+    },
+    {
+      "label": "bounded perturbation K=16, phases=(0.4, 1.1, -0.2)",
+      "error": null
+    },
+    {
+      "label": "oscillator count K=24, phases=(0, 0.7, 1.3)",
+      "error": null
+    },
+    {
+      "label": "bounded perturbation K=24, phases=(0, 0.7, 1.3)",
+      "error": null
+    },
+    {
+      "label": "oscillator count K=24, phases=(0.4, 1.1, -0.2)",
+      "error": null
+    },
+    {
+      "label": "bounded perturbation K=24, phases=(0.4, 1.1, -0.2)",
+      "error": null
+    },
+    {
+      "label": "oscillator count K=32, phases=(0, 0.7, 1.3)",
+      "error": null
+    },
+    {
+      "label": "bounded perturbation K=32, phases=(0, 0.7, 1.3)",
+      "error": null
+    },
+    {
+      "label": "oscillator count K=32, phases=(0.4, 1.1, -0.2)",
+      "error": null
+    },
+    {
+      "label": "bounded perturbation K=32, phases=(0.4, 1.1, -0.2)",
+      "error": null
+    },
+    {
+      "label": "oscillator refinement: local_projector",
+      "error": 4.996456692829554e-08
+    },
+    {
+      "label": "oscillator refinement: normalized_probe",
+      "error": 5.299094496535872e-13
+    },
+    {
+      "label": "oscillator refinement: occupied_energy_sum",
+      "error": 6.45172804070171e-12
+    },
+    {
+      "label": "oscillator refinement: local_projector",
+      "error": 4.1818391638415164e-08
+    },
+    {
+      "label": "oscillator refinement: normalized_probe",
+      "error": 4.584110868677271e-13
+    },
+    {
+      "label": "oscillator refinement: occupied_energy_sum",
+      "error": 9.350742402602918e-12
+    },
+    {
+      "label": "oscillator count K=18, phases=(0, 0.7, 1.3)",
+      "error": null
+    },
+    {
+      "label": "bounded perturbation K=18, phases=(0, 0.7, 1.3)",
+      "error": null
+    },
+    {
+      "label": "rank derivative zero",
+      "error": 1.6886183931870561e-16
+    },
+    {
+      "label": "projector derivative tangent",
+      "error": 2.2866258961898953e-16
+    },
+    {
+      "label": "oscillator count K=18, phases=[0.0001, 0.7, 1.3]",
+      "error": null
+    },
+    {
+      "label": "bounded perturbation K=18, phases=[0.0001, 0.7, 1.3]",
+      "error": null
+    },
+    {
+      "label": "oscillator count K=18, phases=[-0.0001, 0.7, 1.3]",
+      "error": null
+    },
+    {
+      "label": "bounded perturbation K=18, phases=[-0.0001, 0.7, 1.3]",
+      "error": null
+    },
+    {
+      "label": "independent projector derivative",
+      "error": 4.6086693042603204e-10
+    },
+    {
+      "label": "projector changes at fixed count",
+      "error": null
+    },
+    {
+      "label": "quasiperiodic approximant gap count",
+      "error": null
+    },
+    {
+      "label": "quasiperiodic projector trace",
+      "error": 7.105427357601002e-15
+    },
+    {
+      "label": "quasiperiodic approximant gap count",
+      "error": null
+    },
+    {
+      "label": "quasiperiodic projector trace",
+      "error": 7.105427357601002e-15
+    },
+    {
+      "label": "quasiperiodic approximant gap count",
+      "error": null
+    },
+    {
+      "label": "quasiperiodic projector trace",
+      "error": 7.105427357601002e-15
+    },
+    {
+      "label": "quasiperiodic approximant gap count",
+      "error": null
+    },
+    {
+      "label": "quasiperiodic projector trace",
+      "error": 0.0
+    },
+    {
+      "label": "exact translated lattice operator",
+      "error": 7.926992395823618e-14
+    },
+    {
+      "label": "translated spectrum",
+      "error": 8.43769498715119e-15
+    },
+    {
+      "label": "fixed local probe changes",
+      "error": null
+    },
+    {
+      "label": "common translation covariance",
+      "error": null
+    }
+  ],
+  "checks_total": 43,
+  "source_sha256": {
+    "experiments/spectral_count_checks.py": "f5ddaa84d685a1bd13fae48ba732e5165db9f2c388d9249480ea8fd093aa6d3d",
+    "experiments/idwt-v2.py": "e10b3169e0153d76317ae638bcfe16d27b1acfdebdf782bbf70bc16efbf785ca"
+  }
+}

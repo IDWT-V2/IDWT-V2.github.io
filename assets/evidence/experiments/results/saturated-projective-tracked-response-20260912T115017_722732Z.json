@@ -1,0 +1,111 @@
+{
+  "timestamp": "2026-09-12T11:50:17.722917+00:00",
+  "status": "exploratory_radial_response",
+  "scope": "Independent radial response about a resolved smooth spatial field.\n\nThe stationary background and response cutoffs are distinct. A nonzero\ngrowth rate is checked with full differential residuals and refined bases.\nAbsence of radial growth does not establish full angular or nonlinear stability.\n",
+  "background_case": {
+    "degree": 34,
+    "physical_depth": 6,
+    "cutoff": 1400,
+    "quadrature_order": 5900,
+    "width": 0.001,
+    "mass_scale": 206.76470588235293,
+    "energy": 206.5600484877687,
+    "frequency": 206.76411221419528,
+    "canonical_norm": 1.0,
+    "odd_norm": 1.7758126958455477e-06,
+    "same_holomorphic_probe_visibility": 0.9999981206190738,
+    "scalar_current_range": [
+      4.487669567645039e-09,
+      9.477901763866193
+    ],
+    "stationary_residual": 1.1573339890926103e-13,
+    "differential_residual": 2.349764753570215e-09,
+    "distance_from_previous_resolution": 2.9679974555729784e-11,
+    "elapsed_seconds": 766.5872589750215,
+    "continuation": [
+      {
+        "residual": 1.1573339890926103e-13,
+        "evaluations": 11
+      }
+    ],
+    "array_key": "case_006"
+  },
+  "background_report": "experiments/results/saturated-projective-continuation-20260912T105221_399299Z.json",
+  "background_report_sha256": "20a53a0fadccd7b437f3be65a70d7565f504c540e5a1bbb26d1fd50719876e12",
+  "background_data_sha256": "6d5388f40089112d7eb47d2ef24e586a149d389ae413750734fa93c8230389a2",
+  "source_sha256": {
+    "saturated_projective_tracked_response.py": "fec388e09e614b6376087b59025b6d056f555bedeb6b3dea8863db07719b260f",
+    "projective_jacobi_basis.py": "584b8a5c0e83390890416d756a7c918b272ce37f860a669ee49f959d1e7f9ee5",
+    "saturated_projective_fields.py": "b4be73bdcdc1c5ade301fd0982f727b466ada2fb83d5a9416a230847387a6022",
+    "cp3_scalar_dirac.py": "4b7477054fedd1aa14c1aba0eb67410ef8d5192c8943a0a8317f4df73ccb2d6d"
+  },
+  "raw_data": "experiments/results/saturated-projective-tracked-response-20260912T115017_722732Z.npz",
+  "cases": [
+    {
+      "response_cutoff": 1500,
+      "quadrature_order": 9500,
+      "phase_projection_defect": 2.279715424101724e-09,
+      "modes": [
+        {
+          "exponent": [
+            0.022946955612697287,
+            -463.22132743921196
+          ],
+          "compressed_residual": 2.461014218721009e-12,
+          "differential_residual": 8.98806845708408e-06,
+          "array_prefix": "cutoff_1500_mode_0"
+        },
+        {
+          "exponent": [
+            0.022946955612697287,
+            463.22132743921196
+          ],
+          "compressed_residual": 2.461014218721009e-12,
+          "differential_residual": 8.98806845708408e-06,
+          "array_prefix": "cutoff_1500_mode_1"
+        }
+      ],
+      "maximum_growth_among_targeted_modes": 0.022946955612697287,
+      "target_oscillation": 463.22132744,
+      "elapsed_seconds": 90.25024604005739
+    },
+    {
+      "response_cutoff": 1900,
+      "quadrature_order": 9500,
+      "phase_projection_defect": 2.3287592560626316e-09,
+      "modes": [
+        {
+          "exponent": [
+            0.022946955612746345,
+            -463.2213274392119
+          ],
+          "compressed_residual": 2.4634873463160204e-12,
+          "differential_residual": 9.702526728089643e-08,
+          "array_prefix": "cutoff_1900_mode_0"
+        },
+        {
+          "exponent": [
+            0.022946955612746345,
+            463.2213274392119
+          ],
+          "compressed_residual": 2.4634873463160204e-12,
+          "differential_residual": 9.702526728089643e-08,
+          "array_prefix": "cutoff_1900_mode_1"
+        }
+      ],
+      "maximum_growth_among_targeted_modes": 0.022946955612746345,
+      "target_oscillation": 463.22132744,
+      "elapsed_seconds": 96.56939031090587
+    }
+  ],
+  "elapsed_seconds": 218.6645921538584,
+  "original_background_report_sha256": "9894d389a0adff2503add939c008a0e0a6e7200427b893dc2c26e4031084da0f",
+  "dataset": {
+    "path": "experiments/results/saturated-projective-tracked-response-20260912T115017_722732Z.npz",
+    "sha256": "877c314e39386a40fd4e013a8bb95b6b91fe20db86abf7a1fe6cc4c8372f8aa5"
+  },
+  "publication_provenance": {
+    "original_report_sha256": "037f70c226c0c031b893c725e3908d31dd866d3ec76f74753d732e24255a23dd",
+    "changes": "Local file locations are replaced with portable artifact references. Calculation values and source-code fingerprints are unchanged."
+  }
+}

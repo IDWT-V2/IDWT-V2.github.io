@@ -1,0 +1,72 @@
+{
+  "timestamp": "2026-09-12T13:29:34.545000+00:00",
+  "scope": "Reciprocal retained/normal field evolution and its adiabatic limit.\n\nAll spinor components are evolved. The single momentum and two coefficient\ndirections define a finite mode control, not a spatially localized particle.\nThe orthogonal occupied fast columns are explicit spectator modes of the\nsame conditional field decomposition, with their full canonical norm.\n",
+  "parameters": {
+    "separations": [
+      32.0,
+      64.0
+    ],
+    "duration": 20.0,
+    "rtol": 2e-12,
+    "atol": 2e-14
+  },
+  "common_parameters": {
+    "real_depth": 6,
+    "active_coefficient_directions": 2,
+    "spinor_components": 8,
+    "momentum": 0.35,
+    "base_epsilon": 0.8,
+    "base_coupling": 0.6,
+    "fast_occupied_columns": 2
+  },
+  "cases": [
+    {
+      "separation": 32.0,
+      "epsilon": 25.6,
+      "coupling": 19.2,
+      "occupation_per_fast_mode": 0.03125,
+      "slow_norm": 1.0,
+      "fast_norm": 0.0625,
+      "maximum_slow_norm_drift": 1.3322676295501878e-15,
+      "maximum_fast_norm_drift": 1.7951889974554547e-12,
+      "maximum_gram_error": 1.2730192994280534e-12,
+      "maximum_energy_drift": 4.6705750378350785e-11,
+      "maximum_adiabatic_slow_error": 0.0003806552132169424,
+      "final_adiabatic_slow_error": 0.0003806552132169424,
+      "maximum_projector_error": 0.006528419024577824,
+      "maximum_negative_fraction": 1.065506374068844e-05,
+      "rhs_evaluations": 30797
+    },
+    {
+      "separation": 64.0,
+      "epsilon": 51.2,
+      "coupling": 38.4,
+      "occupation_per_fast_mode": 0.015625,
+      "slow_norm": 1.0,
+      "fast_norm": 0.03125,
+      "maximum_slow_norm_drift": 1.7763568394002505e-15,
+      "maximum_fast_norm_drift": 1.6283155379603897e-12,
+      "maximum_gram_error": 1.1534319912122598e-12,
+      "maximum_energy_drift": 8.474376755884805e-11,
+      "maximum_adiabatic_slow_error": 9.359916613568095e-05,
+      "final_adiabatic_slow_error": 8.882387442764643e-05,
+      "maximum_projector_error": 0.0032605348200135864,
+      "maximum_negative_fraction": 2.6577718280620325e-06,
+      "rhs_evaluations": 60041
+    }
+  ],
+  "raw_data": "experiments/results/dirac-current-reciprocal-flow-20260912T132934_545000Z.npz",
+  "source_sha256": {
+    "experiments/dirac_current_reciprocal_flow.py": "3baa36767956dbdeeca7e519ced6b71c36a8b5741810aeb009411da20f697f47",
+    "experiments/dirac_current_reduction.py": "e9a907c42f83662ade7a9ce8baba55a3c0e880c99ac5480b578beb6e381738e9",
+    "experiments/spatial_dirac_mode_checks.py": "116a9f6d0f3cbcf9ee2fbe7a762e09c113194a07591191dd6663f5bcb8364552"
+  },
+  "dataset": {
+    "path": "experiments/results/dirac-current-reciprocal-flow-20260912T132934_545000Z.npz",
+    "sha256": "4364b269e4952c33110d6fd7676fd93481ab8c3edb47bbd474e084de54372577"
+  },
+  "publication_provenance": {
+    "original_report_sha256": "4b614f9938a97bc4863c34ac822b33edcb2a4d962cdf760c51fd30ada7421a43",
+    "changes": "Local file locations are replaced with portable artifact references. Calculation values and source-code fingerprints are unchanged."
+  }
+}

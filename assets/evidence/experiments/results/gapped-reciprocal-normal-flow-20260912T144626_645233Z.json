@@ -1,0 +1,73 @@
+{
+  "timestamp": "2026-09-12T14:46:26.645233+00:00",
+  "scope": "Full nonlinear canonical confirmation of finite-gap stable and growing normal modes.",
+  "parameters": {
+    "duration": 15.0,
+    "amplitude": 1e-05,
+    "rtol": 2e-13,
+    "atol": 2e-15
+  },
+  "cases": [
+    {
+      "label": "stable",
+      "degree": 12,
+      "depth": 6,
+      "epsilon": 20.0,
+      "balanced_difference": 0.6,
+      "perpendicular_population": 17.25714285714286,
+      "parallel_population": 17.85714285714286,
+      "canonical_normal_norm": 245.60000000000008,
+      "stationary_scalar_trace": 0.10751844294158765,
+      "stationary_normal_energy": 56.125296084984406,
+      "frequency_real": 0.30547403170099235,
+      "predicted_growth": 0.0,
+      "measured_growth": -7.263945541739324e-12,
+      "final_density_amplification": 1.0000000000961953,
+      "predicted_amplification": 1.0,
+      "maximum_relative_linear_error": 1.4842800896639813e-05,
+      "maximum_energy_drift": 7.696598913753405e-11,
+      "maximum_gram_drift": 8.75765646800737e-11,
+      "maximum_rotation_moment_drift": 1.2385428186301514e-10,
+      "maximum_ray_norm_drift": 3.885780586188048e-15,
+      "rhs_evaluations": 24893
+    },
+    {
+      "label": "growing",
+      "degree": 12,
+      "depth": 6,
+      "epsilon": 20.0,
+      "balanced_difference": -20.0,
+      "perpendicular_population": 20.2,
+      "parallel_population": 0.1999999999999993,
+      "canonical_normal_norm": 245.59999999999994,
+      "stationary_scalar_trace": 0.10751844294158765,
+      "stationary_normal_energy": 56.12529608498442,
+      "frequency_real": 0.11297762720382928,
+      "predicted_growth": 0.439235095738026,
+      "measured_growth": 0.4392350957304513,
+      "final_density_amplification": 726.7092266843279,
+      "predicted_amplification": 726.709228020607,
+      "maximum_relative_linear_error": 0.00018689285417805752,
+      "maximum_energy_drift": 7.069900220812997e-11,
+      "maximum_gram_drift": 7.994966572920511e-11,
+      "maximum_rotation_moment_drift": 1.1306038377773584e-10,
+      "maximum_ray_norm_drift": 2.886579864025407e-15,
+      "rhs_evaluations": 25265
+    }
+  ],
+  "raw_data": "experiments/results/gapped-reciprocal-normal-flow-20260912T144626_645233Z.npz",
+  "source_sha256": {
+    "experiments/gapped_reciprocal_normal_flow.py": "63d39fdc9a59e6a36a9b3f1812486e98b6c1e48b82d7fbb87ade45df58d114a1",
+    "experiments/gapped_reciprocal_normal.py": "f266747ccd26418220f84ec0bc7a6914164a81a5a7e7001a8fc74168088006ba",
+    "experiments/gapped_balanced_response.py": "e3ac920eeb859cf1a64f88b8ddf6ec9f18772002626f689d081b33c08a3275be",
+    "experiments/dirac_current_reduction.py": "e9a907c42f83662ade7a9ce8baba55a3c0e880c99ac5480b578beb6e381738e9"
+  },
+  "dataset": {
+    "path": "experiments/results/gapped-reciprocal-normal-flow-20260912T144626_645233Z.npz",
+    "sha256": "2a3d3fce38683d3a1d04bffb5a9410954a6d9d57bbd5fc04113533685eb7fcfd"
+  },
+  "publication_provenance": {
+    "original_report_sha256": "28edee88e5a7600b128f3f4dd043eceaca660a287a8c706d6807cea7d49fe50a",
+    "changes": "Local file locations are replaced with portable artifact references. Calculation values and source-code fingerprints are unchanged."
+  }
+}

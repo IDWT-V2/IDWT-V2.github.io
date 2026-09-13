@@ -1,0 +1,181 @@
+{
+  "timestamp": "2026-09-12T10:48:39.843178+00:00",
+  "status": "stopped_after_light_branch_converged",
+  "scope": "Resolve spatial fields of a smooth common tensor-current self-interaction.\n\nThis is a conditional physical CP3 control with O(2), radius and volume one,\ncanonical norm one, and a parallel mode ray. The mass-branch labels remain\nN=12,34. They are distinct from the radial resolution cutoff of the solver.\nNo particle norm, radius, shell weighting or master carrier is derived here.\n",
+  "arguments": {
+    "cutoffs": [
+      80,
+      160,
+      320,
+      550,
+      800,
+      1100
+    ],
+    "widths": [
+      0.001
+    ],
+    "degrees": [
+      12,
+      34
+    ],
+    "scale": 1.0
+  },
+  "source_sha256": {
+    "saturated_projective_continuation.py": "fb2c0ff63f7f692e8ef3969a608cd63802680db06191ee748621699da7fe2a6d",
+    "saturated_projective_fields.py": "b4be73bdcdc1c5ade301fd0982f727b466ada2fb83d5a9416a230847387a6022",
+    "cp3_scalar_dirac.py": "4b7477054fedd1aa14c1aba0eb67410ef8d5192c8943a0a8317f4df73ccb2d6d",
+    "graded_current_tower.py": "cf0f72cb6d078df086ec594550155d6518b00255ed46a16d669790edb093a602"
+  },
+  "raw_data": "experiments/results/saturated-projective-continuation-20260912T104839_843074Z.npz",
+  "cases": [
+    {
+      "degree": 12,
+      "physical_depth": 6,
+      "cutoff": 80,
+      "quadrature_order": 620,
+      "width": 0.001,
+      "mass_scale": 1.0,
+      "energy": 0.9990355108846262,
+      "frequency": 0.9999828805190012,
+      "canonical_norm": 0.9999999999999999,
+      "odd_norm": 4.889886950112311e-09,
+      "same_holomorphic_probe_visibility": 0.9999828895774614,
+      "scalar_current_range": [
+        2.904573942738846e-09,
+        9.999592302432331
+      ],
+      "stationary_residual": 3.709641422347363e-16,
+      "differential_residual": 2.08407403353693e-06,
+      "distance_from_previous_resolution": null,
+      "elapsed_seconds": 0.473473607795313,
+      "continuation": [
+        {
+          "width": 1e-05,
+          "distance": 6.862197500627e-07,
+          "residual": 1.8066404703538267e-16,
+          "evaluations": 6
+        },
+        {
+          "width": 3e-05,
+          "distance": 1.4525251809133162e-06,
+          "residual": 1.2231743371573539e-16,
+          "evaluations": 6
+        },
+        {
+          "width": 0.0001,
+          "distance": 5.11294146469621e-06,
+          "residual": 2.3560268497108113e-16,
+          "evaluations": 6
+        },
+        {
+          "width": 0.0003,
+          "distance": 1.4730411224175547e-05,
+          "residual": 1.8230340483204705e-16,
+          "evaluations": 6
+        },
+        {
+          "width": 0.001,
+          "distance": 5.206124172197862e-05,
+          "residual": 3.709641422347363e-16,
+          "evaluations": 6
+        }
+      ],
+      "array_key": "case_000"
+    },
+    {
+      "degree": 12,
+      "physical_depth": 6,
+      "cutoff": 160,
+      "quadrature_order": 940,
+      "width": 0.001,
+      "mass_scale": 1.0,
+      "energy": 0.9990355108846256,
+      "frequency": 0.9999828805190065,
+      "canonical_norm": 1.0,
+      "odd_norm": 4.889887067181614e-09,
+      "same_holomorphic_probe_visibility": 0.9999828895774676,
+      "scalar_current_range": [
+        5.52746470969015e-10,
+        9.999775192411825
+      ],
+      "stationary_residual": 3.811284081943406e-16,
+      "differential_residual": 4.353504333736497e-09,
+      "distance_from_previous_resolution": 1.1310148010048993e-08,
+      "elapsed_seconds": 1.736080067930743,
+      "continuation": [
+        {
+          "residual": 3.811284081943406e-16,
+          "evaluations": 5
+        }
+      ],
+      "array_key": "case_001"
+    },
+    {
+      "degree": 12,
+      "physical_depth": 6,
+      "cutoff": 320,
+      "quadrature_order": 1580,
+      "width": 0.001,
+      "mass_scale": 1.0,
+      "energy": 0.9990355108846256,
+      "frequency": 0.9999828805190061,
+      "canonical_norm": 1.0,
+      "odd_norm": 4.889887067169744e-09,
+      "same_holomorphic_probe_visibility": 0.9999828895774675,
+      "scalar_current_range": [
+        6.954685887932272e-11,
+        9.99987094085929
+      ],
+      "stationary_residual": 8.829088424743138e-17,
+      "differential_residual": 3.6293979949805897e-14,
+      "distance_from_previous_resolution": 1.299720662226506e-11,
+      "elapsed_seconds": 10.581852058880031,
+      "continuation": [
+        {
+          "residual": 8.829088424743138e-17,
+          "evaluations": 5
+        }
+      ],
+      "array_key": "case_002"
+    },
+    {
+      "degree": 12,
+      "physical_depth": 6,
+      "cutoff": 550,
+      "quadrature_order": 2500,
+      "width": 0.001,
+      "mass_scale": 1.0,
+      "energy": 0.9990355108846257,
+      "frequency": 0.9999828805190064,
+      "canonical_norm": 1.0,
+      "odd_norm": 4.889887067166738e-09,
+      "same_holomorphic_probe_visibility": 0.9999828895774676,
+      "scalar_current_range": [
+        1.1121321110417015e-11,
+        9.999902541423701
+      ],
+      "stationary_residual": 1.904418141280737e-16,
+      "differential_residual": 5.6688849805213873e-14,
+      "distance_from_previous_resolution": 8.549384341938585e-16,
+      "elapsed_seconds": 46.760839690919966,
+      "continuation": [
+        {
+          "residual": 1.904418141280737e-16,
+          "evaluations": 4
+        }
+      ],
+      "array_key": "case_003"
+    }
+  ],
+  "elapsed_seconds": 59.5585441889707,
+  "interruption_reason": "Stopped unnecessary larger light-branch resolutions after its independent differential residual reached 3.63e-14. Saved cases remain available; the heavy branch is continued separately.",
+  "interruption_timestamp": "2026-09-12T10:52:20.301846+00:00",
+  "dataset": {
+    "path": "experiments/results/saturated-projective-continuation-20260912T104839_843074Z.npz",
+    "sha256": "f1453a98332300ee2b3fed4f66740f44d4307756c934791c05f18369c0c9bb94"
+  },
+  "publication_provenance": {
+    "original_report_sha256": "c212a5a3763d3de8f3606047713704a12eece78854a64daabb6ff19af6360049",
+    "changes": "Local file locations are replaced with portable artifact references. Calculation values and source-code fingerprints are unchanged."
+  }
+}

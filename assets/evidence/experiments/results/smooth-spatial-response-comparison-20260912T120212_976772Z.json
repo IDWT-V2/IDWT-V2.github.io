@@ -1,0 +1,209 @@
+{
+  "timestamp": "2026-09-12T12:02:12.975551+00:00",
+  "scope": "Compare full spatial probe multipliers on two resolved mass controls.\n\nThe operator norm and a particular weighted matrix element are distinct.\nBoth use the same coupling scale, spatial measure and probe bundle.\n",
+  "checks": 17,
+  "ratio": {
+    "simplex": 206.76470588235293,
+    "energy": 206.75946574197746,
+    "frequency": 206.76765196908332,
+    "relative_energy_defect": -2.5343495414720252e-05,
+    "relative_frequency_defect": 1.4248499122793135e-05
+  },
+  "multiplier_supremum": 0.9492335907374935,
+  "maximum_location_t": 0.0013126785953491385,
+  "probe_matrices": [
+    {
+      "quadrature_order": 1600,
+      "probe_radial_cutoff": 16,
+      "scalar_multiplier_difference_norm": 0.25189359345027035,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774678,
+        0.999998120619074
+      ]
+    },
+    {
+      "quadrature_order": 1600,
+      "probe_radial_cutoff": 40,
+      "scalar_multiplier_difference_norm": 0.8606790703065333,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774678,
+        0.999998120619074
+      ]
+    },
+    {
+      "quadrature_order": 1600,
+      "probe_radial_cutoff": 80,
+      "scalar_multiplier_difference_norm": 0.9352668281246518,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774678,
+        0.999998120619074
+      ]
+    },
+    {
+      "quadrature_order": 1600,
+      "probe_radial_cutoff": 160,
+      "scalar_multiplier_difference_norm": 0.9454951767874609,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774678,
+        0.999998120619074
+      ]
+    },
+    {
+      "quadrature_order": 2400,
+      "probe_radial_cutoff": 16,
+      "scalar_multiplier_difference_norm": 0.2518935934501488,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774678,
+        0.9999981206190742
+      ]
+    },
+    {
+      "quadrature_order": 2400,
+      "probe_radial_cutoff": 40,
+      "scalar_multiplier_difference_norm": 0.8606790703067836,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774678,
+        0.9999981206190742
+      ]
+    },
+    {
+      "quadrature_order": 2400,
+      "probe_radial_cutoff": 80,
+      "scalar_multiplier_difference_norm": 0.9352668281229956,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774678,
+        0.9999981206190742
+      ]
+    },
+    {
+      "quadrature_order": 2400,
+      "probe_radial_cutoff": 160,
+      "scalar_multiplier_difference_norm": 0.9454951767844411,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774678,
+        0.9999981206190742
+      ]
+    },
+    {
+      "quadrature_order": 3200,
+      "probe_radial_cutoff": 16,
+      "scalar_multiplier_difference_norm": 0.25189359345008205,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774676,
+        0.999998120619074
+      ]
+    },
+    {
+      "quadrature_order": 3200,
+      "probe_radial_cutoff": 40,
+      "scalar_multiplier_difference_norm": 0.8606790703023924,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774676,
+        0.999998120619074
+      ]
+    },
+    {
+      "quadrature_order": 3200,
+      "probe_radial_cutoff": 80,
+      "scalar_multiplier_difference_norm": 0.9352668281164115,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774676,
+        0.999998120619074
+      ]
+    },
+    {
+      "quadrature_order": 3200,
+      "probe_radial_cutoff": 160,
+      "scalar_multiplier_difference_norm": 0.9454951767799544,
+      "unchanged_holomorphic_probe": [
+        0.9999828895774676,
+        0.999998120619074
+      ]
+    }
+  ],
+  "source_sha256": {
+    "smooth_spatial_response_comparison.py": "69c89c0f7f79d5466e287769b9056674c6bb27dae4ed164761eb14313e2372fe",
+    "projective_jacobi_basis.py": "584b8a5c0e83390890416d756a7c918b272ce37f860a669ee49f959d1e7f9ee5",
+    "cp3_scalar_dirac.py": "4b7477054fedd1aa14c1aba0eb67410ef8d5192c8943a0a8317f4df73ccb2d6d",
+    "saturated_projective_fields.py": "b4be73bdcdc1c5ade301fd0982f727b466ada2fb83d5a9416a230847387a6022",
+    "graded_current_tower.py": "cf0f72cb6d078df086ec594550155d6518b00255ed46a16d669790edb093a602",
+    "coherent_mode_algebra.py": "4fbcbb6a1fbaa5a1a7de387746eda4d00f69fe22bbdb1e906c8795f8bb786dff"
+  },
+  "field_provenance": [
+    {
+      "report": "saturated-projective-continuation-20260912T104839_843074Z.json",
+      "case": {
+        "degree": 12,
+        "physical_depth": 6,
+        "cutoff": 320,
+        "quadrature_order": 1580,
+        "width": 0.001,
+        "mass_scale": 1.0,
+        "energy": 0.9990355108846256,
+        "frequency": 0.9999828805190061,
+        "canonical_norm": 1.0,
+        "odd_norm": 4.889887067169744e-09,
+        "same_holomorphic_probe_visibility": 0.9999828895774675,
+        "scalar_current_range": [
+          6.954685887932272e-11,
+          9.99987094085929
+        ],
+        "stationary_residual": 8.829088424743138e-17,
+        "differential_residual": 3.6293979949805897e-14,
+        "distance_from_previous_resolution": 1.299720662226506e-11,
+        "elapsed_seconds": 10.581852058880031,
+        "continuation": [
+          {
+            "residual": 8.829088424743138e-17,
+            "evaluations": 5
+          }
+        ],
+        "array_key": "case_002"
+      },
+      "report_sha256": "c212a5a3763d3de8f3606047713704a12eece78854a64daabb6ff19af6360049",
+      "data_sha256": "f1453a98332300ee2b3fed4f66740f44d4307756c934791c05f18369c0c9bb94"
+    },
+    {
+      "report": "saturated-projective-continuation-20260912T105221_399299Z.json",
+      "case": {
+        "degree": 34,
+        "physical_depth": 6,
+        "cutoff": 1400,
+        "quadrature_order": 5900,
+        "width": 0.001,
+        "mass_scale": 206.76470588235293,
+        "energy": 206.5600484877687,
+        "frequency": 206.76411221419528,
+        "canonical_norm": 1.0,
+        "odd_norm": 1.7758126958455477e-06,
+        "same_holomorphic_probe_visibility": 0.9999981206190738,
+        "scalar_current_range": [
+          4.487669567645039e-09,
+          9.477901763866193
+        ],
+        "stationary_residual": 1.1573339890926103e-13,
+        "differential_residual": 2.349764753570215e-09,
+        "distance_from_previous_resolution": 2.9679974555729784e-11,
+        "elapsed_seconds": 766.5872589750215,
+        "continuation": [
+          {
+            "residual": 1.1573339890926103e-13,
+            "evaluations": 11
+          }
+        ],
+        "array_key": "case_006"
+      },
+      "report_sha256": "9894d389a0adff2503add939c008a0e0a6e7200427b893dc2c26e4031084da0f",
+      "data_sha256": "6d5388f40089112d7eb47d2ef24e586a149d389ae413750734fa93c8230389a2"
+    }
+  ],
+  "raw_data": "experiments/results/smooth-spatial-response-comparison-20260912T120212_976772Z.npz",
+  "dataset": {
+    "path": "experiments/results/smooth-spatial-response-comparison-20260912T120212_976772Z.npz",
+    "sha256": "97288c2b6354ef6562b76b11992e82e56f1956c06b9dea2c902b091dd69c3cc8"
+  },
+  "publication_provenance": {
+    "original_report_sha256": "4fc7c9203b9de132d844e24d757a0ac15d1c2f4ed24f4625395144296bb2aabf",
+    "changes": "Local file locations are replaced with portable artifact references. Calculation values and source-code fingerprints are unchanged."
+  }
+}

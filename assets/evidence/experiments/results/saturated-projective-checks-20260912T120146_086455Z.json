@@ -1,0 +1,84 @@
+{
+  "timestamp": "2026-09-12T12:01:46.086004+00:00",
+  "scope": "Independent variations and response checks for smooth spatial controls.\n\nThe radial 0/1-form subspace is invariant and supplies a valid instability\ntest. It does not exhaust angular perturbations of the full spatial spinor.\n",
+  "checks": 245,
+  "results": {
+    "variations": [
+      {
+        "cutoff": 7,
+        "width": 0.03,
+        "mass_scale": 1.0,
+        "derivative_errors": [
+          1.7643000615369987e-08,
+          4.462737994037026e-09,
+          1.029679839232922e-09
+        ]
+      },
+      {
+        "cutoff": 12,
+        "width": 0.3,
+        "mass_scale": 2.7,
+        "derivative_errors": [
+          1.4660329258755264e-08,
+          3.7274279791033225e-09,
+          1.0871514135348139e-09
+        ]
+      },
+      {
+        "cutoff": 8,
+        "width": 0.02,
+        "mass_scale": 206.76470588235293,
+        "derivative_errors": [
+          9.736711607467174e-07,
+          2.4390510395411744e-07,
+          6.767724508440618e-08
+        ]
+      }
+    ],
+    "fixed_background": {
+      "background_report": "saturated-projective-continuation-20260912T104839_843074Z.json",
+      "background_report_sha256": "c212a5a3763d3de8f3606047713704a12eece78854a64daabb6ff19af6360049",
+      "background_data_sha256": "f1453a98332300ee2b3fed4f66740f44d4307756c934791c05f18369c0c9bb94",
+      "response_cutoff": 80,
+      "direct_growth": 0.006685383928937581,
+      "direct_oscillation": 39.697947991914226,
+      "derivative_errors": [
+        4.36209502287423e-11,
+        1.100391981756625e-11,
+        4.318638485977752e-12
+      ]
+    },
+    "homogeneous_symbol": {
+      "characteristic": "4*M*a*p**2 + p**4 + w**4 - w**2*(4*M**2 + 2*p**2)",
+      "controls": [
+        {
+          "mass": 1.0,
+          "scalar_slope": 0.1,
+          "minimum_momentum": 0.5,
+          "maximum_sampled_eigenvector_condition": 1.6179707394320448,
+          "high_momentum_eigenvector_condition": 1.054092553394362
+        },
+        {
+          "mass": 1.0,
+          "scalar_slope": 0.4,
+          "minimum_momentum": 0.5,
+          "maximum_sampled_eigenvector_condition": 2.7681562968963314,
+          "high_momentum_eigenvector_condition": 1.2909944487850278
+        },
+        {
+          "mass": 1.0,
+          "scalar_slope": 0.9,
+          "minimum_momentum": 0.5,
+          "maximum_sampled_eigenvector_condition": 4.139956336018062,
+          "high_momentum_eigenvector_condition": 3.162277658874596
+        }
+      ]
+    }
+  },
+  "source_sha256": {
+    "saturated_projective_checks.py": "7b3f11223b46538fa1c6f24263490c32de5428e8a75ba85c698ad1711c26e9c2",
+    "saturated_projective_fields.py": "b4be73bdcdc1c5ade301fd0982f727b466ada2fb83d5a9416a230847387a6022",
+    "saturated_projective_response.py": "4912247c59b000b96f6a90358e0c5d38383edc37087794becc19e77f864d55b9",
+    "cp3_scalar_dirac.py": "4b7477054fedd1aa14c1aba0eb67410ef8d5192c8943a0a8317f4df73ccb2d6d"
+  }
+}

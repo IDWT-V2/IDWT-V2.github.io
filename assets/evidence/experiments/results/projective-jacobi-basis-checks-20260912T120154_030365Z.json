@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-09-12T12:01:54.029849+00:00",
+  "checks": 28,
+  "scope": "Independent special-function and differential checks of the recurrence.",
+  "cases": [
+    {
+      "complex_dimension": 3,
+      "line_degree": 0,
+      "cutoff": 80,
+      "reference_errors": [
+        9.499889047530288e-15,
+        6.074065262835002e-15,
+        5.816006226688194e-15,
+        6.535266505259911e-15
+      ]
+    },
+    {
+      "complex_dimension": 3,
+      "line_degree": 2,
+      "cutoff": 160,
+      "reference_errors": [
+        1.8070330753224695e-13,
+        3.6516629120051604e-14,
+        1.1151258896057736e-13,
+        8.645329253454726e-14
+      ]
+    },
+    {
+      "complex_dimension": 5,
+      "line_degree": 3,
+      "cutoff": 70,
+      "reference_errors": [
+        5.692935184764437e-15,
+        2.5128092050245115e-15,
+        4.252509710930316e-15,
+        2.6264598001864628e-15
+      ]
+    },
+    {
+      "complex_dimension": 3,
+      "line_degree": 2,
+      "cutoff": 1400,
+      "reference_errors": [
+        1.4413410813052307e-11,
+        1.5635172390410355e-11,
+        1.1444913515218168e-11,
+        9.451835335509156e-12
+      ]
+    }
+  ],
+  "source_sha256": {
+    "projective_jacobi_basis.py": "584b8a5c0e83390890416d756a7c918b272ce37f860a669ee49f959d1e7f9ee5",
+    "projective_jacobi_basis_checks.py": "a5d86b1fef3443334763a2f0f57853d1371979b712c7bf466ce13e45a19d91d3",
+    "cp3_scalar_dirac.py": "4b7477054fedd1aa14c1aba0eb67410ef8d5192c8943a0a8317f4df73ccb2d6d",
+    "saturated_projective_fields.py": "b4be73bdcdc1c5ade301fd0982f727b466ada2fb83d5a9416a230847387a6022"
+  }
+}

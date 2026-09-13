@@ -1,0 +1,69 @@
+{
+  "timestamp": "2026-09-12T14:02:24.733174+00:00",
+  "scope": "Complete complex reciprocal ray/normal fields under the projected scalar square.\n\nThis zero-spatial-kinetic invariant mode control retains the probe's full\nrank, both Dirac signs, scalar phases, norms and all occupied Gram entries.\nIt is not a localized spatial encounter or a selected physical particle.\n",
+  "parameters": {
+    "degrees": [
+      12,
+      34
+    ],
+    "duration": 60.0,
+    "rtol": 2e-12,
+    "atol": 2e-14
+  },
+  "cases": [
+    {
+      "target_degree": 12,
+      "maximum_energy_drift": 3.46765283154582e-10,
+      "maximum_target_norm_drift": 1.0524914273446484e-13,
+      "maximum_occupied_gram_drift": 9.326845453887058e-11,
+      "maximum_rotation_moment_drift": 1.3570673035169515e-10,
+      "initial_plus_overlap": 0.6718228731580239,
+      "minimum_plus_overlap": 0.6426345820891682,
+      "maximum_plus_overlap": 0.6718228731580239,
+      "final_plus_overlap": 0.6694298729482764,
+      "minimum_minus_overlap": 0.6718228731580232,
+      "maximum_minus_overlap": 0.7434668604335866,
+      "maximum_scalar_anisotropy": 0.7818964283117139,
+      "rhs_evaluations": 17837
+    },
+    {
+      "target_degree": 34,
+      "maximum_energy_drift": 3.3598546167468157e-10,
+      "maximum_target_norm_drift": 1.4765966227514582e-14,
+      "maximum_occupied_gram_drift": 8.21179901629559e-11,
+      "maximum_rotation_moment_drift": 1.21271102186169e-10,
+      "initial_plus_overlap": 0.6718228731580239,
+      "minimum_plus_overlap": 0.6401504688576264,
+      "maximum_plus_overlap": 0.6718228731580239,
+      "final_plus_overlap": 0.6718110684521427,
+      "minimum_minus_overlap": 0.6718228731580232,
+      "maximum_minus_overlap": 0.718851594765393,
+      "maximum_scalar_anisotropy": 0.7915413722238217,
+      "rhs_evaluations": 20465
+    }
+  ],
+  "raw_data": "experiments/results/balanced-dirac-reciprocal-flow-20260912T140224_733174Z.npz",
+  "common_parameters": {
+    "depth": 6,
+    "probe_degree": 1,
+    "canonical_target_norm": 1.0,
+    "coupling": 0.7,
+    "scalar_excess_per_mode": 0.4,
+    "perpendicular_population": 0.2,
+    "anisotropic_population": 0.6,
+    "initial_angle": 0.61,
+    "initial_phase": 0.37
+  },
+  "source_sha256": {
+    "experiments/balanced_dirac_reciprocal_flow.py": "9172b13290849e00185592d10f88b5bdecc30ede582923621742644b00d453e0",
+    "experiments/balanced_dirac_response.py": "c95d8b95a9d6069e8d9b910cf539a06f81a061b7d88814f5e3adbd2ca1b86911"
+  },
+  "dataset": {
+    "path": "experiments/results/balanced-dirac-reciprocal-flow-20260912T140224_733174Z.npz",
+    "sha256": "04d814f3ab0c5ef9df1a116301c677b99a87b92f1bf58ab1bbcf48842c0d03bc"
+  },
+  "publication_provenance": {
+    "original_report_sha256": "525417dccc16d9674a77ba70094715d9fc587d7962776fdaaa3626e95cc646f8",
+    "changes": "Local file locations are replaced with portable artifact references. Calculation values and source-code fingerprints are unchanged."
+  }
+}

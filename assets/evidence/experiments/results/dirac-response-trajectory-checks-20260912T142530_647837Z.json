@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-09-12T14:25:30.647837+00:00",
+  "execution_mode": "normal",
+  "scope": "Independent complete-field refinement and conserved-moment checks of stored trajectories.",
+  "checks": 22,
+  "results": [
+    {
+      "kind": "adiabatic",
+      "label": "32",
+      "maximum_field_refinement_errors": {
+        "slow": 3.5887779816191893e-09,
+        "fast": 3.2362910047820574e-09
+      },
+      "maximum_total_rotation_moment_drift": 1.2732196149948535e-12
+    },
+    {
+      "kind": "adiabatic",
+      "label": "64",
+      "maximum_field_refinement_errors": {
+        "slow": 7.089640445789487e-09,
+        "fast": 4.8146396376320945e-09
+      },
+      "maximum_total_rotation_moment_drift": 1.1555251236827775e-12
+    },
+    {
+      "kind": "balanced",
+      "label": "12",
+      "maximum_field_refinement_errors": {
+        "complete_fields": 4.0472313420416414e-07
+      },
+      "maximum_total_rotation_moment_drift": 1.3570673035169515e-10
+    },
+    {
+      "kind": "balanced",
+      "label": "34",
+      "maximum_field_refinement_errors": {
+        "complete_fields": 3.555844190226507e-07
+      },
+      "maximum_total_rotation_moment_drift": 1.21271102186169e-10
+    }
+  ],
+  "input_report_sha256": {
+    "experiments/results/dirac-current-reciprocal-flow-20260912T132510_826057Z.json": "2550d59e3976f58ca22f4af78acef79ae45bf0e3ebbd067dafc57a132b8ad014",
+    "experiments/results/dirac-current-reciprocal-flow-20260912T132934_545000Z.json": "4b614f9938a97bc4863c34ac822b33edcb2a4d962cdf760c51fd30ada7421a43",
+    "experiments/results/balanced-dirac-reciprocal-flow-20260912T140123_928838Z.json": "a28539d3696c49d15be76a26260c411b23c8aafc12a1975be8d25073c367823c",
+    "experiments/results/balanced-dirac-reciprocal-flow-20260912T140224_733174Z.json": "525417dccc16d9674a77ba70094715d9fc587d7962776fdaaa3626e95cc646f8"
+  },
+  "input_dataset_sha256": {
+    "experiments/results/dirac-current-reciprocal-flow-20260912T132510_826057Z.npz": "56bc845e117c90541520ef2e5081b822acf2d9030ac7f408765e4a3a63b45a4e",
+    "experiments/results/dirac-current-reciprocal-flow-20260912T132934_545000Z.npz": "4364b269e4952c33110d6fd7676fd93481ab8c3edb47bbd474e084de54372577",
+    "experiments/results/balanced-dirac-reciprocal-flow-20260912T140123_928838Z.npz": "0cd66163c4fffe6baeb771592a85180bd9ba185ca0c58c7a184317b76ca92352",
+    "experiments/results/balanced-dirac-reciprocal-flow-20260912T140224_733174Z.npz": "04d814f3ab0c5ef9df1a116301c677b99a87b92f1bf58ab1bbcf48842c0d03bc"
+  },
+  "source_sha256": {
+    "experiments/dirac_response_trajectory_checks.py": "a5babfdf7d33d9024c92cade7780be24fd2a631f705419cf593b23b694b5ed2a",
+    "experiments/dirac_current_reduction.py": "e9a907c42f83662ade7a9ce8baba55a3c0e880c99ac5480b578beb6e381738e9",
+    "experiments/balanced_dirac_response.py": "c95d8b95a9d6069e8d9b910cf539a06f81a061b7d88814f5e3adbd2ca1b86911",
+    "experiments/spatial_dirac_mode_checks.py": "116a9f6d0f3cbcf9ee2fbe7a762e09c113194a07591191dd6663f5bcb8364552"
+  }
+}

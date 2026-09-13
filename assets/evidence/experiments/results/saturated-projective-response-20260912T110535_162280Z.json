@@ -1,0 +1,189 @@
+{
+  "timestamp": "2026-09-12T11:05:35.162402+00:00",
+  "status": "exploratory_radial_response",
+  "scope": "Independent radial response about a resolved smooth spatial field.\n\nThe stationary background and response cutoffs are distinct. A nonzero\ngrowth rate is checked with full differential residuals and refined bases.\nAbsence of radial growth does not establish full angular or nonlinear stability.\n",
+  "background_case": {
+    "degree": 12,
+    "physical_depth": 6,
+    "cutoff": 320,
+    "quadrature_order": 1580,
+    "width": 0.001,
+    "mass_scale": 1.0,
+    "energy": 0.9990355108846256,
+    "frequency": 0.9999828805190061,
+    "canonical_norm": 1.0,
+    "odd_norm": 4.889887067169744e-09,
+    "same_holomorphic_probe_visibility": 0.9999828895774675,
+    "scalar_current_range": [
+      6.954685887932272e-11,
+      9.99987094085929
+    ],
+    "stationary_residual": 8.829088424743138e-17,
+    "differential_residual": 3.6293979949805897e-14,
+    "distance_from_previous_resolution": 1.299720662226506e-11,
+    "elapsed_seconds": 10.581852058880031,
+    "continuation": [
+      {
+        "residual": 8.829088424743138e-17,
+        "evaluations": 5
+      }
+    ],
+    "array_key": "case_002"
+  },
+  "background_report": "experiments/results/saturated-projective-continuation-20260912T104839_843074Z.json",
+  "background_report_sha256": "a030bf3837985dd69c8f774ced93d43f7d7b0697c9e62b3730ceae86ef873f56",
+  "background_data_sha256": "f1453a98332300ee2b3fed4f66740f44d4307756c934791c05f18369c0c9bb94",
+  "source_sha256": {
+    "saturated_projective_response.py": "4912247c59b000b96f6a90358e0c5d38383edc37087794becc19e77f864d55b9",
+    "saturated_projective_fields.py": "b4be73bdcdc1c5ade301fd0982f727b466ada2fb83d5a9416a230847387a6022",
+    "cp3_scalar_dirac.py": "4b7477054fedd1aa14c1aba0eb67410ef8d5192c8943a0a8317f4df73ccb2d6d"
+  },
+  "raw_data": "experiments/results/saturated-projective-response-20260912T110535_162280Z.npz",
+  "cases": [
+    {
+      "response_cutoff": 40,
+      "quadrature_order": 1580,
+      "phase_projection_defect": 2.470747153919226e-07,
+      "modes": [
+        {
+          "exponent": [
+            0.006685367789214178,
+            -39.69794686529177
+          ],
+          "compressed_residual": 7.320449561584589e-10,
+          "differential_residual": 0.012605075206599727,
+          "array_prefix": "cutoff_40_mode_0"
+        },
+        {
+          "exponent": [
+            0.006685367789214178,
+            39.69794686529177
+          ],
+          "compressed_residual": 7.320449561584589e-10,
+          "differential_residual": 0.012605075206599727,
+          "array_prefix": "cutoff_40_mode_1"
+        }
+      ],
+      "maximum_growth": 0.006685367789214178,
+      "elapsed_seconds": 0.4956059600226581
+    },
+    {
+      "response_cutoff": 80,
+      "quadrature_order": 1580,
+      "phase_projection_defect": 1.106841595863373e-09,
+      "modes": [
+        {
+          "exponent": [
+            0.006685383928797031,
+            -39.69794799191419
+          ],
+          "compressed_residual": 3.0306327220326756e-13,
+          "differential_residual": 0.0006485212979853336,
+          "array_prefix": "cutoff_80_mode_0"
+        },
+        {
+          "exponent": [
+            0.006685383928797031,
+            39.69794799191419
+          ],
+          "compressed_residual": 3.0306327220326756e-13,
+          "differential_residual": 0.0006485212979853336,
+          "array_prefix": "cutoff_80_mode_1"
+        }
+      ],
+      "maximum_growth": 0.006685383928797031,
+      "elapsed_seconds": 0.8274441519752145
+    },
+    {
+      "response_cutoff": 160,
+      "quadrature_order": 1580,
+      "phase_projection_defect": 3.602889182851936e-12,
+      "modes": [
+        {
+          "exponent": [
+            0.006685383883469956,
+            39.697947993566245
+          ],
+          "compressed_residual": 1.1345831192209388e-12,
+          "differential_residual": 1.3950670592723364e-06,
+          "array_prefix": "cutoff_160_mode_0"
+        },
+        {
+          "exponent": [
+            0.006685383883469956,
+            -39.697947993566245
+          ],
+          "compressed_residual": 1.1345831192209388e-12,
+          "differential_residual": 1.3950670592723364e-06,
+          "array_prefix": "cutoff_160_mode_1"
+        }
+      ],
+      "maximum_growth": 0.006685383883469956,
+      "elapsed_seconds": 3.1030295819509774
+    },
+    {
+      "response_cutoff": 240,
+      "quadrature_order": 1580,
+      "phase_projection_defect": 5.09323262979144e-15,
+      "modes": [
+        {
+          "exponent": [
+            0.0066853838835572756,
+            39.697947993566316
+          ],
+          "compressed_residual": 2.339481662892883e-12,
+          "differential_residual": 4.725438703439677e-09,
+          "array_prefix": "cutoff_240_mode_0"
+        },
+        {
+          "exponent": [
+            0.0066853838835572756,
+            -39.697947993566316
+          ],
+          "compressed_residual": 2.339481662892883e-12,
+          "differential_residual": 4.725438703439677e-09,
+          "array_prefix": "cutoff_240_mode_1"
+        }
+      ],
+      "maximum_growth": 0.0066853838835572756,
+      "elapsed_seconds": 6.881993545917794
+    },
+    {
+      "response_cutoff": 320,
+      "quadrature_order": 1580,
+      "phase_projection_defect": 7.340386237814879e-16,
+      "modes": [
+        {
+          "exponent": [
+            0.006685383883488361,
+            -39.69794799356621
+          ],
+          "compressed_residual": 4.7367067466604934e-12,
+          "differential_residual": 1.2122227752791438e-11,
+          "array_prefix": "cutoff_320_mode_0"
+        },
+        {
+          "exponent": [
+            0.006685383883488361,
+            39.69794799356621
+          ],
+          "compressed_residual": 4.7367067466604934e-12,
+          "differential_residual": 1.2122227752791438e-11,
+          "array_prefix": "cutoff_320_mode_1"
+        }
+      ],
+      "maximum_growth": 0.006685383883488361,
+      "elapsed_seconds": 11.464858568971977
+    }
+  ],
+  "elapsed_seconds": 32.84669734397903,
+  "original_background_report_sha256": "c212a5a3763d3de8f3606047713704a12eece78854a64daabb6ff19af6360049",
+  "dataset": {
+    "path": "experiments/results/saturated-projective-response-20260912T110535_162280Z.npz",
+    "sha256": "d1f7844f3e0363c43c1ccf3d53783e945708aeaca99f87b1192737fb4c7bfe84"
+  },
+  "publication_provenance": {
+    "original_report_sha256": "df2aa1355ad7fe8aa66bef26cfb01916824eb59aed825f1e12efc779b281f24c",
+    "changes": "Local file locations are replaced with portable artifact references. Calculation values and source-code fingerprints are unchanged."
+  }
+}

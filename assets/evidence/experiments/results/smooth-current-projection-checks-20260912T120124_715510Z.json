@@ -1,0 +1,146 @@
+{
+  "timestamp": "2026-09-12T12:01:24.574626+00:00",
+  "scope": "Exact current weights of a smooth coherent scalar projection.\n\nThe product calculation and partial-current calculation are independent.\nThis verifies the projection algebra and its canonical normalization; it\ndoes not derive the different shell weights of the inverse mass action.\n",
+  "projection": [
+    {
+      "degrees": [
+        0,
+        3
+      ],
+      "depth": 2,
+      "active_slots": 3,
+      "signed_integral": 0.0401524078991192,
+      "relative_error": 1.249000902703301e-16
+    },
+    {
+      "degrees": [
+        1,
+        2
+      ],
+      "depth": 3,
+      "active_slots": 4,
+      "signed_integral": 0.017953003806021245,
+      "relative_error": 1.0408340855860843e-16
+    },
+    {
+      "degrees": [
+        2,
+        2
+      ],
+      "depth": 2,
+      "active_slots": 3,
+      "signed_integral": 0.0185937640073665,
+      "relative_error": 1.491862189340054e-16
+    },
+    {
+      "degrees": [
+        2,
+        4
+      ],
+      "depth": 2,
+      "active_slots": 3,
+      "signed_integral": 0.08626152883832285,
+      "relative_error": 9.71445146547012e-17
+    },
+    {
+      "degrees": [
+        3,
+        5
+      ],
+      "depth": 6,
+      "active_slots": 2,
+      "signed_integral": -0.4366151970691655,
+      "relative_error": 6.661338147750939e-16
+    },
+    {
+      "degrees": [
+        12,
+        34
+      ],
+      "depth": 6,
+      "active_slots": 2,
+      "signed_integral": 3.906222869855548,
+      "relative_error": 4.2064422107743034e-15
+    }
+  ],
+  "weights": [
+    {
+      "degree": 12,
+      "depth": 6,
+      "desired_sum": 18564,
+      "actual_coherent_sum": 580.3917241379311,
+      "smooth_mean_order": 6.0,
+      "desired_mean_order": 10.285714285714286
+    },
+    {
+      "degree": 34,
+      "depth": 6,
+      "desired_sum": 3838380,
+      "actual_coherent_sum": 79530.89615716934,
+      "smooth_mean_order": 17.0,
+      "desired_mean_order": 29.142857142857142
+    }
+  ],
+  "canonical_copy_lift": [
+    {
+      "degree": 2,
+      "depth": 2,
+      "kinetic_multiplier": 6,
+      "canonical_quartic_source": 0.023116666666666664,
+      "canonical_root_source": 0.11
+    },
+    {
+      "degree": 4,
+      "depth": 3,
+      "kinetic_multiplier": 35,
+      "canonical_quartic_source": 0.003962857142857143,
+      "canonical_root_source": 0.11
+    },
+    {
+      "degree": 12,
+      "depth": 6,
+      "kinetic_multiplier": 18564,
+      "canonical_quartic_source": 7.4714501185089415e-06,
+      "canonical_root_source": 0.11
+    },
+    {
+      "degree": 34,
+      "depth": 6,
+      "kinetic_multiplier": 3838380,
+      "canonical_quartic_source": 3.6135036135036134e-08,
+      "canonical_root_source": 0.11
+    }
+  ],
+  "real_rotation_bounds": [
+    {
+      "depth": 5,
+      "degree": 12,
+      "lower_bound": 27.502222222222223,
+      "tower_mean": 48.23155428200522
+    },
+    {
+      "depth": 5,
+      "degree": 34,
+      "lower_bound": 352.5762400489896,
+      "tower_mean": 597.6029093491453
+    },
+    {
+      "depth": 6,
+      "degree": 12,
+      "lower_bound": 32.88077259063721,
+      "tower_mean": 59.40643787384033
+    },
+    {
+      "depth": 6,
+      "degree": 34,
+      "lower_bound": 587.3492385322528,
+      "tower_mean": 1023.8361270835996
+    }
+  ],
+  "checks": 345,
+  "source_sha256": {
+    "smooth_current_projection_checks.py": "a97c53262f5ffd260a851b809868e8eb020435bbc870534d72788b8a9a68e414",
+    "graded_current_tower.py": "cf0f72cb6d078df086ec594550155d6518b00255ed46a16d669790edb093a602",
+    "coherent_mode_algebra.py": "4fbcbb6a1fbaa5a1a7de387746eda4d00f69fe22bbdb1e906c8795f8bb786dff"
+  }
+}
