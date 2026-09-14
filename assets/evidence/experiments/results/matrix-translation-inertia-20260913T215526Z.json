@@ -1,0 +1,35 @@
+{
+  "timestamp": "20260913T215526Z",
+  "scope": "Full reciprocal translation response about a solved radial matrix core.\n\nThe inverse Hessian is restricted to the complete angular sector driven by\ntranslation. A localized boost residual removes the uniform background's\nboost exactly. The remaining normal response decays at spatial infinity.\nFinite radial bases require refinement, especially for its algebraic tail.\n",
+  "result": {
+    "frequency_base": 30.0,
+    "strength": 0.1,
+    "count": 64,
+    "kinetic_hermitian": 1.3174332559778772e-11,
+    "angular_closure": 2.0462208508148046e-13,
+    "local_hermitian": 1.88627780229259e-14,
+    "reality_error": 4.4296388720906425e-33,
+    "hessian_hermitian": 1.3174856496191567e-11,
+    "solve_residual": 1.535023223943403e-16,
+    "target_norm": 0.9999999999988181,
+    "kinematic_extra": 9.008227321853919e-05,
+    "responding_deformation_inertia": -3.423482977819862e-06,
+    "scaled_inertia_above_base_frequency_norm": 0.0018434341772231109,
+    "scaled_inertia_minus_selected_frequency_norm": 0.00519952741444316,
+    "inertia_coefficient_at_strength": 0.01843434177223111
+  },
+  "radial_length": 0.65,
+  "source_core": {
+    "path": "spatial-matrix-core-checks-20260913T212442Z.json",
+    "sha256": "600ec95eb272c65fa1a0f40bde6442e5655d6b1ddc5b48b3965862ed7a74a96d"
+  },
+  "sources": {
+    "matrix_translation_inertia.py": "a54593b66f903a9e8cd0131bc895dd467dd0ab9b1a52f808952703fde2d70ddc",
+    "matrix_translation_sector.py": "2f69dcec76b412e1785fa8d35af20e1311c3091514eef3a9b9d8679cb1d7844a",
+    "localized_radial_galerkin.py": "90da671d22c91761fd55ef161c393bd892302948a90e6bcae7dbf374df2eb89e"
+  },
+  "raw_data": {
+    "path": "matrix-translation-inertia-20260913T215526Z.npz",
+    "sha256": "a45eaf156c5529455808729a5c1489a43e09fb1041c68c19656f080a76320a89"
+  }
+}

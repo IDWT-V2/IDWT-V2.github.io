@@ -1,0 +1,161 @@
+{
+  "timestamp": "20260913T202335Z",
+  "scope": "Independent radial boundary solution for the specified smooth binding-only source at phase frequency .2, with its complete energy and conserved norm. It is not a physical particle assignment or a full stability result.",
+  "checks": [
+    {
+      "name": "initial: differential residual",
+      "error": 9.987563678739997e-09,
+      "tolerance": 3e-08,
+      "passed": true
+    },
+    {
+      "name": "initial: boundary residual",
+      "error": 1.5270103616663822e-21,
+      "tolerance": 2e-09,
+      "passed": true
+    },
+    {
+      "name": "initial: negative energy of this positive phase-frequency source",
+      "error": 0.0,
+      "tolerance": 0.5,
+      "passed": true
+    },
+    {
+      "name": "refined: differential residual",
+      "error": 1.996007813812256e-09,
+      "tolerance": 3e-08,
+      "passed": true
+    },
+    {
+      "name": "refined: boundary residual",
+      "error": 8.470329472543003e-22,
+      "tolerance": 2e-09,
+      "passed": true
+    },
+    {
+      "name": "refined: negative energy of this positive phase-frequency source",
+      "error": 0.0,
+      "tolerance": 0.5,
+      "passed": true
+    },
+    {
+      "name": "lower frequency: differential residual",
+      "error": 1.998935028646623e-09,
+      "tolerance": 3e-08,
+      "passed": true
+    },
+    {
+      "name": "lower frequency: boundary residual",
+      "error": 1.197885481783886e-21,
+      "tolerance": 2e-09,
+      "passed": true
+    },
+    {
+      "name": "lower frequency: negative energy of this positive phase-frequency source",
+      "error": 0.0,
+      "tolerance": 0.5,
+      "passed": true
+    },
+    {
+      "name": "upper frequency: differential residual",
+      "error": 1.9982256816609334e-09,
+      "tolerance": 3e-08,
+      "passed": true
+    },
+    {
+      "name": "upper frequency: boundary residual",
+      "error": 1.5270103616663822e-21,
+      "tolerance": 2e-09,
+      "passed": true
+    },
+    {
+      "name": "upper frequency: negative energy of this positive phase-frequency source",
+      "error": 0.0,
+      "tolerance": 0.5,
+      "passed": true
+    },
+    {
+      "name": "norm: boundary and tolerance refinement",
+      "error": 6.037806921099786e-10,
+      "tolerance": 2e-07,
+      "passed": true
+    },
+    {
+      "name": "energy: boundary and tolerance refinement",
+      "error": 3.133552445300225e-11,
+      "tolerance": 2e-07,
+      "passed": true
+    },
+    {
+      "name": "rms: boundary and tolerance refinement",
+      "error": 2.056198322719638e-09,
+      "tolerance": 2e-07,
+      "passed": true
+    },
+    {
+      "name": "stationary family identity dE/domega=omega*dQ/domega",
+      "error": 5.391137364307852e-08,
+      "tolerance": 2e-06,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "results": [
+    {
+      "frequency": 0.2,
+      "norm": 0.841517343288438,
+      "energy": -0.01715165923147661,
+      "kinetic": -1.1127307679286302,
+      "rms": 1.0832406801676369,
+      "residual": 9.987563678739997e-09,
+      "boundary": 1.5270103616663822e-21,
+      "nodes": 819
+    },
+    {
+      "frequency": 0.2,
+      "norm": 0.8415173438922187,
+      "energy": -0.017151659200141084,
+      "kinetic": -1.1127307676291298,
+      "rms": 1.0832406822238352,
+      "residual": 1.996007813812256e-09,
+      "boundary": 8.470329472543003e-22,
+      "nodes": 1221
+    },
+    {
+      "frequency": 0.1998,
+      "norm": 0.8416520623906188,
+      "energy": -0.017124728974956614,
+      "kinetic": -1.1117208660014022,
+      "rms": 1.0834818327286482,
+      "residual": 1.998935028646623e-09,
+      "boundary": 1.197885481783886e-21,
+      "nodes": 1220
+    },
+    {
+      "frequency": 0.20020000000000002,
+      "norm": 0.8413827881367473,
+      "energy": -0.01717858380416638,
+      "kinetic": -1.113740507692312,
+      "rms": 1.0829995750962764,
+      "residual": 1.9982256816609334e-09,
+      "boundary": 1.5270103616663822e-21,
+      "nodes": 1221
+    }
+  ],
+  "energy_derivative": -0.13463707302441458,
+  "norm_derivative": -0.6731856346789411,
+  "sources": {
+    "binding_matching_checks.py": "97a5c6889df13d7f118c4347f1aac64278497e4e0ea62d471e60c71a6d1eea6f",
+    "binding_matching.py": "9728ffe7a1fdf81b977c5ed63b2b059a9a62b8990799a017b76f6322d96c1dc3",
+    "binding_branch.py": "904dc31ca4e4c0ee229cf3f2fdd29fc3237eb27ec5a40a9d990119324e65d27d",
+    "binding_only.py": "8e5dc2076f3652856c1d0bd65222b5b43116747b86d5fe05178e84c7dd7b2341"
+  },
+  "input_data": {
+    "path": "binding-branch-20260913T201559Z.npz",
+    "sha256": "7c080260bac41e37d68c445f91e1dc1df25cdee8523f817cc14d2bfca6b6b420"
+  },
+  "raw_data": {
+    "path": "binding-matching-20260913T202335Z.npz",
+    "sha256": "73a34df09f94bbbd12eb37e287ff7aacb9c4ca084f81a6974d3da0a7d7385a97"
+  }
+}

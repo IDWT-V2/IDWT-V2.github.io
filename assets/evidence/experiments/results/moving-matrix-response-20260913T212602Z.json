@@ -1,0 +1,124 @@
+{
+  "timestamp": "20260913T212602Z",
+  "scope": "Leading translation response of a scalar core in the same-field background.\n\nThe coefficient calculated here multiplies g*D. It is the first correction\nin inverse ambient density at fixed omega_0=g*b and fixed target grade.\nThe background is kept in its original frame. This is a conditional\neffective-action calculation, not full nonlinear particle stability.\n",
+  "checks": [
+    {
+      "name": "normalized angular second moment",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-14,
+      "passed": true
+    },
+    {
+      "name": "6001: physical density normalization",
+      "error": 8.534284390293578e-13,
+      "tolerance": 2e-09,
+      "passed": true
+    },
+    {
+      "name": "6001: independent Fourier Parseval identity",
+      "error": 8.218425939787721e-14,
+      "tolerance": 3e-09,
+      "passed": true
+    },
+    {
+      "name": "6001: independent moving-action second derivative",
+      "error": 1.1925190002148867e-11,
+      "tolerance": 3e-08,
+      "passed": true
+    },
+    {
+      "name": "10001: physical density normalization",
+      "error": 8.533174167268953e-13,
+      "tolerance": 2e-09,
+      "passed": true
+    },
+    {
+      "name": "10001: independent Fourier Parseval identity",
+      "error": 3.837208328860697e-15,
+      "tolerance": 3e-09,
+      "passed": true
+    },
+    {
+      "name": "10001: independent moving-action second derivative",
+      "error": 1.2578316860301086e-11,
+      "tolerance": 3e-08,
+      "passed": true
+    },
+    {
+      "name": "spatial and Fourier refinement of static correction",
+      "error": 2.0997092953223273e-14,
+      "tolerance": 2e-09,
+      "passed": true
+    },
+    {
+      "name": "spatial and Fourier refinement of inertia correction",
+      "error": 4.076253223850301e-14,
+      "tolerance": 2e-09,
+      "passed": true
+    },
+    {
+      "name": "independent position-space screened energy",
+      "error": 5.980979600472836e-14,
+      "tolerance": 3e-09,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "results": [
+    {
+      "radial_points": 6001,
+      "momentum_samples": 1201,
+      "momentum_maximum": 40.0,
+      "density_norm": 0.9999999999991466,
+      "static_energy": 0.01567715741911118,
+      "additional_medium_inertia": 0.004606118185654792,
+      "inertia": 0.020283275604765973,
+      "direct_moving_derivative": 0.020283275592840783,
+      "speed_estimates": [
+        0.02028608235114457,
+        0.020283977138976783,
+        0.020283450979374784
+      ],
+      "small_momentum_response_speed": 0.7071067811865476
+    },
+    {
+      "radial_points": 10001,
+      "momentum_samples": 2001,
+      "momentum_maximum": 40.0,
+      "density_norm": 0.9999999999991467,
+      "static_energy": 0.015677157419090183,
+      "additional_medium_inertia": 0.004606118185635028,
+      "inertia": 0.02028327560472521,
+      "direct_moving_derivative": 0.020283275592146894,
+      "speed_estimates": [
+        0.02028608235107518,
+        0.020283977138838005,
+        0.020283450978819673
+      ],
+      "small_momentum_response_speed": 0.7071067811865476
+    }
+  ],
+  "static_position": 0.015677157419030373,
+  "core_parameters": {
+    "depth": 6,
+    "delta": 0.0001,
+    "p": 5.238913288673056,
+    "shape_norm": 11.539282371773758,
+    "g": 7.875370789618523,
+    "current_scale": 8.666050173502126e-06,
+    "rms_radius": 1.2766585981150327,
+    "nodes": 2903,
+    "collocation": 1.995279473977291e-10
+  },
+  "normal_phase": 2.0,
+  "frequency_unit": 1.0,
+  "sources": {
+    "moving_matrix_response.py": "19800521032b4232c21d3a4cd9d830f4f711e047d8cdf96d5f0cb1c1154dbf59",
+    "smooth_current_core.py": "f5d4f787f3f7e296adb4096f398896b9f8e07df8bc1e6b9b952934cc040157ef",
+    "scaled_gap_core.py": "1a4462a66671fab84f648670fb4f550556d1402d9f1ab6af8410cefa2ca887c9"
+  },
+  "raw_data": {
+    "path": "moving-matrix-response-20260913T212602Z.npz",
+    "sha256": "7bb98cccf8f7b49626aa359c7d13e78d99b9bd2586f8921437c53dcf80176a7c"
+  }
+}

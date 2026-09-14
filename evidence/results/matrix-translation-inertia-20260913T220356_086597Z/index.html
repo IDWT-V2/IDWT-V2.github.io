@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>matrix-translation-inertia-20260913T220356_086597Z.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/matrix-translation-inertia-20260913T220356_086597Z/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="matrix-translation-inertia-20260913T220356_086597Z.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/matrix-translation-inertia-20260913T220356_086597Z/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="matrix-translation-inertia-20260913T220356_086597Z.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>matrix-translation-inertia-20260913T220356_086597Z.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/matrix-translation-inertia-20260913T220356_086597Z.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">timestamp</th><td>20260913T220356_086597Z</td></tr><tr><th scope="row">scope</th><td>Full reciprocal translation response about a solved radial matrix core.
+
+The inverse Hessian is restricted to the complete angular sector driven by
+translation. A localized boost residual removes the uniform background&#39;s
+boost exactly. The remaining normal response decays at spatial infinity.
+Finite radial bases require refinement, especially for its algebraic tail.
+</td></tr><tr><th scope="row">radial_length</th><td>0.65</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;timestamp&quot;: &quot;20260913T220356_086597Z&quot;,
+  &quot;scope&quot;: &quot;Full reciprocal translation response about a solved radial matrix core.\n\nThe inverse Hessian is restricted to the complete angular sector driven by\ntranslation. A localized boost residual removes the uniform background&#39;s\nboost exactly. The remaining normal response decays at spatial infinity.\nFinite radial bases require refinement, especially for its algebraic tail.\n&quot;,
+  &quot;result&quot;: {
+    &quot;frequency_base&quot;: 18564.0,
+    &quot;strength&quot;: 0.1,
+    &quot;count&quot;: 48,
+    &quot;kinetic_hermitian&quot;: 7.0034272515082485e-12,
+    &quot;angular_closure&quot;: 1.27951392059622e-10,
+    &quot;local_hermitian&quot;: 6.752653646667704e-12,
+    &quot;reality_error&quot;: 3.4666738998970245e-33,
+    &quot;hessian_hermitian&quot;: 5.5984020785467876e-11,
+    &quot;solve_residual&quot;: 5.916974743767834e-18,
+    &quot;target_norm&quot;: 0.9999999999988183,
+    &quot;kinematic_extra&quot;: 1.455756554546594e-07,
+    &quot;responding_deformation_inertia&quot;: -5.532604976688148e-09,
+    &quot;deformation_inertia_from_direct_pairing&quot;: -5.532322698227164e-09,
+    &quot;inertia_pairing_identity_error&quot;: 2.8227846098429917e-13,
+    &quot;target_current_boost_pairing&quot;: 1.852884572118782e-22,
+    &quot;scaled_inertia_above_base_frequency_norm&quot;: 0.001843429457920277,
+    &quot;scaled_inertia_minus_selected_frequency_norm&quot;: 0.005199518378146117,
+    &quot;inertia_coefficient_at_strength&quot;: 0.01843429457920277
+  },
+  &quot;radial_length&quot;: 0.65,
+  &quot;source_core&quot;: {
+    &quot;path&quot;: &quot;spatial-matrix-core-checks-20260913T212442Z.json&quot;,
+    &quot;sha256&quot;: &quot;600ec95eb272c65fa1a0f40bde6442e5655d6b1ddc5b48b3965862ed7a74a96d&quot;
+  },
+  &quot;sources&quot;: {
+    &quot;matrix_translation_inertia.py&quot;: &quot;4b78f7b0ee5fa6e2150e31b112196e683ad7c78f0a3e26aeabc38ac0e79e6792&quot;,
+    &quot;matrix_translation_sector.py&quot;: &quot;2f69dcec76b412e1785fa8d35af20e1311c3091514eef3a9b9d8679cb1d7844a&quot;,
+    &quot;localized_radial_galerkin.py&quot;: &quot;90da671d22c91761fd55ef161c393bd892302948a90e6bcae7dbf374df2eb89e&quot;
+  },
+  &quot;raw_data&quot;: {
+    &quot;path&quot;: &quot;matrix-translation-inertia-20260913T220356_086597Z.npz&quot;,
+    &quot;sha256&quot;: &quot;87f987ea023959a79011e5d0abf338499a1a48177dd16f1e25ecc833a52c1c63&quot;
+  }
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "timestamp": "20260913T221553_961450Z",
+  "scope": "Full reciprocal translation response about a solved radial matrix core.\n\nThe inverse Hessian is restricted to the complete angular sector driven by\ntranslation. A localized boost residual removes the uniform background's\nboost exactly. The remaining normal response decays at spatial infinity.\nFinite radial bases require refinement, especially for its algebraic tail.\n",
+  "result": {
+    "frequency_base": 3838380.0,
+    "strength": 0.1,
+    "count": 64,
+    "kinetic_hermitian": 1.3174332559778772e-11,
+    "angular_closure": 2.326909033330039e-08,
+    "local_hermitian": 1.3170890159662633e-09,
+    "reality_error": 5.7777898331617076e-34,
+    "hessian_hermitian": 1.3576072681372154e-08,
+    "solve_residual": 4.302745513111535e-19,
+    "target_norm": 0.9999999999988182,
+    "kinematic_extra": 7.040629367919985e-10,
+    "responding_deformation_inertia": -2.675726624644924e-11,
+    "deformation_inertia_from_direct_pairing": -2.6714785504068634e-11,
+    "inertia_pairing_identity_error": 4.2480742380606395e-14,
+    "target_current_boost_pairing": 9.26442286059391e-23,
+    "scaled_inertia_above_base_frequency_norm": 0.0018434346478454992,
+    "scaled_inertia_minus_selected_frequency_norm": 0.005199513079417251,
+    "inertia_coefficient_at_strength": 0.01843434647845499
+  },
+  "radial_length": 0.65,
+  "source_core": {
+    "path": "matrix-core-family-20260913T220533_796597Z.json",
+    "sha256": "da14ae3a675874e06aa36c0eb9163671881577ca9de7e1130f01c6a63431f337"
+  },
+  "sources": {
+    "matrix_translation_inertia.py": "4b78f7b0ee5fa6e2150e31b112196e683ad7c78f0a3e26aeabc38ac0e79e6792",
+    "matrix_translation_sector.py": "2f69dcec76b412e1785fa8d35af20e1311c3091514eef3a9b9d8679cb1d7844a",
+    "localized_radial_galerkin.py": "90da671d22c91761fd55ef161c393bd892302948a90e6bcae7dbf374df2eb89e"
+  },
+  "raw_data": {
+    "path": "matrix-translation-inertia-20260913T221553_961450Z.npz",
+    "sha256": "08f299c88d223fc30291417c4d6f740fb358228d0eecb240a5dd79ab1f960fc4"
+  }
+}

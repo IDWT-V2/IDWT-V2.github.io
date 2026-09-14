@@ -1,0 +1,72 @@
+{
+  "timestamp": "20260913T213206Z",
+  "scope": "Independent continuum first frequency correction at fixed target norm.",
+  "checks": [
+    {
+      "name": "continuum frequency-slope refinement",
+      "error": 3.2856403014980273e-10,
+      "tolerance": 2e-07,
+      "passed": true
+    },
+    {
+      "name": "continuum radius-derivative refinement",
+      "error": 1.352927936348891e-09,
+      "tolerance": 2e-07,
+      "passed": true
+    },
+    {
+      "name": "full norm derivative constraint",
+      "error": 2.468886576857516e-12,
+      "tolerance": 2e-09,
+      "passed": true
+    },
+    {
+      "name": "complete asymptotic and origin boundary equations",
+      "error": 4.235164736271502e-22,
+      "tolerance": 2e-10,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "results": [
+    {
+      "outer": 24.0,
+      "tolerance": 2e-08,
+      "first_frequency_slope": -0.042173443054085935,
+      "core_norm": 0.9999999999991468,
+      "norm_derivative": -1.3476257797039372e-10,
+      "radius": 1.2766585981094936,
+      "radius_derivative": 0.3238079020672827,
+      "residual": 1.9921042036870775e-08,
+      "normal_residual": 1.9666260226009552e-08,
+      "boundary": 4.365507887384641e-22,
+      "nodes": 821,
+      "binding_g": 7.875370789618523,
+      "current_scale": 8.666050173502126e-06
+    },
+    {
+      "outer": 32.0,
+      "tolerance": 2e-10,
+      "first_frequency_slope": -0.042173442725521905,
+      "core_norm": 0.9999999999991563,
+      "norm_derivative": -2.468886576857516e-12,
+      "radius": 1.2766585981094931,
+      "radius_derivative": 0.3238079007143548,
+      "residual": 1.999475224112068e-10,
+      "normal_residual": 1.993151306596614e-10,
+      "boundary": 4.235164736271502e-22,
+      "nodes": 3162,
+      "binding_g": 7.875370789618523,
+      "current_scale": 8.666050173502126e-06
+    }
+  ],
+  "sources": {
+    "spatial_matrix_first_order.py": "753bc51930897d94f3f817ed7d90942800e6f63ec2435974859d5b1db6ce0b1b",
+    "smooth_current_core.py": "f5d4f787f3f7e296adb4096f398896b9f8e07df8bc1e6b9b952934cc040157ef",
+    "scaled_gap_core.py": "1a4462a66671fab84f648670fb4f550556d1402d9f1ab6af8410cefa2ca887c9"
+  },
+  "raw_data": {
+    "path": "spatial-matrix-first-order-20260913T213206Z.npz",
+    "sha256": "f215ca0cf013451d806d79193f4946b83279ae8ae84372ca343ae1a2aefbc42e"
+  }
+}
