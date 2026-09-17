@@ -1,0 +1,519 @@
+{
+  "scope": "Two refined growing modes in the complete rotationally invariant wave/frame channel. The frame has positive kinetic energy and no alignment potential. This does not exclude other same-field frame actions.",
+  "source_hashes": {
+    "experiments/holomorphic_frame_checks.py": "c18a14d7d7c1205c94c8170d4b29920bfacf637fabba075e8c75a73619f120a8",
+    "experiments/holomorphic_radial_frame.py": "3b3f0e7de5396edf285b0707fd22f2991746c00a5da520fa28baae2825a26720",
+    "experiments/holomorphic_core_binding.py": "8b475b8ef47dac8b2afe60600335adb90ef795bbcee350ce4f6eb0e462b98d21",
+    "experiments/polarization_bound_core.py": "b6428084852d678707e5dbc89ccbba03fb2415850a46d649694759890081e45c",
+    "experiments/localized_current_model.py": "bea8db856f55959328e92d99c089ed26db3b35e717533c67a14c9444d5f1a2e4"
+  },
+  "checks": [
+    {
+      "name": "full discrete eigen-equation",
+      "error": 6.329007633049734e-15,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 3,
+      "cells": 160,
+      "outer": 20.0
+    },
+    {
+      "name": "resolved positive radial growth",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 3,
+      "cells": 160
+    },
+    {
+      "name": "resolved nonoscillatory control",
+      "error": 0.0,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 3,
+      "cells": 160
+    },
+    {
+      "name": "smooth spatial mode, not grid alternation",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 3,
+      "cells": 160
+    },
+    {
+      "name": "full discrete eigen-equation",
+      "error": 2.2871822737945817e-14,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 3,
+      "cells": 320,
+      "outer": 20.0
+    },
+    {
+      "name": "resolved positive radial growth",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 3,
+      "cells": 320
+    },
+    {
+      "name": "resolved nonoscillatory control",
+      "error": 0.0,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 3,
+      "cells": 320
+    },
+    {
+      "name": "smooth spatial mode, not grid alternation",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 3,
+      "cells": 320
+    },
+    {
+      "name": "radial refinement or outer-domain agreement",
+      "error": 0.0010933229719400916,
+      "tolerance": 0.012,
+      "passed": true,
+      "d": 3,
+      "cells": 320,
+      "outer": 20.0
+    },
+    {
+      "name": "full discrete eigen-equation",
+      "error": 7.786466316173124e-14,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 3,
+      "cells": 640,
+      "outer": 20.0
+    },
+    {
+      "name": "resolved positive radial growth",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 3,
+      "cells": 640
+    },
+    {
+      "name": "resolved nonoscillatory control",
+      "error": 0.0,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 3,
+      "cells": 640
+    },
+    {
+      "name": "smooth spatial mode, not grid alternation",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 3,
+      "cells": 640
+    },
+    {
+      "name": "radial refinement or outer-domain agreement",
+      "error": 0.0002802286774605811,
+      "tolerance": 0.012,
+      "passed": true,
+      "d": 3,
+      "cells": 640,
+      "outer": 20.0
+    },
+    {
+      "name": "full discrete eigen-equation",
+      "error": 4.332237823617442e-14,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 3,
+      "cells": 640,
+      "outer": 28.0
+    },
+    {
+      "name": "resolved positive radial growth",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 3,
+      "cells": 640
+    },
+    {
+      "name": "resolved nonoscillatory control",
+      "error": 0.0,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 3,
+      "cells": 640
+    },
+    {
+      "name": "smooth spatial mode, not grid alternation",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 3,
+      "cells": 640
+    },
+    {
+      "name": "radial refinement or outer-domain agreement",
+      "error": 9.025491931846652e-05,
+      "tolerance": 0.012,
+      "passed": true,
+      "d": 3,
+      "cells": 640,
+      "outer": 28.0
+    },
+    {
+      "name": "full discrete eigen-equation",
+      "error": 4.272095751876931e-15,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 4,
+      "cells": 160,
+      "outer": 20.0
+    },
+    {
+      "name": "resolved positive radial growth",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 4,
+      "cells": 160
+    },
+    {
+      "name": "resolved nonoscillatory control",
+      "error": 0.0,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 4,
+      "cells": 160
+    },
+    {
+      "name": "smooth spatial mode, not grid alternation",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 4,
+      "cells": 160
+    },
+    {
+      "name": "full discrete eigen-equation",
+      "error": 1.5091765337669995e-14,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 4,
+      "cells": 320,
+      "outer": 20.0
+    },
+    {
+      "name": "resolved positive radial growth",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 4,
+      "cells": 320
+    },
+    {
+      "name": "resolved nonoscillatory control",
+      "error": 0.0,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 4,
+      "cells": 320
+    },
+    {
+      "name": "smooth spatial mode, not grid alternation",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 4,
+      "cells": 320
+    },
+    {
+      "name": "radial refinement or outer-domain agreement",
+      "error": 0.00031848796404165824,
+      "tolerance": 0.012,
+      "passed": true,
+      "d": 4,
+      "cells": 320,
+      "outer": 20.0
+    },
+    {
+      "name": "full discrete eigen-equation",
+      "error": 6.818882479062829e-14,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 4,
+      "cells": 640,
+      "outer": 20.0
+    },
+    {
+      "name": "resolved positive radial growth",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 4,
+      "cells": 640
+    },
+    {
+      "name": "resolved nonoscillatory control",
+      "error": 0.0,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 4,
+      "cells": 640
+    },
+    {
+      "name": "smooth spatial mode, not grid alternation",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 4,
+      "cells": 640
+    },
+    {
+      "name": "radial refinement or outer-domain agreement",
+      "error": 7.943964067513853e-05,
+      "tolerance": 0.012,
+      "passed": true,
+      "d": 4,
+      "cells": 640,
+      "outer": 20.0
+    },
+    {
+      "name": "full discrete eigen-equation",
+      "error": 3.636316869764507e-14,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 4,
+      "cells": 640,
+      "outer": 28.0
+    },
+    {
+      "name": "resolved positive radial growth",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 4,
+      "cells": 640
+    },
+    {
+      "name": "resolved nonoscillatory control",
+      "error": 0.0,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 4,
+      "cells": 640
+    },
+    {
+      "name": "smooth spatial mode, not grid alternation",
+      "error": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "d": 4,
+      "cells": 640
+    },
+    {
+      "name": "radial refinement or outer-domain agreement",
+      "error": 2.5495565214361804e-05,
+      "tolerance": 0.012,
+      "passed": true,
+      "d": 4,
+      "cells": 640,
+      "outer": 28.0
+    }
+  ],
+  "records": [
+    {
+      "depth": 3,
+      "omega": 1.0,
+      "cells": 160,
+      "outer": 20.0,
+      "growth": 0.512997868589222,
+      "oscillation": 0.0,
+      "residual": 6.329007633049734e-15,
+      "mean_radius": 1.5788385280061719,
+      "derivative_norm": 1.0530968628623372,
+      "block_norms": [
+        0.0446014836191926,
+        0.015237985030024923,
+        0.003508803045171731,
+        0.005619025703163197,
+        0.0332321349669134,
+        0.027751228352880325,
+        0.08769904029004555,
+        0.0009460035078020138,
+        0.6186073662903157,
+        0.16279692919449196
+      ]
+    },
+    {
+      "depth": 3,
+      "omega": 1.0,
+      "cells": 320,
+      "outer": 20.0,
+      "growth": 0.5119045456172819,
+      "oscillation": 0.0,
+      "residual": 2.2871822737945817e-14,
+      "mean_radius": 1.5855978467647815,
+      "derivative_norm": 1.0690562195220175,
+      "block_norms": [
+        0.043722422274902216,
+        0.014909010062177675,
+        0.0034324139908104676,
+        0.0055404375001980415,
+        0.033081812831338646,
+        0.02769193133464047,
+        0.08771954105914882,
+        0.0009765318855347117,
+        0.6203622810856465,
+        0.16256361797560184
+      ]
+    },
+    {
+      "depth": 3,
+      "omega": 1.0,
+      "cells": 640,
+      "outer": 20.0,
+      "growth": 0.5116243169398214,
+      "oscillation": 0.0,
+      "residual": 7.786466316173124e-14,
+      "mean_radius": 1.5873005497716342,
+      "derivative_norm": 1.0780339356534177,
+      "block_norms": [
+        0.043506226390839765,
+        0.014827615497193556,
+        0.0034135167843359652,
+        0.00552088869461993,
+        0.03304380015206209,
+        0.027676557798254658,
+        0.08772308643230364,
+        0.000984118216668592,
+        0.6208031136174443,
+        0.1625010764162772
+      ]
+    },
+    {
+      "depth": 3,
+      "omega": 1.0,
+      "cells": 640,
+      "outer": 28.0,
+      "growth": 0.5117145718591398,
+      "oscillation": 0.0,
+      "residual": 4.332237823617442e-14,
+      "mean_radius": 1.5867534032904764,
+      "derivative_norm": 1.0743472298788894,
+      "block_norms": [
+        0.04357547595440554,
+        0.014853707868909452,
+        0.0034195744591479014,
+        0.00552715995712348,
+        0.0330560211207051,
+        0.02768151609606876,
+        0.08772201577271391,
+        0.0009816847949442268,
+        0.6206615088088107,
+        0.16252133516717185
+      ]
+    },
+    {
+      "depth": 4,
+      "omega": 15.0,
+      "cells": 160,
+      "outer": 20.0,
+      "growth": 1.0862611366059172,
+      "oscillation": 0.0,
+      "residual": 4.272095751876931e-15,
+      "mean_radius": 1.4165647560684669,
+      "derivative_norm": 1.2197974620171612,
+      "block_norms": [
+        0.039160413979054856,
+        0.2944995998219326,
+        0.004492091278645234,
+        0.001085076533646465,
+        0.015503607231786103,
+        0.07457000201710054,
+        0.0015459544191644085,
+        0.0007492696928712028,
+        0.26073558039413036,
+        0.3076584046316684
+      ]
+    },
+    {
+      "depth": 4,
+      "omega": 15.0,
+      "cells": 320,
+      "outer": 20.0,
+      "growth": 1.0859426486418755,
+      "oscillation": 0.0,
+      "residual": 1.5091765337669995e-14,
+      "mean_radius": 1.4181348559641325,
+      "derivative_norm": 1.220954139147689,
+      "block_norms": [
+        0.03936006616211145,
+        0.2942063165457749,
+        0.00449576972389911,
+        0.001077762710434879,
+        0.015495129267669753,
+        0.07460091335691145,
+        0.0015497311222662136,
+        0.0007493467850589109,
+        0.2608509224224644,
+        0.3076140419034086
+      ]
+    },
+    {
+      "depth": 4,
+      "omega": 15.0,
+      "cells": 640,
+      "outer": 20.0,
+      "growth": 1.0858632090012004,
+      "oscillation": 0.0,
+      "residual": 6.818882479062829e-14,
+      "mean_radius": 1.418526765359124,
+      "derivative_norm": 1.2212505297305183,
+      "block_norms": [
+        0.03940983384571066,
+        0.2941324564788348,
+        0.004496694543960366,
+        0.0010759444007332633,
+        0.015492974614191858,
+        0.07460891719228263,
+        0.001550693727645541,
+        0.0007493599658566241,
+        0.26087990910873177,
+        0.3076032161220519
+      ]
+    },
+    {
+      "depth": 4,
+      "omega": 15.0,
+      "cells": 640,
+      "outer": 28.0,
+      "growth": 1.0858887045664147,
+      "oscillation": 0.0,
+      "residual": 3.636316869764507e-14,
+      "mean_radius": 1.4184009690345687,
+      "derivative_norm": 1.2211543823223288,
+      "block_norms": [
+        0.039393863324324034,
+        0.29415619017833955,
+        0.004496397431915865,
+        0.0010765276898616872,
+        0.015493667859471462,
+        0.07460633613088737,
+        0.0015503839328625429,
+        0.000749356010019788,
+        0.26087059690888986,
+        0.30760668053342766
+      ]
+    }
+  ],
+  "array_file": "holomorphic-frame-20260914T180053_320888Z.npz",
+  "array_sha256": "285a04b3a0983ca7633cdfc9cf85f8f3f4b92bc62b9be15a0ec99a86ac2acb3d",
+  "passed": true
+}

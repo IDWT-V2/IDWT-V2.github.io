@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>holomorphic-frame-20260914T180053_320888Z.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/holomorphic-frame-20260914T180053_320888Z/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="holomorphic-frame-20260914T180053_320888Z.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/holomorphic-frame-20260914T180053_320888Z/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="holomorphic-frame-20260914T180053_320888Z.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>holomorphic-frame-20260914T180053_320888Z.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/holomorphic-frame-20260914T180053_320888Z.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">scope</th><td>Two refined growing modes in the complete rotationally invariant wave/frame channel. The frame has positive kinetic energy and no alignment potential. This does not exclude other same-field frame actions.</td></tr><tr><th scope="row">array_file</th><td>holomorphic-frame-20260914T180053_320888Z.npz</td></tr><tr><th scope="row">array_sha256</th><td>285a04b3a0983ca7633cdfc9cf85f8f3f4b92bc62b9be15a0ec99a86ac2acb3d</td></tr><tr><th scope="row">passed</th><td>true</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;scope&quot;: &quot;Two refined growing modes in the complete rotationally invariant wave/frame channel. The frame has positive kinetic energy and no alignment potential. This does not exclude other same-field frame actions.&quot;,
+  &quot;source_hashes&quot;: {
+    &quot;experiments/holomorphic_frame_checks.py&quot;: &quot;c18a14d7d7c1205c94c8170d4b29920bfacf637fabba075e8c75a73619f120a8&quot;,
+    &quot;experiments/holomorphic_radial_frame.py&quot;: &quot;3b3f0e7de5396edf285b0707fd22f2991746c00a5da520fa28baae2825a26720&quot;,
+    &quot;experiments/holomorphic_core_binding.py&quot;: &quot;8b475b8ef47dac8b2afe60600335adb90ef795bbcee350ce4f6eb0e462b98d21&quot;,
+    &quot;experiments/polarization_bound_core.py&quot;: &quot;b6428084852d678707e5dbc89ccbba03fb2415850a46d649694759890081e45c&quot;,
+    &quot;experiments/localized_current_model.py&quot;: &quot;bea8db856f55959328e92d99c089ed26db3b35e717533c67a14c9444d5f1a2e4&quot;
+  },
+  &quot;checks&quot;: [
+    {
+      &quot;name&quot;: &quot;full discrete eigen-equation&quot;,
+      &quot;error&quot;: 6.329007633049734e-15,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 160,
+      &quot;outer&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;resolved positive radial growth&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 160
+    },
+    {
+      &quot;name&quot;: &quot;resolved nonoscillatory control&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 160
+    },
+    {
+      &quot;name&quot;: &quot;smooth spatial mode, not grid alternation&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 160
+    },
+    {
+      &quot;name&quot;: &quot;full discrete eigen-equation&quot;,
+      &quot;error&quot;: 2.2871822737945817e-14,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 320,
+      &quot;outer&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;resolved positive radial growth&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 320
+    },
+    {
+      &quot;name&quot;: &quot;resolved nonoscillatory control&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 320
+    },
+    {
+      &quot;name&quot;: &quot;smooth spatial mode, not grid alternation&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 320
+    },
+    {
+      &quot;name&quot;: &quot;radial refinement or outer-domain agreement&quot;,
+      &quot;error&quot;: 0.0010933229719400916,
+      &quot;tolerance&quot;: 0.012,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 320,
+      &quot;outer&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;full discrete eigen-equation&quot;,
+      &quot;error&quot;: 7.786466316173124e-14,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;resolved positive radial growth&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;resolved nonoscillatory control&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;smooth spatial mode, not grid alternation&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;radial refinement or outer-domain agreement&quot;,
+      &quot;error&quot;: 0.0002802286774605811,
+      &quot;tolerance&quot;: 0.012,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;full discrete eigen-equation&quot;,
+      &quot;error&quot;: 4.332237823617442e-14,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 28.0
+    },
+    {
+      &quot;name&quot;: &quot;resolved positive radial growth&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;resolved nonoscillatory control&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;smooth spatial mode, not grid alternation&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;radial refinement or outer-domain agreement&quot;,
+      &quot;error&quot;: 9.025491931846652e-05,
+      &quot;tolerance&quot;: 0.012,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 28.0
+    },
+    {
+      &quot;name&quot;: &quot;full discrete eigen-equation&quot;,
+      &quot;error&quot;: 4.272095751876931e-15,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 160,
+      &quot;outer&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;resolved positive radial growth&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 160
+    },
+    {
+      &quot;name&quot;: &quot;resolved nonoscillatory control&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 160
+    },
+    {
+      &quot;name&quot;: &quot;smooth spatial mode, not grid alternation&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 160
+    },
+    {
+      &quot;name&quot;: &quot;full discrete eigen-equation&quot;,
+      &quot;error&quot;: 1.5091765337669995e-14,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 320,
+      &quot;outer&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;resolved positive radial growth&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 320
+    },
+    {
+      &quot;name&quot;: &quot;resolved nonoscillatory control&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 320
+    },
+    {
+      &quot;name&quot;: &quot;smooth spatial mode, not grid alternation&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 320
+    },
+    {
+      &quot;name&quot;: &quot;radial refinement or outer-domain agreement&quot;,
+      &quot;error&quot;: 0.00031848796404165824,
+      &quot;tolerance&quot;: 0.012,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 320,
+      &quot;outer&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;full discrete eigen-equation&quot;,
+      &quot;error&quot;: 6.818882479062829e-14,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;resolved positive radial growth&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;resolved nonoscillatory control&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;smooth spatial mode, not grid alternation&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;radial refinement or outer-domain agreement&quot;,
+      &quot;error&quot;: 7.943964067513853e-05,
+      &quot;tolerance&quot;: 0.012,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;full discrete eigen-equation&quot;,
+      &quot;error&quot;: 3.636316869764507e-14,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 28.0
+    },
+    {
+      &quot;name&quot;: &quot;resolved positive radial growth&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;resolved nonoscillatory control&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;smooth spatial mode, not grid alternation&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0.0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 640
+    },
+    {
+      &quot;name&quot;: &quot;radial refinement or outer-domain agreement&quot;,
+      &quot;error&quot;: 2.5495565214361804e-05,
+      &quot;tolerance&quot;: 0.012,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 28.0
+    }
+  ],
+  &quot;records&quot;: [
+    {
+      &quot;depth&quot;: 3,
+      &quot;omega&quot;: 1.0,
+      &quot;cells&quot;: 160,
+      &quot;outer&quot;: 20.0,
+      &quot;growth&quot;: 0.512997868589222,
+      &quot;oscillation&quot;: 0.0,
+      &quot;residual&quot;: 6.329007633049734e-15,
+      &quot;mean_radius&quot;: 1.5788385280061719,
+      &quot;derivative_norm&quot;: 1.0530968628623372,
+      &quot;block_norms&quot;: [
+        0.0446014836191926,
+        0.015237985030024923,
+        0.003508803045171731,
+        0.005619025703163197,
+        0.0332321349669134,
+        0.027751228352880325,
+        0.08769904029004555,
+        0.0009460035078020138,
+        0.6186073662903157,
+        0.16279692919449196
+      ]
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;omega&quot;: 1.0,
+      &quot;cells&quot;: 320,
+      &quot;outer&quot;: 20.0,
+      &quot;growth&quot;: 0.5119045456172819,
+      &quot;oscillation&quot;: 0.0,
+      &quot;residual&quot;: 2.2871822737945817e-14,
+      &quot;mean_radius&quot;: 1.5855978467647815,
+      &quot;derivative_norm&quot;: 1.0690562195220175,
+      &quot;block_norms&quot;: [
+        0.043722422274902216,
+        0.014909010062177675,
+        0.0034324139908104676,
+        0.0055404375001980415,
+        0.033081812831338646,
+        0.02769193133464047,
+        0.08771954105914882,
+        0.0009765318855347117,
+        0.6203622810856465,
+        0.16256361797560184
+      ]
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;omega&quot;: 1.0,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 20.0,
+      &quot;growth&quot;: 0.5116243169398214,
+      &quot;oscillation&quot;: 0.0,
+      &quot;residual&quot;: 7.786466316173124e-14,
+      &quot;mean_radius&quot;: 1.5873005497716342,
+      &quot;derivative_norm&quot;: 1.0780339356534177,
+      &quot;block_norms&quot;: [
+        0.043506226390839765,
+        0.014827615497193556,
+        0.0034135167843359652,
+        0.00552088869461993,
+        0.03304380015206209,
+        0.027676557798254658,
+        0.08772308643230364,
+        0.000984118216668592,
+        0.6208031136174443,
+        0.1625010764162772
+      ]
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;omega&quot;: 1.0,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 28.0,
+      &quot;growth&quot;: 0.5117145718591398,
+      &quot;oscillation&quot;: 0.0,
+      &quot;residual&quot;: 4.332237823617442e-14,
+      &quot;mean_radius&quot;: 1.5867534032904764,
+      &quot;derivative_norm&quot;: 1.0743472298788894,
+      &quot;block_norms&quot;: [
+        0.04357547595440554,
+        0.014853707868909452,
+        0.0034195744591479014,
+        0.00552715995712348,
+        0.0330560211207051,
+        0.02768151609606876,
+        0.08772201577271391,
+        0.0009816847949442268,
+        0.6206615088088107,
+        0.16252133516717185
+      ]
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;omega&quot;: 15.0,
+      &quot;cells&quot;: 160,
+      &quot;outer&quot;: 20.0,
+      &quot;growth&quot;: 1.0862611366059172,
+      &quot;oscillation&quot;: 0.0,
+      &quot;residual&quot;: 4.272095751876931e-15,
+      &quot;mean_radius&quot;: 1.4165647560684669,
+      &quot;derivative_norm&quot;: 1.2197974620171612,
+      &quot;block_norms&quot;: [
+        0.039160413979054856,
+        0.2944995998219326,
+        0.004492091278645234,
+        0.001085076533646465,
+        0.015503607231786103,
+        0.07457000201710054,
+        0.0015459544191644085,
+        0.0007492696928712028,
+        0.26073558039413036,
+        0.3076584046316684
+      ]
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;omega&quot;: 15.0,
+      &quot;cells&quot;: 320,
+      &quot;outer&quot;: 20.0,
+      &quot;growth&quot;: 1.0859426486418755,
+      &quot;oscillation&quot;: 0.0,
+      &quot;residual&quot;: 1.5091765337669995e-14,
+      &quot;mean_radius&quot;: 1.4181348559641325,
+      &quot;derivative_norm&quot;: 1.220954139147689,
+      &quot;block_norms&quot;: [
+        0.03936006616211145,
+        0.2942063165457749,
+        0.00449576972389911,
+        0.001077762710434879,
+        0.015495129267669753,
+        0.07460091335691145,
+        0.0015497311222662136,
+        0.0007493467850589109,
+        0.2608509224224644,
+        0.3076140419034086
+      ]
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;omega&quot;: 15.0,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 20.0,
+      &quot;growth&quot;: 1.0858632090012004,
+      &quot;oscillation&quot;: 0.0,
+      &quot;residual&quot;: 6.818882479062829e-14,
+      &quot;mean_radius&quot;: 1.418526765359124,
+      &quot;derivative_norm&quot;: 1.2212505297305183,
+      &quot;block_norms&quot;: [
+        0.03940983384571066,
+        0.2941324564788348,
+        0.004496694543960366,
+        0.0010759444007332633,
+        0.015492974614191858,
+        0.07460891719228263,
+        0.001550693727645541,
+        0.0007493599658566241,
+        0.26087990910873177,
+        0.3076032161220519
+      ]
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;omega&quot;: 15.0,
+      &quot;cells&quot;: 640,
+      &quot;outer&quot;: 28.0,
+      &quot;growth&quot;: 1.0858887045664147,
+      &quot;oscillation&quot;: 0.0,
+      &quot;residual&quot;: 3.636316869764507e-14,
+      &quot;mean_radius&quot;: 1.4184009690345687,
+      &quot;derivative_norm&quot;: 1.2211543823223288,
+      &quot;block_norms&quot;: [
+        0.039393863324324034,
+        0.29415619017833955,
+        0.004496397431915865,
+        0.0010765276898616872,
+        0.015493667859471462,
+        0.07460633613088737,
+        0.0015503839328625429,
+        0.000749356010019788,
+        0.26087059690888986,
+        0.30760668053342766
+      ]
+    }
+  ],
+  &quot;array_file&quot;: &quot;holomorphic-frame-20260914T180053_320888Z.npz&quot;,
+  &quot;array_sha256&quot;: &quot;285a04b3a0983ca7633cdfc9cf85f8f3f4b92bc62b9be15a0ec99a86ac2acb3d&quot;,
+  &quot;passed&quot;: true
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

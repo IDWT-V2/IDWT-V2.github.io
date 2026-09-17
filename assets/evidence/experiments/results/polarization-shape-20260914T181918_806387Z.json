@@ -1,0 +1,5568 @@
+{
+  "scope": "Full source and boost checks, complete local Clifford decomposition including depth ten, exact necessary center constraint, and finite local scans. No complete spatial or nonlinear stability theorem.",
+  "source_hashes": {
+    "experiments/polarization_shape_checks.py": "d090d8f4d2c0831c5c4ad2d4d54ec353cdba11d846d7c309615b6c353cf3543d",
+    "experiments/polarization_clifford_blocks.py": "83abc9452739419f532750c0d0a0e549387095b662dc9b23c145784edefec070",
+    "experiments/clifford_shape_penalty.py": "3b6352b9f363b50724f5484b35539fb9a84c469c0ce481783250eddd07009e85",
+    "experiments/polarization_frozen_response.py": "b1ed0a704674e74a6ed8fa73ce0601965285a4ddda4167cff653c89264b1528d",
+    "experiments/polarization_bound_core.py": "b6428084852d678707e5dbc89ccbba03fb2415850a46d649694759890081e45c",
+    "experiments/localized_current_model.py": "bea8db856f55959328e92d99c089ed26db3b35e717533c67a14c9444d5f1a2e4"
+  },
+  "checks": [
+    {
+      "name": "scalar/vector orthogonal projection",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3
+    },
+    {
+      "name": "projection orthogonality",
+      "error": 1.5021383168150947e-15,
+      "tolerance": 2e-10,
+      "passed": true,
+      "d": 3
+    },
+    {
+      "name": "independent full shape source",
+      "error": 2.2539747845939928e-11,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 3
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 3,
+      "radius": 0.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.352290465003294e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 3,
+      "radius": 0.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 1.280740544522045e-12,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 3,
+      "radius": 0.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 3,
+      "radius": 0.0
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 3,
+      "radius": 0.7
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.0955493979243652e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 3,
+      "radius": 0.7
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 8.07793566946316e-18,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 3,
+      "radius": 0.7
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 3,
+      "radius": 0.7
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 3,
+      "radius": 3.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 1.9629408109779913e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 3,
+      "radius": 3.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 8.07793566946316e-18,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 3,
+      "radius": 3.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 3,
+      "radius": 3.0
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 3,
+      "radius": 12.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 4.266014401605134e-21,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 3,
+      "radius": 12.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 8.07793566946316e-18,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 3,
+      "radius": 12.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 3,
+      "radius": 12.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.0
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": true,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": true,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": true
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.4210854715202004e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.0,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.0609448708091202e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.0,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.2737367544323206e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.0,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.3
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 1.5700924586837752e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": true,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": true,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": true
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 9.947598300641403e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.3,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 8.526512781133001e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.3,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.6022077235188135e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.3,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.7
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 1.5700924586837752e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 2.178940998026312e-33,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 2.178940998026312e-33,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": true,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 2.178940998026312e-33,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": true,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": true
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 9.947598300641403e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.7,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.141328013473483e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.7,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.468765863512531e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.7,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.95
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 1.7554167342883506e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 9.813077866773595e-18,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 9.813077866773595e-18,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": true,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 9.813077866773595e-18,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": true,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": true
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.213887733076788e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.95,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.037654218612112e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.95,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.6123547769429933e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 0.95,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 3,
+      "ratio": 1.0
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": true,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 0,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": true,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3,
+      "k": 1,
+      "unused": true
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.269965309364759e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 1.0,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 8.190618908496265e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 1.0,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.6975310046518644e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 3,
+      "ratio": 1.0,
+      "omega": 100.0
+    },
+    {
+      "name": "scalar/vector orthogonal projection",
+      "error": 4.489533802955699e-17,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4
+    },
+    {
+      "name": "projection orthogonality",
+      "error": 1.0934428697813141e-15,
+      "tolerance": 2e-10,
+      "passed": true,
+      "d": 4
+    },
+    {
+      "name": "independent full shape source",
+      "error": 3.734096365448636e-11,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 4
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 4,
+      "radius": 0.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 1.2097559003869227e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 4,
+      "radius": 0.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 1.1107646221652012e-12,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 4,
+      "radius": 0.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 4,
+      "radius": 0.0
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 4,
+      "radius": 0.7
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.0129280285174502e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 4,
+      "radius": 0.7
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 0.0,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 4,
+      "radius": 0.7
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 4,
+      "radius": 0.7
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 4,
+      "radius": 3.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 1.281467000744585e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 4,
+      "radius": 3.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 0.0,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 4,
+      "radius": 3.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 4,
+      "radius": 3.0
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 4,
+      "radius": 12.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 1.0342167460561064e-20,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 4,
+      "radius": 12.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 1.615587133892632e-17,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 4,
+      "radius": 12.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 4,
+      "radius": 12.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.0
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 9.947598300641403e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.0,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.0609448708091202e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.0,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.2737367544323206e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.0,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.3
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 1.5700924586837752e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 9.947598300641403e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.3,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 8.526512781133001e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.3,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.6022077235188135e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.3,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.7
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 1.5700924586837752e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 2.178940998026312e-33,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 2.178940998026312e-33,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 9.947598300641403e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.7,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.141328013473483e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.7,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.468765863512531e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.7,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.95
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 1.7554167342883506e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 9.813077866773595e-18,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 9.813077866773595e-18,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.213887733076788e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.95,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.037654218612112e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.95,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.6123547769429933e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 0.95,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 4,
+      "ratio": 1.0
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 0,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 1,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 0.0,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4,
+      "k": 2,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.269965309364759e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 1.0,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 8.190618908496265e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 1.0,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.6975310046518644e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 4,
+      "ratio": 1.0,
+      "omega": 100.0
+    },
+    {
+      "name": "scalar/vector orthogonal projection",
+      "error": 6.155016501119572e-17,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "projection orthogonality",
+      "error": 6.206335383118183e-16,
+      "tolerance": 2e-10,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full shape source",
+      "error": 1.2148735286116474e-10,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 5,
+      "radius": 0.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.167170057233181e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 5,
+      "radius": 0.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 1.6446677023026992e-14,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 5,
+      "radius": 0.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 5,
+      "radius": 0.0
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 5,
+      "radius": 0.7
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 3.1355980492227955e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 5,
+      "radius": 0.7
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 1.615587133892632e-17,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 5,
+      "radius": 0.7
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 5,
+      "radius": 0.7
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 5,
+      "radius": 3.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.7756298766622716e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 5,
+      "radius": 3.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 0.0,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 5,
+      "radius": 3.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 5,
+      "radius": 3.0
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 5,
+      "radius": 12.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.395694247031748e-20,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 5,
+      "radius": 12.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 3.231174267785264e-17,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 5,
+      "radius": 12.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 5,
+      "radius": 12.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.0
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": true,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": true,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": true,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": true,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": true
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.927324204653624e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.0,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.229853892337207e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.0,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.2656365952983867e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.0,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.3
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": true,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": true,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": true,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": true,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": true
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.142525629715128e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.3,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.819233541900283e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.3,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.849285698532488e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.3,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.7
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 4.002966042486721e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": true,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": true,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": true,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": true,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": true
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.585480435562238e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.7,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.129944815671784e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.7,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.6776229044693995e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.7,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.95
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.764949453935611e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": true,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": true,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": true,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": true,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": true
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.2789769243681803e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.95,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 8.836311905560307e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.95,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.2061853862261797e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 0.95,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 5,
+      "ratio": 1.0
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": true,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 0,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": true,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 1,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": true,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 2,
+      "unused": true
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": true,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5,
+      "k": 3,
+      "unused": true
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 6.076482542521723e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 1.0,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.510959176824363e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 1.0,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.9932910045959913e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 5,
+      "ratio": 1.0,
+      "omega": 100.0
+    },
+    {
+      "name": "scalar/vector orthogonal projection",
+      "error": 1.4934405392844625e-17,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6
+    },
+    {
+      "name": "projection orthogonality",
+      "error": 2.482534153247273e-16,
+      "tolerance": 2e-10,
+      "passed": true,
+      "d": 6
+    },
+    {
+      "name": "independent full shape source",
+      "error": 1.0814590889474118e-10,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 6
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 6,
+      "radius": 0.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 1.5694523621209455e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 6,
+      "radius": 0.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 9.785611269987672e-14,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 6,
+      "radius": 0.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 6,
+      "radius": 0.0
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 6,
+      "radius": 0.7
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.0493657465022808e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 6,
+      "radius": 0.7
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 1.615587133892632e-17,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 6,
+      "radius": 0.7
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 6,
+      "radius": 0.7
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 6,
+      "radius": 3.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 1.9070829522019542e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 6,
+      "radius": 3.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 1.615587133892632e-17,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 6,
+      "radius": 3.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 6,
+      "radius": 3.0
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 6,
+      "radius": 12.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 3.107927566836656e-20,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 6,
+      "radius": 12.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 0.0,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 6,
+      "radius": 12.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 6,
+      "radius": 12.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.0
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 4,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 4,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.927324204653624e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.0,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.229853892337207e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.0,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.2656365952983867e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.0,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.3
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 4,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 4,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 8.62277179094481e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.3,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.644998945456161e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.3,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.8348834768245835e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.3,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.7
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 4.002966042486721e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140192688378902e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 4,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 4,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.585480435562238e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.7,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.129944815671784e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.7,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.6776229044693995e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.7,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.95
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.764949453935611e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401972314912e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 4,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 4,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.2789769243681803e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.95,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 8.836311905560307e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.95,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.2061853862261797e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 0.95,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 6,
+      "ratio": 1.0
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 0,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 1,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 2,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 3,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140197214823603e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 6,
+      "k": 4,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1321281242339183e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 6,
+      "k": 4,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 6.076482542521723e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 1.0,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.105427357601002e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 1.0,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.9932910045959913e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 6,
+      "ratio": 1.0,
+      "omega": 100.0
+    },
+    {
+      "name": "scalar/vector orthogonal projection",
+      "error": 1.523349772766882e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10
+    },
+    {
+      "name": "projection orthogonality",
+      "error": 1.0235750533041806e-15,
+      "tolerance": 2e-10,
+      "passed": true,
+      "d": 10
+    },
+    {
+      "name": "independent full shape source",
+      "error": 8.525228634148618e-09,
+      "tolerance": 2e-08,
+      "passed": true,
+      "d": 10
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 10,
+      "radius": 0.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.693841011081057e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 10,
+      "radius": 0.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 7.242677121240669e-14,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 10,
+      "radius": 0.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 0.0,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 10,
+      "radius": 0.0
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 6.284249785198543e-16,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 10,
+      "radius": 0.7
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.6573676948503135e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 10,
+      "radius": 0.7
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 0.0,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 10,
+      "radius": 0.7
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 1.578620076205148e-30,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 10,
+      "radius": 0.7
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 2.4161902126951447e-17,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 10,
+      "radius": 3.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.6494656936338646e-16,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 10,
+      "radius": 3.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 1.615587133892632e-17,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 10,
+      "radius": 3.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 2.046300565911438e-33,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 10,
+      "radius": 3.0
+    },
+    {
+      "name": "unchanged full spatial core",
+      "error": 5.407096370481386e-21,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 10,
+      "radius": 12.0
+    },
+    {
+      "name": "complete boosted mass-frequency branch",
+      "error": 2.2918532420280083e-19,
+      "tolerance": 3e-10,
+      "passed": true,
+      "d": 10,
+      "radius": 12.0
+    },
+    {
+      "name": "zero mixed frame-wave quadratic coefficient",
+      "error": 1.615587133892632e-17,
+      "tolerance": 3e-08,
+      "passed": true,
+      "d": 10,
+      "radius": 12.0
+    },
+    {
+      "name": "zero frame-only quadratic energy",
+      "error": 4.598052625019736e-40,
+      "tolerance": 3e-12,
+      "passed": true,
+      "d": 10,
+      "radius": 12.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.0
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 4,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 4,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 5,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 5,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 6,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 6,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 7,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 7,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.280369834735101e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 8,
+      "unused": false,
+      "ratio": 0.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 8,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.1368683772161603e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.0,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 9.168797643309763e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.0,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.095964242097469e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.0,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.3
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 4,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 4,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 5,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 5,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 6,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 6,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 7,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 7,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 6.473657049138938e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 8,
+      "unused": false,
+      "ratio": 0.3
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 8,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.2789769243681803e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.3,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.3311775823074195e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.3,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.105239132977818e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.3,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.7
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.188872858294072e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185170246838e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185170246838e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185170246838e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185170246838e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 4,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 4,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185170246838e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 5,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 5,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185170246838e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 6,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 6,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185170246838e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 7,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 7,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185170246838e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 8,
+      "unused": false,
+      "ratio": 0.7
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 8,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 6.947638578057682e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.7,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 8.208792291762503e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.7,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 1.9895196601282805e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.7,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.95
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185318086177e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 0,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185318086177e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 1,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185318086177e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 2,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185318086177e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 3,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185318086177e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 4,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 4,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185318086177e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 5,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 5,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185318086177e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 6,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 6,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185318086177e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 7,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 7,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.140185318086177e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 8,
+      "unused": false,
+      "ratio": 0.95
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 8,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 7.356325261077568e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.95,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 9.638036706037177e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.95,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 3.126388037344441e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 0.95,
+      "omega": 100.0
+    },
+    {
+      "name": "complete representation dimension",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true,
+      "d": 10,
+      "ratio": 1.0
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401853175437897e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 0,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 0,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401853175437897e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 1,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 1,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401853175437897e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 2,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 2,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401853175437897e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 3,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 3,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401853175437897e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 4,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 4,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401853175437897e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 5,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 5,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401853175437897e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 6,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 6,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401853175437897e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 7,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 7,
+      "unused": false
+    },
+    {
+      "name": "full source and principal orbit closure",
+      "error": 3.1401853175437897e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 10,
+      "k": 8,
+      "unused": false,
+      "ratio": 1.0
+    },
+    {
+      "name": "canonical orbit norm",
+      "error": 1.1102230246251565e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 10,
+      "k": 8,
+      "unused": false
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 5.775935285612377e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 1.0,
+      "omega": 6.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 5.907686642453204e-14,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 1.0,
+      "omega": 20.0
+    },
+    {
+      "name": "no resolved growth in stated full local scan",
+      "error": 2.7711166694643907e-13,
+      "tolerance": 2e-09,
+      "passed": true,
+      "d": 10,
+      "ratio": 1.0,
+      "omega": 100.0
+    },
+    {
+      "name": "complete explicit Clifford basis",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 3
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 4.8752763130510507e-17,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 3.7499821114887954e-17,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 3.678344745674664e-17,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 4.8907765913496205e-17,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 3
+    },
+    {
+      "name": "complete explicit Clifford basis",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 4
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 4.8752763130510507e-17,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 3.610220300875769e-17,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 3.610220300875769e-17,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 4.8907765913496205e-17,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 4
+    },
+    {
+      "name": "complete explicit Clifford basis",
+      "error": 1.1635914414045796e-16,
+      "tolerance": 2e-12,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.7612146598734084e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.744466660683643e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.744466660683643e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.7419930876591865e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.7580228325945606e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.747393442042035e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.747393442042034e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.7408073920012134e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.7426873511372593e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.747393442042034e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.747393442042035e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.7494513331424e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.742150351471804e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.739464126975541e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.739464126975541e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "independent full-matrix orbit operator",
+      "error": 2.7518605278687613e-16,
+      "tolerance": 2e-11,
+      "passed": true,
+      "d": 5
+    },
+    {
+      "name": "exact center characteristic factor",
+      "error": 0.0,
+      "tolerance": 0,
+      "passed": true
+    },
+    {
+      "name": "exact threshold root",
+      "error": 0.0,
+      "tolerance": 2e-12,
+      "passed": true
+    }
+  ],
+  "records": [
+    {
+      "depth": 3,
+      "ratio": 0.0,
+      "omega": 6.0,
+      "largest_raw_growth": 1.4210854715202004e-13,
+      "case": {
+        "k": 0,
+        "unused": true,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": -106.8158887297743
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.0,
+      "omega": 20.0,
+      "largest_raw_growth": 1.0609448708091202e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 82.89264292832452
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.0,
+      "omega": 100.0,
+      "largest_raw_growth": 2.2737367544323206e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 40.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -207.80789799049796
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.3,
+      "omega": 6.0,
+      "largest_raw_growth": 9.947598300641403e-14,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": 106.63722213975672
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.3,
+      "omega": 20.0,
+      "largest_raw_growth": 8.526512781133001e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -121.66183261624288
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.3,
+      "omega": 100.0,
+      "largest_raw_growth": 2.6022077235188135e-13,
+      "case": {
+        "k": 1,
+        "unused": true,
+        "p": 40.0,
+        "angle": 0.37,
+        "disturbance_frequency": -206.38957638030692
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.7,
+      "omega": 6.0,
+      "largest_raw_growth": 9.947598300641403e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 106.03997840591583
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.7,
+      "omega": 20.0,
+      "largest_raw_growth": 1.141328013473483e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 120.76922863493921
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.7,
+      "omega": 100.0,
+      "largest_raw_growth": 2.468765863512531e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 40.0,
+        "angle": 0.37,
+        "disturbance_frequency": -206.94813369748417
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.95,
+      "omega": 6.0,
+      "largest_raw_growth": 1.213887733076788e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": -105.0952132350085
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.95,
+      "omega": 20.0,
+      "largest_raw_growth": 7.037654218612112e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 119.86054658737096
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 0.95,
+      "omega": 100.0,
+      "largest_raw_growth": 2.6123547769429933e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 0.1,
+        "angle": 0.0,
+        "disturbance_frequency": 0.49510011933830134
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 1.0,
+      "omega": 6.0,
+      "largest_raw_growth": 1.269965309364759e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 94.18482919085099
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 1.0,
+      "omega": 20.0,
+      "largest_raw_growth": 8.190618908496265e-14,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 120.08996129633219
+      }
+    },
+    {
+      "depth": 3,
+      "ratio": 1.0,
+      "omega": 100.0,
+      "largest_raw_growth": 1.6975310046518644e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 0.1,
+        "angle": 0.0,
+        "disturbance_frequency": -200.00452429630928
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.0,
+      "omega": 6.0,
+      "largest_raw_growth": 9.947598300641403e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 107.08057578167418
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.0,
+      "omega": 20.0,
+      "largest_raw_growth": 1.0609448708091202e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 82.89264292832452
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.0,
+      "omega": 100.0,
+      "largest_raw_growth": 2.2737367544323206e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 40.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -207.80789799049796
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.3,
+      "omega": 6.0,
+      "largest_raw_growth": 9.947598300641403e-14,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": 106.63722213975672
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.3,
+      "omega": 20.0,
+      "largest_raw_growth": 8.526512781133001e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -121.66183261624288
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.3,
+      "omega": 100.0,
+      "largest_raw_growth": 2.6022077235188135e-13,
+      "case": {
+        "k": 2,
+        "unused": false,
+        "p": 40.0,
+        "angle": 0.37,
+        "disturbance_frequency": -206.38957638030692
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.7,
+      "omega": 6.0,
+      "largest_raw_growth": 9.947598300641403e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 106.03997840591583
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.7,
+      "omega": 20.0,
+      "largest_raw_growth": 1.141328013473483e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 120.76922863493921
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.7,
+      "omega": 100.0,
+      "largest_raw_growth": 2.468765863512531e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 40.0,
+        "angle": 0.37,
+        "disturbance_frequency": -206.94813369748417
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.95,
+      "omega": 6.0,
+      "largest_raw_growth": 1.213887733076788e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": -105.0952132350085
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.95,
+      "omega": 20.0,
+      "largest_raw_growth": 7.037654218612112e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 119.86054658737096
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 0.95,
+      "omega": 100.0,
+      "largest_raw_growth": 2.6123547769429933e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 0.1,
+        "angle": 0.0,
+        "disturbance_frequency": 0.49510011933830134
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 1.0,
+      "omega": 6.0,
+      "largest_raw_growth": 1.269965309364759e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 94.18482919085099
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 1.0,
+      "omega": 20.0,
+      "largest_raw_growth": 8.190618908496265e-14,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 120.08996129633219
+      }
+    },
+    {
+      "depth": 4,
+      "ratio": 1.0,
+      "omega": 100.0,
+      "largest_raw_growth": 1.6975310046518644e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 0.1,
+        "angle": 0.0,
+        "disturbance_frequency": -200.00452429630928
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.0,
+      "omega": 6.0,
+      "largest_raw_growth": 7.927324204653624e-14,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 104.93778825085806
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.0,
+      "omega": 20.0,
+      "largest_raw_growth": 1.229853892337207e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": -118.78049705276936
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.0,
+      "omega": 100.0,
+      "largest_raw_growth": 2.2656365952983867e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 0.0,
+        "angle": 0.0,
+        "disturbance_frequency": 200.02440848565837
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.3,
+      "omega": 6.0,
+      "largest_raw_growth": 1.142525629715128e-13,
+      "case": {
+        "k": 0,
+        "unused": true,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 93.6231401929618
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.3,
+      "omega": 20.0,
+      "largest_raw_growth": 7.819233541900283e-14,
+      "case": {
+        "k": 0,
+        "unused": true,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": -118.95239841726547
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.3,
+      "omega": 100.0,
+      "largest_raw_growth": 1.849285698532488e-13,
+      "case": {
+        "k": 0,
+        "unused": true,
+        "p": 1.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 199.9853392220013
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.7,
+      "omega": 6.0,
+      "largest_raw_growth": 7.585480435562238e-14,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -105.34066812430187
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.7,
+      "omega": 20.0,
+      "largest_raw_growth": 1.129944815671784e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": -121.33446831935028
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.7,
+      "omega": 100.0,
+      "largest_raw_growth": 2.6776229044693995e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 0.1,
+        "angle": 0.37,
+        "disturbance_frequency": -0.5623607047885512
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.95,
+      "omega": 6.0,
+      "largest_raw_growth": 1.2789769243681803e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 106.71139081584342
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.95,
+      "omega": 20.0,
+      "largest_raw_growth": 8.836311905560307e-14,
+      "case": {
+        "k": 1,
+        "unused": true,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": -83.84593480481085
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 0.95,
+      "omega": 100.0,
+      "largest_raw_growth": 2.2061853862261797e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 0.0,
+        "angle": 0.0,
+        "disturbance_frequency": 200.0037329949661
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 1.0,
+      "omega": 6.0,
+      "largest_raw_growth": 6.076482542521723e-14,
+      "case": {
+        "k": 3,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -105.39368395260695
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 1.0,
+      "omega": 20.0,
+      "largest_raw_growth": 7.510959176824363e-14,
+      "case": {
+        "k": 0,
+        "unused": true,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": -120.66705509932213
+      }
+    },
+    {
+      "depth": 5,
+      "ratio": 1.0,
+      "omega": 100.0,
+      "largest_raw_growth": 1.9932910045959913e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 0.1,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -199.98250991679467
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.0,
+      "omega": 6.0,
+      "largest_raw_growth": 7.927324204653624e-14,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 104.93778825085806
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.0,
+      "omega": 20.0,
+      "largest_raw_growth": 1.229853892337207e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": -118.78049705276936
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.0,
+      "omega": 100.0,
+      "largest_raw_growth": 2.2656365952983867e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 0.0,
+        "angle": 0.0,
+        "disturbance_frequency": 200.02440848565837
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.3,
+      "omega": 6.0,
+      "largest_raw_growth": 8.62277179094481e-14,
+      "case": {
+        "k": 3,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": 106.85221448859407
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.3,
+      "omega": 20.0,
+      "largest_raw_growth": 7.644998945456161e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": -122.44206906125908
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.3,
+      "omega": 100.0,
+      "largest_raw_growth": 1.8348834768245835e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 238.48238161110046
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.7,
+      "omega": 6.0,
+      "largest_raw_growth": 7.585480435562238e-14,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -105.34066812430187
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.7,
+      "omega": 20.0,
+      "largest_raw_growth": 1.129944815671784e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": -121.33446831935028
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.7,
+      "omega": 100.0,
+      "largest_raw_growth": 2.6776229044693995e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 0.1,
+        "angle": 0.37,
+        "disturbance_frequency": -0.5623607047885512
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.95,
+      "omega": 6.0,
+      "largest_raw_growth": 1.2789769243681803e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 106.71139081584342
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.95,
+      "omega": 20.0,
+      "largest_raw_growth": 8.836311905560307e-14,
+      "case": {
+        "k": 4,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": -83.84593480481085
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 0.95,
+      "omega": 100.0,
+      "largest_raw_growth": 2.2061853862261797e-13,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 0.0,
+        "angle": 0.0,
+        "disturbance_frequency": 200.0037329949661
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 1.0,
+      "omega": 6.0,
+      "largest_raw_growth": 6.076482542521723e-14,
+      "case": {
+        "k": 3,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -105.39368395260695
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 1.0,
+      "omega": 20.0,
+      "largest_raw_growth": 7.105427357601002e-14,
+      "case": {
+        "k": 3,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 120.66705509932227
+      }
+    },
+    {
+      "depth": 6,
+      "ratio": 1.0,
+      "omega": 100.0,
+      "largest_raw_growth": 1.9932910045959913e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 0.1,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -199.98250991679467
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.0,
+      "omega": 6.0,
+      "largest_raw_growth": 1.1368683772161603e-13,
+      "case": {
+        "k": 2,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": -92.79795714499996
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.0,
+      "omega": 20.0,
+      "largest_raw_growth": 9.168797643309763e-14,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 81.18635331100134
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.0,
+      "omega": 100.0,
+      "largest_raw_growth": 2.095964242097469e-13,
+      "case": {
+        "k": 2,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -239.42838599783587
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.3,
+      "omega": 6.0,
+      "largest_raw_growth": 1.2789769243681803e-13,
+      "case": {
+        "k": 4,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": 93.13357038111607
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.3,
+      "omega": 20.0,
+      "largest_raw_growth": 1.3311775823074195e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": -121.00070229696061
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.3,
+      "omega": 100.0,
+      "largest_raw_growth": 2.105239132977818e-13,
+      "case": {
+        "k": 3,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": -241.99946422401314
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.7,
+      "omega": 6.0,
+      "largest_raw_growth": 6.947638578057682e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": 93.85326062688706
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.7,
+      "omega": 20.0,
+      "largest_raw_growth": 8.208792291762503e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": 81.92837637051561
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.7,
+      "omega": 100.0,
+      "largest_raw_growth": 1.9895196601282805e-13,
+      "case": {
+        "k": 3,
+        "unused": false,
+        "p": 10.0,
+        "angle": 0.0,
+        "disturbance_frequency": -200.560737343463
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.95,
+      "omega": 6.0,
+      "largest_raw_growth": 7.356325261077568e-14,
+      "case": {
+        "k": 1,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": -106.12008433487551
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.95,
+      "omega": 20.0,
+      "largest_raw_growth": 9.638036706037177e-14,
+      "case": {
+        "k": 7,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.37,
+        "disturbance_frequency": -121.23962388983102
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 0.95,
+      "omega": 100.0,
+      "largest_raw_growth": 3.126388037344441e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 40.0,
+        "angle": 0.37,
+        "disturbance_frequency": -207.4450631444667
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 1.0,
+      "omega": 6.0,
+      "largest_raw_growth": 5.775935285612377e-14,
+      "case": {
+        "k": 2,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": -105.63025017031335
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 1.0,
+      "omega": 20.0,
+      "largest_raw_growth": 5.907686642453204e-14,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 1.5707963267948966,
+        "disturbance_frequency": 81.4834162319421
+      }
+    },
+    {
+      "depth": 10,
+      "ratio": 1.0,
+      "omega": 100.0,
+      "largest_raw_growth": 2.7711166694643907e-13,
+      "case": {
+        "k": 0,
+        "unused": false,
+        "p": 100.0,
+        "angle": 0.0,
+        "disturbance_frequency": 241.4248917270221
+      }
+    }
+  ],
+  "center_threshold": 5.035072665703711,
+  "passed": true
+}

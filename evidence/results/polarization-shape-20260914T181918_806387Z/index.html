@@ -1,0 +1,5629 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>polarization-shape-20260914T181918_806387Z.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/polarization-shape-20260914T181918_806387Z/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="polarization-shape-20260914T181918_806387Z.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/polarization-shape-20260914T181918_806387Z/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="polarization-shape-20260914T181918_806387Z.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>polarization-shape-20260914T181918_806387Z.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/polarization-shape-20260914T181918_806387Z.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">scope</th><td>Full source and boost checks, complete local Clifford decomposition including depth ten, exact necessary center constraint, and finite local scans. No complete spatial or nonlinear stability theorem.</td></tr><tr><th scope="row">center_threshold</th><td>5.035072665703711</td></tr><tr><th scope="row">passed</th><td>true</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;scope&quot;: &quot;Full source and boost checks, complete local Clifford decomposition including depth ten, exact necessary center constraint, and finite local scans. No complete spatial or nonlinear stability theorem.&quot;,
+  &quot;source_hashes&quot;: {
+    &quot;experiments/polarization_shape_checks.py&quot;: &quot;d090d8f4d2c0831c5c4ad2d4d54ec353cdba11d846d7c309615b6c353cf3543d&quot;,
+    &quot;experiments/polarization_clifford_blocks.py&quot;: &quot;83abc9452739419f532750c0d0a0e549387095b662dc9b23c145784edefec070&quot;,
+    &quot;experiments/clifford_shape_penalty.py&quot;: &quot;3b6352b9f363b50724f5484b35539fb9a84c469c0ce481783250eddd07009e85&quot;,
+    &quot;experiments/polarization_frozen_response.py&quot;: &quot;b1ed0a704674e74a6ed8fa73ce0601965285a4ddda4167cff653c89264b1528d&quot;,
+    &quot;experiments/polarization_bound_core.py&quot;: &quot;b6428084852d678707e5dbc89ccbba03fb2415850a46d649694759890081e45c&quot;,
+    &quot;experiments/localized_current_model.py&quot;: &quot;bea8db856f55959328e92d99c089ed26db3b35e717533c67a14c9444d5f1a2e4&quot;
+  },
+  &quot;checks&quot;: [
+    {
+      &quot;name&quot;: &quot;scalar/vector orthogonal projection&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3
+    },
+    {
+      &quot;name&quot;: &quot;projection orthogonality&quot;,
+      &quot;error&quot;: 1.5021383168150947e-15,
+      &quot;tolerance&quot;: 2e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3
+    },
+    {
+      &quot;name&quot;: &quot;independent full shape source&quot;,
+      &quot;error&quot;: 2.2539747845939928e-11,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.352290465003294e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 1.280740544522045e-12,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.0955493979243652e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 8.07793566946316e-18,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 1.9629408109779913e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 8.07793566946316e-18,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 4.266014401605134e-21,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 8.07793566946316e-18,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.4210854715202004e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.0609448708091202e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.2737367544323206e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 1.5700924586837752e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 9.947598300641403e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 8.526512781133001e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.6022077235188135e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 1.5700924586837752e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 2.178940998026312e-33,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 2.178940998026312e-33,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 2.178940998026312e-33,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 9.947598300641403e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.141328013473483e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.468765863512531e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 1.7554167342883506e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 9.813077866773595e-18,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 9.813077866773595e-18,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 9.813077866773595e-18,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.213887733076788e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.037654218612112e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.6123547769429933e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.269965309364759e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 8.190618908496265e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.6975310046518644e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;scalar/vector orthogonal projection&quot;,
+      &quot;error&quot;: 4.489533802955699e-17,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4
+    },
+    {
+      &quot;name&quot;: &quot;projection orthogonality&quot;,
+      &quot;error&quot;: 1.0934428697813141e-15,
+      &quot;tolerance&quot;: 2e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4
+    },
+    {
+      &quot;name&quot;: &quot;independent full shape source&quot;,
+      &quot;error&quot;: 3.734096365448636e-11,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 1.2097559003869227e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 1.1107646221652012e-12,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.0129280285174502e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 1.281467000744585e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 1.0342167460561064e-20,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 1.615587133892632e-17,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 9.947598300641403e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.0609448708091202e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.2737367544323206e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 1.5700924586837752e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 9.947598300641403e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 8.526512781133001e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.6022077235188135e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 1.5700924586837752e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 2.178940998026312e-33,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 2.178940998026312e-33,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 9.947598300641403e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.141328013473483e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.468765863512531e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 1.7554167342883506e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 9.813077866773595e-18,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 9.813077866773595e-18,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.213887733076788e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.037654218612112e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.6123547769429933e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.269965309364759e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 8.190618908496265e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.6975310046518644e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;scalar/vector orthogonal projection&quot;,
+      &quot;error&quot;: 6.155016501119572e-17,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;projection orthogonality&quot;,
+      &quot;error&quot;: 6.206335383118183e-16,
+      &quot;tolerance&quot;: 2e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full shape source&quot;,
+      &quot;error&quot;: 1.2148735286116474e-10,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.167170057233181e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 1.6446677023026992e-14,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 3.1355980492227955e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 1.615587133892632e-17,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.7756298766622716e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.395694247031748e-20,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 3.231174267785264e-17,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.927324204653624e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.229853892337207e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.2656365952983867e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.142525629715128e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.819233541900283e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.849285698532488e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 4.002966042486721e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.585480435562238e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.129944815671784e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.6776229044693995e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.764949453935611e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.2789769243681803e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 8.836311905560307e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.2061853862261797e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: true,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 6.076482542521723e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.510959176824363e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.9932910045959913e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;scalar/vector orthogonal projection&quot;,
+      &quot;error&quot;: 1.4934405392844625e-17,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6
+    },
+    {
+      &quot;name&quot;: &quot;projection orthogonality&quot;,
+      &quot;error&quot;: 2.482534153247273e-16,
+      &quot;tolerance&quot;: 2e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6
+    },
+    {
+      &quot;name&quot;: &quot;independent full shape source&quot;,
+      &quot;error&quot;: 1.0814590889474118e-10,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 1.5694523621209455e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 9.785611269987672e-14,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.0493657465022808e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 1.615587133892632e-17,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 1.9070829522019542e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 1.615587133892632e-17,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 3.107927566836656e-20,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.927324204653624e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.229853892337207e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.2656365952983867e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 8.62277179094481e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.644998945456161e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.8348834768245835e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 4.002966042486721e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140192688378902e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.585480435562238e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.129944815671784e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.6776229044693995e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.764949453935611e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401972314912e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.2789769243681803e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 8.836311905560307e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.2061853862261797e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140197214823603e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1321281242339183e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 6.076482542521723e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.105427357601002e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.9932910045959913e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 6,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;scalar/vector orthogonal projection&quot;,
+      &quot;error&quot;: 1.523349772766882e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10
+    },
+    {
+      &quot;name&quot;: &quot;projection orthogonality&quot;,
+      &quot;error&quot;: 1.0235750533041806e-15,
+      &quot;tolerance&quot;: 2e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10
+    },
+    {
+      &quot;name&quot;: &quot;independent full shape source&quot;,
+      &quot;error&quot;: 8.525228634148618e-09,
+      &quot;tolerance&quot;: 2e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.693841011081057e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 7.242677121240669e-14,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 6.284249785198543e-16,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.6573676948503135e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 1.578620076205148e-30,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 2.4161902126951447e-17,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.6494656936338646e-16,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 1.615587133892632e-17,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 2.046300565911438e-33,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 3.0
+    },
+    {
+      &quot;name&quot;: &quot;unchanged full spatial core&quot;,
+      &quot;error&quot;: 5.407096370481386e-21,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;complete boosted mass-frequency branch&quot;,
+      &quot;error&quot;: 2.2918532420280083e-19,
+      &quot;tolerance&quot;: 3e-10,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;zero mixed frame-wave quadratic coefficient&quot;,
+      &quot;error&quot;: 1.615587133892632e-17,
+      &quot;tolerance&quot;: 3e-08,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;zero frame-only quadratic energy&quot;,
+      &quot;error&quot;: 4.598052625019736e-40,
+      &quot;tolerance&quot;: 3e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;radius&quot;: 12.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 5,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 5,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 6,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 6,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 7,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 7,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.280369834735101e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 8,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 8,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.1368683772161603e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 9.168797643309763e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.095964242097469e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 5,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 5,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 6,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 6,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 7,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 7,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 6.473657049138938e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 8,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.3
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 8,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.2789769243681803e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.3311775823074195e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.105239132977818e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.188872858294072e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185170246838e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185170246838e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185170246838e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185170246838e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185170246838e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 5,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 5,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185170246838e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 6,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 6,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185170246838e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 7,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 7,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185170246838e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 8,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.7
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 8,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 6.947638578057682e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 8.208792291762503e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 1.9895196601282805e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185318086177e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185318086177e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185318086177e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185318086177e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185318086177e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185318086177e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 5,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 5,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185318086177e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 6,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 6,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185318086177e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 7,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 7,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.140185318086177e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 8,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 0.95
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 8,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 7.356325261077568e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 9.638036706037177e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 3.126388037344441e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete representation dimension&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401853175437897e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 0,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401853175437897e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 1,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401853175437897e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 2,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401853175437897e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 3,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401853175437897e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 4,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401853175437897e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 5,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 5,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401853175437897e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 6,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 6,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401853175437897e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 7,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 7,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;full source and principal orbit closure&quot;,
+      &quot;error&quot;: 3.1401853175437897e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 8,
+      &quot;unused&quot;: false,
+      &quot;ratio&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;canonical orbit norm&quot;,
+      &quot;error&quot;: 1.1102230246251565e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;k&quot;: 8,
+      &quot;unused&quot;: false
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 5.775935285612377e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 6.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 5.907686642453204e-14,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 20.0
+    },
+    {
+      &quot;name&quot;: &quot;no resolved growth in stated full local scan&quot;,
+      &quot;error&quot;: 2.7711166694643907e-13,
+      &quot;tolerance&quot;: 2e-09,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 10,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 100.0
+    },
+    {
+      &quot;name&quot;: &quot;complete explicit Clifford basis&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 4.8752763130510507e-17,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 3.7499821114887954e-17,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 3.678344745674664e-17,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 4.8907765913496205e-17,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 3
+    },
+    {
+      &quot;name&quot;: &quot;complete explicit Clifford basis&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 4.8752763130510507e-17,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 3.610220300875769e-17,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 3.610220300875769e-17,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 4.8907765913496205e-17,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 4
+    },
+    {
+      &quot;name&quot;: &quot;complete explicit Clifford basis&quot;,
+      &quot;error&quot;: 1.1635914414045796e-16,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.7612146598734084e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.744466660683643e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.744466660683643e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.7419930876591865e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.7580228325945606e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.747393442042035e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.747393442042034e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.7408073920012134e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.7426873511372593e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.747393442042034e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.747393442042035e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.7494513331424e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.742150351471804e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.739464126975541e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.739464126975541e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;independent full-matrix orbit operator&quot;,
+      &quot;error&quot;: 2.7518605278687613e-16,
+      &quot;tolerance&quot;: 2e-11,
+      &quot;passed&quot;: true,
+      &quot;d&quot;: 5
+    },
+    {
+      &quot;name&quot;: &quot;exact center characteristic factor&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 0,
+      &quot;passed&quot;: true
+    },
+    {
+      &quot;name&quot;: &quot;exact threshold root&quot;,
+      &quot;error&quot;: 0.0,
+      &quot;tolerance&quot;: 2e-12,
+      &quot;passed&quot;: true
+    }
+  ],
+  &quot;records&quot;: [
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 1.4210854715202004e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: true,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -106.8158887297743
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 1.0609448708091202e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 82.89264292832452
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.2737367544323206e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 40.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -207.80789799049796
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 9.947598300641403e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 106.63722213975672
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 8.526512781133001e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -121.66183261624288
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.6022077235188135e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: true,
+        &quot;p&quot;: 40.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -206.38957638030692
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 9.947598300641403e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 106.03997840591583
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 1.141328013473483e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 120.76922863493921
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.468765863512531e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 40.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -206.94813369748417
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 1.213887733076788e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -105.0952132350085
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 7.037654218612112e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 119.86054658737096
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.6123547769429933e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.1,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 0.49510011933830134
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 1.269965309364759e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 94.18482919085099
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 8.190618908496265e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 120.08996129633219
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 1.6975310046518644e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.1,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -200.00452429630928
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 9.947598300641403e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 107.08057578167418
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 1.0609448708091202e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 82.89264292832452
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.2737367544323206e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 40.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -207.80789799049796
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 9.947598300641403e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 106.63722213975672
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 8.526512781133001e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -121.66183261624288
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.6022077235188135e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 2,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 40.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -206.38957638030692
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 9.947598300641403e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 106.03997840591583
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 1.141328013473483e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 120.76922863493921
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.468765863512531e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 40.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -206.94813369748417
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 1.213887733076788e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -105.0952132350085
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 7.037654218612112e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 119.86054658737096
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.6123547769429933e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.1,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 0.49510011933830134
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 1.269965309364759e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 94.18482919085099
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 8.190618908496265e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 120.08996129633219
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 1.6975310046518644e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.1,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -200.00452429630928
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 7.927324204653624e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 104.93778825085806
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 1.229853892337207e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -118.78049705276936
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.2656365952983867e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 200.02440848565837
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 1.142525629715128e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: true,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 93.6231401929618
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 7.819233541900283e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: true,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -118.95239841726547
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 1.849285698532488e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: true,
+        &quot;p&quot;: 1.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 199.9853392220013
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 7.585480435562238e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -105.34066812430187
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 1.129944815671784e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -121.33446831935028
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.6776229044693995e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.1,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -0.5623607047885512
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 1.2789769243681803e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 106.71139081584342
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 8.836311905560307e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: true,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -83.84593480481085
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.2061853862261797e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 200.0037329949661
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 6.076482542521723e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 3,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -105.39368395260695
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 7.510959176824363e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: true,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -120.66705509932213
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 1.9932910045959913e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.1,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -199.98250991679467
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 7.927324204653624e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 104.93778825085806
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 1.229853892337207e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -118.78049705276936
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.2656365952983867e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 200.02440848565837
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 8.62277179094481e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 3,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 106.85221448859407
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 7.644998945456161e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -122.44206906125908
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 1.8348834768245835e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 238.48238161110046
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 7.585480435562238e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -105.34066812430187
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 1.129944815671784e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -121.33446831935028
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.6776229044693995e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.1,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -0.5623607047885512
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 1.2789769243681803e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 106.71139081584342
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 8.836311905560307e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 4,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -83.84593480481085
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.2061853862261797e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 200.0037329949661
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 6.076482542521723e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 3,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -105.39368395260695
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 7.105427357601002e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 3,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 120.66705509932227
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 1.9932910045959913e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 0.1,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -199.98250991679467
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 1.1368683772161603e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 2,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -92.79795714499996
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 9.168797643309763e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 81.18635331100134
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.0,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.095964242097469e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 2,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -239.42838599783587
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 1.2789769243681803e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 4,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 93.13357038111607
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 1.3311775823074195e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -121.00070229696061
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.3,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.105239132977818e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 3,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -241.99946422401314
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 6.947638578057682e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 93.85326062688706
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 8.208792291762503e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: 81.92837637051561
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.7,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 1.9895196601282805e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 3,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 10.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -200.560737343463
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 7.356325261077568e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 1,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: -106.12008433487551
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 9.638036706037177e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 7,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -121.23962388983102
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 0.95,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 3.126388037344441e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 40.0,
+        &quot;angle&quot;: 0.37,
+        &quot;disturbance_frequency&quot;: -207.4450631444667
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 6.0,
+      &quot;largest_raw_growth&quot;: 5.775935285612377e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 2,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: -105.63025017031335
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 20.0,
+      &quot;largest_raw_growth&quot;: 5.907686642453204e-14,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 1.5707963267948966,
+        &quot;disturbance_frequency&quot;: 81.4834162319421
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;ratio&quot;: 1.0,
+      &quot;omega&quot;: 100.0,
+      &quot;largest_raw_growth&quot;: 2.7711166694643907e-13,
+      &quot;case&quot;: {
+        &quot;k&quot;: 0,
+        &quot;unused&quot;: false,
+        &quot;p&quot;: 100.0,
+        &quot;angle&quot;: 0.0,
+        &quot;disturbance_frequency&quot;: 241.4248917270221
+      }
+    }
+  ],
+  &quot;center_threshold&quot;: 5.035072665703711,
+  &quot;passed&quot;: true
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

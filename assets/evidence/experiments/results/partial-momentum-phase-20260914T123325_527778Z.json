@@ -1,0 +1,110 @@
+{
+  "timestamp": "20260914T123325_527778Z",
+  "scope": "An imposed harmonic velocity and the phase of a partial momentum response.\n\nThe two-level control checks a general spectral identity; it is not an IDWT\nparticle model and does not assign physical negative inertia.\n",
+  "passed": true,
+  "checks": [
+    {
+      "name": "complete unit norm nu0.3_v0.001",
+      "passed": true,
+      "error": 1.2212453270876722e-14
+    },
+    {
+      "name": "phase-resolved spectral response nu0.3_v0.001",
+      "passed": true,
+      "error": 2.933569944730029e-07
+    },
+    {
+      "name": "complete unit norm nu0.3_v0.0002",
+      "passed": true,
+      "error": 4.773959005888173e-15
+    },
+    {
+      "name": "phase-resolved spectral response nu0.3_v0.0002",
+      "passed": true,
+      "error": 1.173428780082639e-08
+    },
+    {
+      "name": "quadratic response refinement nu=0.3",
+      "passed": true,
+      "ratio": 0.040000027345202006
+    },
+    {
+      "name": "complete unit norm nu3.0_v0.001",
+      "passed": true,
+      "error": 1.2212453270876722e-15
+    },
+    {
+      "name": "phase-resolved spectral response nu3.0_v0.001",
+      "passed": true,
+      "error": 2.6281070911241894e-07
+    },
+    {
+      "name": "complete unit norm nu3.0_v0.0002",
+      "passed": true,
+      "error": 8.881784197001252e-16
+    },
+    {
+      "name": "phase-resolved spectral response nu3.0_v0.0002",
+      "passed": true,
+      "error": 1.0512896440638263e-08
+    },
+    {
+      "name": "quadratic response refinement nu=3.0",
+      "passed": true,
+      "ratio": 0.040001781039072135
+    }
+  ],
+  "results": [
+    {
+      "velocity_amplitude": 0.001,
+      "drive_frequency": 0.3,
+      "level_difference": -2.0,
+      "predicted_response": -0.5012787723785166,
+      "cosine_response": -0.5012786752564519,
+      "sine_response": 7.189551367359887e-15,
+      "phase": 3.141592653589779,
+      "relative_linear_response_error": 2.933569944730029e-07,
+      "norm_error": 1.2212453270876722e-14
+    },
+    {
+      "velocity_amplitude": 0.0002,
+      "drive_frequency": 0.3,
+      "level_difference": -2.0,
+      "predicted_response": -0.5012787723785166,
+      "cosine_response": -0.5012787684936312,
+      "sine_response": 3.171797457609118e-15,
+      "phase": 3.141592653589787,
+      "relative_linear_response_error": 1.173428780082639e-08,
+      "norm_error": 4.773959005888173e-15
+    },
+    {
+      "velocity_amplitude": 0.001,
+      "drive_frequency": 3.0,
+      "level_difference": -2.0,
+      "predicted_response": 0.39199999999999996,
+      "cosine_response": 0.391999919326277,
+      "sine_response": -1.866086753111546e-14,
+      "phase": -4.7604263702879197e-14,
+      "relative_linear_response_error": 2.6281070911241894e-07,
+      "norm_error": 1.2212453270876722e-15
+    },
+    {
+      "velocity_amplitude": 0.0002,
+      "drive_frequency": 3.0,
+      "level_difference": -2.0,
+      "predicted_response": 0.39199999999999996,
+      "cosine_response": 0.3919999967728995,
+      "sine_response": -1.938155901396051e-14,
+      "phase": -4.944275299366644e-14,
+      "relative_linear_response_error": 1.0512896440638263e-08,
+      "norm_error": 8.881784197001252e-16
+    }
+  ],
+  "sources": {
+    "experiments/partial_momentum_phase.py": "3ec0989c18b4158ebe4c9881bafdbb22f58c0ccab16886797b3e6ef3f7136781"
+  },
+  "raw_data": {
+    "path": "partial-momentum-phase-20260914T123325_527778Z.npz",
+    "sha256": "9070e46d603864ee2e8ec45bc1d3cc12b42440fd95e094eb060a434ec10ba36a"
+  }
+}
