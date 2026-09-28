@@ -1,0 +1,79 @@
+{
+  "experiment": "coupling-localization-scale-batch",
+  "created_utc": "2026-09-24T10:38:28.695197+00:00",
+  "status": "conditional_scale_ansatz",
+  "energy_law": "E(Q,R)=a*Q/R-B*Q^2/R^d+C*Q^3/R^(2d), a=C=Q=1",
+  "rows": [
+    {
+      "depth": 2,
+      "stationary_fold_attraction": 1.5,
+      "zero_binding_attraction": 1.8898815748423101,
+      "trial_attraction": 2.267857889810772,
+      "wide_state_inverse_radius": 0.23139936020493293,
+      "localized_inverse_radius": 0.9301347699793546,
+      "localized_energy_relative_to_dispersion": -0.28341833197936517,
+      "stationary_frequency_shift_at_Q_1": -0.7484857169690446,
+      "single_attractive_contact_stationary_curvature_sign": "negative"
+    },
+    {
+      "depth": 3,
+      "stationary_fold_attraction": 1.3379026029337178,
+      "zero_binding_attraction": 1.9601317042077893,
+      "trial_attraction": 2.352158045049347,
+      "wide_state_inverse_radius": 0.38600592583558924,
+      "localized_inverse_radius": 1.0035134262626602,
+      "localized_energy_relative_to_dispersion": -0.35225763889083117,
+      "stationary_frequency_shift_at_Q_1": -0.6867621143117173,
+      "single_attractive_contact_stationary_curvature_sign": "negative"
+    },
+    {
+      "depth": 4,
+      "stationary_fold_attraction": 1.206595763278358,
+      "zero_binding_attraction": 1.979626330052519,
+      "trial_attraction": 2.3755515960630227,
+      "wide_state_inverse_radius": 0.4793359372829773,
+      "localized_inverse_radius": 1.016788950214826,
+      "localized_energy_relative_to_dispersion": -0.3798828614655949,
+      "stationary_frequency_shift_at_Q_1": -0.6340800990193021,
+      "single_attractive_contact_stationary_curvature_sign": "negative"
+    },
+    {
+      "depth": 5,
+      "stationary_fold_attraction": 1.1061602859499144,
+      "zero_binding_attraction": 1.9876669750024178,
+      "trial_attraction": 2.3852003700029014,
+      "wide_state_inverse_radius": 0.5436087237289332,
+      "localized_inverse_radius": 1.0192332636739818,
+      "localized_energy_relative_to_dispersion": -0.39447553417377024,
+      "stationary_frequency_shift_at_Q_1": -0.5983221869085655,
+      "single_attractive_contact_stationary_curvature_sign": "negative"
+    },
+    {
+      "depth": 6,
+      "stationary_fold_attraction": 1.0271138604895083,
+      "zero_binding_attraction": 1.9917412148051297,
+      "trial_attraction": 2.3900894577661553,
+      "wide_state_inverse_radius": 0.5913605606556573,
+      "localized_inverse_radius": 1.0189424228469457,
+      "localized_energy_relative_to_dispersion": -0.40343321237402385,
+      "stationary_frequency_shift_at_Q_1": -0.5732569495151827,
+      "single_attractive_contact_stationary_curvature_sign": "negative"
+    },
+    {
+      "depth": 10,
+      "stationary_fold_attraction": 0.825478123241336,
+      "zero_binding_attraction": 1.997230555812158,
+      "trial_attraction": 2.3966766669745896,
+      "wide_state_inverse_radius": 0.7045957277104976,
+      "localized_inverse_radius": 1.0144615922628435,
+      "localized_energy_relative_to_dispersion": -0.4196225392745616,
+      "stationary_frequency_shift_at_Q_1": -0.5210686985008479,
+      "single_attractive_contact_stationary_curvature_sign": "negative"
+    }
+  ],
+  "pair_mixed_contact_for_orthogonal_components": "Delta U=-g*integral(rho_i*rho_j)+h*integral(rho_i*rho_j*(rho_i+rho_j)) for U=-g*rho^2/2+h*rho^3/3",
+  "scope": "Fixed-profile dilation ansatz only. Finite scale minima do not establish complete stationary spatial solutions, positive mass-frequency, causal propagation, inertia, or observed particle couplings.",
+  "sources": {
+    "experiments/coupling-localization-scale-batch.py": "629f0b7f228f68e1d5e45b96d8a48661b3019b2950759ebf16911fb1f1371e68"
+  }
+}

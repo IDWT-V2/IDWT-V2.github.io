@@ -1,0 +1,841 @@
+{
+  "generated_at": "2026-09-23T07:47:57.302085+00:00",
+  "status": "diagnostic_pass",
+  "checks": 356,
+  "scope": "shared positive-response controls and the minimal finite-carrier background action",
+  "assumptions": {
+    "source": "(i+ell+d)/(i+2ell+d+1), even ell >= 2",
+    "inverse_stiffness": "d/((ell-1)(ell+d))",
+    "size_law": "E=Q*c*mu/L-g^2*Q^2*K/(2*L^(d-2))",
+    "fixed_profile": true,
+    "bias": "minimum-norm solution on maintained selected modes",
+    "background_schur": "unit v and the same source/control inverse; reported G bound omits the nonnegative field-mixing Schur term",
+    "radial_action": "H(R)+a*xi^2/2-(R-1)*(v+xi)*<psi,H'(1)psi>/v; R0=v=Q=1 and a remains a common free coefficient",
+    "radial_carrier_gap_values": [
+      1000,
+      10000
+    ]
+  },
+  "route_findings": {
+    "unbiased_positive_response": "The fixed-norm shift is not proportional to the simplex count at any multi-mode depth.",
+    "finite_common_bias": "Selected modes are algebraically compatible, but the next mode has a nonzero residual and the response amplitude curvature is negative.",
+    "scale_covariant_size": "No maintained depth has a finite positive-curvature size extremum from these two energy terms alone.",
+    "nonzero_background": "An operator-level linear background cancels the finite carrier's radius force and field-radius mixed block at a common R=1. Its bare radial curvature is 2*p*omega and its relaxed background requires a*v^2>Q*p*omega/2 for each occupied mode. The angular Hessian and full field dynamics remain open."
+  },
+  "limits": [
+    "The source vectors are controls, not derived spatial particle profiles.",
+    "A passing diagnostic does not establish a complete stable particle or pair coupling.",
+    "Depth ten has one maintained mode and cannot test within-depth proportionality.",
+    "A fixed norm removes radial variations but does not derive the norm value.",
+    "The finite-carrier background action is an inverse choice; its retained field origin, nonzero v, curvature a, and physical size scale are not derived from Psi_infinity.",
+    "The first-order constrained field Hessian has a negative partner direction, so positive-P Schur stability cannot be inferred from the radial block.",
+    "The angular second metric derivative is not determined by first-order cancellation; no angular stability verdict follows from the radial calculation.",
+    "The radius kinetic coefficient and background potential are candidate-action inputs; a threshold inequality is not their derivation from the master field."
+  ],
+  "sources": {
+    "experiments/route-decision-checks.py": "34a85e65467b4e274f0061eb60d7cd0080f9483d872dd367d45000150a87d113",
+    "experiments/results/flux-moment-20260915T033331_031324Z.json": "6ed720878d217cc502ef9d7ba94e70b3d5b0afd10e08e1a7d3410336878f21e5"
+  },
+  "records": [
+    {
+      "depth": 2,
+      "indices": [
+        76,
+        81,
+        95
+      ],
+      "simplex_counts": [
+        2926,
+        3321,
+        4560
+      ],
+      "response_norms": [
+        "0.69749012355472711390101923776468736",
+        "0.70182709004672823762348772378112482",
+        "0.71198816279324300540738418583977382"
+      ],
+      "response_per_simplex": [
+        "0.00023837666560311931438859167387720005",
+        "0.00021133004819233009262977649014788462",
+        "0.00015613775499851820294021583022802057"
+      ],
+      "background_unit_schur_penalties": [
+        "0.69749012355472711390101923776468736",
+        "0.70182709004672823762348772378112482",
+        "0.71198816279324300540738418583977382"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "0.71198816279324300540738418583977382",
+      "response_ratio_spread": "1.526707397614251498117974",
+      "bias_minimum_norm_squared": "4.97618064900007247649920217784",
+      "bias_gram_condition_estimate": "1185463869.3465507083",
+      "bias_selected_max_residual": "1.37048573262e-80",
+      "bias_next_index": 96,
+      "bias_next_residual": "0.00000111384682091369598343901997867",
+      "bias_amplitude_curvatures": [
+        "-2.78996049421890845560407695106",
+        "-2.80730836018691295049395089512",
+        "-2.84795265117297202162953674336"
+      ],
+      "size_response_power": 0,
+      "size_stationary_frequency_fraction": null,
+      "size_stationary_curvature_sign": "no finite stationary size",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "2.0"
+      }
+    },
+    {
+      "depth": 3,
+      "indices": [
+        1,
+        4,
+        16,
+        17
+      ],
+      "simplex_counts": [
+        1,
+        20,
+        816,
+        969
+      ],
+      "response_norms": [
+        "0.39983756997098636224886790246395956",
+        "0.49655935255021424257801517266842855",
+        "0.68179927945951416061987753354264133",
+        "0.69064027668203223582089860488696825"
+      ],
+      "response_per_simplex": [
+        "0.39983756997098636224886790246395956",
+        "0.024827967627510712128900758633421427",
+        "0.00083553833267097323605377148718460948",
+        "0.00071273506365534802458297069647777941"
+      ],
+      "background_unit_schur_penalties": [
+        "0.39983756997098636224886790246395956",
+        "0.49655935255021424257801517266842855",
+        "0.68179927945951416061987753354264133",
+        "0.69064027668203223582089860488696825"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "0.69064027668203223582089860488696825",
+      "response_ratio_spread": "560.9904582501820506404855",
+      "bias_minimum_norm_squared": "79.7666984369902854736959449297",
+      "bias_gram_condition_estimate": "421015148.93467080456",
+      "bias_selected_max_residual": "9.11900122089e-80",
+      "bias_next_index": 18,
+      "bias_next_residual": "0.0000243434165573608154403295120663",
+      "bias_amplitude_curvatures": [
+        "-1.59935027988394544899547160986",
+        "-1.98623741020085697031206069067",
+        "-2.72719711783805664247951013417",
+        "-2.76256110672812894328359441955"
+      ],
+      "size_response_power": 1,
+      "size_stationary_frequency_fraction": "-1.0",
+      "size_stationary_curvature_sign": "flat only at equality",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "1.6666666666666666666666666666666666666666666666666666666666666666666666666666667"
+      }
+    },
+    {
+      "depth": 4,
+      "indices": [
+        3,
+        20,
+        72
+      ],
+      "simplex_counts": [
+        15,
+        8855,
+        1215450
+      ],
+      "response_norms": [
+        "0.56752926716497497398243984485456033",
+        "0.82432116938975218928104242423516566",
+        "0.99543094716890210585311264217170313"
+      ],
+      "response_per_simplex": [
+        "0.037835284477664998265495989656970689",
+        "0.00009309104115073429579684273565614519",
+        "0.00000081898140373433880937357574739537054"
+      ],
+      "background_unit_schur_penalties": [
+        "0.56752926716497497398243984485456033",
+        "0.82432116938975218928104242423516566",
+        "0.99543094716890210585311264217170313"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "0.99543094716890210585311264217170313",
+      "response_ratio_spread": "46197.97751834913210990735",
+      "bias_minimum_norm_squared": "43.4310328095309925794055393665",
+      "bias_gram_condition_estimate": "18678.209257489024615",
+      "bias_selected_max_residual": "0.0",
+      "bias_next_index": 73,
+      "bias_next_residual": "0.000446067882280155034157241105503",
+      "bias_amplitude_curvatures": [
+        "-2.27011706865989989592975937942",
+        "-3.29728467755900875712416969694",
+        "-3.98172378867560842341245056869"
+      ],
+      "size_response_power": 2,
+      "size_stationary_frequency_fraction": "0.0",
+      "size_stationary_curvature_sign": "negative",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "1.5"
+      }
+    },
+    {
+      "depth": 5,
+      "indices": [
+        10,
+        15,
+        22
+      ],
+      "simplex_counts": [
+        2002,
+        11628,
+        65780
+      ],
+      "response_norms": [
+        "0.80139298900744808807648334540393393",
+        "0.86589113356203925728158398629574145",
+        "0.92841221591330343631611549090791189"
+      ],
+      "response_per_simplex": [
+        "0.00040029619830541862541282884385810885",
+        "0.000074466041758001312115719297067057228",
+        "0.000014113898083206193923930001381999269"
+      ],
+      "background_unit_schur_penalties": [
+        "0.80139298900744808807648334540393393",
+        "0.86589113356203925728158398629574145",
+        "0.92841221591330343631611549090791189"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "0.92841221591330343631611549090791189",
+      "response_ratio_spread": "28.36184560392440132783541",
+      "bias_minimum_norm_squared": "35.0232927564610507155227546121",
+      "bias_gram_condition_estimate": "2973364.9537611132114",
+      "bias_selected_max_residual": "1.05421979432e-81",
+      "bias_next_index": 23,
+      "bias_next_residual": "0.000121131941950498495500393189928",
+      "bias_amplitude_curvatures": [
+        "-3.20557195602979235230593338162",
+        "-3.46356453424815702912633594518",
+        "-3.71364886365321374526446196363"
+      ],
+      "size_response_power": 3,
+      "size_stationary_frequency_fraction": "0.3333333333333333333333333",
+      "size_stationary_curvature_sign": "negative",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "1.4"
+      }
+    },
+    {
+      "depth": 6,
+      "indices": [
+        13,
+        35
+      ],
+      "simplex_counts": [
+        18564,
+        3838380
+      ],
+      "response_norms": [
+        "0.91566133011910104758139820377474791",
+        "1.0783014394539006722882650040090457"
+      ],
+      "response_per_simplex": [
+        "0.000049324570680839315211236705654748325",
+        "0.00000028092618225759322221569125620940233"
+      ],
+      "background_unit_schur_penalties": [
+        "0.91566133011910104758139820377474791",
+        "1.0783014394539006722882650040090457"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "1.0783014394539006722882650040090457",
+      "response_ratio_spread": "175.5784038513416610335083",
+      "bias_minimum_norm_squared": "13.3677164333573869608001683958",
+      "bias_gram_condition_estimate": "7497.5297778389075091",
+      "bias_selected_max_residual": "0.0",
+      "bias_next_index": 36,
+      "bias_next_residual": "-0.000702411175544740834562977331403",
+      "bias_amplitude_curvatures": [
+        "-3.6626453204764041903255928151",
+        "-4.31320575781560268915306001604"
+      ],
+      "size_response_power": 4,
+      "size_stationary_frequency_fraction": "0.5",
+      "size_stationary_curvature_sign": "negative",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "1.3333333333333333333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    {
+      "depth": 10,
+      "indices": [
+        23
+      ],
+      "simplex_counts": [
+        64512240
+      ],
+      "response_norms": [
+        "1.2249750622167611610588472352200678"
+      ],
+      "response_per_simplex": [
+        "0.00000001898825807655665283144481163915666"
+      ],
+      "background_unit_schur_penalties": [
+        "1.2249750622167611610588472352200678"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "1.2249750622167611610588472352200678",
+      "response_ratio_spread": null,
+      "bias_minimum_norm_squared": "1.22497506221676116105884723522",
+      "bias_gram_condition_estimate": "1.0",
+      "bias_selected_max_residual": "0.0",
+      "bias_next_index": 24,
+      "bias_next_residual": "0.00361044022890621980587624078647",
+      "bias_amplitude_curvatures": [
+        "-4.89990024886704464423538894088"
+      ],
+      "size_response_power": 8,
+      "size_stationary_frequency_fraction": "0.75",
+      "size_stationary_curvature_sign": "negative",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "1.2"
+      }
+    }
+  ],
+  "radial_records": [
+    {
+      "depth": 2,
+      "index": 76,
+      "gap_at_reference_radius": 1000,
+      "frequency": "11.958590343768794619378154365723054",
+      "radius_exponent": "1.9522868324467507678422144347660502",
+      "carrier_pressure": "23.346598462764680406313622870513076",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "46.693196925529360812627245741026151",
+      "background_force_unit_v": "23.346598462764680406313622870513076",
+      "critical_a_times_v_squared_per_unit_Q": "11.673299231382340203156811435256538",
+      "negative_partner_constrained_field_curvature": "-23.917180687537589238756308731446108"
+    },
+    {
+      "depth": 2,
+      "index": 81,
+      "gap_at_reference_radius": 1000,
+      "frequency": "13.529526473279285951166124264321402",
+      "radius_exponent": "1.9463557606111605683049351449996074",
+      "carrier_pressure": "26.333271789608337388045298020192278",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "52.666543579216674776090596040384556",
+      "background_force_unit_v": "26.333271789608337388045298020192278",
+      "critical_a_times_v_squared_per_unit_Q": "13.166635894804168694022649010096139",
+      "negative_partner_constrained_field_curvature": "-27.059052946558571902332248528642804"
+    },
+    {
+      "depth": 2,
+      "index": 95,
+      "gap_at_reference_radius": 1000,
+      "frequency": "18.394826584607326402733070358255459",
+      "radius_exponent": "1.9284466724096791101894720942002763",
+      "carrier_pressure": "35.47344211663910121543989673230724",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "70.94688423327820243087979346461448",
+      "background_force_unit_v": "35.47344211663910121543989673230724",
+      "critical_a_times_v_squared_per_unit_Q": "17.73672105831955060771994836615362",
+      "negative_partner_constrained_field_curvature": "-36.789653169214652805466140716510919"
+    },
+    {
+      "depth": 3,
+      "index": 1,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.000013217370041022427643239779578692206",
+      "radius_exponent": "2.9999789707159027051723100200708841",
+      "carrier_pressure": "0.000039651832171237671195697403616027089",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.000079303664342475342391394807232054178",
+      "background_force_unit_v": "0.000039651832171237671195697403616027089",
+      "critical_a_times_v_squared_per_unit_Q": "0.000019825916085618835597848701808013544",
+      "negative_partner_constrained_field_curvature": "-0.000026434740082044855286479559157384413"
+    },
+    {
+      "depth": 3,
+      "index": 4,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.00026433535629494715510976419049051068",
+      "radius_exponent": "2.9998878393527959749474738167274465",
+      "carrier_pressure": "0.00079297642086020051749859204700042381",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.0015859528417204010349971840940008476",
+      "background_force_unit_v": "0.00079297642086020051749859204700042381",
+      "critical_a_times_v_squared_per_unit_Q": "0.00039648821043010025874929602350021191",
+      "negative_partner_constrained_field_curvature": "-0.00052867071258989431021952838098102136"
+    },
+    {
+      "depth": 3,
+      "index": 16,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.010778632717260815507140511772817205",
+      "radius_exponent": "2.9987281045221529829497617618714523",
+      "carrier_pressure": "0.032322188857571988584658896219005989",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.064644377715143977169317792438011978",
+      "background_force_unit_v": "0.032322188857571988584658896219005989",
+      "critical_a_times_v_squared_per_unit_Q": "0.016161094428785994292329448109502994",
+      "negative_partner_constrained_field_curvature": "-0.02155726543452163101428102354563441"
+    },
+    {
+      "depth": 3,
+      "index": 17,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.01279864045515841205601816772624006",
+      "radius_exponent": "2.9985739440567819294454395392022178",
+      "carrier_pressure": "0.038377669788189046282913899278403362",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.076755339576378092565827798556806724",
+      "background_force_unit_v": "0.038377669788189046282913899278403362",
+      "critical_a_times_v_squared_per_unit_Q": "0.019188834894094523141456949639201681",
+      "negative_partner_constrained_field_curvature": "-0.02559728091031682411203633545248012"
+    },
+    {
+      "depth": 4,
+      "index": 3,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.00000059570310677450356085053010820067522",
+      "radius_exponent": "3.9999374551246125961225522013128489",
+      "carrier_pressure": "0.0000023827751689214331427303478387900305",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.000004765550337842866285460695677580061",
+      "background_force_unit_v": "0.0000023827751689214331427303478387900305",
+      "critical_a_times_v_squared_per_unit_Q": "0.0000011913875844607165713651739193950153",
+      "negative_partner_constrained_field_curvature": "-0.0000011914062135490071217010602164013504"
+    },
+    {
+      "depth": 4,
+      "index": 20,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.00035143475299742475937355802145450235",
+      "radius_exponent": "3.9986363309578984159981892198344594",
+      "carrier_pressure": "0.0014052597712967178324955652039537955",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.002810519542593435664991130407907591",
+      "background_force_unit_v": "0.0014052597712967178324955652039537955",
+      "critical_a_times_v_squared_per_unit_Q": "0.00070262988564835891624778260197689775",
+      "negative_partner_constrained_field_curvature": "-0.00070286950599484951874711604290900469"
+    },
+    {
+      "depth": 4,
+      "index": 72,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.047884777763522171947155601363358888",
+      "radius_exponent": "3.9838755839603650669150718059374935",
+      "carrier_pressure": "0.19076699697546419670047907969264219",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.38153399395092839340095815938528437",
+      "background_force_unit_v": "0.19076699697546419670047907969264219",
+      "critical_a_times_v_squared_per_unit_Q": "0.095383498487732098350239539846321093",
+      "negative_partner_constrained_field_curvature": "-0.095769555527044343894311202726717775"
+    },
+    {
+      "depth": 5,
+      "index": 10,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.00000024149766411721901017238440145992751",
+      "radius_exponent": "4.9996776827843981982216430392898398",
+      "carrier_pressure": "0.0000012074104817314224496732833933110271",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.0000024148209634628448993465667866220543",
+      "background_force_unit_v": "0.0000012074104817314224496732833933110271",
+      "critical_a_times_v_squared_per_unit_Q": "0.00000060370524086571122483664169665551356",
+      "negative_partner_constrained_field_curvature": "-0.00000048299532823443802034476880291985503"
+    },
+    {
+      "depth": 5,
+      "index": 15,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.0000014024357869837202801557916730594704",
+      "radius_exponent": "4.9993511353518718849571422864944339",
+      "carrier_pressure": "0.0000070112689439151579330166900056560573",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.000014022537887830315866033380011312115",
+      "background_force_unit_v": "0.0000070112689439151579330166900056560573",
+      "critical_a_times_v_squared_per_unit_Q": "0.0000035056344719575789665083450028280286",
+      "negative_partner_constrained_field_curvature": "-0.0000028048715739674405603115833461189408"
+    },
+    {
+      "depth": 5,
+      "index": 22,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.0000079310462992695013077676328135234784",
+      "radius_exponent": "4.9987000327866423893021476553657444",
+      "carrier_pressure": "0.00003964492139619083497428542450102646",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.00007928984279238166994857084900205292",
+      "background_force_unit_v": "0.00003964492139619083497428542450102646",
+      "critical_a_times_v_squared_per_unit_Q": "0.00001982246069809541748714271225051323",
+      "negative_partner_constrained_field_curvature": "-0.000015862092598539002615535265627046957"
+    },
+    {
+      "depth": 6,
+      "index": 13,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.0000000070202443202261734166186356523553886",
+      "radius_exponent": "5.9995584536427539322641973293283561",
+      "carrier_pressure": "0.000000042118366158050467235798996098897759",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.000000084236732316100934471597992197795518",
+      "background_force_unit_v": "0.000000042118366158050467235798996098897759",
+      "critical_a_times_v_squared_per_unit_Q": "0.000000021059183079025233617899498049448879",
+      "negative_partner_constrained_field_curvature": "-0.000000014040488640452346833237271304710777"
+    },
+    {
+      "depth": 6,
+      "index": 35,
+      "gap_at_reference_radius": 1000,
+      "frequency": "0.0000014499388128705355196988706253520429",
+      "radius_exponent": "5.9973519830630052950141708127296838",
+      "carrier_pressure": "0.0000086957934146891259439953620064288183",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.000017391586829378251887990724012857637",
+      "background_force_unit_v": "0.0000086957934146891259439953620064288183",
+      "critical_a_times_v_squared_per_unit_Q": "0.0000043478967073445629719976810032144091",
+      "negative_partner_constrained_field_curvature": "-0.0000028998776257410710393977412507040857"
+    },
+    {
+      "depth": 10,
+      "index": 23,
+      "gap_at_reference_radius": 1000,
+      "frequency": "3.4911088107732869427845486329587965e-15",
+      "radius_exponent": "9.9990764792960697634009263187018018",
+      "carrier_pressure": "3.4907863996466447030727335316021882e-14",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "6.9815727992932894061454670632043763e-14",
+      "background_force_unit_v": "3.4907863996466447030727335316021882e-14",
+      "critical_a_times_v_squared_per_unit_Q": "1.7453931998233223515363667658010941e-14",
+      "negative_partner_constrained_field_curvature": "-6.982217621546573885569097265917593e-15"
+    },
+    {
+      "depth": 2,
+      "index": 76,
+      "gap_at_reference_radius": 10000,
+      "frequency": "1.2255028754424944099054621475021688",
+      "radius_exponent": "1.9994868078332332740577974357581784",
+      "carrier_pressure": "2.4503768324089616330494164207755513",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "4.9007536648179232660988328415511025",
+      "background_force_unit_v": "2.4503768324089616330494164207755513",
+      "critical_a_times_v_squared_per_unit_Q": "1.2251884162044808165247082103877756",
+      "negative_partner_constrained_field_curvature": "-2.4510057508849888198109242950043376"
+    },
+    {
+      "depth": 2,
+      "index": 81,
+      "gap_at_reference_radius": 10000,
+      "frequency": "1.3908934011079307186002755739517498",
+      "radius_exponent": "1.9994175950699822237311317591225972",
+      "carrier_pressure": "2.7809767390419269859928747481295405",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "5.5619534780838539719857494962590811",
+      "background_force_unit_v": "2.7809767390419269859928747481295405",
+      "critical_a_times_v_squared_per_unit_Q": "1.3904883695209634929964373740647703",
+      "negative_partner_constrained_field_curvature": "-2.7817868022158614372005511479034996"
+    },
+    {
+      "depth": 2,
+      "index": 95,
+      "gap_at_reference_radius": 10000,
+      "frequency": "1.9096010394326312222638386983513072",
+      "radius_exponent": "1.9992005880321472064761045335441924",
+      "carrier_pressure": "3.8176755209405158648386496480398132",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "7.6353510418810317296772992960796265",
+      "background_force_unit_v": "3.8176755209405158648386496480398132",
+      "critical_a_times_v_squared_per_unit_Q": "1.9088377604702579324193248240199066",
+      "negative_partner_constrained_field_curvature": "-3.8192020788652624445276773967026143"
+    },
+    {
+      "depth": 3,
+      "index": 1,
+      "gap_at_reference_radius": 10000,
+      "frequency": "0.00000013217507627786216761838333930153977",
+      "radius_exponent": "2.9999997897074891095548515181939983",
+      "carrier_pressure": "0.00000039652520103815783524740193355905275",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.00000079305040207631567049480386711810549",
+      "background_force_unit_v": "0.00000039652520103815783524740193355905275",
+      "critical_a_times_v_squared_per_unit_Q": "0.00000019826260051907891762370096677952637",
+      "negative_partner_constrained_field_curvature": "-0.00000026435015255572433523676667860307954"
+    },
+    {
+      "depth": 3,
+      "index": 4,
+      "gap_at_reference_radius": 10000,
+      "frequency": "0.0000026435003211015893642081779037942525",
+      "radius_exponent": "2.9999988784492306628186410522485594",
+      "carrier_pressure": "0.0000079304979984849492180510245136285579",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.000015860995996969898436102049027257116",
+      "background_force_unit_v": "0.0000079304979984849492180510245136285579",
+      "critical_a_times_v_squared_per_unit_Q": "0.000003965248999242474609025512256814279",
+      "negative_partner_constrained_field_curvature": "-0.0000052870006422031787284163558075885049"
+    },
+    {
+      "depth": 3,
+      "index": 16,
+      "gap_at_reference_radius": 10000,
+      "frequency": "0.000107854188120578044540664417607973",
+      "radius_exponent": "2.9999872890848771838150909668207243",
+      "carrier_pressure": "0.00032356119343630329270480679966163316",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.00064712238687260658540961359932326633",
+      "background_force_unit_v": "0.00032356119343630329270480679966163316",
+      "critical_a_times_v_squared_per_unit_Q": "0.00016178059671815164635240339983081658",
+      "negative_partner_constrained_field_curvature": "-0.00021570837624115608908132883521594601"
+    },
+    {
+      "depth": 3,
+      "index": 17,
+      "gap_at_reference_radius": 10000,
+      "frequency": "0.00012807674980378680487729291901814035",
+      "radius_exponent": "2.999985749538738109772502607045753",
+      "carrier_pressure": "0.00038422842425859878696122029817714882",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.00076845684851719757392244059635429764",
+      "background_force_unit_v": "0.00038422842425859878696122029817714882",
+      "critical_a_times_v_squared_per_unit_Q": "0.00019211421212929939348061014908857441",
+      "negative_partner_constrained_field_curvature": "-0.00025615349960757360975458583803628069"
+    },
+    {
+      "depth": 4,
+      "index": 3,
+      "gap_at_reference_radius": 10000,
+      "frequency": "0.00000000059572154970000212080956447917471893",
+      "radius_exponent": "3.999999374561921731078565392605542",
+      "carrier_pressure": "0.0000000023828858262130672554851611097762559",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.0000000047657716524261345109703222195525118",
+      "background_force_unit_v": "0.0000000023828858262130672554851611097762559",
+      "critical_a_times_v_squared_per_unit_Q": "0.0000000011914429131065336277425805548881279",
+      "negative_partner_constrained_field_curvature": "-0.0000000011914430994000042416191289583494379"
+    },
+    {
+      "depth": 4,
+      "index": 20,
+      "gap_at_reference_radius": 10000,
+      "frequency": "0.00000035167200145091498496011055982552869",
+      "radius_exponent": "3.9999863697152705195539589954965238",
+      "carrier_pressure": "0.0000014066832124141487776086588310203702",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.0000028133664248282975552173176620407403",
+      "background_force_unit_v": "0.0000014066832124141487776086588310203702",
+      "critical_a_times_v_squared_per_unit_Q": "0.00000070334160620707438880432941551018508",
+      "negative_partner_constrained_field_curvature": "-0.00000070334400290182996992022111965105737"
+    },
+    {
+      "depth": 4,
+      "index": 72,
+      "gap_at_reference_radius": 10000,
+      "frequency": "0.000048267461770663316073667099951431519",
+      "radius_exponent": "3.9998396250229486016412060473186948",
+      "carrier_pressure": "0.00019306210618957946491776017976655607",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.00038612421237915892983552035953311215",
+      "background_force_unit_v": "0.00019306210618957946491776017976655607",
+      "critical_a_times_v_squared_per_unit_Q": "0.000096531053094789732458880089883278037",
+      "negative_partner_constrained_field_curvature": "-0.000096534923541326632147334199902863038"
+    },
+    {
+      "depth": 5,
+      "index": 10,
+      "gap_at_reference_radius": 10000,
+      "frequency": "2.4153619559922888581400565641401409e-11",
+      "radius_exponent": "4.9999967771331006561565585491252375",
+      "carrier_pressure": "0.00000000012076801995571346388751455376700779",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.00000000024153603991142692777502910753401558",
+      "background_force_unit_v": "0.00000000012076801995571346388751455376700779",
+      "critical_a_times_v_squared_per_unit_Q": "6.0384009977856731943757276883503895e-11",
+      "negative_partner_constrained_field_curvature": "-4.8307239119845777162801131282802817e-11"
+    },
+    {
+      "depth": 5,
+      "index": 15,
+      "gap_at_reference_radius": 10000,
+      "frequency": "0.00000000014028862627548209560192038802717408",
+      "radius_exponent": "4.9999935125665547694396155649244693",
+      "carrier_pressure": "0.0000000007014422212642843929962718276063486",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.0000000014028844425285687859925436552126972",
+      "background_force_unit_v": "0.0000000007014422212642843929962718276063486",
+      "critical_a_times_v_squared_per_unit_Q": "0.0000000003507211106321421964981359138031743",
+      "negative_partner_constrained_field_curvature": "-0.00000000028057725255096419120384077605434816"
+    },
+    {
+      "depth": 5,
+      "index": 22,
+      "gap_at_reference_radius": 10000,
+      "frequency": "0.00000000079361505077247922321882139221345495",
+      "radius_exponent": "4.9999870050794689159821999107541304",
+      "carrier_pressure": "0.0000000039680649408978790555186487002543893",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.0000000079361298817957581110372974005087785",
+      "background_force_unit_v": "0.0000000039680649408978790555186487002543893",
+      "critical_a_times_v_squared_per_unit_Q": "0.0000000019840324704489395277593243501271946",
+      "negative_partner_constrained_field_curvature": "-0.0000000015872301015449584464376427844269099"
+    },
+    {
+      "depth": 6,
+      "index": 13,
+      "gap_at_reference_radius": 10000,
+      "frequency": "7.0217787836254683255364806753930856e-14",
+      "radius_exponent": "5.9999955850377664116443110334087568",
+      "carrier_pressure": "4.2130641700864667634793915860091433e-13",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "8.4261283401729335269587831720182866e-13",
+      "background_force_unit_v": "4.2130641700864667634793915860091433e-13",
+      "critical_a_times_v_squared_per_unit_Q": "2.1065320850432333817396957930045717e-13",
+      "negative_partner_constrained_field_curvature": "-1.4043557567250936651072961350786171e-13"
+    },
+    {
+      "depth": 6,
+      "index": 35,
+      "gap_at_reference_radius": 10000,
+      "frequency": "1.451840018952662213107200078284307e-11",
+      "radius_exponent": "5.9999735357998055477947330017974509",
+      "carrier_pressure": "8.7110016919310613981064801325081223e-11",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "0.00000000017422003383862122796212960265016245",
+      "background_force_unit_v": "8.7110016919310613981064801325081223e-11",
+      "critical_a_times_v_squared_per_unit_Q": "4.3555008459655306990532400662540612e-11",
+      "negative_partner_constrained_field_curvature": "-2.903680037905324426214400156568614e-11"
+    },
+    {
+      "depth": 10,
+      "index": 23,
+      "gap_at_reference_radius": 10000,
+      "frequency": "3.4927049986713353781593225631802385e-24",
+      "radius_exponent": "9.9999907660887298742605726659975038",
+      "carrier_pressure": "3.4927017735385303325843724917180253e-23",
+      "first_radius_force_with_background": "0",
+      "field_radius_mixed_operator_with_background": "0",
+      "bare_radial_curvature": "6.9854035470770606651687449834360506e-23",
+      "background_force_unit_v": "3.4927017735385303325843724917180253e-23",
+      "critical_a_times_v_squared_per_unit_Q": "1.7463508867692651662921862458590126e-23",
+      "negative_partner_constrained_field_curvature": "-6.9854099973426707563186451263604769e-24"
+    }
+  ],
+  "radial_depth_bounds": [
+    {
+      "depth": 2,
+      "gap_at_reference_radius": 1000,
+      "common_a_times_v_squared_must_exceed": "17.7367210583195493711627932498",
+      "largest_to_smallest_threshold_ratio": "1.5194265739917285352"
+    },
+    {
+      "depth": 3,
+      "gap_at_reference_radius": 1000,
+      "common_a_times_v_squared_must_exceed": "0.0191888348940945224763154897119",
+      "largest_to_smallest_threshold_ratio": "967.86624190412896951"
+    },
+    {
+      "depth": 4,
+      "gap_at_reference_radius": 1000,
+      "common_a_times_v_squared_must_exceed": "0.0953834984877321018226226101433",
+      "largest_to_smallest_threshold_ratio": "80060.846471643904806"
+    },
+    {
+      "depth": 5,
+      "gap_at_reference_radius": 1000,
+      "common_a_times_v_squared_must_exceed": "0.0000198224606980954164603576928005",
+      "largest_to_smallest_threshold_ratio": "32.834667245343240438"
+    },
+    {
+      "depth": 6,
+      "gap_at_reference_radius": 1000,
+      "common_a_times_v_squared_must_exceed": "0.00000434789670734456319114904360168",
+      "largest_to_smallest_threshold_ratio": "206.46084375775387798"
+    },
+    {
+      "depth": 10,
+      "gap_at_reference_radius": 1000,
+      "common_a_times_v_squared_must_exceed": "1.74539319982332225822155368221e-14",
+      "largest_to_smallest_threshold_ratio": "1.0"
+    },
+    {
+      "depth": 2,
+      "gap_at_reference_radius": 10000,
+      "common_a_times_v_squared_must_exceed": "1.90883776047025799371681387129",
+      "largest_to_smallest_threshold_ratio": "1.5579952725831827109"
+    },
+    {
+      "depth": 3,
+      "gap_at_reference_radius": 10000,
+      "common_a_times_v_squared_must_exceed": "0.000192114212129299380144714648466",
+      "largest_to_smallest_threshold_ratio": "968.98866264397713621"
+    },
+    {
+      "depth": 4,
+      "gap_at_reference_radius": 10000,
+      "common_a_times_v_squared_must_exceed": "0.0000965310530947897287110809338984",
+      "largest_to_smallest_threshold_ratio": "81020.292313542304328"
+    },
+    {
+      "depth": 5,
+      "gap_at_reference_radius": 10000,
+      "common_a_times_v_squared_must_exceed": "0.00000000198403247044893972944233450197",
+      "largest_to_smallest_threshold_ratio": "32.856918100942607452"
+    },
+    {
+      "depth": 6,
+      "gap_at_reference_radius": 10000,
+      "common_a_times_v_squared_must_exceed": "4.35550084596553062232361381615e-11",
+      "largest_to_smallest_threshold_ratio": "206.76166657466984589"
+    },
+    {
+      "depth": 10,
+      "gap_at_reference_radius": 10000,
+      "common_a_times_v_squared_must_exceed": "1.74635088676926502171673326929e-23",
+      "largest_to_smallest_threshold_ratio": "1.0"
+    }
+  ]
+}

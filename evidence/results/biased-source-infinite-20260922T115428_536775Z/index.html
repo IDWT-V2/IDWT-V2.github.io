@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>biased-source-infinite-20260922T115428_536775Z.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/biased-source-infinite-20260922T115428_536775Z/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="biased-source-infinite-20260922T115428_536775Z.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/biased-source-infinite-20260922T115428_536775Z/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="biased-source-infinite-20260922T115428_536775Z.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>biased-source-infinite-20260922T115428_536775Z.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/biased-source-infinite-20260922T115428_536775Z.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">generated_at</th><td>2026-09-22T11:54:28.536775+00:00</td></tr><tr><th scope="row">status</th><td>pass</td></tr><tr><th scope="row">checks</th><td>48</td></tr><tr><th scope="row">scope</th><td>infinite-harmonic biased-source orthogonality and amplitude curvature</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;generated_at&quot;: &quot;2026-09-22T11:54:28.536775+00:00&quot;,
+  &quot;status&quot;: &quot;pass&quot;,
+  &quot;checks&quot;: 48,
+  &quot;scope&quot;: &quot;infinite-harmonic biased-source orthogonality and amplitude curvature&quot;,
+  &quot;method&quot;: {
+    &quot;summation&quot;: &quot;mpmath.nsum over harmonic ell=2k, k=1..infinity&quot;,
+    &quot;precision_cross_check_digits&quot;: [
+      50,
+      80
+    ],
+    &quot;source_components&quot;: &quot;(i+ell+d)/(i+2ell+d+1)&quot;,
+    &quot;inverse_weight&quot;: &quot;d/((ell-1)(ell+d))&quot;
+  },
+  &quot;environment&quot;: {
+    &quot;mpmath&quot;: &quot;1.3.0&quot;
+  },
+  &quot;sources&quot;: {
+    &quot;experiments/biased_source_infinite_checks.py&quot;: &quot;b2a67d68d4d5748621c33d09f5475f07e053b8fe52e0a356aa773d1009a62cd7&quot;
+  },
+  &quot;records&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;indices&quot;: [
+        76,
+        81,
+        95
+      ],
+      &quot;digits&quot;: 80,
+      &quot;minimum_bias_norm&quot;: &quot;4.97618064900007247649920217783511393760213176597687656336180091804080197262&quot;,
+      &quot;gram_condition_estimate&quot;: &quot;1185463869.34655070827209640604656460009659551662294887113581176806581038836&quot;,
+      &quot;bias_coefficients&quot;: [
+        &quot;21239.482775684711799444083653190468544303971194718079210441778095315955147&quot;,
+        &quot;-29397.529509741418085554959510077909662274422983297656645755036005930432554&quot;,
+        &quot;8164.00784176067612732178138815303903750557476753616574718924557254792647839&quot;
+      ],
+      &quot;source_norms&quot;: [
+        &quot;0.697490123554727113901019237764687359676018696394487275589643887403367989033&quot;,
+        &quot;0.701827090046728237623487723781124819313528615682697800494768870884399603033&quot;,
+        &quot;0.711988162793243005407384185839773819924286068441446538015578702418302032597&quot;
+      ],
+      &quot;stationary_relative_response_energies&quot;: [
+        &quot;0.348745061777363556950509618882343679838009348197243637794821943701683994517&quot;,
+        &quot;0.350913545023364118811743861890562409656764307841348900247384435442199801517&quot;,
+        &quot;0.355994081396621502703692092919886909962143034220723269007789351209151016299&quot;
+      ],
+      &quot;real_amplitude_curvatures&quot;: [
+        &quot;-2.78996049421890845560407695105874943870407478557794910235857554961347195613&quot;,
+        &quot;-2.80730836018691295049395089512449927725411446273079120197907548353759841213&quot;,
+        &quot;-2.84795265117297202162953674335909527969714427376578615206231480967320813039&quot;
+      ],
+      &quot;selected_residuals&quot;: [
+        &quot;1.85858949739e-78&quot;,
+        &quot;1.50036561128e-77&quot;,
+        &quot;-1.33285008596e-77&quot;
+      ],
+      &quot;unselected_extra_index&quot;: 96,
+      &quot;unselected_extra_residual&quot;: &quot;0.00000111384682091369598343901997867292600623602977764061074566207253779607211858&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;indices&quot;: [
+        1,
+        4,
+        16,
+        17
+      ],
+      &quot;digits&quot;: 80,
+      &quot;minimum_bias_norm&quot;: &quot;79.766698436990285473695944929709587333683988328614287900252780558646899439&quot;,
+      &quot;gram_condition_estimate&quot;: &quot;421015148.934670804562333415063165310724240734110384444303238993482654587375&quot;,
+      &quot;bias_coefficients&quot;: [
+        &quot;3815.59850361241821248275321022811620415747283024704909426804660487659327875&quot;,
+        &quot;-7457.91030472994283157746792518320087407615819797895897436438311051040644079&quot;,
+        &quot;59945.4330545547978662697795380226083316729684911635059300373730889543504465&quot;,
+        &quot;-56140.4331493207891905501792711443549534934386041245087937399423456536353941&quot;
+      ],
+      &quot;source_norms&quot;: [
+        &quot;0.399837569970986362248867902463959557908501497730212602424114468162649624333&quot;,
+        &quot;0.496559352550214242578015172668428549811135253069451232351637278489025593897&quot;,
+        &quot;0.681799279459514160619877533542641332857512892309344053126997203003791451427&quot;,
+        &quot;0.690640276682032235820898604886968246377579979680766890104246410148034644867&quot;
+      ],
+      &quot;stationary_relative_response_energies&quot;: [
+        &quot;0.199918784985493181124433951231979778954250748865106301212057234081324812167&quot;,
+        &quot;0.248279676275107121289007586334214274905567626534725616175818639244512796949&quot;,
+        &quot;0.340899639729757080309938766771320666428756446154672026563498601501895725713&quot;,
+        &quot;0.345320138341016117910449302443484123188789989840383445052123205074017322434&quot;
+      ],
+      &quot;real_amplitude_curvatures&quot;: [
+        &quot;-1.59935027988394544899547160985583823163400599092085040969645787265059849733&quot;,
+        &quot;-1.98623741020085697031206069067371419924454101227780492940654911395610237559&quot;,
+        &quot;-2.72719711783805664247951013417056533143005156923737621250798881201516580571&quot;,
+        &quot;-2.76256110672812894328359441954787298551031991872306756041698564059213857947&quot;
+      ],
+      &quot;selected_residuals&quot;: [
+        &quot;5.1445925963e-79&quot;,
+        &quot;4.88493826095e-77&quot;,
+        &quot;-6.21768292494e-77&quot;,
+        &quot;4.83032967561e-77&quot;
+      ],
+      &quot;unselected_extra_index&quot;: 18,
+      &quot;unselected_extra_residual&quot;: &quot;0.0000243434165573608154403295120662519110438062365961102697239689718801476775473&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;indices&quot;: [
+        3,
+        20,
+        72
+      ],
+      &quot;digits&quot;: 80,
+      &quot;minimum_bias_norm&quot;: &quot;43.4310328095309925794055393664628995870670190332277743166126141337962841845&quot;,
+      &quot;gram_condition_estimate&quot;: &quot;18678.2092574890246152790450112721150293290059608247887778594722495350079318&quot;,
+      &quot;bias_coefficients&quot;: [
+        &quot;356.045970214414065615232815672946807972960708574253801732625950060916422895&quot;,
+        &quot;-281.562754542807332630828194485386457251709967839606349801630272456309267529&quot;,
+        &quot;-13.4609058711127638045861239490951062861395534962718761212074482236301727638&quot;
+      ],
+      &quot;source_norms&quot;: [
+        &quot;0.567529267164974973982439844854560331137143691545187050989659355454401024689&quot;,
+        &quot;0.82432116938975218928104242423516566085628653792564935922124228263758752522&quot;,
+        &quot;0.995430947168902105853112642171703126640515269438652442100193676108393076389&quot;
+      ],
+      &quot;stationary_relative_response_energies&quot;: [
+        &quot;0.283764633582487486991219922427280165568571845772593525494829677727200512345&quot;,
+        &quot;0.41216058469487609464052121211758283042814326896282467961062114131879376261&quot;,
+        &quot;0.497715473584451052926556321085851563320257634719326221050096838054196538195&quot;
+      ],
+      &quot;real_amplitude_curvatures&quot;: [
+        &quot;-2.27011706865989989592975937941824132454857476618074820395863742181760409876&quot;,
+        &quot;-3.29728467755900875712416969694066264342514615170259743688496913055035010088&quot;,
+        &quot;-3.98172378867560842341245056868681250656206107775460976840077470443357230556&quot;
+      ],
+      &quot;selected_residuals&quot;: [
+        &quot;1.06476199227e-79&quot;,
+        &quot;1.05421979432e-81&quot;,
+        &quot;-1.48644991e-79&quot;
+      ],
+      &quot;unselected_extra_index&quot;: 73,
+      &quot;unselected_extra_residual&quot;: &quot;0.000446067882280155034157241105503001234907211903944368086425662743161091504586&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;indices&quot;: [
+        10,
+        15,
+        22
+      ],
+      &quot;digits&quot;: 80,
+      &quot;minimum_bias_norm&quot;: &quot;35.0232927564610507155227546120809502110759889419860222937697522220623492185&quot;,
+      &quot;gram_condition_estimate&quot;: &quot;2973364.95376111321141424359657921455764335353105961132936752854888031771709&quot;,
+      &quot;bias_coefficients&quot;: [
+        &quot;2177.24574427523865455290847295607312222450600928308766975686847734929407796&quot;,
+        &quot;-3222.61566676705867661830131395942878606336408304865155400653886325071985889&quot;,
+        &quot;1088.50524351689977305246252829181034626080851303022569840152168358846883502&quot;
+      ],
+      &quot;source_norms&quot;: [
+        &quot;0.801392989007448088076483345403933927594709447928912907751129964323579787402&quot;,
+        &quot;0.865891133562039257281583986295741446960120185415600901828905428320245970891&quot;,
+        &quot;0.928412215913303436316115490907911887529001459420915821913299095277520274221&quot;
+      ],
+      &quot;stationary_relative_response_energies&quot;: [
+        &quot;0.400696494503724044038241672701966963797354723964456453875564982161789893701&quot;,
+        &quot;0.432945566781019628640791993147870723480060092707800450914452714160122985446&quot;,
+        &quot;0.464206107956651718158057745453955943764500729710457910956649547638760137111&quot;
+      ],
+      &quot;real_amplitude_curvatures&quot;: [
+        &quot;-3.20557195602979235230593338161573571037883779171565163100451985729431914961&quot;,
+        &quot;-3.46356453424815702912633594518296578784048074166240360731562171328098388357&quot;,
+        &quot;-3.71364886365321374526446196363164755011600583768366328765319638111008109688&quot;
+      ],
+      &quot;selected_residuals&quot;: [
+        &quot;-1.60873940614e-78&quot;,
+        &quot;-4.89157984566e-79&quot;,
+        &quot;-2.10633114906e-78&quot;
+      ],
+      &quot;unselected_extra_index&quot;: 23,
+      &quot;unselected_extra_residual&quot;: &quot;0.000121131941950498495500393189927774834243028667252283290565591783399556642156&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;indices&quot;: [
+        13,
+        35
+      ],
+      &quot;digits&quot;: 80,
+      &quot;minimum_bias_norm&quot;: &quot;13.3677164333573869608001683957603048698799244442792517149032431774322663438&quot;,
+      &quot;gram_condition_estimate&quot;: &quot;7497.52977783890750912303089418665600099945083657019729929246961416215722779&quot;,
+      &quot;bias_coefficients&quot;: [
+        &quot;158.10138311797080736918350630640331002443607588501732892500064918260762982&quot;,
+        &quot;-146.651978200933006631415031252253873775040147919002067851202155628288972549&quot;
+      ],
+      &quot;source_norms&quot;: [
+        &quot;0.915661330119101047581398203774747912578415517310998614506607372048973115427&quot;,
+        &quot;1.07830143945390067228826500400904570338211296310579624127162852416475323009&quot;
+      ],
+      &quot;stationary_relative_response_energies&quot;: [
+        &quot;0.457830665059550523790699101887373956289207758655499307253303686024486557713&quot;,
+        &quot;0.539150719726950336144132502004522851691056481552898120635814262082376615043&quot;
+      ],
+      &quot;real_amplitude_curvatures&quot;: [
+        &quot;-3.66264532047640419032559281509899165031366206924399445802642948819589246171&quot;,
+        &quot;-4.31320575781560268915306001603618281352845185242318496508651409665901292035&quot;
+      ],
+      &quot;selected_residuals&quot;: [
+        &quot;-6.43074074537e-80&quot;,
+        &quot;5.48194293048e-80&quot;
+      ],
+      &quot;unselected_extra_index&quot;: 36,
+      &quot;unselected_extra_residual&quot;: &quot;-0.000702411175544740834562977331403289946887654302109292558943736417012807994525&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;indices&quot;: [
+        23
+      ],
+      &quot;digits&quot;: 80,
+      &quot;minimum_bias_norm&quot;: &quot;1.22497506221676116105884723522006784671451854923398028364878548833835680885&quot;,
+      &quot;gram_condition_estimate&quot;: &quot;1.0&quot;,
+      &quot;bias_coefficients&quot;: [
+        &quot;-1.0&quot;
+      ],
+      &quot;source_norms&quot;: [
+        &quot;1.22497506221676116105884723522006784671451854923398028364878548833835680885&quot;
+      ],
+      &quot;stationary_relative_response_energies&quot;: [
+        &quot;0.612487531108380580529423617610033923357259274616990141824392744169178404426&quot;
+      ],
+      &quot;real_amplitude_curvatures&quot;: [
+        &quot;-4.89990024886704464423538894088027138685807419693592113459514195335342723541&quot;
+      ],
+      &quot;selected_residuals&quot;: [
+        &quot;0.0&quot;
+      ],
+      &quot;unselected_extra_index&quot;: 24,
+      &quot;unselected_extra_residual&quot;: &quot;0.00361044022890621980587624078647416813455583266002343146398930151847911675862&quot;
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

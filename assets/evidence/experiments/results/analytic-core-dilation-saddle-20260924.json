@@ -1,0 +1,114 @@
+{
+  "experiment": "analytic-core-dilation-saddle",
+  "rows": [
+    {
+      "depth": 2,
+      "rank": 2,
+      "canonical_norm": null,
+      "coupling": 2,
+      "origin_amplitude": 1.0,
+      "controls": [
+        {
+          "radius_factor": 0.9,
+          "lower_residual_per_diagonal": -0.2743484224965713,
+          "formula_error": 1.3345785898812087e-15
+        },
+        {
+          "radius_factor": 1.0,
+          "lower_residual_per_diagonal": 0.0,
+          "formula_error": 0.0
+        },
+        {
+          "radius_factor": 1.1,
+          "lower_residual_per_diagonal": 0.1502629601803156,
+          "formula_error": 7.850462293418876e-17
+        }
+      ],
+      "mixed_source_derivative_per_diagonal": 2.0000000011899384,
+      "derivative_relative_error": 5.949691850304362e-10
+    },
+    {
+      "depth": 4,
+      "rank": 4,
+      "canonical_norm": 1.0,
+      "coupling": 10.81027076025396,
+      "origin_amplitude": 0.22507907903927651,
+      "controls": [
+        {
+          "radius_factor": 0.9,
+          "lower_residual_per_diagonal": -0.04414411281786612,
+          "formula_error": 5.551115123125783e-17
+        },
+        {
+          "radius_factor": 1.0,
+          "lower_residual_per_diagonal": 1.1102230246251565e-16,
+          "formula_error": 2.220446049250313e-16
+        },
+        {
+          "radius_factor": 1.1,
+          "lower_residual_per_diagonal": 0.02115215318511665,
+          "formula_error": 1.734723475976807e-16
+        }
+      ],
+      "mixed_source_derivative_per_diagonal": 0.30010543896619163,
+      "derivative_relative_error": 8.235648660176749e-10
+    },
+    {
+      "depth": 6,
+      "rank": 8,
+      "canonical_norm": 1.0,
+      "coupling": 9.572313707894,
+      "origin_amplitude": 0.3110540199058654,
+      "controls": [
+        {
+          "radius_factor": 0.9,
+          "lower_residual_per_diagonal": -0.060577130632660126,
+          "formula_error": 2.924297204298531e-15
+        },
+        {
+          "radius_factor": 1.0,
+          "lower_residual_per_diagonal": 2.220446049250313e-16,
+          "formula_error": 6.280369834735101e-16
+        },
+        {
+          "radius_factor": 1.1,
+          "lower_residual_per_diagonal": 0.024068715823572173,
+          "formula_error": 9.224293194767178e-16
+        }
+      ],
+      "mixed_source_derivative_per_diagonal": 0.3732648243714997,
+      "derivative_relative_error": 1.2979020855463496e-09
+    },
+    {
+      "depth": 10,
+      "rank": 32,
+      "canonical_norm": 1.0,
+      "coupling": 10.427255317731225,
+      "origin_amplitude": 0.8283902250999898,
+      "controls": [
+        {
+          "radius_factor": 0.9,
+          "lower_residual_per_diagonal": -0.18355230803628508,
+          "formula_error": 7.850462293418876e-16
+        },
+        {
+          "radius_factor": 1.0,
+          "lower_residual_per_diagonal": -1.7763568394002505e-15,
+          "formula_error": 1.0048591735576161e-14
+        },
+        {
+          "radius_factor": 1.1,
+          "lower_residual_per_diagonal": 0.049258146933023106,
+          "formula_error": 3.689717277906871e-15
+        }
+      ],
+      "mixed_source_derivative_per_diagonal": 0.9204335858825629,
+      "derivative_relative_error": 2.648892709925887e-09
+    }
+  ],
+  "scope": "Exact mixed Hessian obstruction for the gapless analytic upper-only core in d>2 flat sectors. Depth two is only a local equation check because that analytic profile has divergent canonical norm. This proves an energetic constrained saddle, not dynamical growth.",
+  "sources": {
+    "experiments/analytic-core-dilation-saddle.py": "f0b6f9072f1bd753256fa75ede3f8df677cb3137773dd9da99c8d8d5a6b2fca0",
+    "experiments/localized_current_model.py": "bea8db856f55959328e92d99c089ed26db3b35e717533c67a14c9444d5f1a2e4"
+  }
+}

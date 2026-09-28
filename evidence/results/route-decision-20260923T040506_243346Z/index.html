@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>route-decision-20260923T040506_243346Z.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/route-decision-20260923T040506_243346Z/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="route-decision-20260923T040506_243346Z.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/route-decision-20260923T040506_243346Z/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="route-decision-20260923T040506_243346Z.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>route-decision-20260923T040506_243346Z.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/route-decision-20260923T040506_243346Z.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">generated_at</th><td>2026-09-23T04:05:06.243394+00:00</td></tr><tr><th scope="row">status</th><td>diagnostic_pass</td></tr><tr><th scope="row">checks</th><td>108</td></tr><tr><th scope="row">scope</th><td>shared algebraic controls for current positive-response routes</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;generated_at&quot;: &quot;2026-09-23T04:05:06.243394+00:00&quot;,
+  &quot;status&quot;: &quot;diagnostic_pass&quot;,
+  &quot;checks&quot;: 108,
+  &quot;scope&quot;: &quot;shared algebraic controls for current positive-response routes&quot;,
+  &quot;assumptions&quot;: {
+    &quot;source&quot;: &quot;(i+ell+d)/(i+2ell+d+1), even ell &gt;= 2&quot;,
+    &quot;inverse_stiffness&quot;: &quot;d/((ell-1)(ell+d))&quot;,
+    &quot;size_law&quot;: &quot;E=Q*c*mu/L-g^2*Q^2*K/(2*L^(d-2))&quot;,
+    &quot;fixed_profile&quot;: true,
+    &quot;bias&quot;: &quot;minimum-norm solution on maintained selected modes&quot;,
+    &quot;background_schur&quot;: &quot;unit v and the same source/control inverse; reported G bound omits the nonnegative field-mixing Schur term&quot;
+  },
+  &quot;route_findings&quot;: {
+    &quot;unbiased_positive_response&quot;: &quot;The fixed-norm shift is not proportional to the simplex count at any multi-mode depth.&quot;,
+    &quot;finite_common_bias&quot;: &quot;Selected modes are algebraically compatible, but the next mode has a nonzero residual and the response amplitude curvature is negative.&quot;,
+    &quot;scale_covariant_size&quot;: &quot;No maintained depth has a finite positive-curvature size extremum from these two energy terms alone.&quot;,
+    &quot;nonzero_background&quot;: &quot;The shared unit-normalization geometric stiffness must exceed the maximum reported Schur penalty at each depth before field mixing; radial stability and the full action remain untested.&quot;
+  },
+  &quot;limits&quot;: [
+    &quot;The source vectors are controls, not derived spatial particle profiles.&quot;,
+    &quot;A passing diagnostic does not establish a complete stable particle or pair coupling.&quot;,
+    &quot;Depth ten has one maintained mode and cannot test within-depth proportionality.&quot;,
+    &quot;A fixed norm removes radial variations but does not derive the norm value.&quot;
+  ],
+  &quot;sources&quot;: {
+    &quot;experiments/route-decision-checks.py&quot;: &quot;531158df3ecce9d20e7ade159340c73b26fcc8574c75ff828d341970212db50d&quot;
+  },
+  &quot;records&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;indices&quot;: [
+        76,
+        81,
+        95
+      ],
+      &quot;simplex_counts&quot;: [
+        2926,
+        3321,
+        4560
+      ],
+      &quot;response_norms&quot;: [
+        &quot;0.69749012355472711390101923776468736&quot;,
+        &quot;0.70182709004672823762348772378112482&quot;,
+        &quot;0.71198816279324300540738418583977382&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.00023837666560311931438859167387720005&quot;,
+        &quot;0.00021133004819233009262977649014788462&quot;,
+        &quot;0.00015613775499851820294021583022802057&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;0.69749012355472711390101923776468736&quot;,
+        &quot;0.70182709004672823762348772378112482&quot;,
+        &quot;0.71198816279324300540738418583977382&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;0.71198816279324300540738418583977382&quot;,
+      &quot;response_ratio_spread&quot;: &quot;1.526707397614251498117974&quot;,
+      &quot;bias_minimum_norm_squared&quot;: &quot;4.97618064900007247649920217784&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;1185463869.3465507083&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;1.37048573262e-80&quot;,
+      &quot;bias_next_index&quot;: 96,
+      &quot;bias_next_residual&quot;: &quot;0.00000111384682091369598343901997867&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-2.78996049421890845560407695106&quot;,
+        &quot;-2.80730836018691295049395089512&quot;,
+        &quot;-2.84795265117297202162953674336&quot;
+      ],
+      &quot;size_response_power&quot;: 0,
+      &quot;size_stationary_frequency_fraction&quot;: null,
+      &quot;size_stationary_curvature_sign&quot;: &quot;no finite stationary size&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;2.0&quot;
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;indices&quot;: [
+        1,
+        4,
+        16,
+        17
+      ],
+      &quot;simplex_counts&quot;: [
+        1,
+        20,
+        816,
+        969
+      ],
+      &quot;response_norms&quot;: [
+        &quot;0.39983756997098636224886790246395956&quot;,
+        &quot;0.49655935255021424257801517266842855&quot;,
+        &quot;0.68179927945951416061987753354264133&quot;,
+        &quot;0.69064027668203223582089860488696825&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.39983756997098636224886790246395956&quot;,
+        &quot;0.024827967627510712128900758633421427&quot;,
+        &quot;0.00083553833267097323605377148718460948&quot;,
+        &quot;0.00071273506365534802458297069647777941&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;0.39983756997098636224886790246395956&quot;,
+        &quot;0.49655935255021424257801517266842855&quot;,
+        &quot;0.68179927945951416061987753354264133&quot;,
+        &quot;0.69064027668203223582089860488696825&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;0.69064027668203223582089860488696825&quot;,
+      &quot;response_ratio_spread&quot;: &quot;560.9904582501820506404855&quot;,
+      &quot;bias_minimum_norm_squared&quot;: &quot;79.7666984369902854736959449297&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;421015148.93467080456&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;9.11900122089e-80&quot;,
+      &quot;bias_next_index&quot;: 18,
+      &quot;bias_next_residual&quot;: &quot;0.0000243434165573608154403295120663&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-1.59935027988394544899547160986&quot;,
+        &quot;-1.98623741020085697031206069067&quot;,
+        &quot;-2.72719711783805664247951013417&quot;,
+        &quot;-2.76256110672812894328359441955&quot;
+      ],
+      &quot;size_response_power&quot;: 1,
+      &quot;size_stationary_frequency_fraction&quot;: &quot;-1.0&quot;,
+      &quot;size_stationary_curvature_sign&quot;: &quot;flat only at equality&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;1.6666666666666666666666666666666666666666666666666666666666666666666666666666667&quot;
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;indices&quot;: [
+        3,
+        20,
+        72
+      ],
+      &quot;simplex_counts&quot;: [
+        15,
+        8855,
+        1215450
+      ],
+      &quot;response_norms&quot;: [
+        &quot;0.56752926716497497398243984485456033&quot;,
+        &quot;0.82432116938975218928104242423516566&quot;,
+        &quot;0.99543094716890210585311264217170313&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.037835284477664998265495989656970689&quot;,
+        &quot;0.00009309104115073429579684273565614519&quot;,
+        &quot;0.00000081898140373433880937357574739537054&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;0.56752926716497497398243984485456033&quot;,
+        &quot;0.82432116938975218928104242423516566&quot;,
+        &quot;0.99543094716890210585311264217170313&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;0.99543094716890210585311264217170313&quot;,
+      &quot;response_ratio_spread&quot;: &quot;46197.97751834913210990735&quot;,
+      &quot;bias_minimum_norm_squared&quot;: &quot;43.4310328095309925794055393665&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;18678.209257489024615&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;0.0&quot;,
+      &quot;bias_next_index&quot;: 73,
+      &quot;bias_next_residual&quot;: &quot;0.000446067882280155034157241105503&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-2.27011706865989989592975937942&quot;,
+        &quot;-3.29728467755900875712416969694&quot;,
+        &quot;-3.98172378867560842341245056869&quot;
+      ],
+      &quot;size_response_power&quot;: 2,
+      &quot;size_stationary_frequency_fraction&quot;: &quot;0.0&quot;,
+      &quot;size_stationary_curvature_sign&quot;: &quot;negative&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;1.5&quot;
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;indices&quot;: [
+        10,
+        15,
+        22
+      ],
+      &quot;simplex_counts&quot;: [
+        2002,
+        11628,
+        65780
+      ],
+      &quot;response_norms&quot;: [
+        &quot;0.80139298900744808807648334540393393&quot;,
+        &quot;0.86589113356203925728158398629574145&quot;,
+        &quot;0.92841221591330343631611549090791189&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.00040029619830541862541282884385810885&quot;,
+        &quot;0.000074466041758001312115719297067057228&quot;,
+        &quot;0.000014113898083206193923930001381999269&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;0.80139298900744808807648334540393393&quot;,
+        &quot;0.86589113356203925728158398629574145&quot;,
+        &quot;0.92841221591330343631611549090791189&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;0.92841221591330343631611549090791189&quot;,
+      &quot;response_ratio_spread&quot;: &quot;28.36184560392440132783541&quot;,
+      &quot;bias_minimum_norm_squared&quot;: &quot;35.0232927564610507155227546121&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;2973364.9537611132114&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;1.05421979432e-81&quot;,
+      &quot;bias_next_index&quot;: 23,
+      &quot;bias_next_residual&quot;: &quot;0.000121131941950498495500393189928&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-3.20557195602979235230593338162&quot;,
+        &quot;-3.46356453424815702912633594518&quot;,
+        &quot;-3.71364886365321374526446196363&quot;
+      ],
+      &quot;size_response_power&quot;: 3,
+      &quot;size_stationary_frequency_fraction&quot;: &quot;0.3333333333333333333333333&quot;,
+      &quot;size_stationary_curvature_sign&quot;: &quot;negative&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;1.4&quot;
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;indices&quot;: [
+        13,
+        35
+      ],
+      &quot;simplex_counts&quot;: [
+        18564,
+        3838380
+      ],
+      &quot;response_norms&quot;: [
+        &quot;0.91566133011910104758139820377474791&quot;,
+        &quot;1.0783014394539006722882650040090457&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.000049324570680839315211236705654748325&quot;,
+        &quot;0.00000028092618225759322221569125620940233&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;0.91566133011910104758139820377474791&quot;,
+        &quot;1.0783014394539006722882650040090457&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;1.0783014394539006722882650040090457&quot;,
+      &quot;response_ratio_spread&quot;: &quot;175.5784038513416610335083&quot;,
+      &quot;bias_minimum_norm_squared&quot;: &quot;13.3677164333573869608001683958&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;7497.5297778389075091&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;0.0&quot;,
+      &quot;bias_next_index&quot;: 36,
+      &quot;bias_next_residual&quot;: &quot;-0.000702411175544740834562977331403&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-3.6626453204764041903255928151&quot;,
+        &quot;-4.31320575781560268915306001604&quot;
+      ],
+      &quot;size_response_power&quot;: 4,
+      &quot;size_stationary_frequency_fraction&quot;: &quot;0.5&quot;,
+      &quot;size_stationary_curvature_sign&quot;: &quot;negative&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;1.3333333333333333333333333333333333333333333333333333333333333333333333333333333&quot;
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;indices&quot;: [
+        23
+      ],
+      &quot;simplex_counts&quot;: [
+        64512240
+      ],
+      &quot;response_norms&quot;: [
+        &quot;1.2249750622167611610588472352200678&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.00000001898825807655665283144481163915666&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;1.2249750622167611610588472352200678&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;1.2249750622167611610588472352200678&quot;,
+      &quot;response_ratio_spread&quot;: null,
+      &quot;bias_minimum_norm_squared&quot;: &quot;1.22497506221676116105884723522&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;1.0&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;0.0&quot;,
+      &quot;bias_next_index&quot;: 24,
+      &quot;bias_next_residual&quot;: &quot;0.00361044022890621980587624078647&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-4.89990024886704464423538894088&quot;
+      ],
+      &quot;size_response_power&quot;: 8,
+      &quot;size_stationary_frequency_fraction&quot;: &quot;0.75&quot;,
+      &quot;size_stationary_curvature_sign&quot;: &quot;negative&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;1.2&quot;
+      }
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

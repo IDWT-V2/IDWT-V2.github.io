@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>route-decision-20260923T074757_301943Z.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/route-decision-20260923T074757_301943Z/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="route-decision-20260923T074757_301943Z.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/route-decision-20260923T074757_301943Z/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="route-decision-20260923T074757_301943Z.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>route-decision-20260923T074757_301943Z.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/route-decision-20260923T074757_301943Z.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">generated_at</th><td>2026-09-23T07:47:57.302085+00:00</td></tr><tr><th scope="row">status</th><td>diagnostic_pass</td></tr><tr><th scope="row">checks</th><td>356</td></tr><tr><th scope="row">scope</th><td>shared positive-response controls and the minimal finite-carrier background action</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;generated_at&quot;: &quot;2026-09-23T07:47:57.302085+00:00&quot;,
+  &quot;status&quot;: &quot;diagnostic_pass&quot;,
+  &quot;checks&quot;: 356,
+  &quot;scope&quot;: &quot;shared positive-response controls and the minimal finite-carrier background action&quot;,
+  &quot;assumptions&quot;: {
+    &quot;source&quot;: &quot;(i+ell+d)/(i+2ell+d+1), even ell &gt;= 2&quot;,
+    &quot;inverse_stiffness&quot;: &quot;d/((ell-1)(ell+d))&quot;,
+    &quot;size_law&quot;: &quot;E=Q*c*mu/L-g^2*Q^2*K/(2*L^(d-2))&quot;,
+    &quot;fixed_profile&quot;: true,
+    &quot;bias&quot;: &quot;minimum-norm solution on maintained selected modes&quot;,
+    &quot;background_schur&quot;: &quot;unit v and the same source/control inverse; reported G bound omits the nonnegative field-mixing Schur term&quot;,
+    &quot;radial_action&quot;: &quot;H(R)+a*xi^2/2-(R-1)*(v+xi)*&lt;psi,H&#39;(1)psi&gt;/v; R0=v=Q=1 and a remains a common free coefficient&quot;,
+    &quot;radial_carrier_gap_values&quot;: [
+      1000,
+      10000
+    ]
+  },
+  &quot;route_findings&quot;: {
+    &quot;unbiased_positive_response&quot;: &quot;The fixed-norm shift is not proportional to the simplex count at any multi-mode depth.&quot;,
+    &quot;finite_common_bias&quot;: &quot;Selected modes are algebraically compatible, but the next mode has a nonzero residual and the response amplitude curvature is negative.&quot;,
+    &quot;scale_covariant_size&quot;: &quot;No maintained depth has a finite positive-curvature size extremum from these two energy terms alone.&quot;,
+    &quot;nonzero_background&quot;: &quot;An operator-level linear background cancels the finite carrier&#39;s radius force and field-radius mixed block at a common R=1. Its bare radial curvature is 2*p*omega and its relaxed background requires a*v^2&gt;Q*p*omega/2 for each occupied mode. The angular Hessian and full field dynamics remain open.&quot;
+  },
+  &quot;limits&quot;: [
+    &quot;The source vectors are controls, not derived spatial particle profiles.&quot;,
+    &quot;A passing diagnostic does not establish a complete stable particle or pair coupling.&quot;,
+    &quot;Depth ten has one maintained mode and cannot test within-depth proportionality.&quot;,
+    &quot;A fixed norm removes radial variations but does not derive the norm value.&quot;,
+    &quot;The finite-carrier background action is an inverse choice; its retained field origin, nonzero v, curvature a, and physical size scale are not derived from Psi_infinity.&quot;,
+    &quot;The first-order constrained field Hessian has a negative partner direction, so positive-P Schur stability cannot be inferred from the radial block.&quot;,
+    &quot;The angular second metric derivative is not determined by first-order cancellation; no angular stability verdict follows from the radial calculation.&quot;,
+    &quot;The radius kinetic coefficient and background potential are candidate-action inputs; a threshold inequality is not their derivation from the master field.&quot;
+  ],
+  &quot;sources&quot;: {
+    &quot;experiments/route-decision-checks.py&quot;: &quot;34a85e65467b4e274f0061eb60d7cd0080f9483d872dd367d45000150a87d113&quot;,
+    &quot;experiments/results/flux-moment-20260915T033331_031324Z.json&quot;: &quot;6ed720878d217cc502ef9d7ba94e70b3d5b0afd10e08e1a7d3410336878f21e5&quot;
+  },
+  &quot;records&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;indices&quot;: [
+        76,
+        81,
+        95
+      ],
+      &quot;simplex_counts&quot;: [
+        2926,
+        3321,
+        4560
+      ],
+      &quot;response_norms&quot;: [
+        &quot;0.69749012355472711390101923776468736&quot;,
+        &quot;0.70182709004672823762348772378112482&quot;,
+        &quot;0.71198816279324300540738418583977382&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.00023837666560311931438859167387720005&quot;,
+        &quot;0.00021133004819233009262977649014788462&quot;,
+        &quot;0.00015613775499851820294021583022802057&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;0.69749012355472711390101923776468736&quot;,
+        &quot;0.70182709004672823762348772378112482&quot;,
+        &quot;0.71198816279324300540738418583977382&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;0.71198816279324300540738418583977382&quot;,
+      &quot;response_ratio_spread&quot;: &quot;1.526707397614251498117974&quot;,
+      &quot;bias_minimum_norm_squared&quot;: &quot;4.97618064900007247649920217784&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;1185463869.3465507083&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;1.37048573262e-80&quot;,
+      &quot;bias_next_index&quot;: 96,
+      &quot;bias_next_residual&quot;: &quot;0.00000111384682091369598343901997867&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-2.78996049421890845560407695106&quot;,
+        &quot;-2.80730836018691295049395089512&quot;,
+        &quot;-2.84795265117297202162953674336&quot;
+      ],
+      &quot;size_response_power&quot;: 0,
+      &quot;size_stationary_frequency_fraction&quot;: null,
+      &quot;size_stationary_curvature_sign&quot;: &quot;no finite stationary size&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;2.0&quot;
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;indices&quot;: [
+        1,
+        4,
+        16,
+        17
+      ],
+      &quot;simplex_counts&quot;: [
+        1,
+        20,
+        816,
+        969
+      ],
+      &quot;response_norms&quot;: [
+        &quot;0.39983756997098636224886790246395956&quot;,
+        &quot;0.49655935255021424257801517266842855&quot;,
+        &quot;0.68179927945951416061987753354264133&quot;,
+        &quot;0.69064027668203223582089860488696825&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.39983756997098636224886790246395956&quot;,
+        &quot;0.024827967627510712128900758633421427&quot;,
+        &quot;0.00083553833267097323605377148718460948&quot;,
+        &quot;0.00071273506365534802458297069647777941&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;0.39983756997098636224886790246395956&quot;,
+        &quot;0.49655935255021424257801517266842855&quot;,
+        &quot;0.68179927945951416061987753354264133&quot;,
+        &quot;0.69064027668203223582089860488696825&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;0.69064027668203223582089860488696825&quot;,
+      &quot;response_ratio_spread&quot;: &quot;560.9904582501820506404855&quot;,
+      &quot;bias_minimum_norm_squared&quot;: &quot;79.7666984369902854736959449297&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;421015148.93467080456&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;9.11900122089e-80&quot;,
+      &quot;bias_next_index&quot;: 18,
+      &quot;bias_next_residual&quot;: &quot;0.0000243434165573608154403295120663&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-1.59935027988394544899547160986&quot;,
+        &quot;-1.98623741020085697031206069067&quot;,
+        &quot;-2.72719711783805664247951013417&quot;,
+        &quot;-2.76256110672812894328359441955&quot;
+      ],
+      &quot;size_response_power&quot;: 1,
+      &quot;size_stationary_frequency_fraction&quot;: &quot;-1.0&quot;,
+      &quot;size_stationary_curvature_sign&quot;: &quot;flat only at equality&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;1.6666666666666666666666666666666666666666666666666666666666666666666666666666667&quot;
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;indices&quot;: [
+        3,
+        20,
+        72
+      ],
+      &quot;simplex_counts&quot;: [
+        15,
+        8855,
+        1215450
+      ],
+      &quot;response_norms&quot;: [
+        &quot;0.56752926716497497398243984485456033&quot;,
+        &quot;0.82432116938975218928104242423516566&quot;,
+        &quot;0.99543094716890210585311264217170313&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.037835284477664998265495989656970689&quot;,
+        &quot;0.00009309104115073429579684273565614519&quot;,
+        &quot;0.00000081898140373433880937357574739537054&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;0.56752926716497497398243984485456033&quot;,
+        &quot;0.82432116938975218928104242423516566&quot;,
+        &quot;0.99543094716890210585311264217170313&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;0.99543094716890210585311264217170313&quot;,
+      &quot;response_ratio_spread&quot;: &quot;46197.97751834913210990735&quot;,
+      &quot;bias_minimum_norm_squared&quot;: &quot;43.4310328095309925794055393665&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;18678.209257489024615&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;0.0&quot;,
+      &quot;bias_next_index&quot;: 73,
+      &quot;bias_next_residual&quot;: &quot;0.000446067882280155034157241105503&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-2.27011706865989989592975937942&quot;,
+        &quot;-3.29728467755900875712416969694&quot;,
+        &quot;-3.98172378867560842341245056869&quot;
+      ],
+      &quot;size_response_power&quot;: 2,
+      &quot;size_stationary_frequency_fraction&quot;: &quot;0.0&quot;,
+      &quot;size_stationary_curvature_sign&quot;: &quot;negative&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;1.5&quot;
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;indices&quot;: [
+        10,
+        15,
+        22
+      ],
+      &quot;simplex_counts&quot;: [
+        2002,
+        11628,
+        65780
+      ],
+      &quot;response_norms&quot;: [
+        &quot;0.80139298900744808807648334540393393&quot;,
+        &quot;0.86589113356203925728158398629574145&quot;,
+        &quot;0.92841221591330343631611549090791189&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.00040029619830541862541282884385810885&quot;,
+        &quot;0.000074466041758001312115719297067057228&quot;,
+        &quot;0.000014113898083206193923930001381999269&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;0.80139298900744808807648334540393393&quot;,
+        &quot;0.86589113356203925728158398629574145&quot;,
+        &quot;0.92841221591330343631611549090791189&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;0.92841221591330343631611549090791189&quot;,
+      &quot;response_ratio_spread&quot;: &quot;28.36184560392440132783541&quot;,
+      &quot;bias_minimum_norm_squared&quot;: &quot;35.0232927564610507155227546121&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;2973364.9537611132114&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;1.05421979432e-81&quot;,
+      &quot;bias_next_index&quot;: 23,
+      &quot;bias_next_residual&quot;: &quot;0.000121131941950498495500393189928&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-3.20557195602979235230593338162&quot;,
+        &quot;-3.46356453424815702912633594518&quot;,
+        &quot;-3.71364886365321374526446196363&quot;
+      ],
+      &quot;size_response_power&quot;: 3,
+      &quot;size_stationary_frequency_fraction&quot;: &quot;0.3333333333333333333333333&quot;,
+      &quot;size_stationary_curvature_sign&quot;: &quot;negative&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;1.4&quot;
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;indices&quot;: [
+        13,
+        35
+      ],
+      &quot;simplex_counts&quot;: [
+        18564,
+        3838380
+      ],
+      &quot;response_norms&quot;: [
+        &quot;0.91566133011910104758139820377474791&quot;,
+        &quot;1.0783014394539006722882650040090457&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.000049324570680839315211236705654748325&quot;,
+        &quot;0.00000028092618225759322221569125620940233&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;0.91566133011910104758139820377474791&quot;,
+        &quot;1.0783014394539006722882650040090457&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;1.0783014394539006722882650040090457&quot;,
+      &quot;response_ratio_spread&quot;: &quot;175.5784038513416610335083&quot;,
+      &quot;bias_minimum_norm_squared&quot;: &quot;13.3677164333573869608001683958&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;7497.5297778389075091&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;0.0&quot;,
+      &quot;bias_next_index&quot;: 36,
+      &quot;bias_next_residual&quot;: &quot;-0.000702411175544740834562977331403&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-3.6626453204764041903255928151&quot;,
+        &quot;-4.31320575781560268915306001604&quot;
+      ],
+      &quot;size_response_power&quot;: 4,
+      &quot;size_stationary_frequency_fraction&quot;: &quot;0.5&quot;,
+      &quot;size_stationary_curvature_sign&quot;: &quot;negative&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;1.3333333333333333333333333333333333333333333333333333333333333333333333333333333&quot;
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;indices&quot;: [
+        23
+      ],
+      &quot;simplex_counts&quot;: [
+        64512240
+      ],
+      &quot;response_norms&quot;: [
+        &quot;1.2249750622167611610588472352200678&quot;
+      ],
+      &quot;response_per_simplex&quot;: [
+        &quot;0.00000001898825807655665283144481163915666&quot;
+      ],
+      &quot;background_unit_schur_penalties&quot;: [
+        &quot;1.2249750622167611610588472352200678&quot;
+      ],
+      &quot;background_shared_geometric_stiffness_lower_bound&quot;: &quot;1.2249750622167611610588472352200678&quot;,
+      &quot;response_ratio_spread&quot;: null,
+      &quot;bias_minimum_norm_squared&quot;: &quot;1.22497506221676116105884723522&quot;,
+      &quot;bias_gram_condition_estimate&quot;: &quot;1.0&quot;,
+      &quot;bias_selected_max_residual&quot;: &quot;0.0&quot;,
+      &quot;bias_next_index&quot;: 24,
+      &quot;bias_next_residual&quot;: &quot;0.00361044022890621980587624078647&quot;,
+      &quot;bias_amplitude_curvatures&quot;: [
+        &quot;-4.89990024886704464423538894088&quot;
+      ],
+      &quot;size_response_power&quot;: 8,
+      &quot;size_stationary_frequency_fraction&quot;: &quot;0.75&quot;,
+      &quot;size_stationary_curvature_sign&quot;: &quot;negative&quot;,
+      &quot;angular_jacobi&quot;: {
+        &quot;0&quot;: &quot;-1.0&quot;,
+        &quot;1&quot;: &quot;0.0&quot;,
+        &quot;2&quot;: &quot;1.2&quot;
+      }
+    }
+  ],
+  &quot;radial_records&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;index&quot;: 76,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;11.958590343768794619378154365723054&quot;,
+      &quot;radius_exponent&quot;: &quot;1.9522868324467507678422144347660502&quot;,
+      &quot;carrier_pressure&quot;: &quot;23.346598462764680406313622870513076&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;46.693196925529360812627245741026151&quot;,
+      &quot;background_force_unit_v&quot;: &quot;23.346598462764680406313622870513076&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;11.673299231382340203156811435256538&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-23.917180687537589238756308731446108&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;index&quot;: 81,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;13.529526473279285951166124264321402&quot;,
+      &quot;radius_exponent&quot;: &quot;1.9463557606111605683049351449996074&quot;,
+      &quot;carrier_pressure&quot;: &quot;26.333271789608337388045298020192278&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;52.666543579216674776090596040384556&quot;,
+      &quot;background_force_unit_v&quot;: &quot;26.333271789608337388045298020192278&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;13.166635894804168694022649010096139&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-27.059052946558571902332248528642804&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;index&quot;: 95,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;18.394826584607326402733070358255459&quot;,
+      &quot;radius_exponent&quot;: &quot;1.9284466724096791101894720942002763&quot;,
+      &quot;carrier_pressure&quot;: &quot;35.47344211663910121543989673230724&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;70.94688423327820243087979346461448&quot;,
+      &quot;background_force_unit_v&quot;: &quot;35.47344211663910121543989673230724&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;17.73672105831955060771994836615362&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-36.789653169214652805466140716510919&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;index&quot;: 1,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.000013217370041022427643239779578692206&quot;,
+      &quot;radius_exponent&quot;: &quot;2.9999789707159027051723100200708841&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.000039651832171237671195697403616027089&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.000079303664342475342391394807232054178&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.000039651832171237671195697403616027089&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.000019825916085618835597848701808013544&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.000026434740082044855286479559157384413&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;index&quot;: 4,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.00026433535629494715510976419049051068&quot;,
+      &quot;radius_exponent&quot;: &quot;2.9998878393527959749474738167274465&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.00079297642086020051749859204700042381&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.0015859528417204010349971840940008476&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.00079297642086020051749859204700042381&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.00039648821043010025874929602350021191&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.00052867071258989431021952838098102136&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;index&quot;: 16,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.010778632717260815507140511772817205&quot;,
+      &quot;radius_exponent&quot;: &quot;2.9987281045221529829497617618714523&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.032322188857571988584658896219005989&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.064644377715143977169317792438011978&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.032322188857571988584658896219005989&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.016161094428785994292329448109502994&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.02155726543452163101428102354563441&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;index&quot;: 17,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.01279864045515841205601816772624006&quot;,
+      &quot;radius_exponent&quot;: &quot;2.9985739440567819294454395392022178&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.038377669788189046282913899278403362&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.076755339576378092565827798556806724&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.038377669788189046282913899278403362&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.019188834894094523141456949639201681&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.02559728091031682411203633545248012&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;index&quot;: 3,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.00000059570310677450356085053010820067522&quot;,
+      &quot;radius_exponent&quot;: &quot;3.9999374551246125961225522013128489&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.0000023827751689214331427303478387900305&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.000004765550337842866285460695677580061&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.0000023827751689214331427303478387900305&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.0000011913875844607165713651739193950153&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.0000011914062135490071217010602164013504&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;index&quot;: 20,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.00035143475299742475937355802145450235&quot;,
+      &quot;radius_exponent&quot;: &quot;3.9986363309578984159981892198344594&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.0014052597712967178324955652039537955&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.002810519542593435664991130407907591&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.0014052597712967178324955652039537955&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.00070262988564835891624778260197689775&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.00070286950599484951874711604290900469&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;index&quot;: 72,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.047884777763522171947155601363358888&quot;,
+      &quot;radius_exponent&quot;: &quot;3.9838755839603650669150718059374935&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.19076699697546419670047907969264219&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.38153399395092839340095815938528437&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.19076699697546419670047907969264219&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.095383498487732098350239539846321093&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.095769555527044343894311202726717775&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;index&quot;: 10,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.00000024149766411721901017238440145992751&quot;,
+      &quot;radius_exponent&quot;: &quot;4.9996776827843981982216430392898398&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.0000012074104817314224496732833933110271&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.0000024148209634628448993465667866220543&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.0000012074104817314224496732833933110271&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.00000060370524086571122483664169665551356&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.00000048299532823443802034476880291985503&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;index&quot;: 15,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.0000014024357869837202801557916730594704&quot;,
+      &quot;radius_exponent&quot;: &quot;4.9993511353518718849571422864944339&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.0000070112689439151579330166900056560573&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.000014022537887830315866033380011312115&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.0000070112689439151579330166900056560573&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.0000035056344719575789665083450028280286&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.0000028048715739674405603115833461189408&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;index&quot;: 22,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.0000079310462992695013077676328135234784&quot;,
+      &quot;radius_exponent&quot;: &quot;4.9987000327866423893021476553657444&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.00003964492139619083497428542450102646&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.00007928984279238166994857084900205292&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.00003964492139619083497428542450102646&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.00001982246069809541748714271225051323&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.000015862092598539002615535265627046957&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;index&quot;: 13,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.0000000070202443202261734166186356523553886&quot;,
+      &quot;radius_exponent&quot;: &quot;5.9995584536427539322641973293283561&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.000000042118366158050467235798996098897759&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.000000084236732316100934471597992197795518&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.000000042118366158050467235798996098897759&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.000000021059183079025233617899498049448879&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.000000014040488640452346833237271304710777&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;index&quot;: 35,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;0.0000014499388128705355196988706253520429&quot;,
+      &quot;radius_exponent&quot;: &quot;5.9973519830630052950141708127296838&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.0000086957934146891259439953620064288183&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.000017391586829378251887990724012857637&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.0000086957934146891259439953620064288183&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.0000043478967073445629719976810032144091&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.0000028998776257410710393977412507040857&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;index&quot;: 23,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;frequency&quot;: &quot;3.4911088107732869427845486329587965e-15&quot;,
+      &quot;radius_exponent&quot;: &quot;9.9990764792960697634009263187018018&quot;,
+      &quot;carrier_pressure&quot;: &quot;3.4907863996466447030727335316021882e-14&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;6.9815727992932894061454670632043763e-14&quot;,
+      &quot;background_force_unit_v&quot;: &quot;3.4907863996466447030727335316021882e-14&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;1.7453931998233223515363667658010941e-14&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-6.982217621546573885569097265917593e-15&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;index&quot;: 76,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;1.2255028754424944099054621475021688&quot;,
+      &quot;radius_exponent&quot;: &quot;1.9994868078332332740577974357581784&quot;,
+      &quot;carrier_pressure&quot;: &quot;2.4503768324089616330494164207755513&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;4.9007536648179232660988328415511025&quot;,
+      &quot;background_force_unit_v&quot;: &quot;2.4503768324089616330494164207755513&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;1.2251884162044808165247082103877756&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-2.4510057508849888198109242950043376&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;index&quot;: 81,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;1.3908934011079307186002755739517498&quot;,
+      &quot;radius_exponent&quot;: &quot;1.9994175950699822237311317591225972&quot;,
+      &quot;carrier_pressure&quot;: &quot;2.7809767390419269859928747481295405&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;5.5619534780838539719857494962590811&quot;,
+      &quot;background_force_unit_v&quot;: &quot;2.7809767390419269859928747481295405&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;1.3904883695209634929964373740647703&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-2.7817868022158614372005511479034996&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;index&quot;: 95,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;1.9096010394326312222638386983513072&quot;,
+      &quot;radius_exponent&quot;: &quot;1.9992005880321472064761045335441924&quot;,
+      &quot;carrier_pressure&quot;: &quot;3.8176755209405158648386496480398132&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;7.6353510418810317296772992960796265&quot;,
+      &quot;background_force_unit_v&quot;: &quot;3.8176755209405158648386496480398132&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;1.9088377604702579324193248240199066&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-3.8192020788652624445276773967026143&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;index&quot;: 1,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;0.00000013217507627786216761838333930153977&quot;,
+      &quot;radius_exponent&quot;: &quot;2.9999997897074891095548515181939983&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.00000039652520103815783524740193355905275&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.00000079305040207631567049480386711810549&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.00000039652520103815783524740193355905275&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.00000019826260051907891762370096677952637&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.00000026435015255572433523676667860307954&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;index&quot;: 4,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;0.0000026435003211015893642081779037942525&quot;,
+      &quot;radius_exponent&quot;: &quot;2.9999988784492306628186410522485594&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.0000079304979984849492180510245136285579&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.000015860995996969898436102049027257116&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.0000079304979984849492180510245136285579&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.000003965248999242474609025512256814279&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.0000052870006422031787284163558075885049&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;index&quot;: 16,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;0.000107854188120578044540664417607973&quot;,
+      &quot;radius_exponent&quot;: &quot;2.9999872890848771838150909668207243&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.00032356119343630329270480679966163316&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.00064712238687260658540961359932326633&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.00032356119343630329270480679966163316&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.00016178059671815164635240339983081658&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.00021570837624115608908132883521594601&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;index&quot;: 17,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;0.00012807674980378680487729291901814035&quot;,
+      &quot;radius_exponent&quot;: &quot;2.999985749538738109772502607045753&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.00038422842425859878696122029817714882&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.00076845684851719757392244059635429764&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.00038422842425859878696122029817714882&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.00019211421212929939348061014908857441&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.00025615349960757360975458583803628069&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;index&quot;: 3,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;0.00000000059572154970000212080956447917471893&quot;,
+      &quot;radius_exponent&quot;: &quot;3.999999374561921731078565392605542&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.0000000023828858262130672554851611097762559&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.0000000047657716524261345109703222195525118&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.0000000023828858262130672554851611097762559&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.0000000011914429131065336277425805548881279&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.0000000011914430994000042416191289583494379&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;index&quot;: 20,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;0.00000035167200145091498496011055982552869&quot;,
+      &quot;radius_exponent&quot;: &quot;3.9999863697152705195539589954965238&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.0000014066832124141487776086588310203702&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.0000028133664248282975552173176620407403&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.0000014066832124141487776086588310203702&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.00000070334160620707438880432941551018508&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.00000070334400290182996992022111965105737&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;index&quot;: 72,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;0.000048267461770663316073667099951431519&quot;,
+      &quot;radius_exponent&quot;: &quot;3.9998396250229486016412060473186948&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.00019306210618957946491776017976655607&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.00038612421237915892983552035953311215&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.00019306210618957946491776017976655607&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.000096531053094789732458880089883278037&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.000096534923541326632147334199902863038&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;index&quot;: 10,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;2.4153619559922888581400565641401409e-11&quot;,
+      &quot;radius_exponent&quot;: &quot;4.9999967771331006561565585491252375&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.00000000012076801995571346388751455376700779&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.00000000024153603991142692777502910753401558&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.00000000012076801995571346388751455376700779&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;6.0384009977856731943757276883503895e-11&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-4.8307239119845777162801131282802817e-11&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;index&quot;: 15,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;0.00000000014028862627548209560192038802717408&quot;,
+      &quot;radius_exponent&quot;: &quot;4.9999935125665547694396155649244693&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.0000000007014422212642843929962718276063486&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.0000000014028844425285687859925436552126972&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.0000000007014422212642843929962718276063486&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.0000000003507211106321421964981359138031743&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.00000000028057725255096419120384077605434816&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;index&quot;: 22,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;0.00000000079361505077247922321882139221345495&quot;,
+      &quot;radius_exponent&quot;: &quot;4.9999870050794689159821999107541304&quot;,
+      &quot;carrier_pressure&quot;: &quot;0.0000000039680649408978790555186487002543893&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.0000000079361298817957581110372974005087785&quot;,
+      &quot;background_force_unit_v&quot;: &quot;0.0000000039680649408978790555186487002543893&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;0.0000000019840324704489395277593243501271946&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-0.0000000015872301015449584464376427844269099&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;index&quot;: 13,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;7.0217787836254683255364806753930856e-14&quot;,
+      &quot;radius_exponent&quot;: &quot;5.9999955850377664116443110334087568&quot;,
+      &quot;carrier_pressure&quot;: &quot;4.2130641700864667634793915860091433e-13&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;8.4261283401729335269587831720182866e-13&quot;,
+      &quot;background_force_unit_v&quot;: &quot;4.2130641700864667634793915860091433e-13&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;2.1065320850432333817396957930045717e-13&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-1.4043557567250936651072961350786171e-13&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;index&quot;: 35,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;1.451840018952662213107200078284307e-11&quot;,
+      &quot;radius_exponent&quot;: &quot;5.9999735357998055477947330017974509&quot;,
+      &quot;carrier_pressure&quot;: &quot;8.7110016919310613981064801325081223e-11&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;0.00000000017422003383862122796212960265016245&quot;,
+      &quot;background_force_unit_v&quot;: &quot;8.7110016919310613981064801325081223e-11&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;4.3555008459655306990532400662540612e-11&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-2.903680037905324426214400156568614e-11&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;index&quot;: 23,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;frequency&quot;: &quot;3.4927049986713353781593225631802385e-24&quot;,
+      &quot;radius_exponent&quot;: &quot;9.9999907660887298742605726659975038&quot;,
+      &quot;carrier_pressure&quot;: &quot;3.4927017735385303325843724917180253e-23&quot;,
+      &quot;first_radius_force_with_background&quot;: &quot;0&quot;,
+      &quot;field_radius_mixed_operator_with_background&quot;: &quot;0&quot;,
+      &quot;bare_radial_curvature&quot;: &quot;6.9854035470770606651687449834360506e-23&quot;,
+      &quot;background_force_unit_v&quot;: &quot;3.4927017735385303325843724917180253e-23&quot;,
+      &quot;critical_a_times_v_squared_per_unit_Q&quot;: &quot;1.7463508867692651662921862458590126e-23&quot;,
+      &quot;negative_partner_constrained_field_curvature&quot;: &quot;-6.9854099973426707563186451263604769e-24&quot;
+    }
+  ],
+  &quot;radial_depth_bounds&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;17.7367210583195493711627932498&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;1.5194265739917285352&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;0.0191888348940945224763154897119&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;967.86624190412896951&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;0.0953834984877321018226226101433&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;80060.846471643904806&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;0.0000198224606980954164603576928005&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;32.834667245343240438&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;0.00000434789670734456319114904360168&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;206.46084375775387798&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;gap_at_reference_radius&quot;: 1000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;1.74539319982332225822155368221e-14&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;1.0&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;1.90883776047025799371681387129&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;1.5579952725831827109&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;0.000192114212129299380144714648466&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;968.98866264397713621&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;0.0000965310530947897287110809338984&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;81020.292313542304328&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;0.00000000198403247044893972944233450197&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;32.856918100942607452&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;4.35550084596553062232361381615e-11&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;206.76166657466984589&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;gap_at_reference_radius&quot;: 10000,
+      &quot;common_a_times_v_squared_must_exceed&quot;: &quot;1.74635088676926502171673326929e-23&quot;,
+      &quot;largest_to_smallest_threshold_ratio&quot;: &quot;1.0&quot;
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

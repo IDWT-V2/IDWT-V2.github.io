@@ -1,0 +1,307 @@
+{
+  "generated_at": "2026-09-23T04:05:06.243394+00:00",
+  "status": "diagnostic_pass",
+  "checks": 108,
+  "scope": "shared algebraic controls for current positive-response routes",
+  "assumptions": {
+    "source": "(i+ell+d)/(i+2ell+d+1), even ell >= 2",
+    "inverse_stiffness": "d/((ell-1)(ell+d))",
+    "size_law": "E=Q*c*mu/L-g^2*Q^2*K/(2*L^(d-2))",
+    "fixed_profile": true,
+    "bias": "minimum-norm solution on maintained selected modes",
+    "background_schur": "unit v and the same source/control inverse; reported G bound omits the nonnegative field-mixing Schur term"
+  },
+  "route_findings": {
+    "unbiased_positive_response": "The fixed-norm shift is not proportional to the simplex count at any multi-mode depth.",
+    "finite_common_bias": "Selected modes are algebraically compatible, but the next mode has a nonzero residual and the response amplitude curvature is negative.",
+    "scale_covariant_size": "No maintained depth has a finite positive-curvature size extremum from these two energy terms alone.",
+    "nonzero_background": "The shared unit-normalization geometric stiffness must exceed the maximum reported Schur penalty at each depth before field mixing; radial stability and the full action remain untested."
+  },
+  "limits": [
+    "The source vectors are controls, not derived spatial particle profiles.",
+    "A passing diagnostic does not establish a complete stable particle or pair coupling.",
+    "Depth ten has one maintained mode and cannot test within-depth proportionality.",
+    "A fixed norm removes radial variations but does not derive the norm value."
+  ],
+  "sources": {
+    "experiments/route-decision-checks.py": "531158df3ecce9d20e7ade159340c73b26fcc8574c75ff828d341970212db50d"
+  },
+  "records": [
+    {
+      "depth": 2,
+      "indices": [
+        76,
+        81,
+        95
+      ],
+      "simplex_counts": [
+        2926,
+        3321,
+        4560
+      ],
+      "response_norms": [
+        "0.69749012355472711390101923776468736",
+        "0.70182709004672823762348772378112482",
+        "0.71198816279324300540738418583977382"
+      ],
+      "response_per_simplex": [
+        "0.00023837666560311931438859167387720005",
+        "0.00021133004819233009262977649014788462",
+        "0.00015613775499851820294021583022802057"
+      ],
+      "background_unit_schur_penalties": [
+        "0.69749012355472711390101923776468736",
+        "0.70182709004672823762348772378112482",
+        "0.71198816279324300540738418583977382"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "0.71198816279324300540738418583977382",
+      "response_ratio_spread": "1.526707397614251498117974",
+      "bias_minimum_norm_squared": "4.97618064900007247649920217784",
+      "bias_gram_condition_estimate": "1185463869.3465507083",
+      "bias_selected_max_residual": "1.37048573262e-80",
+      "bias_next_index": 96,
+      "bias_next_residual": "0.00000111384682091369598343901997867",
+      "bias_amplitude_curvatures": [
+        "-2.78996049421890845560407695106",
+        "-2.80730836018691295049395089512",
+        "-2.84795265117297202162953674336"
+      ],
+      "size_response_power": 0,
+      "size_stationary_frequency_fraction": null,
+      "size_stationary_curvature_sign": "no finite stationary size",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "2.0"
+      }
+    },
+    {
+      "depth": 3,
+      "indices": [
+        1,
+        4,
+        16,
+        17
+      ],
+      "simplex_counts": [
+        1,
+        20,
+        816,
+        969
+      ],
+      "response_norms": [
+        "0.39983756997098636224886790246395956",
+        "0.49655935255021424257801517266842855",
+        "0.68179927945951416061987753354264133",
+        "0.69064027668203223582089860488696825"
+      ],
+      "response_per_simplex": [
+        "0.39983756997098636224886790246395956",
+        "0.024827967627510712128900758633421427",
+        "0.00083553833267097323605377148718460948",
+        "0.00071273506365534802458297069647777941"
+      ],
+      "background_unit_schur_penalties": [
+        "0.39983756997098636224886790246395956",
+        "0.49655935255021424257801517266842855",
+        "0.68179927945951416061987753354264133",
+        "0.69064027668203223582089860488696825"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "0.69064027668203223582089860488696825",
+      "response_ratio_spread": "560.9904582501820506404855",
+      "bias_minimum_norm_squared": "79.7666984369902854736959449297",
+      "bias_gram_condition_estimate": "421015148.93467080456",
+      "bias_selected_max_residual": "9.11900122089e-80",
+      "bias_next_index": 18,
+      "bias_next_residual": "0.0000243434165573608154403295120663",
+      "bias_amplitude_curvatures": [
+        "-1.59935027988394544899547160986",
+        "-1.98623741020085697031206069067",
+        "-2.72719711783805664247951013417",
+        "-2.76256110672812894328359441955"
+      ],
+      "size_response_power": 1,
+      "size_stationary_frequency_fraction": "-1.0",
+      "size_stationary_curvature_sign": "flat only at equality",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "1.6666666666666666666666666666666666666666666666666666666666666666666666666666667"
+      }
+    },
+    {
+      "depth": 4,
+      "indices": [
+        3,
+        20,
+        72
+      ],
+      "simplex_counts": [
+        15,
+        8855,
+        1215450
+      ],
+      "response_norms": [
+        "0.56752926716497497398243984485456033",
+        "0.82432116938975218928104242423516566",
+        "0.99543094716890210585311264217170313"
+      ],
+      "response_per_simplex": [
+        "0.037835284477664998265495989656970689",
+        "0.00009309104115073429579684273565614519",
+        "0.00000081898140373433880937357574739537054"
+      ],
+      "background_unit_schur_penalties": [
+        "0.56752926716497497398243984485456033",
+        "0.82432116938975218928104242423516566",
+        "0.99543094716890210585311264217170313"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "0.99543094716890210585311264217170313",
+      "response_ratio_spread": "46197.97751834913210990735",
+      "bias_minimum_norm_squared": "43.4310328095309925794055393665",
+      "bias_gram_condition_estimate": "18678.209257489024615",
+      "bias_selected_max_residual": "0.0",
+      "bias_next_index": 73,
+      "bias_next_residual": "0.000446067882280155034157241105503",
+      "bias_amplitude_curvatures": [
+        "-2.27011706865989989592975937942",
+        "-3.29728467755900875712416969694",
+        "-3.98172378867560842341245056869"
+      ],
+      "size_response_power": 2,
+      "size_stationary_frequency_fraction": "0.0",
+      "size_stationary_curvature_sign": "negative",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "1.5"
+      }
+    },
+    {
+      "depth": 5,
+      "indices": [
+        10,
+        15,
+        22
+      ],
+      "simplex_counts": [
+        2002,
+        11628,
+        65780
+      ],
+      "response_norms": [
+        "0.80139298900744808807648334540393393",
+        "0.86589113356203925728158398629574145",
+        "0.92841221591330343631611549090791189"
+      ],
+      "response_per_simplex": [
+        "0.00040029619830541862541282884385810885",
+        "0.000074466041758001312115719297067057228",
+        "0.000014113898083206193923930001381999269"
+      ],
+      "background_unit_schur_penalties": [
+        "0.80139298900744808807648334540393393",
+        "0.86589113356203925728158398629574145",
+        "0.92841221591330343631611549090791189"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "0.92841221591330343631611549090791189",
+      "response_ratio_spread": "28.36184560392440132783541",
+      "bias_minimum_norm_squared": "35.0232927564610507155227546121",
+      "bias_gram_condition_estimate": "2973364.9537611132114",
+      "bias_selected_max_residual": "1.05421979432e-81",
+      "bias_next_index": 23,
+      "bias_next_residual": "0.000121131941950498495500393189928",
+      "bias_amplitude_curvatures": [
+        "-3.20557195602979235230593338162",
+        "-3.46356453424815702912633594518",
+        "-3.71364886365321374526446196363"
+      ],
+      "size_response_power": 3,
+      "size_stationary_frequency_fraction": "0.3333333333333333333333333",
+      "size_stationary_curvature_sign": "negative",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "1.4"
+      }
+    },
+    {
+      "depth": 6,
+      "indices": [
+        13,
+        35
+      ],
+      "simplex_counts": [
+        18564,
+        3838380
+      ],
+      "response_norms": [
+        "0.91566133011910104758139820377474791",
+        "1.0783014394539006722882650040090457"
+      ],
+      "response_per_simplex": [
+        "0.000049324570680839315211236705654748325",
+        "0.00000028092618225759322221569125620940233"
+      ],
+      "background_unit_schur_penalties": [
+        "0.91566133011910104758139820377474791",
+        "1.0783014394539006722882650040090457"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "1.0783014394539006722882650040090457",
+      "response_ratio_spread": "175.5784038513416610335083",
+      "bias_minimum_norm_squared": "13.3677164333573869608001683958",
+      "bias_gram_condition_estimate": "7497.5297778389075091",
+      "bias_selected_max_residual": "0.0",
+      "bias_next_index": 36,
+      "bias_next_residual": "-0.000702411175544740834562977331403",
+      "bias_amplitude_curvatures": [
+        "-3.6626453204764041903255928151",
+        "-4.31320575781560268915306001604"
+      ],
+      "size_response_power": 4,
+      "size_stationary_frequency_fraction": "0.5",
+      "size_stationary_curvature_sign": "negative",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "1.3333333333333333333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    {
+      "depth": 10,
+      "indices": [
+        23
+      ],
+      "simplex_counts": [
+        64512240
+      ],
+      "response_norms": [
+        "1.2249750622167611610588472352200678"
+      ],
+      "response_per_simplex": [
+        "0.00000001898825807655665283144481163915666"
+      ],
+      "background_unit_schur_penalties": [
+        "1.2249750622167611610588472352200678"
+      ],
+      "background_shared_geometric_stiffness_lower_bound": "1.2249750622167611610588472352200678",
+      "response_ratio_spread": null,
+      "bias_minimum_norm_squared": "1.22497506221676116105884723522",
+      "bias_gram_condition_estimate": "1.0",
+      "bias_selected_max_residual": "0.0",
+      "bias_next_index": 24,
+      "bias_next_residual": "0.00361044022890621980587624078647",
+      "bias_amplitude_curvatures": [
+        "-4.89990024886704464423538894088"
+      ],
+      "size_response_power": 8,
+      "size_stationary_frequency_fraction": "0.75",
+      "size_stationary_curvature_sign": "negative",
+      "angular_jacobi": {
+        "0": "-1.0",
+        "1": "0.0",
+        "2": "1.2"
+      }
+    }
+  ]
+}

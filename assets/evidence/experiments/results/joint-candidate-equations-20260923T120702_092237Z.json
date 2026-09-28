@@ -1,0 +1,1715 @@
+{
+  "generated_at": "2026-09-23T12:07:02.090574+00:00",
+  "status": "diagnostic_pass",
+  "checks": 32,
+  "check_meaning": "one completed candidate-equation comparison per maintained mode and strength",
+  "purpose": "All current candidate equations in one comparison run under shared mode assignments",
+  "normalization": {
+    "response": "unit wave norm for the displayed algebraic source controls",
+    "linked_radial": "unit wave norm; its a*v^2 values belong only to the linked finite-carrier action",
+    "whole_depth_current": "unit phase charge for the reported common a*v^2 threshold; wave norm N=J/(2*omega)"
+  },
+  "equations": {
+    "response": "K_ij=sum_even_ell s_iell*s_jell*d/((ell-1)*(ell+d)); bias Kc=-diag(K); fixed-norm frequency shift=-gamma^2*N*K_ii",
+    "linked_radial": "H=D/R+gK; p=-R*omega_R/omega; G_R=2*N*p*omega/R^2; a*v^2>N*p*omega/2",
+    "whole_depth_current": "E1=<psi,H0(g)psi>-int g(kappa)*|j|; g(kappa)=g0*kappa^4/(1+kappa^4); G_ij=d_i d_j E1; F_i=d_i E1; a*v^2>J*F^T*G^-1*F on each tested metric subspace",
+    "positive_wave_action": "L+=||psi_dot||^2-||delta W/delta psi*||^2+positive collective kinetics-a*xi^2/2; J=2*omega*N"
+  },
+  "comparison_scope": [
+    "The three routes are separate actions and their Hessian entries are never added.",
+    "Strengths 1000 and 10000 are dimensionless controls, not physical fits.",
+    "Current Hessian rows show the uniform-radius and shared-q plane; pointwise coefficients test bare spinor positivity for all smooth conformal directions, and depth-two form rows include nine zonal directions.",
+    "The listed current a*v^2 values are lower bounds from finite tested metric subspaces, not sufficient thresholds for all metric perturbations.",
+    "The background potential, local causal completion, tensor metric response, complete wave stability, and exact finite-strength mass law remain unproved."
+  ],
+  "sources": {
+    "experiments/joint-candidate-equations.py": "21de1feee9cd8ca506a7cb8c852fe73093f9eac4b0edce7b998c4ebcdd8f8540",
+    "experiments/results/flux-moment-20260915T033331_031324Z.json": "6ed720878d217cc502ef9d7ba94e70b3d5b0afd10e08e1a7d3410336878f21e5"
+  },
+  "response_depth_summaries": [
+    {
+      "depth": 2,
+      "unbiased_response_unit_spread": "1.52670739761425149811797417707",
+      "common_bias_next_mode": 96,
+      "common_bias_next_residual": "0.00000111384682091369598343901997867",
+      "one_scale_size_curvature": "no finite stationary size"
+    },
+    {
+      "depth": 3,
+      "unbiased_response_unit_spread": "560.99045825018205064048546714",
+      "common_bias_next_mode": 18,
+      "common_bias_next_residual": "0.0000243434165573608154403295120663",
+      "one_scale_size_curvature": "flat at equality"
+    },
+    {
+      "depth": 4,
+      "unbiased_response_unit_spread": "46197.9775183491321099073459152",
+      "common_bias_next_mode": 73,
+      "common_bias_next_residual": "0.000446067882280155034157241105503",
+      "one_scale_size_curvature": "negative"
+    },
+    {
+      "depth": 5,
+      "unbiased_response_unit_spread": "28.3618456039244013278354074498",
+      "common_bias_next_mode": 23,
+      "common_bias_next_residual": "0.000121131941950498495500393189928",
+      "one_scale_size_curvature": "negative"
+    },
+    {
+      "depth": 6,
+      "unbiased_response_unit_spread": "175.578403851341661033508338772",
+      "common_bias_next_mode": 36,
+      "common_bias_next_residual": "-0.000702411175544740834562977331403",
+      "one_scale_size_curvature": "negative"
+    },
+    {
+      "depth": 10,
+      "unbiased_response_unit_spread": null,
+      "common_bias_next_mode": 24,
+      "common_bias_next_residual": "0.00361044022890621980587624078647",
+      "one_scale_size_curvature": "negative"
+    }
+  ],
+  "depth_summaries": [
+    {
+      "depth": 2,
+      "strength": 1000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "17.7367210583195493711627932498",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "16.4999371238239938008973695105",
+      "whole_depth_current_tested_metric_basis": "nine zonal form directions through scalar degree 16",
+      "linked_frequency_unit_spread": "1.01315247993163137785188609996",
+      "current_frequency_unit_spread": "1.01207752477367018961729172588"
+    },
+    {
+      "depth": 3,
+      "strength": 1000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "0.0191888348940945224763154897119",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "0.054709747896032404068655807805",
+      "whole_depth_current_tested_metric_basis": "uniform radius and shared q shape; bare positivity holds for all smooth conformal directions",
+      "linked_frequency_unit_spread": "1.00070250544374772516675875522",
+      "current_frequency_unit_spread": "1.00128164427240484712910983944"
+    },
+    {
+      "depth": 4,
+      "strength": 1000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "0.0953834984877321018226226101433",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "0.89677191023405256053990797227",
+      "whole_depth_current_tested_metric_basis": "uniform radius and shared q shape; bare positivity holds for all smooth conformal directions",
+      "linked_frequency_unit_spread": "1.00804107268321030410618277529",
+      "current_frequency_unit_spread": "1.02200248352782185889964239323"
+    },
+    {
+      "depth": 5,
+      "strength": 1000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "0.0000198224606980954164603576928005",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "0.000724852128331527592770833212654",
+      "whole_depth_current_tested_metric_basis": "uniform radius and shared q shape; bare positivity holds for all smooth conformal directions",
+      "linked_frequency_unit_spread": "1.00048883213512751488849517045",
+      "current_frequency_unit_spread": "1.00173199726907502515871328796"
+    },
+    {
+      "depth": 6,
+      "strength": 1000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "0.00000434789670734456319114904360168",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "0.000667252356433764137050301812337",
+      "whole_depth_current_tested_metric_basis": "uniform radius and shared q shape; bare positivity holds for all smooth conformal directions",
+      "linked_frequency_unit_spread": "1.00110345292441715869813378958",
+      "current_frequency_unit_spread": "1.00469047158687740939342347701"
+    },
+    {
+      "depth": 10,
+      "strength": 1000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "1.74539319982332225822155368221e-14",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "0.00000000178279414117739837793730651728",
+      "whole_depth_current_tested_metric_basis": "uniform radius and shared q shape; bare positivity holds for all smooth conformal directions",
+      "linked_frequency_unit_spread": null,
+      "current_frequency_unit_spread": null
+    },
+    {
+      "depth": 2,
+      "strength": 10000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "1.90883776047025799371681387129",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "1.82215728008407484850295077194",
+      "whole_depth_current_tested_metric_basis": "nine zonal form directions through scalar degree 16",
+      "linked_frequency_unit_spread": "1.00014326115294860386484288028",
+      "current_frequency_unit_spread": "1.00013061121423429966625917586"
+    },
+    {
+      "depth": 3,
+      "strength": 10000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "0.000192114212129299380144714648466",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "0.000548741494202082953461629966085",
+      "whole_depth_current_tested_metric_basis": "uniform radius and shared q shape; bare positivity holds for all smooth conformal directions",
+      "linked_frequency_unit_spread": "1.00000702008337194470755093789",
+      "current_frequency_unit_spread": "1.0000128001648596054451445525"
+    },
+    {
+      "depth": 4,
+      "strength": 10000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "0.0000965310530947897287110809338984",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "0.000934237089593066886115957370151",
+      "whole_depth_current_tested_metric_basis": "uniform radius and shared q shape; bare positivity holds for all smooth conformal directions",
+      "linked_frequency_unit_spread": "1.00007987578767187919481784775",
+      "current_frequency_unit_spread": "1.00021532651912226086210466747"
+    },
+    {
+      "depth": 5,
+      "strength": 10000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "0.00000000198403247044893972944233450197",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "0.0000000727577948935955023813650305656",
+      "whole_depth_current_tested_metric_basis": "uniform radius and shared q shape; bare positivity holds for all smooth conformal directions",
+      "linked_frequency_unit_spread": "1.00000488602753101474718278041",
+      "current_frequency_unit_spread": "1.00001728039883142074017996492"
+    },
+    {
+      "depth": 6,
+      "strength": 10000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "4.35550084596553062232361381615e-11",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "0.00000000672865289745143545714536876092",
+      "whole_depth_current_tested_metric_basis": "uniform radius and shared q shape; bare positivity holds for all smooth conformal directions",
+      "linked_frequency_unit_spread": "1.00001102464072810782624856074",
+      "current_frequency_unit_spread": "1.00004664263250875322341926221"
+    },
+    {
+      "depth": 10,
+      "strength": 10000,
+      "linked_radial_common_av_squared_must_exceed_per_unit_wave_norm": "1.74635088676926502171673326929e-23",
+      "whole_depth_current_tested_metric_av_squared_lower_bound_per_unit_phase_charge": "1.78966548618756833262699116165e-18",
+      "whole_depth_current_tested_metric_basis": "uniform radius and shared q shape; bare positivity holds for all smooth conformal directions",
+      "linked_frequency_unit_spread": null,
+      "current_frequency_unit_spread": null
+    }
+  ],
+  "records": [
+    {
+      "depth": 2,
+      "index": 76,
+      "strength": 1000,
+      "simplex_count": 2926,
+      "response": {
+        "response_norm": "0.697490123554727113901019237765",
+        "response_per_simplex": "0.000238376665603119314388591673877",
+        "biased_amplitude_curvature": "-2.78996049421890845560407695106"
+      },
+      "linked_radial": {
+        "frequency": "11.9585903437687946193781543657",
+        "frequency_per_simplex": "0.00408700968686561675303422910654",
+        "radius_exponent": "1.95228683244675076784221443477",
+        "bare_radial_curvature_per_unit_wave_norm": "46.693196925529360812627245741",
+        "background_threshold_av_squared_per_unit_wave_norm": "11.6732992313823402031568114353",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "11.4421323311893256945191180982",
+        "frequency_per_simplex": "0.00391050318905991992293886469522",
+        "canonical_phase_charge_at_unit_wave_norm": "22.8842646623786513890382361964",
+        "metric_force_per_unit_wave_norm": [
+          "-0.5008128675367741715969388211",
+          "-21.9530611902206457280805801613"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "22.3834517948418772174412973753",
+            "22.2390608236594323962215296186"
+          ],
+          [
+            "22.2390608236594323962215296186",
+            "64.1964705307373836879937132198"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "10.945363815293031555991965858",
+        "background_threshold_av_squared_per_unit_wave_norm": "250.476602375188294423827373563",
+        "spinor_pointwise_positive_coefficients": null,
+        "depth_two_form_zonal_control": {
+          "maximum_scalar_degree": 16,
+          "minimum_bare_hessian_eigenvalue": "2.81571851970735441654538495675e-13",
+          "background_threshold_av_squared_per_unit_phase_charge": "10.9539576886332583245281363264"
+        },
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 2,
+      "index": 81,
+      "strength": 1000,
+      "simplex_count": 3321,
+      "response": {
+        "response_norm": "0.701827090046728237623487723781",
+        "response_per_simplex": "0.000211330048192330092629776490148",
+        "biased_amplitude_curvature": "-2.80730836018691295049395089512"
+      },
+      "linked_radial": {
+        "frequency": "13.5295264732792859511661242643",
+        "frequency_per_simplex": "0.00407393148849120323732795069687",
+        "radius_exponent": "1.946355760611160568304935145",
+        "bare_radial_curvature_per_unit_wave_norm": "52.6665435792166747760905960404",
+        "background_threshold_av_squared_per_unit_wave_norm": "13.1666358948041686940226490101",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "12.9486395693527433256010623698",
+        "frequency_per_simplex": "0.00389901823828748669846463787106",
+        "canonical_phase_charge_at_unit_wave_norm": "25.8972791387054866512021247396",
+        "metric_force_per_unit_wave_norm": [
+          "-0.637690678834767573581857954715",
+          "-24.8044609614454257553673667846"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "25.2595884598707190776202667849",
+            "25.1065254789972912775168565299"
+          ],
+          [
+            "25.1065254789972912775168565299",
+            "72.4370036946887688404869393689"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "12.3199617095861122910695381551",
+        "background_threshold_av_squared_per_unit_wave_norm": "319.053487371314808979474844179",
+        "spinor_pointwise_positive_coefficients": null,
+        "depth_two_form_zonal_control": {
+          "maximum_scalar_degree": 16,
+          "minimum_bare_hessian_eigenvalue": "1.34712309705180730979423076651e-13",
+          "background_threshold_av_squared_per_unit_phase_charge": "12.3284703887303778875723989741"
+        },
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 2,
+      "index": 95,
+      "strength": 1000,
+      "simplex_count": 4560,
+      "response": {
+        "response_norm": "0.71198816279324300540738418584",
+        "response_per_simplex": "0.000156137754998518202940215830228",
+        "biased_amplitude_curvature": "-2.84795265117297202162953674336"
+      },
+      "linked_radial": {
+        "frequency": "18.3948265846073264027330703583",
+        "frequency_per_simplex": "0.00403395319837879964972216455225",
+        "radius_exponent": "1.9284466724096791101894720942",
+        "bare_radial_curvature_per_unit_wave_norm": "70.9468842332782024308797934646",
+        "background_threshold_av_squared_per_unit_wave_norm": "17.7367210583195506077199483662",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "17.6190994322307087033837428201",
+        "frequency_per_simplex": "0.00386383759478743611916310149563",
+        "canonical_phase_charge_at_unit_wave_norm": "35.2381988644614174067674856402",
+        "metric_force_per_unit_wave_norm": [
+          "-1.16004315276700031869260207191",
+          "-33.5569754326179056712698836838"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "34.0781557116944170880748835683",
+            "33.9016305030061728831250275877"
+          ],
+          [
+            "33.9016305030061728831250275877",
+            "97.5443176282763689806878929159"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "16.4916761804969664908711420948",
+        "background_threshold_av_squared_per_unit_wave_norm": "581.136964856653610010515568454",
+        "spinor_pointwise_positive_coefficients": null,
+        "depth_two_form_zonal_control": {
+          "maximum_scalar_degree": 16,
+          "minimum_bare_hessian_eigenvalue": "2.09954476387248238893690451271e-14",
+          "background_threshold_av_squared_per_unit_phase_charge": "16.4999371238239921738095047299"
+        },
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 3,
+      "index": 1,
+      "strength": 1000,
+      "simplex_count": 1,
+      "response": {
+        "response_norm": "0.399837569970986362248867902464",
+        "response_per_simplex": "0.399837569970986362248867902464",
+        "biased_amplitude_curvature": "-1.59935027988394544899547160986"
+      },
+      "linked_radial": {
+        "frequency": "0.0000132173700410224276432397795787",
+        "frequency_per_simplex": "0.0000132173700410224276432397795787",
+        "radius_exponent": "2.99997897071590270517231002007",
+        "bare_radial_curvature_per_unit_wave_norm": "0.0000793036643424753423913948072321",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.000019825916085618835597848701808",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.0000239995200049921397661268749908",
+        "frequency_per_simplex": "0.0000239995200049921397661268749908",
+        "canonical_phase_charge_at_unit_wave_norm": "0.0000479990400099842795322537499816",
+        "metric_force_per_unit_wave_norm": [
+          "0.000023998560024960978343142440895",
+          "-0.000043554471120854076425065568243"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.0000719976000349452578753961908766",
+            "0.0000648869511341665733625185975256"
+          ],
+          [
+            "0.0000648869511341665733625185975256",
+            "0.000235843952693452426194098305836"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.0000319544180948782969589874711462",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00000000153378139263182901341609023441",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.0000719976000349452578753961908766",
+          "laplacian_squared_times_depth_squared": "0.000229991560119269375689649821661",
+          "determinant_times_depth_squared": "0.0000000151148981163438977079828211871",
+          "gradient_squared": "0.0000446651333531210464903703966298"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 3,
+      "index": 4,
+      "strength": 1000,
+      "simplex_count": 20,
+      "response": {
+        "response_norm": "0.496559352550214242578015172668",
+        "response_per_simplex": "0.0248279676275107121289007586334",
+        "biased_amplitude_curvature": "-1.98623741020085697031206069067"
+      },
+      "linked_radial": {
+        "frequency": "0.000264335356294947155109764190491",
+        "frequency_per_simplex": "0.0000132167678147473577554882095245",
+        "radius_exponent": "2.99988783935279597494747381673",
+        "bare_radial_curvature_per_unit_wave_norm": "0.001585952841720401034997184094",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.0003964882104301002587492960235",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.00047995008058501979086756453487",
+        "frequency_per_simplex": "0.0000239975040292509895433782267435",
+        "canonical_phase_charge_at_unit_wave_norm": "0.000959900161170039581735129069739",
+        "metric_force_per_unit_wave_norm": [
+          "0.000479850242927777859301318653434",
+          "-0.00147352509461639859243409391729"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.00143975040409781744103644772317",
+            "0.00136688061422608774241532911858"
+          ],
+          [
+            "0.00136688061422608774241532911858",
+            "0.00541147589111788919601697571728"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.00106454270234563118664118051022",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00000102185471155396084954952535162",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.00143975040409781744103644772317",
+          "laplacian_squared_times_depth_squared": "0.00402717598121383545992110827115",
+          "determinant_times_depth_squared": "0.00000576279376331174986085257871685",
+          "gradient_squared": "0.00070252511139608005319444729818"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 3,
+      "index": 16,
+      "strength": 1000,
+      "simplex_count": 816,
+      "response": {
+        "response_norm": "0.681799279459514160619877533543",
+        "response_per_simplex": "0.000835538332670973236053771487185",
+        "biased_amplitude_curvature": "-2.72719711783805664247951013417"
+      },
+      "linked_radial": {
+        "frequency": "0.0107786327172608155071405117728",
+        "frequency_per_simplex": "0.0000132091087221333523371819997216",
+        "radius_exponent": "2.99872810452215298294976176187",
+        "bare_radial_curvature_per_unit_wave_norm": "0.064644377715143977169317792438",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.0161610944287859942923294481095",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.0195612829219728355781981261296",
+        "frequency_per_simplex": "0.0000239721604435941612477918212372",
+        "canonical_phase_charge_at_unit_wave_norm": "0.0391225658439456711563962522591",
+        "metric_force_per_unit_wave_norm": [
+          "0.0195158496693552500101358549936",
+          "-0.0764056060210436381296730855847"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.0586384155133009211665321072527",
+            "0.0575906903289227080315863539329"
+          ],
+          [
+            "0.0575906903289227080315863539329",
+            "0.287257497647127887557289564375"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.0460891225630452298526397529212",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00180312473216241907732845150535",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.0586384155133009211665321072527",
+          "laplacian_squared_times_depth_squared": "0.158173187968179205700406637656",
+          "determinant_times_depth_squared": "0.00927154817116561294907945677841",
+          "gradient_squared": "0.0266729742618410115079128918034"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 3,
+      "index": 17,
+      "strength": 1000,
+      "simplex_count": 969,
+      "response": {
+        "response_norm": "0.690640276682032235820898604887",
+        "response_per_simplex": "0.000712735063655348024582970696478",
+        "biased_amplitude_curvature": "-2.76256110672812894328359441955"
+      },
+      "linked_radial": {
+        "frequency": "0.0127986404551584120560181677262",
+        "frequency_per_simplex": "0.0000132080912849932012962003794904",
+        "radius_exponent": "2.9985739440567819294454395392",
+        "bare_radial_curvature_per_unit_wave_norm": "0.0767553395763780925658277985568",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.0191888348940945231414569496392",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.023225767712676227677216855891",
+        "frequency_per_simplex": "0.000023968800529077634341813060775",
+        "canonical_phase_charge_at_unit_wave_norm": "0.046451535425352455354433711782",
+        "metric_force_per_unit_wave_norm": [
+          "0.0231653044637168998946020888629",
+          "-0.0912249424465979717669530249042"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.0696168398890693552490358006449",
+            "0.0684363455880188915562349467795"
+          ],
+          [
+            "0.0684363455880188915562349467795",
+            "0.343765858642167148526950344009"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.0547097478960324028083162663778",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00254135179250465111958404765023",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.0696168398890693552490358006449",
+          "laplacian_squared_times_depth_squared": "0.187646087889503857864591348598",
+          "determinant_times_depth_squared": "0.0130589937685716090130222830608",
+          "gradient_squared": "0.0316213145122392009069844863634"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 4,
+      "index": 3,
+      "strength": 1000,
+      "simplex_count": 15,
+      "response": {
+        "response_norm": "0.567529267164974973982439844855",
+        "response_per_simplex": "0.037835284477664998265495989657",
+        "biased_amplitude_curvature": "-2.27011706865989989592975937942"
+      },
+      "linked_radial": {
+        "frequency": "0.000000595703106774503560850530108201",
+        "frequency_per_simplex": "0.00000003971354045163357072336867388",
+        "radius_exponent": "3.99993745512461259612255220131",
+        "bare_radial_curvature_per_unit_wave_norm": "0.00000476555033784286628546069567758",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.0000011913875844607165713651739194",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.00000287974080347365847198372235009",
+        "frequency_per_simplex": "0.000000191982720231577231465581490006",
+        "canonical_phase_charge_at_unit_wave_norm": "0.00000575948160694731694396744470018",
+        "metric_force_per_unit_wave_norm": [
+          "0.00000575896322084270847774802408915",
+          "-0.0000117148379122432680873468402081"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.0000115184448277900254217154687893",
+            "0.0000101441644532766559146683408555"
+          ],
+          [
+            "0.0000101441644532766559146683408555",
+            "0.0000474478530339724051625676016756"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.0000101959904039994630538699925673",
+        "background_threshold_av_squared_per_unit_wave_norm": "5.87236191964462507628789725002e-11",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.0000115184448277900254217154687893",
+          "laplacian_squared_times_depth_squared": "0.000036714621693234691319774541212",
+          "determinant_times_depth_squared": "4.18230584134326622823316809764e-10",
+          "gradient_squared": "0.00000971860682230097871015552416677"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 4,
+      "index": 20,
+      "strength": 1000,
+      "simplex_count": 8855,
+      "response": {
+        "response_norm": "0.824321169389752189281042424235",
+        "response_per_simplex": "0.0000930910411507342957968427356561",
+        "biased_amplitude_curvature": "-3.29728467755900875712416969694"
+      },
+      "linked_radial": {
+        "frequency": "0.000351434752997424759373558021455",
+        "frequency_per_simplex": "0.0000000396877191414370140455740283969",
+        "radius_exponent": "3.99863633095789841599818921983",
+        "bare_radial_curvature_per_unit_wave_norm": "0.00281051954259343566499113040791",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.000702629885648358916247782601977",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.00169700114705833112348020675213",
+        "frequency_per_simplex": "0.000000191643269007152018461909288778",
+        "canonical_phase_charge_at_unit_wave_norm": "0.00339400229411666224696041350425",
+        "metric_force_per_unit_wave_norm": [
+          "0.00338768467747685866472746033267",
+          "-0.0106328049491163389442727601399"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.00678168697159352091168787383692",
+            "0.00656505628948818711370662647203"
+          ],
+          [
+            "0.00656505628948818711370662647203",
+            "0.0444114152585172830346339206814"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.00677821790528401526684041550163",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.0000230052871205565846684051328444",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.00678168697159352091168787383692",
+          "laplacian_squared_times_depth_squared": "0.0205153546351414348499291265074",
+          "determinant_times_depth_squared": "0.000139097521682402253210122958351",
+          "gradient_squared": "0.00517299149303552763675689616888"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 4,
+      "index": 72,
+      "strength": 1000,
+      "simplex_count": 1215450,
+      "response": {
+        "response_norm": "0.995430947168902105853112642172",
+        "response_per_simplex": "0.000000818981403734338809373575747395",
+        "biased_amplitude_curvature": "-3.98172378867560842341245056869"
+      },
+      "linked_radial": {
+        "frequency": "0.0478847777635221719471556013634",
+        "frequency_per_simplex": "0.0000000393967483347913710536472922484",
+        "radius_exponent": "3.98387558396036506691507180594",
+        "bare_radial_curvature_per_unit_wave_norm": "0.381533993950928393400958159385",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.0953834984877320983502395398463",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.228321751724117245790457431778",
+        "frequency_per_simplex": "0.000000187849563309158950010660604532",
+        "canonical_phase_charge_at_unit_wave_norm": "0.456643503448234491580914863556",
+        "metric_force_per_unit_wave_norm": [
+          "0.446555499684090058582329187125",
+          "-1.52834814986343158169382447321"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.903199003132324550163244050681",
+            "0.894235296191290490336843757459"
+          ],
+          [
+            "0.894235296191290490336843757459",
+            "6.62918939296358424120002570483"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.896771910234052563970412930961",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.409505066883243413945387322903",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.903199003132324550163244050681",
+          "laplacian_squared_times_depth_squared": "2.70587013838830560052983207034",
+          "determinant_times_depth_squared": "2.44389874758790989955872021787",
+          "gradient_squared": "0.678057817785945495892129416269"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 5,
+      "index": 10,
+      "strength": 1000,
+      "simplex_count": 2002,
+      "response": {
+        "response_norm": "0.801392989007448088076483345404",
+        "response_per_simplex": "0.000400296198305418625412828843858",
+        "biased_amplitude_curvature": "-3.20557195602979235230593338162"
+      },
+      "linked_radial": {
+        "frequency": "0.00000024149766411721901017238440146",
+        "frequency_per_simplex": "1.20628203854754750335856344386e-10",
+        "radius_exponent": "4.99967768278439819822164303929",
+        "bare_radial_curvature_per_unit_wave_norm": "0.00000241482096346284489934656678662",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.000000603705240865711224836641696656",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.00000384156447407298042013041918883",
+        "frequency_per_simplex": "0.00000000191886337366282738268252706735",
+        "canonical_phase_charge_at_unit_wave_norm": "0.00000768312894814596084026083837765",
+        "metric_force_per_unit_wave_norm": [
+          "0.0000115201424251635738036945511916",
+          "-0.0000294008758871351113888948685713"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.0000192032713733095346439553895692",
+            "0.0000175841782723377619859525836633"
+          ],
+          [
+            "0.0000175841782723377619859525836633",
+            "0.000123535369954206006654210370032"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.0000217664690063145387771326706306",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.67234588121337079777529708005e-10",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.0000192032713733095346439553895692",
+          "laplacian_squared_times_depth_squared": "0.0000625317233740703434411670254191",
+          "determinant_times_depth_squared": "0.00000000119963665454577396896268569458",
+          "gradient_squared": "0.000019084985745358340996110250795"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 5,
+      "index": 15,
+      "strength": 1000,
+      "simplex_count": 11628,
+      "response": {
+        "response_norm": "0.865891133562039257281583986296",
+        "response_per_simplex": "0.0000744660417580013121157192970671",
+        "biased_amplitude_curvature": "-3.46356453424815702912633594518"
+      },
+      "linked_radial": {
+        "frequency": "0.00000140243578698372028015579167306",
+        "frequency_per_simplex": "1.20608512812497444113845173122e-10",
+        "radius_exponent": "4.99935113535187188495714228649",
+        "bare_radial_curvature_per_unit_wave_norm": "0.0000140225378878303158660333800113",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00000350563447195757896650834500283",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.0000222995945243492987466130718637",
+        "frequency_per_simplex": "0.00000000191774978709574292626531405777",
+        "canonical_phase_charge_at_unit_wave_norm": "0.0000445991890486985974932261437274",
+        "metric_force_per_unit_wave_norm": [
+          "0.0000668464532540468527570514613064",
+          "-0.000183746824073522361256129860077"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.000111445642302745450250277605034",
+            "0.00010450589271494800436398360837"
+          ],
+          [
+            "0.00010450589271494800436398360837",
+            "0.000791351687906462750583750356927"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.000127681394324700563745094920658",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00000000569448664348875264046651783736",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.000111445642302745450250277605034",
+          "laplacian_squared_times_depth_squared": "0.000360666515781298642454127435602",
+          "determinant_times_depth_squared": "0.0000000401780461336474789944073238668",
+          "gradient_squared": "0.000109424652134703803668079021557"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 5,
+      "index": 22,
+      "strength": 1000,
+      "simplex_count": 65780,
+      "response": {
+        "response_norm": "0.928412215913303436316115490908",
+        "response_per_simplex": "0.000014113898083206193923930001382",
+        "biased_amplitude_curvature": "-3.71364886365321374526446196363"
+      },
+      "linked_radial": {
+        "frequency": "0.00000793104629926950130776763281352",
+        "frequency_per_simplex": "1.20569265723160554997987728999e-10",
+        "radius_exponent": "4.99870003278664238930214765537",
+        "bare_radial_curvature_per_unit_wave_norm": "0.0000792898427923816699485708490021",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.0000198224606980954174871427122505",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.000126004593108386156396286430388",
+        "frequency_per_simplex": "0.00000000191554565382161989048778398279",
+        "canonical_phase_charge_at_unit_wave_norm": "0.000252009186216772312792572860776",
+        "metric_force_per_unit_wave_norm": [
+          "0.0003774277726714435608036274698",
+          "-0.00109206423940407643102367517709"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.000629436958888215873596200330576",
+            "0.000600714250402962627036559210508"
+          ],
+          [
+            "0.000600714250402962627036559210508",
+            "0.0048038601208502142706034473011"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.000724852128331527582611997810935",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.000000182669394988323676521641383733",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.000629436958888215873596200330576",
+          "laplacian_squared_times_depth_squared": "0.00202909327577969104445878550585",
+          "determinant_times_depth_squared": "0.00000127695025406783365340900771741",
+          "gradient_squared": "0.000613337126532018966035374623285"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 6,
+      "index": 13,
+      "strength": 1000,
+      "simplex_count": 18564,
+      "response": {
+        "response_norm": "0.915661330119101047581398203775",
+        "response_per_simplex": "0.0000493245706808393152112367056547",
+        "biased_amplitude_curvature": "-3.6626453204764041903255928151"
+      },
+      "linked_radial": {
+        "frequency": "0.00000000702024432022617341661863565236",
+        "frequency_per_simplex": "3.78164421473075491091286126501e-13",
+        "radius_exponent": "5.99955845364275393226419732933",
+        "bare_radial_curvature_per_unit_wave_norm": "0.0000000842367323161009344715979921978",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.0000000210591830790252336178994980494",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.000000427292836099775648919886265506",
+        "frequency_per_simplex": "2.30172827030691472161110895015e-11",
+        "canonical_phase_charge_at_unit_wave_norm": "0.000000854585672199551297839772531012",
+        "metric_force_per_unit_wave_norm": [
+          "0.00000170832790194785386103688158087",
+          "-0.00000431089966810155363919789932105"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.00000256291357414740515887665411188",
+            "0.00000232628241658254439762191303957"
+          ],
+          [
+            "0.00000232628241658254439762191303957",
+            "0.0000188186452331550520598615801942"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.00000319513379907867859075755441841",
+        "background_threshold_av_squared_per_unit_wave_norm": "2.73051556545315862073243094694e-12",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.00000256291357414740515887665411188",
+          "laplacian_squared_times_depth_squared": "0.00000865800002152351697843422865874",
+          "determinant_times_depth_squared": "2.21763615868238628091283908418e-11",
+          "gradient_squared": "0.00000292450569695217197234712864399"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 6,
+      "index": 35,
+      "strength": 1000,
+      "simplex_count": 3838380,
+      "response": {
+        "response_norm": "1.07830143945390067228826500401",
+        "response_per_simplex": "0.000000280926182257593222215691256209",
+        "biased_amplitude_curvature": "-4.31320575781560268915306001604"
+      },
+      "linked_radial": {
+        "frequency": "0.00000144993881287053551969887062535",
+        "frequency_per_simplex": "3.77747594784918512419007660876e-13",
+        "radius_exponent": "5.99735198306300529501417081273",
+        "bare_radial_curvature_per_unit_wave_norm": "0.0000173915868293782518879907240129",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00000434789670734456297199768100321",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.0000879366133952299987264844150104",
+        "frequency_per_simplex": "2.29098248206873729871676110782e-11",
+        "canonical_phase_charge_at_unit_wave_norm": "0.000175873226790459997452968830021",
+        "metric_force_per_unit_wave_norm": [
+          "0.000350747136533158705823908763241",
+          "-0.0010137051530052027870450421953"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.000526620363323618703276877593262",
+            "0.000504756040534171735878352274213"
+          ],
+          [
+            "0.000504756040534171735878352274213",
+            "0.00468588190844178914420827955212"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.00066725235643376414632862350811",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.000000117351825009544251705071729539",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.000526620363323618703276877593262",
+          "laplacian_squared_times_depth_squared": "0.00176287399081496062128755504215",
+          "determinant_times_depth_squared": "0.000000928299098360583460313617239031",
+          "gradient_squared": "0.000590337660638788808124512457095"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 10,
+      "index": 23,
+      "strength": 1000,
+      "simplex_count": 64512240,
+      "response": {
+        "response_norm": "1.22497506221676116105884723522",
+        "response_per_simplex": "0.0000000189882580765566528314448116392",
+        "biased_amplitude_curvature": "-4.89990024886704464423538894088"
+      },
+      "linked_radial": {
+        "frequency": "3.49110881077328694278454863296e-15",
+        "frequency_per_simplex": "5.41154486462303423781990616503e-23",
+        "radius_exponent": "9.9990764792960697634009263187",
+        "bare_radial_curvature_per_unit_wave_norm": "6.9815727992932894061454670632e-14",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.7453931998233223515363667658e-14",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "1.19487925909043743065878178667e-10",
+        "frequency_per_simplex": "1.85217450066907834956402348868e-18",
+        "canonical_phase_charge_at_unit_wave_norm": "2.38975851818087486131756357335e-10",
+        "metric_force_per_unit_wave_norm": [
+          "9.55158752968154136876417697694e-10",
+          "-0.0000000023690164200848445298770311032"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.00000000119413460478624162300817405503",
+            "0.00000000105681626482426606594749087522"
+          ],
+          [
+            "0.00000000105681626482426606594749087522",
+            "0.0000000110767351946046116017419139979"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.00000000178279414117739834140029462833",
+        "background_threshold_av_squared_per_unit_wave_norm": "4.26044748504164487848365291511e-19",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.00000000119413460478624162300817405503",
+          "laplacian_squared_times_depth_squared": "0.00000000433385321388129837791670313402",
+          "determinant_times_depth_squared": "5.17396036885226929740617503385e-18",
+          "gradient_squared": "0.00000000174764788490152209442568910504"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 2,
+      "index": 76,
+      "strength": 10000,
+      "simplex_count": 2926,
+      "response": {
+        "response_norm": "0.697490123554727113901019237765",
+        "response_per_simplex": "0.000238376665603119314388591673877",
+        "biased_amplitude_curvature": "-2.78996049421890845560407695106"
+      },
+      "linked_radial": {
+        "frequency": "1.2255028754424944099054621475",
+        "frequency_per_simplex": "0.000418832151552458786707266625941",
+        "radius_exponent": "1.99948680783323327405779743576",
+        "bare_radial_curvature_per_unit_wave_norm": "4.90075366481792326609883284155",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.22518841620448081652470821039",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "1.17012613756191636902095248002",
+        "frequency_per_simplex": "0.000399906403814735601169156691736",
+        "canonical_phase_charge_at_unit_wave_norm": "2.34025227512383273804190496004",
+        "metric_force_per_unit_wave_norm": [
+          "-0.000547468622279651798490200817383",
+          "-2.29403532392846088138644162741"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "2.33970480650155308624341475922",
+            "2.32460742007333425036298536214"
+          ],
+          [
+            "2.32460742007333425036298536214",
+            "6.80999564126614365851684619495"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "1.16881102303620452778943270022",
+        "background_threshold_av_squared_per_unit_wave_norm": "2.73531265585029212276065385667",
+        "spinor_pointwise_positive_coefficients": null,
+        "depth_two_form_zonal_control": {
+          "maximum_scalar_degree": 16,
+          "minimum_bare_hessian_eigenvalue": "3.00984107202441323523777276443e-14",
+          "background_threshold_av_squared_per_unit_phase_charge": "1.16972970911184190823403261132"
+        },
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 2,
+      "index": 81,
+      "strength": 10000,
+      "simplex_count": 3321,
+      "response": {
+        "response_norm": "0.701827090046728237623487723781",
+        "response_per_simplex": "0.000211330048192330092629776490148",
+        "biased_amplitude_curvature": "-2.80730836018691295049395089512"
+      },
+      "linked_radial": {
+        "frequency": "1.39089340110793071860027557395",
+        "frequency_per_simplex": "0.000418817645621177572598697854246",
+        "radius_exponent": "1.99941759506998222373113175912",
+        "bare_radial_curvature_per_unit_wave_norm": "5.56195347808385397198574949626",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.39048836952096349299643737406",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "1.32804723154921053014345284651",
+        "frequency_per_simplex": "0.000399893776437582213231994232613",
+        "canonical_phase_charge_at_unit_wave_norm": "2.65609446309842106028690569302",
+        "metric_force_per_unit_wave_norm": [
+          "-0.000705162291943319507734045528545",
+          "-2.60672567973319264142009890993"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "2.65538930080647774077917164749",
+            "2.63929367634678445207577433049"
+          ],
+          [
+            "2.63929367634678445207577433049",
+            "7.74276701322404118920184736835"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "1.3265756650069784129725682961",
+        "background_threshold_av_squared_per_unit_wave_norm": "3.52351027870614120255775985548",
+        "spinor_pointwise_positive_coefficients": null,
+        "depth_two_form_zonal_control": {
+          "maximum_scalar_degree": 16,
+          "minimum_bare_hessian_eigenvalue": "1.45242317021496096743489679475e-14",
+          "background_threshold_av_squared_per_unit_phase_charge": "1.32749309569431159456915755589"
+        },
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 2,
+      "index": 95,
+      "strength": 10000,
+      "simplex_count": 4560,
+      "response": {
+        "response_norm": "0.71198816279324300540738418584",
+        "response_per_simplex": "0.000156137754998518202940215830228",
+        "biased_amplitude_curvature": "-2.84795265117297202162953674336"
+      },
+      "linked_radial": {
+        "frequency": "1.90960103943263122226383869835",
+        "frequency_per_simplex": "0.0004187721577703138645315435742",
+        "radius_exponent": "1.99920058803214720647610453354",
+        "bare_radial_curvature_per_unit_wave_norm": "7.63535104188103172967729929608",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.90883776047025793241932482402",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "1.82333505338991521587454781035",
+        "frequency_per_simplex": "0.00039985417837498140699003241455",
+        "canonical_phase_charge_at_unit_wave_norm": "3.6466701067798304317490956207",
+        "metric_force_per_unit_wave_norm": [
+          "-0.00132892396413152354436447741957",
+          "-3.58829833866128214392894707662"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "3.64534118281569890820473114328",
+            "3.6264514162206936458460782746"
+          ],
+          [
+            "3.6264514162206936458460782746",
+            "10.6722874688591917248694137913"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "1.8212427499482114994490717255",
+        "background_threshold_av_squared_per_unit_wave_norm": "6.64147149342563644321838930034",
+        "spinor_pointwise_positive_coefficients": null,
+        "depth_two_form_zonal_control": {
+          "maximum_scalar_degree": 16,
+          "minimum_bare_hessian_eigenvalue": "2.32415204622726371565846775219e-15",
+          "background_threshold_av_squared_per_unit_phase_charge": "1.82215728008407476569373534679"
+        },
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 3,
+      "index": 1,
+      "strength": 10000,
+      "simplex_count": 1,
+      "response": {
+        "response_norm": "0.399837569970986362248867902464",
+        "response_per_simplex": "0.399837569970986362248867902464",
+        "biased_amplitude_curvature": "-1.59935027988394544899547160986"
+      },
+      "linked_radial": {
+        "frequency": "0.000000132175076277862167618383339302",
+        "frequency_per_simplex": "0.000000132175076277862167618383339302",
+        "radius_exponent": "2.99999978970748910955485151819",
+        "bare_radial_curvature_per_unit_wave_norm": "0.000000793050402076315670494803867118",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00000019826260051907891762370096678",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.000000239999952000004992001397759013",
+        "frequency_per_simplex": "0.000000239999952000004992001397759013",
+        "canonical_phase_charge_at_unit_wave_norm": "0.000000479999904000009984002795518025",
+        "metric_force_per_unit_wave_norm": [
+          "0.000000239999856000024960009784311114",
+          "-0.000000435555447111120853340764724106"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.000000719999760000034944012579829139",
+            "0.000000648888695111134165345734533052"
+          ],
+          [
+            "0.000000648888695111134165345734533052",
+            "0.00000235851772859269344716426596234"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.000000319559334648504060726793074051",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.53388449953589013373761310317e-13",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.000000719999760000034944012579829139",
+          "laplacian_squared_times_depth_squared": "0.00000229999915600011926405376123616",
+          "determinant_times_depth_squared": "1.51159889808036343872257784878e-12",
+          "gradient_squared": "0.000000446666513333353120010465698637"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 3,
+      "index": 4,
+      "strength": 10000,
+      "simplex_count": 20,
+      "response": {
+        "response_norm": "0.496559352550214242578015172668",
+        "response_per_simplex": "0.0248279676275107121289007586334",
+        "biased_amplitude_curvature": "-1.98623741020085697031206069067"
+      },
+      "linked_radial": {
+        "frequency": "0.00000264350032110158936420817790379",
+        "frequency_per_simplex": "0.00000013217501605507946821040889519",
+        "radius_exponent": "2.99999887844923066281864105225",
+        "bare_radial_curvature_per_unit_wave_norm": "0.0000158609959969698984361020490273",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00000396524899924247460902551225681",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.00000479999500800058369340125895612",
+        "frequency_per_simplex": "0.000000239999750400029184670062947806",
+        "canonical_phase_charge_at_unit_wave_norm": "0.00000959999001600116738680251791224",
+        "metric_force_per_unit_wave_norm": [
+          "0.00000479998502400291849380874500515",
+          "-0.0000147377525091586039022638864479"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.0000143999750400040858806112629174",
+            "0.0000136710880611582147703516637855"
+          ],
+          [
+            "0.0000136710880611582147703516637855",
+            "0.0000541251856828762052027443401255"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.0000106479572516015124607475672702",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.02220283306181749918445532196e-10",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.0000143999750400040858806112629174",
+          "laplacian_squared_times_depth_squared": "0.0000402799175968131698524125786187",
+          "determinant_times_depth_squared": "5.76495417524839755625234036822e-10",
+          "gradient_squared": "0.00000702665251093538849266419023206"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 3,
+      "index": 16,
+      "strength": 10000,
+      "simplex_count": 816,
+      "response": {
+        "response_norm": "0.681799279459514160619877533543",
+        "response_per_simplex": "0.000835538332670973236053771487185",
+        "biased_amplitude_curvature": "-2.72719711783805664247951013417"
+      },
+      "linked_radial": {
+        "frequency": "0.000107854188120578044540664417608",
+        "frequency_per_simplex": "0.000000132174250147767211446892668637",
+        "radius_exponent": "2.99998728908487718381509096682",
+        "bare_radial_curvature_per_unit_wave_norm": "0.000647122386872606585409613599323",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.000161780596718151646352403399831",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.000195837728256272884918701454211",
+        "frequency_per_simplex": "0.000000239997216000334417792526291925",
+        "canonical_phase_charge_at_unit_wave_norm": "0.000391675456512545769837402908421",
+        "metric_force_per_unit_wave_norm": [
+          "0.000195833184769366229197901769407",
+          "-0.000765590426957851380086806083055"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.000587508641281911999035304677828",
+            "0.000577008135501062176993626753165"
+          ],
+          [
+            "0.000577008135501062176993626753165",
+            "0.002878949360035105948224802106"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.000462126461166487394363953354139",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.000000181003592643911204906565221157",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.000587508641281911999035304677828",
+          "laplacian_squared_times_depth_squared": "0.00158536331791005404407352705231",
+          "determinant_times_depth_squared": "0.00000093106571892883995931778811936",
+          "gradient_squared": "0.000267340497286258605280106868358"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 3,
+      "index": 17,
+      "strength": 10000,
+      "simplex_count": 969,
+      "response": {
+        "response_norm": "0.690640276682032235820898604887",
+        "response_per_simplex": "0.000712735063655348024582970696478",
+        "biased_amplitude_curvature": "-2.76256110672812894328359441955"
+      },
+      "linked_radial": {
+        "frequency": "0.000128076749803786804877292919018",
+        "frequency_per_simplex": "0.000000132174148404320748067381753373",
+        "radius_exponent": "2.99998574953873810977250260705",
+        "bare_radial_curvature_per_unit_wave_norm": "0.000768456848517197573922440596354",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.000192114212129299393480610149089",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.000232556976720363560223179102359",
+        "frequency_per_simplex": "0.000000239996880000375191148791643301",
+        "canonical_phase_charge_at_unit_wave_norm": "0.000465113953440727120446358204718",
+        "metric_force_per_unit_wave_norm": [
+          "0.000232550930161820822654325549213",
+          "-0.000914304851683190603260611141669"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.000697664883602547943100683753931",
+            "0.000685830792162117573075170260195"
+          ],
+          [
+            "0.000685830792162117573075170260195",
+            "0.00344621402377688777711679441475"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.000548741494202082947381336634233",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.000000255227325785302639099540463979",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.000697664883602547943100683753931",
+          "laplacian_squared_times_depth_squared": "0.00188129120750966566000778010804",
+          "determinant_times_depth_squared": "0.00000131207568923274702397513393721",
+          "gradient_squared": "0.000317025131248432298084256934964"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 4,
+      "index": 3,
+      "strength": 10000,
+      "simplex_count": 15,
+      "response": {
+        "response_norm": "0.567529267164974973982439844855",
+        "response_per_simplex": "0.037835284477664998265495989657",
+        "biased_amplitude_curvature": "-2.27011706865989989592975937942"
+      },
+      "linked_radial": {
+        "frequency": "5.95721549700002120809564479175e-10",
+        "frequency_per_simplex": "3.97147699800001413873042986116e-11",
+        "radius_exponent": "3.99999937456192173107856539261",
+        "bare_radial_curvature_per_unit_wave_norm": "0.00000000476577165242613451097032221955",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00000000119144291310653362774258055489",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.00000000287999740800034732837812447107",
+        "frequency_per_simplex": "1.91999827200023155225208298072e-10",
+        "canonical_phase_charge_at_unit_wave_norm": "0.00000000575999481600069465675624894215",
+        "metric_force_per_unit_wave_norm": [
+          "0.00000000575998963200208397102500279073",
+          "-0.0000000117163483789112240104636210102"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.0000000115199844480027786277812517329",
+            "0.0000000101454416443653274105721433263"
+          ],
+          [
+            "0.0000000101454416443653274105721433263",
+            "0.0000000474544785292972418522002051178"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.0000000101976441209649153304366051948",
+        "background_threshold_av_squared_per_unit_wave_norm": "5.87383772721778730835802235217e-17",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.0000000115199844480027786277812517329",
+          "laplacian_squared_times_depth_squared": "0.0000000367199462160093221413951271279",
+          "determinant_times_depth_squared": "4.18347617738003832819867801639e-16",
+          "gradient_squared": "0.00000000971998606800222977129443630213"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 4,
+      "index": 20,
+      "strength": 10000,
+      "simplex_count": 8855,
+      "response": {
+        "response_norm": "0.824321169389752189281042424235",
+        "response_per_simplex": "0.0000930910411507342957968427356561",
+        "biased_amplitude_curvature": "-3.29728467755900875712416969694"
+      },
+      "linked_radial": {
+        "frequency": "0.000000351672001450914984960110559826",
+        "frequency_per_simplex": "3.9714511739233764535303281742e-11",
+        "radius_exponent": "3.9999863697152705195539589955",
+        "bare_radial_curvature_per_unit_wave_norm": "0.00000281336642482829755521731766204",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00000070334160620707438880432941551",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.00000170012841103161340350324269732",
+        "frequency_per_simplex": "1.91996432640498408074900361075e-10",
+        "canonical_phase_charge_at_unit_wave_norm": "0.00000340025682206322680700648539464",
+        "metric_force_per_unit_wave_norm": [
+          "0.00000340019364413528067894016385383",
+          "-0.0000106634134848288329726353676162"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.00000680045046619850748594664924848",
+            "0.00000658315584069531770668064237523"
+          ],
+          [
+            "0.00000658315584069531770668064237523",
+            "0.0000445457059287390471310688677939"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.00000680163013644110452004892086811",
+        "background_threshold_av_squared_per_unit_wave_norm": "2.31272892725847018014776355935e-11",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.00000680045046619850748594664924848",
+          "laplacian_squared_times_depth_squared": "0.0000205783397748501093696214535121",
+          "determinant_times_depth_squared": "1.39910633062632265403698489318e-10",
+          "gradient_squared": "0.0000051888478322581606023673202049"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 4,
+      "index": 72,
+      "strength": 10000,
+      "simplex_count": 1215450,
+      "response": {
+        "response_norm": "0.995430947168902105853112642172",
+        "response_per_simplex": "0.000000818981403734338809373575747395",
+        "biased_amplitude_curvature": "-3.98172378867560842341245056869"
+      },
+      "linked_radial": {
+        "frequency": "0.0000482674617706633160736670999514",
+        "frequency_per_simplex": "3.97115979848313925489876999888e-11",
+        "radius_exponent": "3.99983962502294860164120604732",
+        "bare_radial_curvature_per_unit_wave_norm": "0.000386124212379158929835520359533",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.0000965310530947897324588800898833",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.000233315950858714049389000751089",
+        "frequency_per_simplex": "1.91958493445813525351927887687e-10",
+        "canonical_phase_charge_at_unit_wave_norm": "0.000466631901717428098778001502177",
+        "metric_force_per_unit_wave_norm": [
+          "0.000466531003449001216414167591752",
+          "-0.00158146660351101953264424655758"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.00093316290516642931519216909393",
+            "0.000923892284027260222493618584437"
+          ],
+          [
+            "0.000923892284027260222493618584437",
+            "0.00687099125917335931473283056308"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.000934237089593066842186520400358",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.000000435944829771768035984210408664",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.00093316290516642931519216909393",
+          "laplacian_squared_times_depth_squared": "0.00280595340133161612401587930362",
+          "determinant_times_depth_squared": "0.00000261836852085365058603584798489",
+          "gradient_squared": "0.000703129746358092796204771308969"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 5,
+      "index": 10,
+      "strength": 10000,
+      "simplex_count": 2002,
+      "response": {
+        "response_norm": "0.801392989007448088076483345404",
+        "response_per_simplex": "0.000400296198305418625412828843858",
+        "biased_amplitude_curvature": "-3.20557195602979235230593338162"
+      },
+      "linked_radial": {
+        "frequency": "2.41536195599228885814005656414e-11",
+        "frequency_per_simplex": "1.20647450349265177729273554652e-14",
+        "radius_exponent": "4.99999677713310065615655854913",
+        "bare_radial_curvature_per_unit_wave_norm": "2.41536039911426927775029107534e-10",
+        "background_threshold_av_squared_per_unit_wave_norm": "6.03840099778567319437572768835e-11",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "3.84381724446993071026392621551e-10",
+        "frequency_per_simplex": "1.91998863360136399114082228547e-13",
+        "canonical_phase_charge_at_unit_wave_norm": "7.68763448893986142052785243102e-10",
+        "metric_force_per_unit_wave_norm": [
+          "0.0000000011531406222355115064503579148",
+          "-0.0000000029425474601858379758869808447"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.0000000019219040711294976485031431579",
+            "0.00000000175983796273775753167409581674"
+          ],
+          [
+            "0.00000000175983796273775753167409581674",
+            "0.0000000123642223478502526729049581516"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.00000000217871597187753670223581861965",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.67491720470098803528494081626e-18",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.0000000019219040711294976485031431579",
+          "laplacian_squared_times_depth_squared": "0.00000000625864868255291667104629407544",
+          "determinant_times_depth_squared": "1.20167372620581539526445024496e-17",
+          "gradient_squared": "0.00000000191016239351274450965567580165"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 5,
+      "index": 15,
+      "strength": 10000,
+      "simplex_count": 11628,
+      "response": {
+        "response_norm": "0.865891133562039257281583986296",
+        "response_per_simplex": "0.0000744660417580013121157192970671",
+        "biased_amplitude_curvature": "-3.46356453424815702912633594518"
+      },
+      "linked_radial": {
+        "frequency": "1.40288626275482095601920388027e-10",
+        "frequency_per_simplex": "1.20647253418887251119642576563e-14",
+        "radius_exponent": "4.99999351256655476943961556492",
+        "bare_radial_curvature_per_unit_wave_norm": "0.00000000140288444252856878599254365521",
+        "background_threshold_av_squared_per_unit_wave_norm": "3.50721110632142196498135913803e-10",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.0000000022325498342124200027829654545",
+        "frequency_per_simplex": "1.91997749760270038079030396844e-13",
+        "canonical_phase_charge_at_unit_wave_norm": "0.000000004465099668424840005565930909",
+        "metric_force_per_unit_wave_norm": [
+          "0.0000000066975971710683802352751585641",
+          "-0.0000000184053541800988511788901354339"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.0000000111626968394932202408410894731",
+            "0.0000000104674457309603620783940251951"
+          ],
+          [
+            "0.0000000104674457309603620783940251951",
+            "0.0000000792714069730411775018882306337"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.0000000127922962030679192534543689852",
+        "background_threshold_av_squared_per_unit_wave_norm": "5.71188775347109060301623224582e-17",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.0000000111626968394932202408410894731",
+          "laplacian_squared_times_depth_squared": "0.0000000361293744263479923504672886553",
+          "determinant_times_depth_squared": "4.03134147396765303920389459273e-16",
+          "gradient_squared": "0.0000000109614482494718351246106243709"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 5,
+      "index": 22,
+      "strength": 10000,
+      "simplex_count": 65780,
+      "response": {
+        "response_norm": "0.928412215913303436316115490908",
+        "response_per_simplex": "0.000014113898083206193923930001382",
+        "biased_amplitude_curvature": "-3.71364886365321374526446196363"
+      },
+      "linked_radial": {
+        "frequency": "7.93615050772479223218821392213e-10",
+        "frequency_per_simplex": "1.20646860865381456859048554608e-14",
+        "radius_exponent": "4.99998700507946891598219991075",
+        "bare_radial_curvature_per_unit_wave_norm": "0.00000000793612988179575811103729740051",
+        "background_threshold_av_squared_per_unit_wave_norm": "0.00000000198403247044893952775932435013",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "0.0000000126294669896031636710158203451",
+        "frequency_per_simplex": "1.91995545600534564776768323884e-13",
+        "canonical_phase_charge_at_unit_wave_norm": "0.0000000252589339792063273420316406901",
+        "metric_force_per_unit_wave_norm": [
+          "0.0000000378878149480861505355231107298",
+          "-0.000000109569211311666253331152942294"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.0000000631467489272924778775547514199",
+            "0.0000000602643441404814826655709455649"
+          ],
+          [
+            "0.0000000602643441404814826655709455649",
+            "0.000000482029791960572092157403085611"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.0000000727577948935955018188509570718",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.83778433768996403280620958187e-15",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.0000000631467489272924778775547514199",
+          "laplacian_squared_times_depth_squared": "0.00000020360984872190242942432374579",
+          "determinant_times_depth_squared": "1.28549261752550494092786896319e-14",
+          "gradient_squared": "0.0000000615451709079142806067475301841"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 6,
+      "index": 13,
+      "strength": 10000,
+      "simplex_count": 18564,
+      "response": {
+        "response_norm": "0.915661330119101047581398203775",
+        "response_per_simplex": "0.0000493245706808393152112367056547",
+        "biased_amplitude_curvature": "-3.6626453204764041903255928151"
+      },
+      "linked_radial": {
+        "frequency": "7.02177878362546832553648067539e-14",
+        "frequency_per_simplex": "3.78247079488551407322585686026e-18",
+        "radius_exponent": "5.99999558503776641164431103341",
+        "bare_radial_curvature_per_unit_wave_norm": "8.42612834017293352695878317202e-13",
+        "background_threshold_av_squared_per_unit_wave_norm": "2.106532085043233381739695793e-13",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "4.27710342734702147428874437843e-12",
+        "frequency_per_simplex": "2.30397728256142074676187479985e-16",
+        "canonical_phase_charge_at_unit_wave_norm": "8.55420685469404294857748875687e-12",
+        "metric_force_per_unit_wave_norm": [
+          "1.7108329364087404166936855619e-11",
+          "-4.31660444589939523582736732461e-11"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "2.56625362187814471155143443759e-11",
+            "2.32927129760447891361246308242e-11"
+          ],
+          [
+            "2.32927129760447891361246308242e-11",
+            "1.88441019090796751981369431918e-10"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "3.19976342746265717568117874336e-11",
+        "background_threshold_av_squared_per_unit_wave_norm": "2.73714382446003670852108154754e-22",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "2.56625362187814471155143443759e-11",
+          "laplacian_squared_times_depth_squared": "8.66980814907437992323880424823e-11",
+          "determinant_times_depth_squared": "2.22355551028093643986979113413e-21",
+          "gradient_squared": "2.92848106052499652999578949916e-11"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 6,
+      "index": 35,
+      "strength": 10000,
+      "simplex_count": 3838380,
+      "response": {
+        "response_norm": "1.07830143945390067228826500401",
+        "response_per_simplex": "0.000000280926182257593222215691256209",
+        "biased_amplitude_curvature": "-4.31320575781560268915306001604"
+      },
+      "linked_radial": {
+        "frequency": "1.45184001895266221310720007828e-11",
+        "frequency_per_simplex": "3.78242909496366230833632959291e-18",
+        "radius_exponent": "5.9999735357998055477947330018",
+        "bare_radial_curvature_per_unit_wave_norm": "1.7422003383862122796212960265e-10",
+        "background_threshold_av_squared_per_unit_wave_norm": "4.35550084596553069905324006625e-11",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "8.84312785507533391629542065694e-10",
+        "frequency_per_simplex": "2.30386982400787152816954565649e-16",
+        "canonical_phase_charge_at_unit_wave_norm": "0.00000000176862557101506678325908413139",
+        "metric_force_per_unit_wave_norm": [
+          "0.00000000353715120905124571884295883126",
+          "-0.0000000102150549208501680766740425617"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "0.00000000530577678006631250210204296265",
+            "0.00000000508539106569106503941590299292"
+          ],
+          [
+            "0.00000000508539106569106503941590299292",
+            "0.0000000472264299377237794349755963814"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "0.00000000672865289745143580773279256262",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.19004675729172292550527656892e-17",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "0.00000000530577678006631250210204296265",
+          "laplacian_squared_times_depth_squared": "0.0000000177677918401788665094643816205",
+          "determinant_times_depth_squared": "9.42652238932002624357845952426e-17",
+          "gradient_squared": "0.00000000594990923404087219234625321772"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    },
+    {
+      "depth": 10,
+      "index": 23,
+      "strength": 10000,
+      "simplex_count": 64512240,
+      "response": {
+        "response_norm": "1.22497506221676116105884723522",
+        "response_per_simplex": "0.0000000189882580765566528314448116392",
+        "biased_amplitude_curvature": "-4.89990024886704464423538894088"
+      },
+      "linked_radial": {
+        "frequency": "3.49270499867133537815932256318e-24",
+        "frequency_per_simplex": "5.41401910501221997276690836217e-32",
+        "radius_exponent": "9.999990766088729874260572666",
+        "bare_radial_curvature_per_unit_wave_norm": "6.98540354707706066516874498344e-23",
+        "background_threshold_av_squared_per_unit_wave_norm": "1.74635088676926516629218624586e-23",
+        "field_radius_mixed_block_at_reference": "0"
+      },
+      "whole_depth_current": {
+        "frequency": "1.19856509593252149591254855791e-19",
+        "frequency_per_simplex": "1.8578878921775487813049873294e-27",
+        "canonical_phase_charge_at_unit_wave_norm": "2.39713019186504299182509711582e-19",
+        "metric_force_per_unit_wave_norm": [
+          "9.58844631020089957148337991219e-19",
+          "-2.37784077814327563121984923533e-18"
+        ],
+        "bare_conformal_hessian_per_unit_wave_norm": [
+          [
+            "1.1985576502065942563308477028e-18",
+            "1.0606899117101421114115042853e-18"
+          ],
+          [
+            "1.0606899117101421114115042853e-18",
+            "1.11183144043070766114289394657e-17"
+          ]
+        ],
+        "background_threshold_av_squared_per_unit_phase_charge": "1.78966548618756848814483847445e-18",
+        "background_threshold_av_squared_per_unit_wave_norm": "4.29006117027905149835002915087e-37",
+        "spinor_pointwise_positive_coefficients": {
+          "f_squared": "1.1985576502065942563308477028e-18",
+          "laplacian_squared_times_depth_squared": "4.35017361749638263041942277122e-18",
+          "determinant_times_depth_squared": "5.21268289892254836397522011623e-36",
+          "gradient_squared": "1.75421706901575873355218966176e-18"
+        },
+        "depth_two_form_zonal_control": null,
+        "field_metric_mixed_block_at_reference": "0"
+      }
+    }
+  ]
+}

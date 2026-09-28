@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+"""Axisymmetric full two-grade field evolution in ordinary R^d."""
+import argparse, hashlib, json, math, time
+from pathlib import Path
+import numpy as np
+from scipy.interpolate import PchipInterpolator
+
+HERE=Path(__file__).resolve().parent
+
+def run(d,h,dt,end,R,zmax,rmax,cross):
+    source=HERE/'reciprocal-density-inputs.json'
+    data=json.loads(source.read_text())[str(d)]
+    raw={key:np.array(data[key]) for key in ['x','y']}
+    delta0=data['delta0']
+    q=np.array([3.,10.])[:,None,None]
+    g=q**((5-d)/2);w=q**((3-d)/2);lam=.25;a=2.
+    nz=int(round(2*zmax/h));nr=int(round(rmax/h)); hz=2*zmax/nz;hr=rmax/nr
+    z=(-zmax+(np.arange(nz)+.5)*hz)[None,:]
+    rho=((np.arange(nr)+.5)*hr)[:,None]
+    edges=np.arange(nr+1)*hr
+    vol=((edges[1:]**(d-1)-edges[:-1]**(d-1))/(d-1))[:,None]
+    sphere=2*math.pi**((d-1)/2)/math.gamma((d-1)/2)
+    measure=sphere*hz*vol
+    inner=(edges[:-1]**(d-2)/hr)[:,None];outer=(edges[1:]**(d-2)/hr)[:,None]
+    # At rho=0 the regular boundary is zero flux, including d=2.
+    inner[0]=0
+    def integ(x):return np.sum(x*measure,axis=(-2,-1))
+    def lap(x):
+        out=(np.roll(x,-1,axis=-1)-2*x+np.roll(x,1,axis=-1))/hz**2
+        fwd=np.empty_like(x);back=np.empty_like(x)
+        fwd[...,:-1,:]=x[...,1:,:]-x[...,:-1,:];fwd[...,-1,:]=-x[...,-1,:]
+        back[...,1:,:]=x[...,1:,:]-x[...,:-1,:];back[...,0,:]=0
+        return out+(outer*fwd-inner*back)/vol
+    def gradz(x):return (np.roll(x,-1,axis=-1)-np.roll(x,1,axis=-1))/(2*hz)
+    v=np.empty((2,nr,nz),complex);c=np.empty_like(v)
+    fi=PchipInterpolator(raw['x'],raw['y'][0],extrapolate=False)
+    hi=PchipInterpolator(raw['x'],raw['y'][2],extrapolate=False)
+    for j,(count,center) in enumerate(zip(q[:,0,0],[-R/2,R/2])):
+        arg=count*np.sqrt(rho*rho+(z-center)**2)/math.sqrt(a)
+        factor=2*count**((d-1)/2)/a
+        v[j]=factor*np.nan_to_num(fi(arg),nan=0.0)
+        c[j]=factor*np.nan_to_num(hi(arg),nan=0.0)
+    omega=q*math.sqrt(1-delta0/a)
+    pv=-1j*omega*v;pc=-2j*omega*c
+    initial=(v.copy(),c.copy())
+    def acc(v,c):
+        dens=abs(v)**2
+        own=w*dens;contact=own+cross*own[::-1]
+        return (lap(v)-q*q*v+g*c*v.conj()-g*g/(2*q*q)*dens*v-2*lam*w*contact*v,
+                lap(c)-4*q*q*c+(g/2)*v*v)
+    def obs(t,v,c,pv,pc):
+        lv,lc=lap(v),lap(c);dens=abs(v)**2
+        selfpot=q*q*dens+4*q*q*abs(c)**2-g*np.real(c.conj()*v*v)+g*g/(4*q*q)*dens*dens+lam*w*w*dens*dens
+        crosspot=2*lam*cross*w[0]*w[1]*dens[0]*dens[1]
+        e=integ(abs(pv)**2+abs(pc)**2-np.real(v.conj()*lv+c.conj()*lc)+selfpot)
+        charge=-2*np.imag(v.conj()*pv+2*c.conj()*pc)
+        A=integ(charge);center=integ(z*charge)/A
+        width=integ(((z-center[:,None,None])**2+rho*rho)*charge)/A
+        mom=-2*integ(np.real(pv.conj()*gradz(v)+pc.conj()*gradz(c)))
+        force=-2*lam*cross*w[:,0,0]*w[::-1,0,0]*integ(dens*gradz(dens[::-1]))
+        def shape(x,old):
+            phase=np.exp(1j*np.angle(integ(old.conj()*x)))[:,None,None]
+            return np.sqrt(integ(abs(x-phase*old)**2)/integ(abs(old)**2))
+        return {'t':t,'total_energy':float(sum(e)+integ(crosspot)), 'self_energies':e.tolist(),
+                'cross_energy':float(integ(crosspot)),'charges':A.tolist(),'charge_centers':center.tolist(),
+                'charge_rms_widths':np.sqrt(width).tolist(),'momenta':mom.tolist(),'instantaneous_forces':force.tolist(),
+                'v_phase_removed_change':shape(v,initial[0]).tolist(),
+                'edge_norm_fraction':float((np.sum(abs(v[:,[-1],:])**2)+np.sum(abs(v[:,:,[0,-1]])**2))/np.sum(abs(v)**2))}
+    steps=round(end/dt);dt=end/steps;hist=[obs(0,v,c,pv,pc)];av,ac=acc(v,c)
+    for k in range(steps):
+        pv+=dt/2*av;pc+=dt/2*ac
+        v+=dt*pv;c+=dt*pc
+        av,ac=acc(v,c)
+        pv+=dt/2*av;pc+=dt/2*ac
+        if (k+1)%max(1,steps//10)==0 or k+1==steps:hist.append(obs((k+1)*dt,v,c,pv,pc))
+    return {'d':d,'h_requested':h,'hz':hz,'hr':hr,'dt':dt,'end':end,'R':R,'zmax':zmax,'rmax':rmax,'cross_multiplier':cross,
+            'scope':'Full two-grade invariant axisymmetric PDE. Cross=0 is isolated-control dynamics retaining the same self terms.',
+            'counts':[3,10],'lambda':lam,'kappa':1,'delta':delta0/a,'mu':1,'gamma':1,
+            'sources':{source.name:hashlib.sha256(source.read_bytes()).hexdigest()},
+            'history':hist,'energy_relative_drift':max(abs(x['total_energy']/hist[0]['total_energy']-1) for x in hist),
+            'charge_relative_drift':max(abs(y/z-1) for x in hist for y,z in zip(x['charges'],hist[0]['charges']))}
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--d',type=int,required=True);p.add_argument('--h',type=float,default=.12);p.add_argument('--dt',type=float,default=.002);p.add_argument('--end',type=float,default=.5);p.add_argument('--R',type=float,default=2);p.add_argument('--zmax',type=float,default=10);p.add_argument('--rmax',type=float,default=8);p.add_argument('--cross',type=float,default=1);p.add_argument('--tag',required=True)
+    args=p.parse_args();tag=args.tag;del args.tag;t=time.monotonic();r=run(**vars(args));r['script_sha256']=hashlib.sha256(Path(__file__).read_bytes()).hexdigest();r['elapsed_seconds']=time.monotonic()-t
+    out=HERE/f'{tag}.json';out.write_text(json.dumps(r,indent=2)+'\n')
+    print(json.dumps({'file':str(out),'seconds':r['elapsed_seconds'],'energy_drift':r['energy_relative_drift'],'charge_drift':r['charge_relative_drift'],'initial':r['history'][0],'final':r['history'][-1]},indent=2),flush=True)

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>reciprocal-density-evolve.py.txt — IDWT V2</title>
+  <meta name="description" content="Selected historical code preserved as a source excerpt.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/reciprocal-density-evolve.py.txt/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="reciprocal-density-evolve.py.txt — IDWT V2">
+  <meta property="og:description" content="Selected historical code preserved as a source excerpt.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/reciprocal-density-evolve.py.txt/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="reciprocal-density-evolve.py.txt — IDWT V2">
+  <meta name="twitter:description" content="Selected historical code preserved as a source excerpt.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>reciprocal-density-evolve.py.txt</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Selected historical code preserved as a source excerpt.</p><p><a class="text-link" href="/assets/evidence/experiments/results/reciprocal-density-evolve.py.txt">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Axisymmetric full two-grade field evolution in ordinary R^d.&quot;&quot;&quot;
+import argparse, hashlib, json, math, time
+from pathlib import Path
+import numpy as np
+from scipy.interpolate import PchipInterpolator
+
+HERE=Path(__file__).resolve().parent
+
+def run(d,h,dt,end,R,zmax,rmax,cross):
+    source=HERE/&#39;reciprocal-density-inputs.json&#39;
+    data=json.loads(source.read_text())[str(d)]
+    raw={key:np.array(data[key]) for key in [&#39;x&#39;,&#39;y&#39;]}
+    delta0=data[&#39;delta0&#39;]
+    q=np.array([3.,10.])[:,None,None]
+    g=q**((5-d)/2);w=q**((3-d)/2);lam=.25;a=2.
+    nz=int(round(2*zmax/h));nr=int(round(rmax/h)); hz=2*zmax/nz;hr=rmax/nr
+    z=(-zmax+(np.arange(nz)+.5)*hz)[None,:]
+    rho=((np.arange(nr)+.5)*hr)[:,None]
+    edges=np.arange(nr+1)*hr
+    vol=((edges[1:]**(d-1)-edges[:-1]**(d-1))/(d-1))[:,None]
+    sphere=2*math.pi**((d-1)/2)/math.gamma((d-1)/2)
+    measure=sphere*hz*vol
+    inner=(edges[:-1]**(d-2)/hr)[:,None];outer=(edges[1:]**(d-2)/hr)[:,None]
+    # At rho=0 the regular boundary is zero flux, including d=2.
+    inner[0]=0
+    def integ(x):return np.sum(x*measure,axis=(-2,-1))
+    def lap(x):
+        out=(np.roll(x,-1,axis=-1)-2*x+np.roll(x,1,axis=-1))/hz**2
+        fwd=np.empty_like(x);back=np.empty_like(x)
+        fwd[...,:-1,:]=x[...,1:,:]-x[...,:-1,:];fwd[...,-1,:]=-x[...,-1,:]
+        back[...,1:,:]=x[...,1:,:]-x[...,:-1,:];back[...,0,:]=0
+        return out+(outer*fwd-inner*back)/vol
+    def gradz(x):return (np.roll(x,-1,axis=-1)-np.roll(x,1,axis=-1))/(2*hz)
+    v=np.empty((2,nr,nz),complex);c=np.empty_like(v)
+    fi=PchipInterpolator(raw[&#39;x&#39;],raw[&#39;y&#39;][0],extrapolate=False)
+    hi=PchipInterpolator(raw[&#39;x&#39;],raw[&#39;y&#39;][2],extrapolate=False)
+    for j,(count,center) in enumerate(zip(q[:,0,0],[-R/2,R/2])):
+        arg=count*np.sqrt(rho*rho+(z-center)**2)/math.sqrt(a)
+        factor=2*count**((d-1)/2)/a
+        v[j]=factor*np.nan_to_num(fi(arg),nan=0.0)
+        c[j]=factor*np.nan_to_num(hi(arg),nan=0.0)
+    omega=q*math.sqrt(1-delta0/a)
+    pv=-1j*omega*v;pc=-2j*omega*c
+    initial=(v.copy(),c.copy())
+    def acc(v,c):
+        dens=abs(v)**2
+        own=w*dens;contact=own+cross*own[::-1]
+        return (lap(v)-q*q*v+g*c*v.conj()-g*g/(2*q*q)*dens*v-2*lam*w*contact*v,
+                lap(c)-4*q*q*c+(g/2)*v*v)
+    def obs(t,v,c,pv,pc):
+        lv,lc=lap(v),lap(c);dens=abs(v)**2
+        selfpot=q*q*dens+4*q*q*abs(c)**2-g*np.real(c.conj()*v*v)+g*g/(4*q*q)*dens*dens+lam*w*w*dens*dens
+        crosspot=2*lam*cross*w[0]*w[1]*dens[0]*dens[1]
+        e=integ(abs(pv)**2+abs(pc)**2-np.real(v.conj()*lv+c.conj()*lc)+selfpot)
+        charge=-2*np.imag(v.conj()*pv+2*c.conj()*pc)
+        A=integ(charge);center=integ(z*charge)/A
+        width=integ(((z-center[:,None,None])**2+rho*rho)*charge)/A
+        mom=-2*integ(np.real(pv.conj()*gradz(v)+pc.conj()*gradz(c)))
+        force=-2*lam*cross*w[:,0,0]*w[::-1,0,0]*integ(dens*gradz(dens[::-1]))
+        def shape(x,old):
+            phase=np.exp(1j*np.angle(integ(old.conj()*x)))[:,None,None]
+            return np.sqrt(integ(abs(x-phase*old)**2)/integ(abs(old)**2))
+        return {&#39;t&#39;:t,&#39;total_energy&#39;:float(sum(e)+integ(crosspot)), &#39;self_energies&#39;:e.tolist(),
+                &#39;cross_energy&#39;:float(integ(crosspot)),&#39;charges&#39;:A.tolist(),&#39;charge_centers&#39;:center.tolist(),
+                &#39;charge_rms_widths&#39;:np.sqrt(width).tolist(),&#39;momenta&#39;:mom.tolist(),&#39;instantaneous_forces&#39;:force.tolist(),
+                &#39;v_phase_removed_change&#39;:shape(v,initial[0]).tolist(),
+                &#39;edge_norm_fraction&#39;:float((np.sum(abs(v[:,[-1],:])**2)+np.sum(abs(v[:,:,[0,-1]])**2))/np.sum(abs(v)**2))}
+    steps=round(end/dt);dt=end/steps;hist=[obs(0,v,c,pv,pc)];av,ac=acc(v,c)
+    for k in range(steps):
+        pv+=dt/2*av;pc+=dt/2*ac
+        v+=dt*pv;c+=dt*pc
+        av,ac=acc(v,c)
+        pv+=dt/2*av;pc+=dt/2*ac
+        if (k+1)%max(1,steps//10)==0 or k+1==steps:hist.append(obs((k+1)*dt,v,c,pv,pc))
+    return {&#39;d&#39;:d,&#39;h_requested&#39;:h,&#39;hz&#39;:hz,&#39;hr&#39;:hr,&#39;dt&#39;:dt,&#39;end&#39;:end,&#39;R&#39;:R,&#39;zmax&#39;:zmax,&#39;rmax&#39;:rmax,&#39;cross_multiplier&#39;:cross,
+            &#39;scope&#39;:&#39;Full two-grade invariant axisymmetric PDE. Cross=0 is isolated-control dynamics retaining the same self terms.&#39;,
+            &#39;counts&#39;:[3,10],&#39;lambda&#39;:lam,&#39;kappa&#39;:1,&#39;delta&#39;:delta0/a,&#39;mu&#39;:1,&#39;gamma&#39;:1,
+            &#39;sources&#39;:{source.name:hashlib.sha256(source.read_bytes()).hexdigest()},
+            &#39;history&#39;:hist,&#39;energy_relative_drift&#39;:max(abs(x[&#39;total_energy&#39;]/hist[0][&#39;total_energy&#39;]-1) for x in hist),
+            &#39;charge_relative_drift&#39;:max(abs(y/z-1) for x in hist for y,z in zip(x[&#39;charges&#39;],hist[0][&#39;charges&#39;]))}
+
+if __name__==&#39;__main__&#39;:
+    p=argparse.ArgumentParser();p.add_argument(&#39;--d&#39;,type=int,required=True);p.add_argument(&#39;--h&#39;,type=float,default=.12);p.add_argument(&#39;--dt&#39;,type=float,default=.002);p.add_argument(&#39;--end&#39;,type=float,default=.5);p.add_argument(&#39;--R&#39;,type=float,default=2);p.add_argument(&#39;--zmax&#39;,type=float,default=10);p.add_argument(&#39;--rmax&#39;,type=float,default=8);p.add_argument(&#39;--cross&#39;,type=float,default=1);p.add_argument(&#39;--tag&#39;,required=True)
+    args=p.parse_args();tag=args.tag;del args.tag;t=time.monotonic();r=run(**vars(args));r[&#39;script_sha256&#39;]=hashlib.sha256(Path(__file__).read_bytes()).hexdigest();r[&#39;elapsed_seconds&#39;]=time.monotonic()-t
+    out=HERE/f&#39;{tag}.json&#39;;out.write_text(json.dumps(r,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;file&#39;:str(out),&#39;seconds&#39;:r[&#39;elapsed_seconds&#39;],&#39;energy_drift&#39;:r[&#39;energy_relative_drift&#39;],&#39;charge_drift&#39;:r[&#39;charge_relative_drift&#39;],&#39;initial&#39;:r[&#39;history&#39;][0],&#39;final&#39;:r[&#39;history&#39;][-1]},indent=2),flush=True)
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

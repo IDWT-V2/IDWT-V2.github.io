@@ -1,0 +1,430 @@
+{
+  "experiment": "shifted-tau-action-stability",
+  "created_utc": "2026-09-24T12:19:58.948915+00:00",
+  "depth": 10,
+  "harmonic": 23,
+  "simplex_count": 64512240,
+  "rows": [
+    {
+      "branch": "inner",
+      "source_ratio": 0.01,
+      "reference": {
+        "radius": 1.067214828960502,
+        "edge": 108.46229594786422,
+        "current": -4.533122783629955e-06,
+        "frequency": 5.473192917110559e-05,
+        "force": 3.3634456947640095e-06,
+        "gap": 109.29355038179415,
+        "gap_prime": -113.79653044132367,
+        "effective_current_curvature": 38736.441663535064,
+        "nearest_other_signed_component_over_frequency": 1.024011080417606
+      },
+      "shifted": {
+        "radius": 1.0563845094507194,
+        "edge": 109.70678332217186,
+        "current": -4.479494134032868e-06,
+        "frequency": 5.471329944606299e-05,
+        "force": 5.880637739316272e-56,
+        "gap": 110.53540408540711,
+        "gap_prime": -115.52416541762156,
+        "effective_current_curvature": 38612.25629317377,
+        "nearest_other_signed_component_over_frequency": 1.0236315159373763
+      },
+      "radius_shift_over_reference": -0.010148209353810859,
+      "radial_curvature_per_canonical_norm": 0.0003320194604518557,
+      "radial_curvature_step_values": [
+        0.00033201949503307537,
+        0.0003320194604518557,
+        0.0003320194601060435
+      ],
+      "radial_curvature_positive": true,
+      "shifted_F0_value": 3.1762221840368038e-06,
+      "shifted_F0_prime": -0.8781350326556053,
+      "spatial_scalar_current_controls": [
+        {
+          "angular_degree": 0,
+          "spherical_laplacian_eigenvalue": 0.0,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 38612.25629317376
+        },
+        {
+          "angular_degree": 0,
+          "spherical_laplacian_eigenvalue": 0.0,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 38612.25629317376
+        },
+        {
+          "angular_degree": 1,
+          "spherical_laplacian_eigenvalue": 8.064890237267745,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 38612.25629317376
+        },
+        {
+          "angular_degree": 1,
+          "spherical_laplacian_eigenvalue": 8.064890237267745,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 47855.291409586214
+        },
+        {
+          "angular_degree": 2,
+          "spherical_laplacian_eigenvalue": 17.92197830503943,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 38612.25629317376
+        },
+        {
+          "angular_degree": 2,
+          "spherical_laplacian_eigenvalue": 17.92197830503943,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 48759.908646289
+        },
+        {
+          "angular_degree": 4,
+          "spherical_laplacian_eigenvalue": 43.01274793209463,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 38612.25629317376
+        },
+        {
+          "angular_degree": 4,
+          "spherical_laplacian_eigenvalue": 43.01274793209463,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 49266.730048560275
+        },
+        {
+          "angular_degree": 8,
+          "spherical_laplacian_eigenvalue": 114.70066115225237,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 38612.25629317376
+        },
+        {
+          "angular_degree": 8,
+          "spherical_laplacian_eigenvalue": 114.70066115225237,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 49512.19038745662
+        }
+      ],
+      "local_direct_F0_second": 49665.79670171448,
+      "local_current_taylor_scope": "F0 is quadratic only near this branch's occupied current; the two local Taylor germs are separate inputs constrained by the prior sampled convex compatibility check."
+    },
+    {
+      "branch": "outer",
+      "source_ratio": 0.01,
+      "reference": {
+        "radius": 14.180171763582814,
+        "edge": 40.098011914847234,
+        "current": -5.94740522578106e-13,
+        "frequency": 2.6499569422246715e-12,
+        "force": 4.74873854494941e-16,
+        "gap": 40.110236947409184,
+        "gap_prime": -3.142913548205117,
+        "effective_current_curvature": 4157101628.9211645,
+        "nearest_other_signed_component_over_frequency": 1.0009280619672443
+      },
+      "shifted": {
+        "radius": 14.1789243890052,
+        "edge": 40.101932413453575,
+        "current": -5.946822862858858e-13,
+        "frequency": 2.6499566460466157e-12,
+        "force": -3.655929289718278e-58,
+        "gap": 40.1141572039211,
+        "gap_prime": -3.142698754048198,
+        "effective_current_curvature": 4157101628.529139,
+        "nearest_other_signed_component_over_frequency": 1.0009279534078785
+      },
+      "radius_shift_over_reference": -8.79661120055578e-05,
+      "radial_curvature_per_canonical_norm": 3.807190189103523e-13,
+      "radial_curvature_step_values": [
+        3.807190715047796e-13,
+        3.807190189103523e-13,
+        3.8071901838440804e-13
+      ],
+      "radial_curvature_positive": true,
+      "shifted_F0_value": 6.040348903695609e-15,
+      "shifted_F0_prime": -0.012224792853049489,
+      "spatial_scalar_current_controls": [
+        {
+          "angular_degree": 0,
+          "spherical_laplacian_eigenvalue": 0.0,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 4157101628.5291386
+        },
+        {
+          "angular_degree": 0,
+          "spherical_laplacian_eigenvalue": 0.0,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 4157101628.5291386
+        },
+        {
+          "angular_degree": 1,
+          "spherical_laplacian_eigenvalue": 0.044766788127001494,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 4157101628.5291386
+        },
+        {
+          "angular_degree": 1,
+          "spherical_laplacian_eigenvalue": 0.044766788127001494,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 4157101754.174037
+        },
+        {
+          "angular_degree": 2,
+          "spherical_laplacian_eigenvalue": 0.09948175139333666,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 4157101628.5291386
+        },
+        {
+          "angular_degree": 2,
+          "spherical_laplacian_eigenvalue": 0.09948175139333666,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 4157101897.444555
+        },
+        {
+          "angular_degree": 4,
+          "spherical_laplacian_eigenvalue": 0.238756203344008,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 4157101628.5291386
+        },
+        {
+          "angular_degree": 4,
+          "spherical_laplacian_eigenvalue": 0.238756203344008,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 4157102218.5472193
+        },
+        {
+          "angular_degree": 8,
+          "spherical_laplacian_eigenvalue": 0.6366832089173546,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 4157101628.5291386
+        },
+        {
+          "angular_degree": 8,
+          "spherical_laplacian_eigenvalue": 0.6366832089173546,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 4157102892.127105
+        }
+      ],
+      "local_direct_F0_second": 4157105639.944859,
+      "local_current_taylor_scope": "F0 is quadratic only near this branch's occupied current; the two local Taylor germs are separate inputs constrained by the prior sampled convex compatibility check."
+    },
+    {
+      "branch": "inner",
+      "source_ratio": 1.0,
+      "reference": {
+        "radius": 1.067214828960502,
+        "edge": 108.46229594786422,
+        "current": -4.533122783629955e-06,
+        "frequency": 5.473192917110559e-05,
+        "force": 3.247693513196733e-06,
+        "gap": 109.29355038179415,
+        "gap_prime": -113.79653044132367,
+        "effective_current_curvature": 38736.441663535064,
+        "nearest_other_signed_component_over_frequency": 1.024011080417606
+      },
+      "shifted": {
+        "radius": 1.056723215552234,
+        "edge": 109.66704135417159,
+        "current": -4.481336001876593e-06,
+        "frequency": 5.4714514017436774e-05,
+        "force": -2.0824258895647727e-55,
+        "gap": 110.4962843625961,
+        "gap_prime": -115.47091357926722,
+        "effective_current_curvature": 38735.23892955426,
+        "nearest_other_signed_component_over_frequency": 1.0236877782169693
+      },
+      "radius_shift_over_reference": -0.00983083548275581,
+      "radial_curvature_per_canonical_norm": 0.0003303408131824944,
+      "radial_curvature_step_values": [
+        0.00033034084774370606,
+        0.0003303408131824944,
+        0.0003303408128368823
+      ],
+      "radial_curvature_positive": true,
+      "shifted_F0_value": 3.069193425073638e-06,
+      "shifted_F0_prime": -0.8297381794016974,
+      "spatial_scalar_current_controls": [
+        {
+          "angular_degree": 0,
+          "spherical_laplacian_eigenvalue": 0.0,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 38735.23892955426
+        },
+        {
+          "angular_degree": 0,
+          "spherical_laplacian_eigenvalue": 0.0,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 38735.23892955426
+        },
+        {
+          "angular_degree": 1,
+          "spherical_laplacian_eigenvalue": 8.059721069572943,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 38735.23892955426
+        },
+        {
+          "angular_degree": 1,
+          "spherical_laplacian_eigenvalue": 8.059721069572943,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 38827.62251507358
+        },
+        {
+          "angular_degree": 2,
+          "spherical_laplacian_eigenvalue": 17.910491265717653,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 38735.23892955426
+        },
+        {
+          "angular_degree": 2,
+          "spherical_laplacian_eigenvalue": 17.910491265717653,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 38836.671546228834
+        },
+        {
+          "angular_degree": 4,
+          "spherical_laplacian_eigenvalue": 42.98517903772236,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 38735.23892955426
+        },
+        {
+          "angular_degree": 4,
+          "spherical_laplacian_eigenvalue": 42.98517903772236,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 38841.742189690936
+        },
+        {
+          "angular_degree": 8,
+          "spherical_laplacian_eigenvalue": 114.62714410059297,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 38735.23892955426
+        },
+        {
+          "angular_degree": 8,
+          "spherical_laplacian_eigenvalue": 114.62714410059297,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 38844.19819573188
+        }
+      ],
+      "local_direct_F0_second": 38845.73521391686,
+      "local_current_taylor_scope": "F0 is quadratic only near this branch's occupied current; the two local Taylor germs are separate inputs constrained by the prior sampled convex compatibility check."
+    },
+    {
+      "branch": "outer",
+      "source_ratio": 1.0,
+      "reference": {
+        "radius": 14.180171763582814,
+        "edge": 40.098011914847234,
+        "current": -5.94740522578106e-13,
+        "frequency": 2.6499569422246715e-12,
+        "force": 4.748737994658051e-16,
+        "gap": 40.110236947409184,
+        "gap_prime": -3.142913548205117,
+        "effective_current_curvature": 4157101628.9211645,
+        "nearest_other_signed_component_over_frequency": 1.0009280619672443
+      },
+      "shifted": {
+        "radius": 14.178924389149675,
+        "edge": 40.101932412999275,
+        "current": -5.946822862926565e-13,
+        "frequency": 2.649956646046684e-12,
+        "force": -1.251337308315401e-57,
+        "gap": 40.114157203467066,
+        "gap_prime": -3.142698754073085,
+        "effective_current_curvature": 4157101628.9172444,
+        "nearest_other_signed_component_over_frequency": 1.000927953407943
+      },
+      "radius_shift_over_reference": -8.796610181713566e-05,
+      "radial_curvature_per_canonical_norm": 3.8071901888538444e-13,
+      "radial_curvature_step_values": [
+        3.807190714798117e-13,
+        3.8071901888538444e-13,
+        3.807190183594402e-13
+      ],
+      "radial_curvature_positive": true,
+      "shifted_F0_value": 6.04034820162752e-15,
+      "shifted_F0_prime": -0.012224790491645742,
+      "spatial_scalar_current_controls": [
+        {
+          "angular_degree": 0,
+          "spherical_laplacian_eigenvalue": 0.0,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 4157101628.9172444
+        },
+        {
+          "angular_degree": 0,
+          "spherical_laplacian_eigenvalue": 0.0,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 4157101628.9172444
+        },
+        {
+          "angular_degree": 1,
+          "spherical_laplacian_eigenvalue": 0.04476678812608921,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 4157101628.9172444
+        },
+        {
+          "angular_degree": 1,
+          "spherical_laplacian_eigenvalue": 0.04476678812608921,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 4157101630.173693
+        },
+        {
+          "angular_degree": 2,
+          "spherical_laplacian_eigenvalue": 0.09948175139130935,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 4157101628.9172444
+        },
+        {
+          "angular_degree": 2,
+          "spherical_laplacian_eigenvalue": 0.09948175139130935,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 4157101631.6063986
+        },
+        {
+          "angular_degree": 4,
+          "spherical_laplacian_eigenvalue": 0.23875620333914246,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 4157101628.9172444
+        },
+        {
+          "angular_degree": 4,
+          "spherical_laplacian_eigenvalue": 0.23875620333914246,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 4157101634.8174253
+        },
+        {
+          "angular_degree": 8,
+          "spherical_laplacian_eigenvalue": 0.6366832089043799,
+          "retained_mode_gradient_stiffness": 0.0,
+          "scalar_current_schur_curvature": 4157101628.9172444
+        },
+        {
+          "angular_degree": 8,
+          "spherical_laplacian_eigenvalue": 0.6366832089043799,
+          "retained_mode_gradient_stiffness": 1.0,
+          "scalar_current_schur_curvature": 4157101641.553224
+        }
+      ],
+      "local_direct_F0_second": 4157101669.0314016,
+      "local_current_taylor_scope": "F0 is quadratic only near this branch's occupied current; the two local Taylor germs are separate inputs constrained by the prior sampled convex compatibility check."
+    }
+  ],
+  "global_convex_controls": [
+    {
+      "source_ratio": 0.01,
+      "knots_including_shifted": 17,
+      "minimum_convex_secant_margin": 1.2102762387763977e-07,
+      "sampled_convex_necessary_conditions_pass": true
+    },
+    {
+      "source_ratio": 1.0,
+      "knots_including_shifted": 17,
+      "minimum_convex_secant_margin": 1.2102748790654427e-07,
+      "sampled_convex_necessary_conditions_pass": true
+    }
+  ],
+  "scope": "Local quadratic germs of one possible direct current action at each depth-ten radius. Full self-consistent finite component and retained-mode response is continued to shifted stationary radii at two source ratios. Scalar current spatial controls use optional positive retained-mode gradient stiffness and S9 Laplacian eigenvalues. They omit physical spinor/angular carrier perturbations, spatially varying polarization, metric modes and nonlinear stability. No common global F0 or master-field origin is derived.",
+  "sources": {
+    "experiments/shifted-tau-action-stability.py": "0264839d69977caa6df9af3ae84c190143e53f4041b63c1710f37b93160a1144",
+    "experiments/results/light-tau-branch-batch-20260924T102749_642908Z.json": "f76f1eafaacb1214f4673ef0a491ddc921c50e713f26168fd986d32147301901",
+    "experiments/results/two-channel-tau-test-20260924T105124_408062Z.json": "9230b7910d6a1c14fb79ad3f4acd0404d9b131fa4d2899703024e26cad9cd343",
+    "experiments/results/same-field-action-tradeoff-20260924T111602_840875Z.json": "0ac2ddf77a05da66da53b70cb94a081e5c1ae632d814e3756197acad017acfa6"
+  }
+}

@@ -1,0 +1,1772 @@
+{
+  "experiment": "same-field-action-tradeoff",
+  "created_utc": "2026-09-24T11:16:02.839913+00:00",
+  "case": "depth-ten index 23 inner and outer radii at b=1.34",
+  "action": "Per canonical norm, sum D_i(R)*(q_i-J_i/D_i)^2/2 + sum beta_i*q_i*k + F0(k), where J_i=sqrt(r*gamma*w_i), beta_i=sqrt(gamma*w_i/r).",
+  "reduced_action": "F_eff(k,R)=g(R)*k-g(R)*k^2/(2*r)+F0(k), with exact zero-current offset cancellation.",
+  "tradeoff": "Without square completion, E_offset=-r*g/2 and current curvature=-g/r, so 2*abs(E_offset)*abs(curvature)=g^2. Cauchy gives >=g^2 for general two-channel coefficients.",
+  "zero_current_curvature_match_ratio": 2.57086503762751e-16,
+  "zero_current_curvature_match_scope": "Requires the exact inverse law to continue smoothly to zero current at both radii and one R-independent F0''(0).",
+  "states": {
+    "inner": {
+      "radius": 1.067214828960502,
+      "gap": 109.29355038179415,
+      "gap_prime": -113.79653044132368,
+      "current": -4.533122783629959e-06,
+      "edge": 108.46229594786422,
+      "epsilon": 5.5389015547474686e-05,
+      "frequency": 5.4731929171105497e-05,
+      "inverse_curvature": 38736.441663535064,
+      "samples": [
+        {
+          "harmonic": 5,
+          "current": -6.993929337331444e-11,
+          "inverse_density": -7.639507212955504e-09,
+          "edge": 109.21585713504837
+        },
+        {
+          "harmonic": 20,
+          "current": -1.405536315904375e-06,
+          "inverse_density": -0.00015286234108179378,
+          "edge": 108.64453124332854
+        },
+        {
+          "harmonic": 22.5,
+          "current": -3.7644382212818997e-06,
+          "inverse_density": -0.00040894465900603806,
+          "edge": 108.4943978019823
+        },
+        {
+          "harmonic": 23,
+          "current": -4.533122783629959e-06,
+          "inverse_density": -0.0004923299913024478,
+          "edge": 108.46229594786422
+        },
+        {
+          "harmonic": 23.5,
+          "current": -5.440171123283099e-06,
+          "inverse_density": -0.0005906953037983847,
+          "edge": 108.42948587218025
+        },
+        {
+          "harmonic": 26,
+          "current": -1.2919795224198826e-05,
+          "inverse_density": -0.0014009804185739984,
+          "edge": 108.2545400125444
+        },
+        {
+          "harmonic": 30,
+          "current": -4.484903728070534e-05,
+          "inverse_density": -0.0048515644647697176,
+          "edge": 107.9347252540891
+        }
+      ],
+      "inverse_curvature_at_zero_current": 2312152950725.1475
+    },
+    "outer": {
+      "radius": 14.180171763582814,
+      "gap": 40.11023694740918,
+      "gap_prime": -3.142913548205117,
+      "current": -5.947405225781063e-13,
+      "edge": 40.09801191484723,
+      "epsilon": 2.651186604351129e-12,
+      "frequency": 2.6499569422246763e-12,
+      "inverse_curvature": 4157101628.9211645,
+      "samples": [
+        {
+          "harmonic": 5,
+          "current": -9.226134677538998e-18,
+          "inverse_density": -3.7005354764540617e-16,
+          "edge": 40.10904808472343
+        },
+        {
+          "harmonic": 20,
+          "current": -1.8464741488945816e-13,
+          "inverse_density": -7.404774039691903e-12,
+          "edge": 40.10059989284045
+        },
+        {
+          "harmonic": 22.5,
+          "current": -4.940043566639316e-13,
+          "inverse_density": -1.9809800027442125e-11,
+          "edge": 40.09846412445658
+        },
+        {
+          "harmonic": 23,
+          "current": -5.947405225781063e-13,
+          "inverse_density": -2.384914222270583e-11,
+          "edge": 40.09801191484723
+        },
+        {
+          "harmonic": 23.5,
+          "current": -7.135753746884276e-13,
+          "inverse_density": -2.8614155509006042e-11,
+          "edge": 40.09755134541988
+        },
+        {
+          "harmonic": 26,
+          "current": -1.6925261938321563e-12,
+          "inverse_density": -6.786636261694116e-11,
+          "edge": 40.095122976994844
+        },
+        {
+          "harmonic": 30,
+          "current": -5.861835859413625e-12,
+          "inverse_density": -2.350248859057435e-10,
+          "edge": 40.09080153035349
+        }
+      ],
+      "inverse_curvature_at_zero_current": 2.6910750601497434e+17
+    }
+  },
+  "ratio_scans": [
+    {
+      "source_to_current_amplitude_ratio": 2.57086503762751e-16,
+      "states": {
+        "inner": {
+          "uncancelled_zero_current_offset": -1.4048948375736768e-14,
+          "uncancelled_offset_over_occupied_frequency": -2.566865189753552e-10,
+          "negative_schur_curvature": -4.2512364041736826e+17,
+          "direct_F0_curvature_needed_at_n_23": 4.25123640417407e+17,
+          "fixed_norm_radial_force_at_inherited_radius": 4547939.849479015,
+          "force_over_occupied_frequency": 83094820854.22267
+        },
+        "outer": {
+          "uncancelled_zero_current_offset": -5.1559002909524714e-15,
+          "uncancelled_offset_over_occupied_frequency": -0.0019456543647173453,
+          "negative_schur_curvature": -1.5601844655534464e+17,
+          "direct_F0_curvature_needed_at_n_23": 1.5601845071244627e+17,
+          "fixed_norm_radial_force_at_inherited_radius": 2.1621126458074604e-09,
+          "force_over_occupied_frequency": 815.9048214543201
+        }
+      },
+      "sampled_convex_necessary_conditions_pass": true,
+      "minimum_secant_margin": 0.7199477706189945,
+      "intervals": [
+        {
+          "left": [
+            "inner",
+            30
+          ],
+          "right": [
+            "inner",
+            26
+          ],
+          "secant": -12279448188574.25,
+          "left_derivative": -19066385997989.082,
+          "right_derivative": -5492510379159.372,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            26
+          ],
+          "right": [
+            "inner",
+            23.5
+          ],
+          "secant": -3902627865791.9053,
+          "left_derivative": -5492510379159.372,
+          "right_derivative": -2312745352424.419,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            23.5
+          ],
+          "right": [
+            "inner",
+            23
+          ],
+          "secant": -2119941506330.464,
+          "left_derivative": -2312745352424.419,
+          "right_derivative": -1927137660236.5134,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            23
+          ],
+          "right": [
+            "inner",
+            22.5
+          ],
+          "secant": -1763744670497.4795,
+          "left_derivative": -1927137660236.5134,
+          "right_derivative": -1600351680758.4429,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            22.5
+          ],
+          "right": [
+            "inner",
+            20
+          ],
+          "secant": -1098939198057.5975,
+          "left_derivative": -1600351680758.4429,
+          "right_derivative": -597526715356.7332,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            20
+          ],
+          "right": [
+            "inner",
+            5
+          ],
+          "secant": -298778224102.0819,
+          "left_derivative": -597526715356.7332,
+          "right_derivative": -29732847.084774997,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            5
+          ],
+          "right": [
+            "outer",
+            30
+          ],
+          "secant": -16184579.02544833,
+          "left_derivative": -29732847.084774997,
+          "right_derivative": -914554.5441835446,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            30
+          ],
+          "right": [
+            "outer",
+            26
+          ],
+          "secant": -589309.9337549199,
+          "left_derivative": -914554.5441835446,
+          "right_derivative": -264065.3226298936,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            26
+          ],
+          "right": [
+            "outer",
+            23.5
+          ],
+          "secant": -187698.12852516945,
+          "left_derivative": -264065.3226298936,
+          "right_derivative": -111330.93414463846,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            23.5
+          ],
+          "right": [
+            "outer",
+            23
+          ],
+          "secant": -102060.71940849537,
+          "left_derivative": -111330.93414463846,
+          "right_derivative": -92790.5046611826,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            23
+          ],
+          "right": [
+            "outer",
+            22.5
+          ],
+          "secant": -84932.15438172866,
+          "left_derivative": -92790.5046611826,
+          "right_derivative": -77073.80409110199,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            22.5
+          ],
+          "right": [
+            "outer",
+            20
+          ],
+          "secant": -52941.10841754336,
+          "left_derivative": -77073.80409110199,
+          "right_derivative": -28808.412468568047,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            20
+          ],
+          "right": [
+            "outer",
+            5
+          ],
+          "secant": -14404.929141571069,
+          "left_derivative": -28808.412468568047,
+          "right_derivative": -1.4406360627857744,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            5
+          ],
+          "right": [
+            "zero",
+            0
+          ],
+          "secant": -0.7206882921667799,
+          "left_derivative": -1.4406360627857744,
+          "right_derivative": 0.0,
+          "convex_necessary": true
+        }
+      ],
+      "F0_samples": [
+        {
+          "current": -4.484903728070534e-05,
+          "F0": 427554528.21608496,
+          "F0_prime": -19066385997989.082,
+          "branch": "inner",
+          "harmonic": 30
+        },
+        {
+          "current": -1.2919795224198826e-05,
+          "F0": 35481054.68276723,
+          "F0_prime": -5492510379159.372,
+          "branch": "inner",
+          "harmonic": 26
+        },
+        {
+          "current": -5.440171123283099e-06,
+          "F0": 6290865.240884787,
+          "F0_prime": -2312745352424.419,
+          "branch": "inner",
+          "harmonic": 23.5
+        },
+        {
+          "current": -4.533122783629959e-06,
+          "F0": 4367975.817405962,
+          "F0_prime": -1927137660236.5134,
+          "branch": "inner",
+          "harmonic": 23
+        },
+        {
+          "current": -3.7644382212818997e-06,
+          "F0": 3012212.517270886,
+          "F0_prime": -1600351680758.4429,
+          "branch": "inner",
+          "harmonic": 22.5
+        },
+        {
+          "current": -1.405536315904375e-06,
+          "F0": 419922.74907877005,
+          "F0_prime": -597526715356.7332,
+          "branch": "inner",
+          "harmonic": 20
+        },
+        {
+          "current": -6.993929337331444e-11,
+          "F0": 0.0010397471592325535,
+          "F0_prime": -29732847.084774997,
+          "branch": "inner",
+          "harmonic": 5
+        },
+        {
+          "current": -5.861835859413625e-12,
+          "F0": 2.6804843490181416e-06,
+          "F0_prime": -914554.5441835446,
+          "branch": "outer",
+          "harmonic": 30
+        },
+        {
+          "current": -1.6925261938321563e-12,
+          "F0": 2.2346874619057903e-07,
+          "F0_prime": -264065.3226298936,
+          "branch": "outer",
+          "harmonic": 26
+        },
+        {
+          "current": -7.135753746884276e-13,
+          "F0": 3.9721509519119516e-08,
+          "F0_prime": -111330.93414463846,
+          "branch": "outer",
+          "harmonic": 23.5
+        },
+        {
+          "current": -5.947405225781063e-13,
+          "F0": 2.759313902193797e-08,
+          "F0_prime": -92790.5046611826,
+          "branch": "outer",
+          "harmonic": 23
+        },
+        {
+          "current": -4.940043566639316e-13,
+          "F0": 1.9037399426691853e-08,
+          "F0_prime": -77073.80409110199,
+          "branch": "outer",
+          "harmonic": 22.5
+        },
+        {
+          "current": -1.8464741488945816e-13,
+          "F0": 2.6597000324898064e-09,
+          "F0_prime": -28808.412468568047,
+          "branch": "outer",
+          "harmonic": 20
+        },
+        {
+          "current": -9.226134677538998e-18,
+          "F0": 6.649167244056285e-18,
+          "F0_prime": -1.4406360627857744,
+          "branch": "outer",
+          "harmonic": 5
+        },
+        {
+          "current": 0.0,
+          "F0": 0.0,
+          "F0_prime": 0.0,
+          "branch": "zero",
+          "harmonic": 0
+        }
+      ]
+    },
+    {
+      "source_to_current_amplitude_ratio": 0.001,
+      "states": {
+        "inner": {
+          "uncancelled_zero_current_offset": -0.05464677519089708,
+          "uncancelled_offset_over_occupied_frequency": -998.4441626396504,
+          "negative_schur_curvature": -109293.55038179415,
+          "direct_F0_curvature_needed_at_n_23": 148029.9920453292,
+          "fixed_norm_radial_force_at_inherited_radius": 4.415738254466561e-06,
+          "force_over_occupied_frequency": 0.0806793826079449
+        },
+        "outer": {
+          "uncancelled_zero_current_offset": -0.02005511847370459,
+          "uncancelled_offset_over_occupied_frequency": -7568092203.3654,
+          "negative_schur_curvature": -40110.236947409176,
+          "direct_F0_curvature_needed_at_n_23": 4157141739.158112,
+          "fixed_norm_radial_force_at_inherited_radius": 4.748743547600662e-16,
+          "force_over_occupied_frequency": 0.0001792007814139812
+        }
+      },
+      "sampled_convex_necessary_conditions_pass": true,
+      "minimum_secant_margin": 0.00022052044976220327,
+      "intervals": [
+        {
+          "left": [
+            "inner",
+            30
+          ],
+          "right": [
+            "inner",
+            26
+          ],
+          "secant": -4.380717131989083,
+          "left_derivative": -6.2605356433187795,
+          "right_derivative": -2.4510606595081894,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            26
+          ],
+          "right": [
+            "inner",
+            23.5
+          ],
+          "secant": -1.964532212345548,
+          "left_derivative": -2.4510606595081894,
+          "right_derivative": -1.45864012636202,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            23.5
+          ],
+          "right": [
+            "inner",
+            23
+          ],
+          "secant": -1.3930567715429727,
+          "left_derivative": -1.45864012636202,
+          "right_derivative": -1.3266955172694477,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            23
+          ],
+          "right": [
+            "inner",
+            22.5
+          ],
+          "secant": -1.269026517284208,
+          "left_derivative": -1.3266955172694477,
+          "right_derivative": -1.2105813982086708,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            22.5
+          ],
+          "right": [
+            "inner",
+            20
+          ],
+          "secant": -1.0161037322596151,
+          "left_derivative": -1.2105813982086708,
+          "right_derivative": -0.8026351926213404,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            20
+          ],
+          "right": [
+            "inner",
+            5
+          ],
+          "secant": -0.6130812895664629,
+          "left_derivative": -0.8026351926213404,
+          "right_derivative": -0.07770089065946512,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            5
+          ],
+          "right": [
+            "outer",
+            30
+          ],
+          "secant": -0.06729352925201006,
+          "left_derivative": -0.07770089065946512,
+          "right_derivative": -0.019435652175314455,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            30
+          ],
+          "right": [
+            "outer",
+            26
+          ],
+          "secant": -0.017623046104197234,
+          "left_derivative": -0.019435652175314455,
+          "right_derivative": -0.015114038301959941,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            26
+          ],
+          "right": [
+            "outer",
+            23.5
+          ],
+          "secant": -0.014037737903018939,
+          "left_derivative": -0.015114038301959941,
+          "right_derivative": -0.012685630610974271,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            23.5
+          ],
+          "right": [
+            "outer",
+            23
+          ],
+          "secant": -0.012460928312220943,
+          "left_derivative": -0.012685630610974271,
+          "right_derivative": -0.012225056417133683,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            23
+          ],
+          "right": [
+            "outer",
+            22.5
+          ],
+          "secant": -0.01200453596737148,
+          "left_derivative": -0.012225056417133683,
+          "right_derivative": -0.011772842767232646,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            22.5
+          ],
+          "right": [
+            "outer",
+            20
+          ],
+          "secant": -0.010842660717476946,
+          "left_derivative": -0.011772842767232646,
+          "right_derivative": -0.00963706197497944,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            20
+          ],
+          "right": [
+            "outer",
+            5
+          ],
+          "secant": -0.008002217982050832,
+          "left_derivative": -0.00963706197497944,
+          "right_derivative": -0.0011888626861142034,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            5
+          ],
+          "right": [
+            "zero",
+            0
+          ],
+          "secant": -0.0009646921169499125,
+          "left_derivative": -0.0011888626861142034,
+          "right_derivative": 0.0,
+          "convex_necessary": true
+        }
+      ],
+      "F0_samples": [
+        {
+          "current": -4.484903728070534e-05,
+          "F0": 0.00016006454967100854,
+          "F0_prime": -6.2605356433187795,
+          "branch": "inner",
+          "harmonic": 30
+        },
+        {
+          "current": -1.2919795224198826e-05,
+          "F0": 2.0191571982644073e-05,
+          "F0_prime": -2.4510606595081894,
+          "branch": "inner",
+          "harmonic": 26
+        },
+        {
+          "current": -5.440171123283099e-06,
+          "F0": 5.497609500159021e-06,
+          "F0_prime": -1.45864012636202,
+          "branch": "inner",
+          "harmonic": 23.5
+        },
+        {
+          "current": -4.533122783629959e-06,
+          "F0": 4.234039668488403e-06,
+          "F0_prime": -1.3266955172694477,
+          "branch": "inner",
+          "harmonic": 23
+        },
+        {
+          "current": -3.7644382212818997e-06,
+          "F0": 3.2585585754417105e-06,
+          "F0_prime": -1.2105813982086708,
+          "branch": "inner",
+          "harmonic": 22.5
+        },
+        {
+          "current": -1.405536315904375e-06,
+          "F0": 8.616695453532898e-07,
+          "F0_prime": -0.8026351926213404,
+          "branch": "inner",
+          "harmonic": 20
+        },
+        {
+          "current": -6.993929337331444e-11,
+          "F0": 4.406738312879353e-12,
+          "F0_prime": -0.07770089065946512,
+          "branch": "inner",
+          "harmonic": 5
+        },
+        {
+          "current": -5.861835859413625e-12,
+          "F0": 9.474005127323772e-14,
+          "F0_prime": -0.019435652175314455,
+          "branch": "outer",
+          "harmonic": 30
+        },
+        {
+          "current": -1.6925261938321563e-12,
+          "F0": 2.1264114814020343e-14,
+          "F0_prime": -0.015114038301959941,
+          "branch": "outer",
+          "harmonic": 26
+        },
+        {
+          "current": -7.135753746884276e-13,
+          "F0": 7.521859794934983e-15,
+          "F0_prime": -0.012685630610974271,
+          "branch": "outer",
+          "harmonic": 23.5
+        },
+        {
+          "current": -5.947405225781063e-13,
+          "F0": 6.041067221794892e-15,
+          "F0_prime": -0.012225056417133683,
+          "branch": "outer",
+          "harmonic": 23
+        },
+        {
+          "current": -4.940043566639316e-13,
+          "F0": 4.831776294863081e-15,
+          "F0_prime": -0.011772842767232646,
+          "branch": "outer",
+          "harmonic": 22.5
+        },
+        {
+          "current": -1.8464741488945816e-13,
+          "F0": 1.4775239346061948e-15,
+          "F0_prime": -0.00963706197497944,
+          "branch": "outer",
+          "harmonic": 20
+        },
+        {
+          "current": -9.226134677538998e-18,
+          "F0": 8.900379393340095e-21,
+          "F0_prime": -0.0011888626861142034,
+          "branch": "outer",
+          "harmonic": 5
+        },
+        {
+          "current": 0.0,
+          "F0": 0.0,
+          "F0_prime": 0.0,
+          "branch": "zero",
+          "harmonic": 0
+        }
+      ]
+    },
+    {
+      "source_to_current_amplitude_ratio": 0.01,
+      "states": {
+        "inner": {
+          "uncancelled_zero_current_offset": -0.5464677519089708,
+          "uncancelled_offset_over_occupied_frequency": -9984.441626396503,
+          "negative_schur_curvature": -10929.355038179414,
+          "direct_F0_curvature_needed_at_n_23": 49665.79670171448,
+          "fixed_norm_radial_force_at_inherited_radius": 3.3634456947640455e-06,
+          "force_over_occupied_frequency": 0.061453081331174816
+        },
+        "outer": {
+          "uncancelled_zero_current_offset": -0.2005511847370459,
+          "uncancelled_offset_over_occupied_frequency": -75680922033.654,
+          "negative_schur_curvature": -4011.0236947409176,
+          "direct_F0_curvature_needed_at_n_23": 4157105639.944859,
+          "fixed_norm_radial_force_at_inherited_radius": 4.748738544951934e-16,
+          "force_over_occupied_frequency": 0.0001792005926317165
+        }
+      },
+      "sampled_convex_necessary_conditions_pass": true,
+      "minimum_secant_margin": 0.00022051863151403145,
+      "intervals": [
+        {
+          "left": [
+            "inner",
+            30
+          ],
+          "right": [
+            "inner",
+            26
+          ],
+          "secant": -1.5395247693466065,
+          "left_derivative": -1.8489961792664193,
+          "right_derivative": -1.1802153982755956,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            26
+          ],
+          "right": [
+            "inner",
+            23.5
+          ],
+          "secant": -1.0615505541925958,
+          "left_derivative": -1.1802153982755956,
+          "right_derivative": -0.9235220712887091,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            23.5
+          ],
+          "right": [
+            "inner",
+            23
+          ],
+          "secant": -0.9025492565035332,
+          "left_derivative": -0.9235220712887091,
+          "right_derivative": -0.8807985422638799,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            23
+          ],
+          "right": [
+            "inner",
+            22.5
+          ],
+          "secant": -0.8609350615028526,
+          "left_derivative": -0.8807985422638799,
+          "right_derivative": -0.8402954616515285,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            22.5
+          ],
+          "right": [
+            "inner",
+            20
+          ],
+          "secant": -0.7618335396109629,
+          "left_derivative": -0.8402954616515285,
+          "right_derivative": -0.664380743881178,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            20
+          ],
+          "right": [
+            "inner",
+            5
+          ],
+          "secant": -0.5439506254352239,
+          "left_derivative": -0.664380743881178,
+          "right_derivative": -0.07769401113714955,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            5
+          ],
+          "right": [
+            "outer",
+            30
+          ],
+          "secant": -0.06728978449887275,
+          "left_derivative": -0.07769401113714955,
+          "right_derivative": -0.019435440567651712,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            30
+          ],
+          "right": [
+            "outer",
+            26
+          ],
+          "secant": -0.01762290975093386,
+          "left_derivative": -0.019435440567651712,
+          "right_derivative": -0.015113977203095933,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            26
+          ],
+          "right": [
+            "outer",
+            23.5
+          ],
+          "secant": -0.014037694473832126,
+          "left_derivative": -0.015113977203095933,
+          "right_derivative": -0.012685604851464648,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            23.5
+          ],
+          "right": [
+            "outer",
+            23
+          ],
+          "secant": -0.012460904697633645,
+          "left_derivative": -0.012685604851464648,
+          "right_derivative": -0.012225034947468728,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            23
+          ],
+          "right": [
+            "outer",
+            22.5
+          ],
+          "secant": -0.012004516315954696,
+          "left_derivative": -0.012225034947468728,
+          "right_derivative": -0.011772824934064027,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            22.5
+          ],
+          "right": [
+            "outer",
+            20
+          ],
+          "secant": -0.010842648468079434,
+          "left_derivative": -0.011772824934064027,
+          "right_derivative": -0.009637055309353033,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            20
+          ],
+          "right": [
+            "outer",
+            5
+          ],
+          "secant": -0.008002214649071101,
+          "left_derivative": -0.009637055309353033,
+          "right_derivative": -0.001188862685781147,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            5
+          ],
+          "right": [
+            "zero",
+            0
+          ],
+          "secant": -0.0009646921167833845,
+          "left_derivative": -0.001188862685781147,
+          "right_derivative": 0.0,
+          "convex_necessary": true
+        }
+      ],
+      "F0_samples": [
+        {
+          "current": -4.484903728070534e-05,
+          "F0": 6.113790072671496e-05,
+          "F0_prime": -1.8489961792664193,
+          "branch": "inner",
+          "harmonic": 30
+        },
+        {
+          "current": -1.2919795224198826e-05,
+          "F0": 1.1982041714259786e-05,
+          "F0_prime": -1.1802153982755956,
+          "branch": "inner",
+          "harmonic": 26
+        },
+        {
+          "current": -5.440171123283099e-06,
+          "F0": 4.042042604780401e-06,
+          "F0_prime": -0.9235220712887091,
+          "branch": "inner",
+          "harmonic": 23.5
+        },
+        {
+          "current": -4.533122783629959e-06,
+          "F0": 3.2233868002136944e-06,
+          "F0_prime": -0.8807985422638799,
+          "branch": "inner",
+          "harmonic": 23
+        },
+        {
+          "current": -3.7644382212818997e-06,
+          "F0": 2.561599309252275e-06,
+          "F0_prime": -0.8402954616515285,
+          "branch": "inner",
+          "harmonic": 22.5
+        },
+        {
+          "current": -1.405536315904375e-06,
+          "F0": 7.645087210834706e-07,
+          "F0_prime": -0.664380743881178,
+          "branch": "inner",
+          "harmonic": 20
+        },
+        {
+          "current": -6.993929337331444e-11,
+          "F0": 4.406497738414605e-12,
+          "F0_prime": -0.07769401113714955,
+          "branch": "inner",
+          "harmonic": 5
+        },
+        {
+          "current": -5.861835859413625e-12,
+          "F0": 9.473943106854492e-14,
+          "F0_prime": -0.019435440567651712,
+          "branch": "outer",
+          "harmonic": 30
+        },
+        {
+          "current": -1.6925261938321563e-12,
+          "F0": 2.126406310830647e-14,
+          "F0_prime": -0.015113977203095933,
+          "branch": "outer",
+          "harmonic": 26
+        },
+        {
+          "current": -7.135753746884276e-13,
+          "F0": 7.521850604259117e-15,
+          "F0_prime": -0.012685604851464648,
+          "branch": "outer",
+          "harmonic": 23.5
+        },
+        {
+          "current": -5.947405225781063e-13,
+          "F0": 6.041060837355015e-15,
+          "F0_prime": -0.012225034947468728,
+          "branch": "outer",
+          "harmonic": 23
+        },
+        {
+          "current": -4.940043566639316e-13,
+          "F0": 4.831771890031586e-15,
+          "F0_prime": -0.011772824934064027,
+          "branch": "outer",
+          "harmonic": 22.5
+        },
+        {
+          "current": -1.8464741488945816e-13,
+          "F0": 1.4775233192108525e-15,
+          "F0_prime": -0.009637055309353033,
+          "branch": "outer",
+          "harmonic": 20
+        },
+        {
+          "current": -9.226134677538998e-18,
+          "F0": 8.900379391803684e-21,
+          "F0_prime": -0.001188862685781147,
+          "branch": "outer",
+          "harmonic": 5
+        },
+        {
+          "current": 0.0,
+          "F0": 0.0,
+          "F0_prime": 0.0,
+          "branch": "zero",
+          "harmonic": 0
+        }
+      ]
+    },
+    {
+      "source_to_current_amplitude_ratio": 1.0,
+      "states": {
+        "inner": {
+          "uncancelled_zero_current_offset": -54.646775190897074,
+          "uncancelled_offset_over_occupied_frequency": -998444.1626396503,
+          "negative_schur_curvature": -109.29355038179415,
+          "direct_F0_curvature_needed_at_n_23": 38845.73521391686,
+          "fixed_norm_radial_force_at_inherited_radius": 3.2476935131967686e-06,
+          "force_over_occupied_frequency": 0.059338188190730105
+        },
+        "outer": {
+          "uncancelled_zero_current_offset": -20.05511847370459,
+          "uncancelled_offset_over_occupied_frequency": -7568092203365.4,
+          "negative_schur_curvature": -40.11023694740918,
+          "direct_F0_curvature_needed_at_n_23": 4157101669.0314016,
+          "fixed_norm_radial_force_at_inherited_radius": 4.748737994660573e-16,
+          "force_over_occupied_frequency": 0.0001792005718656674
+        }
+      },
+      "sampled_convex_necessary_conditions_pass": true,
+      "minimum_secant_margin": 0.00022051843150673427,
+      "intervals": [
+        {
+          "left": [
+            "inner",
+            30
+          ],
+          "right": [
+            "inner",
+            26
+          ],
+          "secant": -1.2269936094559344,
+          "left_derivative": -1.3637268382206598,
+          "right_derivative": -1.0404224195400102,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            26
+          ],
+          "right": [
+            "inner",
+            23.5
+          ],
+          "secant": -0.962222571795771,
+          "left_derivative": -1.0404224195400102,
+          "right_derivative": -0.8646590852306449,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            23.5
+          ],
+          "right": [
+            "inner",
+            23
+          ],
+          "secant": -0.8485934298491953,
+          "left_derivative": -0.8646590852306449,
+          "right_derivative": -0.8317498750132675,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            23
+          ],
+          "right": [
+            "inner",
+            22.5
+          ],
+          "secant": -0.8160450013669035,
+          "left_derivative": -0.8317498750132675,
+          "right_derivative": -0.7995640086302428,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            22.5
+          ],
+          "right": [
+            "inner",
+            20
+          ],
+          "secant": -0.733863818419611,
+          "left_derivative": -0.7995640086302428,
+          "right_derivative": -0.6491727545197601,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            20
+          ],
+          "right": [
+            "inner",
+            5
+          ],
+          "secant": -0.5363462523807876,
+          "left_derivative": -0.6491727545197601,
+          "right_derivative": -0.07769325438969484,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            5
+          ],
+          "right": [
+            "outer",
+            30
+          ],
+          "secant": -0.06728937257602766,
+          "left_derivative": -0.07769325438969484,
+          "right_derivative": -0.01943541729080881,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            30
+          ],
+          "right": [
+            "outer",
+            26
+          ],
+          "secant": -0.01762289475207489,
+          "left_derivative": -0.01943541729080881,
+          "right_derivative": -0.015113970482220893,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            26
+          ],
+          "right": [
+            "outer",
+            23.5
+          ],
+          "secant": -0.014037689696621575,
+          "left_derivative": -0.015113970482220893,
+          "right_derivative": -0.012685602017918591,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            23.5
+          ],
+          "right": [
+            "outer",
+            23
+          ],
+          "secant": -0.012460902100029056,
+          "left_derivative": -0.012685602017918591,
+          "right_derivative": -0.012225032585805583,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            23
+          ],
+          "right": [
+            "outer",
+            22.5
+          ],
+          "secant": -0.012004514154298849,
+          "left_derivative": -0.012225032585805583,
+          "right_derivative": -0.01177282297241548,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            22.5
+          ],
+          "right": [
+            "outer",
+            20
+          ],
+          "secant": -0.010842647120645707,
+          "left_derivative": -0.01177282297241548,
+          "right_derivative": -0.009637054576134127,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            20
+          ],
+          "right": [
+            "outer",
+            5
+          ],
+          "secant": -0.008002214282443331,
+          "left_derivative": -0.009637054576134127,
+          "right_derivative": -0.001188862685744511,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            5
+          ],
+          "right": [
+            "zero",
+            0
+          ],
+          "secant": -0.0009646921167650664,
+          "left_derivative": -0.001188862685744511,
+          "right_derivative": 0.0,
+          "convex_necessary": true
+        }
+      ],
+      "F0_samples": [
+        {
+          "current": -4.484903728070534e-05,
+          "F0": 5.025596934284267e-05,
+          "F0_prime": -1.3637268382206598,
+          "branch": "inner",
+          "harmonic": 30
+        },
+        {
+          "current": -1.2919795224198826e-05,
+          "F0": 1.1078993384737514e-05,
+          "F0_prime": -1.0404224195400102,
+          "branch": "inner",
+          "harmonic": 26
+        },
+        {
+          "current": -5.440171123283099e-06,
+          "F0": 3.8819302462887526e-06,
+          "F0_prime": -0.8646590852306449,
+          "branch": "inner",
+          "harmonic": 23.5
+        },
+        {
+          "current": -4.533122783629959e-06,
+          "F0": 3.1122149847034763e-06,
+          "F0_prime": -0.8317498750132675,
+          "branch": "inner",
+          "harmonic": 23
+        },
+        {
+          "current": -3.7644382212818997e-06,
+          "F0": 2.484933789971437e-06,
+          "F0_prime": -0.7995640086302428,
+          "branch": "inner",
+          "harmonic": 22.5
+        },
+        {
+          "current": -1.405536315904375e-06,
+          "F0": 7.538210304137906e-07,
+          "F0_prime": -0.6491727545197601,
+          "branch": "inner",
+          "harmonic": 20
+        },
+        {
+          "current": -6.993929337331444e-11,
+          "F0": 4.406471275223483e-12,
+          "F0_prime": -0.07769325438969484,
+          "branch": "inner",
+          "harmonic": 5
+        },
+        {
+          "current": -5.861835859413625e-12,
+          "F0": 9.473936284602872e-14,
+          "F0_prime": -0.01943541729080881,
+          "branch": "outer",
+          "harmonic": 30
+        },
+        {
+          "current": -1.6925261938321563e-12,
+          "F0": 2.1264057420677945e-14,
+          "F0_prime": -0.015113970482220893,
+          "branch": "outer",
+          "harmonic": 26
+        },
+        {
+          "current": -7.135753746884276e-13,
+          "F0": 7.521849593284773e-15,
+          "F0_prime": -0.012685602017918591,
+          "branch": "outer",
+          "harmonic": 23.5
+        },
+        {
+          "current": -5.947405225781063e-13,
+          "F0": 6.041060135066628e-15,
+          "F0_prime": -0.012225032585805583,
+          "branch": "outer",
+          "harmonic": 23
+        },
+        {
+          "current": -4.940043566639316e-13,
+          "F0": 4.831771405500121e-15,
+          "F0_prime": -0.01177282297241548,
+          "branch": "outer",
+          "harmonic": 22.5
+        },
+        {
+          "current": -1.8464741488945816e-13,
+          "F0": 1.4775232515173649e-15,
+          "F0_prime": -0.009637054576134127,
+          "branch": "outer",
+          "harmonic": 20
+        },
+        {
+          "current": -9.226134677538998e-18,
+          "F0": 8.90037939163468e-21,
+          "F0_prime": -0.001188862685744511,
+          "branch": "outer",
+          "harmonic": 5
+        },
+        {
+          "current": 0.0,
+          "F0": 0.0,
+          "F0_prime": 0.0,
+          "branch": "zero",
+          "harmonic": 0
+        }
+      ]
+    },
+    {
+      "source_to_current_amplitude_ratio": 100.0,
+      "states": {
+        "inner": {
+          "uncancelled_zero_current_offset": -5464.677519089708,
+          "uncancelled_offset_over_occupied_frequency": -99844416.26396503,
+          "negative_schur_curvature": -1.0929355038179416,
+          "direct_F0_curvature_needed_at_n_23": 38737.53459903888,
+          "fixed_norm_radial_force_at_inherited_radius": 3.2465359913810958e-06,
+          "force_over_occupied_frequency": 0.05931703925932565
+        },
+        "outer": {
+          "uncancelled_zero_current_offset": -2005.5118473704588,
+          "uncancelled_offset_over_occupied_frequency": -756809220336540.0,
+          "negative_schur_curvature": -0.4011023694740918,
+          "direct_F0_curvature_needed_at_n_23": 4157101629.322267,
+          "fixed_norm_radial_force_at_inherited_radius": 4.74873798915766e-16,
+          "force_over_occupied_frequency": 0.0001792005716580069
+        }
+      },
+      "sampled_convex_necessary_conditions_pass": true,
+      "minimum_secant_margin": 0.00022051842950666228,
+      "intervals": [
+        {
+          "left": [
+            "inner",
+            30
+          ],
+          "right": [
+            "inner",
+            26
+          ],
+          "secant": -1.2238682978570274,
+          "left_derivative": -1.3588741448102022,
+          "right_derivative": -1.0390244897526544,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            26
+          ],
+          "right": [
+            "inner",
+            23.5
+          ],
+          "secant": -0.9612292919718028,
+          "left_derivative": -1.0390244897526544,
+          "right_derivative": -0.8640704553700643,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            23.5
+          ],
+          "right": [
+            "inner",
+            23
+          ],
+          "secant": -0.8480538715826513,
+          "left_derivative": -0.8640704553700643,
+          "right_derivative": -0.8312593883407613,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            23
+          ],
+          "right": [
+            "inner",
+            22.5
+          ],
+          "secant": -0.815596100765544,
+          "left_derivative": -0.8312593883407613,
+          "right_derivative": -0.7991566941000299,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            22.5
+          ],
+          "right": [
+            "inner",
+            20
+          ],
+          "secant": -0.7335841212076976,
+          "left_derivative": -0.7991566941000299,
+          "right_derivative": -0.6490206746261459,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            20
+          ],
+          "right": [
+            "inner",
+            5
+          ],
+          "secant": -0.5362702086502432,
+          "left_derivative": -0.6490206746261459,
+          "right_derivative": -0.07769324682222029,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "inner",
+            5
+          ],
+          "right": [
+            "outer",
+            30
+          ],
+          "secant": -0.0672893684567992,
+          "left_derivative": -0.07769324682222029,
+          "right_derivative": -0.01943541705804038,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            30
+          ],
+          "right": [
+            "outer",
+            26
+          ],
+          "secant": -0.0176228946020863,
+          "left_derivative": -0.01943541705804038,
+          "right_derivative": -0.015113970415012144,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            26
+          ],
+          "right": [
+            "outer",
+            23.5
+          ],
+          "secant": -0.014037689648849471,
+          "left_derivative": -0.015113970415012144,
+          "right_derivative": -0.01268560198958313,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            23.5
+          ],
+          "right": [
+            "outer",
+            23
+          ],
+          "secant": -0.012460902074053,
+          "left_derivative": -0.01268560198958313,
+          "right_derivative": -0.012225032562188952,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            23
+          ],
+          "right": [
+            "outer",
+            22.5
+          ],
+          "secant": -0.01200451413268229,
+          "left_derivative": -0.012225032562188952,
+          "right_derivative": -0.011772822952798995,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            22.5
+          ],
+          "right": [
+            "outer",
+            20
+          ],
+          "secant": -0.01084264710717137,
+          "left_derivative": -0.011772822952798995,
+          "right_derivative": -0.009637054568801939,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            20
+          ],
+          "right": [
+            "outer",
+            5
+          ],
+          "secant": -0.008002214278777054,
+          "left_derivative": -0.009637054568801939,
+          "right_derivative": -0.0011888626857441446,
+          "convex_necessary": true
+        },
+        {
+          "left": [
+            "outer",
+            5
+          ],
+          "right": [
+            "zero",
+            0
+          ],
+          "secant": -0.0009646921167648831,
+          "left_derivative": -0.0011888626857441446,
+          "right_derivative": 0.0,
+          "convex_necessary": true
+        }
+      ],
+      "F0_samples": [
+        {
+          "current": -4.484903728070534e-05,
+          "F0": 5.014715002900394e-05,
+          "F0_prime": -1.3588741448102022,
+          "branch": "inner",
+          "harmonic": 30
+        },
+        {
+          "current": -1.2919795224198826e-05,
+          "F0": 1.1069962901442292e-05,
+          "F0_prime": -1.0390244897526544,
+          "branch": "inner",
+          "harmonic": 26
+        },
+        {
+          "current": -5.440171123283099e-06,
+          "F0": 3.880329122703836e-06,
+          "F0_prime": -0.8640704553700643,
+          "branch": "inner",
+          "harmonic": 23.5
+        },
+        {
+          "current": -4.533122783629959e-06,
+          "F0": 3.111103266548374e-06,
+          "F0_prime": -0.8312593883407613,
+          "branch": "inner",
+          "harmonic": 23
+        },
+        {
+          "current": -3.7644382212818997e-06,
+          "F0": 2.4841671347786285e-06,
+          "F0_prime": -0.7991566941000299,
+          "branch": "inner",
+          "harmonic": 22.5
+        },
+        {
+          "current": -1.405536315904375e-06,
+          "F0": 7.537141535070937e-07,
+          "F0_prime": -0.6490206746261459,
+          "branch": "inner",
+          "harmonic": 20
+        },
+        {
+          "current": -6.993929337331444e-11,
+          "F0": 4.406471010591571e-12,
+          "F0_prime": -0.07769324682222029,
+          "branch": "inner",
+          "harmonic": 5
+        },
+        {
+          "current": -5.861835859413625e-12,
+          "F0": 9.473936216380356e-14,
+          "F0_prime": -0.01943541705804038,
+          "branch": "outer",
+          "harmonic": 30
+        },
+        {
+          "current": -1.6925261938321563e-12,
+          "F0": 2.126405736380166e-14,
+          "F0_prime": -0.015113970415012144,
+          "branch": "outer",
+          "harmonic": 26
+        },
+        {
+          "current": -7.135753746884276e-13,
+          "F0": 7.521849583175028e-15,
+          "F0_prime": -0.01268560198958313,
+          "branch": "outer",
+          "harmonic": 23.5
+        },
+        {
+          "current": -5.947405225781063e-13,
+          "F0": 6.0410601280437444e-15,
+          "F0_prime": -0.012225032562188952,
+          "branch": "outer",
+          "harmonic": 23
+        },
+        {
+          "current": -4.940043566639316e-13,
+          "F0": 4.831771400654806e-15,
+          "F0_prime": -0.011772822952798995,
+          "branch": "outer",
+          "harmonic": 22.5
+        },
+        {
+          "current": -1.8464741488945816e-13,
+          "F0": 1.47752325084043e-15,
+          "F0_prime": -0.009637054568801939,
+          "branch": "outer",
+          "harmonic": 20
+        },
+        {
+          "current": -9.226134677538998e-18,
+          "F0": 8.900379391632988e-21,
+          "F0_prime": -0.0011888626857441446,
+          "branch": "outer",
+          "harmonic": 5
+        },
+        {
+          "current": 0.0,
+          "F0": 0.0,
+          "F0_prime": 0.0,
+          "branch": "zero",
+          "harmonic": 0
+        }
+      ]
+    }
+  ],
+  "scope": "Homogeneous retained-mode reduction at two radius samples. Convex Hermite tests are necessary sampled conditions for one radius-independent F0, not proof of a smooth spatial action. Radial force is for fixed canonical norm at inherited radii; nearby equilibria, full spatial/metric stability and master origin remain untested.",
+  "sources": {
+    "experiments/same-field-action-tradeoff.py": "e5f9a636ef3a8253fad80903239ab931a660ecf7a32aa37bab34dcfc4404fc12",
+    "experiments/results/light-tau-branch-batch-20260924T102749_642908Z.json": "f76f1eafaacb1214f4673ef0a491ddc921c50e713f26168fd986d32147301901",
+    "experiments/results/two-channel-tau-test-20260924T105124_408062Z.json": "9230b7910d6a1c14fb79ad3f4acd0404d9b131fa4d2899703024e26cad9cd343",
+    "experiments/rational-common-law-probe.py": "c5c1d814e6f89023d9fa7a27a83f6f52360ff958af3f3f98287118ed1a196cc4",
+    "experiments/nonmonotone-common-law-probe.py": "43a676540502034807ba79aa3835e5bf767ec06fbd77fe4a0c3ef5293beb4bd1"
+  }
+}
