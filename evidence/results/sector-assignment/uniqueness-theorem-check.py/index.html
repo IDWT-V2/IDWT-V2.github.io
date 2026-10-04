@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>uniqueness-theorem-check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/sector-assignment/uniqueness-theorem-check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="uniqueness-theorem-check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/sector-assignment/uniqueness-theorem-check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="uniqueness-theorem-check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>uniqueness-theorem-check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/sector-assignment/uniqueness-theorem-check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact rational certificates for sector and mode-index uniqueness.
+
+Keep sector-inputs.json beside this standard-library Python script. The output
+replaces uniqueness-theorem-certificates.json in the same directory.
+&quot;&quot;&quot;
+from fractions import Fraction
+from pathlib import Path
+import hashlib
+import json
+import math
+
+BUNDLE = Path(__file__).resolve().parent
+INPUT = BUNDLE / &#39;sector-inputs.json&#39;
+MASS = {key: Fraction(str(value)) for key, value in json.loads(INPUT.read_text())[&#39;benchmark_mev&#39;].items()}
+FACTORS4 = {2: Fraction(2890 ** 2), 3: Fraction(7168),
+            4: Fraction(256, 39375), 6: Fraction(1, 18564 ** 4),
+            10: Fraction(1, 18564 ** 4)}
+MAINTAINED = {&#39;W&#39;: (2, 76), &#39;Z&#39;: (2, 81), &#39;H&#39;: (2, 95),
+              &#39;down&#39;: (3, 1), &#39;strange&#39;: (3, 4), &#39;bottom&#39;: (3, 17),
+              &#39;up&#39;: (4, 3), &#39;charm&#39;: (4, 20), &#39;top&#39;: (4, 72),
+              &#39;electron&#39;: (6, 13), &#39;muon&#39;: (6, 35), &#39;tau&#39;: (10, 23)}
+
+def count(n, d):
+    return math.comb(n + d - 1, d)
+
+def prediction4(n, d):
+    return MASS[&#39;electron&#39;] ** 4 * FACTORS4[d] * count(n, d) ** 4
+
+certificates = []
+
+def less(name, left, right):
+    left, right = Fraction(left), Fraction(right)
+    difference = right - left
+    assert difference &gt; 0, name
+    certificates.append(dict(name=name, left=str(left), right=str(right),
+        positive_difference=str(difference), passed=True))
+
+for d in [2, 3]:
+    less(f&#39;electron-first-rung-d{d}&#39;, 1, FACTORS4[d])
+less(&#39;electron-d4-lower&#39;, FACTORS4[4], 1)
+less(&#39;electron-d4-upper&#39;, 1, FACTORS4[4] * count(2, 4) ** 4)
+assert count(13, 6) == 18564
+assert FACTORS4[6] * count(13, 6) ** 4 == 1
+less(&#39;electron-d10-lower&#39;, count(7, 10), 18564)
+less(&#39;electron-d10-upper&#39;, 18564, count(8, 10))
+assert {d for d in FACTORS4 if FACTORS4[d] == FACTORS4[6]} == {6, 10}
+
+gap_rows = []
+for d, low, high in [(3, 45, 46), (4, 58, 59)]:
+    assert high == low + 1
+    lower_ratio4 = prediction4(low, d) / MASS[&#39;W&#39;] ** 4
+    upper_ratio4 = prediction4(high, d) / MASS[&#39;W&#39;] ** 4
+    less(f&#39;W-d{d}-below-half-percent-window&#39;, lower_ratio4, Fraction(199, 200) ** 4)
+    less(f&#39;W-d{d}-above-half-percent-window&#39;, Fraction(201, 200) ** 4, upper_ratio4)
+    less(f&#39;W-d{d}-simple-lower-certificate&#39;, lower_ratio4, Fraction(81, 100) if d == 3 else Fraction(4, 5))
+    less(f&#39;W-d{d}-simple-upper-certificate&#39;, Fraction(26, 25) if d == 3 else Fraction(41, 40), upper_ratio4)
+    gap_rows.append(dict(depth=d, lower_index=low, upper_index=high,
+        lower_count=count(low, d), upper_count=count(high, d),
+        lower_prediction_ratio_fourth=str(lower_ratio4), upper_prediction_ratio_fourth=str(upper_ratio4)))
+less(&#39;up-d3-first-rung-exceeds-double-target&#39;, 16, prediction4(1, 3) / MASS[&#39;up&#39;] ** 4)
+for name, upper in [(&#39;W&#39;, Fraction(201, 200)), (&#39;up&#39;, Fraction(2))]:
+    d, n = MAINTAINED[name]
+    ratio4 = prediction4(n, d) / MASS[name] ** 4
+    distortion4 = max(ratio4, 1 / ratio4)
+    less(name + &#39;-original-log-error-implies-outer-window&#39;, distortion4, upper ** 4)
+
+nearest = []
+for name, (d, n) in MAINTAINED.items():
+    target8 = MASS[name] ** 8
+    center4 = prediction4(n, d)
+    lower_product4 = prediction4(n - 1, d) * center4 if n &gt; 1 else None
+    upper_product4 = center4 * prediction4(n + 1, d)
+    if lower_product4 is not None:
+        less(name + &#39;-above-lower-log-midpoint&#39;, lower_product4, target8)
+    less(name + &#39;-below-upper-log-midpoint&#39;, target8, upper_product4)
+    nearest.append(dict(particle=name, depth=d, index=n, count=count(n, d),
+        target_eighth_power=str(target8),
+        lower_neighbor_product_fourth=None if lower_product4 is None else str(lower_product4),
+        upper_neighbor_product_fourth=str(upper_product4),
+        strict_lower_boundary=n &gt; 1, strict_upper_boundary=True))
+
+report = dict(status=&#39;passed&#39;, exact_arithmetic=&#39;fractions.Fraction; no floating acceptance decisions&#39;,
+    sector_uniqueness_tolerances={&#39;W_relative_error&#39;: &#39;1/200&#39;, &#39;up_relative_error&#39;: &#39;1&#39;},
+    sector_uniqueness_requires_fixed_electron_and_shared_lepton_units=True,
+    sector_factors_fourth={str(d): str(a) for d, a in FACTORS4.items()},
+    electron_counts={&#39;d6_n13&#39;: count(13, 6), &#39;d10_n7&#39;: count(7, 10), &#39;d10_n8&#39;: count(8, 10)},
+    W_gap_certificates=gap_rows, unique_nearest_indices=nearest,
+    strict_rational_inequalities=certificates, inequality_count=len(certificates),
+    sources={file.name: hashlib.sha256(file.read_bytes()).hexdigest() for file in [Path(__file__), INPUT]},
+    scope=&#39;Conditional sector uniqueness and unique integer indices at the original per-particle log errors; no probability or physical selection law.&#39;)
+(BUNDLE / &#39;uniqueness-theorem-certificates.json&#39;).write_text(json.dumps(report, indent=2) + &#39;\n&#39;)
+print(json.dumps({&#39;status&#39;: report[&#39;status&#39;], &#39;strict_rational_inequalities&#39;: len(certificates),
+                  &#39;unique_nearest_indices&#39;: len(nearest), &#39;gap_counts&#39;: gap_rows}, indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>
