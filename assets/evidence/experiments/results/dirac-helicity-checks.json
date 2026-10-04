@@ -1,0 +1,64 @@
+{
+    "utc": "2026-10-01T05:07:44.434822+00:00",
+    "scope": "Exact full-Dirac block comparison conditional on the prior normal zero-mode construction; connection weights are hypotheses, not a derived field coupling.",
+    "checks": {
+        "full_observer_grading": true,
+        "full_helicity_identity": true,
+        "same_connection_projector": true,
+        "same_connection_rank": true,
+        "same_connection_positive_energy_projector": true,
+        "same_connection_helicity_count": true,
+        "opposite_connection_positive_projector": true,
+        "opposite_connection_positive_rank": true,
+        "opposite_connection_positive_positive_energy_projector": true,
+        "opposite_connection_positive_helicity_count": true,
+        "opposite_connection_negative_projector": true,
+        "opposite_connection_negative_rank": true,
+        "opposite_connection_negative_positive_energy_projector": true,
+        "opposite_connection_negative_helicity_count": true,
+        "reversed_same_connection_projector": true,
+        "reversed_same_connection_rank": true,
+        "reversed_same_connection_positive_energy_projector": true,
+        "reversed_same_connection_helicity_count": true,
+        "left_acceptance_is_projector": true,
+        "left_acceptance_normal_sign_eta-1": true,
+        "left_acceptance_normal_sign_eta1": true
+    },
+    "cases": [
+        {
+            "connection_case": "same_connection",
+            "lambda_plus": 1,
+            "lambda_minus": 1,
+            "negative_helicity_modes": 1,
+            "positive_helicity_modes": 1,
+            "normal_winding_magnitude": 2
+        },
+        {
+            "connection_case": "opposite_connection_positive",
+            "lambda_plus": 1,
+            "lambda_minus": -1,
+            "negative_helicity_modes": 0,
+            "positive_helicity_modes": 2,
+            "normal_winding_magnitude": 2
+        },
+        {
+            "connection_case": "opposite_connection_negative",
+            "lambda_plus": -1,
+            "lambda_minus": 1,
+            "negative_helicity_modes": 2,
+            "positive_helicity_modes": 0,
+            "normal_winding_magnitude": 2
+        },
+        {
+            "connection_case": "reversed_same_connection",
+            "lambda_plus": -1,
+            "lambda_minus": -1,
+            "negative_helicity_modes": 1,
+            "positive_helicity_modes": 1,
+            "normal_winding_magnitude": 2
+        }
+    ],
+    "sources": {
+        "experiments/dirac-helicity-checks.py": "72882264847435178a50637b9f555116106f97dfcad985dd430da55d8b636a5b"
+    }
+}
