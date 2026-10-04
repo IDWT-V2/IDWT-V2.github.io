@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>exact-sector-check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/sector-assignment/exact-sector-check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="exact-sector-check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/sector-assignment/exact-sector-check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="exact-sector-check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>exact-sector-check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/sector-assignment/exact-sector-check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact complete-assignment check with no positive-integer mode cutoff.&quot;&quot;&quot;
+from decimal import Decimal, localcontext
+from fractions import Fraction
+from itertools import permutations
+from pathlib import Path
+import hashlib
+import json
+import math
+
+BUNDLE = Path(__file__).resolve().parent
+INPUT_FILE = BUNDLE / &#39;sector-inputs.json&#39;
+INPUT = json.loads(INPUT_FILE.read_text())
+MASS = {name: Fraction(str(value)) for name, value in INPUT[&#39;benchmark_mev&#39;].items()}
+ELECTRON = MASS[&#39;electron&#39;]
+DEPTHS = (2, 3, 4, 6, 10)
+BLOCKS = (&#39;bosons&#39;, &#39;down_quarks&#39;, &#39;up_quarks&#39;, &#39;electron_muon&#39;, &#39;tau&#39;)
+MEMBERS = ((&#39;W&#39;, &#39;Z&#39;, &#39;H&#39;), (&#39;down&#39;, &#39;strange&#39;, &#39;bottom&#39;), (&#39;up&#39;, &#39;charm&#39;, &#39;top&#39;), (&#39;electron&#39;, &#39;muon&#39;), (&#39;tau&#39;,))
+MAINTAINED = (2, 3, 4, 6, 10)
+FACTORS4 = {2: Fraction(2890 ** 2), 3: Fraction(7168), 4: Fraction(256, 39375),
+            6: Fraction(1, 18564 ** 4), 10: Fraction(1, 18564 ** 4)}
+
+
+def decimal_value(value):
+    return Decimal(value.numerator) / Decimal(value.denominator)
+
+
+def count(n, depth):
+    return math.comb(n + depth - 1, depth)
+
+
+def predicted4(n, depth):
+    return ELECTRON ** 4 * FACTORS4[depth] * count(n, depth) ** 4
+
+
+def nearest(name, depth):
+    target4 = MASS[name] ** 4
+    if predicted4(1, depth) &gt;= target4:
+        lower = upper = selected = 1
+    else:
+        lower, upper = 1, 2
+        while predicted4(upper, depth) &lt; target4:
+            lower, upper = upper, 2 * upper
+        while upper - lower &gt; 1:
+            middle = (lower + upper) // 2
+            if predicted4(middle, depth) &lt; target4:
+                lower = middle
+            else:
+                upper = middle
+        assert predicted4(lower, depth) &lt; target4 &lt;= predicted4(upper, depth)
+        threshold8 = predicted4(lower, depth) * predicted4(upper, depth)
+        selected = lower if target4 ** 2 &lt;= threshold8 else upper
+    ratio4 = predicted4(selected, depth) / target4
+    distortion = max(ratio4, 1 / ratio4)
+    with localcontext() as context:
+        context.prec = 70
+        ratio = decimal_value(ratio4).sqrt().sqrt()
+        error = decimal_value(distortion).ln() / 4
+        predicted = decimal_value(MASS[name]) * ratio
+        row = {
+            &#39;particle&#39;: name, &#39;depth&#39;: depth, &#39;index&#39;: selected,
+            &#39;bracket&#39;: [lower, upper],
+            &#39;observed_mev&#39;: str(decimal_value(MASS[name])),
+            &#39;predicted_mev&#39;: str(predicted),
+            &#39;signed_relative_residual&#39;: str(ratio - 1),
+            &#39;log_error&#39;: str(error),
+            &#39;ratio_fourth_power&#39;: str(ratio4),
+            &#39;distortion_fourth_power&#39;: str(distortion),
+        }
+    return row, distortion
+
+
+TABLE = {(name, d): nearest(name, d) for name in MASS for d in DEPTHS}
+BASELINE = {name: TABLE[name, d][1] for names, d in zip(MEMBERS, MAINTAINED) for name in names}
+records = []
+accepted = []
+electron_admissible = []
+all_pass = []
+for ds in permutations(DEPTHS):
+    rows = [TABLE[name, d][0] for names, d in zip(MEMBERS, ds) for name in names]
+    exact_electron = TABLE[&#39;electron&#39;, ds[3]][1] == 1
+    common_lepton_scale = FACTORS4[ds[3]] == FACTORS4[ds[4]]
+    witnesses = [name for names, d in zip(MEMBERS, ds) for name in names if TABLE[name, d][1] &gt; BASELINE[name]]
+    candidate = {
+        &#39;block_depths&#39;: dict(zip(BLOCKS, ds)),
+        &#39;exact_electron_reference&#39;: exact_electron,
+        &#39;preserves_shared_lepton_unit&#39;: common_lepton_scale,
+        &#39;all_retained_constraints&#39;: exact_electron and common_lepton_scale,
+        &#39;no_worse_for_every_mass&#39;: not witnesses,
+        &#39;particles_worse_than_maintained&#39;: witnesses,
+    }
+    if exact_electron:
+        electron_admissible.append(ds)
+    if exact_electron and common_lepton_scale:
+        candidate[&#39;rows&#39;] = rows
+        with localcontext() as context:
+            context.prec = 70
+            candidate[&#39;rms_log_error_eleven_nonanchor&#39;] = str((sum(
+                Decimal(row[&#39;log_error&#39;]) ** 2 for row in rows if row[&#39;particle&#39;] != &#39;electron&#39;) / 11).sqrt())
+        accepted.append(candidate)
+        if not witnesses:
+            all_pass.append(ds)
+    records.append(candidate)
+
+assert len(records) == 120
+assert len(electron_admissible) == 24
+assert len(accepted) == 6
+assert all_pass == [MAINTAINED]
+assert TABLE[&#39;top&#39;, 2][0][&#39;index&#39;] &gt; 100
+assert TABLE[&#39;electron&#39;, 6][0][&#39;index&#39;] == 13
+assert all(TABLE[&#39;electron&#39;, d][1] != 1 for d in DEPTHS if d != 6)
+maintained = next(c for c in accepted if tuple(c[&#39;block_depths&#39;].values()) == MAINTAINED)
+ordered = sorted(accepted, key=lambda c: Decimal(c[&#39;rms_log_error_eleven_nonanchor&#39;]))
+assert ordered[0] == maintained
+with localcontext() as context:
+    context.prec = 70
+    ratio = Decimal(ordered[1][&#39;rms_log_error_eleven_nonanchor&#39;]) / Decimal(ordered[0][&#39;rms_log_error_eleven_nonanchor&#39;])
+report = {
+    &#39;status&#39;: &#39;passed&#39;,
+    &#39;method&#39;: &#39;Exact rational fourth-power bracketing and distortion comparisons; positive integer n unbounded.&#39;,
+    &#39;mass_inputs_rational&#39;: {name: str(value) for name, value in MASS.items()},
+    &#39;sector_factor_fourth_powers&#39;: {str(d): str(value) for d, value in FACTORS4.items()},
+    &#39;permutations_tested&#39;: len(records), &#39;electron_reference_admissible&#39;: len(electron_admissible),
+    &#39;full_constraint_admissible&#39;: len(accepted),
+    &#39;assignments_meeting_every_maintained_accuracy&#39;: [dict(zip(BLOCKS, ds)) for ds in all_pass],
+    &#39;ordered_full_constraint_assignments&#39;: ordered,
+    &#39;nearest_alternative_rms_ratio&#39;: str(ratio),
+    &#39;all_permutation_gates&#39;: records,
+    &#39;all_depth_nearest_rungs&#39;: [row for row, distortion in TABLE.values()],
+    &#39;sources&#39;: {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in (Path(__file__), INPUT_FILE)},
+    &#39;statistical_scope&#39;: &#39;No odds computed from observed componentwise tolerances; finite-null bounds are a separate preserved result.&#39;,
+}
+(BUNDLE / &#39;exact-sector-results.json&#39;).write_text(json.dumps(report, indent=2) + &#39;\n&#39;)
+print(json.dumps({&#39;status&#39;: &#39;passed&#39;, &#39;permutations&#39;: len(records), &#39;full_constraints&#39;: len(accepted),
+                 &#39;only_assignment_meeting_all_current_accuracies&#39;: report[&#39;assignments_meeting_every_maintained_accuracy&#39;],
+                 &#39;nearest_alternative_error_ratio&#39;: str(ratio),
+                 &#39;top_index_at_depth_two&#39;: TABLE[&#39;top&#39;, 2][0][&#39;index&#39;]},indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

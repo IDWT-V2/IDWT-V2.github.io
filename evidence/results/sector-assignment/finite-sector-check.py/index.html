@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>finite-sector-check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/sector-assignment/finite-sector-check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="finite-sector-check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/sector-assignment/finite-sector-check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="finite-sector-check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>finite-sector-check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/sector-assignment/finite-sector-check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Complete exclusive block assignments with the measured electron mass fixed.&quot;&quot;&quot;
+from itertools import permutations
+from pathlib import Path
+import hashlib
+import json
+import math
+
+BUNDLE = Path(__file__).resolve().parent
+INPUT_FILE = BUNDLE / &#39;sector-inputs.json&#39;
+INPUT = json.loads(INPUT_FILE.read_text())
+MASS = INPUT[&#39;benchmark_mev&#39;]
+assert MASS[&#39;electron&#39;] == 0.51099895000
+DEPTHS = (2, 3, 4, 6, 10)
+BLOCKS = (&#39;bosons&#39;, &#39;down_quarks&#39;, &#39;up_quarks&#39;, &#39;electron_muon&#39;, &#39;tau&#39;)
+MEMBERS = ((&#39;W&#39;, &#39;Z&#39;, &#39;H&#39;), (&#39;down&#39;, &#39;strange&#39;, &#39;bottom&#39;), (&#39;up&#39;, &#39;charm&#39;, &#39;top&#39;), (&#39;muon&#39;,), (&#39;tau&#39;,))
+NAMES = tuple(name for members in MEMBERS for name in members)
+COEFFICIENT = {int(k): v for k, v in INPUT[&#39;coefficients&#39;].items()}
+REFERENCE = {int(k): v for k, v in INPUT[&#39;reference_counts&#39;].items()}
+FACTOR = {d: math.sqrt(COEFFICIENT[d] / COEFFICIENT[6]) / REFERENCE[d] for d in DEPTHS}
+N_MAX = 100
+COUNTS = {d: [math.comb(n + d - 1, d) for n in range(1, N_MAX + 1)] for d in DEPTHS}
+CENTERS = {d: [math.log(FACTOR[d] * count) for count in COUNTS[d]] for d in DEPTHS}
+PERMUTATIONS = list(permutations(DEPTHS))
+MAINTAINED = (2, 3, 4, 6, 10)
+MAINTAINED_ID = PERMUTATIONS.index(MAINTAINED)
+CHECKS = []
+
+
+def check(name, condition):
+    CHECKS.append({&#39;name&#39;: name, &#39;passed&#39;: bool(condition)})
+    if not condition:
+        raise AssertionError(name)
+
+
+def covered_fraction(centers, error, upper):
+    total = 0.0
+    last_low = last_high = None
+    for center in centers:
+        low, high = max(0.0, center - error), min(upper, center + error)
+        if low &gt;= high:
+            continue
+        if last_high is not None and low &lt;= last_high:
+            last_high = max(high, last_high)
+        else:
+            if last_high is not None:
+                total += last_high - last_low
+            last_low, last_high = low, high
+    if last_high is not None:
+        total += last_high - last_low
+    return total / upper
+
+
+def gamma_tail(x, shape=11):
+    term = 1.0
+    values = [term]
+    for j in range(1, shape):
+        term *= x / j
+        values.append(term)
+    return math.exp(-x) * math.fsum(values)
+
+
+def make_row(name, d, anchor, upper):
+    centers = [c - anchor for c in CENTERS[d]]
+    observed = math.log(MASS[name] / MASS[&#39;electron&#39;])
+    index = min(range(N_MAX), key=lambda j: abs(centers[j] - observed))
+    error = abs(centers[index] - observed)
+    probability = covered_fraction(centers, error, upper)
+    assert 0 &lt; probability &lt;= 1.0 + 1e-13
+    probability = min(1.0, probability)
+    return {
+        &#39;particle&#39;: name, &#39;depth&#39;: d, &#39;index&#39;: index + 1,
+        &#39;observed_mev&#39;: MASS[name],
+        &#39;predicted_mev&#39;: MASS[&#39;electron&#39;] * math.exp(centers[index]),
+        &#39;signed_relative_residual&#39;: math.expm1(centers[index] - observed),
+        &#39;log_error&#39;: error, &#39;probability&#39;: probability,
+    }
+
+
+def details(candidate, upper):
+    pid, ne, x, rms = candidate
+    depths = PERMUTATIONS[pid]
+    anchor = CENTERS[depths[3]][ne - 1]
+    rows = [make_row(name, d, anchor, upper) for members, d in zip(MEMBERS, depths) for name in members]
+    electron_factor = FACTOR[depths[3]] * COUNTS[depths[3]][ne - 1]
+    check(f&#39;details-{upper}-{pid}-{ne}:fixed-electron&#39;,
+          math.isclose((MASS[&#39;electron&#39;] / electron_factor) * electron_factor, MASS[&#39;electron&#39;], rel_tol=2e-15))
+    return {
+        &#39;permutation_id&#39;: pid, &#39;block_depths&#39;: dict(zip(BLOCKS, depths)),
+        &#39;electron_index&#39;: ne, &#39;electron_observed_mev&#39;: MASS[&#39;electron&#39;],
+        &#39;electron_predicted_mev&#39;: MASS[&#39;electron&#39;], &#39;electron_relative_residual&#39;: 0.0,
+        &#39;common_normalization_relative_to_original&#39;: math.exp(-anchor),
+        &#39;preserves_original_absolute_units&#39;: abs(anchor) &lt;= 1e-14,
+        &#39;preserves_shared_lepton_unit&#39;: FACTOR[depths[3]] == FACTOR[depths[4]],
+        &#39;negative_log_product&#39;: x, &#39;fixed_candidate_tail&#39;: gamma_tail(x),
+        &#39;rms_log_error&#39;: rms, &#39;rows&#39;: rows,
+        &#39;repeated_indices_in_observed_triples&#39;: {
+            block: len({row[&#39;index&#39;] for row in rows if row[&#39;particle&#39;] in members}) != len(members)
+            for block, members in zip(BLOCKS[:3], MEMBERS[:3])
+        },
+    }
+
+
+def run_window(power):
+    upper = math.log(10 ** power)
+    baseline_rows = [make_row(name, d, 0.0, upper)
+                     for members, d in zip(MEMBERS, MAINTAINED) for name in members]
+    baseline = {row[&#39;particle&#39;]: row[&#39;log_error&#39;] for row in baseline_rows}
+    records = []
+    original_units = []
+    shared_leptons = []
+    both_gates = []
+    no_worse_alternate = []
+    grid_x = [[None] * N_MAX for _ in PERMUTATIONS]
+    grid_rms = [[None] * N_MAX for _ in PERMUTATIONS]
+    for electron_depth in DEPTHS:
+        legal_ids = [pid for pid, ds in enumerate(PERMUTATIONS) if ds[3] == electron_depth]
+        check(f&#39;window{power}:d{electron_depth}:exclusive-permutation-count&#39;, len(legal_ids) == 24)
+        for ne in range(1, N_MAX + 1):
+            anchor = CENTERS[electron_depth][ne - 1]
+            table = {}
+            for name in NAMES:
+                allowed = [electron_depth] if name == &#39;muon&#39; else [d for d in DEPTHS if d != electron_depth]
+                for d in allowed:
+                    table[name, d] = make_row(name, d, anchor, upper)
+            for pid in legal_ids:
+                ds = PERMUTATIONS[pid]
+                rows = [table[name, d] for members, d in zip(MEMBERS, ds) for name in members]
+                x = -math.fsum(math.log(row[&#39;probability&#39;]) for row in rows)
+                rms = math.sqrt(math.fsum(row[&#39;log_error&#39;] ** 2 for row in rows) / 11)
+                candidate = (pid, ne, x, rms)
+                records.append(candidate)
+                grid_x[pid][ne - 1] = x
+                grid_rms[pid][ne - 1] = rms
+                same_units = abs(anchor) &lt;= 1e-14
+                same_lepton_scale = FACTOR[ds[3]] == FACTOR[ds[4]]
+                if same_units:
+                    original_units.append(candidate)
+                if same_lepton_scale:
+                    shared_leptons.append(candidate)
+                if same_units and same_lepton_scale:
+                    both_gates.append(candidate)
+                if pid != MAINTAINED_ID and all(row[&#39;log_error&#39;] &lt;= baseline[row[&#39;particle&#39;]] + 1e-14 for row in rows):
+                    no_worse_alternate.append(candidate)
+    check(f&#39;window{power}:all-candidates&#39;, len(records) == 12000 and all(value is not None for row in grid_x for value in row))
+    check(f&#39;window{power}:shared-lepton-candidates&#39;, len(shared_leptons) == 1200)
+    summaries = []
+    for label, group in [(&#39;all_common_normalizations&#39;, records), (&#39;shared_lepton_unit&#39;, shared_leptons),
+                         (&#39;original_absolute_units&#39;, original_units), (&#39;both_preserved&#39;, both_gates)]:
+        ordered = sorted(group, key=lambda row: row[2], reverse=True)
+        raw = sorted(group, key=lambda row: row[3])
+        best, raw_best = ordered[0], raw[0]
+        best_other = next(row for row in ordered if row[0] != MAINTAINED_ID)
+        raw_other = next(row for row in raw if row[0] != MAINTAINED_ID)
+        q = gamma_tail(best[2])
+        summaries.append({
+            &#39;class&#39;: label, &#39;complete_candidate_count&#39;: len(group),
+            &#39;distinct_permutation_count&#39;: len({row[0] for row in group}),
+            &#39;best_calibrated&#39;: details(best, upper),
+            &#39;best_raw&#39;: details(raw_best, upper),
+            &#39;best_alternate_permutation_calibrated&#39;: details(best_other, upper),
+            &#39;best_alternate_permutation_raw&#39;: details(raw_other, upper),
+            &#39;calibrated_winner_ties_1e12&#39;: sum(abs(row[2] - best[2]) &lt;= 1e-12 for row in group),
+            &#39;raw_winner_ties_1e12&#39;: sum(abs(row[3] - raw_best[3]) &lt;= 1e-12 for row in group),
+            &#39;searched_tail_lower_bound&#39;: q,
+            &#39;searched_tail_upper_bound&#39;: min(1.0, len(group) * q),
+        })
+    maintained = next(row for row in records if row[:2] == (MAINTAINED_ID, 13))
+    old = next(w for w in INPUT[&#39;finite_reference_checks&#39;] if w[&#39;ratio_window&#39;][1] == 10 ** power)
+    check(f&#39;window{power}:maintained-tail-reproduced&#39;,
+          math.isclose(gamma_tail(maintained[2]), old[&#39;searched_tail_lower_bound&#39;], rel_tol=2e-12))
+    check(f&#39;window{power}:maintained-raw-reproduced&#39;,
+          math.isclose(maintained[3], old[&#39;best_assignment&#39;][&#39;rms_log_residual&#39;], rel_tol=2e-12))
+    return {
+        &#39;ratio_window&#39;: [1, 10 ** power], &#39;maintained&#39;: details(maintained, upper),
+        &#39;classes&#39;: summaries,
+        &#39;no_worse_alternate_permutations&#39;: [details(row, upper) for row in no_worse_alternate],
+        &#39;score_grid&#39;: grid_x, &#39;rms_grid&#39;: grid_rms,
+        &#39;best_permutation_summaries&#39;: [{
+            &#39;permutation_id&#39;: pid, &#39;block_depths&#39;: dict(zip(BLOCKS, ds)),
+            &#39;best_electron_index_calibrated&#39;: max(range(N_MAX), key=lambda j: grid_x[pid][j]) + 1,
+            &#39;best_electron_index_raw&#39;: min(range(N_MAX), key=lambda j: grid_rms[pid][j]) + 1,
+            &#39;max_score&#39;: max(grid_x[pid]), &#39;min_rms&#39;: min(grid_rms[pid]),
+        } for pid, ds in enumerate(PERMUTATIONS)],
+    }
+
+
+check(&#39;permutations-exclusive-and-complete&#39;, len(PERMUTATIONS) == len(set(PERMUTATIONS)) == 120
+      and all(len(set(ds)) == 5 for ds in PERMUTATIONS))
+check(&#39;maintained-electron-normalization&#39;, CENTERS[6][12] == 0.0)
+check(&#39;overlap-boundary-union&#39;, abs(covered_fraction([0.4, 0.48, 1.2, 1.98], 0.1, 2) - 0.3) &lt; 1e-14)
+check(&#39;outside-centers&#39;, abs(covered_fraction([-0.05, 1.05], 0.1, 1) - 0.1) &lt; 1e-14)
+windows = [run_window(power) for power in (6, 7)]
+report = {
+    &#39;status&#39;: &#39;passed&#39;,
+    &#39;sources&#39;: {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in (Path(__file__), INPUT_FILE)},
+    &#39;benchmark_mev&#39;: MASS, &#39;dimensionless_sector_factors&#39;: FACTOR,
+    &#39;depth_domain&#39;: DEPTHS, &#39;index_range&#39;: [1, N_MAX], &#39;block_order&#39;: BLOCKS,
+    &#39;permutations&#39;: PERMUTATIONS, &#39;maintained_permutation_id&#39;: MAINTAINED_ID,
+    &#39;reference_mass_is_fixed&#39;: True,
+    &#39;electron_is_conditioned_not_an_independent_prediction&#39;: True,
+    &#39;normalization&#39;: &#39;One common value determined by the same fixed measured electron for each trial depth and index; relative sector factors fixed.&#39;,
+    &#39;windows&#39;: windows, &#39;checks&#39;: CHECKS,
+    &#39;scope&#39;: &#39;Finite mass-pattern search with exclusive sectors. Bounds condition on fixed relative numerical recipe; not historical discovery significance or a physical model derivation.&#39;,
+}
+(BUNDLE / &#39;finite-sector-results.json&#39;).write_text(json.dumps(report, indent=2) + &#39;\n&#39;)
+print(json.dumps({&#39;status&#39;: &#39;passed&#39;, &#39;checks&#39;: len(CHECKS),
+    &#39;primary&#39;: [{&#39;class&#39;: c[&#39;class&#39;], &#39;count&#39;: c[&#39;complete_candidate_count&#39;],
+      &#39;best_calibrated&#39;: [c[&#39;best_calibrated&#39;][&#39;block_depths&#39;], c[&#39;best_calibrated&#39;][&#39;electron_index&#39;]],
+      &#39;best_raw&#39;: [c[&#39;best_raw&#39;][&#39;block_depths&#39;], c[&#39;best_raw&#39;][&#39;electron_index&#39;]],
+      &#39;upper_bound&#39;: c[&#39;searched_tail_upper_bound&#39;],
+      &#39;best_other_raw&#39;: [c[&#39;best_alternate_permutation_raw&#39;][&#39;block_depths&#39;], c[&#39;best_alternate_permutation_raw&#39;][&#39;electron_index&#39;], c[&#39;best_alternate_permutation_raw&#39;][&#39;rms_log_error&#39;]]}
+      for c in windows[0][&#39;classes&#39;]],
+    &#39;no_worse_alternate_count&#39;: len(windows[0][&#39;no_worse_alternate_permutations&#39;])},indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

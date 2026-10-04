@@ -1,0 +1,52 @@
+{
+  "benchmark_mev": {
+    "W": 80369.2,
+    "Z": 91188.0,
+    "H": 125200.0,
+    "down": 4.7,
+    "strange": 93.5,
+    "bottom": 4183.0,
+    "up": 2.16,
+    "charm": 1273.0,
+    "top": 172570.0,
+    "electron": 0.51099895,
+    "muon": 105.6583755,
+    "tau": 1776.93
+  },
+  "coefficients": {
+    "2": 722.5,
+    "3": 21.166010488516726,
+    "4": 4.535573676110727,
+    "6": 0.25,
+    "10": 0.25
+  },
+  "reference_counts": {
+    "2": 1,
+    "3": 1,
+    "4": 15,
+    "6": 18564,
+    "10": 18564
+  },
+  "finite_reference_checks": [
+    {
+      "ratio_window": [
+        1,
+        1000000
+      ],
+      "searched_tail_lower_bound": 5.059995001967177e-10,
+      "best_assignment": {
+        "rms_log_residual": 0.02688569005489564
+      }
+    },
+    {
+      "ratio_window": [
+        1,
+        10000000
+      ],
+      "searched_tail_lower_bound": 2.687466569724292e-10,
+      "best_assignment": {
+        "rms_log_residual": 0.02688569005489564
+      }
+    }
+  ]
+}
