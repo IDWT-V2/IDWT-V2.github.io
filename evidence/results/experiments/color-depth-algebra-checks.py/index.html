@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>color-depth-algebra-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/color-depth-algebra-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="color-depth-algebra-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/color-depth-algebra-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="color-depth-algebra-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>color-depth-algebra-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/color-depth-algebra-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact color algebra and uniform spatial-depth controls, without simulations.&quot;&quot;&quot;
+from pathlib import Path
+from datetime import datetime, timezone
+from hashlib import sha256
+from itertools import combinations, permutations
+from math import comb
+import argparse
+import json
+import sympy as s
+
+parser = argparse.ArgumentParser()
+parser.add_argument(&#39;--output-dir&#39;, type=Path)
+args = parser.parse_args()
+checks = 0
+
+
+def require(condition):
+    global checks
+    assert condition
+    checks += 1
+
+
+def clean(matrix):
+    return matrix.applyfunc(s.simplify)
+
+
+def zero(matrix):
+    return clean(matrix) == s.zeros(*matrix.shape)
+
+
+def comm(a, b):
+    return clean(a*b-b*a)
+
+
+def norm2(matrix):
+    return s.simplify(s.trace(matrix.H*matrix))
+
+
+def plane(d, a, b):
+    result = s.zeros(d)
+    result[a,b] = 1
+    result[b,a] = -1
+    return result
+
+
+def wedge_action(matrix):
+    d = matrix.rows
+    basis = list(combinations(range(d), 2))
+    result = s.zeros(len(basis))
+    for col,(a,b) in enumerate(basis):
+        for k in range(d):
+            if k != b:
+                pair = tuple(sorted((k,b)))
+                result[basis.index(pair),col] += matrix[k,a]*(1 if k&lt;b else -1)
+            if k != a:
+                pair = tuple(sorted((a,k)))
+                result[basis.index(pair),col] += matrix[k,b]*(1 if a&lt;k else -1)
+    return result
+
+
+def chiral_embeddings(d):
+    basis = list(combinations(range(d),2))
+    plus = s.zeros(len(basis),3)
+    minus = s.zeros(len(basis),3)
+    # B = (e23,e31,e12); star4 B = (e14,e24,e34).
+    for i,(pair,sign) in enumerate([((1,2),1),((0,2),-1),((0,1),1)]):
+        plus[basis.index(pair),i] = sign
+        minus[basis.index(pair),i] = sign
+        plus[basis.index((i,3)),i] = 1
+        minus[basis.index((i,3)),i] = -1
+    return plus,minus
+
+
+I = s.I
+root3 = s.sqrt(3)
+T = [s.Matrix(x)/2 for x in [
+    [[0,1,0],[1,0,0],[0,0,0]],
+    [[0,-I,0],[I,0,0],[0,0,0]],
+    [[1,0,0],[0,-1,0],[0,0,0]],
+    [[0,0,1],[0,0,0],[1,0,0]],
+    [[0,0,-I],[0,0,0],[I,0,0]],
+    [[0,0,0],[0,0,1],[0,1,0]],
+    [[0,0,0],[0,0,-I],[0,I,0]],
+    [[1/root3,0,0],[0,1/root3,0],[0,0,-2/root3]],
+]]
+for a in range(8):
+    require(T[a].H == T[a] and s.trace(T[a]) == 0)
+    for b in range(8):
+        require(s.simplify(s.trace(T[a]*T[b])) == s.Rational(a==b,2))
+CF = clean(sum((t*t for t in T),s.zeros(3)))
+require(CF == s.eye(3)*s.Rational(4,3))
+f = [[[s.simplify(-2*I*s.trace(comm(T[a],T[b])*T[c])) for c in range(8)]
+      for b in range(8)] for a in range(8)]
+for a in range(8):
+    for b in range(8):
+        require(zero(comm(T[a],T[b])-I*sum((f[a][b][c]*T[c] for c in range(8)),s.zeros(3))))
+        require(s.simplify(sum(f[a][c][d]*f[b][c][d] for c in range(8) for d in range(8))) == 3*int(a==b))
+for a,b,c,d in [(a,b,c,d) for a in range(3) for b in range(3) for c in range(3) for d in range(3)]:
+    lhs = s.simplify(sum(t[a,b]*t[c,d] for t in T))
+    rhs = (s.Rational(1,2)*int(a==d and b==c)-s.Rational(1,6)*int(a==b and c==d))
+    require(lhs == rhs)
+
+rho = s.eye(3)/3
+require(all(s.trace(rho*t)==0 for t in T))
+require(s.trace(rho*CF)==s.Rational(4,3))
+v = s.ones(3,1)
+means = [s.simplify((v.H*t*v)[0]/3) for t in T]
+require(means[2] == means[7] == 0)
+require(s.simplify(sum(a*a for a in means)) == s.Rational(1,3))
+require(s.simplify((v.H*CF*v)[0]/3) == s.Rational(4,3))
+
+meson = s.zeros(9,1)
+for i in range(3):
+    meson[3*i+i] = 1
+meson_generators = [s.kronecker_product(t,s.eye(3))-s.kronecker_product(s.eye(3),t.T) for t in T]
+require(all(zero(g*meson) for g in meson_generators))
+baryon = s.zeros(27,1)
+for p in permutations(range(3)):
+    inversions = sum(p[i]&gt;p[j] for i in range(3) for j in range(i+1,3))
+    baryon[9*p[0]+3*p[1]+p[2]] = (-1)**inversions
+baryon_generators = [s.kronecker_product(t,s.eye(3),s.eye(3))+
+                    s.kronecker_product(s.eye(3),t,s.eye(3))+
+                    s.kronecker_product(s.eye(3),s.eye(3),t) for t in T]
+require(all(zero(g*baryon) for g in baryon_generators))
+require((baryon.H*baryon)[0] == 6)
+baryon_C=clean(sum((g*g for g in baryon_generators),s.zeros(27)))
+require(baryon_C.eigenvals()=={s.S.Zero:1,s.Integer(3):16,s.Integer(6):10})
+meson_C = clean(sum((g*g for g in meson_generators),s.zeros(9)))
+require(meson_C.eigenvals() == {s.S.Zero:1,s.Integer(3):8})
+qq_generators=[s.kronecker_product(t,s.eye(3))+s.kronecker_product(s.eye(3),t) for t in T]
+qq_C=clean(sum((g*g for g in qq_generators),s.zeros(9)))
+require(qq_C.eigenvals() == {s.Rational(4,3):3,s.Rational(10,3):6})
+qq_pair=(qq_C-s.Rational(8,3)*s.eye(9))/2
+require(qq_pair.eigenvals() == {s.Rational(-2,3):3,s.Rational(1,3):6})
+meson_pair=(meson_C-s.Rational(8,3)*s.eye(9))/2
+require(meson_pair.eigenvals() == {s.Rational(-4,3):1,s.Rational(1,6):8})
+mixed_baryon_generators=[s.kronecker_product(t,s.eye(3),s.eye(3))+
+                        s.kronecker_product(s.eye(3),t,s.eye(3))-
+                        s.kronecker_product(s.eye(3),s.eye(3),t.T) for t in T]
+mixed_baryon_C=clean(sum((g*g for g in mixed_baryon_generators),s.zeros(27)))
+require(mixed_baryon_C.eigenvals()=={s.Rational(4,3):6,s.Rational(10,3):6,s.Rational(16,3):15})
+require(mixed_baryon_C.det()!=0)
+
+plus,minus = chiral_embeddings(4)
+star4 = s.zeros(6)
+for a,b,sign in [(0,5,1),(1,4,-1),(2,3,1)]:
+    star4[a,b] = star4[b,a] = sign
+require(star4*star4 == s.eye(6))
+require(star4*plus == plus and star4*minus == -minus)
+require(plus.T*plus == minus.T*minus == 2*s.eye(3))
+require(zero(plus.T*minus))
+restriction = s.zeros(3,6)
+restriction[0,3] = 1
+restriction[1,1] = -1
+restriction[2,0] = 1
+require(restriction*plus == restriction*minus == s.eye(3))
+observer_actions=[]
+extra_actions=[]
+for a,b in combinations(range(4),2):
+    action = wedge_action(plane(4,a,b))
+    left = clean(plus.T*action*plus/2)
+    right = clean(minus.T*action*minus/2)
+    require(action*plus == plus*left and action*minus == minus*right)
+    if b&lt;3:
+        require(left == right)
+        observer_actions.append(left)
+    else:
+        require(left == -right and not zero(left))
+        extra_actions.append(left)
+for r in observer_actions:
+    require(r.T == -r)
+variables = s.symbols(&#39;m0:9&#39;)
+M = s.Matrix(3,3,variables)
+equations = [entry for r in observer_actions for entry in comm(M,r)]
+coefficients,_ = s.linear_eq_to_matrix(equations,variables)
+require(len(coefficients.nullspace()) == 1)
+color_rotation_commutators = sum(not zero(comm(t,r)) for t in T for r in observer_actions)
+require(color_rotation_commutators &gt; 0)
+
+# A relative frame is a constructive repair of the fixed-vector Schur
+# obstruction. It is extra geometric data, not a derived particle field.
+R=s.Matrix([[0,-1,0],[1,0,0],[0,0,1]])
+require(R.T*R==s.eye(3) and R.det()==1)
+B=s.Matrix([1,I,2])
+relative_frame_checks=0
+for k in observer_actions:
+    frame_variation=k*R
+    pattern_variation=k*B
+    require(zero(frame_variation.T*B+R.T*pattern_variation))
+    for t in T:
+        C=I*R*t*R.T
+        varied_C=I*(frame_variation*t*R.T+R*t*frame_variation.T)
+        require(zero(varied_C*B+C*pattern_variation-k*C*B))
+        relative_frame_checks+=1
+require(clean(sum(((R*t*R.T)**2 for t in T),s.zeros(3)))==CF)
+half_spin=[s.Matrix([[0,1],[1,0]])/2,s.Matrix([[0,-I],[I,0]])/2,
+           s.diag(s.Rational(1,2),s.Rational(-1,2))]
+require(all(zero(comm(s.kronecker_product(a,s.eye(3)),
+                      s.kronecker_product(s.eye(2),t))) for a in half_spin for t in T))
+
+# A spatial triple&#39;s eight endomorphisms are a spin-one plus spin-two space.
+adjoint_rotation_casimir = s.zeros(8)
+for b,t in enumerate(T):
+    image = -sum((comm(r,comm(r,t)) for r in observer_actions),s.zeros(3))
+    for a in range(8):
+        adjoint_rotation_casimir[a,b] = s.simplify(2*s.trace(T[a]*image))
+require(adjoint_rotation_casimir.eigenvals() == {s.Integer(2):3,s.Integer(6):5})
+
+# Canonical rank-three projected-mode connection: all nine u(3) curvature
+# directions are possible if the modes can have complex relative variation.
+def projected_curvature(v,w):
+    return v.H*w-w.H*v
+
+mode_tangents = []
+for i in range(3):
+    row=s.zeros(1,3)
+    row[i]=1
+    mode_tangents.extend([row,I*row])
+berry_curvatures = [projected_curvature(v,w) for v,w in combinations(mode_tangents,2)]
+berry_columns = s.Matrix.hstack(*(c.reshape(9,1) for c in berry_curvatures))
+require(berry_columns.rank()==9)
+traceless_curvatures = [c-s.trace(c)*s.eye(3)/3 for c in berry_curvatures]
+require(s.Matrix.hstack(*(c.reshape(9,1) for c in traceless_curvatures)).rank()==8)
+real_curvatures = [projected_curvature(v,w) for v,w in combinations(mode_tangents[::2],2)]
+require(s.Matrix.hstack(*(c.reshape(9,1) for c in real_curvatures)).rank()==3)
+
+def traceless(matrix):
+    return clean(matrix-s.trace(matrix)*s.eye(matrix.rows)/matrix.rows)
+
+
+def lie_span(generators,target_rank):
+    basis=[]
+    for candidate in generators:
+        if s.Matrix.hstack(*(x.reshape(9,1) for x in basis+[candidate])).rank()&gt;len(basis):
+            basis.append(candidate)
+    while len(basis)&lt;target_rank:
+        previous=len(basis)
+        for a in basis[:]:
+            for b in basis[:]:
+                candidate=comm(a,b)
+                if s.Matrix.hstack(*(x.reshape(9,1) for x in basis+[candidate])).rank()&gt;len(basis):
+                    basis.append(candidate)
+                if len(basis)==target_rank:
+                    break
+            if len(basis)==target_rank:
+                break
+        if len(basis)==previous:
+            break
+    return len(basis)
+
+
+# Actual two-dimensional pullback Z(x,y)=x*v1+y*v2+x*x*v3/2.
+# At the origin A=0, Fxy=M(v1,v2), and covariant d_x Fxy=M(v3,v2).
+v1=s.Matrix([[1,0,0]])
+v2=s.Matrix([[I,1,0]])
+v3=s.Matrix([[0,I,1]])
+curvature0=traceless(projected_curvature(v1,v2))
+curvature_derivative=traceless(projected_curvature(v3,v2))
+require(lie_span([curvature0,curvature_derivative],8)==8)
+u=s.diag(I,1,-I)
+c=s.Matrix([1,1,0])
+require(u.H*u==s.eye(3) and u.det()==1)
+require((c.H*c)[0]==((u*c).H*(u*c))[0])
+require(s.Abs((c.T*c)[0])**2==4 and s.Abs(((u*c).T*(u*c))[0])**2==0)
+
+spin10_blades=[set(b) for k in [0,2,4] for b in combinations(range(10),k)]
+require(len(spin10_blades)==256)
+
+depth_rows=[]
+leakage_rows=[]
+for d in range(2,17):
+    bivector_rank = comb(d,2)
+    factors = [1] if d==2 else [3,3] if d==4 else [bivector_rank]
+    require((3 in factors) == (d in (3,4)))
+    # Standard fixed Spin(10) positive chiral carrier, restricted to Spin(d).
+    if d&lt;=10:
+        if d==10:
+            copies=[1]
+            spin_dimensions=[16]
+        elif d%2==0:
+            copies=[2**((10-d)//2-1)]*2
+            spin_dimensions=[2**(d//2-1)]*2
+        else:
+            copies=[2**((9-d)//2)]
+            spin_dimensions=[2**((d-1)//2)]
+        require(sum(a*b for a,b in zip(copies,spin_dimensions)) == 16)
+        # Independent Clifford-monomial centralizer count, with the chiral
+        # complement relation reducing every even blade to degree zero/two/four.
+        allowed=[b for b in spin10_blades if all((a in b)==(c in b)
+                 for a,c in combinations(range(d),2))]
+        require(len(allowed)==sum(k*k for k in copies))
+        commuting_su3_available = any(k&gt;=3 for k in copies)
+    else:
+        copies=spin_dimensions=None
+        commuting_su3_available=None
+    real_spin_commutant={0:&#39;R&#39;,1:&#39;R&#39;,2:&#39;C&#39;,3:&#39;H&#39;,4:&#39;H&#39;,5:&#39;H&#39;,6:&#39;C&#39;,7:&#39;R&#39;}[d%8]
+    # Full tangent-Clifford compatibility uses the parent Dirac carrier,
+    # not its chiral half, because individual generators exchange chirality.
+    if d&lt;=10:
+        clifford_copies=([2**((10-d)//2)] if d%2==0
+                        else [2**((9-d)//2)]*2)
+        require(sum(clifford_copies)*2**(d//2)==32)
+    else:
+        clifford_copies=None
+    mixing_factors=[{&#39;rank&#39;:k,&#39;traceless_unitary_dimension&#39;:k*k-1,
+                     &#39;fundamental_Casimir&#39;:str(s.Rational(k*k-1,2*k)),
+                     &#39;adjoint_Casimir&#39;:k if k&gt;1 else 0} for k in factors]
+    depth_rows.append({&#39;spatial_depth&#39;:d,&#39;maintained_sector&#39;:d in [2,3,4,5,6,10],
+                       &#39;bivector_rank&#39;:bivector_rank,&#39;full_rotation_factor_ranks&#39;:factors,
+                       &#39;rank_three_rotation_factor&#39;:3 in factors,
+                       &#39;Spin10_chiral_rotation_multiplicities&#39;:copies,
+                       &#39;Spin10_restricted_irrep_dimensions&#39;:spin_dimensions,
+                       &#39;commuting_su3_available_in_this_carrier&#39;:commuting_su3_available,
+                       &#39;full_Spin10_Dirac_tangent_Clifford_multiplicities&#39;:clifford_copies,
+                       &#39;full_tangent_Clifford_commuting_su3_available&#39;:any(k&gt;=3 for k in clifford_copies) if clifford_copies else None,
+                       &#39;minimal_real_spinor_commutant&#39;:real_spin_commutant,
+                       &#39;quaternionic_three_units_available&#39;:real_spin_commutant==&#39;H&#39;,
+                       &#39;full_rotation_factor_unitary_mixing&#39;:mixing_factors})
+    if d&gt;=4:
+        p,_ = chiral_embeddings(d)
+        projector=p*p.T/2
+        require(projector*projector==projector and projector.rank()==3)
+        total=s.S.Zero
+        mixed_count=0
+        for a,b in combinations(range(d),2):
+            action=wedge_action(plane(d,a,b))
+            leaked=(s.eye(bivector_rank)-projector)*action*p
+            leakage=norm2(leaked)/2
+            if a&lt;4&lt;=b:
+                require(leakage==s.Rational(3,2))
+                mixed_count+=1
+            else:
+                require(leakage==0)
+            total+=leakage
+        require(total == 6*(d-4))
+        leakage_rows.append({&#39;spatial_depth&#39;:d,&#39;chiral_triple_rank&#39;:3,
+                             &#39;mixed_rotation_generators&#39;:mixed_count,
+                             &#39;total_squared_leakage&#39;:str(total),
+                             &#39;invariant_under_full_sector_rotations&#39;:total==0})
+
+# Uniform round-sphere spectrum controls. These are actual spectral
+# multiplicities, unlike the ranks of a two-form bundle at one point.
+sphere_rows=[]
+for d in range(2,17):
+    candidates=[{&#39;type&#39;:&#39;exact-two-form&#39;,&#39;eigenvalue&#39;:2*(d-1),&#39;multiplicity&#39;:comb(d+1,2)}]
+    if d&gt;=3:
+        candidates.append({&#39;type&#39;:&#39;coexact-two-form&#39;,&#39;eigenvalue&#39;:3*(d-2),&#39;multiplicity&#39;:comb(d+1,3)})
+    first=min(c[&#39;eigenvalue&#39;] for c in candidates)
+    first_multiplicity=sum(c[&#39;multiplicity&#39;] for c in candidates if c[&#39;eigenvalue&#39;]==first)
+    require((first_multiplicity==3)==(d==2))
+    sphere_rows.append({&#39;spatial_depth&#39;:d,&#39;first_nonzero_Hodge_two_form_eigenvalue&#39;:first,
+                        &#39;first_nonzero_Hodge_two_form_multiplicity&#39;:first_multiplicity,
+                        &#39;first_scalar_harmonic_multiplicity&#39;:d+1,
+                        &#39;candidates&#39;:candidates})
+require(sphere_rows[1][&#39;first_nonzero_Hodge_two_form_multiplicity&#39;]==4)
+require(sphere_rows[2][&#39;first_nonzero_Hodge_two_form_multiplicity&#39;]==20)
+
+# Boundary/self-duality degree tests do not require a gauge group.
+curvature_degree_rows=[]
+for d in range(2,17):
+    curvature_degree_rows.append({&#39;spatial_depth&#39;:d,&#39;star_two_form_degree&#39;:d-2,
+        &#39;ordinary_self_dual_two_form_possible&#39;:d==4,
+        &#39;scalar_gradient_Bogomolny_degree_match&#39;:d==3,
+        &#39;four_dimensional_self_dual_embedding_in_container_possible&#39;:d&gt;=4,
+        &#39;quaternionic_geometry_pair_dimensions&#39;:d%4 in [0,3]})
+
+def hodge_basis(indices,dimension):
+    complement=tuple(i for i in range(dimension) if i not in indices)
+    sign=(-1)**(sum(indices)-len(indices)*(len(indices)-1)//2)
+    return complement,sign
+
+
+def sparse_hodge(form,dimension):
+    out={}
+    for indices,value in form.items():
+        dual,sign=hodge_basis(indices,dimension)
+        out[dual]=out.get(dual,0)+sign*value
+    return {k:s.simplify(v) for k,v in out.items() if v!=0}
+
+
+middle_hodge_rows=[]
+for m in range(1,9):
+    even=2*m
+    odd=even-1
+    k=comb(odd,m-1)
+    require(2*k==comb(even,m))
+    require((k==3)==(m==2))
+    if m&gt;1:
+        previous=comb(2*m-3,m-2)
+        require(s.Rational(k,previous)==4-s.Rational(2,m))
+    eigenvalue=s.S.One if m%2==0 else I
+    count=0
+    for indices in combinations(range(odd),m-1):
+        a,sign=hodge_basis(indices,odd)
+        form={a:s.Integer(sign),indices+(odd,):1/eigenvalue}
+        opposite={a:s.Integer(sign),indices+(odd,):-1/eigenvalue}
+        require(sparse_hodge(form,even)=={key:s.simplify(eigenvalue*value) for key,value in form.items()})
+        require(sparse_hodge(opposite,even)=={key:s.simplify(-eigenvalue*value) for key,value in opposite.items()})
+        require(sum(s.conjugate(form[key])*opposite[key] for key in form)==0)
+        require(sum(s.conjugate(value)*value for value in form.values())==2)
+        count+=1
+    require(count==k)
+    for d in [odd,even]:
+        middle_hodge_rows.append({&#39;spatial_depth&#39;:d,&#39;paired_depth&#39;:even if d==odd else odd,
+            &#39;complete_middle_Hodge_channel_rank&#39;:k,
+            &#39;three_channel_candidate&#39;:k==3,
+            &#39;even_partner_Hodge_eigenvalue&#39;:str(eigenvalue),
+            &#39;full_channel_mixing_group&#39;:&#39;SU(&#39;+str(k)+&#39;)&#39; if k&gt;1 else &#39;trivial&#39;,
+            &#39;full_channel_fundamental_Casimir&#39;:str(s.Rational(k*k-1,2*k)),
+            &#39;scope&#39;:&#39;Full-channel mixing is a physical hypothesis; Hodge rank and restriction are exact&#39;})
+
+def blade_lie_closure(initial):
+    basis=set(initial)
+    while True:
+        previous=len(basis)
+        for a,b in combinations(tuple(basis),2):
+            if (len(a)*len(b)-len(a&amp;b))%2:
+                basis.add(a^b)
+        if len(basis)==previous:
+            return basis
+
+
+endomorphism_rows=[]
+for d in range(2,17):
+    spinor_dimension=2**((d-1)//2)
+    components=[]
+    if d%2:
+        for k in range(0,d,2):
+            components.append({&#39;blade_degree&#39;:k,&#39;multiplicity&#39;:comb(d,k),
+                               &#39;rotation_Casimir&#39;:k*(d-k)})
+    else:
+        for k in range(0,d//2+1,2):
+            multiplicity=comb(d,k)
+            if 2*k==d:
+                multiplicity//=2
+            components.append({&#39;blade_degree&#39;:k,&#39;multiplicity&#39;:multiplicity,
+                               &#39;rotation_Casimir&#39;:k*(d-k)})
+    require(sum(x[&#39;multiplicity&#39;] for x in components)==spinor_dimension**2)
+    positive=[x for x in components if x[&#39;rotation_Casimir&#39;]&gt;0]
+    first=min((x[&#39;rotation_Casimir&#39;] for x in positive),default=None)
+    first_rank=sum(x[&#39;multiplicity&#39;] for x in positive if x[&#39;rotation_Casimir&#39;]==first)
+    require((first_rank==3)==(d in [3,4]))
+    require((spinor_dimension**2-1==3)==(d in [3,4]))
+    # A rotation generator commutes with a Clifford blade unless exactly one
+    # of its two indices lies in that blade. There are k*(d-k) such pairs.
+    for component in components:
+        k=component[&#39;blade_degree&#39;]
+        representative=set(range(k))
+        counted=sum((a in representative)!=(b in representative)
+                    for a,b in combinations(range(d),2))
+        require(counted==component[&#39;rotation_Casimir&#39;])
+    lie_rank=0
+    closed=True
+    if positive:
+        if d==4:
+            # The half-middle two-forms are one simple so(3) ideal.
+            lie_rank=3
+        else:
+            lowest=set(frozenset(indices) for component in positive
+                       if component[&#39;rotation_Casimir&#39;]==first
+                       for indices in combinations(range(d),component[&#39;blade_degree&#39;]))
+            closure=blade_lie_closure(lowest)
+            lie_rank=len(closure)
+            closed=closure==lowest
+            require(lie_rank==(comb(d,2) if d%2==0 else (3 if d==3 else comb(d,2)+d)))
+            require(closed==(d%2==0 or d==3))
+    endomorphism_rows.append({&#39;spatial_depth&#39;:d,&#39;minimal_rotation_spinor_dimension&#39;:spinor_dimension,
+        &#39;traceless_endomorphism_rank&#39;:spinor_dimension**2-1,
+        &#39;lowest_positive_adjoint_rotation_Casimir&#39;:first,
+        &#39;lowest_positive_channel_rank&#39;:first_rank,
+        &#39;lowest_channel_closed_under_commutators&#39;:closed,
+        &#39;Lie_algebra_generated_by_lowest_channel_rank&#39;:lie_rank,
+        &#39;components&#39;:components})
+
+paired_carrier_rows=[]
+for d in range(2,17):
+    rank=2**((d+1)//2)
+    grades=range(d+1) if d%2==0 else range(0,d,2)
+    factor=1 if d%2==0 else 4
+    components=[{&#39;blade_degree&#39;:k,&#39;rotation_Casimir&#39;:k*(d-k),
+                 &#39;multiplicity&#39;:factor*comb(d,k)} for k in grades]
+    require(sum(x[&#39;multiplicity&#39;] for x in components)==rank**2)
+    first=min(x[&#39;rotation_Casimir&#39;] for x in components if x[&#39;rotation_Casimir&#39;]&gt;0)
+    first_rank=sum(x[&#39;multiplicity&#39;] for x in components if x[&#39;rotation_Casimir&#39;]==first)
+    require(first_rank==(2 if d==2 else (2*d if d%2==0 else 4*d)))
+    paired_carrier_rows.append({&#39;spatial_depth&#39;:d,&#39;maintained_paired_carrier_rank&#39;:rank,
+        &#39;lowest_positive_rotation_Casimir&#39;:first,
+        &#39;lowest_positive_channel_rank&#39;:first_rank,
+        &#39;components&#39;:components,
+        &#39;scope&#39;:&#39;Full paired Dirac carrier without choosing a minimal rotation irrep&#39;})
+
+low_degree_rows=[]
+for k in [1,2,3,5,10,15,35,45,126]:
+    cubic_allowed=3%k==0
+    # The SU(k) center acts on three fundamental slots with phase z^3.
+    # At k=3 the previously checked epsilon tensor supplies the invariant.
+    require(cubic_allowed==(k in [1,3]))
+    a=s.zeros(k,1)
+    b=s.zeros(k,1)
+    a[0]=1
+    b[0]=1 if k==1 else 1/s.sqrt(2)
+    if k&gt;1:
+        b[1]=1/s.sqrt(2)
+    require(norm2(a)==1 and norm2(b)==1)
+    overlap=(b.H*a)[0]
+    tangent_response=clean(b*overlap-a*s.conjugate(overlap)*overlap)
+    require(norm2(tangent_response)==(0 if k==1 else s.Rational(1,4)))
+    low_degree_rows.append({&#39;complete_complex_channel_rank&#39;:k,
+        &#39;three_fundamental_slots_singlet_dimension&#39;:1 if cubic_allowed else 0,
+        &#39;quartic_overlap_has_nonzero_relative_orientation_response&#39;:k&gt;1,
+        &#39;quartic_overlap_projected_gradient_norm_squared&#39;:str(norm2(tangent_response)),
+        &#39;scope&#39;:&#39;Full SU(k) equivalent-mode hypothesis; not the native rotation algebra&#39;})
+
+result={&#39;status&#39;:&#39;passed&#39;,&#39;checks&#39;:checks,
+        &#39;scope&#39;:&#39;Representation and rotation-form geometry, not a derived physical color interaction&#39;,
+        &#39;depth_rows&#39;:depth_rows,&#39;chiral_embedding_controls&#39;:leakage_rows,
+        &#39;color_factors&#39;:{&#39;CF&#39;:&#39;4/3&#39;,&#39;CA&#39;:&#39;3&#39;,&#39;TR&#39;:&#39;1/2&#39;},
+        &#39;pair_color_eigenvalues&#39;:{&#39;qq_antitriplet&#39;:&#39;-2/3&#39;,&#39;qq_sextet&#39;:&#39;1/3&#39;,
+                                  &#39;q_antiquark_singlet&#39;:&#39;-4/3&#39;,&#39;q_antiquark_octet&#39;:&#39;1/6&#39;,
+                                  &#39;scope&#39;:&#39;Algebraic weights, not forces without a derived interaction kernel&#39;},
+        &#39;mixed_quark_family_control&#39;:{&#39;three_same_color_types_allow_baryon_singlet&#39;:True,
+                                      &#39;two_triplets_one_antitriplet_Casimir_has_zero&#39;:False},
+        &#39;round_sphere_spectral_controls&#39;:sphere_rows,
+        &#39;curvature_degree_controls&#39;:curvature_degree_rows,
+        &#39;middle_hodge_pair_controls&#39;:middle_hodge_rows,
+        &#39;spinor_endomorphism_Casimir_controls&#39;:endomorphism_rows,
+        &#39;low_degree_interaction_controls&#39;:low_degree_rows,
+        &#39;maintained_paired_spinor_Casimir_controls&#39;:paired_carrier_rows,
+        &#39;neutrality_controls&#39;:{&#39;unpolarized_triplet_mean_generators&#39;:&#39;0&#39;,
+                              &#39;unpolarized_triplet_Casimir&#39;:&#39;4/3&#39;,
+                              &#39;equal_component_pure_triplet_mean_square&#39;:&#39;1/3&#39;,
+                              &#39;meson_total_generators&#39;:&#39;0&#39;,&#39;baryon_total_generators&#39;:&#39;0&#39;,
+                              &#39;three_triplets_Casimir_spectrum&#39;:{&#39;0&#39;:1,&#39;3&#39;:16,&#39;6&#39;:10},
+                              &#39;zero_triality_decuplet_Casimir&#39;:&#39;6&#39;},
+        &#39;three_four_restriction&#39;:{&#39;both_chiral_restrictions_rank&#39;:3,
+                                 &#39;observer_actions_equal&#39;:True,
+                                 &#39;extra_rotation_actions_opposite&#39;:True,
+                                 &#39;rotation_commutant_complex_dimension&#39;:1,
+                                 &#39;nonzero_color_rotation_commutators&#39;:color_rotation_commutators,
+                                 &#39;eight_endomorphisms_rotation_Casimir&#39;:{&#39;2&#39;:3,&#39;6&#39;:5}},
+        &#39;relative_frame_completion&#39;:{&#39;mixed_generator_checks&#39;:relative_frame_checks,
+                                     &#39;relative_amplitudes_are_rotation_invariant&#39;:True,
+                                     &#39;color_Casimir_preserved&#39;:&#39;4/3&#39;,
+                                     &#39;separate_spin_half_and_color_actions_commute&#39;:True,
+                                     &#39;scope&#39;:&#39;Requires a geometric moving frame and a justified equivalent-mode sector&#39;},
+        &#39;projected_mode_curvature&#39;:{&#39;complex_variations_u3_span&#39;:9,
+                                   &#39;traceless_complex_variations_su3_span&#39;:8,
+                                   &#39;real_variations_so3_span&#39;:3,
+                                   &#39;two_dimensional_pullback_holonomy_Lie_rank&#39;:8,
+                                   &#39;same_pullback_extends_to_depths&#39;:[2,16],
+                                   &#39;SO3_invariant_quartic_SU3_counterexample&#39;:[4,0],
+                                   &#39;scope&#39;:&#39;Availability if an actual geometric rank-three mode projector is derived&#39;},
+        &#39;sources&#39;:{&#39;experiments/color-depth-algebra-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest()}}
+out=args.output_dir or Path(__file__).parent/(&#39;run-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;))
+out.mkdir(parents=True,exist_ok=False)
+(out/&#39;executed-source.py&#39;).write_bytes(Path(__file__).read_bytes())
+(out/&#39;color-depth-algebra-checks.json&#39;).write_text(json.dumps(result,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;status&#39;:&#39;passed&#39;,&#39;checks&#39;:checks,&#39;output&#39;:str(out)},indent=2),flush=True)
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

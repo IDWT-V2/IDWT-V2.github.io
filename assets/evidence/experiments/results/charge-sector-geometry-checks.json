@@ -1,0 +1,7613 @@
+{
+  "experiment": "One-script geometry, charge and sector selection comparison",
+  "created_at": "2026-10-09T05:29:27.909763+00:00",
+  "sources": {
+    "experiments/charge-sector-geometry-checks.py": "88e9144a9eab6902765828a75be3dca62d88283f2b8ff2e62f989933dc03d19c"
+  },
+  "original_geometry": {
+    "representation": {
+      "integer_center_weights": [
+        0,
+        2,
+        2,
+        2,
+        -3,
+        -1,
+        -1,
+        -1
+      ],
+      "normalized_charges": [
+        "0",
+        "2/3",
+        "2/3",
+        "2/3",
+        "-1",
+        "-1/3",
+        "-1/3",
+        "-1/3"
+      ],
+      "factorization": "E=(1+Lambda^2 W) tensor (1+det(W)^-1)",
+      "induced_connection": "A_E=diag(A_F,A_F-Tr(A) I4)=diag(C_F,C_F)+Tr(A) Q",
+      "same_transition_line": "Hom(D^-1,1)=D",
+      "determinant": "det(E)=D^4 D^-4=1",
+      "twist_family": "E tensor D^k shifts every normalized charge by k; canonical untwisted construction is a carrier choice",
+      "circle_globality": "Q is center generator/3; its 2pi exponential equals the SU3 center action, and its standalone period is 6pi"
+    },
+    "ranks": [
+      {
+        "complex_normal_rank": 1,
+        "ordinary_normal_dimensions": 2,
+        "weights": [
+          {
+            "degree": 0,
+            "multiplicity": 1,
+            "weight": "0"
+          },
+          {
+            "degree": 1,
+            "multiplicity": 1,
+            "weight": "-1"
+          }
+        ],
+        "integer_weight_trace": "-1"
+      },
+      {
+        "complex_normal_rank": 2,
+        "ordinary_normal_dimensions": 4,
+        "weights": [
+          {
+            "degree": 0,
+            "multiplicity": 1,
+            "weight": "0"
+          },
+          {
+            "degree": 1,
+            "multiplicity": 2,
+            "weight": "-1/2"
+          },
+          {
+            "degree": 2,
+            "multiplicity": 1,
+            "weight": "1"
+          }
+        ],
+        "integer_weight_trace": "0"
+      },
+      {
+        "complex_normal_rank": 3,
+        "ordinary_normal_dimensions": 6,
+        "weights": [
+          {
+            "degree": 0,
+            "multiplicity": 1,
+            "weight": "0"
+          },
+          {
+            "degree": 1,
+            "multiplicity": 3,
+            "weight": "-1/3"
+          },
+          {
+            "degree": 2,
+            "multiplicity": 3,
+            "weight": "2/3"
+          },
+          {
+            "degree": 3,
+            "multiplicity": 1,
+            "weight": "-1"
+          }
+        ],
+        "integer_weight_trace": "0"
+      },
+      {
+        "complex_normal_rank": 4,
+        "ordinary_normal_dimensions": 8,
+        "weights": [
+          {
+            "degree": 0,
+            "multiplicity": 1,
+            "weight": "0"
+          },
+          {
+            "degree": 1,
+            "multiplicity": 4,
+            "weight": "-1/4"
+          },
+          {
+            "degree": 2,
+            "multiplicity": 6,
+            "weight": "1/2"
+          },
+          {
+            "degree": 3,
+            "multiplicity": 4,
+            "weight": "-3/4"
+          },
+          {
+            "degree": 4,
+            "multiplicity": 1,
+            "weight": "1"
+          }
+        ],
+        "integer_weight_trace": "0"
+      },
+      {
+        "complex_normal_rank": 5,
+        "ordinary_normal_dimensions": 10,
+        "weights": [
+          {
+            "degree": 0,
+            "multiplicity": 1,
+            "weight": "0"
+          },
+          {
+            "degree": 1,
+            "multiplicity": 5,
+            "weight": "-1/5"
+          },
+          {
+            "degree": 2,
+            "multiplicity": 10,
+            "weight": "2/5"
+          },
+          {
+            "degree": 3,
+            "multiplicity": 10,
+            "weight": "-3/5"
+          },
+          {
+            "degree": 4,
+            "multiplicity": 5,
+            "weight": "4/5"
+          },
+          {
+            "degree": 5,
+            "multiplicity": 1,
+            "weight": "-1"
+          }
+        ],
+        "integer_weight_trace": "0"
+      },
+      {
+        "complex_normal_rank": 6,
+        "ordinary_normal_dimensions": 12,
+        "weights": [
+          {
+            "degree": 0,
+            "multiplicity": 1,
+            "weight": "0"
+          },
+          {
+            "degree": 1,
+            "multiplicity": 6,
+            "weight": "-1/6"
+          },
+          {
+            "degree": 2,
+            "multiplicity": 15,
+            "weight": "1/3"
+          },
+          {
+            "degree": 3,
+            "multiplicity": 20,
+            "weight": "-1/2"
+          },
+          {
+            "degree": 4,
+            "multiplicity": 15,
+            "weight": "2/3"
+          },
+          {
+            "degree": 5,
+            "multiplicity": 6,
+            "weight": "-5/6"
+          },
+          {
+            "degree": 6,
+            "multiplicity": 1,
+            "weight": "1"
+          }
+        ],
+        "integer_weight_trace": "0"
+      }
+    ],
+    "minimal_carrier": {
+      "family": "Exactly one copy of each degree 0,1,2,3, each positive degree either original or conjugate; no character twists or extra summands",
+      "cases": [
+        {
+          "conjugation_signs_degrees_1_2_3": [
+            -1,
+            -1,
+            -1
+          ],
+          "integer_weights": [
+            0,
+            -1,
+            -2,
+            -3
+          ],
+          "determinant_power": -4,
+          "matching_triplet_type": false
+        },
+        {
+          "conjugation_signs_degrees_1_2_3": [
+            -1,
+            -1,
+            1
+          ],
+          "integer_weights": [
+            0,
+            -1,
+            -2,
+            3
+          ],
+          "determinant_power": -2,
+          "matching_triplet_type": false
+        },
+        {
+          "conjugation_signs_degrees_1_2_3": [
+            -1,
+            1,
+            -1
+          ],
+          "integer_weights": [
+            0,
+            -1,
+            2,
+            -3
+          ],
+          "determinant_power": 0,
+          "matching_triplet_type": true
+        },
+        {
+          "conjugation_signs_degrees_1_2_3": [
+            -1,
+            1,
+            1
+          ],
+          "integer_weights": [
+            0,
+            -1,
+            2,
+            3
+          ],
+          "determinant_power": 2,
+          "matching_triplet_type": true
+        },
+        {
+          "conjugation_signs_degrees_1_2_3": [
+            1,
+            -1,
+            -1
+          ],
+          "integer_weights": [
+            0,
+            1,
+            -2,
+            -3
+          ],
+          "determinant_power": -2,
+          "matching_triplet_type": true
+        },
+        {
+          "conjugation_signs_degrees_1_2_3": [
+            1,
+            -1,
+            1
+          ],
+          "integer_weights": [
+            0,
+            1,
+            -2,
+            3
+          ],
+          "determinant_power": 0,
+          "matching_triplet_type": true
+        },
+        {
+          "conjugation_signs_degrees_1_2_3": [
+            1,
+            1,
+            -1
+          ],
+          "integer_weights": [
+            0,
+            1,
+            2,
+            -3
+          ],
+          "determinant_power": 2,
+          "matching_triplet_type": false
+        },
+        {
+          "conjugation_signs_degrees_1_2_3": [
+            1,
+            1,
+            1
+          ],
+          "integer_weights": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "determinant_power": 4,
+          "matching_triplet_type": false
+        }
+      ],
+      "determinant_trivial_choices": [
+        [
+          -1,
+          1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1
+        ]
+      ],
+      "conclusion": "E and its full conjugate are the only determinant-trivial choices in this finite family; their triplet types match automatically",
+      "premise": "A preferred parallel complex volume on the carrier is an extra selection criterion, not a consequence of orienting the real spatial normal bundle"
+    },
+    "projective": {
+      "normal_bundle": "N_CP2/CP5=Hom(ell,C6/A)=O(1) tensor (C6/A)",
+      "carrier": "O + O(2)^3 + O(-1)^3 + O(-3), with constant quotient-space factors retained",
+      "total_chern_polynomial": "24*H**7 - 44*H**6 - 6*H**5 + 39*H**4 - 2*H**3 - 12*H**2 + 1",
+      "chern_character_degree_four": "12 H^2",
+      "pullback": "O_CP5(-3)|CP3=O_CP3(-3)",
+      "compatibility_status": "Valid partial/global associated-bundle example; not a complete maintained sector chain",
+      "odd_intermediate_obstructions": [
+        {
+          "lower_depth": 2,
+          "higher_depth": 4,
+          "excluded_intermediate_depth": 3,
+          "normal_euler_class": "H"
+        },
+        {
+          "lower_depth": 4,
+          "higher_depth": 6,
+          "excluded_intermediate_depth": 5,
+          "normal_euler_class": "H"
+        }
+      ]
+    },
+    "compatible_metric": {
+      "ordinary_space": "R4_x times R6_y, all noncompact physical spatial coordinates",
+      "metric": "g=sum dx_mu^2 + |dy+omega J y|^2, omega=b/2 (x1 dx2-x2 dx1)",
+      "normal_connection": "omega J, or i omega I3 in complex notation",
+      "normal_curvature": "b J dx1 wedge dx2",
+      "full_nested_flag": {
+        "2": "span(x1,x2)",
+        "3": "span(x1,x2,x3)",
+        "4": "R4_x at y=0",
+        "5": "R4_x plus y1",
+        "6": "R4_x plus y1,y2",
+        "10": "all coordinates"
+      },
+      "metric_properties": "smooth, positive, determinant one; no boundary or compactification",
+      "premises": "Chosen metric and complex normal structure; an existence construction, not selected IDWT geometry",
+      "scope": "Normal connection need not preserve each intermediate real normal line; all listed submanifolds coexist"
+    }
+  },
+  "rank_and_depth_tests": {
+    "ranks": [
+      {
+        "complex_rank": 1,
+        "real_normal_dimension": 2,
+        "determinant_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "fixed_three_plane_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_target_match": false
+      },
+      {
+        "complex_rank": 2,
+        "real_normal_dimension": 4,
+        "determinant_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/2",
+            "multiplicity": 2
+          },
+          {
+            "charge": "1",
+            "multiplicity": 1
+          }
+        ],
+        "fixed_three_plane_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 2
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_target_match": false
+      },
+      {
+        "complex_rank": 3,
+        "real_normal_dimension": 6,
+        "determinant_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "fixed_three_plane_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_target_match": true
+      },
+      {
+        "complex_rank": 4,
+        "real_normal_dimension": 8,
+        "determinant_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/4",
+            "multiplicity": 4
+          },
+          {
+            "charge": "1/2",
+            "multiplicity": 6
+          },
+          {
+            "charge": "-3/4",
+            "multiplicity": 4
+          },
+          {
+            "charge": "1",
+            "multiplicity": 1
+          }
+        ],
+        "fixed_three_plane_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 4
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 6
+          },
+          {
+            "charge": "-1",
+            "multiplicity": 4
+          },
+          {
+            "charge": "4/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_target_match": false
+      },
+      {
+        "complex_rank": 5,
+        "real_normal_dimension": 10,
+        "determinant_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/5",
+            "multiplicity": 5
+          },
+          {
+            "charge": "2/5",
+            "multiplicity": 10
+          },
+          {
+            "charge": "-3/5",
+            "multiplicity": 10
+          },
+          {
+            "charge": "4/5",
+            "multiplicity": 5
+          },
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "fixed_three_plane_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 5
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 10
+          },
+          {
+            "charge": "-1",
+            "multiplicity": 10
+          },
+          {
+            "charge": "4/3",
+            "multiplicity": 5
+          },
+          {
+            "charge": "-5/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_target_match": false
+      },
+      {
+        "complex_rank": 6,
+        "real_normal_dimension": 12,
+        "determinant_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/6",
+            "multiplicity": 6
+          },
+          {
+            "charge": "1/3",
+            "multiplicity": 15
+          },
+          {
+            "charge": "-1/2",
+            "multiplicity": 20
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 15
+          },
+          {
+            "charge": "-5/6",
+            "multiplicity": 6
+          },
+          {
+            "charge": "1",
+            "multiplicity": 1
+          }
+        ],
+        "fixed_three_plane_unit": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 6
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 15
+          },
+          {
+            "charge": "-1",
+            "multiplicity": 20
+          },
+          {
+            "charge": "4/3",
+            "multiplicity": 15
+          },
+          {
+            "charge": "-5/3",
+            "multiplicity": 6
+          },
+          {
+            "charge": "2",
+            "multiplicity": 1
+          }
+        ],
+        "full_target_match": false
+      }
+    ],
+    "all_maintained_pairs": [
+      {
+        "lower_depth": 2,
+        "upper_depth": 3,
+        "normal_dimension": 1,
+        "status": "odd real normal rank: whole-normal complex structure unavailable",
+        "full_target_match": false
+      },
+      {
+        "lower_depth": 2,
+        "upper_depth": 4,
+        "normal_dimension": 2,
+        "complex_rank": 1,
+        "full_target_match": false,
+        "status": "Hermitian normal bundle assumed; full exterior carrier compared"
+      },
+      {
+        "lower_depth": 2,
+        "upper_depth": 5,
+        "normal_dimension": 3,
+        "status": "odd real normal rank: whole-normal complex structure unavailable",
+        "full_target_match": false
+      },
+      {
+        "lower_depth": 2,
+        "upper_depth": 6,
+        "normal_dimension": 4,
+        "complex_rank": 2,
+        "full_target_match": false,
+        "status": "Hermitian normal bundle assumed; full exterior carrier compared"
+      },
+      {
+        "lower_depth": 2,
+        "upper_depth": 10,
+        "normal_dimension": 8,
+        "complex_rank": 4,
+        "full_target_match": false,
+        "status": "Hermitian normal bundle assumed; full exterior carrier compared"
+      },
+      {
+        "lower_depth": 3,
+        "upper_depth": 4,
+        "normal_dimension": 1,
+        "status": "odd real normal rank: whole-normal complex structure unavailable",
+        "full_target_match": false
+      },
+      {
+        "lower_depth": 3,
+        "upper_depth": 5,
+        "normal_dimension": 2,
+        "complex_rank": 1,
+        "full_target_match": false,
+        "status": "Hermitian normal bundle assumed; full exterior carrier compared"
+      },
+      {
+        "lower_depth": 3,
+        "upper_depth": 6,
+        "normal_dimension": 3,
+        "status": "odd real normal rank: whole-normal complex structure unavailable",
+        "full_target_match": false
+      },
+      {
+        "lower_depth": 3,
+        "upper_depth": 10,
+        "normal_dimension": 7,
+        "status": "odd real normal rank: whole-normal complex structure unavailable",
+        "full_target_match": false
+      },
+      {
+        "lower_depth": 4,
+        "upper_depth": 5,
+        "normal_dimension": 1,
+        "status": "odd real normal rank: whole-normal complex structure unavailable",
+        "full_target_match": false
+      },
+      {
+        "lower_depth": 4,
+        "upper_depth": 6,
+        "normal_dimension": 2,
+        "complex_rank": 1,
+        "full_target_match": false,
+        "status": "Hermitian normal bundle assumed; full exterior carrier compared"
+      },
+      {
+        "lower_depth": 4,
+        "upper_depth": 10,
+        "normal_dimension": 6,
+        "complex_rank": 3,
+        "full_target_match": true,
+        "status": "Hermitian normal bundle assumed; full exterior carrier compared"
+      },
+      {
+        "lower_depth": 5,
+        "upper_depth": 6,
+        "normal_dimension": 1,
+        "status": "odd real normal rank: whole-normal complex structure unavailable",
+        "full_target_match": false
+      },
+      {
+        "lower_depth": 5,
+        "upper_depth": 10,
+        "normal_dimension": 5,
+        "status": "odd real normal rank: whole-normal complex structure unavailable",
+        "full_target_match": false
+      },
+      {
+        "lower_depth": 6,
+        "upper_depth": 10,
+        "normal_dimension": 4,
+        "complex_rank": 2,
+        "full_target_match": false,
+        "status": "Hermitian normal bundle assumed; full exterior carrier compared"
+      }
+    ],
+    "maintained_pair_matches": [
+      [
+        4,
+        10
+      ]
+    ],
+    "all_integer_depths_2_to_10_matches": [
+      [
+        2,
+        8
+      ],
+      [
+        3,
+        9
+      ],
+      [
+        4,
+        10
+      ]
+    ],
+    "changed_tangent_rule_fixed_unit": [
+      {
+        "depth": 2,
+        "paired_rank": 1,
+        "extra_odd_direction_choice_required": false,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          }
+        ],
+        "matter_target": null,
+        "target_multiplicity": null,
+        "multiplicity_at_target": null,
+        "target_available": null
+      },
+      {
+        "depth": 3,
+        "paired_rank": 1,
+        "extra_odd_direction_choice_required": true,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          }
+        ],
+        "matter_target": "-1/3",
+        "target_multiplicity": 3,
+        "multiplicity_at_target": 1,
+        "target_available": true
+      },
+      {
+        "depth": 4,
+        "paired_rank": 2,
+        "extra_odd_direction_choice_required": false,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 2
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "matter_target": "2/3",
+        "target_multiplicity": 3,
+        "multiplicity_at_target": 1,
+        "target_available": true
+      },
+      {
+        "depth": 5,
+        "paired_rank": 2,
+        "extra_odd_direction_choice_required": true,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 2
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "matter_target": "0",
+        "target_multiplicity": 1,
+        "multiplicity_at_target": 1,
+        "target_available": true
+      },
+      {
+        "depth": 6,
+        "paired_rank": 3,
+        "extra_odd_direction_choice_required": false,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "matter_target": "-1",
+        "target_multiplicity": 1,
+        "multiplicity_at_target": 1,
+        "target_available": true
+      },
+      {
+        "depth": 10,
+        "paired_rank": 5,
+        "extra_odd_direction_choice_required": false,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 5
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 10
+          },
+          {
+            "charge": "-1",
+            "multiplicity": 10
+          },
+          {
+            "charge": "4/3",
+            "multiplicity": 5
+          },
+          {
+            "charge": "-5/3",
+            "multiplicity": 1
+          }
+        ],
+        "matter_target": "-1",
+        "target_multiplicity": 1,
+        "multiplicity_at_target": 10,
+        "target_available": true
+      }
+    ]
+  },
+  "fixed_carrier_assignment_tests": {
+    "restriction_scope": "Same W/E extended by pullback from the depth-four base on the explicit R10 example",
+    "spectra_at_depths": {
+      "2": [
+        {
+          "charge": "0",
+          "multiplicity": 1
+        },
+        {
+          "charge": "2/3",
+          "multiplicity": 3
+        },
+        {
+          "charge": "-1",
+          "multiplicity": 1
+        },
+        {
+          "charge": "-1/3",
+          "multiplicity": 3
+        }
+      ],
+      "3": [
+        {
+          "charge": "0",
+          "multiplicity": 1
+        },
+        {
+          "charge": "2/3",
+          "multiplicity": 3
+        },
+        {
+          "charge": "-1",
+          "multiplicity": 1
+        },
+        {
+          "charge": "-1/3",
+          "multiplicity": 3
+        }
+      ],
+      "4": [
+        {
+          "charge": "0",
+          "multiplicity": 1
+        },
+        {
+          "charge": "2/3",
+          "multiplicity": 3
+        },
+        {
+          "charge": "-1",
+          "multiplicity": 1
+        },
+        {
+          "charge": "-1/3",
+          "multiplicity": 3
+        }
+      ],
+      "5": [
+        {
+          "charge": "0",
+          "multiplicity": 1
+        },
+        {
+          "charge": "2/3",
+          "multiplicity": 3
+        },
+        {
+          "charge": "-1",
+          "multiplicity": 1
+        },
+        {
+          "charge": "-1/3",
+          "multiplicity": 3
+        }
+      ],
+      "6": [
+        {
+          "charge": "0",
+          "multiplicity": 1
+        },
+        {
+          "charge": "2/3",
+          "multiplicity": 3
+        },
+        {
+          "charge": "-1",
+          "multiplicity": 1
+        },
+        {
+          "charge": "-1/3",
+          "multiplicity": 3
+        }
+      ],
+      "10": [
+        {
+          "charge": "0",
+          "multiplicity": 1
+        },
+        {
+          "charge": "2/3",
+          "multiplicity": 3
+        },
+        {
+          "charge": "-1",
+          "multiplicity": 1
+        },
+        {
+          "charge": "-1/3",
+          "multiplicity": 3
+        }
+      ]
+    },
+    "one_to_one_assignment_count": 24,
+    "type_preserving_assignments": [
+      {
+        "down_at_3": "2/3",
+        "up_at_4": "-1/3",
+        "neutral_at_5": "0",
+        "charged_at_6_and_10": "-1"
+      },
+      {
+        "down_at_3": "2/3",
+        "up_at_4": "-1/3",
+        "neutral_at_5": "-1",
+        "charged_at_6_and_10": "0"
+      },
+      {
+        "down_at_3": "-1/3",
+        "up_at_4": "2/3",
+        "neutral_at_5": "0",
+        "charged_at_6_and_10": "-1"
+      },
+      {
+        "down_at_3": "-1/3",
+        "up_at_4": "2/3",
+        "neutral_at_5": "-1",
+        "charged_at_6_and_10": "0"
+      }
+    ],
+    "with_additional_named_channel_alignment": [
+      {
+        "down_at_3": "2/3",
+        "up_at_4": "-1/3",
+        "neutral_at_5": "-1",
+        "charged_at_6_and_10": "0"
+      },
+      {
+        "down_at_3": "-1/3",
+        "up_at_4": "2/3",
+        "neutral_at_5": "0",
+        "charged_at_6_and_10": "-1"
+      }
+    ],
+    "with_named_forward_channels_fixed_to_D": [
+      {
+        "down_at_3": "-1/3",
+        "up_at_4": "2/3",
+        "neutral_at_5": "0",
+        "charged_at_6_and_10": "-1"
+      }
+    ],
+    "assignment_qualification": "The 24 and 4 counts do not impose a map from physical named channels to D. Such a map reduces counts by extra assumptions; the depth numbers still do not enter Q.",
+    "warning": "These are permitted identifications, not derived physical states. No branch-to-depth selector is present."
+  },
+  "charge_twist_tests": {
+    "carrier_family": "1 + (Lambda2 W tensor D^a) + D^b + (W* tensor D^c)",
+    "general_solution_for_common_D_power_m": {
+      "a": "2*m/3 - 2/3",
+      "b": "-m",
+      "c": "1/3 - m/3"
+    },
+    "admissible_m": "m congruent 1 modulo 3; m is nonzero; all weights are m times original Q",
+    "bounded_twist_domain": "a,c in [-3,3]; b determined by exact determinant cancellation",
+    "cases": [
+      {
+        "a": -3,
+        "b": 17,
+        "c": -3,
+        "charges": [
+          "0",
+          "-7/3",
+          "17",
+          "-10/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -3,
+        "b": 14,
+        "c": -2,
+        "charges": [
+          "0",
+          "-7/3",
+          "14",
+          "-7/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -3,
+        "b": 11,
+        "c": -1,
+        "charges": [
+          "0",
+          "-7/3",
+          "11",
+          "-4/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -3,
+        "b": 8,
+        "c": 0,
+        "charges": [
+          "0",
+          "-7/3",
+          "8",
+          "-1/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -3,
+        "b": 5,
+        "c": 1,
+        "charges": [
+          "0",
+          "-7/3",
+          "5",
+          "2/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -3,
+        "b": 2,
+        "c": 2,
+        "charges": [
+          "0",
+          "-7/3",
+          "2",
+          "5/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -3,
+        "b": -1,
+        "c": 3,
+        "charges": [
+          "0",
+          "-7/3",
+          "-1",
+          "8/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -2,
+        "b": 14,
+        "c": -3,
+        "charges": [
+          "0",
+          "-4/3",
+          "14",
+          "-10/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -2,
+        "b": 11,
+        "c": -2,
+        "charges": [
+          "0",
+          "-4/3",
+          "11",
+          "-7/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -2,
+        "b": 8,
+        "c": -1,
+        "charges": [
+          "0",
+          "-4/3",
+          "8",
+          "-4/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -2,
+        "b": 5,
+        "c": 0,
+        "charges": [
+          "0",
+          "-4/3",
+          "5",
+          "-1/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -2,
+        "b": 2,
+        "c": 1,
+        "charges": [
+          "0",
+          "-4/3",
+          "2",
+          "2/3"
+        ],
+        "common_transition": true
+      },
+      {
+        "a": -2,
+        "b": -1,
+        "c": 2,
+        "charges": [
+          "0",
+          "-4/3",
+          "-1",
+          "5/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -2,
+        "b": -4,
+        "c": 3,
+        "charges": [
+          "0",
+          "-4/3",
+          "-4",
+          "8/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -1,
+        "b": 11,
+        "c": -3,
+        "charges": [
+          "0",
+          "-1/3",
+          "11",
+          "-10/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -1,
+        "b": 8,
+        "c": -2,
+        "charges": [
+          "0",
+          "-1/3",
+          "8",
+          "-7/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -1,
+        "b": 5,
+        "c": -1,
+        "charges": [
+          "0",
+          "-1/3",
+          "5",
+          "-4/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -1,
+        "b": 2,
+        "c": 0,
+        "charges": [
+          "0",
+          "-1/3",
+          "2",
+          "-1/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -1,
+        "b": -1,
+        "c": 1,
+        "charges": [
+          "0",
+          "-1/3",
+          "-1",
+          "2/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -1,
+        "b": -4,
+        "c": 2,
+        "charges": [
+          "0",
+          "-1/3",
+          "-4",
+          "5/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": -1,
+        "b": -7,
+        "c": 3,
+        "charges": [
+          "0",
+          "-1/3",
+          "-7",
+          "8/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 0,
+        "b": 8,
+        "c": -3,
+        "charges": [
+          "0",
+          "2/3",
+          "8",
+          "-10/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 0,
+        "b": 5,
+        "c": -2,
+        "charges": [
+          "0",
+          "2/3",
+          "5",
+          "-7/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "c": -1,
+        "charges": [
+          "0",
+          "2/3",
+          "2",
+          "-4/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 0,
+        "b": -1,
+        "c": 0,
+        "charges": [
+          "0",
+          "2/3",
+          "-1",
+          "-1/3"
+        ],
+        "common_transition": true
+      },
+      {
+        "a": 0,
+        "b": -4,
+        "c": 1,
+        "charges": [
+          "0",
+          "2/3",
+          "-4",
+          "2/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 0,
+        "b": -7,
+        "c": 2,
+        "charges": [
+          "0",
+          "2/3",
+          "-7",
+          "5/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 0,
+        "b": -10,
+        "c": 3,
+        "charges": [
+          "0",
+          "2/3",
+          "-10",
+          "8/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 1,
+        "b": 5,
+        "c": -3,
+        "charges": [
+          "0",
+          "5/3",
+          "5",
+          "-10/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "c": -2,
+        "charges": [
+          "0",
+          "5/3",
+          "2",
+          "-7/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 1,
+        "b": -1,
+        "c": -1,
+        "charges": [
+          "0",
+          "5/3",
+          "-1",
+          "-4/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 1,
+        "b": -4,
+        "c": 0,
+        "charges": [
+          "0",
+          "5/3",
+          "-4",
+          "-1/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 1,
+        "b": -7,
+        "c": 1,
+        "charges": [
+          "0",
+          "5/3",
+          "-7",
+          "2/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 1,
+        "b": -10,
+        "c": 2,
+        "charges": [
+          "0",
+          "5/3",
+          "-10",
+          "5/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 1,
+        "b": -13,
+        "c": 3,
+        "charges": [
+          "0",
+          "5/3",
+          "-13",
+          "8/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 2,
+        "b": 2,
+        "c": -3,
+        "charges": [
+          "0",
+          "8/3",
+          "2",
+          "-10/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 2,
+        "b": -1,
+        "c": -2,
+        "charges": [
+          "0",
+          "8/3",
+          "-1",
+          "-7/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 2,
+        "b": -4,
+        "c": -1,
+        "charges": [
+          "0",
+          "8/3",
+          "-4",
+          "-4/3"
+        ],
+        "common_transition": true
+      },
+      {
+        "a": 2,
+        "b": -7,
+        "c": 0,
+        "charges": [
+          "0",
+          "8/3",
+          "-7",
+          "-1/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 2,
+        "b": -10,
+        "c": 1,
+        "charges": [
+          "0",
+          "8/3",
+          "-10",
+          "2/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 2,
+        "b": -13,
+        "c": 2,
+        "charges": [
+          "0",
+          "8/3",
+          "-13",
+          "5/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 2,
+        "b": -16,
+        "c": 3,
+        "charges": [
+          "0",
+          "8/3",
+          "-16",
+          "8/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 3,
+        "b": -1,
+        "c": -3,
+        "charges": [
+          "0",
+          "11/3",
+          "-1",
+          "-10/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 3,
+        "b": -4,
+        "c": -2,
+        "charges": [
+          "0",
+          "11/3",
+          "-4",
+          "-7/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 3,
+        "b": -7,
+        "c": -1,
+        "charges": [
+          "0",
+          "11/3",
+          "-7",
+          "-4/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 3,
+        "b": -10,
+        "c": 0,
+        "charges": [
+          "0",
+          "11/3",
+          "-10",
+          "-1/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 3,
+        "b": -13,
+        "c": 1,
+        "charges": [
+          "0",
+          "11/3",
+          "-13",
+          "2/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 3,
+        "b": -16,
+        "c": 2,
+        "charges": [
+          "0",
+          "11/3",
+          "-16",
+          "5/3"
+        ],
+        "common_transition": false
+      },
+      {
+        "a": 3,
+        "b": -19,
+        "c": 3,
+        "charges": [
+          "0",
+          "11/3",
+          "-19",
+          "8/3"
+        ],
+        "common_transition": false
+      }
+    ],
+    "relative_counterexample": {
+      "a": 1,
+      "b": -4,
+      "c": 0,
+      "charges_in_original_unit": [
+        "0",
+        "5/3",
+        "-4",
+        "-1/3"
+      ],
+      "charged_singlet_normalized_to_minus_one": [
+        "0",
+        "5/12",
+        "-1",
+        "-1/12"
+      ],
+      "lost_premise": "The singlet and triplet transition lines are D^4 and D^2, rather than the same D"
+    }
+  },
+  "integer_character_scan": {
+    "case_count": 39304,
+    "scope": "all eight degree conjugations; three independent integer twists in [-8,8]",
+    "solutions": [
+      {
+        "degree_signs": [
+          -1,
+          1,
+          -1
+        ],
+        "twists": [
+          -2,
+          4,
+          -6
+        ],
+        "m": 7
+      },
+      {
+        "degree_signs": [
+          -1,
+          1,
+          -1
+        ],
+        "twists": [
+          -1,
+          2,
+          -3
+        ],
+        "m": 4
+      },
+      {
+        "degree_signs": [
+          -1,
+          1,
+          -1
+        ],
+        "twists": [
+          0,
+          0,
+          0
+        ],
+        "m": 1
+      },
+      {
+        "degree_signs": [
+          -1,
+          1,
+          -1
+        ],
+        "twists": [
+          1,
+          -2,
+          3
+        ],
+        "m": -2
+      },
+      {
+        "degree_signs": [
+          -1,
+          1,
+          -1
+        ],
+        "twists": [
+          2,
+          -4,
+          6
+        ],
+        "m": -5
+      },
+      {
+        "degree_signs": [
+          -1,
+          1,
+          1
+        ],
+        "twists": [
+          -2,
+          4,
+          -8
+        ],
+        "m": 7
+      },
+      {
+        "degree_signs": [
+          -1,
+          1,
+          1
+        ],
+        "twists": [
+          -1,
+          2,
+          -5
+        ],
+        "m": 4
+      },
+      {
+        "degree_signs": [
+          -1,
+          1,
+          1
+        ],
+        "twists": [
+          0,
+          0,
+          -2
+        ],
+        "m": 1
+      },
+      {
+        "degree_signs": [
+          -1,
+          1,
+          1
+        ],
+        "twists": [
+          1,
+          -2,
+          1
+        ],
+        "m": -2
+      },
+      {
+        "degree_signs": [
+          -1,
+          1,
+          1
+        ],
+        "twists": [
+          2,
+          -4,
+          4
+        ],
+        "m": -5
+      },
+      {
+        "degree_signs": [
+          -1,
+          1,
+          1
+        ],
+        "twists": [
+          3,
+          -6,
+          7
+        ],
+        "m": -8
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          -1
+        ],
+        "twists": [
+          -3,
+          6,
+          -7
+        ],
+        "m": 8
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          -1
+        ],
+        "twists": [
+          -2,
+          4,
+          -4
+        ],
+        "m": 5
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          -1
+        ],
+        "twists": [
+          -1,
+          2,
+          -1
+        ],
+        "m": 2
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          -1
+        ],
+        "twists": [
+          0,
+          0,
+          2
+        ],
+        "m": -1
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          -1
+        ],
+        "twists": [
+          1,
+          -2,
+          5
+        ],
+        "m": -4
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          -1
+        ],
+        "twists": [
+          2,
+          -4,
+          8
+        ],
+        "m": -7
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          1
+        ],
+        "twists": [
+          -2,
+          4,
+          -6
+        ],
+        "m": 5
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          1
+        ],
+        "twists": [
+          -1,
+          2,
+          -3
+        ],
+        "m": 2
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          1
+        ],
+        "twists": [
+          0,
+          0,
+          0
+        ],
+        "m": -1
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          1
+        ],
+        "twists": [
+          1,
+          -2,
+          3
+        ],
+        "m": -4
+      },
+      {
+        "degree_signs": [
+          1,
+          -1,
+          1
+        ],
+        "twists": [
+          2,
+          -4,
+          6
+        ],
+        "m": -7
+      }
+    ],
+    "interpretation": "Every accepted carrier is an overall charge rescaling, not a new relative-charge table"
+  },
+  "anisotropic_metric_test": {
+    "plane_rates": [
+      1,
+      1,
+      2
+    ],
+    "determinant_unit": 4,
+    "complete_holonomy_response": [
+      "0",
+      "1/2",
+      "3/4",
+      "3/4",
+      "-1",
+      "-1/2",
+      "-1/4",
+      "-1/4"
+    ],
+    "metric": "g=|dx|^2+|dy+omega J_lambda y|^2, omega=(x1 dx2-x2 dx1)/2",
+    "retained": [
+      "ordinary nested depths",
+      "compatible J",
+      "fixed exterior carrier",
+      "neutral singlet",
+      "trace zero",
+      "unit paired differences"
+    ],
+    "changed": "Charge identified with complete anisotropic holonomy instead of the central determinant component; color scalar property is lost",
+    "qualification": "This does not change Q when electric charge is still defined by the determinant component. It tests a relaxed identification."
+  },
+  "sector_selector_tests": {
+    "scope": "Seven added uniform predicates, two complex-subspace policies, two compatible nested real flags",
+    "premise": "Only the intersection of each tangent sector with the fixed four-in-ten normal bundle enters the selector",
+    "predicates": {
+      "unrestricted": "all p,q",
+      "tangent-only": "q=0",
+      "normal-only": "p=0",
+      "saturated-tangent": "p=r",
+      "saturated-normal": "q=3-r",
+      "balanced-occupation": "p=q",
+      "fully-saturated": "p=r and q=3-r"
+    },
+    "rank_rows": [
+      {
+        "geometry": "aligned-flag",
+        "depth": 2,
+        "real_intersection_rank": 0,
+        "maximal_complex_rank": 0,
+        "minimal_closure_complex_rank": 0
+      },
+      {
+        "geometry": "aligned-flag",
+        "depth": 3,
+        "real_intersection_rank": 0,
+        "maximal_complex_rank": 0,
+        "minimal_closure_complex_rank": 0
+      },
+      {
+        "geometry": "aligned-flag",
+        "depth": 4,
+        "real_intersection_rank": 0,
+        "maximal_complex_rank": 0,
+        "minimal_closure_complex_rank": 0
+      },
+      {
+        "geometry": "aligned-flag",
+        "depth": 5,
+        "real_intersection_rank": 1,
+        "maximal_complex_rank": 0,
+        "minimal_closure_complex_rank": 1
+      },
+      {
+        "geometry": "aligned-flag",
+        "depth": 6,
+        "real_intersection_rank": 2,
+        "maximal_complex_rank": 1,
+        "minimal_closure_complex_rank": 1
+      },
+      {
+        "geometry": "aligned-flag",
+        "depth": 10,
+        "real_intersection_rank": 6,
+        "maximal_complex_rank": 3,
+        "minimal_closure_complex_rank": 3
+      },
+      {
+        "geometry": "tilted-flag",
+        "depth": 2,
+        "real_intersection_rank": 0,
+        "maximal_complex_rank": 0,
+        "minimal_closure_complex_rank": 0
+      },
+      {
+        "geometry": "tilted-flag",
+        "depth": 3,
+        "real_intersection_rank": 0,
+        "maximal_complex_rank": 0,
+        "minimal_closure_complex_rank": 0
+      },
+      {
+        "geometry": "tilted-flag",
+        "depth": 4,
+        "real_intersection_rank": 0,
+        "maximal_complex_rank": 0,
+        "minimal_closure_complex_rank": 0
+      },
+      {
+        "geometry": "tilted-flag",
+        "depth": 5,
+        "real_intersection_rank": 1,
+        "maximal_complex_rank": 0,
+        "minimal_closure_complex_rank": 1
+      },
+      {
+        "geometry": "tilted-flag",
+        "depth": 6,
+        "real_intersection_rank": 2,
+        "maximal_complex_rank": 0,
+        "minimal_closure_complex_rank": 2
+      },
+      {
+        "geometry": "tilted-flag",
+        "depth": 10,
+        "real_intersection_rank": 6,
+        "maximal_complex_rank": 3,
+        "minimal_closure_complex_rank": 3
+      }
+    ],
+    "cases": [
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1/3",
+            "multiplicity": 2
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 2
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 2
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1/3",
+            "multiplicity": 2
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 2
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 2
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1/3",
+            "multiplicity": 2
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 2
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 2
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 6,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 2,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": null,
+        "exact_target_multiplet": null
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 3,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 4,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 5,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1/3",
+            "multiplicity": 2
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 2
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 2
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 5,
+        "complex_active_rank": 1,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 6,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 6,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 6,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 6,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 6,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 6,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 6,
+        "complex_active_rank": 0,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 6,
+        "complex_active_rank": 2,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 6,
+        "complex_active_rank": 2,
+        "charges": [
+          {
+            "charge": "-1/3",
+            "multiplicity": 2
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 6,
+        "complex_active_rank": 2,
+        "charges": [
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 6,
+        "complex_active_rank": 2,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 6,
+        "complex_active_rank": 2,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 2
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 6,
+        "complex_active_rank": 2,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 2
+          }
+        ],
+        "full_SU3_triplets_preserved": false,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 6,
+        "complex_active_rank": 2,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          },
+          {
+            "charge": "-1/3",
+            "multiplicity": 3
+          },
+          {
+            "charge": "0",
+            "multiplicity": 1
+          },
+          {
+            "charge": "2/3",
+            "multiplicity": 3
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "0",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": false,
+        "exact_target_multiplet": false
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "depth": 10,
+        "complex_active_rank": 3,
+        "charges": [
+          {
+            "charge": "-1",
+            "multiplicity": 1
+          }
+        ],
+        "full_SU3_triplets_preserved": true,
+        "target_available": true,
+        "exact_target_multiplet": true
+      }
+    ],
+    "uniform_families": [
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "tangent-only",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "normal-only",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-normal",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "balanced-occupation",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "fully-saturated",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "tangent-only",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "normal-only",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-tangent",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "saturated-normal",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "balanced-occupation",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "fully-saturated",
+        "all_target_numbers_available": false,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "number_only_matches": [
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "geometry": "aligned-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "unrestricted",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "maximal-contained",
+        "rule": "saturated-tangent",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "geometry": "tilted-flag",
+        "policy": "minimal-containing",
+        "rule": "unrestricted",
+        "all_target_numbers_available": true,
+        "all_target_multiplets_selected": false,
+        "mismatched_depths": [
+          3,
+          4,
+          5,
+          6,
+          10
+        ]
+      }
+    ],
+    "complete_assignment_matches": [],
+    "no_separation_reason": "S_3=S_4=0. Every uniform function of this intersection and J alone gives the same retained spectrum at both depths.",
+    "scope_limit": "No exclusion of rules using additional base-tangent, embedding, curvature or physical branch data. Complex intersections define subbundles only on constant-rank regions."
+  },
+  "checks": [
+    {
+      "name": "Hodge reordering is unitary",
+      "passed": true
+    },
+    {
+      "name": "g unitary",
+      "passed": true
+    },
+    {
+      "name": "g global determinant factorization",
+      "passed": true
+    },
+    {
+      "name": "g carrier determinant one",
+      "passed": true
+    },
+    {
+      "name": "h unitary",
+      "passed": true
+    },
+    {
+      "name": "h global determinant factorization",
+      "passed": true
+    },
+    {
+      "name": "h carrier determinant one",
+      "passed": true
+    },
+    {
+      "name": "gh unitary",
+      "passed": true
+    },
+    {
+      "name": "gh global determinant factorization",
+      "passed": true
+    },
+    {
+      "name": "gh carrier determinant one",
+      "passed": true
+    },
+    {
+      "name": "representation composition on noncommuting unitary elements",
+      "passed": true
+    },
+    {
+      "name": "test matrices do not commute",
+      "passed": true
+    },
+    {
+      "name": "general u3 connection factorization",
+      "passed": true
+    },
+    {
+      "name": "induced connection has zero trace",
+      "passed": true
+    },
+    {
+      "name": "single determinant connection gives all relative charges",
+      "passed": true
+    },
+    {
+      "name": "charge generator parallel for induced unitary connection",
+      "passed": true
+    },
+    {
+      "name": "charge trace zero",
+      "passed": true
+    },
+    {
+      "name": "same unit transition on singlet and triplet",
+      "passed": true
+    },
+    {
+      "name": "transition is a section of determinant line",
+      "passed": true
+    },
+    {
+      "name": "color generator 1 commutes with charge",
+      "passed": true
+    },
+    {
+      "name": "color generator 2 commutes with charge",
+      "passed": true
+    },
+    {
+      "name": "color generator 3 commutes with charge",
+      "passed": true
+    },
+    {
+      "name": "color generator 4 commutes with charge",
+      "passed": true
+    },
+    {
+      "name": "color generator 5 commutes with charge",
+      "passed": true
+    },
+    {
+      "name": "color generator 6 commutes with charge",
+      "passed": true
+    },
+    {
+      "name": "color generator 7 commutes with charge",
+      "passed": true
+    },
+    {
+      "name": "color generator 8 commutes with charge",
+      "passed": true
+    },
+    {
+      "name": "both triplets have fundamental Casimir",
+      "passed": true
+    },
+    {
+      "name": "old parity-number shortcut fails the unchanged wedge product",
+      "passed": true
+    },
+    {
+      "name": "determinant twist changes trace",
+      "passed": true
+    },
+    {
+      "name": "rank 2 alternating binomial trace",
+      "passed": true
+    },
+    {
+      "name": "rank 3 alternating binomial trace",
+      "passed": true
+    },
+    {
+      "name": "rank 4 alternating binomial trace",
+      "passed": true
+    },
+    {
+      "name": "rank 5 alternating binomial trace",
+      "passed": true
+    },
+    {
+      "name": "rank 6 alternating binomial trace",
+      "passed": true
+    },
+    {
+      "name": "rank three has exact multiplicities 1,3,3,1",
+      "passed": true
+    },
+    {
+      "name": "all eight minimal exterior choices classified",
+      "passed": true
+    },
+    {
+      "name": "trivial complex determinant forces matching triplets in this family",
+      "passed": true
+    },
+    {
+      "name": "projective carrier c1 vanishes",
+      "passed": true
+    },
+    {
+      "name": "projective carrier c2",
+      "passed": true
+    },
+    {
+      "name": "projective carrier ch2",
+      "passed": true
+    },
+    {
+      "name": "lepton transition exponent",
+      "passed": true
+    },
+    {
+      "name": "triplet transition exponent",
+      "passed": true
+    },
+    {
+      "name": "CP1 to CP2 normal Euler class nonzero",
+      "passed": true
+    },
+    {
+      "name": "CP2 to CP3 normal Euler class nonzero",
+      "passed": true
+    },
+    {
+      "name": "metric Schur complement identity",
+      "passed": true
+    },
+    {
+      "name": "normal connection equals prescribed geometric one-form 1",
+      "passed": true
+    },
+    {
+      "name": "normal connection equals prescribed geometric one-form 2",
+      "passed": true
+    },
+    {
+      "name": "normal connection equals prescribed geometric one-form 3",
+      "passed": true
+    },
+    {
+      "name": "normal connection equals prescribed geometric one-form 4",
+      "passed": true
+    },
+    {
+      "name": "normal curvature is nonzero central U3 curvature",
+      "passed": true
+    },
+    {
+      "name": "zero section is totally geodesic",
+      "passed": true
+    },
+    {
+      "name": "rank 1 exterior total dimension",
+      "passed": true
+    },
+    {
+      "name": "rank 2 exterior total dimension",
+      "passed": true
+    },
+    {
+      "name": "rank 3 exterior total dimension",
+      "passed": true
+    },
+    {
+      "name": "rank 4 exterior total dimension",
+      "passed": true
+    },
+    {
+      "name": "rank 5 exterior total dimension",
+      "passed": true
+    },
+    {
+      "name": "rank 6 exterior total dimension",
+      "passed": true
+    },
+    {
+      "name": "only rank three gives the complete target spectrum in ranks 1..6",
+      "passed": true
+    },
+    {
+      "name": "only maintained pair 4-in-10 has full rank-three table",
+      "passed": true
+    },
+    {
+      "name": "rank criterion is a gap criterion, not absolute depth selection",
+      "passed": true
+    },
+    {
+      "name": "changed tangent rule contains all target numbers with fixed unit",
+      "passed": true
+    },
+    {
+      "name": "changed tangent rule fails target multiplet ranks at depths 3,4,10",
+      "passed": true
+    },
+    {
+      "name": "depth 2 pulled-back connection preserves Q",
+      "passed": true
+    },
+    {
+      "name": "depth 3 pulled-back connection preserves Q",
+      "passed": true
+    },
+    {
+      "name": "depth 4 pulled-back connection preserves Q",
+      "passed": true
+    },
+    {
+      "name": "depth 5 pulled-back connection preserves Q",
+      "passed": true
+    },
+    {
+      "name": "depth 6 pulled-back connection preserves Q",
+      "passed": true
+    },
+    {
+      "name": "depth 10 pulled-back connection preserves Q",
+      "passed": true
+    },
+    {
+      "name": "every one-to-one branch assignment retains trace",
+      "passed": true
+    },
+    {
+      "name": "24 permutations allowed by fibre construction",
+      "passed": true
+    },
+    {
+      "name": "four assignments remain after singlet/triplet grouping",
+      "passed": true
+    },
+    {
+      "name": "quark-depth swap remains geometrically allowed",
+      "passed": true
+    },
+    {
+      "name": "naming the same oriented physical channels leaves two assignments",
+      "passed": true
+    },
+    {
+      "name": "naming physical forward channels as D leaves one assignment",
+      "passed": true
+    },
+    {
+      "name": "common-transition character solution",
+      "passed": true
+    },
+    {
+      "name": "exact determinant transition fixes all twists",
+      "passed": true
+    },
+    {
+      "name": "twist (-3,-3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-3,-2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-3,-1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-3,0) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-3,1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-3,2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-3,3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-2,-3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-2,-2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-2,-1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-2,0) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-2,1) full trace",
+      "passed": true
+    },
+    {
+      "name": "common twist (-2,1) is only an overall scale",
+      "passed": true
+    },
+    {
+      "name": "common twist (-2,1) U3 globality",
+      "passed": true
+    },
+    {
+      "name": "twist (-2,2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-2,3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-1,-3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-1,-2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-1,-1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-1,0) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-1,1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-1,2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (-1,3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (0,-3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (0,-2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (0,-1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (0,0) full trace",
+      "passed": true
+    },
+    {
+      "name": "common twist (0,0) is only an overall scale",
+      "passed": true
+    },
+    {
+      "name": "common twist (0,0) U3 globality",
+      "passed": true
+    },
+    {
+      "name": "twist (0,1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (0,2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (0,3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (1,-3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (1,-2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (1,-1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (1,0) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (1,1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (1,2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (1,3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (2,-3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (2,-2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (2,-1) full trace",
+      "passed": true
+    },
+    {
+      "name": "common twist (2,-1) is only an overall scale",
+      "passed": true
+    },
+    {
+      "name": "common twist (2,-1) U3 globality",
+      "passed": true
+    },
+    {
+      "name": "twist (2,0) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (2,1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (2,2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (2,3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (3,-3) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (3,-2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (3,-1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (3,0) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (3,1) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (3,2) full trace",
+      "passed": true
+    },
+    {
+      "name": "twist (3,3) full trace",
+      "passed": true
+    },
+    {
+      "name": "relative-charge counterexample keeps neutrality and determinant cancellation",
+      "passed": true
+    },
+    {
+      "name": "counterexample is not a unit change",
+      "passed": true
+    },
+    {
+      "name": "counterexample loses common transition",
+      "passed": true
+    },
+    {
+      "name": "block-scalar neutral trace common-unit constraints fix relative weights",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 1",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 2",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 3",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 4",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 5",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 6",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 7",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 8",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 9",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 10",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 11",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 12",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 13",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 14",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 15",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 16",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 17",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 18",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 19",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 20",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 21",
+      "passed": true
+    },
+    {
+      "name": "integer family solution 22",
+      "passed": true
+    },
+    {
+      "name": "integer scan includes even m4",
+      "passed": true
+    },
+    {
+      "name": "general plane rates have traceless carrier generator",
+      "passed": true
+    },
+    {
+      "name": "general plane rates retain same singlet and pair transition",
+      "passed": true
+    },
+    {
+      "name": "anisotropic response is not color scalar",
+      "passed": true
+    },
+    {
+      "name": "equal triplet weights force equal plane rates",
+      "passed": true
+    },
+    {
+      "name": "determinant part remains original Q even for anisotropic rates",
+      "passed": true
+    },
+    {
+      "name": "all three independent plane rates preserve the same complex structure",
+      "passed": true
+    },
+    {
+      "name": "anisotropic metric remains positive by Schur complement",
+      "passed": true
+    },
+    {
+      "name": "anisotropic normal connection follows from the actual metric",
+      "passed": true
+    },
+    {
+      "name": "normal flag tilt is an exact orthogonal rotation",
+      "passed": true
+    },
+    {
+      "name": "relative normal flag tilt changes J alignment",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 2 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 2 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 2 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 2 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 1 unrestricted is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 1 unrestricted retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 1 unrestricted matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 2 tangent-only is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 2 tangent-only retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 2 tangent-only matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 3 normal-only is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 3 normal-only retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 3 normal-only matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 4 saturated-tangent is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 4 saturated-tangent retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 4 saturated-tangent matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 5 saturated-normal is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 5 saturated-normal retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 5 saturated-normal matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 6 balanced-occupation is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 6 balanced-occupation retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 6 balanced-occupation matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 7 fully-saturated is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 7 fully-saturated retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 7 fully-saturated matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 2 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 2 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 3 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 3 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 3 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 3 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 3 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 3 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 4 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 4 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 4 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 4 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 4 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 4 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 5 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 5 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 5 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 5 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 5 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 5 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 8 unrestricted is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 8 unrestricted retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 8 unrestricted matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 9 tangent-only is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 9 tangent-only retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 9 tangent-only matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 10 normal-only is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 10 normal-only retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 10 normal-only matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 11 saturated-tangent is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 11 saturated-tangent retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 11 saturated-tangent matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 12 saturated-normal is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 12 saturated-normal retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 12 saturated-normal matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 13 balanced-occupation is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 13 balanced-occupation retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 13 balanced-occupation matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 14 fully-saturated is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 14 fully-saturated retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 14 fully-saturated matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 6 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 6 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 6 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 6 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 6 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 6 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 10 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 10 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 10 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 10 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 15 unrestricted is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 15 unrestricted retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 15 unrestricted matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 16 tangent-only is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 16 tangent-only retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 16 tangent-only matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 17 normal-only is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 17 normal-only retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 17 normal-only matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 18 saturated-tangent is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 18 saturated-tangent retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 18 saturated-tangent matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 19 saturated-normal is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 19 saturated-normal retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 19 saturated-normal matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 20 balanced-occupation is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 20 balanced-occupation retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 20 balanced-occupation matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 21 fully-saturated is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 21 fully-saturated retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 21 fully-saturated matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 10 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag depth 10 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 2 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 2 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 2 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 2 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 2 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 2 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 3 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 3 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 3 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 3 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 3 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 3 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 4 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 4 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 4 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 4 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 4 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 4 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 5 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 5 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 5 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 5 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 5 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 5 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 6 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 6 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 6 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 6 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 6 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 6 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 22 unrestricted is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 22 unrestricted retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 22 unrestricted matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 23 tangent-only is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 23 tangent-only retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 23 tangent-only matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 24 normal-only is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 24 normal-only retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 24 normal-only matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 25 saturated-tangent is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 25 saturated-tangent retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 25 saturated-tangent matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 26 saturated-normal is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 26 saturated-normal retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 26 saturated-normal matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 27 balanced-occupation is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 27 balanced-occupation retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 27 balanced-occupation matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "selector projector 28 fully-saturated is an orthogonal projector",
+      "passed": true
+    },
+    {
+      "name": "selector projector 28 fully-saturated retains charge eigenbranches",
+      "passed": true
+    },
+    {
+      "name": "selector projector 28 fully-saturated matches binomial branching",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 10 common rotation covariance",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 10 complex core/closure dimension identity",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 10 maximal-contained is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 10 maximal-contained is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 10 minimal-containing is J-invariant",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag depth 10 minimal-containing is Hermitian projector",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag maximal-contained unrestricted cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag maximal-contained tangent-only cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag maximal-contained normal-only cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag maximal-contained saturated-tangent cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag maximal-contained saturated-normal cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag maximal-contained balanced-occupation cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag maximal-contained fully-saturated cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag minimal-containing unrestricted cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag minimal-containing tangent-only cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag minimal-containing normal-only cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag minimal-containing saturated-tangent cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag minimal-containing saturated-normal cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag minimal-containing balanced-occupation cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "aligned-flag minimal-containing fully-saturated cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag maximal-contained unrestricted cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag maximal-contained tangent-only cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag maximal-contained normal-only cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag maximal-contained saturated-tangent cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag maximal-contained saturated-normal cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag maximal-contained balanced-occupation cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag maximal-contained fully-saturated cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag minimal-containing unrestricted cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag minimal-containing tangent-only cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag minimal-containing normal-only cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag minimal-containing saturated-tangent cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag minimal-containing saturated-normal cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag minimal-containing balanced-occupation cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "tilted-flag minimal-containing fully-saturated cannot distinguish d3/d4",
+      "passed": true
+    },
+    {
+      "name": "no tested uniform selector selects the complete assignment",
+      "passed": true
+    },
+    {
+      "name": "depth-six core rank changes under relative J alignment",
+      "passed": true
+    }
+  ]
+}

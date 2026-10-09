@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>normal-charge-character-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/normal-charge-character-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="normal-charge-character-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/normal-charge-character-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="normal-charge-character-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>normal-charge-character-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/normal-charge-character-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact exterior charge moments and parity controls; no particle simulation.&quot;&quot;&quot;
+from collections import Counter
+import argparse
+from datetime import datetime, timezone
+from fractions import Fraction as F
+from hashlib import sha256
+import json
+from math import comb, factorial
+from pathlib import Path
+
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument(&#39;--output-dir&#39;,type=Path,help=&#39;A new directory for paired code and results.&#39;)
+args=parser.parse_args()
+script_bytes=Path(__file__).read_bytes()
+checks = 0
+
+
+def require(condition):
+    global checks
+    assert condition
+    checks += 1
+
+
+def spectrum(m, parity=None):
+    values = Counter()
+    for grade in range(m+1):
+        if parity is None or grade % 2 == parity:
+            values[F(grade,m)] += comb(m,grade)
+            values[F(grade,m)-1] += comb(m,grade)
+    return values
+
+
+def moment(values, power):
+    return sum((mult * charge**power for charge,mult in values.items()), F(0))
+
+
+def exact(x):
+    return str(x.numerator) + &#39;/&#39; + str(x.denominator)
+
+
+def pfaffian(matrix):
+    if not matrix:
+        return F(1)
+    total = F(0)
+    for j in range(1,len(matrix)):
+        rest = [i for i in range(len(matrix)) if i not in (0,j)]
+        minor = [[matrix[a][b] for b in rest] for a in rest]
+        total += (-1)**(j+1)*matrix[0][j]*pfaffian(minor)
+    return total
+
+
+def multiply(a,b):
+    return [[sum((a[i][k]*b[k][j] for k in range(len(b))),F(0))
+             for j in range(len(b[0]))] for i in range(len(a))]
+
+
+def transpose(a):
+    return list(map(list,zip(*a)))
+
+
+def rank(matrix):
+    a = [row[:] for row in matrix]
+    r = 0
+    for c in range(len(a[0])):
+        pivot = next((i for i in range(r,len(a)) if a[i][c]),None)
+        if pivot is None:
+            continue
+        a[r],a[pivot]=a[pivot],a[r]
+        scale=a[r][c]
+        a[r]=[v/scale for v in a[r]]
+        for i in range(len(a)):
+            if i != r:
+                scale=a[i][c]
+                a[i]=[v-scale*w for v,w in zip(a[i],a[r])]
+        r += 1
+        if r == len(a):
+            break
+    return r
+
+
+def frame_tensor(x,y):
+    a,aa=x[0],x[1:]
+    b,bb=y[0],y[1:]
+    v=[aa[1]*bb[2]-aa[2]*bb[1],aa[2]*bb[0]-aa[0]*bb[2],aa[0]*bb[1]-aa[1]*bb[0]]
+    xi=[a*z-b*w for w,z in zip(aa,bb)]
+    return v,xi
+
+
+def aggregate_rotation(xs,ys):
+    omega=[[F(0) for _ in range(6)] for _ in range(6)]
+    q=F(0)
+    for x in xs:
+        for y in ys:
+            v,xi=frame_tensor(x,y)
+            require(sum(a*b for a,b in zip(v,xi)) == 0)
+            q += sum(a*a for a in v+xi)
+            u=[a+b for a,b in zip(v,xi)]
+            w=[a-b for a,b in zip(v,xi)]
+            for i in range(3):
+                for j in range(3):
+                    omega[2*i][2*j+1] -= u[i]*w[j]
+                    omega[2*i+1][2*j] += w[i]*u[j]
+    n0=sum(a*a for x in xs for a in x)
+    n1=sum(a*a for y in ys for a in y)
+    mixed=[[sum(a*b for a,b in zip(x,y)) for y in ys] for x in xs]
+    require(q == n0*n1-sum(a*a for row in mixed for a in row))
+    return omega,q,F(n0*n1)
+
+
+def gamma_action(state,axis):
+    plane=axis//2
+    out={}
+    for mask,coefficient in state.items():
+        sign=(-1)**((mask &amp; ((1&lt;&lt;plane)-1)).bit_count())
+        if axis%2:
+            sign *= 1j*(-1)**((mask&gt;&gt;plane)&amp;1)
+        target=mask^(1&lt;&lt;plane)
+        out[target]=out.get(target,0)+sign*coefficient
+    return out
+
+
+def spinor_rotation(m,state):
+    def gaussian_norm(c):
+        c=complex(c)
+        require(c.real==int(c.real) and c.imag==int(c.imag))
+        return int(c.real)**2+int(c.imag)**2
+    norm=sum(gaussian_norm(c) for c in state.values())
+    result=[[F(0) for _ in range(2*m)] for _ in range(2*m)]
+    for i in range(2*m):
+        for j in range(i+1,2*m):
+            acted=gamma_action(gamma_action(state,j),i)
+            scalar=1j*sum(complex(c).conjugate()*acted.get(mask,0) for mask,c in state.items())
+            require(scalar.imag == 0 and scalar.real == int(scalar.real))
+            result[i][j]=F(int(scalar.real),norm)
+            result[j][i]=-result[i][j]
+    number=sum(F(mask.bit_count()*gaussian_norm(c),norm) for mask,c in state.items())
+    return result,number
+
+
+rows = []
+for m in range(1,17):
+    even,odd,full = spectrum(m,0),spectrum(m,1),spectrum(m)
+    require(sum(even.values()) == 2**m)
+    require(sum(full.values()) == 2**(m+1))
+    require(even+odd == full)
+    require(all(full[q] == full[-q] for q in full))
+    if m % 2 == 0:
+        require(all(even[q] == even[-q] for q in even))
+    for power in range(0,2*m+4):
+        e,o,f = moment(even,power),moment(odd,power),moment(full,power)
+        require(e+o == f)
+        if power % 2:
+            require(f == 0)
+            if m%2 == 0 or power &lt; m:
+                require(e == 0)
+            if m%2 and power == m:
+                require(e == -F(factorial(m),m**m))
+    # Independent finite-character identity in unnormalized integer weights.
+    for x in [F(1,2),F(2,3),F(1),F(3,2),F(2)]:
+        ge = sum(mult*x**int(q*m) for q,mult in even.items())
+        gi = sum(mult*x**int(-q*m) for q,mult in even.items())
+        closed = (1+x**(-m))*((1+x)**m+(1-x)**m)/2
+        supertrace = sum((even[q]-odd[q])*x**int(q*m) for q in full)
+        require(ge == closed)
+        require(ge-gi == ((1+x**(-m))*(1-x)**m if m%2 else 0))
+        require(supertrace == (1+x**(-m))*(1-x)**m)
+    if m &gt;= 3:
+        require(moment(even,2)/sum(even.values()) == F(m+1,4*m))
+    rows.append({&#39;complex_normal_rank&#39;:m,&#39;real_normal_directions&#39;:2*m,
+                 &#39;orthogonal_complex_structure_orbit_real_dimension&#39;:m*(m-1),
+                 &#39;ambient_depth_if_base_four&#39;:4+2*m,&#39;even_carrier_rank&#39;:sum(even.values()),
+                 &#39;first_nonzero_odd_moment&#39;:m if m%2 else None,
+                 &#39;first_odd_moment_trace&#39;:exact(-F(factorial(m),m**m)) if m%2 else None,
+                 &#39;normalized_cubic_trace&#39;:exact(moment(even,3)),
+                 &#39;full_cubic_trace&#39;:exact(moment(full,3)),
+                 &#39;spectrum&#39;:[{&#39;q&#39;:exact(q),&#39;multiplicity&#39;:even[q]} for q in sorted(even)]})
+require(moment(spectrum(3,0),3) == -F(2,9))
+require(moment(spectrum(3,1),3) == F(2,9))
+require(moment(spectrum(3),3) == 0)
+require([m for m in range(2,17) if moment(spectrum(m,0),3)] == [3])
+require([m for m in range(1,17) if m*(m-1)==2*m] == [3])
+
+# Multivariate parity character with independent plane weights x_i.
+# Its lowest polynomial degree is m, with coefficient 2*(-1)^m*x_1...x_m.
+for m in range(1,9):
+    plane_weights = [F(i+1,i+2) for i in range(m)]
+    degree = m
+    super_moment = F(0)
+    for mask in range(1&lt;&lt;m):
+        grade = mask.bit_count()
+        w = sum((plane_weights[i] for i in range(m) if mask &amp; (1&lt;&lt;i)),F(0))
+        determinant_weight = sum(plane_weights,F(0))
+        super_moment += (-1)**grade * (w**degree + (w-determinant_weight)**degree)
+    product = F(1)
+    for w in plane_weights:
+        product *= w
+    require(super_moment == 2*(-1)**m*factorial(m)*product)
+    if m &lt;= 4:
+        size = 2*m
+        a = [[F(0) for _ in range(size)] for _ in range(size)]
+        for i,w in enumerate(plane_weights):
+            a[2*i][2*i+1] = -w
+            a[2*i+1][2*i] = w
+        require(super_moment == 2*factorial(m)*pfaffian(a))
+        rotation = [[F(int(i==j)) for j in range(size)] for i in range(size)]
+        if m &gt; 1:
+            for i,j in [(0,2),(1,3)]:
+                elementary = [[F(int(x==y)) for y in range(size)] for x in range(size)]
+                elementary[i][i]=elementary[j][j]=F(3,5)
+                elementary[i][j]=-F(4,5)
+                elementary[j][i]=F(4,5)
+                rotation = multiply(elementary,rotation)
+        require(multiply(rotation,transpose(rotation)) ==
+                [[F(int(i==j)) for j in range(size)] for i in range(size)])
+        rotated = multiply(multiply(rotation,a),transpose(rotation))
+        require(pfaffian(rotated) == pfaffian(a))
+        reflection = [[F(int(i==j)) for j in range(size)] for i in range(size)]
+        reflection[0][0]=-1
+        reflected=multiply(multiply(reflection,a),transpose(reflection))
+        require(pfaffian(reflected) == -pfaffian(a))
+
+e=[[F(int(i==j)) for i in range(4)] for j in range(4)]
+one=aggregate_rotation([e[0]],[e[1]])
+three=aggregate_rotation([e[0],e[1]],[e[0],e[2]])
+cancel=aggregate_rotation([e[0],e[1]],[e[2],e[3]])
+partial=aggregate_rotation([e[0],e[1]],
+         [[a+b for a,b in zip(e[0],e[2])],[a+b for a,b in zip(e[1],e[3])]])
+require(rank(one[0]) == 2 and pfaffian(one[0]) == 0)
+require(rank(three[0]) == 6 and pfaffian(three[0]) == -1)
+require(multiply(three[0],three[0]) == [[-F(int(i==j)) for j in range(6)] for i in range(6)])
+require(rank(cancel[0]) == 0 and cancel[1] == 4)
+require(rank(partial[0]) == 2 and pfaffian(partial[0]) == 0)
+require(three[1]/three[2] == partial[1]/partial[2] == F(3,4))
+rotation_cases=[]
+for name,case in [(&#39;single-plane&#39;,one),(&#39;three-plane&#39;,three),(&#39;circulation-cancels&#39;,cancel),(&#39;same-normalized-frame-power&#39;,partial)]:
+    omega,q,n=case
+    rotation_cases.append({&#39;name&#39;:name,&#39;rotation_rank&#39;:rank(omega),&#39;pfaffian&#39;:exact(pfaffian(omega)),
+                           &#39;frame_power&#39;:exact(q),&#39;intensity_product&#39;:exact(n),
+                           &#39;normalized_frame_power&#39;:exact(q/n),
+                           &#39;volume_efficiency&#39;:exact(27*abs(pfaffian(omega))/q**3),
+                           &#39;rotation_matrix&#39;:[[exact(a) for a in row] for row in omega]})
+    require(0 &lt;= 27*abs(pfaffian(omega)) &lt;= q**3)
+require(27*abs(pfaffian(three[0]))/three[1]**3 == 1)
+
+spinor_cases=[]
+for m,state,name in [(2,{0:1},&#39;rank-two-vacuum&#39;),(2,{3:1},&#39;rank-two-top-singlet&#39;),
+                     (3,{0:1},&#39;rank-three-vacuum&#39;),(3,{3:1},&#39;rank-three-grade-two-basis&#39;),
+                     (3,{3:1,5:2,6:3j},&#39;rank-three-arbitrary-grade-two&#39;),
+                     (3,{0:1,3:1},&#39;rank-three-mixed-charge&#39;),
+                     (4,{3:1},&#39;rank-four-pure-grade-two&#39;),
+                     (4,{3:1,12:1},&#39;rank-four-nonpure-same-charge&#39;)]:
+    j,number=spinor_rotation(m,state)
+    j0,_=spinor_rotation(m,{0:1})
+    product=multiply(j,j0)
+    alignment=-sum(product[i][i] for i in range(2*m))/F(2*m)
+    require(alignment == 1-2*number/m)
+    require((1-alignment)/2 == number/m)
+    is_complex=multiply(j,j)==[[-F(int(i==k)) for k in range(2*m)] for i in range(2*m)]
+    if m&lt;=3 or len(state)==1:
+        require(is_complex)
+    else:
+        require(not is_complex and rank(j)==0)
+    spinor_cases.append({&#39;name&#39;:name,&#39;complex_normal_rank&#39;:m,&#39;grade_expectation&#39;:exact(number),
+                         &#39;unshifted_charge_expectation&#39;:exact(number/m),&#39;rotation_alignment&#39;:exact(alignment),
+                         &#39;rotation_is_orthogonal_complex_structure&#39;:is_complex,&#39;rotation_rank&#39;:rank(j)})
+# The same rank-four counterexample embeds at every higher rank tested.
+for m in range(5,9):
+    j,number=spinor_rotation(m,{3:1,12:1})
+    require(number==2 and rank(j)==2*(m-4))
+    require(multiply(j,j)!=[[-F(int(i==k)) for k in range(2*m)] for i in range(2*m)])
+
+result = {&#39;status&#39;:&#39;passed&#39;,&#39;checks&#39;:checks,&#39;comparison_ranks&#39;:[1,16],
+          &#39;scope&#39;:&#39;Exact pointwise characters, not selected particles or physical anomaly coefficients&#39;,
+          &#39;rows&#39;:rows,&#39;aggregate_rotation_cases&#39;:rotation_cases,
+          &#39;spinor_rotation_cases&#39;:spinor_cases,
+          &#39;sources&#39;:{&#39;experiments/normal-charge-character-checks.py&#39;:sha256(script_bytes).hexdigest()}}
+output_dir=args.output_dir or Path(__file__).parent/(&#39;run-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;))
+output_dir.mkdir(parents=True,exist_ok=False)
+(output_dir/&#39;executed-source.py&#39;).write_bytes(script_bytes)
+output = output_dir/&#39;normal-charge-character-checks.json&#39;
+output.write_text(json.dumps(result,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;status&#39;:result[&#39;status&#39;],&#39;checks&#39;:checks,&#39;output&#39;:str(output),
+                  &#39;rank_three_cubic_trace&#39;:&#39;-2/9&#39;,&#39;full_completion_cubic_trace&#39;:&#39;0&#39;},indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

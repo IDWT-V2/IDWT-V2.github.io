@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>charge-sector-geometry-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/charge-sector-geometry-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="charge-sector-geometry-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/charge-sector-geometry-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="charge-sector-geometry-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>charge-sector-geometry-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/charge-sector-geometry-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Standalone exact geometry, charge and sector-selector comparison.
+
+Run: python3 -B charge-sector-geometry-checks.py [--output-dir NEW_DIRECTORY]
+Requires installed SymPy. No other project files, network or simulations.
+&quot;&quot;&quot;
+from collections import Counter
+from datetime import datetime, timezone
+from fractions import Fraction as F
+from itertools import combinations, permutations, product
+from math import comb
+from pathlib import Path
+import argparse
+import hashlib
+import json
+import sympy as s
+
+HERE = Path(__file__).resolve().parent
+SCRIPT_SOURCE_PATH = &#39;experiments/charge-sector-geometry-checks.py&#39;
+DEPTHS = (2, 3, 4, 5, 6, 10)
+CHECKS = []
+Q = (F(0), F(2, 3), F(-1), F(-1, 3))
+MULT = (1, 3, 1, 3)
+
+
+def check(name, result):
+    result = bool(result)
+    CHECKS.append({&quot;name&quot;: name, &quot;passed&quot;: result})
+    if not result:
+        raise AssertionError(name)
+
+
+def exterior_spectrum(rank, denominator):
+    return [(F((-1)**k * k, denominator), comb(rank, k))
+            for k in range(rank + 1)]
+
+
+def signature(rows):
+    result = Counter()
+    for charge, multiplicity in rows:
+        result[charge] += multiplicity
+    return result
+
+
+def serial_spectrum(rows):
+    return [{&quot;charge&quot;: str(q), &quot;multiplicity&quot;: m} for q, m in rows]
+
+
+def rank_and_depths():
+    target = signature(zip(Q, MULT))
+    ranks = []
+    for rank in range(1, 7):
+        relative = exterior_spectrum(rank, rank)
+        common = exterior_spectrum(rank, 3)
+        check(f&quot;rank {rank} exterior total dimension&quot;, sum(m for _, m in common) == 2**rank)
+        ranks.append({&quot;complex_rank&quot;: rank, &quot;real_normal_dimension&quot;: 2*rank,
+                      &quot;determinant_unit&quot;: serial_spectrum(relative),
+                      &quot;fixed_three_plane_unit&quot;: serial_spectrum(common),
+                      &quot;full_target_match&quot;: signature(common) == target})
+    check(&quot;only rank three gives the complete target spectrum in ranks 1..6&quot;,
+          [r[&quot;complex_rank&quot;] for r in ranks if r[&quot;full_target_match&quot;]] == [3])
+    normal_pairs = []
+    for a, b in combinations(DEPTHS, 2):
+        gap = b-a
+        row = {&quot;lower_depth&quot;: a, &quot;upper_depth&quot;: b, &quot;normal_dimension&quot;: gap}
+        if gap % 2:
+            row[&quot;status&quot;] = &quot;odd real normal rank: whole-normal complex structure unavailable&quot;
+            row[&quot;full_target_match&quot;] = False
+        else:
+            row[&quot;complex_rank&quot;] = gap//2
+            row[&quot;full_target_match&quot;] = signature(exterior_spectrum(gap//2, 3)) == target
+            row[&quot;status&quot;] = &quot;Hermitian normal bundle assumed; full exterior carrier compared&quot;
+        normal_pairs.append(row)
+    winners = [(r[&quot;lower_depth&quot;], r[&quot;upper_depth&quot;]) for r in normal_pairs if r[&quot;full_target_match&quot;]]
+    check(&quot;only maintained pair 4-in-10 has full rank-three table&quot;, winners == [(4, 10)])
+    broad_pairs = [(a, b) for a, b in combinations(range(2, 11), 2) if b-a == 6]
+    check(&quot;rank criterion is a gap criterion, not absolute depth selection&quot;,
+          broad_pairs == [(2, 8), (3, 9), (4, 10)])
+
+    # Rebuilding the carrier from each tangent space is a changed rule.
+    tangent_rows = []
+    targets = {3: F(-1, 3), 4: F(2, 3), 5: F(0), 6: F(-1), 10: F(-1)}
+    target_multiplicities = {3: 3, 4: 3, 5: 1, 6: 1, 10: 1}
+    for d in DEPTHS:
+        n = d//2
+        rows = exterior_spectrum(n, 3)
+        tangent_rows.append({&quot;depth&quot;: d, &quot;paired_rank&quot;: n,
+                             &quot;extra_odd_direction_choice_required&quot;: bool(d % 2),
+                             &quot;charges&quot;: serial_spectrum(rows),
+                             &quot;matter_target&quot;: str(targets[d]) if d in targets else None,
+                             &quot;target_multiplicity&quot;: target_multiplicities.get(d),
+                             &quot;multiplicity_at_target&quot;: next((m for q, m in rows if d in targets and q == targets[d]), None),
+                             &quot;target_available&quot;: any(q == targets[d] for q, _ in rows) if d in targets else None})
+    check(&quot;changed tangent rule contains all target numbers with fixed unit&quot;,
+          all(r[&quot;target_available&quot;] for r in tangent_rows if r[&quot;matter_target&quot;] is not None))
+    check(&quot;changed tangent rule fails target multiplet ranks at depths 3,4,10&quot;,
+          [r[&quot;depth&quot;] for r in tangent_rows if r[&quot;matter_target&quot;] is not None
+           and r[&quot;multiplicity_at_target&quot;] != r[&quot;target_multiplicity&quot;]] == [3, 4, 10])
+    return {&quot;ranks&quot;: ranks, &quot;all_maintained_pairs&quot;: normal_pairs,
+            &quot;maintained_pair_matches&quot;: winners, &quot;all_integer_depths_2_to_10_matches&quot;: broad_pairs,
+            &quot;changed_tangent_rule_fixed_unit&quot;: tangent_rows}
+
+
+def fixed_carrier_assignments():
+    # Pullback of the constructed E and Q along each inclusion has the same
+    # fibre spectrum; it does not rebuild E from that submanifold&#39;s tangent.
+    spectra = {str(d): serial_spectrum(zip(Q, MULT)) for d in DEPTHS}
+    qmat = s.diag(0, *([s.Rational(2, 3)]*3), -1, *([-s.Rational(1, 3)]*3))
+    for d in DEPTHS:
+        connection = s.I*qmat
+        check(f&quot;depth {d} pulled-back connection preserves Q&quot;, connection*qmat == qmat*connection)
+    blocks = (&quot;down_at_3&quot;, &quot;up_at_4&quot;, &quot;neutral_at_5&quot;, &quot;charged_at_6_and_10&quot;)
+    assignments = []
+    for perm in permutations(range(4)):
+        type_ok = [MULT[k] for k in perm] == [3, 3, 1, 1]
+        assignments.append({&quot;assignment&quot;: {name: str(Q[k]) for name, k in zip(blocks, perm)},
+                            &quot;type_preserving&quot;: type_ok,
+                            &quot;trace_zero&quot;: sum(MULT[k]*Q[k] for k in perm) == 0})
+    check(&quot;every one-to-one branch assignment retains trace&quot;, all(a[&quot;trace_zero&quot;] for a in assignments))
+    check(&quot;24 permutations allowed by fibre construction&quot;, len(assignments) == 24)
+    check(&quot;four assignments remain after singlet/triplet grouping&quot;,
+          sum(a[&quot;type_preserving&quot;] for a in assignments) == 4)
+    type_cases = [a[&quot;assignment&quot;] for a in assignments if a[&quot;type_preserving&quot;]]
+    swapped = {&quot;down_at_3&quot;: &quot;2/3&quot;, &quot;up_at_4&quot;: &quot;-1/3&quot;, &quot;neutral_at_5&quot;: &quot;0&quot;, &quot;charged_at_6_and_10&quot;: &quot;-1&quot;}
+    check(&quot;quark-depth swap remains geometrically allowed&quot;, swapped in type_cases)
+    # These extra constraints associate the geometric transition with named
+    # physical channels. The fixed carrier itself has no such depth map.
+    aligned = [a for a in type_cases if F(a[&#39;up_at_4&#39;])-F(a[&#39;down_at_3&#39;])
+               == F(a[&#39;neutral_at_5&#39;])-F(a[&#39;charged_at_6_and_10&#39;])]
+    exact_oriented = [a for a in aligned if F(a[&#39;neutral_at_5&#39;])-F(a[&#39;charged_at_6_and_10&#39;]) == 1]
+    check(&quot;naming the same oriented physical channels leaves two assignments&quot;, len(aligned) == 2)
+    check(&quot;naming physical forward channels as D leaves one assignment&quot;, len(exact_oriented) == 1)
+    return {&quot;restriction_scope&quot;: &quot;Same W/E extended by pullback from the depth-four base on the explicit R10 example&quot;,
+            &quot;spectra_at_depths&quot;: spectra, &quot;one_to_one_assignment_count&quot;: len(assignments),
+            &quot;type_preserving_assignments&quot;: type_cases,
+            &quot;with_additional_named_channel_alignment&quot;: aligned,
+            &quot;with_named_forward_channels_fixed_to_D&quot;: exact_oriented,
+            &quot;assignment_qualification&quot;: &quot;The 24 and 4 counts do not impose a map from physical named channels to D. Such a map reduces counts by extra assumptions; the depth numbers still do not enter Q.&quot;,
+            &quot;warning&quot;: &quot;These are permitted identifications, not derived physical states. No branch-to-depth selector is present.&quot;}
+
+
+def twists_and_weights():
+    a, b, c, m = s.symbols(&quot;a b c m&quot;, integer=True)
+    neutral_trace_common = [1+3*a+b+3*c, -b-m, 1+a-c-m]
+    solution = s.solve(neutral_trace_common, (a, b, c), dict=True)[0]
+    check(&quot;common-transition character solution&quot;,
+          solution == {a: 2*(m-1)/3, b: -m, c: (1-m)/3})
+    exact_unit = {key: s.simplify(value.subs(m, 1)) for key, value in solution.items()}
+    check(&quot;exact determinant transition fixes all twists&quot;, exact_unit == {a: 0, b: -1, c: 0})
+    classified = []
+    for av, cv in product(range(-3, 4), repeat=2):
+        bv = -1-3*(av+cv)
+        weights = (F(0), F(2, 3)+av, F(bv), F(-1, 3)+cv)
+        check(f&quot;twist ({av},{cv}) full trace&quot;, sum(q*k for q, k in zip(weights, MULT)) == 0)
+        transitions = (-weights[2], weights[1]-weights[3])
+        common = transitions[0] == transitions[1]
+        if common:
+            mv = transitions[0]
+            check(f&quot;common twist ({av},{cv}) is only an overall scale&quot;, weights == tuple(mv*q for q in Q))
+            check(f&quot;common twist ({av},{cv}) U3 globality&quot;, mv.denominator == 1 and mv.numerator % 3 == 1)
+        classified.append({&quot;a&quot;: av, &quot;b&quot;: bv, &quot;c&quot;: cv,
+                           &quot;charges&quot;: list(map(str, weights)), &quot;common_transition&quot;: common})
+    alternative = (F(0), F(5, 3), F(-4), F(-1, 3))
+    check(&quot;relative-charge counterexample keeps neutrality and determinant cancellation&quot;,
+          alternative[0] == 0 and sum(q*k for q, k in zip(alternative, MULT)) == 0)
+    normalized = tuple(q/4 for q in alternative)
+    check(&quot;counterexample is not a unit change&quot;, normalized != Q and normalized[2] == -1)
+    check(&quot;counterexample loses common transition&quot;, alternative[1]-alternative[3] != -alternative[2])
+    # Independent block-scalar linear constraints reproduce Q without twists.
+    u, e, down = s.symbols(&quot;u e down&quot;)
+    rigid = s.solve([3*u+e+3*down, -e-1, u-down-1], (u, e, down), dict=True)
+    check(&quot;block-scalar neutral trace common-unit constraints fix relative weights&quot;,
+          rigid == [{u: s.Rational(2, 3), e: -1, down: -s.Rational(1, 3)}])
+    return {&quot;carrier_family&quot;: &quot;1 + (Lambda2 W tensor D^a) + D^b + (W* tensor D^c)&quot;,
+            &quot;general_solution_for_common_D_power_m&quot;: {str(k): str(v) for k, v in solution.items()},
+            &quot;admissible_m&quot;: &quot;m congruent 1 modulo 3; m is nonzero; all weights are m times original Q&quot;,
+            &quot;bounded_twist_domain&quot;: &quot;a,c in [-3,3]; b determined by exact determinant cancellation&quot;,
+            &quot;cases&quot;: classified,
+            &quot;relative_counterexample&quot;: {&quot;a&quot;: 1, &quot;b&quot;: -4, &quot;c&quot;: 0,
+                &quot;charges_in_original_unit&quot;: list(map(str, alternative)),
+                &quot;charged_singlet_normalized_to_minus_one&quot;: list(map(str, normalized)),
+                &quot;lost_premise&quot;: &quot;The singlet and triplet transition lines are D^4 and D^2, rather than the same D&quot;}}
+
+
+def anisotropic_geometry():
+    l1, l2, l3 = s.symbols(&quot;l1 l2 l3&quot;, real=True)
+    total = l1+l2+l3
+    w = (0, l1+l2, l1+l3, l2+l3, -total, -l3, -l2, -l1)
+    H = s.diag(*w)
+    check(&quot;general plane rates have traceless carrier generator&quot;, s.trace(H) == 0)
+    raise_map = s.zeros(8)
+    raise_map[:4, 4:] = s.eye(4)
+    check(&quot;general plane rates retain same singlet and pair transition&quot;,
+          H*raise_map-raise_map*H == total*raise_map)
+    color_mix = s.zeros(8)
+    color_mix[1, 3] = color_mix[3, 1] = color_mix[5, 7] = color_mix[7, 5] = 1
+    example = H.subs({l1: 1, l2: 1, l3: 2})/4
+    check(&quot;anisotropic response is not color scalar&quot;, example*color_mix != color_mix*example)
+    condition = s.solve([l1+l2-(l1+l3), l1+l2-(l2+l3)], (l1, l2), dict=True)
+    check(&quot;equal triplet weights force equal plane rates&quot;, condition == [{l1: l3, l2: l3}])
+    determinant_q = s.diag(0, *([s.Rational(2, 3)]*3), -1, *([-s.Rational(1, 3)]*3))
+    check(&quot;determinant part remains original Q even for anisotropic rates&quot;,
+          (example-determinant_q)[0, 0] == 0 and (example-determinant_q)[4, 4] == 0
+          and s.trace((example-determinant_q)[1:4, 1:4]) == 0
+          and s.trace((example-determinant_q)[5:8, 5:8]) == 0)
+    j2 = s.Matrix([[0, -1], [1, 0]])
+    generator = s.diag(l1*j2, l2*j2, l3*j2)
+    j = s.diag(j2, j2, j2)
+    check(&quot;all three independent plane rates preserve the same complex structure&quot;, generator*j == j*generator)
+    x = s.symbols(&quot;x1:5&quot;, real=True)
+    y = s.Matrix(s.symbols(&quot;y1:7&quot;, real=True))
+    omega = s.Matrix([-x[1]/2, x[0]/2, 0, 0])
+    cross = omega*(generator*y).T
+    gxx = s.eye(4)+cross*cross.T
+    check(&quot;anisotropic metric remains positive by Schur complement&quot;, gxx-cross*cross.T == s.eye(4))
+    recovered = s.Matrix(6, 6, lambda a, b: (s.diff(cross[1, a], y[b])-s.diff(cross[1, b], y[a]))/2)
+    check(&quot;anisotropic normal connection follows from the actual metric&quot;, recovered == omega[1]*generator)
+    return {&quot;plane_rates&quot;: [1, 1, 2], &quot;determinant_unit&quot;: 4,
+            &quot;complete_holonomy_response&quot;: [str(x) for x in example.diagonal()],
+            &quot;metric&quot;: &quot;g=|dx|^2+|dy+omega J_lambda y|^2, omega=(x1 dx2-x2 dx1)/2&quot;,
+            &quot;retained&quot;: [&quot;ordinary nested depths&quot;, &quot;compatible J&quot;, &quot;fixed exterior carrier&quot;, &quot;neutral singlet&quot;, &quot;trace zero&quot;, &quot;unit paired differences&quot;],
+            &quot;changed&quot;: &quot;Charge identified with complete anisotropic holonomy instead of the central determinant component; color scalar property is lost&quot;,
+            &quot;qualification&quot;: &quot;This does not change Q when electric charge is still defined by the determinant component. It tests a relaxed identification.&quot;}
+
+
+
+
+# Exact geometry checks consolidated from the source-pinned earlier derivation.
+def geometry_check(name, value):
+    if isinstance(value, s.MatrixBase):
+        passed = all((s.simplify(x) == 0 for x in value))
+    elif isinstance(value, bool):
+        passed = value
+    else:
+        passed = s.simplify(value) == 0
+    CHECKS.append({&#39;name&#39;: name, &#39;passed&#39;: bool(passed)})
+    if not passed:
+        raise AssertionError(name)
+
+def exterior(matrix, degree):
+    tuples = list(combinations(range(matrix.rows), degree))
+    return s.Matrix([[matrix.extract(a, b).det() for b in tuples] for a in tuples])
+
+def exterior_lie(matrix, degree):
+    t = s.symbols(&#39;t&#39;, real=True)
+    return exterior(s.eye(matrix.rows) + t * matrix, degree).diff(t).subs(t, 0)
+
+def carrier(matrix):
+    return s.diag(s.ones(1), exterior(matrix, 2), matrix.conjugate(), s.Matrix([[s.conjugate(matrix.det())]]))
+
+def factored_carrier(matrix):
+    first = s.diag(s.ones(1), exterior(matrix, 2))
+    return s.diag(first, first / matrix.det())
+
+def representation():
+    g = s.Matrix([[s.Rational(3, 5), s.Rational(4, 5), 0], [-s.Rational(4, 5), s.Rational(3, 5), 0], [0, 0, 1]]) * s.diag(s.I, 1, 1)
+    h = s.Matrix([[1, 0, 0], [0, s.Rational(5, 13), s.Rational(12, 13)], [0, -s.Rational(12, 13), s.Rational(5, 13)]]) * s.diag(1, s.I, -1)
+    p = s.zeros(8)
+    for j in range(4):
+        p[j, j] = 1
+    p[4, 7], p[5, 6], p[6, 5], p[7, 4] = (1, 1, -1, 1)
+    geometry_check(&#39;Hodge reordering is unitary&#39;, p * p.T - s.eye(8))
+    for name, matrix in [(&#39;g&#39;, g), (&#39;h&#39;, h), (&#39;gh&#39;, g * h)]:
+        geometry_check(name + &#39; unitary&#39;, matrix.H * matrix - s.eye(3))
+        geometry_check(name + &#39; global determinant factorization&#39;, p * carrier(matrix) * p.T - factored_carrier(matrix))
+        geometry_check(name + &#39; carrier determinant one&#39;, carrier(matrix).det() - 1)
+    geometry_check(&#39;representation composition on noncommuting unitary elements&#39;, carrier(g * h) - carrier(g) * carrier(h))
+    geometry_check(&#39;test matrices do not commute&#39;, g * h != h * g)
+    x = s.symbols(&#39;x0:9&#39;, real=True)
+    A = s.Matrix([[s.I * x[0], x[3] + s.I * x[4], x[5] + s.I * x[6]], [-x[3] + s.I * x[4], s.I * x[1], x[7] + s.I * x[8]], [-x[5] + s.I * x[6], -x[7] + s.I * x[8], s.I * x[2]]])
+    Af = s.diag(s.zeros(1), exterior_lie(A, 2))
+    AE = s.diag(Af, Af - s.trace(A) * s.eye(4))
+    original = s.diag(s.zeros(1), exterior_lie(A, 2), A.conjugate(), s.Matrix([[s.conjugate(s.trace(A))]]))
+    geometry_check(&#39;general u3 connection factorization&#39;, p * original * p.T - AE)
+    geometry_check(&#39;induced connection has zero trace&#39;, s.trace(AE))
+    Q = s.diag(0, *[s.Rational(2, 3)] * 3, -1, *[-s.Rational(1, 3)] * 3)
+    As = A - s.trace(A) * s.eye(3) / 3
+    Cf = s.diag(s.zeros(1), exterior_lie(As, 2))
+    geometry_check(&#39;single determinant connection gives all relative charges&#39;, AE - s.diag(Cf, Cf) - s.trace(A) * Q)
+    geometry_check(&#39;charge generator parallel for induced unitary connection&#39;, AE * Q - Q * AE)
+    geometry_check(&#39;charge trace zero&#39;, s.trace(Q))
+    raise_op = s.zeros(8)
+    raise_op[:4, 4:] = s.eye(4)
+    geometry_check(&#39;same unit transition on singlet and triplet&#39;, Q * raise_op - raise_op * Q - raise_op)
+    geometry_check(&#39;transition is a section of determinant line&#39;, factored_carrier(g) * raise_op * factored_carrier(g).inv() - g.det() * raise_op)
+    t1 = s.Matrix([[0, 1, 0], [1, 0, 0], [0, 0, 0]]) / 2
+    t2 = s.Matrix([[0, -s.I, 0], [s.I, 0, 0], [0, 0, 0]]) / 2
+    t3 = s.diag(1, -1, 0) / 2
+    t4 = s.Matrix([[0, 0, 1], [0, 0, 0], [1, 0, 0]]) / 2
+    t5 = s.Matrix([[0, 0, -s.I], [0, 0, 0], [s.I, 0, 0]]) / 2
+    t6 = s.Matrix([[0, 0, 0], [0, 0, 1], [0, 1, 0]]) / 2
+    t7 = s.Matrix([[0, 0, 0], [0, 0, -s.I], [0, s.I, 0]]) / 2
+    t8 = s.diag(1, 1, -2) / (2 * s.sqrt(3))
+    casimir = s.zeros(8)
+    for index, t in enumerate([t1, t2, t3, t4, t5, t6, t7, t8]):
+        block = s.diag(s.zeros(1), exterior_lie(t, 2))
+        T = s.diag(block, block)
+        casimir += T * T
+        geometry_check(f&#39;color generator {index + 1} commutes with charge&#39;, T * Q - Q * T)
+    geometry_check(&#39;both triplets have fundamental Casimir&#39;, casimir - s.Rational(4, 3) * s.diag(0, 1, 1, 1, 0, 1, 1, 1))
+    geometry_check(&#39;old parity-number shortcut fails the unchanged wedge product&#39;, s.Rational(2, 3) != 2 * -s.Rational(1, 3))
+    twist = s.symbols(&#39;twist&#39;, integer=True)
+    geometry_check(&#39;determinant twist changes trace&#39;, s.trace(Q + twist * s.eye(8)) - 8 * twist)
+    central_weights = [0, 2, 2, 2, -3, -1, -1, -1]
+    return {&#39;integer_center_weights&#39;: central_weights, &#39;normalized_charges&#39;: [str(w / s.Integer(3)) for w in central_weights], &#39;factorization&#39;: &#39;E=(1+Lambda^2 W) tensor (1+det(W)^-1)&#39;, &#39;induced_connection&#39;: &#39;A_E=diag(A_F,A_F-Tr(A) I4)=diag(C_F,C_F)+Tr(A) Q&#39;, &#39;same_transition_line&#39;: &#39;Hom(D^-1,1)=D&#39;, &#39;determinant&#39;: &#39;det(E)=D^4 D^-4=1&#39;, &#39;twist_family&#39;: &#39;E tensor D^k shifts every normalized charge by k; canonical untwisted construction is a carrier choice&#39;, &#39;circle_globality&#39;: &#39;Q is center generator/3; its 2pi exponential equals the SU3 center action, and its standalone period is 6pi&#39;}
+
+def rank_comparison():
+    rows = []
+    for n in range(1, 7):
+        weights = [{&#39;degree&#39;: k, &#39;multiplicity&#39;: int(s.binomial(n, k)), &#39;weight&#39;: str(s.Rational((-1) ** k * k, n))} for k in range(n + 1)]
+        trace = sum((s.binomial(n, k) * (-1) ** k * k for k in range(n + 1)))
+        if n &gt;= 2:
+            geometry_check(f&#39;rank {n} alternating binomial trace&#39;, trace)
+        rows.append({&#39;complex_normal_rank&#39;: n, &#39;ordinary_normal_dimensions&#39;: 2 * n, &#39;weights&#39;: weights, &#39;integer_weight_trace&#39;: str(trace)})
+    geometry_check(&#39;rank three has exact multiplicities 1,3,3,1&#39;, [int(s.binomial(3, k)) for k in range(4)] == [1, 3, 3, 1])
+    return rows
+
+def minimal_carrier_classification():
+    cases = []
+    selected = []
+    for signs in product((-1, 1), repeat=3):
+        e1, e2, e3 = signs
+        determinant_power = e1 + 2 * e2 + e3
+        case = {&#39;conjugation_signs_degrees_1_2_3&#39;: list(signs), &#39;integer_weights&#39;: [0, e1, 2 * e2, 3 * e3], &#39;determinant_power&#39;: determinant_power, &#39;matching_triplet_type&#39;: e1 == -e2}
+        cases.append(case)
+        if determinant_power == 0:
+            selected.append(signs)
+    geometry_check(&#39;all eight minimal exterior choices classified&#39;, selected == [(-1, 1, -1), (1, -1, 1)])
+    geometry_check(&#39;trivial complex determinant forces matching triplets in this family&#39;, all((e1 == -e2 for e1, e2, e3 in selected)))
+    return {&#39;family&#39;: &#39;Exactly one copy of each degree 0,1,2,3, each positive degree either original or conjugate; no character twists or extra summands&#39;, &#39;cases&#39;: cases, &#39;determinant_trivial_choices&#39;: [list(x) for x in selected], &#39;conclusion&#39;: &#39;E and its full conjugate are the only determinant-trivial choices in this finite family; their triplet types match automatically&#39;, &#39;premise&#39;: &#39;A preferred parallel complex volume on the carrier is an extra selection criterion, not a consequence of orienting the real spatial normal bundle&#39;}
+
+def projective_geometry():
+    H = s.symbols(&#39;H&#39;)
+    weights = [0, 2, 2, 2, -1, -1, -1, -3]
+    c = s.expand(s.prod((1 + w * H for w in weights)))
+    geometry_check(&#39;projective carrier c1 vanishes&#39;, c.coeff(H, 1))
+    geometry_check(&#39;projective carrier c2&#39;, c.coeff(H, 2) + 12)
+    geometry_check(&#39;projective carrier ch2&#39;, sum((w * w for w in weights)) / s.Integer(2) - 12)
+    geometry_check(&#39;lepton transition exponent&#39;, 0 - -3 - 3)
+    geometry_check(&#39;triplet transition exponent&#39;, 2 - -1 - 3)
+    incompatible = []
+    for a in (1, 2):
+        euler = s.rem(H, H ** (a + 1), H)
+        geometry_check(f&#39;CP{a} to CP{a + 1} normal Euler class nonzero&#39;, euler != 0)
+        incompatible.append({&#39;lower_depth&#39;: 2 * a, &#39;higher_depth&#39;: 2 * (a + 1), &#39;excluded_intermediate_depth&#39;: 2 * a + 1, &#39;normal_euler_class&#39;: &#39;H&#39;})
+    return {&#39;normal_bundle&#39;: &#39;N_CP2/CP5=Hom(ell,C6/A)=O(1) tensor (C6/A)&#39;, &#39;carrier&#39;: &#39;O + O(2)^3 + O(-1)^3 + O(-3), with constant quotient-space factors retained&#39;, &#39;total_chern_polynomial&#39;: str(c), &#39;chern_character_degree_four&#39;: &#39;12 H^2&#39;, &#39;pullback&#39;: &#39;O_CP5(-3)|CP3=O_CP3(-3)&#39;, &#39;compatibility_status&#39;: &#39;Valid partial/global associated-bundle example; not a complete maintained sector chain&#39;, &#39;odd_intermediate_obstructions&#39;: incompatible}
+
+def compatible_metric():
+    x = s.symbols(&#39;x1:5&#39;, real=True)
+    y = s.Matrix(s.symbols(&#39;y1:7&#39;, real=True))
+    curvature = s.symbols(&#39;b&#39;, real=True)
+    j2 = s.Matrix([[0, -1], [1, 0]])
+    J = s.diag(j2, j2, j2)
+    omega = s.Matrix([-curvature * x[1] / 2, curvature * x[0] / 2, 0, 0])
+    cross = omega * (J * y).T
+    base = s.eye(4) + cross * cross.T
+    geometry_check(&#39;metric Schur complement identity&#39;, base - cross * cross.T - s.eye(4))
+    for mu in range(4):
+        gamma = s.Matrix(6, 6, lambda a, b: (s.diff(cross[mu, a], y[b]) - s.diff(cross[mu, b], y[a])) / 2)
+        geometry_check(f&#39;normal connection equals prescribed geometric one-form {mu + 1}&#39;, gamma - omega[mu] * J)
+    normal_curvature = s.diff(omega[1], x[0]) * J - s.diff(omega[0], x[1]) * J
+    geometry_check(&#39;normal curvature is nonzero central U3 curvature&#39;, normal_curvature - curvature * J)
+    origin = {v: 0 for v in y}
+    second_fundamental = []
+    for a in range(6):
+        for mu in range(4):
+            for nu in range(4):
+                second_fundamental.append((s.diff(cross[nu, a], x[mu]) + s.diff(cross[mu, a], x[nu]) - s.diff(base[mu, nu], y[a])).subs(origin) / 2)
+    geometry_check(&#39;zero section is totally geodesic&#39;, s.Matrix(second_fundamental))
+    return {&#39;ordinary_space&#39;: &#39;R4_x times R6_y, all noncompact physical spatial coordinates&#39;, &#39;metric&#39;: &#39;g=sum dx_mu^2 + |dy+omega J y|^2, omega=b/2 (x1 dx2-x2 dx1)&#39;, &#39;normal_connection&#39;: &#39;omega J, or i omega I3 in complex notation&#39;, &#39;normal_curvature&#39;: &#39;b J dx1 wedge dx2&#39;, &#39;full_nested_flag&#39;: {&#39;2&#39;: &#39;span(x1,x2)&#39;, &#39;3&#39;: &#39;span(x1,x2,x3)&#39;, &#39;4&#39;: &#39;R4_x at y=0&#39;, &#39;5&#39;: &#39;R4_x plus y1&#39;, &#39;6&#39;: &#39;R4_x plus y1,y2&#39;, &#39;10&#39;: &#39;all coordinates&#39;}, &#39;metric_properties&#39;: &#39;smooth, positive, determinant one; no boundary or compactification&#39;, &#39;premises&#39;: &#39;Chosen metric and complex normal structure; an existence construction, not selected IDWT geometry&#39;, &#39;scope&#39;: &#39;Normal connection need not preserve each intermediate real normal line; all listed submanifolds coexist&#39;}
+
+SELECTORS = {
+    &quot;unrestricted&quot;: lambda p, q, r: True,
+    &quot;tangent-only&quot;: lambda p, q, r: q == 0,
+    &quot;normal-only&quot;: lambda p, q, r: p == 0,
+    &quot;saturated-tangent&quot;: lambda p, q, r: p == r,
+    &quot;saturated-normal&quot;: lambda p, q, r: q == 3-r,
+    &quot;balanced-occupation&quot;: lambda p, q, r: p == q,
+    &quot;fully-saturated&quot;: lambda p, q, r: p == r and q == 3-r,
+}
+MATTER_TARGETS = {3: (F(-1, 3), 3), 4: (F(2, 3), 3),
+                  5: (F(0), 1), 6: (F(-1), 1), 10: (F(-1), 1)}
+
+
+def column_basis(matrix):
+    columns = matrix.columnspace()
+    return s.Matrix.hstack(*columns) if columns else s.zeros(matrix.rows, 0)
+
+
+def orthogonal_projector(basis):
+    if basis.cols == 0:
+        return s.zeros(basis.rows)
+    return s.simplify(basis*(basis.T*basis).inv()*basis.T)
+
+
+def complex_part_and_closure(basis, j):
+    &quot;&quot;&quot;Compute S intersect J S and S+J S using real spatial subspaces.&quot;&quot;&quot;
+    basis = column_basis(basis)
+    closure = column_basis(basis.row_join(j*basis))
+    if basis.cols:
+        coefficients = basis.row_join(-j*basis).nullspace()
+        vectors = [basis*v[:basis.cols, :] for v in coefficients]
+        core = column_basis(s.Matrix.hstack(*vectors)) if vectors else s.zeros(j.rows, 0)
+    else:
+        core = s.zeros(j.rows, 0)
+    return orthogonal_projector(core), orthogonal_projector(closure)
+
+
+def complex_matrix(real_matrix):
+    &quot;&quot;&quot;Coordinates are (x1,y1,x2,y2,x3,y3), with J acting by i.&quot;&quot;&quot;
+    return s.Matrix(3, 3, lambda a, b: real_matrix[2*a, 2*b]+s.I*real_matrix[2*a+1, 2*b])
+
+
+def occupation_projector(a, rule):
+    &quot;&quot;&quot;Project the actual exterior matrices by A-occupation p, B-occupation q.&quot;&quot;&quot;
+    rank = int(s.trace(a))
+    blocks = []
+    for degree in (0, 2, 3, 1):
+        number = exterior_lie(a, degree)
+        identity = s.eye(number.rows)
+        selected = s.zeros(number.rows)
+        for p in range(degree+1):
+            q = degree-p
+            if not (p &lt;= rank and q &lt;= 3-rank and SELECTORS[rule](p, q, rank)):
+                continue
+            # Lagrange projectors on integer occupation eigenvalues.
+            projector = identity
+            for other in range(degree+1):
+                if other != p:
+                    projector = projector*(number-other*identity)/(p-other)
+            selected += projector
+        blocks.append(selected.conjugate() if degree % 2 else selected)
+    return s.simplify(s.diag(*blocks))
+
+
+def color_generators():
+    fundamental = []
+    for a, b in combinations(range(3), 2):
+        symmetric, antisymmetric = s.zeros(3), s.zeros(3)
+        symmetric[a, b] = symmetric[b, a] = 1
+        antisymmetric[a, b], antisymmetric[b, a] = -s.I, s.I
+        fundamental.extend((symmetric, antisymmetric))
+    fundamental.extend((s.diag(1, -1, 0), s.diag(1, 1, -2)))
+    return [s.diag(s.zeros(1), exterior_lie(t, 2), s.zeros(1), -t.conjugate()) for t in fundamental]
+
+
+def selector_spectrum(rank, name):
+    result = Counter()
+    for p in range(rank+1):
+        for q in range(4-rank):
+            if SELECTORS[name](p, q, rank):
+                result[F((-1)**(p+q)*(p+q), 3)] += comb(rank, p)*comb(3-rank, q)
+    return result
+
+
+def selector_tests():
+    j2 = s.Matrix([[0, -1], [1, 0]])
+    j = s.diag(j2, j2, j2)
+    rotation = s.eye(6)
+    rotation[1:3, 1:3] = s.Matrix([[s.Rational(3, 5), -s.Rational(4, 5)],
+                                                  [s.Rational(4, 5), s.Rational(3, 5)]])
+    check(&quot;normal flag tilt is an exact orthogonal rotation&quot;, rotation.T*rotation == s.eye(6))
+    check(&quot;relative normal flag tilt changes J alignment&quot;, rotation*j != j*rotation)
+    geometries = {&quot;aligned-flag&quot;: s.eye(6), &quot;tilted-flag&quot;: rotation}
+    generators = color_generators()
+    qmatrix = s.diag(0, *([s.Rational(2, 3)]*3), -1, *([-s.Rational(1, 3)]*3))
+    rows, rank_rows = [], []
+    projector_cache = {}
+    for geometry, frame in geometries.items():
+        for d in DEPTHS:
+            real_rank = max(0, d-4)
+            basis = frame[:, :real_rank]
+            core, closure = complex_part_and_closure(basis, j)
+            core_rot, closure_rot = complex_part_and_closure(rotation*basis, rotation*j*rotation.T)
+            check(f&quot;{geometry} depth {d} common rotation covariance&quot;,
+                  core_rot == rotation*core*rotation.T and closure_rot == rotation*closure*rotation.T)
+            check(f&quot;{geometry} depth {d} complex core/closure dimension identity&quot;,
+                  s.trace(core)+s.trace(closure) == 2*real_rank)
+            rank_rows.append({&quot;geometry&quot;: geometry, &quot;depth&quot;: d, &quot;real_intersection_rank&quot;: real_rank,
+                              &quot;maximal_complex_rank&quot;: int(s.trace(core)/2),
+                              &quot;minimal_closure_complex_rank&quot;: int(s.trace(closure)/2)})
+            for policy, real_projector in ((&quot;maximal-contained&quot;, core), (&quot;minimal-containing&quot;, closure)):
+                check(f&quot;{geometry} depth {d} {policy} is J-invariant&quot;,
+                      real_projector*j == j*real_projector)
+                a = complex_matrix(real_projector)
+                check(f&quot;{geometry} depth {d} {policy} is Hermitian projector&quot;,
+                      a*a == a and a.H == a)
+                rank = int(s.trace(a))
+                for name in SELECTORS:
+                    cache_key = (tuple(a), name)
+                    if cache_key not in projector_cache:
+                        selected = occupation_projector(a, name)
+                        expected = selector_spectrum(rank, name)
+                        observed = Counter()
+                        for start, stop, charge in ((0, 1, F(0)), (1, 4, F(2, 3)),
+                                                    (4, 5, F(-1)), (5, 8, F(-1, 3))):
+                            count = int(s.trace(selected[start:stop, start:stop]))
+                            if count:
+                                observed[charge] = count
+                        label = f&quot;selector projector {len(projector_cache)+1} {name}&quot;
+                        check(label+&quot; is an orthogonal projector&quot;, selected.H == selected and selected*selected == selected)
+                        check(label+&quot; retains charge eigenbranches&quot;, selected*qmatrix == qmatrix*selected)
+                        check(label+&quot; matches binomial branching&quot;, observed == expected)
+                        invariant = all(selected*t == t*selected for t in generators)
+                        projector_cache[cache_key] = (observed, invariant)
+                    spectrum, color_invariant = projector_cache[cache_key]
+                    target = MATTER_TARGETS.get(d)
+                    rows.append({&quot;geometry&quot;: geometry, &quot;policy&quot;: policy, &quot;rule&quot;: name,
+                                 &quot;depth&quot;: d, &quot;complex_active_rank&quot;: rank,
+                                 &quot;charges&quot;: serial_spectrum(sorted(spectrum.items())),
+                                 &quot;full_SU3_triplets_preserved&quot;: color_invariant,
+                                 &quot;target_available&quot;: spectrum.get(target[0], 0) &gt; 0 if target else None,
+                                 &quot;exact_target_multiplet&quot;: spectrum == Counter({target[0]: target[1]}) if target else None})
+    families = []
+    for geometry, policy, name in product(geometries, (&quot;maximal-contained&quot;, &quot;minimal-containing&quot;), SELECTORS):
+        cases = [r for r in rows if (r[&#39;geometry&#39;], r[&#39;policy&#39;], r[&#39;rule&#39;]) == (geometry, policy, name)
+                 and r[&#39;depth&#39;] in MATTER_TARGETS]
+        families.append({&quot;geometry&quot;: geometry, &quot;policy&quot;: policy, &quot;rule&quot;: name,
+                         &quot;all_target_numbers_available&quot;: all(r[&#39;target_available&#39;] for r in cases),
+                         &quot;all_target_multiplets_selected&quot;: all(r[&#39;exact_target_multiplet&#39;] for r in cases),
+                         &quot;mismatched_depths&quot;: [r[&#39;depth&#39;] for r in cases if not r[&#39;exact_target_multiplet&#39;]]})
+        d3 = next(r for r in cases if r[&#39;depth&#39;] == 3)
+        d4 = next(r for r in cases if r[&#39;depth&#39;] == 4)
+        check(f&quot;{geometry} {policy} {name} cannot distinguish d3/d4&quot;, d3[&#39;charges&#39;] == d4[&#39;charges&#39;])
+    check(&quot;no tested uniform selector selects the complete assignment&quot;,
+          not any(f[&#39;all_target_multiplets_selected&#39;] for f in families))
+    d6 = [r for r in rank_rows if r[&#39;depth&#39;] == 6]
+    check(&quot;depth-six core rank changes under relative J alignment&quot;,
+          [(r[&#39;maximal_complex_rank&#39;], r[&#39;minimal_closure_complex_rank&#39;]) for r in d6] == [(1, 1), (0, 2)])
+    return {&quot;scope&quot;: &quot;Seven added uniform predicates, two complex-subspace policies, two compatible nested real flags&quot;,
+            &quot;premise&quot;: &quot;Only the intersection of each tangent sector with the fixed four-in-ten normal bundle enters the selector&quot;,
+            &quot;predicates&quot;: {&quot;unrestricted&quot;: &quot;all p,q&quot;, &quot;tangent-only&quot;: &quot;q=0&quot;, &quot;normal-only&quot;: &quot;p=0&quot;,
+                           &quot;saturated-tangent&quot;: &quot;p=r&quot;, &quot;saturated-normal&quot;: &quot;q=3-r&quot;,
+                           &quot;balanced-occupation&quot;: &quot;p=q&quot;, &quot;fully-saturated&quot;: &quot;p=r and q=3-r&quot;},
+            &quot;rank_rows&quot;: rank_rows, &quot;cases&quot;: rows, &quot;uniform_families&quot;: families,
+            &quot;number_only_matches&quot;: [f for f in families if f[&#39;all_target_numbers_available&#39;]],
+            &quot;complete_assignment_matches&quot;: [f for f in families if f[&#39;all_target_multiplets_selected&#39;]],
+            &quot;no_separation_reason&quot;: &quot;S_3=S_4=0. Every uniform function of this intersection and J alone gives the same retained spectrum at both depths.&quot;,
+            &quot;scope_limit&quot;: &quot;No exclusion of rules using additional base-tangent, embedding, curvature or physical branch data. Complex intersections define subbundles only on constant-rank regions.&quot;}
+
+
+def integer_character_scan():
+    solutions = []
+    count = 0
+    for e1, e2, e3 in product((-1, 1), repeat=3):
+        for t1, t2, t3 in product(range(-8, 9), repeat=3):
+            count += 1
+            w1, w2, w3 = e1+3*t1, 2*e2+3*t2, 3*e3+3*t3
+            if e1 != -e2 or 3*w1+3*w2+w3 != 0 or w2-w1 != -w3:
+                continue
+            m = -w3//3
+            check(f&quot;integer family solution {len(solutions)+1}&quot;,
+                  (w2, w3, w1) == (2*m, -3*m, -m) and m % 3 == (1 if e2 == 1 else 2))
+            solutions.append({&quot;degree_signs&quot;: [e1, e2, e3], &quot;twists&quot;: [t1, t2, t3], &quot;m&quot;: m})
+    check(&quot;integer scan includes even m4&quot;, any(row[&#39;m&#39;] == 4 for row in solutions))
+    return {&quot;case_count&quot;: count, &quot;scope&quot;: &quot;all eight degree conjugations; three independent integer twists in [-8,8]&quot;,
+            &quot;solutions&quot;: solutions, &quot;interpretation&quot;: &quot;Every accepted carrier is an overall charge rescaling, not a new relative-charge table&quot;}
+
+
+def write_report(result, destination):
+    tested = result[&#39;sector_selector_tests&#39;]
+    lines = [&#39;# Unified Geometric Charge And Sector Test&#39;, &#39;&#39;,
+             &#39;This report is generated by the one standalone Python script. All computations are exact geometry or finite algebra; there is no particle simulation.&#39;, &#39;&#39;,
+             &#39;## Outcome&#39;, &#39;&#39;,
+             &#39;The charge construction retains its conditional ratios and six-normal-direction criterion. None of the tested uniform tangent/normal selectors uniquely produces the complete maintained matter assignment.&#39;, &#39;&#39;,
+             f&quot;The run contains {len(result[&#39;checks&#39;])} passing mathematical checks, {len(tested[&#39;cases&#39;])} selector/depth cases and {result[&#39;integer_character_scan&#39;][&#39;case_count&#39;]} bounded integer character cases. Check counts are implementation verification, not independent physical evidence.&quot;, &#39;&#39;,
+             &#39;## New Geometric Tests&#39;, &#39;&#39;,
+             &#39;Let S_d be the real intersection of the depth-d tangent space with the fixed six-dimensional normal space of four inside ten. The script computes S_d intersect J S_d and S_d+J S_d by exact linear algebra. It then builds actual exterior occupation projectors, checking their ranks, charge preservation and commutation with all eight SU(3) generators.&#39;, &#39;&#39;,
+             &#39;| Geometry | Depth | Real S rank | Largest contained complex rank | Smallest containing complex rank |&#39;,
+             &#39;| --- | ---: | ---: | ---: | ---: |&#39;]
+    for row in tested[&#39;rank_rows&#39;]:
+        lines.append(f&quot;| {row[&#39;geometry&#39;]} | {row[&#39;depth&#39;]} | {row[&#39;real_intersection_rank&#39;]} | {row[&#39;maximal_complex_rank&#39;]} | {row[&#39;minimal_closure_complex_rank&#39;]} |&quot;)
+    lines.extend([&#39;&#39;, &#39;The tilted case rotates the real flag relative to J by an exact rational orthogonal matrix. Rotating both the flag and J together transforms the two real subspace projectors covariantly, as separately checked. The resulting orientation dependence is therefore physical relative geometric data within the candidate, not coordinate dependence.&#39;, &#39;&#39;,
+                  &#39;## Uniform Selector Comparison&#39;, &#39;&#39;,
+                  &#39;Each rule is an added hypothesis applied unchanged at every depth. Here p is occupation in the chosen complex active subspace of rank r, and q is occupation in its orthogonal complement. The common charge is (-1)^(p+q)(p+q)/3 and multiplicity is C(r,p) C(3-r,q).&#39;, &#39;&#39;,
+                  &#39;| Rule | Condition | Complete assignment selected in either flag/policy? |&#39;, &#39;| --- | --- | --- |&#39;])
+    for name, predicate in tested[&#39;predicates&#39;].items():
+        won = any(f[&#39;rule&#39;] == name and f[&#39;all_target_multiplets_selected&#39;] for f in tested[&#39;uniform_families&#39;])
+        lines.append(f&quot;| {name} | {predicate} | {&#39;Yes&#39; if won else &#39;No&#39;} |&quot;)
+    lines.extend([&#39;&#39;, &#39;Some rules merely contain all desired charge numbers while also allowing other charges. Their exact cases are retained in results.json and are not counted as a selected assignment.&#39;, &#39;&#39;,
+                  &#39;The decisive obstruction in this finite family is S_3=S_4=0. Every uniform function of that intersection and J alone gives identical retained spectra at depths three and four. Such a selector cannot uniquely return a -1/3 triplet at one and a +2/3 triplet at the other. This is stronger than a failed numerical search within the seven examples, but still concerns only rules using this particular geometric input.&#39;, &#39;&#39;,
+                  &#39;Partial occupation projectors can also split triplets. The script records whether each projector commutes with the full fixed SU(3) action. Covariance under simultaneous rotation of all geometric data does not imply that a fixed distinguished subspace preserves full SU(3). Complex core and closure ranks can vary under relative orientation; they define smooth subbundles only on constant-rank regions.&#39;, &#39;&#39;,
+                  &#39;## Retained Construction And Alternative Charges&#39;, &#39;&#39;,
+                  &#39;The script also derives the global U(3) exterior-carrier factorization, its induced determinant connection, trace cancellation and shared transition; compares normal ranks and all maintained depth pairs; checks allowed branch assignments, determinant twists, integer globality and an anisotropic ordinary metric; and retains the projective intermediate-depth obstruction.&#39;, &#39;&#39;,
+                  &#39;The full two-singlet/two-triplet exterior pattern requires six normal directions. Only four inside ten has that gap among the maintained depths; two inside eight and three inside nine also have it in the broader integer-depth comparison. Relative charges remain 0,2/3,-1,-1/3 under the original premises. A relaxed common-transition rule permits the alternative normalized table 0,5/12,-1,-1/12. The original determinant-defined generator is unchanged by anisotropic contributions in the traceless connection.&#39;, &#39;&#39;,
+                  &#39;## Scope&#39;, &#39;&#39;,
+                  &#39;These results exclude the tested intersection-only selectors as complete explanations of the particle-depth assignment. They do not exclude additional geometric rules involving base tangent representations, embedding or curvature. No such additional selection law is silently assumed, fitted or claimed solved here. The exterior charge pattern and original mathematical sources retain their attribution in the source-pinned earlier derivation; this script tests its IDWT geometric application.&#39;, &#39;&#39;,
+                  f&quot;Executed source SHA-256: `{next(iter(result[&#39;sources&#39;].values()))}`.&quot;,
+                  &#39;The executed script hash is recorded in results.json. The script needs only Python and installed SymPy; each default run creates a new dated output directory.&#39;, &#39;&#39;])
+    destination.write_text(&#39;\n&#39;.join(lines))
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&#39;--output-dir&#39;, type=Path, help=&#39;New directory; existing paths are refused&#39;)
+    args = parser.parse_args()
+    output = args.output_dir or HERE/(&#39;run-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S%fZ&#39;))
+    output.mkdir(parents=True, exist_ok=False)
+    result = {&quot;experiment&quot;: &quot;One-script geometry, charge and sector selection comparison&quot;,
+              &quot;created_at&quot;: datetime.now(timezone.utc).isoformat(),
+              &quot;sources&quot;: {SCRIPT_SOURCE_PATH: hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
+              &quot;original_geometry&quot;: {&quot;representation&quot;: representation(), &quot;ranks&quot;: rank_comparison(),
+                  &quot;minimal_carrier&quot;: minimal_carrier_classification(), &quot;projective&quot;: projective_geometry(),
+                  &quot;compatible_metric&quot;: compatible_metric()},
+              &quot;rank_and_depth_tests&quot;: rank_and_depths(),
+              &quot;fixed_carrier_assignment_tests&quot;: fixed_carrier_assignments(),
+              &quot;charge_twist_tests&quot;: twists_and_weights(),
+              &quot;integer_character_scan&quot;: integer_character_scan(),
+              &quot;anisotropic_metric_test&quot;: anisotropic_geometry(),
+              &quot;sector_selector_tests&quot;: selector_tests(),
+              &quot;checks&quot;: CHECKS}
+    (output/&#39;results.json&#39;).write_text(json.dumps(result, indent=2)+&#39;\n&#39;)
+    write_report(result, output/&#39;report.md&#39;)
+    print(json.dumps({&quot;output_directory&quot;: str(output), &quot;checks&quot;: len(CHECKS),
+                      &quot;all_passed&quot;: all(c[&#39;passed&#39;] for c in CHECKS),
+                      &quot;maintained_normal_pair&quot;: result[&#39;rank_and_depth_tests&#39;][&#39;maintained_pair_matches&#39;],
+                      &quot;selector_depth_cases&quot;: len(result[&#39;sector_selector_tests&#39;][&#39;cases&#39;]),
+                      &quot;uniform_selector_families&quot;: len(result[&#39;sector_selector_tests&#39;][&#39;uniform_families&#39;]),
+                      &quot;complete_assignment_matches&quot;: result[&#39;sector_selector_tests&#39;][&#39;complete_assignment_matches&#39;],
+                      &quot;number_only_matches&quot;: result[&#39;sector_selector_tests&#39;][&#39;number_only_matches&#39;]}, indent=2))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>
