@@ -62,6 +62,16 @@ OPENBLAS_NUM_THREADS=1 python3 -B experiments/run_checks.py --skip-continuation 
 excludes two expensive continuation searches. Omit <code>--skip-continuation</code>
 to include them. Individual scripts can also be run directly.</p>
 <h2 id="recorded-evidence">Recorded evidence</h2>
+<p>The <a href="/evidence/results/experiments/spatial-band-integration-checks.py/">spatial-band integration checker</a>
+and <a href="/evidence/results/spatial-band-integration-results/">recorded results</a> verify
+counts, normalized contact, kinetic dressing, color pair contractions,
+conditional charges and angular response spectra with 2,529 checks.
+The <a href="/evidence/results/experiments/sawtooth-sector-coupling-checks.py/">sawtooth coupling checker</a>
+and <a href="/evidence/results/sawtooth-sector-coupling-results/">recorded results</a> add
+2,023 checks of Fourier sources, reciprocal phase averages, canonical
+spatial readout and a common receiver across all maintained depths.
+Both are bounded geometric and spectral calculations; their passing checks
+verify the stated hypotheses' consequences rather than a particle identification.</p>
 <p><a href="/evidence/results/"><code>results/</code></a> contains the existing numerical reports, input
 candidates, and frozen protocols. Separate reports preserve the inputs,
 settings and results of each calculation for comparison.</p>

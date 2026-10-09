@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>spatial-band-integration-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/spatial-band-integration-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="spatial-band-integration-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/spatial-band-integration-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="spatial-band-integration-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>spatial-band-integration-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/spatial-band-integration-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">title</th><td>Integrated spatial-band, color and angular-geometry calculations</td></tr><tr><th scope="row">created_utc</th><td>2026-10-09T07:41:18.361077+00:00</td></tr><tr><th scope="row">status</th><td>passed</td></tr><tr><th scope="row">total_checks</th><td>2529</td></tr><tr><th scope="row">scope</th><td>Finite exact algebra and bounded eigenvalue comparisons; no particle evolution, parameter fitting or empirical claim.</td></tr><tr><th scope="row">exact_tetrahedron_characteristic_polynomial</th><td>lambda**3*(lambda - 3)**2*(lambda - 2)**3</td></tr><tr><th scope="row">exact_octahedron_characteristic_polynomial</th><td>lambda**3*(lambda - 2)**3*(lambda - 1)**6</td></tr><tr><th scope="row">input_snapshot</th><td>935</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;title&quot;: &quot;Integrated spatial-band, color and angular-geometry calculations&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-09T07:41:18.361077+00:00&quot;,
+  &quot;status&quot;: &quot;passed&quot;,
+  &quot;checks&quot;: {
+    &quot;spatial_band_count&quot;: 154,
+    &quot;band_mean&quot;: 154,
+    &quot;band_variance&quot;: 154,
+    &quot;shell_weighted_tail&quot;: 154,
+    &quot;projective_reference_count&quot;: 84,
+    &quot;normalized_contact_projector&quot;: 33,
+    &quot;independent_kinetic_eigenvalue&quot;: 33,
+    &quot;kinetic_leakage_bound&quot;: 33,
+    &quot;determinant_partial_trace&quot;: 5,
+    &quot;normalized_determinant_trace&quot;: 5,
+    &quot;three_form_partial_trace&quot;: 7,
+    &quot;color_pair_fierz&quot;: 1,
+    &quot;color_fundamental_casimir&quot;: 1,
+    &quot;color_pair_weights&quot;: 1,
+    &quot;charge_linear_anomalies&quot;: 45,
+    &quot;charge_cubic_anomaly&quot;: 15,
+    &quot;middle_channel_parity&quot;: 15,
+    &quot;simplex_zero_energy&quot;: 363,
+    &quot;simplex_shape_spectrum&quot;: 11,
+    &quot;cross_polytope_zero_energy&quot;: 1221,
+    &quot;cross_polytope_shape_spectrum&quot;: 11,
+    &quot;exact_tetrahedral_shape_spectrum&quot;: 1,
+    &quot;octahedral_zero_energy&quot;: 15,
+    &quot;exact_octahedral_shape_spectrum&quot;: 1,
+    &quot;mixing_projector_defect&quot;: 6,
+    &quot;positive_mixing_defect&quot;: 6
+  },
+  &quot;total_checks&quot;: 2529,
+  &quot;scope&quot;: &quot;Finite exact algebra and bounded eigenvalue comparisons; no particle evolution, parameter fitting or empirical claim.&quot;,
+  &quot;spectral_dressing&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 6,
+      &quot;mean_kinetic&quot;: &quot;7/3&quot;,
+      &quot;variance&quot;: &quot;5/9&quot;,
+      &quot;correction&quot;: &quot;0.08549934263670889&quot;,
+      &quot;upper_bound&quot;: &quot;5/36&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 21,
+      &quot;mean_kinetic&quot;: &quot;13/3&quot;,
+      &quot;variance&quot;: &quot;20/9&quot;,
+      &quot;correction&quot;: &quot;0.1016099027792822&quot;,
+      &quot;upper_bound&quot;: &quot;5/36&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 91,
+      &quot;mean_kinetic&quot;: &quot;9&quot;,
+      &quot;variance&quot;: &quot;10&quot;,
+      &quot;correction&quot;: &quot;0.1077652610872409&quot;,
+      &quot;upper_bound&quot;: &quot;10/79&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 10,
+      &quot;mean_kinetic&quot;: &quot;3&quot;,
+      &quot;variance&quot;: &quot;9/20&quot;,
+      &quot;correction&quot;: &quot;0.04215013066742176&quot;,
+      &quot;upper_bound&quot;: &quot;9/160&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 56,
+      &quot;mean_kinetic&quot;: &quot;21/4&quot;,
+      &quot;variance&quot;: &quot;27/16&quot;,
+      &quot;correction&quot;: &quot;0.02952196626604938&quot;,
+      &quot;upper_bound&quot;: &quot;9/272&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 455,
+      &quot;mean_kinetic&quot;: &quot;21/2&quot;,
+      &quot;variance&quot;: &quot;36/5&quot;,
+      &quot;correction&quot;: &quot;0.01574361233435596&quot;,
+      &quot;upper_bound&quot;: &quot;36/2215&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 15,
+      &quot;mean_kinetic&quot;: &quot;18/5&quot;,
+      &quot;variance&quot;: &quot;28/75&quot;,
+      &quot;correction&quot;: &quot;0.02366777822784294&quot;,
+      &quot;upper_bound&quot;: &quot;28/975&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 126,
+      &quot;mean_kinetic&quot;: &quot;6&quot;,
+      &quot;variance&quot;: &quot;4/3&quot;,
+      &quot;correction&quot;: &quot;0.01047546500811979&quot;,
+      &quot;upper_bound&quot;: &quot;4/363&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 1820,
+      &quot;mean_kinetic&quot;: &quot;58/5&quot;,
+      &quot;variance&quot;: &quot;136/25&quot;,
+      &quot;correction&quot;: &quot;0.002984936907425572&quot;,
+      &quot;upper_bound&quot;: &quot;17/5650&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 21,
+      &quot;mean_kinetic&quot;: &quot;25/6&quot;,
+      &quot;variance&quot;: &quot;20/63&quot;,
+      &quot;correction&quot;: &quot;0.01454013451141287&quot;,
+      &quot;upper_bound&quot;: &quot;20/1197&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 252,
+      &quot;mean_kinetic&quot;: &quot;20/3&quot;,
+      &quot;variance&quot;: &quot;275/252&quot;,
+      &quot;correction&quot;: &quot;0.004307685686515935&quot;,
+      &quot;upper_bound&quot;: &quot;275/62244&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 6188,
+      &quot;mean_kinetic&quot;: &quot;25/2&quot;,
+      &quot;variance&quot;: &quot;30/7&quot;,
+      &quot;correction&quot;: &quot;0.0006923050869962348&quot;,
+      &quot;upper_bound&quot;: &quot;15/21616&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 28,
+      &quot;mean_kinetic&quot;: &quot;33/7&quot;,
+      &quot;variance&quot;: &quot;27/98&quot;,
+      &quot;correction&quot;: &quot;0.009542395058455128&quot;,
+      &quot;upper_bound&quot;: &quot;27/2548&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 462,
+      &quot;mean_kinetic&quot;: &quot;51/7&quot;,
+      &quot;variance&quot;: &quot;45/49&quot;,
+      &quot;correction&quot;: &quot;0.001982025921373035&quot;,
+      &quot;upper_bound&quot;: &quot;45/22393&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 18564,
+      &quot;mean_kinetic&quot;: &quot;93/7&quot;,
+      &quot;variance&quot;: &quot;171/49&quot;,
+      &quot;correction&quot;: &quot;0.0001879623735881576&quot;,
+      &quot;upper_bound&quot;: &quot;57/303016&quot;
+    },
+    {
+      &quot;depth&quot;: 7,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 36,
+      &quot;mean_kinetic&quot;: &quot;21/4&quot;,
+      &quot;variance&quot;: &quot;35/144&quot;,
+      &quot;correction&quot;: &quot;0.006587054799684624&quot;,
+      &quot;upper_bound&quot;: &quot;35/4896&quot;
+    },
+    {
+      &quot;depth&quot;: 7,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 792,
+      &quot;mean_kinetic&quot;: &quot;63/8&quot;,
+      &quot;variance&quot;: &quot;455/576&quot;,
+      &quot;correction&quot;: &quot;0.0009956909056794964&quot;,
+      &quot;upper_bound&quot;: &quot;455/453312&quot;
+    },
+    {
+      &quot;depth&quot;: 7,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 50388,
+      &quot;mean_kinetic&quot;: &quot;14&quot;,
+      &quot;variance&quot;: &quot;35/12&quot;,
+      &quot;correction&quot;: &quot;5.788139546773932e-5&quot;,
+      &quot;upper_bound&quot;: &quot;35/604512&quot;
+    },
+    {
+      &quot;depth&quot;: 8,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 45,
+      &quot;mean_kinetic&quot;: &quot;52/9&quot;,
+      &quot;variance&quot;: &quot;88/405&quot;,
+      &quot;correction&quot;: &quot;0.004731983435462773&quot;,
+      &quot;upper_bound&quot;: &quot;88/17415&quot;
+    },
+    {
+      &quot;depth&quot;: 8,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 1287,
+      &quot;mean_kinetic&quot;: &quot;76/9&quot;,
+      &quot;variance&quot;: &quot;56/81&quot;,
+      &quot;correction&quot;: &quot;0.0005366257751170512&quot;,
+      &quot;upper_bound&quot;: &quot;28/51921&quot;
+    },
+    {
+      &quot;depth&quot;: 8,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 125970,
+      &quot;mean_kinetic&quot;: &quot;44/3&quot;,
+      &quot;variance&quot;: &quot;112/45&quot;,
+      &quot;correction&quot;: &quot;1.975742469387821e-5&quot;,
+      &quot;upper_bound&quot;: &quot;8/404865&quot;
+    },
+    {
+      &quot;depth&quot;: 9,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 55,
+      &quot;mean_kinetic&quot;: &quot;63/10&quot;,
+      &quot;variance&quot;: &quot;54/275&quot;,
+      &quot;correction&quot;: &quot;0.00351073320378475&quot;,
+      &quot;upper_bound&quot;: &quot;54/14575&quot;
+    },
+    {
+      &quot;depth&quot;: 9,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 2002,
+      &quot;mean_kinetic&quot;: &quot;9&quot;,
+      &quot;variance&quot;: &quot;27/44&quot;,
+      &quot;correction&quot;: &quot;0.0003063077170502401&quot;,
+      &quot;upper_bound&quot;: &quot;27/87868&quot;
+    },
+    {
+      &quot;depth&quot;: 9,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 293930,
+      &quot;mean_kinetic&quot;: &quot;153/10&quot;,
+      &quot;variance&quot;: &quot;54/25&quot;,
+      &quot;correction&quot;: &quot;7.348631793862937e-6&quot;,
+      &quot;upper_bound&quot;: &quot;27/3673975&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 66,
+      &quot;mean_kinetic&quot;: &quot;75/11&quot;,
+      &quot;variance&quot;: &quot;65/363&quot;,
+      &quot;correction&quot;: &quot;0.002674855281902389&quot;,
+      &quot;upper_bound&quot;: &quot;65/23232&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 3003,
+      &quot;mean_kinetic&quot;: &quot;105/11&quot;,
+      &quot;variance&quot;: &quot;200/363&quot;,
+      &quot;correction&quot;: &quot;0.0001833905564816258&quot;,
+      &quot;upper_bound&quot;: &quot;100/544137&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 646646,
+      &quot;mean_kinetic&quot;: &quot;175/11&quot;,
+      &quot;variance&quot;: &quot;230/121&quot;,
+      &quot;correction&quot;: &quot;2.939506269514728e-6&quot;,
+      &quot;upper_bound&quot;: &quot;115/39121357&quot;
+    },
+    {
+      &quot;depth&quot;: 11,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 78,
+      &quot;mean_kinetic&quot;: &quot;22/3&quot;,
+      &quot;variance&quot;: &quot;77/468&quot;,
+      &quot;correction&quot;: &quot;0.002083933274285172&quot;,
+      &quot;upper_bound&quot;: &quot;77/35568&quot;
+    },
+    {
+      &quot;depth&quot;: 11,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 4368,
+      &quot;mean_kinetic&quot;: &quot;121/12&quot;,
+      &quot;variance&quot;: &quot;935/1872&quot;,
+      &quot;correction&quot;: &quot;0.0001143123014197333&quot;,
+      &quot;upper_bound&quot;: &quot;935/8167536&quot;
+    },
+    {
+      &quot;depth&quot;: 11,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 1352078,
+      &quot;mean_kinetic&quot;: &quot;33/2&quot;,
+      &quot;variance&quot;: &quot;22/13&quot;,
+      &quot;correction&quot;: &quot;1.251632679653048e-6&quot;,
+      &quot;upper_bound&quot;: &quot;11/8788429&quot;
+    },
+    {
+      &quot;depth&quot;: 12,
+      &quot;cutoff&quot;: 2,
+      &quot;count&quot;: 91,
+      &quot;mean_kinetic&quot;: &quot;102/13&quot;,
+      &quot;variance&quot;: &quot;180/1183&quot;,
+      &quot;correction&quot;: &quot;0.00165461430470059&quot;,
+      &quot;upper_bound&quot;: &quot;180/105287&quot;
+    },
+    {
+      &quot;depth&quot;: 12,
+      &quot;cutoff&quot;: 5,
+      &quot;count&quot;: 6188,
+      &quot;mean_kinetic&quot;: &quot;138/13&quot;,
+      &quot;variance&quot;: &quot;540/1183&quot;,
+      &quot;correction&quot;: &quot;7.375095828665145e-5&quot;,
+      &quot;upper_bound&quot;: &quot;20/270907&quot;
+    },
+    {
+      &quot;depth&quot;: 12,
+      &quot;cutoff&quot;: 12,
+      &quot;count&quot;: 2704156,
+      &quot;mean_kinetic&quot;: &quot;222/13&quot;,
+      &quot;variance&quot;: &quot;1800/1183&quot;,
+      &quot;correction&quot;: &quot;5.626724912731417e-7&quot;,
+      &quot;upper_bound&quot;: &quot;225/399875294&quot;
+    }
+  ],
+  &quot;color_comparison&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;channel_rank&quot;: 1,
+      &quot;adjoint_rank&quot;: 0,
+      &quot;fundamental_casimir&quot;: &quot;0&quot;,
+      &quot;up_charge&quot;: &quot;1&quot;,
+      &quot;down_charge&quot;: &quot;0&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 2,
+      &quot;even_weak_doublet_count&quot;: true,
+      &quot;scalar_trilinear_invariant&quot;: true,
+      &quot;isotropic_three_form_pair_factor&quot;: 0
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;channel_rank&quot;: 3,
+      &quot;adjoint_rank&quot;: 8,
+      &quot;fundamental_casimir&quot;: &quot;4/3&quot;,
+      &quot;up_charge&quot;: &quot;2/3&quot;,
+      &quot;down_charge&quot;: &quot;-1/3&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 4,
+      &quot;even_weak_doublet_count&quot;: true,
+      &quot;scalar_trilinear_invariant&quot;: true,
+      &quot;isotropic_three_form_pair_factor&quot;: 1
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;channel_rank&quot;: 3,
+      &quot;adjoint_rank&quot;: 8,
+      &quot;fundamental_casimir&quot;: &quot;4/3&quot;,
+      &quot;up_charge&quot;: &quot;2/3&quot;,
+      &quot;down_charge&quot;: &quot;-1/3&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 4,
+      &quot;even_weak_doublet_count&quot;: true,
+      &quot;scalar_trilinear_invariant&quot;: true,
+      &quot;isotropic_three_form_pair_factor&quot;: 1
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;channel_rank&quot;: 10,
+      &quot;adjoint_rank&quot;: 99,
+      &quot;fundamental_casimir&quot;: &quot;99/20&quot;,
+      &quot;up_charge&quot;: &quot;11/20&quot;,
+      &quot;down_charge&quot;: &quot;-9/20&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 11,
+      &quot;even_weak_doublet_count&quot;: false,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 8
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;channel_rank&quot;: 10,
+      &quot;adjoint_rank&quot;: 99,
+      &quot;fundamental_casimir&quot;: &quot;99/20&quot;,
+      &quot;up_charge&quot;: &quot;11/20&quot;,
+      &quot;down_charge&quot;: &quot;-9/20&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 11,
+      &quot;even_weak_doublet_count&quot;: false,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 8
+    },
+    {
+      &quot;depth&quot;: 7,
+      &quot;channel_rank&quot;: 35,
+      &quot;adjoint_rank&quot;: 1224,
+      &quot;fundamental_casimir&quot;: &quot;612/35&quot;,
+      &quot;up_charge&quot;: &quot;18/35&quot;,
+      &quot;down_charge&quot;: &quot;-17/35&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 36,
+      &quot;even_weak_doublet_count&quot;: true,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 33
+    },
+    {
+      &quot;depth&quot;: 8,
+      &quot;channel_rank&quot;: 35,
+      &quot;adjoint_rank&quot;: 1224,
+      &quot;fundamental_casimir&quot;: &quot;612/35&quot;,
+      &quot;up_charge&quot;: &quot;18/35&quot;,
+      &quot;down_charge&quot;: &quot;-17/35&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 36,
+      &quot;even_weak_doublet_count&quot;: true,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 33
+    },
+    {
+      &quot;depth&quot;: 9,
+      &quot;channel_rank&quot;: 126,
+      &quot;adjoint_rank&quot;: 15875,
+      &quot;fundamental_casimir&quot;: &quot;15875/252&quot;,
+      &quot;up_charge&quot;: &quot;127/252&quot;,
+      &quot;down_charge&quot;: &quot;-125/252&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 127,
+      &quot;even_weak_doublet_count&quot;: false,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 124
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;channel_rank&quot;: 126,
+      &quot;adjoint_rank&quot;: 15875,
+      &quot;fundamental_casimir&quot;: &quot;15875/252&quot;,
+      &quot;up_charge&quot;: &quot;127/252&quot;,
+      &quot;down_charge&quot;: &quot;-125/252&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 127,
+      &quot;even_weak_doublet_count&quot;: false,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 124
+    },
+    {
+      &quot;depth&quot;: 11,
+      &quot;channel_rank&quot;: 462,
+      &quot;adjoint_rank&quot;: 213443,
+      &quot;fundamental_casimir&quot;: &quot;213443/924&quot;,
+      &quot;up_charge&quot;: &quot;463/924&quot;,
+      &quot;down_charge&quot;: &quot;-461/924&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 463,
+      &quot;even_weak_doublet_count&quot;: false,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 460
+    },
+    {
+      &quot;depth&quot;: 12,
+      &quot;channel_rank&quot;: 462,
+      &quot;adjoint_rank&quot;: 213443,
+      &quot;fundamental_casimir&quot;: &quot;213443/924&quot;,
+      &quot;up_charge&quot;: &quot;463/924&quot;,
+      &quot;down_charge&quot;: &quot;-461/924&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 463,
+      &quot;even_weak_doublet_count&quot;: false,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 460
+    },
+    {
+      &quot;depth&quot;: 13,
+      &quot;channel_rank&quot;: 1716,
+      &quot;adjoint_rank&quot;: 2944655,
+      &quot;fundamental_casimir&quot;: &quot;2944655/3432&quot;,
+      &quot;up_charge&quot;: &quot;1717/3432&quot;,
+      &quot;down_charge&quot;: &quot;-1715/3432&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 1717,
+      &quot;even_weak_doublet_count&quot;: false,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 1714
+    },
+    {
+      &quot;depth&quot;: 14,
+      &quot;channel_rank&quot;: 1716,
+      &quot;adjoint_rank&quot;: 2944655,
+      &quot;fundamental_casimir&quot;: &quot;2944655/3432&quot;,
+      &quot;up_charge&quot;: &quot;1717/3432&quot;,
+      &quot;down_charge&quot;: &quot;-1715/3432&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 1717,
+      &quot;even_weak_doublet_count&quot;: false,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 1714
+    },
+    {
+      &quot;depth&quot;: 15,
+      &quot;channel_rank&quot;: 6435,
+      &quot;adjoint_rank&quot;: 41409224,
+      &quot;fundamental_casimir&quot;: &quot;20704612/6435&quot;,
+      &quot;up_charge&quot;: &quot;3218/6435&quot;,
+      &quot;down_charge&quot;: &quot;-3217/6435&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 6436,
+      &quot;even_weak_doublet_count&quot;: true,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 6433
+    },
+    {
+      &quot;depth&quot;: 16,
+      &quot;channel_rank&quot;: 6435,
+      &quot;adjoint_rank&quot;: 41409224,
+      &quot;fundamental_casimir&quot;: &quot;20704612/6435&quot;,
+      &quot;up_charge&quot;: &quot;3218/6435&quot;,
+      &quot;down_charge&quot;: &quot;-3217/6435&quot;,
+      &quot;weak_doublets_with_one_lepton&quot;: 6436,
+      &quot;even_weak_doublet_count&quot;: true,
+      &quot;scalar_trilinear_invariant&quot;: false,
+      &quot;isotropic_three_form_pair_factor&quot;: 6433
+    }
+  ],
+  &quot;angular_comparison&quot;: [
+    {
+      &quot;resolved_directions&quot;: 2,
+      &quot;states&quot;: 3,
+      &quot;rotation_zero_modes&quot;: 1,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 2,
+      &quot;second_shape_eigenvalue&quot;: &quot;8/3&quot;,
+      &quot;second_multiplicity&quot;: 0
+    },
+    {
+      &quot;resolved_directions&quot;: 3,
+      &quot;states&quot;: 4,
+      &quot;rotation_zero_modes&quot;: 3,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 3,
+      &quot;second_shape_eigenvalue&quot;: &quot;3&quot;,
+      &quot;second_multiplicity&quot;: 2
+    },
+    {
+      &quot;resolved_directions&quot;: 4,
+      &quot;states&quot;: 5,
+      &quot;rotation_zero_modes&quot;: 6,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 4,
+      &quot;second_shape_eigenvalue&quot;: &quot;16/5&quot;,
+      &quot;second_multiplicity&quot;: 5
+    },
+    {
+      &quot;resolved_directions&quot;: 5,
+      &quot;states&quot;: 6,
+      &quot;rotation_zero_modes&quot;: 10,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 5,
+      &quot;second_shape_eigenvalue&quot;: &quot;10/3&quot;,
+      &quot;second_multiplicity&quot;: 9
+    },
+    {
+      &quot;resolved_directions&quot;: 6,
+      &quot;states&quot;: 7,
+      &quot;rotation_zero_modes&quot;: 15,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 6,
+      &quot;second_shape_eigenvalue&quot;: &quot;24/7&quot;,
+      &quot;second_multiplicity&quot;: 14
+    },
+    {
+      &quot;resolved_directions&quot;: 7,
+      &quot;states&quot;: 8,
+      &quot;rotation_zero_modes&quot;: 21,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 7,
+      &quot;second_shape_eigenvalue&quot;: &quot;7/2&quot;,
+      &quot;second_multiplicity&quot;: 20
+    },
+    {
+      &quot;resolved_directions&quot;: 8,
+      &quot;states&quot;: 9,
+      &quot;rotation_zero_modes&quot;: 28,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 8,
+      &quot;second_shape_eigenvalue&quot;: &quot;32/9&quot;,
+      &quot;second_multiplicity&quot;: 27
+    },
+    {
+      &quot;resolved_directions&quot;: 9,
+      &quot;states&quot;: 10,
+      &quot;rotation_zero_modes&quot;: 36,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 9,
+      &quot;second_shape_eigenvalue&quot;: &quot;18/5&quot;,
+      &quot;second_multiplicity&quot;: 35
+    },
+    {
+      &quot;resolved_directions&quot;: 10,
+      &quot;states&quot;: 11,
+      &quot;rotation_zero_modes&quot;: 45,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 10,
+      &quot;second_shape_eigenvalue&quot;: &quot;40/11&quot;,
+      &quot;second_multiplicity&quot;: 44
+    },
+    {
+      &quot;resolved_directions&quot;: 11,
+      &quot;states&quot;: 12,
+      &quot;rotation_zero_modes&quot;: 55,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 11,
+      &quot;second_shape_eigenvalue&quot;: &quot;11/3&quot;,
+      &quot;second_multiplicity&quot;: 54
+    },
+    {
+      &quot;resolved_directions&quot;: 12,
+      &quot;states&quot;: 13,
+      &quot;rotation_zero_modes&quot;: 66,
+      &quot;first_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;first_multiplicity&quot;: 12,
+      &quot;second_shape_eigenvalue&quot;: &quot;48/13&quot;,
+      &quot;second_multiplicity&quot;: 65
+    }
+  ],
+  &quot;cross_polytope_comparison&quot;: [
+    {
+      &quot;resolved_directions&quot;: 2,
+      &quot;states&quot;: 4,
+      &quot;rotation_zero_modes&quot;: 1,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 2,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 1
+    },
+    {
+      &quot;resolved_directions&quot;: 3,
+      &quot;states&quot;: 6,
+      &quot;rotation_zero_modes&quot;: 3,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 6,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 3
+    },
+    {
+      &quot;resolved_directions&quot;: 4,
+      &quot;states&quot;: 8,
+      &quot;rotation_zero_modes&quot;: 6,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 12,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 6
+    },
+    {
+      &quot;resolved_directions&quot;: 5,
+      &quot;states&quot;: 10,
+      &quot;rotation_zero_modes&quot;: 10,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 20,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 10
+    },
+    {
+      &quot;resolved_directions&quot;: 6,
+      &quot;states&quot;: 12,
+      &quot;rotation_zero_modes&quot;: 15,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 30,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 15
+    },
+    {
+      &quot;resolved_directions&quot;: 7,
+      &quot;states&quot;: 14,
+      &quot;rotation_zero_modes&quot;: 21,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 42,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 21
+    },
+    {
+      &quot;resolved_directions&quot;: 8,
+      &quot;states&quot;: 16,
+      &quot;rotation_zero_modes&quot;: 28,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 56,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 28
+    },
+    {
+      &quot;resolved_directions&quot;: 9,
+      &quot;states&quot;: 18,
+      &quot;rotation_zero_modes&quot;: 36,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 72,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 36
+    },
+    {
+      &quot;resolved_directions&quot;: 10,
+      &quot;states&quot;: 20,
+      &quot;rotation_zero_modes&quot;: 45,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 90,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 45
+    },
+    {
+      &quot;resolved_directions&quot;: 11,
+      &quot;states&quot;: 22,
+      &quot;rotation_zero_modes&quot;: 55,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 110,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 55
+    },
+    {
+      &quot;resolved_directions&quot;: 12,
+      &quot;states&quot;: 24,
+      &quot;rotation_zero_modes&quot;: 66,
+      &quot;first_shape_eigenvalue&quot;: &quot;1&quot;,
+      &quot;first_multiplicity&quot;: 132,
+      &quot;second_shape_eigenvalue&quot;: &quot;2&quot;,
+      &quot;second_multiplicity&quot;: 66
+    }
+  ],
+  &quot;exact_tetrahedron_characteristic_polynomial&quot;: &quot;lambda**3*(lambda - 3)**2*(lambda - 2)**3&quot;,
+  &quot;exact_octahedron_characteristic_polynomial&quot;: &quot;lambda**3*(lambda - 2)**3*(lambda - 1)**6&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/spatial-band-integration-checks.py&quot;: &quot;4afe5a1c5df4a2e64bd765ef0119e36a2c46f33235201ff45eeb828823589d38&quot;
+  },
+  &quot;input_snapshot&quot;: 935
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

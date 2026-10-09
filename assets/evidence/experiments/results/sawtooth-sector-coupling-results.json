@@ -1,0 +1,1057 @@
+{
+  "title": "Sawtooth spectra in spatial and reciprocal sector coupling",
+  "created_utc": "2026-10-09T17:26:28.794221+00:00",
+  "status": "passed",
+  "checks": {
+    "density_fundamental": 40,
+    "density_top_harmonic": 40,
+    "density_derivative_sum": 40,
+    "derivative_sum_proof_square_identity": 40,
+    "derivative_sum_proof_triangle_identity": 40,
+    "independent_fourier_density_mean": 40,
+    "independent_fourier_density_coefficients": 40,
+    "independent_fourier_density_phase": 40,
+    "cubic_contact_highest_source": 40,
+    "positive_spatial_mode_energy_is_conserved": 40,
+    "spatial_evaluation_is_sawtooth": 40,
+    "orthogonal_complex_modes_keep_total_norm": 40,
+    "complex_local_source_has_same_fundamental": 40,
+    "complex_local_transition_coefficients": 780,
+    "independent_piecewise_phase_integral": 1,
+    "phase_pair_antiphase_ratio": 1,
+    "limiting_antiphase_stiffness": 1,
+    "independent_reciprocal_pair_average": 16,
+    "pair_exchange_reciprocity": 16,
+    "positive_temporal_edge_weight": 16,
+    "commensurate_clock_pair_average": 4,
+    "finite_encounter_retains_both_clocks": 3,
+    "contact_count_identity": 11,
+    "contact_reads_adjacent_orthogonal_modes": 11,
+    "integrated_identity_has_no_adjacent_transition": 11,
+    "kinetic_norm_basis_invariance": 11,
+    "harmonic_source_basis_invariance": 44,
+    "angular_zero_survives_positive_temporal_weight": 363,
+    "equal_comb_preserves_angular_spectrum_ratios": 11,
+    "phase_weighted_shape_has_only_rotation_zeros": 11,
+    "phase_weighted_shape_remains_positive": 11,
+    "weighted_tetrahedron_rotation_rank": 1,
+    "large_cutoff_low_source_coefficients": 157,
+    "cubic_parseval": 8,
+    "nonzero_higher_rank_color_survives_temporal_weight": 15
+  },
+  "total_checks": 2023,
+  "scope": "Specified finite Fourier preparations, exact spatial/phase operators and a common receiver response; no particle simulation or fitted coupling.",
+  "finite_pair_cases": [
+    {
+      "cutoff_a": 1,
+      "cutoff_b": 1,
+      "phase": 0.0,
+      "weight": 0.375
+    },
+    {
+      "cutoff_a": 1,
+      "cutoff_b": 1,
+      "phase": 0.37,
+      "weight": 0.3423085698411985
+    },
+    {
+      "cutoff_a": 1,
+      "cutoff_b": 1,
+      "phase": 1.5707963267948966,
+      "weight": 0.125
+    },
+    {
+      "cutoff_a": 1,
+      "cutoff_b": 1,
+      "phase": 3.141592653589793,
+      "weight": 0.375
+    },
+    {
+      "cutoff_a": 2,
+      "cutoff_b": 5,
+      "phase": 0.0,
+      "weight": 0.7047743055555555
+    },
+    {
+      "cutoff_a": 2,
+      "cutoff_b": 5,
+      "phase": 0.37,
+      "weight": 0.6573672886658466
+    },
+    {
+      "cutoff_a": 2,
+      "cutoff_b": 5,
+      "phase": 1.5707963267948966,
+      "weight": 0.4797743055555556
+    },
+    {
+      "cutoff_a": 2,
+      "cutoff_b": 5,
+      "phase": 3.141592653589793,
+      "weight": 0.22977430555555564
+    },
+    {
+      "cutoff_a": 8,
+      "cutoff_b": 13,
+      "phase": 0.0,
+      "weight": 1.1018591073895219
+    },
+    {
+      "cutoff_a": 8,
+      "cutoff_b": 13,
+      "phase": 0.37,
+      "weight": 0.9270924911357825
+    },
+    {
+      "cutoff_a": 8,
+      "cutoff_b": 13,
+      "phase": 1.5707963267948966,
+      "weight": 0.5933205236202186
+    },
+    {
+      "cutoff_a": 8,
+      "cutoff_b": 13,
+      "phase": 3.141592653589793,
+      "weight": 0.20571680943174786
+    },
+    {
+      "cutoff_a": 30,
+      "cutoff_b": 40,
+      "phase": 0.0,
+      "weight": 1.1962419208744692
+    },
+    {
+      "cutoff_a": 30,
+      "cutoff_b": 40,
+      "phase": 0.37,
+      "weight": 1.1126997977524578
+    },
+    {
+      "cutoff_a": 30,
+      "cutoff_b": 40,
+      "phase": 1.5707963267948966,
+      "weight": 0.6290181743825581
+    },
+    {
+      "cutoff_a": 30,
+      "cutoff_b": 40,
+      "phase": 3.141592653589793,
+      "weight": 0.2032338181968068
+    }
+  ],
+  "commensurate_clocks": [
+    {
+      "frequency_ratio": "1/1",
+      "finite_pair_weight": 0.9273058796728931,
+      "limiting_phase_coefficient": "1/2"
+    },
+    {
+      "frequency_ratio": "2/1",
+      "finite_pair_weight": 0.6563727321409701,
+      "limiting_phase_coefficient": "1/8"
+    },
+    {
+      "frequency_ratio": "3/2",
+      "finite_pair_weight": 0.6285235714277788,
+      "limiting_phase_coefficient": "1/72"
+    },
+    {
+      "frequency_ratio": "5/3",
+      "finite_pair_weight": 0.6176839568633448,
+      "limiting_phase_coefficient": "1/450"
+    }
+  ],
+  "finite_encounter_cases": [
+    {
+      "frequency_ratio": 1.4142135623730951,
+      "duration": 3.7,
+      "pair_average": 0.9538084462050674
+    },
+    {
+      "frequency_ratio": 1.6666666666666667,
+      "duration": 3.7,
+      "pair_average": 0.8874694639567284
+    },
+    {
+      "frequency_ratio": 2.0,
+      "duration": 3.7,
+      "pair_average": 0.8200858883892833
+    }
+  ],
+  "spatial_contact_cases": [
+    {
+      "depth": 2,
+      "spatial_band_count_at_n3": 6,
+      "contact_fundamental_coefficient": 0.8333333333333334
+    },
+    {
+      "depth": 3,
+      "spatial_band_count_at_n3": 10,
+      "contact_fundamental_coefficient": 0.9
+    },
+    {
+      "depth": 4,
+      "spatial_band_count_at_n3": 15,
+      "contact_fundamental_coefficient": 0.9333333333333332
+    },
+    {
+      "depth": 5,
+      "spatial_band_count_at_n3": 21,
+      "contact_fundamental_coefficient": 0.9523809523809524
+    },
+    {
+      "depth": 6,
+      "spatial_band_count_at_n3": 28,
+      "contact_fundamental_coefficient": 0.9642857142857143
+    },
+    {
+      "depth": 7,
+      "spatial_band_count_at_n3": 36,
+      "contact_fundamental_coefficient": 0.9722222222222222
+    },
+    {
+      "depth": 8,
+      "spatial_band_count_at_n3": 45,
+      "contact_fundamental_coefficient": 0.9777777777777775
+    },
+    {
+      "depth": 9,
+      "spatial_band_count_at_n3": 55,
+      "contact_fundamental_coefficient": 0.9818181818181817
+    },
+    {
+      "depth": 10,
+      "spatial_band_count_at_n3": 66,
+      "contact_fundamental_coefficient": 0.9848484848484846
+    },
+    {
+      "depth": 11,
+      "spatial_band_count_at_n3": 78,
+      "contact_fundamental_coefficient": 0.9871794871794871
+    },
+    {
+      "depth": 12,
+      "spatial_band_count_at_n3": 91,
+      "contact_fundamental_coefficient": 0.9890109890109889
+    }
+  ],
+  "angular_cases": [
+    {
+      "resolved_dimensions": 2,
+      "cutoff": 6,
+      "equal_phase_weight": 1.1147384548611112,
+      "alternating_phase_positive_eigenvalues": [
+        0.42824234182098775,
+        1.6290653870884773
+      ]
+    },
+    {
+      "resolved_dimensions": 3,
+      "cutoff": 10,
+      "equal_phase_weight": 1.1713734442474015,
+      "alternating_phase_positive_eigenvalues": [
+        0.41405498177326705,
+        0.4140549817732675,
+        0.6210824726599007,
+        2.342746888494802,
+        2.5497743793814354
+      ]
+    },
+    {
+      "resolved_dimensions": 4,
+      "cutoff": 15,
+      "equal_phase_weight": 1.1938965441941767,
+      "alternating_phase_positive_eigenvalues": [
+        0.4080938275480932,
+        0.4626471875786635,
+        0.4626471875786637,
+        0.6529501240769492,
+        0.6529501240769496,
+        2.0584766849730363,
+        2.961965788332529,
+        3.369975729222744,
+        3.3699757292227455
+      ]
+    },
+    {
+      "resolved_dimensions": 5,
+      "cutoff": 21,
+      "equal_phase_weight": 1.2042060423750551,
+      "alternating_phase_positive_eigenvalues": [
+        0.4491085655324245,
+        0.4491085655324246,
+        0.44910856553242484,
+        0.4491085655324252,
+        0.678478870923699,
+        0.6784788709236991,
+        0.6784788709236991,
+        0.6784788709236995,
+        2.40841208475011,
+        2.6798036331195885,
+        3.6384447712393273,
+        3.63844477123933,
+        3.6384447712393304,
+        3.638444771239331
+      ]
+    },
+    {
+      "resolved_dimensions": 6,
+      "cutoff": 28,
+      "equal_phase_weight": 1.2094563035787496,
+      "alternating_phase_positive_eigenvalues": [
+        0.4410793611874092,
+        0.44107936118741,
+        0.4825785009879115,
+        0.4825785009879116,
+        0.48257850098791216,
+        0.6974846846375823,
+        0.6974846846375832,
+        0.6974846846375832,
+        0.6974846846375835,
+        0.6974846846375837,
+        0.6974846846375842,
+        2.217176376964922,
+        2.91126745594907,
+        3.496124451286703,
+        3.496124451286706,
+        3.496124451286707,
+        3.825058811247049,
+        3.8250588112470516,
+        4.146707326555712,
+        4.146707326555714
+      ]
+    },
+    {
+      "resolved_dimensions": 7,
+      "cutoff": 36,
+      "equal_phase_weight": 1.2123590730230276,
+      "alternating_phase_positive_eigenvalues": [
+        0.4691914245867249,
+        0.4691914245867254,
+        0.46919142458672664,
+        0.4691914245867271,
+        0.4691914245867272,
+        0.4691914245867275,
+        0.7113122459559313,
+        0.7113122459559313,
+        0.7113122459559317,
+        0.7113122459559318,
+        0.7113122459559319,
+        0.7113122459559322,
+        0.7113122459559322,
+        0.7113122459559325,
+        0.711312245955933,
+        2.4247181460460565,
+        2.7295662514557417,
+        3.675965970165165,
+        3.6759659701651652,
+        3.6759659701651657,
+        3.675965970165166,
+        3.6759659701651666,
+        3.6759659701651706,
+        4.243256755580594,
+        4.243256755580597,
+        4.243256755580599,
+        4.243256755580601
+      ]
+    },
+    {
+      "resolved_dimensions": 8,
+      "cutoff": 45,
+      "equal_phase_weight": 1.2140713669344667,
+      "alternating_phase_positive_eigenvalues": [
+        0.4597246254336985,
+        0.45972462543369896,
+        0.45972462543370013,
+        0.4930842275684579,
+        0.49308422756845893,
+        0.4930842275684593,
+        0.4930842275684606,
+        0.7220761942398556,
+        0.7220761942398557,
+        0.7220761942398561,
+        0.7220761942398564,
+        0.7220761942398564,
+        0.7220761942398566,
+        0.7220761942398567,
+        0.7220761942398568,
+        0.7220761942398569,
+        0.722076194239857,
+        0.7220761942398574,
+        0.722076194239858,
+        2.293586383639994,
+        2.878607419077808,
+        3.555790200366557,
+        3.555790200366559,
+        3.5557902003665602,
+        3.5557902003665607,
+        3.813813677457876,
+        3.8138136774578766,
+        3.813813677457877,
+        4.316698193544765,
+        4.316698193544766,
+        4.316698193544767,
+        4.316698193544767,
+        4.3166981935447675,
+        4.316698193544768,
+        4.316698193544768
+      ]
+    },
+    {
+      "resolved_dimensions": 9,
+      "cutoff": 55,
+      "equal_phase_weight": 1.215135558706673,
+      "alternating_phase_positive_eigenvalues": [
+        0.4811146776063909,
+        0.481114677606392,
+        0.481114677606392,
+        0.4811146776063925,
+        0.48111467760639337,
+        0.48111467760639404,
+        0.48111467760639526,
+        0.48111467760639637,
+        0.7309332432454007,
+        0.730933243245402,
+        0.730933243245402,
+        0.7309332432454021,
+        0.7309332432454027,
+        0.7309332432454027,
+        0.7309332432454029,
+        0.730933243245403,
+        0.730933243245403,
+        0.7309332432454034,
+        0.7309332432454034,
+        0.7309332432454034,
+        0.7309332432454039,
+        0.7309332432454042,
+        0.7309332432454045,
+        0.7309332432454049,
+        2.430271117413349,
+        2.7551303366335254,
+        3.6921882297464137,
+        3.692188229746417,
+        3.6921882297464172,
+        3.6921882297464177,
+        3.6921882297464186,
+        3.692188229746419,
+        3.692188229746419,
+        3.692188229746419,
+        4.3744880113440185,
+        4.37448801134402,
+        4.374488011344023,
+        4.374488011344024,
+        4.374488011344025,
+        4.374488011344025,
+        4.374488011344025,
+        4.374488011344028,
+        4.374488011344028,
+        4.37448801134403
+      ]
+    },
+    {
+      "resolved_dimensions": 10,
+      "cutoff": 66,
+      "equal_phase_weight": 1.2158259512777643,
+      "alternating_phase_positive_eigenvalues": [
+        0.4720813922938721,
+        0.4720813922938762,
+        0.47208139229387663,
+        0.47208139229387686,
+        0.4999567075519029,
+        0.49995670755190497,
+        0.49995670755190535,
+        0.4999567075519058,
+        0.4999567075519064,
+        0.7382582855820149,
+        0.7382582855820156,
+        0.7382582855820166,
+        0.7382582855820168,
+        0.7382582855820168,
+        0.7382582855820174,
+        0.7382582855820177,
+        0.7382582855820179,
+        0.7382582855820181,
+        0.7382582855820187,
+        0.738258285582019,
+        0.7382582855820191,
+        0.7382582855820192,
+        0.7382582855820193,
+        0.7382582855820196,
+        0.7382582855820198,
+        0.7382582855820198,
+        0.73825828558202,
+        0.7382582855820201,
+        0.7382582855820202,
+        2.336418932965009,
+        2.859101100657953,
+        3.590685228533553,
+        3.5906852285335584,
+        3.5906852285335584,
+        3.5906852285335593,
+        3.59068522853356,
+        3.8027068933811714,
+        3.8027068933811723,
+        3.802706893381173,
+        3.8027068933811767,
+        4.421185277373684,
+        4.421185277373684,
+        4.421185277373685,
+        4.421185277373687,
+        4.421185277373688,
+        4.421185277373689,
+        4.421185277373689,
+        4.421185277373689,
+        4.421185277373689,
+        4.421185277373689,
+        4.42118527737369,
+        4.421185277373691,
+        4.421185277373692,
+        4.421185277373695
+      ]
+    },
+    {
+      "resolved_dimensions": 11,
+      "cutoff": 78,
+      "equal_phase_weight": 1.2162901920602884,
+      "alternating_phase_positive_eigenvalues": [
+        0.48922847248657486,
+        0.4892284724865763,
+        0.48922847248657736,
+        0.48922847248657775,
+        0.4892284724865783,
+        0.4892284724865784,
+        0.4892284724865785,
+        0.4892284724865787,
+        0.48922847248657986,
+        0.48922847248658013,
+        0.7443197997980702,
+        0.7443197997980707,
+        0.7443197997980711,
+        0.7443197997980712,
+        0.7443197997980715,
+        0.7443197997980715,
+        0.7443197997980717,
+        0.7443197997980718,
+        0.7443197997980718,
+        0.744319799798072,
+        0.7443197997980721,
+        0.7443197997980722,
+        0.7443197997980723,
+        0.7443197997980724,
+        0.7443197997980726,
+        0.7443197997980728,
+        0.7443197997980728,
+        0.744319799798073,
+        0.7443197997980731,
+        0.7443197997980732,
+        0.7443197997980733,
+        0.7443197997980734,
+        0.7443197997980736,
+        0.7443197997980739,
+        0.7443197997980754,
+        2.432580384120575,
+        2.7709075658469726,
+        3.7009655944565156,
+        3.7009655944565165,
+        3.7009655944565165,
+        3.7009655944565174,
+        3.7009655944565183,
+        3.700965594456519,
+        3.7009655944565196,
+        3.70096559445652,
+        3.700965594456521,
+        3.700965594456522,
+        4.459730704221052,
+        4.4597307042210526,
+        4.459730704221053,
+        4.459730704221055,
+        4.459730704221056,
+        4.459730704221056,
+        4.459730704221057,
+        4.459730704221058,
+        4.459730704221058,
+        4.459730704221058,
+        4.459730704221059,
+        4.45973070422106,
+        4.45973070422106,
+        4.45973070422106,
+        4.4597307042210605,
+        4.4597307042210605,
+        4.459730704221061,
+        4.459730704221064
+      ]
+    },
+    {
+      "resolved_dimensions": 12,
+      "cutoff": 91,
+      "equal_phase_weight": 1.2166119940210958,
+      "alternating_phase_positive_eigenvalues": [
+        0.4806971576687456,
+        0.48069715766874566,
+        0.4806971576687461,
+        0.48069715766874765,
+        0.4806971576687508,
+        0.5046236445242811,
+        0.5046236445242831,
+        0.5046236445242844,
+        0.5046236445242854,
+        0.5046236445242859,
+        0.5046236445242869,
+        0.7494431681745115,
+        0.7494431681745117,
+        0.7494431681745121,
+        0.7494431681745123,
+        0.7494431681745124,
+        0.749443168174513,
+        0.749443168174513,
+        0.7494431681745132,
+        0.7494431681745133,
+        0.7494431681745137,
+        0.7494431681745141,
+        0.7494431681745141,
+        0.7494431681745143,
+        0.7494431681745145,
+        0.7494431681745146,
+        0.7494431681745146,
+        0.7494431681745147,
+        0.7494431681745147,
+        0.749443168174515,
+        0.749443168174515,
+        0.749443168174515,
+        0.7494431681745151,
+        0.7494431681745152,
+        0.7494431681745152,
+        0.7494431681745153,
+        0.7494431681745153,
+        0.7494431681745156,
+        0.7494431681745157,
+        0.7494431681745162,
+        0.7494431681745163,
+        2.3627206323788768,
+        2.847222129118822,
+        3.6137091756682618,
+        3.6137091756682627,
+        3.613709175668263,
+        3.6137091756682653,
+        3.6137091756682667,
+        3.6137091756682698,
+        3.7935799398531103,
+        3.7935799398531107,
+        3.7935799398531134,
+        3.793579939853114,
+        3.7935799398531143,
+        4.49210582407789,
+        4.492105824077891,
+        4.492105824077892,
+        4.492105824077892,
+        4.492105824077893,
+        4.492105824077893,
+        4.492105824077893,
+        4.492105824077893,
+        4.4921058240778935,
+        4.4921058240778935,
+        4.492105824077895,
+        4.492105824077895,
+        4.492105824077895,
+        4.492105824077896,
+        4.492105824077897,
+        4.492105824077897,
+        4.492105824077898,
+        4.492105824077899,
+        4.492105824077899,
+        4.4921058240779,
+        4.492105824077901,
+        4.492105824077901,
+        4.4921058240779015
+      ]
+    }
+  ],
+  "weighted_tetrahedron_polynomial": "lambda**3*(lambda - 2)*(2*lambda - 1)*(3*lambda - 1)**2*(6*lambda - 13)/108",
+  "weighted_tetrahedron_eigenvalues": {
+    "2": 1,
+    "1/2": 1,
+    "13/6": 1,
+    "1/3": 2,
+    "0": 3
+  },
+  "limiting_pair_overlap": "-delta**4/96 + pi*delta**3/24 - pi**2*delta**2/24 + pi**4/80",
+  "particle_cases": [
+    {
+      "particle": "W",
+      "depth": 2,
+      "mode_index": 76,
+      "cutoff": 2926,
+      "fundamental_over_depth6": 997976.8822172185,
+      "density_mean": 0.82229618087153,
+      "density_fundamental": "2925/2926",
+      "density_derivative_norm": 5842.618925700631,
+      "density_response": -5.103646885186104e-13,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": -0.5414410422786011,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.2930074372662251,
+      "evaluated_source_harmonics": 5852
+    },
+    {
+      "particle": "Z",
+      "depth": 2,
+      "mode_index": 81,
+      "cutoff": 3321,
+      "fundamental_over_depth6": 997976.8822172185,
+      "density_mean": 0.8223164990281405,
+      "density_fundamental": "3320/3321",
+      "density_derivative_norm": 6632.492296065188,
+      "density_response": -5.104088427720626e-13,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": -0.5414079644840168,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.2930219173153557,
+      "evaluated_source_harmonics": 6642
+    },
+    {
+      "particle": "Higgs",
+      "depth": 2,
+      "mode_index": 95,
+      "cutoff": 4560,
+      "fundamental_over_depth6": 997976.8822172185,
+      "density_mean": 0.8223573963233575,
+      "density_fundamental": "4559/4560",
+      "density_derivative_norm": 9110.175239391152,
+      "density_response": -5.104977207004798e-13,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": -0.5413412653124063,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.2930510644913504,
+      "evaluated_source_harmonics": 9120
+    },
+    {
+      "particle": "down",
+      "depth": 3,
+      "mode_index": 1,
+      "cutoff": 1,
+      "fundamental_over_depth6": 170813.0545187998,
+      "density_mean": 0.5,
+      "density_fundamental": "0",
+      "density_derivative_norm": 0.5,
+      "density_response": -1.0710454580969868e-12,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": -0.1250000000025705,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.10833333333333334,
+      "evaluated_source_harmonics": 2
+    },
+    {
+      "particle": "strange",
+      "depth": 3,
+      "mode_index": 4,
+      "cutoff": 20,
+      "fundamental_over_depth6": 170813.0545187998,
+      "density_mean": 0.7980816219565117,
+      "density_fundamental": "19/20",
+      "density_derivative_norm": 35.6041787208998,
+      "density_response": -1.56534175706646e-11,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": -0.5661043903543734,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.27600485263205243,
+      "evaluated_source_harmonics": 40
+    },
+    {
+      "particle": "up",
+      "depth": 4,
+      "mode_index": 3,
+      "cutoff": 15,
+      "fundamental_over_depth6": 5271.40530590165,
+      "density_mean": 0.7902201417224936,
+      "density_fundamental": "14/15",
+      "density_derivative_norm": 25.89155086504851,
+      "density_response": -1.5850537135090832e-08,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": -0.5694487098515483,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.270594078033031,
+      "evaluated_source_harmonics": 30
+    },
+    {
+      "particle": "charm",
+      "depth": 4,
+      "mode_index": 20,
+      "cutoff": 8855,
+      "fundamental_over_depth6": 5271.40530590165,
+      "density_mean": 0.8224105713384637,
+      "density_fundamental": "8854/8855",
+      "density_derivative_norm": 17699.51157974933,
+      "density_response": -1.830123048509244e-08,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": -0.5412543395458377,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.29308896406801194,
+      "evaluated_source_harmonics": 17710
+    },
+    {
+      "particle": "top",
+      "depth": 4,
+      "mode_index": 72,
+      "cutoff": 1215450,
+      "fundamental_over_depth6": 5271.40530590165,
+      "density_mean": 0.8224666220540081,
+      "density_fundamental": "1215449/1215450",
+      "density_derivative_norm": 2430884.589692365,
+      "density_response": -1.8305596701094053e-08,
+      "density_tail_bound": 2.7214271004649436e-22,
+      "derivative_source_response": -0.5411603302433489,
+      "derivative_tail_bound": 3.2480494965483416e-05,
+      "static_source_term": 0.29312891590360324,
+      "evaluated_source_harmonics": 65536
+    },
+    {
+      "particle": "nu1",
+      "depth": 5,
+      "mode_index": 10,
+      "cutoff": 2002,
+      "fundamental_over_depth6": 2.7813921180875695e-08,
+      "density_mean": 0.8222173455391647,
+      "density_fundamental": "2001/2002",
+      "density_derivative_norm": 3994.998415300226,
+      "density_response": 0.23467991214492692,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": 1.3392546064223185e-12,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.2929512574323704,
+      "evaluated_source_harmonics": 4004
+    },
+    {
+      "particle": "nu2",
+      "depth": 5,
+      "mode_index": 15,
+      "cutoff": 11628,
+      "fundamental_over_depth6": 2.7813921180875695e-08,
+      "density_mean": 0.8224240356170279,
+      "density_fundamental": "11627/11628",
+      "density_derivative_norm": 23245.239146038763,
+      "density_response": 0.23453396537159685,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": 7.792567565236514e-12,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.2930985608895927,
+      "evaluated_source_harmonics": 23256
+    },
+    {
+      "particle": "nu3",
+      "depth": 5,
+      "mode_index": 22,
+      "cutoff": 65780,
+      "fundamental_over_depth6": 2.7813921180875695e-08,
+      "density_mean": 0.822459432387332,
+      "density_fundamental": "65779/65780",
+      "density_derivative_norm": 131547.5062461819,
+      "density_response": 0.2345087835257144,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": 4.409911082982459e-11,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.29312379109992004,
+      "evaluated_source_harmonics": 131560
+    },
+    {
+      "particle": "electron",
+      "depth": 6,
+      "mode_index": 13,
+      "cutoff": 18564,
+      "fundamental_over_depth6": 1.0,
+      "density_mean": 0.8224401002990692,
+      "density_fundamental": "18563/18564",
+      "density_derivative_norm": 37116.77133780083,
+      "density_response": 0.3769526549770102,
+      "density_tail_bound": 0.0,
+      "derivative_source_response": 0.2997002729085459,
+      "derivative_tail_bound": 0.0,
+      "static_source_term": 0.293110011384642,
+      "evaluated_source_harmonics": 37128
+    },
+    {
+      "particle": "muon",
+      "depth": 6,
+      "mode_index": 35,
+      "cutoff": 3838380,
+      "fundamental_over_depth6": 1.0,
+      "density_mean": 0.822466903160842,
+      "density_fundamental": "3838379/3838380",
+      "density_derivative_norm": 7676743.439756341,
+      "density_response": 0.37698479949540487,
+      "density_tail_bound": 2.3946312986543502e-15,
+      "derivative_source_response": 0.29981402028982507,
+      "derivative_tail_bound": 1.0285176985206652e-05,
+      "static_source_term": 0.29312911627782723,
+      "evaluated_source_harmonics": 65536
+    },
+    {
+      "particle": "tau",
+      "depth": 10,
+      "mode_index": 23,
+      "cutoff": 64512240,
+      "fundamental_over_depth6": 1.0,
+      "density_mean": 0.822467025673646,
+      "density_fundamental": "64512239/64512240",
+      "density_derivative_norm": 129024460.61795177,
+      "density_response": 0.3769849464196103,
+      "density_tail_bound": 1.4247691447170004e-16,
+      "derivative_source_response": 0.29981393515892113,
+      "derivative_tail_bound": 6.119523629675514e-07,
+      "static_source_term": 0.29312920360553,
+      "evaluated_source_harmonics": 65536
+    }
+  ],
+  "cubic_source_leakage": [
+    {
+      "cutoff": 1,
+      "outside_cutoff_source_fraction": 0.1
+    },
+    {
+      "cutoff": 2,
+      "outside_cutoff_source_fraction": 0.08371040723981901
+    },
+    {
+      "cutoff": 3,
+      "outside_cutoff_source_fraction": 0.07358558755426309
+    },
+    {
+      "cutoff": 8,
+      "outside_cutoff_source_fraction": 0.05331279164521452
+    },
+    {
+      "cutoff": 32,
+      "outside_cutoff_source_fraction": 0.0238689353356308
+    },
+    {
+      "cutoff": 128,
+      "outside_cutoff_source_fraction": 0.007561853430476785
+    },
+    {
+      "cutoff": 512,
+      "outside_cutoff_source_fraction": 0.0020477821205637306
+    },
+    {
+      "cutoff": 2048,
+      "outside_cutoff_source_fraction": 0.0005248283181581178
+    }
+  ],
+  "color_controls": [
+    {
+      "depth": 2,
+      "middle_channel_rank": 1,
+      "three_form_pair_factor": 0,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 3,
+      "middle_channel_rank": 3,
+      "three_form_pair_factor": 1,
+      "scalar_volume_triplet": true
+    },
+    {
+      "depth": 4,
+      "middle_channel_rank": 3,
+      "three_form_pair_factor": 1,
+      "scalar_volume_triplet": true
+    },
+    {
+      "depth": 5,
+      "middle_channel_rank": 10,
+      "three_form_pair_factor": 8,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 6,
+      "middle_channel_rank": 10,
+      "three_form_pair_factor": 8,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 7,
+      "middle_channel_rank": 35,
+      "three_form_pair_factor": 33,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 8,
+      "middle_channel_rank": 35,
+      "three_form_pair_factor": 33,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 9,
+      "middle_channel_rank": 126,
+      "three_form_pair_factor": 124,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 10,
+      "middle_channel_rank": 126,
+      "three_form_pair_factor": 124,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 11,
+      "middle_channel_rank": 462,
+      "three_form_pair_factor": 460,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 12,
+      "middle_channel_rank": 462,
+      "three_form_pair_factor": 460,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 13,
+      "middle_channel_rank": 1716,
+      "three_form_pair_factor": 1714,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 14,
+      "middle_channel_rank": 1716,
+      "three_form_pair_factor": 1714,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 15,
+      "middle_channel_rank": 6435,
+      "three_form_pair_factor": 6433,
+      "scalar_volume_triplet": false
+    },
+    {
+      "depth": 16,
+      "middle_channel_rank": 6435,
+      "three_form_pair_factor": 6433,
+      "scalar_volume_triplet": false
+    }
+  ],
+  "neutrino_scale_input": "Archived atmospheric splitting 2.534e-3 eV^2; separate conditional calibration.",
+  "receiver": "One common observer-three-dimensional angular response with squared poles 2 and 3 in units omega_0,6^2, weights 3/5 and 2/5. Signed response forms, not rates.",
+  "exceptions": {
+    "photon": "Massless n=0 does not supply an optical harmonic cutoff.",
+    "bottom": "The unresolved geometric-mean assignment is not an integer cutoff; no rounding or replacement mass was used."
+  },
+  "sources": {
+    "experiments/sawtooth-sector-coupling-checks.py": "4b76b045f19240c04e8cf1be656643d8594a68423dd1292d29624e5106e584b9"
+  },
+  "research_inputs": {
+    "snapshot_id": 939,
+    "sources": {
+      "content/notes/topics/contact-operators/spatial-spectral-projector-bridge.md": "c0d574ba0d834d1913f3716c00c3e734ab40279aff128e3fb7334a8c7a9e7690",
+      "content/notes/topics/gauge-topology/determinant-contact-and-color-response.md": "51b6d628fb08305a572b9339c6513f7d52f4e92fc48913662e9660fa931e814b",
+      "content/notes/topics/operator-tools/angular-kernel-geometry.md": "a9cae28b37009dabac775a5d37a1614a7311cd0926629675247082e3b1bd0495",
+      "content/notes/topics/coupling/transition-density-coupling.md": "2e9fc3bb98489700c719a8267fa2f57878c142e94620266d3777099e99468be4",
+      "content/notes/topics/coupling/canonical-coupling-normalization.md": "e2ce497eb226bb3016ceec4c3e41752cfa73d58ffe3680d41da819774bd4345e",
+      "content/notes/topics/coupling/source-frequency-selection.md": "d7a7bde0ed823ddce0ef59d15e8fbbe89366a8c66914a50756b62a4632e6ff29",
+      "content/notes/topics/coupling/reciprocal-wave-scattering.md": "19856646baf791483e41ed0f339350e5e10249d4da5595938ededac98344cb00",
+      "content/notes/topics/coupling/generalized-sector-coupling.md": "8feafae96c1001b66afd887d6bdee0f61e4c9ac8ceca7faecf658db14dc1d1a1",
+      "content/notes/topics/research-overview/shared-mathematics-constructions.md": "827df1acac0188989f4c4f486fc003fc9a9940b7f5e5c57e965053f575961f9e",
+      "content/notes/topics/research-overview/sector-theory-evidence.md": "6569cfda67e60bfc3095bea24331bd71e489296fc0dc20ee631735d705f08c88",
+      "content/modules/neutrino-simplex-spectrum.md": "7f8a508ef66542811a5138d563f77e0569b1a1562423b464094602a13f36cc94",
+      "content/notes/topics/coupling/_topic.md": "5eacabe4604e96fade29c4016457d01383f8f8b08aecdc461294a5ef2b5a6b11",
+      "content/notes/INDEX.md": "0df0f3c90334988e76010baf217c3225e25cb70b7fb082dc276d589e3918b871"
+    }
+  }
+}

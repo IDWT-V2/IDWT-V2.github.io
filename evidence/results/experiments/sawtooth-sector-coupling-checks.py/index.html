@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>sawtooth-sector-coupling-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/sawtooth-sector-coupling-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="sawtooth-sector-coupling-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/sawtooth-sector-coupling-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="sawtooth-sector-coupling-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>sawtooth-sector-coupling-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/sawtooth-sector-coupling-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact and bounded Fourier/operator checks for the specified sawtooth ansatz.&quot;&quot;&quot;
+import argparse
+from collections import Counter
+from datetime import datetime, timezone
+from fractions import Fraction as F
+from hashlib import sha256
+import json
+import math
+from pathlib import Path
+
+import mpmath as mp
+import numpy as np
+from scipy.special import digamma
+import sympy as sp
+
+
+CHECKS = Counter()
+mp.mp.dps = 50
+
+
+def exact(name, actual, expected):
+    if actual != expected:
+        raise AssertionError((name, actual, expected))
+    CHECKS[name] += 1
+
+
+def close(name, actual, expected, atol=3e-11):
+    if not np.allclose(actual, expected, atol=atol, rtol=atol):
+        raise AssertionError((name, actual, expected))
+    CHECKS[name] += 1
+
+
+def coefficients_exact(cutoff):
+    harmonic = [F(0)]
+    for k in range(1, cutoff + 1):
+        harmonic.append(harmonic[-1] + F(1, k))
+    coefficients = []
+    for p in range(1, 2 * cutoff + 1):
+        if p &lt;= cutoff:
+            value = F(1, p*p) + (harmonic[cutoff-p] - harmonic[cutoff]) / p
+        else:
+            value = -(harmonic[cutoff] - harmonic[p-cutoff-1]) / p
+        coefficients.append(value)
+    mean = sum((F(1, 2*k*k) for k in range(1, cutoff+1)), F(0))
+    return mean, coefficients, harmonic[-1]
+
+
+def coefficients(cutoff, limit=None):
+    number = min(2 * cutoff, limit) if limit else 2 * cutoff
+    p = np.arange(1, number + 1)
+    values = np.empty(number)
+    low = p &lt;= cutoff
+    if cutoff &lt;= 150000:
+        harmonic = np.r_[0., np.cumsum(1 / np.arange(1, cutoff+1, dtype=float))]
+        values[low] = 1 / p[low]**2 + (harmonic[cutoff-p[low]] - harmonic[cutoff]) / p[low]
+        values[~low] = -(harmonic[cutoff] - harmonic[p[~low]-cutoff-1]) / p[~low]
+    else:
+        values[low] = 1 / p[low]**2 + (digamma(cutoff-p[low]+1) - digamma(cutoff+1)) / p[low]
+        values[~low] = -(digamma(cutoff+1) - digamma(p[~low]-cutoff)) / p[~low]
+    mean = float((mp.zeta(2) - mp.polygamma(1, cutoff+1)) / 2)
+    return mean, values
+
+
+def waveform(cutoff, samples):
+    spectrum = np.zeros(samples, dtype=complex)
+    k = np.arange(1, cutoff+1)
+    spectrum[k] = 1 / (2j*k)
+    spectrum[-k] = -1 / (2j*k)
+    return (np.fft.ifft(spectrum) * samples).real
+
+
+def pair_overlap(cutoff_a, cutoff_b, phase):
+    mean_a, ca = coefficients(cutoff_a)
+    mean_b, cb = coefficients(cutoff_b)
+    count = min(len(ca), len(cb))
+    p = np.arange(1, count+1)
+    return mean_a * mean_b + .5 * np.dot(ca[:count]*cb[:count], np.cos(p*phase))
+
+
+def pair_limit(phase):
+    phase = phase % (2*math.pi)
+    return math.pi**4/80 - math.pi**2*phase**2/24 + math.pi*phase**3/24 - phase**4/96
+
+
+def tangent_basis(direction):
+    constraints = np.vstack([np.ones(len(direction)), direction])
+    return np.linalg.svd(constraints, full_matrices=True)[2][2:].T
+
+
+def simplex_jacobian(dimension):
+    number = dimension+1
+    directions = math.sqrt(number/dimension)*(np.eye(number)-np.ones((number, number))/number)
+    bases = [tangent_basis(v) for v in directions]
+    pairs, rows = [], []
+    for i in range(number):
+        for j in range(i+1, number):
+            close(&#39;angular_zero_survives_positive_temporal_weight&#39;, (1+dimension*directions[i]@directions[j])/number, 0)
+            row = np.zeros(number*(dimension-1))
+            row[i*(dimension-1):(i+1)*(dimension-1)] = dimension/number*bases[i].T@directions[j]
+            row[j*(dimension-1):(j+1)*(dimension-1)] = dimension/number*bases[j].T@directions[i]
+            pairs.append((i, j))
+            rows.append(row)
+    return pairs, np.array(rows)
+
+
+def response_sum(cutoff, ratio, limit=65536):
+    # The receiver uses the new tetrahedral triplet/doublet shape Hessian.
+    if cutoff &lt;= 150000:
+        limit = 2*cutoff
+    mean, c = coefficients(cutoff, limit)
+    p = np.arange(1, len(c)+1)
+    frequency = ratio*p
+    susceptibility = (3/(2-frequency**2)+2/(3-frequency**2))/5
+    value = .5*np.dot(c*c, susceptibility)
+    derivative = .5*np.dot(c*c*frequency**2, susceptibility)
+    omitted = len(c) &lt; 2*cutoff
+    ordinary_bound = derivative_bound = 0.
+    if omitted:
+        lowest = ratio*(len(c)+1)
+        if lowest**2 &lt;= 3:
+            raise AssertionError(&#39;Tail contains unresolved receiver poles&#39;)
+        # Fourier projection and the L2 error of the truncated sawtooth.
+        source_tail = 4*math.pi**2/cutoff + 1/(3*len(c)**3)
+        ordinary_bound = source_tail/(lowest**2-3)
+        derivative_bound = source_tail*lowest**2/(lowest**2-3)
+    return {&#39;density_response&#39;: float(value), &#39;density_tail_bound&#39;: ordinary_bound,
+            &#39;derivative_source_response&#39;: float(derivative), &#39;derivative_tail_bound&#39;: derivative_bound,
+            &#39;static_source_term&#39;: mean*mean*13/30, &#39;evaluated_source_harmonics&#39;: len(c)}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&#39;--output&#39;, type=Path, required=True)
+    parser.add_argument(&#39;--manifest&#39;, type=Path)
+    args = parser.parse_args()
+
+    for cutoff in range(1, 41):
+        mean, c, h = coefficients_exact(cutoff)
+        exact(&#39;density_fundamental&#39;, c[0], F(cutoff-1, cutoff))
+        exact(&#39;density_top_harmonic&#39;, c[-1], -F(1, 2*cutoff**2))
+        derivative_norm = sum((F(p*p, 2)*a*a for p, a in enumerate(c, 1)), F(0))
+        exact(&#39;density_derivative_sum&#39;, derivative_norm, 2*cutoff-h-mean)
+        a_sum = sum((sum((F(1, j) for j in range(t+1, cutoff+1)), F(0))**2 for t in range(cutoff)), F(0))
+        exact(&#39;derivative_sum_proof_square_identity&#39;, a_sum, 2*cutoff-h)
+        b_sum = sum((sum((F(1, j) for j in range(cutoff-p+1, cutoff+1)), F(0))/p for p in range(1, cutoff+1)), F(0))
+        exact(&#39;derivative_sum_proof_triangle_identity&#39;, b_sum, 2*mean)
+        samples = 16*(cutoff+1)
+        f = waveform(cutoff, samples)
+        spectrum = np.fft.fft(f*f)/samples
+        close(&#39;independent_fourier_density_mean&#39;, spectrum[0].real, float(mean))
+        close(&#39;independent_fourier_density_coefficients&#39;, 2*spectrum[1:2*cutoff+1].real, list(map(float, c)))
+        close(&#39;independent_fourier_density_phase&#39;, spectrum[1:2*cutoff+1].imag, 0)
+        cubic = np.fft.fft(f**3)/samples
+        close(&#39;cubic_contact_highest_source&#39;, -2*cubic[3*cutoff].imag, -1/(4*cutoff**3))
+        time = 2*math.pi*np.arange(samples)/samples
+        k = np.arange(1, cutoff+1)[:, None]
+        q = np.sin(k*time)/k
+        momentum = np.cos(k*time)
+        close(&#39;positive_spatial_mode_energy_is_conserved&#39;, .5*np.sum(momentum**2+(k*q)**2, axis=0), cutoff/2)
+        close(&#39;spatial_evaluation_is_sawtooth&#39;, q.sum(axis=0), f)
+        analytic_modes = np.exp(-1j*k*time)/k
+        close(&#39;orthogonal_complex_modes_keep_total_norm&#39;, np.sum(abs(analytic_modes)**2, axis=0), float(2*mean))
+        local_density = abs(analytic_modes.sum(axis=0))**2/2
+        analytic_spectrum = np.fft.fft(local_density)/samples
+        close(&#39;complex_local_source_has_same_fundamental&#39;, 2*analytic_spectrum[1].real, float(c[0]))
+        for p in range(1, cutoff):
+            expected_beat = sum((F(1, r*(r+p)) for r in range(1, cutoff-p+1)), F(0))
+            close(&#39;complex_local_transition_coefficients&#39;, 2*analytic_spectrum[p].real, float(expected_beat))
+
+    theta, delta = sp.symbols(&#39;theta delta&#39;, real=True)
+    base = (sp.pi-theta)/2
+    first = (sp.pi-theta-delta)/2
+    wrapped = (3*sp.pi-theta-delta)/2
+    integral = sp.simplify((sp.integrate(base**2*first**2, (theta, 0, 2*sp.pi-delta))
+                           + sp.integrate(base**2*wrapped**2, (theta, 2*sp.pi-delta, 2*sp.pi)))/(2*sp.pi))
+    expected = sp.pi**4/80-sp.pi**2*delta**2/24+sp.pi*delta**3/24-delta**4/96
+    exact(&#39;independent_piecewise_phase_integral&#39;, sp.expand(integral-expected), 0)
+    exact(&#39;phase_pair_antiphase_ratio&#39;, sp.simplify(integral.subs(delta, sp.pi)/integral.subs(delta, 0)), sp.Rational(1, 6))
+    exact(&#39;limiting_antiphase_stiffness&#39;, sp.diff(integral, delta, 2).subs(delta, sp.pi), sp.pi**2/24)
+
+    pair_cases = []
+    for ka, kb in [(1, 1), (2, 5), (8, 13), (30, 40)]:
+        samples = 32*(ka+kb+1)
+        time = np.arange(samples)*2*math.pi/samples
+        for phase in [0., .37, math.pi/2, math.pi]:
+            fa = sum(np.sin(k*time)/k for k in range(1, ka+1))
+            fb = sum(np.sin(k*(time+phase))/k for k in range(1, kb+1))
+            value = pair_overlap(ka, kb, phase)
+            close(&#39;independent_reciprocal_pair_average&#39;, np.mean(fa*fa*fb*fb), value)
+            close(&#39;pair_exchange_reciprocity&#39;, value, pair_overlap(kb, ka, -phase))
+            exact(&#39;positive_temporal_edge_weight&#39;, value &gt; 0, True)
+            pair_cases.append({&#39;cutoff_a&#39;: ka, &#39;cutoff_b&#39;: kb, &#39;phase&#39;: phase, &#39;weight&#39;: value})
+
+    rational_cases = []
+    for p, q in [(1, 1), (2, 1), (3, 2), (5, 3)]:
+        ka, kb = 7, 9
+        ma, ca = coefficients(ka)
+        mb, cb = coefficients(kb)
+        count = min(len(ca)//q, len(cb)//p)
+        phase = .23
+        predicted = ma*mb + .5*sum(ca[q*j-1]*cb[p*j-1]*math.cos(j*phase) for j in range(1, count+1))
+        time = np.arange(16384)*2*math.pi/16384
+        fa = sum(np.sin(k*(p*time+phase/q))/k for k in range(1, ka+1))
+        fb = sum(np.sin(k*q*time)/k for k in range(1, kb+1))
+        close(&#39;commensurate_clock_pair_average&#39;, np.mean(fa*fa*fb*fb), predicted)
+        rational_cases.append({&#39;frequency_ratio&#39;: f&#39;{p}/{q}&#39;, &#39;finite_pair_weight&#39;: predicted,
+                               &#39;limiting_phase_coefficient&#39;: str(F(1, 2*p*p*q*q))})
+
+    finite_windows = []
+    nodes, weights = np.polynomial.legendre.leggauss(320)
+    for ratio in [math.sqrt(2), 5/3, 2.]:
+        ka, kb, duration, phase_a, phase_b = 5, 7, 3.7, .1, -.4
+        ma, ca = coefficients(ka)
+        mb, cb = coefficients(kb)
+        pa = np.arange(-2*ka, 2*ka+1)
+        pb = np.arange(-2*kb, 2*kb+1)
+        aa = np.r_[ca[::-1]/2, ma, ca/2]
+        ab = np.r_[cb[::-1]/2, mb, cb/2]
+        frequency = ratio*pa[:, None]+pb[None, :]
+        phase = phase_a*pa[:, None]+phase_b*pb[None, :]
+        predicted = np.sum(aa[:, None]*ab[None, :]*np.cos(phase)*np.sinc(frequency*duration/(2*math.pi)))
+        time = nodes*duration/2
+        fa = sum(np.sin(k*(ratio*time+phase_a))/k for k in range(1, ka+1))
+        fb = sum(np.sin(k*(time+phase_b))/k for k in range(1, kb+1))
+        close(&#39;finite_encounter_retains_both_clocks&#39;, weights@(fa*fa*fb*fb)/2, predicted)
+        finite_windows.append({&#39;frequency_ratio&#39;: ratio, &#39;duration&#39;: duration, &#39;pair_average&#39;: float(predicted)})
+
+    # Same spectral amplitudes can have different sources under different spatial operators.
+    spatial_cases = []
+    rng = np.random.default_rng(20261009)
+    for depth in range(2, 13):
+        count = math.comb(depth+2, depth)
+        ones = np.ones((count, count))
+        close(&#39;contact_count_identity&#39;, ones@ones, count*ones)
+        amplitudes = 1/np.arange(1, count+1)
+        contact_beat = np.dot(amplitudes[:-1], amplitudes[1:])
+        close(&#39;contact_reads_adjacent_orthogonal_modes&#39;, contact_beat, 1-1/count)
+        exact(&#39;integrated_identity_has_no_adjacent_transition&#39;, np.trace(np.eye(count), offset=1), 0)
+        size = depth
+        a = rng.normal(size=(size, size)) + 1j*rng.normal(size=(size, size))
+        metric = a.conj().T@a + np.eye(size)
+        operator = rng.normal(size=(size, size)) + 1j*rng.normal(size=(size, size))
+        operator = (operator+operator.conj().T)/2
+        basis = np.eye(size) + .04*(rng.normal(size=(size, size))+1j*rng.normal(size=(size, size)))
+        comb = rng.normal(size=(5, size))+1j*rng.normal(size=(5, size))
+        comb /= np.arange(1, 6)[:, None]
+        moved = np.linalg.solve(basis, comb.T).T
+        moved_operator = basis.conj().T@operator@basis
+        moved_metric = basis.conj().T@metric@basis
+        close(&#39;kinetic_norm_basis_invariance&#39;, sum(v.conj()@metric@v for v in comb), sum(v.conj()@moved_metric@v for v in moved))
+        for p in range(1, 5):
+            old = sum(comb[r].conj()@operator@comb[r+p] for r in range(5-p))
+            new = sum(moved[r].conj()@moved_operator@moved[r+p] for r in range(5-p))
+            close(&#39;harmonic_source_basis_invariance&#39;, old, new)
+        spatial_cases.append({&#39;depth&#39;: depth, &#39;spatial_band_count_at_n3&#39;: count,
+                              &#39;contact_fundamental_coefficient&#39;: contact_beat})
+
+    angular_cases = []
+    for dimension in range(2, 13):
+        pairs, jacobian = simplex_jacobian(dimension)
+        cutoff = math.comb(dimension+2, dimension)
+        common_weight = pair_overlap(cutoff, cutoff, 0)
+        unweighted = 2*jacobian.T@jacobian
+        equal = 2*jacobian.T@(common_weight*jacobian)
+        close(&#39;equal_comb_preserves_angular_spectrum_ratios&#39;, np.linalg.eigvalsh(equal)/common_weight,
+              np.linalg.eigvalsh(unweighted))
+        weights = np.array([pair_overlap(cutoff, cutoff, math.pi*((i-j) % 2)) for i, j in pairs])
+        weighted = 2*jacobian.T@(weights[:, None]*jacobian)
+        spectrum = np.linalg.eigvalsh(weighted)
+        zeros = dimension*(dimension-1)//2
+        exact(&#39;phase_weighted_shape_has_only_rotation_zeros&#39;, int(np.sum(abs(spectrum)&lt;1e-9)), zeros)
+        exact(&#39;phase_weighted_shape_remains_positive&#39;, float(spectrum.min()) &gt; -1e-10, True)
+        angular_cases.append({&#39;resolved_dimensions&#39;: dimension, &#39;cutoff&#39;: cutoff,
+                              &#39;equal_phase_weight&#39;: common_weight,
+                              &#39;alternating_phase_positive_eigenvalues&#39;: spectrum[zeros:].tolist()})
+
+    tetra = [sp.Matrix(v) for v in ((1,1,1),(1,-1,-1),(-1,1,-1),(-1,-1,1))]
+    bases = []
+    for v in tetra:
+        first = sp.Matrix([-v[1], v[0], 0])
+        bases.append(sp.Matrix.hstack(first, v.cross(first)))
+    metric = sp.diag(*(b.T*b for b in bases))
+    rows, weights = [], []
+    for i in range(4):
+        for j in range(i+1, 4):
+            row = sp.zeros(1, 8)
+            row[:, 2*i:2*i+2] = sp.Rational(3, 4)*tetra[j].T*bases[i]/sp.sqrt(3)
+            row[:, 2*j:2*j+2] = sp.Rational(3, 4)*tetra[i].T*bases[j]/sp.sqrt(3)
+            rows.append(row)
+            weights.append(1 if (i-j) % 2 == 0 else sp.Rational(1, 6))
+    jacobian = sp.Matrix.vstack(*rows)
+    hessian = metric.inv()*(2*jacobian.T*sp.diag(*weights)*jacobian)
+    polynomial = sp.factor(hessian.charpoly(sp.Symbol(&#39;lambda&#39;)).as_expr())
+    exact(&#39;weighted_tetrahedron_rotation_rank&#39;, hessian.rank(), 5)
+    weighted_eigenvalues = {str(k): v for k, v in hessian.eigenvals().items()}
+
+    electron_mev = mp.mpf(&#39;0.51099895000&#39;)
+    mu6 = electron_mev/18564
+    mu5_ev = mp.sqrt(mp.mpf(&#39;2.534e-3&#39;)/(65780**2-2002**2))
+    scales = {2: electron_mev*mp.sqrt(2890), 3: electron_mev*mp.sqrt(32*mp.sqrt(7)),
+              4: electron_mev*mp.sqrt(48/mp.sqrt(7))/15, 5: mu5_ev/mp.mpf(10**6), 6: mu6, 10: mu6}
+    assigned = [(&#39;W&#39;,2,76),(&#39;Z&#39;,2,81),(&#39;Higgs&#39;,2,95),(&#39;down&#39;,3,1),(&#39;strange&#39;,3,4),
+                (&#39;up&#39;,4,3),(&#39;charm&#39;,4,20),(&#39;top&#39;,4,72),(&#39;nu1&#39;,5,10),(&#39;nu2&#39;,5,15),(&#39;nu3&#39;,5,22),
+                (&#39;electron&#39;,6,13),(&#39;muon&#39;,6,35),(&#39;tau&#39;,10,23)]
+    particle_cases = []
+    for name, depth, n in assigned:
+        cutoff = math.comb(n+depth-1, depth)
+        h = mp.harmonic(cutoff)
+        h2 = mp.zeta(2)-mp.polygamma(1, cutoff+1)
+        derivative_norm = 2*cutoff-h-h2/2
+        ratio = float(scales[depth]/mu6)
+        response = response_sum(cutoff, ratio)
+        # Independently verify low coefficients where cancellation could affect large cutoffs.
+        _, numeric = coefficients(cutoff, 12)
+        for p in range(1, min(cutoff, 12)+1):
+            reference = mp.mpf(1)/(p*p)+(mp.harmonic(cutoff-p)-h)/p
+            close(&#39;large_cutoff_low_source_coefficients&#39;, numeric[p-1], float(reference), 2e-12)
+        particle_cases.append({&#39;particle&#39;: name, &#39;depth&#39;: depth, &#39;mode_index&#39;: n, &#39;cutoff&#39;: cutoff,
+                               &#39;fundamental_over_depth6&#39;: ratio, &#39;density_mean&#39;: float(h2/2),
+                               &#39;density_fundamental&#39;: str(F(cutoff-1, cutoff)),
+                               &#39;density_derivative_norm&#39;: float(derivative_norm), **response})
+
+    leakage = []
+    for cutoff in [1, 2, 3, 8, 32, 128, 512, 2048]:
+        samples = 16*(cutoff+1)
+        f = waveform(cutoff, samples)
+        cubic = np.fft.fft(f**3)/samples
+        total = np.mean(f**6)
+        high = 2*np.sum(abs(cubic[cutoff+1:3*cutoff+1])**2)
+        close(&#39;cubic_parseval&#39;, np.sum(abs(cubic)**2), total)
+        leakage.append({&#39;cutoff&#39;: cutoff, &#39;outside_cutoff_source_fraction&#39;: float(high/total)})
+
+    # The same temporal scalar cannot remove an allowed higher-rank color response.
+    color = []
+    for depth in range(2, 17):
+        half = (depth+1)//2
+        rank = math.comb(2*half-1, half-1)
+        factor = max(0, rank-2)
+        color.append({&#39;depth&#39;: depth, &#39;middle_channel_rank&#39;: rank,
+                      &#39;three_form_pair_factor&#39;: factor,
+                      &#39;scalar_volume_triplet&#39;: rank == 3})
+        exact(&#39;nonzero_higher_rank_color_survives_temporal_weight&#39;, factor &gt; 0, rank &gt;= 3)
+
+    result = {&#39;title&#39;: &#39;Sawtooth spectra in spatial and reciprocal sector coupling&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(), &#39;status&#39;: &#39;passed&#39;,
+              &#39;checks&#39;: dict(CHECKS), &#39;total_checks&#39;: sum(CHECKS.values()),
+              &#39;scope&#39;: &#39;Specified finite Fourier preparations, exact spatial/phase operators and a common receiver response; no particle simulation or fitted coupling.&#39;,
+              &#39;finite_pair_cases&#39;: pair_cases, &#39;commensurate_clocks&#39;: rational_cases,
+              &#39;finite_encounter_cases&#39;: finite_windows,
+              &#39;spatial_contact_cases&#39;: spatial_cases, &#39;angular_cases&#39;: angular_cases,
+              &#39;weighted_tetrahedron_polynomial&#39;: str(polynomial), &#39;weighted_tetrahedron_eigenvalues&#39;: weighted_eigenvalues,
+              &#39;limiting_pair_overlap&#39;: str(expected), &#39;particle_cases&#39;: particle_cases,
+              &#39;cubic_source_leakage&#39;: leakage, &#39;color_controls&#39;: color,
+              &#39;neutrino_scale_input&#39;: &#39;Archived atmospheric splitting 2.534e-3 eV^2; separate conditional calibration.&#39;,
+              &#39;receiver&#39;: &#39;One common observer-three-dimensional angular response with squared poles 2 and 3 in units omega_0,6^2, weights 3/5 and 2/5. Signed response forms, not rates.&#39;,
+              &#39;exceptions&#39;: {&#39;photon&#39;: &#39;Massless n=0 does not supply an optical harmonic cutoff.&#39;,
+                             &#39;bottom&#39;: &#39;The unresolved geometric-mean assignment is not an integer cutoff; no rounding or replacement mass was used.&#39;},
+              &#39;sources&#39;: {&#39;experiments/sawtooth-sector-coupling-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest()}}
+    if args.manifest:
+        result[&#39;research_inputs&#39;] = json.loads(args.manifest.read_text())
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    with args.output.open(&#39;x&#39;) as output:
+        json.dump(result, output, indent=2)
+        output.write(&#39;\n&#39;)
+    print(json.dumps({&#39;checks&#39;: result[&#39;total_checks&#39;], &#39;weighted_tetrahedron&#39;: weighted_eigenvalues,
+                      &#39;report&#39;: str(args.output), &#39;particle_cases&#39;: particle_cases}, indent=2))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>
