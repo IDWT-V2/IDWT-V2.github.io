@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>neutral-frame-dielectric-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/neutral-frame-dielectric-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="neutral-frame-dielectric-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/neutral-frame-dielectric-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="neutral-frame-dielectric-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>neutral-frame-dielectric-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/neutral-frame-dielectric-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Test a neutral ordinary-spatial frame with a squared middle-form dielectric.&quot;&quot;&quot;
+from pathlib import Path
+from itertools import combinations
+from fractions import Fraction
+import argparse
+import hashlib
+import importlib.util
+import json
+import math
+
+import numpy as np
+import sympy as sp
+from scipy.integrate import simpson
+
+
+DEPTHS = (2, 3, 4, 5, 6, 10)
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    CHECKS += 1
+    if not condition:
+        raise AssertionError(message)
+
+
+def close(actual, expected, message, atol=2e-9, rtol=2e-9):
+    check(np.allclose(actual, expected, atol=atol, rtol=rtol), message)
+
+
+def hodge(even):
+    m = even // 2
+    basis = list(combinations(range(even), m))
+    lookup = {item: i for i, item in enumerate(basis)}
+    star = np.zeros((len(basis), len(basis)))
+    for j, item in enumerate(basis):
+        complement = tuple(i for i in range(even) if i not in item)
+        permutation = item + complement
+        star[lookup[complement], j] = (-1)**sum(permutation[i] &gt; permutation[k]
+            for i in range(even) for k in range(i + 1, even))
+    return basis, star, (star + star.T)/2
+
+
+def exterior(frame, basis):
+    return np.array([np.linalg.det(frame[list(item), :]) for item in basis])
+
+
+def geometric_cases():
+    rng = np.random.default_rng(2026101019)
+    for d in DEPTHS:
+        even = d if d % 2 == 0 else d + 1
+        m = even // 2
+        basis, star, symmetric = hodge(even)
+        close(star.T@star, np.eye(len(basis)), &#39;ordinary middle-form metric&#39;)
+        gate = float(np.trace(symmetric.T@symmetric)/len(basis))
+        max_relative_area = 0.
+        for _ in range(12):
+            frame = rng.normal(size=(even, m))
+            derivative = rng.normal(size=(even, m))
+            form = exterior(frame, basis)
+            gram = frame.T@frame
+            u2 = np.sum(frame*frame)
+            determinant = np.linalg.det(gram)
+            bound = (u2/m)**m
+            close(np.dot(form, form), determinant, &#39;Cauchy-Binet gives the actual geometric middle-form norm&#39;)
+            close(np.dot(form, star@form), 0, &#39;a decomposable middle form has zero unweighted self-wedge&#39;)
+            check(determinant &lt;= bound*(1 + 1e-12), &#39;one balanced Gram bound at every occupied depth&#39;)
+            close(np.dot(symmetric@form, symmetric@form), gate*determinant,
+                  &#39;the common Hodge action gates every actual frame preparation&#39;)
+            if gate &gt; 0:
+                plus = (form + star@form)/2
+                minus = (form - star@form)/2
+                close(np.dot(plus, star@plus) - np.dot(minus, star@minus), determinant,
+                      &#39;both weighted chiral self-contacts reproduce the geometric area norm&#39;)
+                close(np.dot(plus, minus), 0, &#39;the two real chiral area components are orthogonal&#39;)
+            radial_derivative2 = np.sum(frame*derivative)**2/u2
+            check(radial_derivative2 &lt;= np.sum(derivative*derivative)*(1 + 1e-12),
+                  &#39;radial norm gradient never exceeds complete frame gradient&#39;)
+            rotation, _ = np.linalg.qr(rng.normal(size=(even, even)))
+            if np.linalg.det(rotation) &lt; 0:
+                rotation[:, 0] *= -1
+            rotated = exterior(rotation@frame, basis)
+            close(np.dot(symmetric@rotated, symmetric@rotated), gate*determinant,
+                  &#39;common ordinary spatial rotation preserves the geometric dielectric&#39;)
+            max_relative_area = max(max_relative_area, determinant/bound)
+        u = 1.7
+        balanced = np.zeros((even, m))
+        balanced[:m, :] = np.eye(m)*u/math.sqrt(m)
+        form = exterior(balanced, basis)
+        close(np.dot(form, form), u**(2*m)/m**m, &#39;equal orthogonal frame saturates the determinant bound&#39;)
+        p = 2*m
+        n = d - 1
+        gradient_coefficient = 2*p - n*(p - 2)
+        mass_coefficient = n*(p - 2)
+        finite_profile = p &gt; 2 and gradient_coefficient &gt; 0
+        check(finite_profile == (d in (3, 4)), &#39;common geometric degree only admits occupied three/four finite-width profiles&#39;)
+        CASES.append({&#39;case&#39;: f&#39;geometric-frame-depth-{d}&#39;, &#39;real_depth&#39;: d,
+                      &#39;even_source_carrier&#39;: even, &#39;frame_vectors&#39;: m,
+                      &#39;balanced_dielectric_power&#39;: p, &#39;hodge_coefficient&#39;: gate,
+                      &#39;balanced_coefficient_fraction&#39;: str(Fraction(1, m**m)),
+                      &#39;pohozaev_gradient_coefficient&#39;: gradient_coefficient,
+                      &#39;pohozaev_mass_coefficient&#39;: mass_coefficient,
+                      &#39;nongated_regular_finite_width_profile_possible&#39;: finite_profile,
+                      &#39;active_color_source_permitted&#39;: gate &gt; 0,
+                      &#39;random_frame_comparisons&#39;: 12,
+                      &#39;largest_sampled_area_fraction&#39;: max_relative_area})
+    a, b, angle = sp.symbols(&#39;a b theta&#39;, positive=True, real=True)
+    area = a*a*b*b*sp.sin(angle)**2
+    check(sp.simplify((a*a + b*b)**2/4 - area -
+                      ((a*a - b*b)**2/4 + a*a*b*b*sp.cos(angle)**2)) == 0,
+          &#39;exact imbalance and nonorthogonality area deficit&#39;)
+
+
+def tube_frame_cases(n, solution, profile):
+    # Raw frame coefficient kappa=4 makes the balanced scalar coefficient one.
+    raw_kap = 4.
+    q = 1.
+    quartic = profile[&#39;quartic_integral&#39;]
+    amplitude = (2*q*q/quartic**2)**(1/6)
+    mass = amplitude*amplitude*profile[&#39;mass_integral&#39;]
+    scalar = amplitude*amplitude*(profile[&#39;gradient_integral&#39;] + profile[&#39;mass_integral&#39;])/2
+    electric = q*q/(2*amplitude**4*quartic)
+    tension = scalar + electric
+    close(electric/tension, 1/3, &#39;same scalar tube normalization in the full neutral-frame action&#39;)
+    for imbalance in (.1, .3, .7):
+        denominator = math.sqrt(2*math.cosh(2*imbalance))
+        first = math.exp(imbalance)/denominator
+        second = math.exp(-imbalance)/denominator
+        close(first*first + second*second, 1, &#39;relative amplitude variation retains complete frame norm&#39;)
+        dielectric_integral = raw_kap*first*first*second*second*amplitude**4*quartic
+        energy = q*q/(2*dielectric_integral) + scalar
+        close(energy - tension, electric*(math.cosh(2*imbalance)**2 - 1), &#39;exact positive imbalance energy&#39;)
+        check(energy &gt; tension, &#39;equal-length frame is preferred without an imposed amplitude fit&#39;)
+        CASES.append({&#39;case&#39;: f&#39;frame-imbalance-n{n}-s{imbalance}&#39;, &#39;real_depth&#39;: n + 1,
+                      &#39;relative_log_amplitude&#39;: imbalance, &#39;reference_tension&#39;: tension,
+                      &#39;complete_energy&#39;: energy, &#39;positive_excess&#39;: energy - tension})
+    for theta in (.4, .9, 1.2):
+        area_fraction = math.sin(theta)**2
+        energy = electric/area_fraction + scalar
+        check(energy &gt; tension, &#39;orthogonal physical deformation directions maximize flux support&#39;)
+        CASES.append({&#39;case&#39;: f&#39;frame-angle-n{n}-theta{theta}&#39;, &#39;real_depth&#39;: n + 1,
+                      &#39;relative_angle&#39;: theta, &#39;area_fraction&#39;: area_fraction,
+                      &#39;complete_energy&#39;: energy, &#39;positive_excess&#39;: energy - tension})
+    x = np.linspace(0, 20, 20001)
+    v, dv = solution.sol(x)
+    u, du = amplitude*v, amplitude*dv
+    weight = x**(n - 1)
+    area = 2*math.pi**(n/2)/math.gamma(n/2)
+    def integrate(value):
+        return area*simpson(weight*value, x=x)
+    for twist in (.2, .6):
+        theta = twist*(1 - np.exp(-x*x))
+        derivative_theta = 2*twist*x*np.exp(-x*x)
+        frame = np.zeros((len(x), 4, 2))
+        derivative = np.zeros_like(frame)
+        for slot in (0, 1):
+            frame[:, slot, slot] = u*np.cos(theta)/math.sqrt(2)
+            frame[:, slot + 2, slot] = u*np.sin(theta)/math.sqrt(2)
+            derivative[:, slot, slot] = (du*np.cos(theta) - u*np.sin(theta)*derivative_theta)/math.sqrt(2)
+            derivative[:, slot + 2, slot] = (du*np.sin(theta) + u*np.cos(theta)*derivative_theta)/math.sqrt(2)
+        gram = np.einsum(&#39;nik,nil-&gt;nkl&#39;, frame, frame)
+        determinant = np.linalg.det(gram)
+        close(determinant, u**4/4, &#39;varying common physical frame retains the dielectric area&#39;)
+        complete_gradient = np.sum(derivative*derivative, axis=(1, 2))
+        close(complete_gradient, du*du + u*u*derivative_theta**2, &#39;complete frame twist gradient&#39;)
+        excess = integrate(complete_gradient - du*du)/2
+        close(excess, integrate(u*u*derivative_theta**2)/2, &#39;positive orientation gradient cost&#39;)
+        check(excess &gt; 0, &#39;spatial frame twist is not an omitted instability&#39;)
+        CASES.append({&#39;case&#39;: f&#39;frame-twist-n{n}-theta{twist}&#39;, &#39;real_depth&#39;: n + 1,
+                      &#39;twist_amplitude&#39;: twist, &#39;positive_gradient_excess&#39;: excess,
+                      &#39;rigid_common_rotations_remain_free&#39;: True})
+    close(mass, integrate(u*u), &#39;complete neutral norm agrees with the scalar branch&#39;)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--profile-code&#39;, type=Path, default=Path(__file__).with_name(&#39;flux-tube-checks.py&#39;))
+    parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    geometric_cases()
+    spec = importlib.util.spec_from_file_location(&#39;profiles&#39;, args.profile_code)
+    profiles = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(profiles)
+    for n in (2, 3):
+        solution, profile = profiles.solve_profile(n, 25.)
+        tube_frame_cases(n, solution, profile)
+    report = {&#39;title&#39;: &#39;Neutral Geometric Frames Realize the Hodge-Gated Quartic Dielectric&#39;,
+              &#39;sources&#39;: {&#39;experiments/neutral-frame-dielectric-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/hodge-flux-tube-checks.py&#39;: hashlib.sha256(args.profile_code.read_bytes()).hexdigest()},
+              &#39;checks_passed&#39;: CHECKS, &#39;case_count&#39;: len(CASES), &#39;occupied_depths&#39;: list(DEPTHS),
+              &#39;status&#39;: &#39;explicit positive retained geometric-mode action; master-field reduction and vacuum Cauchy problem remain open&#39;,
+              &#39;conclusion&#39;: &#39;Squared middle-form volume gives a quartic dielectric on the active four-carrier. Exact Gram and gradient bounds reduce the entire neutral-frame fixed-flux energy to its balanced scalar branch. Amplitude imbalance, nonorthogonality and spatial frame twists cannot lower the tube minimum. All occupied-sector Hodge zeros and geometric-degree profile controls use the same law.&#39;,
+              &#39;cases&#39;: CASES}
+    args.report.write_text(json.dumps(report, indent=2) + &#39;\n&#39;)
+    print(f&#39;{CHECKS} checks passed across {len(CASES)} cases; {args.report}&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

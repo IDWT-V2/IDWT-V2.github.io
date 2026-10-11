@@ -1,0 +1,1386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>paired-curvature-response-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/paired-curvature-response-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="paired-curvature-response-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/paired-curvature-response-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="paired-curvature-response-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>paired-curvature-response-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/paired-curvature-response-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">experiment_key</th><td>paired-curvature-response-20261009</td></tr><tr><th scope="row">created_utc</th><td>2026-10-09T21:31:00.447179+00:00</td></tr><tr><th scope="row">scope</th><td>Conditional conjugate fast-band cancellation, complete positive kinetics, quantum metric/color distinction and Hodge controls through depth twelve. No particle simulations.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;experiment_key&quot;: &quot;paired-curvature-response-20261009&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-09T21:31:00.447179+00:00&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/paired-curvature-response-checks.py&quot;: &quot;fed667102e58b7c1271913bd408aecf6135c95c94e9bfc8caf5a3a106f11ec3b&quot;
+  },
+  &quot;scope&quot;: &quot;Conditional conjugate fast-band cancellation, complete positive kinetics, quantum metric/color distinction and Hodge controls through depth twelve. No particle simulations.&quot;,
+  &quot;summary&quot;: {
+    &quot;checks_passed&quot;: 1485,
+    &quot;case_count&quot;: 64
+  },
+  &quot;cases&quot;: [
+    {
+      &quot;name&quot;: &quot;exact-paired-fast-bands&quot;,
+      &quot;parameters&quot;: {
+        &quot;matching&quot;: &quot;equal positive gaps and equal weights&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;cross_response&quot;: &quot;0&quot;,
+        &quot;source_response&quot;: &quot;2*B**2*Delta*Omega**2/(Delta**2 - Omega**2)&quot;,
+        &quot;source_response_high_frequency&quot;: &quot;-2*B**2*Delta&quot;,
+        &quot;unequal_gap_residual&quot;: &quot;-A*B*Delta_minus**2/(Delta_minus**2 - Omega**2) + A*B*Delta_plus**2/(Delta_plus**2 - Omega**2)&quot;
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          0.3,
+          0.3
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          0.2999576011778212,
+          0.2999721689814799,
+          1.4144134605891054,
+          1.7322115049371283
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.2999047414786983
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          0.3,
+          0.306
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          0.29996487587397513,
+          0.3059634156318577,
+          1.4144156537696388,
+          1.7322132143325193
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.29995197608196783
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          0.3,
+          0.36
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          0.2999648840006431,
+          0.359948515172624,
+          1.4144359865104685,
+          1.7322289037121121
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.29995231645561504
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          0.3,
+          0.3
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          0.2995299722638048,
+          0.29969121871319326,
+          1.4164327713363754,
+          1.7338353939824278
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.2989455520869877
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          0.3,
+          0.306
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          0.2996094651551391,
+          0.305595347294622,
+          1.416457091754361,
+          1.7338543650837903
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.2994246374273601
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          0.3,
+          0.36
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          0.29961046304087313,
+          0.35942944589960274,
+          1.416682485000232,
+          1.7340284832004076
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.2994661048989692
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          0.3,
+          0.3
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          0.2958522743117084,
+          0.297256168898941,
+          1.4340402476167087,
+          1.748038549360834
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.2908120966747514
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          0.3,
+          0.306
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          0.2964680001676787,
+          0.3024969393924196,
+          1.434255428250878,
+          1.748207565784935
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.292791785732324
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          0.3,
+          0.36
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          0.2965440160563614,
+          0.3549800599756268,
+          1.4362437677335667,
+          1.7497584528178038
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.29489076372788536
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          1.3,
+          1.3
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.295304682028698,
+          1.2988431359666157,
+          1.41933991020986,
+          1.7335935244896368
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999996
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          1.3,
+          1.326
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.2969156465851586,
+          1.3224691606402612,
+          1.4200489893225008,
+          1.7336518660683244
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999994
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          1.3,
+          1.56
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.29702590138575,
+          1.414511067595619,
+          1.56064398595046,
+          1.7349410940722574
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 1.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          1.3,
+          1.3
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.2607007656716607,
+          1.2875880035721703,
+          1.458298179192064,
+          1.7487473039456074
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999991
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          1.3,
+          1.326
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.2668462451542628,
+          1.3033947970489284,
+          1.461797689366219,
+          1.749344479948964
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.999999999999999
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          1.3,
+          1.56
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.2717356279599414,
+          1.4112279948945563,
+          1.5713660844603459,
+          1.761457540677886
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999989
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          1.3,
+          1.3
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.1299735238637667,
+          1.2109034602308497,
+          1.6270094761146592,
+          1.859492621658111
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999994
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          1.3,
+          1.326
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.1360021539441174,
+          1.221520630521288,
+          1.6334576763246718,
+          1.8628361374799447
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999997
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          1.3,
+          1.56
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.1539897868079154,
+          1.321945985461387,
+          1.6999129539703552,
+          1.9155840708226117
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999996
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          3.7,
+          3.7
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4138109223735273,
+          1.731511609341006,
+          3.7010537250595688,
+          3.701152191779921
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 1.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          3.7,
+          3.7740000000000005
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4138161688120423,
+          1.73151973766503,
+          3.7011029291871727,
+          3.7750933162564575
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999998
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          3.7,
+          4.44
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4138527839013402,
+          1.7315742462219903,
+          3.7011029719832624,
+          4.4410313808902355
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 1.0000000000000004
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          3.7,
+          3.7
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4097633385325326,
+          1.726098219435602,
+          3.711679852752603,
+          3.7127597467195788
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 1.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          3.7,
+          3.7740000000000005
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4098209270515167,
+          1.7261871590979898,
+          3.7122162799893648,
+          3.7861179506183773
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999994
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          3.7,
+          4.44
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4102231026411498,
+          1.7267853070507782,
+          3.7122214583256703,
+          4.451437424976019
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999989
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          3.7,
+          3.7
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.375907916494484,
+          1.681279978510817,
+          3.8030089935901827,
+          3.8117315794607918
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 1.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          3.7,
+          3.7740000000000005
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.3763760351948062,
+          1.6819854367621545,
+          3.807139749977346,
+          3.8807984905691586
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999997
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          3.7,
+          4.44
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.379662495367141,
+          1.6868379393053476,
+          3.8074945760851397,
+          4.541243686313215
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999996
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          10.0,
+          10.0
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.414083703992422,
+          1.7318901251085335,
+          10.000918321739402,
+          10.000927786688171
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 1.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          10.0,
+          10.2
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4140850273245704,
+          1.7318917946522412,
+          10.000923054528268,
+          10.20092213500904
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.999999999999999
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          10.0,
+          12.0
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4140948593163944,
+          1.7319041401922852,
+          10.000923058079822,
+          12.000915871899407
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.999999999999999
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          10.0,
+          10.0
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.41277275214063,
+          1.7302680579782905,
+          10.010198457114077,
+          10.01030331446255
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999973
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          10.0,
+          10.2
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.41278741299487,
+          1.730286552655161,
+          10.010250924585437,
+          10.210240770825159
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999996
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          10.0,
+          12.0
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4128963526624536,
+          1.7304233410034071,
+          10.010251362160544,
+          12.010171798267791
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999981
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          10.0,
+          10.0
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4014067519342608,
+          1.7162092913208036,
+          10.091385391294551,
+          10.092305270273199
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 1.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          10.0,
+          10.2
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4015353912926987,
+          1.7163714374711525,
+          10.091848452909025,
+          10.291761872444628
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999996
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          10.0,
+          12.0
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.402492294474848,
+          1.7175728227379352,
+          10.09188327735983,
+          12.091188977047523
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999981
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          30.0,
+          30.0
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4141710433986405,
+          1.7319986746246003,
+          30.00090199077376,
+          30.000902996261605
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999964
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          30.0,
+          30.6
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4141714620348607,
+          1.731999189027063,
+          30.000902493651683,
+          30.600902396033703
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 1.0000000000000022
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          30.0,
+          36.0
+        ],
+        &quot;A&quot;: 0.03,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4141745985463519,
+          1.7320030410303513,
+          30.00090249475171,
+          36.00090172719417
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999963
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          30.0,
+          30.0
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4137413452770544,
+          1.7314718181034854,
+          30.01002058327608,
+          30.010031745120063
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999988
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          30.0,
+          30.6
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.413745992547617,
+          1.7314775284538033,
+          30.010026180730836,
+          30.61002509748831
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999929
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          30.0,
+          36.0
+        ],
+        &quot;A&quot;: 0.1,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4137808122184217,
+          1.7315202910707408,
+          30.010026316457456,
+          36.01001779758159
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 1.000000000000004
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          30.0,
+          30.0
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.409980610120124,
+          1.7268608019934633,
+          30.090064052425745,
+          30.090163704615144
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.999999999999989
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          30.0,
+          30.6
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.4100221023340787,
+          1.7269117842240371,
+          30.090115210571046,
+          30.690105571258606
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 0.9999999999999964
+      }
+    },
+    {
+      &quot;name&quot;: &quot;complete-paired-Hamiltonian&quot;,
+      &quot;parameters&quot;: {
+        &quot;gaps&quot;: [
+          30.0,
+          36.0
+        ],
+        &quot;A&quot;: 0.3,
+        &quot;B_signs&quot;: [
+          1,
+          -1
+        ]
+      },
+      &quot;measurements&quot;: {
+        &quot;frequencies&quot;: [
+          1.410333086745889,
+          1.7272937081680106,
+          30.090126148364742,
+          36.09005022725304
+        ],
+        &quot;minimum_energy_eigenvalue&quot;: 1.0000000000000018
+      }
+    },
+    {
+      &quot;name&quot;: &quot;flat-ray-color-control&quot;,
+      &quot;parameters&quot;: {
+        &quot;carrier_rank&quot;: 1
+      },
+      &quot;measurements&quot;: {
+        &quot;singlet_overlap_squared&quot;: &quot;1&quot;,
+        &quot;quadratic_color_generator_expectation&quot;: 0,
+        &quot;Berry_curvature&quot;: &quot;0&quot;,
+        &quot;metric_factor&quot;: 2
+      }
+    },
+    {
+      &quot;name&quot;: &quot;flat-ray-color-control&quot;,
+      &quot;parameters&quot;: {
+        &quot;carrier_rank&quot;: 3
+      },
+      &quot;measurements&quot;: {
+        &quot;singlet_overlap_squared&quot;: &quot;1/3&quot;,
+        &quot;quadratic_color_generator_expectation&quot;: 2,
+        &quot;Berry_curvature&quot;: &quot;0&quot;,
+        &quot;metric_factor&quot;: 2
+      }
+    },
+    {
+      &quot;name&quot;: &quot;flat-ray-color-control&quot;,
+      &quot;parameters&quot;: {
+        &quot;carrier_rank&quot;: 10
+      },
+      &quot;measurements&quot;: {
+        &quot;singlet_overlap_squared&quot;: &quot;1/10&quot;,
+        &quot;quadratic_color_generator_expectation&quot;: 9,
+        &quot;Berry_curvature&quot;: &quot;0&quot;,
+        &quot;metric_factor&quot;: 2
+      }
+    },
+    {
+      &quot;name&quot;: &quot;flat-ray-color-control&quot;,
+      &quot;parameters&quot;: {
+        &quot;carrier_rank&quot;: 35
+      },
+      &quot;measurements&quot;: {
+        &quot;singlet_overlap_squared&quot;: &quot;1/35&quot;,
+        &quot;quadratic_color_generator_expectation&quot;: 34,
+        &quot;Berry_curvature&quot;: &quot;0&quot;,
+        &quot;metric_factor&quot;: 2
+      }
+    },
+    {
+      &quot;name&quot;: &quot;flat-ray-color-control&quot;,
+      &quot;parameters&quot;: {
+        &quot;carrier_rank&quot;: 126
+      },
+      &quot;measurements&quot;: {
+        &quot;singlet_overlap_squared&quot;: &quot;1/126&quot;,
+        &quot;quadratic_color_generator_expectation&quot;: 125,
+        &quot;Berry_curvature&quot;: &quot;0&quot;,
+        &quot;metric_factor&quot;: 2
+      }
+    },
+    {
+      &quot;name&quot;: &quot;flat-ray-color-control&quot;,
+      &quot;parameters&quot;: {
+        &quot;carrier_rank&quot;: 462
+      },
+      &quot;measurements&quot;: {
+        &quot;singlet_overlap_squared&quot;: &quot;1/462&quot;,
+        &quot;quadratic_color_generator_expectation&quot;: 461,
+        &quot;Berry_curvature&quot;: &quot;0&quot;,
+        &quot;metric_factor&quot;: 2
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 2,
+        &quot;middle_degree&quot;: 1,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: true
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 1,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: true,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 2,
+        &quot;middle_degree&quot;: 1,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: false
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 1,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: true,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 4,
+        &quot;middle_degree&quot;: 2,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: true
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 3,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: false,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 2
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 4,
+        &quot;middle_degree&quot;: 2,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: false
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 3,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: false,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 2
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 6,
+        &quot;middle_degree&quot;: 3,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: true
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 10,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: true,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 9
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 6,
+        &quot;middle_degree&quot;: 3,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: false
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 10,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: true,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 9
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 7,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 8,
+        &quot;middle_degree&quot;: 4,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: true
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 35,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: false,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 34
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 8,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 8,
+        &quot;middle_degree&quot;: 4,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: false
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 35,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: false,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 34
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 9,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 10,
+        &quot;middle_degree&quot;: 5,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: true
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 126,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: true,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 125
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 10,
+        &quot;middle_degree&quot;: 5,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: false
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 126,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: true,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 125
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 11,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 12,
+        &quot;middle_degree&quot;: 6,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: true
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 462,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: false,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 461
+      }
+    },
+    {
+      &quot;name&quot;: &quot;all-depth-conjugation-control&quot;,
+      &quot;real_depth&quot;: 12,
+      &quot;parameters&quot;: {
+        &quot;even_carrier_depth&quot;: 12,
+        &quot;middle_degree&quot;: 6,
+        &quot;odd_shadow_requires_separate_restriction_map&quot;: false
+      },
+      &quot;measurements&quot;: {
+        &quot;channel_rank&quot;: 462,
+        &quot;conjugation_exchanges_Hodge_channels&quot;: false,
+        &quot;matched_response_pairs_can_cancel_gyro&quot;: true,
+        &quot;Hodge_rotation_alone_forces_equal_occupation&quot;: false,
+        &quot;flat_product_ray_color_Casimir&quot;: 461
+      }
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

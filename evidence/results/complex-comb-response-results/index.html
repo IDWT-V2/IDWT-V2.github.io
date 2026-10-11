@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>complex-comb-response-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/complex-comb-response-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="complex-comb-response-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/complex-comb-response-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="complex-comb-response-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>complex-comb-response-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/complex-comb-response-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">experiment</th><td>complex-comb-sector-response</td></tr><tr><th scope="row">created_utc</th><td>2026-10-09T23:30:41.566328+00:00</td></tr><tr><th scope="row">status</th><td>passed</td></tr><tr><th scope="row">checks</th><td>2831</td></tr><tr><th scope="row">scope</th><td>Conditional real versus positive-frequency combs at occupied sectors; signed conservative receiver diagnostics, not charges or rates.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;experiment&quot;: &quot;complex-comb-sector-response&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-09T23:30:41.566328+00:00&quot;,
+  &quot;status&quot;: &quot;passed&quot;,
+  &quot;checks&quot;: 2831,
+  &quot;check_counts&quot;: {
+    &quot;finite_derivative_identity&quot;: 40,
+    &quot;partial_harmonic_square_identity&quot;: 40,
+    &quot;harmonic_convolution_identity&quot;: 40,
+    &quot;density_mean_independent_fft&quot;: 40,
+    &quot;density_coefficients_independent_fft&quot;: 40,
+    &quot;derivative_norm_independent_fft&quot;: 40,
+    &quot;finite_variance_deficit_bound&quot;: 40,
+    &quot;telescoping_density_coefficient&quot;: 780,
+    &quot;limiting_coefficient_deficit&quot;: 780,
+    &quot;coefficient_deficit_bound&quot;: 780,
+    &quot;numeric_derivative_identity&quot;: 4,
+    &quot;large_finite_variance_bound&quot;: 4,
+    &quot;variance_response_bound_vs_full_sum&quot;: 10,
+    &quot;external_euler_sum_independent_partial_bound&quot;: 1,
+    &quot;large_cutoff_coefficients_high_precision&quot;: 156,
+    &quot;fundamental_matches_real_preparation&quot;: 13,
+    &quot;equal_mean_source&quot;: 14,
+    &quot;omitted_frequencies_above_poles&quot;: 3,
+    &quot;response_tail_and_variance_intervals_overlap&quot;: 3,
+    &quot;slow_comb_derivative_sandwich&quot;: 3
+  },
+  &quot;scope&quot;: &quot;Conditional real versus positive-frequency combs at occupied sectors; signed conservative receiver diagnostics, not charges or rates.&quot;,
+  &quot;finite_cases&quot;: [
+    {
+      &quot;cutoff&quot;: 1,
+      &quot;density_derivative_norm_exact&quot;: &quot;0&quot;,
+      &quot;variance_exact&quot;: &quot;0&quot;
+    },
+    {
+      &quot;cutoff&quot;: 2,
+      &quot;density_derivative_norm_exact&quot;: &quot;1/8&quot;,
+      &quot;variance_exact&quot;: &quot;1/4&quot;
+    },
+    {
+      &quot;cutoff&quot;: 3,
+      &quot;density_derivative_norm_exact&quot;: &quot;4/9&quot;,
+      &quot;variance_exact&quot;: &quot;5/9&quot;
+    },
+    {
+      &quot;cutoff&quot;: 4,
+      &quot;density_derivative_norm_exact&quot;: &quot;283/288&quot;,
+      &quot;variance_exact&quot;: &quot;481/576&quot;
+    },
+    {
+      &quot;cutoff&quot;: 5,
+      &quot;density_derivative_norm_exact&quot;: &quot;697/400&quot;,
+      &quot;variance_exact&quot;: &quot;69/64&quot;
+    },
+    {
+      &quot;cutoff&quot;: 6,
+      &quot;density_derivative_norm_exact&quot;: &quot;19577/7200&quot;,
+      &quot;variance_exact&quot;: &quot;20867/16200&quot;
+    },
+    {
+      &quot;cutoff&quot;: 7,
+      &quot;density_derivative_norm_exact&quot;: &quot;43046/11025&quot;,
+      &quot;variance_exact&quot;: &quot;13339/9072&quot;
+    },
+    {
+      &quot;cutoff&quot;: 8,
+      &quot;density_derivative_norm_exact&quot;: &quot;829471/156800&quot;,
+      &quot;variance_exact&quot;: &quot;165601201/101606400&quot;
+    },
+    {
+      &quot;cutoff&quot;: 9,
+      &quot;density_derivative_norm_exact&quot;: &quot;1744387/254016&quot;,
+      &quot;variance_exact&quot;: &quot;64764113/36578304&quot;
+    },
+    {
+      &quot;cutoff&quot;: 10,
+      &quot;density_derivative_norm_exact&quot;: &quot;109581541/12700800&quot;,
+      &quot;variance_exact&quot;: &quot;884478749/466560000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 11,
+      &quot;density_derivative_norm_exact&quot;: &quot;1352943371/128066400&quot;,
+      &quot;variance_exact&quot;: &quot;504943994911/251475840000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 12,
+      &quot;density_derivative_norm_exact&quot;: &quot;19470437963/1536796800&quot;,
+      &quot;variance_exact&quot;: &quot;729288569087/345779280000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 13,
+      &quot;density_derivative_norm_exact&quot;: &quot;39584914337/2650190400&quot;,
+      &quot;variance_exact&quot;: &quot;201909217769/91737360000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 14,
+      &quot;density_derivative_norm_exact&quot;: &quot;300575636423/17314577280&quot;,
+      &quot;variance_exact&quot;: &quot;13084221112041769/5726796435360000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 15,
+      &quot;density_derivative_norm_exact&quot;: &quot;40445105959/2029052025&quot;,
+      &quot;variance_exact&quot;: &quot;300536696584921/127262143008000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 16,
+      &quot;density_derivative_norm_exact&quot;: &quot;23531907418231/1038874636800&quot;,
+      &quot;variance_exact&quot;: &quot;1800955707290479/740434286592000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 17,
+      &quot;density_derivative_norm_exact&quot;: &quot;47277402817823/1853301049600&quot;,
+      &quot;variance_exact&quot;: &quot;115278103985061191/46153737197568000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 18,
+      &quot;density_derivative_norm_exact&quot;: &quot;8557875550789973/300234770035200&quot;,
+      &quot;variance_exact&quot;: &quot;487784132124035325221/190661088363153408000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 19,
+      &quot;density_derivative_norm_exact&quot;: &quot;171407533086724679/5419237599135360&quot;,
+      &quot;variance_exact&quot;: &quot;728658081759766270523/278658513761531904000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 20,
+      &quot;density_derivative_norm_exact&quot;: &quot;36006877969070443/1032235733168640&quot;,
+      &quot;variance_exact&quot;: &quot;918047554235009969437549/344143264495491901440000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 21,
+      &quot;density_derivative_norm_exact&quot;: &quot;3427030788866513/89574175192320&quot;,
+      &quot;variance_exact&quot;: &quot;7727663952118559069269/2844159210706544640000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 22,
+      &quot;density_derivative_norm_exact&quot;: &quot;905146044884877869/21676950396541440&quot;,
+      &quot;variance_exact&quot;: &quot;115071782906204654035453429/41641335003954520074240000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 23,
+      &quot;density_derivative_norm_exact&quot;: &quot;21677705791672139887/477796114990434240&quot;,
+      &quot;variance_exact&quot;: &quot;2688445499874047075634956867/957750705090953961707520000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 24,
+      &quot;density_derivative_norm_exact&quot;: &quot;112602897380749396007/2293421351954084352&quot;,
+      &quot;variance_exact&quot;: &quot;7842601547807818386674215727/2753533277136492639909120000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 25,
+      &quot;density_derivative_norm_exact&quot;: &quot;224496192823836125723/4240793920033440000&quot;,
+      &quot;variance_exact&quot;: &quot;2767035147608957252617759/958417430259830365440000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 26,
+      &quot;density_derivative_norm_exact&quot;: &quot;1006640772494256302933/17696152407053120000&quot;,
+      &quot;variance_exact&quot;: &quot;272126770493890756519331320297/93069424767213451228928256000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 27,
+      &quot;density_derivative_norm_exact&quot;: &quot;4010862238204587011513/65818852575212880000&quot;,
+      &quot;variance_exact&quot;: &quot;12391987515878844349801669026157/4188124114524605305301771520000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 28,
+      &quot;density_derivative_norm_exact&quot;: &quot;839749365505184651566339/12900495104741724480000&quot;,
+      &quot;variance_exact&quot;: &quot;1319049534429062834123207579147/440855169949958453189660160000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 29,
+      &quot;density_derivative_norm_exact&quot;: &quot;25080642398770739551440071/361643879436259676256000&quot;,
+      &quot;variance_exact&quot;: &quot;734467051806787196515059804220381/242911198642427107707502748160000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 30,
+      &quot;density_derivative_norm_exact&quot;: &quot;799680599346600616485191801/10849316383087790287680000&quot;,
+      &quot;variance_exact&quot;: &quot;537788466960797247804751975205397821/176110619015759653087939492416000000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 31,
+      &quot;density_derivative_norm_exact&quot;: &quot;3183276065862856501197675007/40727316578700650259611250&quot;,
+      &quot;variance_exact&quot;: &quot;16828231352349093418762274142076356851/5459429189488549245726124264896000000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 32,
+      &quot;density_derivative_norm_exact&quot;: &quot;104524943825483297713958452199/1263780975048165632298240000&quot;,
+      &quot;variance_exact&quot;: &quot;33684455930779758630456424275784534222409/10831507511945281703520630541553664000000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 33,
+      &quot;density_derivative_norm_exact&quot;: &quot;6302486967923434214343717847/72153585080604612224640000&quot;,
+      &quot;variance_exact&quot;: &quot;117539246430624065398658858616543824681/37479264747215507624638860005376000000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 34,
+      &quot;density_derivative_norm_exact&quot;: &quot;109718316828898032755481542279/1191564919331127596166912000&quot;,
+      &quot;variance_exact&quot;: &quot;430248681094074073103066857033827691479487/136100246563138539665976618543869952000000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 35,
+      &quot;density_derivative_norm_exact&quot;: &quot;112254465579343585443235479479/1158465893794151829606720000&quot;,
+      &quot;variance_exact&quot;: &quot;398848405471970777459362412214113990434193/125212226838087456492698489060360355840000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 36,
+      &quot;density_derivative_norm_exact&quot;: &quot;4245826331359151216687599393523/41704772176589465865841920000&quot;,
+      &quot;variance_exact&quot;: &quot;401747034227149607938758072215217045373249/125212226838087456492698489060360355840000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 37,
+      &quot;density_derivative_norm_exact&quot;: &quot;8445460638227534767712652529829/79077331176940413809331840000&quot;,
+      &quot;variance_exact&quot;: &quot;41461759740224787364917227309416582815901/12833386130219490000636687244413665280000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 38,
+      &quot;density_derivative_norm_exact&quot;: &quot;163782557263187558164890141735551/1463944438711563558213784320000&quot;,
+      &quot;variance_exact&quot;: &quot;201247438677583843405610076913423810479172029313/61881009413424363785800027580031631099330560000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 39,
+      &quot;density_derivative_norm_exact&quot;: &quot;167053571220944978857776209584631/1427345827743774469258439712000&quot;,
+      &quot;variance_exact&quot;: &quot;202521961971623653216939157358628648576690022017/61881009413424363785800027580031631099330560000&quot;
+    },
+    {
+      &quot;cutoff&quot;: 40,
+      &quot;density_derivative_norm_exact&quot;: &quot;6981410352975931274584845124676671/57093833109750978770337588480000&quot;,
+      &quot;variance_exact&quot;: &quot;5093749527407677245291078007961191744581217915141/1547025235335609094645000689500790777483264000000&quot;
+    }
+  ],
+  &quot;particle_cases&quot;: [
+    {
+      &quot;particle&quot;: &quot;W&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 76,
+      &quot;cutoff&quot;: 2926,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: -6.12955286131927e-13,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: -2.2692159964432452,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.2930074372662251,
+        &quot;evaluated_harmonics&quot;: 2925,
+        &quot;derivative_interval_lower&quot;: -2.2692159964432452,
+        &quot;derivative_interval_upper&quot;: -2.2692159964432452,
+        &quot;variance_deficit_bound&quot;: 0.10419003184690137,
+        &quot;density_derivative_norm&quot;: 64001.051226946416
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: -5.103646885186104e-13,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: -0.5414410422786011,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.2930074372662251,
+        &quot;evaluated_source_harmonics&quot;: 5852
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;Z&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 81,
+      &quot;cutoff&quot;: 3321,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: -6.130104964318553e-13,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: -2.272135897199846,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.2930219173153557,
+        &quot;evaluated_harmonics&quot;: 3320,
+        &quot;derivative_interval_lower&quot;: -2.272135897199846,
+        &quot;derivative_interval_upper&quot;: -2.272135897199846,
+        &quot;variance_deficit_bound&quot;: 0.09446117307589436,
+        &quot;density_derivative_norm&quot;: 75422.6215495044
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: -5.104088427720626e-13,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: -0.5414079644840168,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.2930219173153557,
+        &quot;evaluated_source_harmonics&quot;: 6642
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;Higgs&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 95,
+      &quot;cutoff&quot;: 4560,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: -6.131216222677637e-13,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: -2.2783204096590297,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.2930510644913504,
+        &quot;evaluated_harmonics&quot;: 4559,
+        &quot;derivative_interval_lower&quot;: -2.2783204096590297,
+        &quot;derivative_interval_upper&quot;: -2.2783204096590297,
+        &quot;variance_deficit_bound&quot;: 0.0737750563768462,
+        &quot;density_derivative_norm&quot;: 113446.69877110975
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: -5.104977207004798e-13,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: -0.5413412653124063,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.2930510644913504,
+        &quot;evaluated_source_harmonics&quot;: 9120
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;down&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;mode_index&quot;: 1,
+      &quot;cutoff&quot;: 1,
+      &quot;fundamental_over_depth6&quot;: 170813.0545187998,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: 0.0,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: 0.0,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.10833333333333334,
+        &quot;evaluated_harmonics&quot;: 0,
+        &quot;derivative_interval_lower&quot;: 0.0,
+        &quot;derivative_interval_upper&quot;: 0.0,
+        &quot;variance_deficit_bound&quot;: 4.599873743272338,
+        &quot;density_derivative_norm&quot;: 0.0
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: -1.0710454580969868e-12,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: -0.1250000000025705,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.10833333333333334,
+        &quot;evaluated_source_harmonics&quot;: 2
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;strange&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;mode_index&quot;: 4,
+      &quot;cutoff&quot;: 20,
+      &quot;fundamental_over_depth6&quot;: 170813.0545187998,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: -1.864727514003411e-11,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: -1.3338159554156241,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.27600485263205243,
+        &quot;evaluated_harmonics&quot;: 19,
+        &quot;derivative_interval_lower&quot;: -1.3338159554156241,
+        &quot;derivative_interval_upper&quot;: -1.3338159554156241,
+        &quot;variance_deficit_bound&quot;: 2.8923088813828537,
+        &quot;density_derivative_norm&quot;: 34.8824176610711
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: -1.56534175706646e-11,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: -0.5661043903543734,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.27600485263205243,
+        &quot;evaluated_source_harmonics&quot;: 40
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;up&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 3,
+      &quot;cutoff&quot;: 15,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: -1.879462297168444e-08,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: -1.1807781205086245,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.270594078033031,
+        &quot;evaluated_harmonics&quot;: 14,
+        &quot;derivative_interval_lower&quot;: -1.1807781205086245,
+        &quot;derivative_interval_upper&quot;: -1.1807781205086245,
+        &quot;variance_deficit_bound&quot;: 3.3101564455311316,
+        &quot;density_derivative_norm&quot;: 19.933005886825402
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: -1.5850537135090832e-08,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: -0.5694487098515483,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.270594078033031,
+        &quot;evaluated_source_harmonics&quot;: 30
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;charm&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 20,
+      &quot;cutoff&quot;: 8855,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: -2.1980478113489328e-08,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: -2.287255876457329,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.29308896406801194,
+        &quot;evaluated_harmonics&quot;: 8854,
+        &quot;derivative_interval_lower&quot;: -2.287255876457329,
+        &quot;derivative_interval_upper&quot;: -2.287255876457329,
+        &quot;variance_deficit_bound&quot;: 0.043652832749740494,
+        &quot;density_derivative_norm&quot;: 263374.5250691595
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: -1.830123048509257e-08,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: -0.5412543395458383,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.29308896406801194,
+        &quot;evaluated_source_harmonics&quot;: 17710
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;top&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 72,
+      &quot;cutoff&quot;: 1215450,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: -2.1985936186135585e-08,
+        &quot;density_tail_bound&quot;: 1.101777887695322e-20,
+        &quot;derivative_response&quot;: -2.29864813768939,
+        &quot;derivative_tail_bound&quot;: 0.001314982537223023,
+        &quot;static_source_term&quot;: 0.29312891590360324,
+        &quot;evaluated_harmonics&quot;: 65536,
+        &quot;derivative_interval_lower&quot;: -2.2999369244024157,
+        &quot;derivative_interval_upper&quot;: -2.2995797627278334,
+        &quot;variance_deficit_bound&quot;: 0.0007143233491643059,
+        &quot;derivative_interval_method&quot;: &quot;limiting variance plus exact finite coefficients&quot;,
+        &quot;density_derivative_norm&quot;: 96727956.02881806
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: -1.8305596701094053e-08,
+        &quot;density_tail_bound&quot;: 2.7214271004649436e-22,
+        &quot;derivative_source_response&quot;: -0.5411603302433488,
+        &quot;derivative_tail_bound&quot;: 3.2480494965483416e-05,
+        &quot;static_source_term&quot;: 0.29312891590360324,
+        &quot;evaluated_source_harmonics&quot;: 65536
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;nu1&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;mode_index&quot;: 10,
+      &quot;cutoff&quot;: 2002,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: 0.9787225900588117,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: 1.3060078996418373e-11,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.2929512574323704,
+        &quot;evaluated_harmonics&quot;: 2001,
+        &quot;derivative_interval_lower&quot;: 1.3060078996418373e-11,
+        &quot;derivative_interval_upper&quot;: 1.3060078996418373e-11,
+        &quot;variance_deficit_bound&quot;: 0.1394191586046011,
+        &quot;density_derivative_norm&quot;: 38958.23445105402,
+        &quot;slow_derivative_leading&quot;: 1.3060078990646476e-11,
+        &quot;slow_derivative_relative_upper&quot;: 1.3899275064233052e-09
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: 0.23467991214492692,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: 1.3392546064223185e-12,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.2929512574323704,
+        &quot;evaluated_source_harmonics&quot;: 4004
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;nu2&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;mode_index&quot;: 15,
+      &quot;cutoff&quot;: 11628,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: 0.9922352730358652,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: 1.2422322548975586e-10,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.2930985608895927,
+        &quot;evaluated_harmonics&quot;: 11627,
+        &quot;derivative_interval_lower&quot;: 1.2422322548975586e-10,
+        &quot;derivative_interval_upper&quot;: 1.2422322548975586e-10,
+        &quot;variance_deficit_bound&quot;: 0.03510005523758015,
+        &quot;density_derivative_norm&quot;: 370558.05508703965,
+        &quot;slow_derivative_leading&quot;: 1.2422322362008715e-10,
+        &quot;slow_derivative_relative_upper&quot;: 4.692813004858465e-08
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: 0.23453396537159715,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: 7.792567565236512e-12,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.2930985608895927,
+        &quot;evaluated_source_harmonics&quot;: 23256
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;nu3&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;mode_index&quot;: 22,
+      &quot;cutoff&quot;: 65780,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: 0.9955912667461677,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: 1.0391361584623414e-09,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.29312379109992004,
+        &quot;evaluated_harmonics&quot;: 65779,
+        &quot;derivative_interval_lower&quot;: 1.0391361584623414e-09,
+        &quot;derivative_interval_upper&quot;: 1.0391361584623414e-09,
+        &quot;variance_deficit_bound&quot;: 0.008504257042454739,
+        &quot;density_derivative_norm&quot;: 3099743.1557011893,
+        &quot;slow_derivative_leading&quot;: 1.0391356547493142e-09,
+        &quot;slow_derivative_relative_upper&quot;: 1.5020109063179632e-06
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: 0.23450878352571458,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: 4.409911082982454e-11,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.29312379109992004,
+        &quot;evaluated_source_harmonics&quot;: 131560
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;electron&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;mode_index&quot;: 13,
+      &quot;cutoff&quot;: 18564,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: 0.15251134182577325,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_response&quot;: -2.0220484046413905,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.293110011384642,
+        &quot;evaluated_harmonics&quot;: 18563,
+        &quot;derivative_interval_lower&quot;: -2.0220484046413905,
+        &quot;derivative_interval_upper&quot;: -2.0220484046413905,
+        &quot;variance_deficit_bound&quot;: 0.024058030782052955,
+        &quot;density_derivative_norm&quot;: 662543.0760960502
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: 0.376952654977006,
+        &quot;density_tail_bound&quot;: 0.0,
+        &quot;derivative_source_response&quot;: 0.2997002729085455,
+        &quot;derivative_tail_bound&quot;: 0.0,
+        &quot;static_source_term&quot;: 0.293110011384642,
+        &quot;evaluated_source_harmonics&quot;: 37128
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;muon&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;mode_index&quot;: 35,
+      &quot;cutoff&quot;: 3838380,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: 0.15251535377363967,
+        &quot;density_tail_bound&quot;: 3.0615888745003493e-13,
+        &quot;derivative_response&quot;: -2.0277294952791856,
+        &quot;derivative_tail_bound&quot;: 0.0013149825381414996,
+        &quot;static_source_term&quot;: 0.29312911627782723,
+        &quot;evaluated_harmonics&quot;: 65536,
+        &quot;derivative_interval_lower&quot;: -2.0289793550807103,
+        &quot;derivative_interval_upper&quot;: -2.0288479602010465,
+        &quot;variance_deficit_bound&quot;: 0.00026278975785784406,
+        &quot;derivative_interval_method&quot;: &quot;limiting variance plus exact finite coefficients&quot;,
+        &quot;density_derivative_norm&quot;: 363565016.5238429
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: 0.37698479949540487,
+        &quot;density_tail_bound&quot;: 2.3946312986543502e-15,
+        &quot;derivative_source_response&quot;: 0.2998140202898259,
+        &quot;derivative_tail_bound&quot;: 1.0285176985206652e-05,
+        &quot;static_source_term&quot;: 0.29312911627782723,
+        &quot;evaluated_source_harmonics&quot;: 65536
+      }
+    },
+    {
+      &quot;particle&quot;: &quot;tau&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;mode_index&quot;: 23,
+      &quot;cutoff&quot;: 64512240,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;complex&quot;: {
+        &quot;density_response&quot;: 0.1525153721187042,
+        &quot;density_tail_bound&quot;: 3.0615888745003493e-13,
+        &quot;derivative_response&quot;: -2.0277464048615657,
+        &quot;derivative_tail_bound&quot;: 0.0013149825381414996,
+        &quot;static_source_term&quot;: 0.29312920360553,
+        &quot;evaluated_harmonics&quot;: 65536,
+        &quot;derivative_interval_lower&quot;: -2.028979363630491,
+        &quot;derivative_interval_upper&quot;: -2.028968526966386,
+        &quot;variance_deficit_bound&quot;: 2.1673326740029747e-05,
+        &quot;derivative_interval_method&quot;: &quot;limiting variance plus exact finite coefficients&quot;,
+        &quot;density_derivative_norm&quot;: 8868170757.584587
+      },
+      &quot;real&quot;: {
+        &quot;density_response&quot;: 0.3769849464196103,
+        &quot;density_tail_bound&quot;: 1.4247691447170004e-16,
+        &quot;derivative_source_response&quot;: 0.29981393515891913,
+        &quot;derivative_tail_bound&quot;: 6.119523629675514e-07,
+        &quot;static_source_term&quot;: 0.29312920360553,
+        &quot;evaluated_source_harmonics&quot;: 65536
+      }
+    }
+  ],
+  &quot;limiting_variance&quot;: {
+    &quot;exact&quot;: &quot;17*zeta(4)/4&quot;,
+    &quot;value&quot;: 4.599873743272338,
+    &quot;partial_sum&quot;: 4.5974099615651,
+    &quot;tail_bound&quot;: 0.002629965074446046
+  },
+  &quot;limiting_response_r1&quot;: {
+    &quot;density_response&quot;: 0.15251537327926032,
+    &quot;derivative_response&quot;: -2.028979364170633,
+    &quot;derivative_tail_bound&quot;: 7.347813298800838e-13
+  },
+  &quot;sources&quot;: {
+    &quot;experiments/complex-comb-response-checks.py&quot;: &quot;9284c202bbe84106f132a75407714adab0cb1c367728f1e2d78d1489043b1552&quot;,
+    &quot;experiments/sawtooth-sector-coupling-checks.py&quot;: &quot;4b76b045f19240c04e8cf1be656643d8594a68423dd1292d29624e5106e584b9&quot;
+  }
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

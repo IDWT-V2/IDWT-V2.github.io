@@ -1,0 +1,517 @@
+{
+  "title": "Classical Zero Color Currents and Complete Spatial Dynamics",
+  "sources": {
+    "experiments/classical-color-source-checks.py": "27cc4d6c2d3afa8b7245d5abadf1fdc53472d2e07a174e5c0c6754ef616daf95",
+    "experiments/hodge-gated-gauss-checks.py": "d24406f940aea7e81ee65cb9596a57a3dc88e0f5d03c07106db93cc948ff1faa"
+  },
+  "checks_passed": 328,
+  "dependency_checks_passed": 192,
+  "case_count": 32,
+  "occupied_depths": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  "scope": "actual finite-parent Clifford and source algebra; free-mode controls, not localized particles or derived occupation",
+  "cases": [
+    {
+      "case": "complex-paired-normal-line-depth-2",
+      "real_depth": 2,
+      "linear_branch_rank": 4,
+      "normal_casimir": "4/3",
+      "normal_number_variance": "1/4",
+      "complex_symplectic_norm": "I_4",
+      "maximum_packet_source": 0.0,
+      "full_free_spatial_dynamics_preserved": true,
+      "fibre_singlet": false,
+      "physical_particle_identified": false
+    },
+    {
+      "case": "complex-paired-normal-line-depth-3",
+      "real_depth": 3,
+      "linear_branch_rank": 4,
+      "normal_casimir": "4/3",
+      "normal_number_variance": "1/4",
+      "complex_symplectic_norm": "I_4",
+      "maximum_packet_source": 0.0,
+      "full_free_spatial_dynamics_preserved": true,
+      "fibre_singlet": false,
+      "physical_particle_identified": false
+    },
+    {
+      "case": "complex-paired-normal-line-depth-4",
+      "real_depth": 4,
+      "linear_branch_rank": 4,
+      "normal_casimir": "4/3",
+      "normal_number_variance": "1/4",
+      "complex_symplectic_norm": "I_4",
+      "maximum_packet_source": 0.0,
+      "full_free_spatial_dynamics_preserved": true,
+      "fibre_singlet": false,
+      "physical_particle_identified": false
+    },
+    {
+      "case": "positive-pure-triplet-floor-depth-2",
+      "real_depth": 2,
+      "positive_spin_multiplicity": 2,
+      "exact_density_norm_floor": "1/12",
+      "sample_density_norms": [
+        0.08333333333333326,
+        0.29692028583770097,
+        0.1352641224094439,
+        0.24959007185575893,
+        0.14753821434013276
+      ],
+      "zero_source_allowed": false
+    },
+    {
+      "case": "positive-pure-triplet-floor-depth-3",
+      "real_depth": 3,
+      "positive_spin_multiplicity": 2,
+      "exact_density_norm_floor": "1/12",
+      "sample_density_norms": [
+        0.08333333333333333,
+        0.20649629199592553,
+        0.21320078576481258,
+        0.10787104388154073,
+        0.160759332660435
+      ],
+      "zero_source_allowed": false
+    },
+    {
+      "case": "positive-pure-triplet-floor-depth-4",
+      "real_depth": 4,
+      "positive_spin_multiplicity": 2,
+      "exact_density_norm_floor": "1/12",
+      "sample_density_norms": [
+        0.08333333333333329,
+        0.15619064044472683,
+        0.2528710702738031,
+        0.19271699945152532,
+        0.2377728294379432
+      ],
+      "zero_source_allowed": false
+    },
+    {
+      "case": "positive-symbol-depth-2-sample-0",
+      "real_depth": 2,
+      "momentum": [
+        1.6302400683004754,
+        1.3093604073423093
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 2.7755575615628914e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-2-sample-1",
+      "real_depth": 2,
+      "momentum": [
+        1.1981329552542803,
+        0.6416841050196881
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 2.7755575615628914e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-2-sample-2",
+      "real_depth": 2,
+      "momentum": [
+        -0.8185494684088607,
+        -1.6345531419288057
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 2.7755575615628914e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-2-sample-3",
+      "real_depth": 2,
+      "momentum": [
+        -0.11304745886789722,
+        0.26709736713908155
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 2.7755575615628914e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-3-sample-0",
+      "real_depth": 3,
+      "momentum": [
+        0.056992492233426,
+        0.9280066873722447,
+        0.1546595791575885
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": true,
+      "maximum_symbol_identity_error": 3.642919299551295e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-3-sample-1",
+      "real_depth": 3,
+      "momentum": [
+        1.6546417043970008,
+        0.5094613587628836,
+        0.9469642656033326
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": true,
+      "maximum_symbol_identity_error": 2.7755575615628914e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-3-sample-2",
+      "real_depth": 3,
+      "momentum": [
+        0.0746400622692435,
+        -0.24831785035269835,
+        -0.028059641028748503
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": true,
+      "maximum_symbol_identity_error": 2.7755575615628914e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-3-sample-3",
+      "real_depth": 3,
+      "momentum": [
+        -0.41977458930674505,
+        0.04237545700686721,
+        0.26234680127299526
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": true,
+      "maximum_symbol_identity_error": 1.3877787807814457e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-4-sample-0",
+      "real_depth": 4,
+      "momentum": [
+        -0.24168272979103075,
+        0.4469530567907538,
+        0.9160769422054245,
+        -0.22639391263254718
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": true,
+      "maximum_symbol_identity_error": 2.0816681711721685e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-4-sample-1",
+      "real_depth": 4,
+      "momentum": [
+        0.9111772908486233,
+        -0.9278070058937258,
+        -0.42166737764110773,
+        -0.44651829113859665
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": true,
+      "maximum_symbol_identity_error": 2.0816681711721685e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-4-sample-2",
+      "real_depth": 4,
+      "momentum": [
+        -1.3738454630796335,
+        0.12400547441542425,
+        -0.03783890129141011,
+        0.16781735966573436
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": true,
+      "maximum_symbol_identity_error": 5.551115123125783e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-4-sample-3",
+      "real_depth": 4,
+      "momentum": [
+        0.4075585876299132,
+        -1.3335556586352026,
+        1.3985639553353064,
+        0.7733517271346563
+      ],
+      "algebra_dimension": 8,
+      "hodge_coefficient_active": true,
+      "maximum_symbol_identity_error": 3.122502256758253e-17,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-5-sample-0",
+      "real_depth": 5,
+      "momentum": [
+        -0.5275805380280357,
+        0.5850851566990001,
+        0.5949097260165285,
+        -0.058536277549531834,
+        0.08236799626116093
+      ],
+      "algebra_dimension": 3,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 4.163336342344337e-17,
+      "residual_canceled_nonsinglet_exists": true,
+      "residual_casimir": "3/4"
+    },
+    {
+      "case": "positive-symbol-depth-5-sample-1",
+      "real_depth": 5,
+      "momentum": [
+        0.2996053622873091,
+        -0.08223395370679913,
+        -1.6111080128338122,
+        0.2454655646226214,
+        1.3507178967749294
+      ],
+      "algebra_dimension": 3,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 1.3877787807814457e-17,
+      "residual_canceled_nonsinglet_exists": true,
+      "residual_casimir": "3/4"
+    },
+    {
+      "case": "positive-symbol-depth-5-sample-2",
+      "real_depth": 5,
+      "momentum": [
+        -0.5459395805468256,
+        0.057352096085120825,
+        -1.2906841743594877,
+        1.2592341473877566,
+        -1.1005946433257017
+      ],
+      "algebra_dimension": 3,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 2.7755575615628914e-17,
+      "residual_canceled_nonsinglet_exists": true,
+      "residual_casimir": "3/4"
+    },
+    {
+      "case": "positive-symbol-depth-5-sample-3",
+      "real_depth": 5,
+      "momentum": [
+        -0.14682556999592994,
+        0.5692037972470385,
+        1.3733728038168918,
+        0.2279616370052262,
+        1.834379306281833
+      ],
+      "algebra_dimension": 3,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 2.7755575615628914e-17,
+      "residual_canceled_nonsinglet_exists": true,
+      "residual_casimir": "3/4"
+    },
+    {
+      "case": "positive-symbol-depth-6-sample-0",
+      "real_depth": 6,
+      "momentum": [
+        1.086840066193116,
+        0.44885262912638,
+        0.03051832383231402,
+        0.28688512640615477,
+        1.3286348455958032,
+        -1.1052098893761113
+      ],
+      "algebra_dimension": 3,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 1.3877787807814457e-17,
+      "residual_canceled_nonsinglet_exists": true,
+      "residual_casimir": "3/4"
+    },
+    {
+      "case": "positive-symbol-depth-6-sample-1",
+      "real_depth": 6,
+      "momentum": [
+        -2.173525423546686,
+        0.5769952760803622,
+        0.033001725212844994,
+        -0.5632553016899738,
+        -1.7727588026772674,
+        0.0024459145190200465
+      ],
+      "algebra_dimension": 3,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 3.230922474006803e-17,
+      "residual_canceled_nonsinglet_exists": true,
+      "residual_casimir": "3/4"
+    },
+    {
+      "case": "positive-symbol-depth-6-sample-2",
+      "real_depth": 6,
+      "momentum": [
+        0.19036927640013807,
+        -0.30249487519079793,
+        0.35104611991326806,
+        -1.5967697063271389,
+        -1.3563910002511192,
+        2.1248946432734552
+      ],
+      "algebra_dimension": 3,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 2.7755575615628914e-17,
+      "residual_canceled_nonsinglet_exists": true,
+      "residual_casimir": "3/4"
+    },
+    {
+      "case": "positive-symbol-depth-6-sample-3",
+      "real_depth": 6,
+      "momentum": [
+        -0.23432464413565626,
+        -1.00574225501709,
+        -0.12423192106762444,
+        -0.7412994297125164,
+        1.1102580248159646,
+        -0.7237938606788584
+      ],
+      "algebra_dimension": 3,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 3.469446951953614e-17,
+      "residual_canceled_nonsinglet_exists": true,
+      "residual_casimir": "3/4"
+    },
+    {
+      "case": "positive-symbol-depth-10-sample-0",
+      "real_depth": 10,
+      "momentum": [
+        0.16421079661542298,
+        -0.5724688661874718,
+        2.351569630461972,
+        0.1273993698146864,
+        -1.503844988982626,
+        -0.8354713082234965,
+        0.9888607202670637,
+        -0.5929749757167068,
+        1.327857530985295,
+        -1.122790016287682
+      ],
+      "algebra_dimension": 0,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 0.0,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-10-sample-1",
+      "real_depth": 10,
+      "momentum": [
+        0.5656833903007403,
+        -1.8041339415519033,
+        0.8625167044816235,
+        0.27100520752720164,
+        -0.7107751791583671,
+        -1.3615375619198098,
+        -0.03530296717072518,
+        -1.3574359217546035,
+        -0.311328079195542,
+        0.7344959941230649
+      ],
+      "algebra_dimension": 0,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 0.0,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-10-sample-2",
+      "real_depth": 10,
+      "momentum": [
+        1.9894099218463972,
+        0.27849250298397504,
+        1.3024313079171759,
+        0.29882621401000775,
+        0.377925695096193,
+        -0.0300853265657526,
+        -0.5526465795370735,
+        1.3513862172355673,
+        1.373784663000161,
+        -0.06145979169727436
+      ],
+      "algebra_dimension": 0,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 0.0,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "positive-symbol-depth-10-sample-3",
+      "real_depth": 10,
+      "momentum": [
+        -0.4142181797301288,
+        0.7213498418312421,
+        -0.5831795435186335,
+        -1.0676587642138302,
+        -2.4022514596667577,
+        0.6448454298243742,
+        -0.8936399583203479,
+        -2.2085276434096546,
+        1.0209891064065806,
+        0.6398382363923608
+      ],
+      "algebra_dimension": 0,
+      "hodge_coefficient_active": false,
+      "maximum_symbol_identity_error": 0.0,
+      "residual_canceled_nonsinglet_exists": false,
+      "residual_casimir": null
+    },
+    {
+      "case": "residual-packet-and-reality-depth-5",
+      "real_depth": 5,
+      "full_spatial_clifford_algebra_dimension": 32,
+      "coherent_two_mode_source_norms": [
+        0.4251865946542618,
+        0.35712781962960155,
+        0.2314589302790927,
+        0.36440014209546007
+      ],
+      "antiunitary_current_cancellation": true,
+      "antiunitary_first_order_symplectic_form": "0",
+      "antiunitary_full_wave_energy": "0",
+      "pure_residual_color_line_density_norm": "1/4",
+      "fixed_colored_complex_linear_full_clifford_dark_subspace": false,
+      "all_nonlinear_source_free_packets_excluded": false
+    },
+    {
+      "case": "residual-packet-and-reality-depth-6",
+      "real_depth": 6,
+      "full_spatial_clifford_algebra_dimension": 64,
+      "coherent_two_mode_source_norms": [
+        0.3405108665041837,
+        0.08010340573435619,
+        0.6608122200463155,
+        1.2152828987162037
+      ],
+      "antiunitary_current_cancellation": true,
+      "antiunitary_first_order_symplectic_form": "0",
+      "antiunitary_full_wave_energy": "0",
+      "pure_residual_color_line_density_norm": "1/4",
+      "fixed_colored_complex_linear_full_clifford_dark_subspace": false,
+      "all_nonlinear_source_free_packets_excluded": false
+    }
+  ]
+}

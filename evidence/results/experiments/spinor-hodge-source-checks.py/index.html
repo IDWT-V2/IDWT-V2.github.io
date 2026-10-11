@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>spinor-hodge-source-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/spinor-hodge-source-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="spinor-hodge-source-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/spinor-hodge-source-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="spinor-hodge-source-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>spinor-hodge-source-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/spinor-hodge-source-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Construct middle-form Hodge sources directly from spatial spinor bilinears.&quot;&quot;&quot;
+from __future__ import annotations
+
+import argparse
+from collections import defaultdict
+from datetime import datetime, timezone
+from hashlib import sha256
+from itertools import combinations
+import json
+import math
+from pathlib import Path
+
+import numpy as np
+import sympy as sp
+
+
+CHECKS = 0
+CASES = []
+
+
+def check(ok, message):
+    global CHECKS
+    if not ok:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def close(actual, expected, message, atol=2e-10):
+    check(np.allclose(actual, expected, atol=atol, rtol=2e-10), message)
+
+
+def parity(index):
+    return (-1)**sum(index[i] &gt; index[j] for i in range(len(index)) for j in range(i+1, len(index)))
+
+
+def multiply(first, second):
+    p, a = first; q, b = second
+    return p[q], b*a[q]
+
+
+def dense(monomial):
+    permutation, phase = monomial
+    value = np.zeros((len(permutation), len(permutation)), dtype=complex)
+    value[permutation, np.arange(len(permutation))] = phase
+    return value
+
+
+def gamma_monomials(m):
+    index = np.arange(2**m)
+    gamma = []
+    for j in range(m):
+        mask = 1 &lt;&lt; (m-1-j)
+        preceding = np.array([((int(c) &gt;&gt; (m-j)).bit_count()) % 2 for c in index])
+        signs = (-1.)**preceding
+        gamma.append((index ^ mask, signs.astype(complex)))
+        gamma.append((index ^ mask, 1j*signs*((-1.)**((index &amp; mask) &gt; 0))))
+    return gamma
+
+
+def bilinear_data(m):
+    gamma = gamma_monomials(m)
+    size = 2**m
+    identity = (np.arange(size), np.ones(size, dtype=complex))
+    pairing = identity
+    for j in range(m):
+        pairing = multiply(pairing, gamma[2*j+1])
+    keep = np.array([j for j in range(size) if int(j).bit_count() % 2 == 0])
+    rank = len(keep)
+    c = dense(pairing)
+    for g in gamma:
+        gd = dense(g)
+        close(c@gd, (-1)**m*gd.T@c, &#39;invariant spinor bilinear Clifford transpose identity&#39;)
+    middle = list(combinations(range(2*m), m))
+    lower = [p for p in range(m) if (m-p) % 2 == 0]
+    rows = []
+    degrees = []
+    middle_rows = []
+    middle_map = {}
+    grouped = defaultdict(list)
+    for degree in lower+[m]:
+        for index in combinations(range(2*m), degree):
+            blade = identity
+            for j in index:
+                blade = multiply(blade, gamma[j])
+            value = dense(multiply(pairing, blade))[np.ix_(keep, keep)]
+            sign = (-1)**(degree*(degree-1)//2+m*degree+m*(m+1)//2)
+            close(value.T, sign*value, &#39;exact graded symmetry of spinor pair form&#39;)
+            if degree == m:
+                middle_map[index] = value
+                middle_rows.append(value.reshape(-1))
+                # Pick one representative from each complementary Hodge pair.
+                if 2*m-1 not in index:
+                    continue
+            rows.append(value.reshape(-1))
+            degrees.append((degree, sign))
+            permutation = tuple(np.argmax(abs(value), axis=0))
+            grouped[permutation].append(value[np.asarray(permutation), np.arange(rank)])
+    check(len(rows) == rank**2, &#39;all retained bilinear grades exhaust spinor tensor square&#39;)
+    for phases in grouped.values():
+        phases = np.asarray(phases)
+        check(phases.shape == (rank, rank), &#39;complete orthogonal Clifford character block&#39;)
+        close(phases@phases.conj().T, rank*np.eye(rank), &#39;all bilinear grades are orthogonal with canonical norm&#39;)
+    check(len(grouped) == rank, &#39;all Clifford permutation blocks represented&#39;)
+    for first, second in combinations(grouped, 2):
+        check(all(a != b for a, b in zip(first, second)), &#39;different Clifford character blocks have disjoint matrix support&#39;)
+    symmetric_count = sum(sign == 1 for degree, sign in degrees)
+    alternating_count = len(rows)-symmetric_count
+    check(symmetric_count == rank*(rank+1)//2, &#39;symmetric-square grade decomposition dimension&#39;)
+    check(alternating_count == rank*(rank-1)//2, &#39;alternating-square grade decomposition dimension&#39;)
+    hodge_eigenvalue = None
+    for index in middle:
+        other = tuple(j for j in range(2*m) if j not in index)
+        star_value = parity(other+index)*middle_map[other]
+        value = middle_map[index]
+        nonzero = abs(value) &gt; .5
+        eigenvalue = star_value[nonzero][0]/value[nonzero][0]
+        close(star_value, eigenvalue*value, &#39;spinor middle-form source has one fixed Hodge chirality&#39;)
+        if hodge_eigenvalue is None:
+            hodge_eigenvalue = eigenvalue
+        close(eigenvalue, hodge_eigenvalue, &#39;same Hodge eigenvalue on every source component&#39;)
+    close(hodge_eigenvalue**2, (-1)**m, &#39;spinor-source Hodge parity&#39;)
+    return {&#39;m&#39;: m, &#39;rank&#39;: rank, &#39;gamma&#39;: gamma, &#39;keep&#39;: keep,
+            &#39;pairing&#39;: pairing, &#39;middle&#39;: middle, &#39;middle_map&#39;: middle_map,
+            &#39;middle_rows&#39;: np.asarray(middle_rows), &#39;degrees&#39;: degrees,
+            &#39;hodge_eigenvalue&#39;: hodge_eigenvalue}
+
+
+def rotation_and_fierz_checks(data, rng):
+    m, rank = data[&#39;m&#39;], data[&#39;rank&#39;]
+    middle, form_map = data[&#39;middle&#39;], data[&#39;middle_map&#39;]
+    lookup = {index: j for j, index in enumerate(middle)}
+    middle_rows = data[&#39;middle_rows&#39;]
+    keep = data[&#39;keep&#39;]
+    for _ in range(3):
+        psi = rng.normal(size=rank)+1j*rng.normal(size=rank)
+        source = middle_rows@np.outer(psi, psi).reshape(-1)
+        lower_norm = 0.
+        for degree in range(m-4, -1, -4):
+            for index in combinations(range(2*m), degree):
+                blade = (np.arange(2**m), np.ones(2**m, dtype=complex))
+                for j in index:
+                    blade = multiply(blade, data[&#39;gamma&#39;][j])
+                matrix = dense(multiply(data[&#39;pairing&#39;], blade))[np.ix_(keep, keep)]
+                lower_norm += abs(psi@matrix@psi)**2/rank
+        close(np.vdot(source, source).real/(2*rank)+lower_norm, np.vdot(psi, psi).real**2,
+              &#39;complete symmetric Fierz norm includes all lower grades&#39;)
+        hermitian_source = data[&#39;hodge_eigenvalue&#39;].real*source
+        if m % 2:
+            close(hermitian_source, 0., &#39;odd-middle Hodge cancellation holds for actual spinor-generated source&#39;)
+        else:
+            close(np.vdot(hermitian_source, hermitian_source), np.vdot(source, source),
+                  &#39;even-middle Hodge filter retains entire spinor-generated source&#39;)
+        for a, b in ((0, 1), (0, 2*m-1)):
+            angle = .413
+            product = dense(multiply(data[&#39;gamma&#39;][a], data[&#39;gamma&#39;][b]))
+            u = (math.cos(angle/2)*np.eye(2**m)+math.sin(angle/2)*product)[np.ix_(keep, keep)]
+            rotated_psi = u@psi
+            actual = middle_rows@np.outer(rotated_psi, rotated_psi).reshape(-1)
+            expected = source.copy()
+            for j, index in enumerate(middle):
+                if (a in index) == (b in index):
+                    continue
+                replaced = tuple((b if q == a else a if q == b else q) for q in index)
+                sign = parity(replaced)
+                other = tuple(sorted(replaced))
+                coefficient = math.sin(angle)*(1 if a in index else -1)*sign
+                expected[j] = math.cos(angle)*source[j]+coefficient*source[lookup[other]]
+            close(actual, expected, &#39;actual spinor rotation intertwines with exterior-form rotation&#39;)
+    for depth in (2*m-1, 2*m):
+        CASES.append({&#39;name&#39;: &#39;spinor-generated-Hodge-channel&#39;, &#39;real_depth&#39;: depth,
+                      &#39;parameters&#39;: {&#39;even_carrier_depth&#39;: 2*m, &#39;middle_degree&#39;: m,
+                                     &#39;minimal_spinor_rank&#39;: rank,
+                                     &#39;source&#39;: &#39;F_I=psi^T C gamma_I psi&#39;,
+                                     &#39;odd_shadow_requires_declared_even_carrier&#39;: depth != 2*m},
+                      &#39;measurements&#39;: {&#39;middle_channel_rank&#39;: math.comb(2*m-1, m-1),
+                                       &#39;symmetric_square_rank&#39;: rank*(rank+1)//2,
+                                       &#39;lower_symmetric_grades&#39;: list(range(m-4, -1, -4)),
+                                       &#39;Hodge_eigenvalue&#39;: str(data[&#39;hodge_eigenvalue&#39;]),
+                                       &#39;symmetric_Hodge_filter_active&#39;: not bool(m % 2),
+                                       &#39;middle_source_is_full_symmetric_square&#39;: m &lt;= 3}})
+
+
+def triplet_geometry_checks():
+    x1, y1, x2, y2, x3, y3 = sp.symbols(&#39;x1 y1 x2 y2 x3 y3&#39;)
+    spinors = [sp.Matrix([x1, y1]), sp.Matrix([x2, y2]), sp.Matrix([x3, y3])]
+    veronese = lambda w: sp.Matrix([w[0]**2, sp.sqrt(2)*w[0]*w[1], w[1]**2])
+    determinant = sp.det(sp.Matrix.hstack(*(veronese(w) for w in spinors)))
+    pair_product = sp.sqrt(2)*sp.prod(sp.det(sp.Matrix.hstack(spinors[i], spinors[j]))
+                                    for i, j in combinations(range(3), 2))
+    check(sp.simplify(determinant-pair_product) == 0, &#39;triplet volume is product of three spinor pair areas&#39;)
+    w = sp.Matrix([x1, y1]); c = veronese(w)
+    check(sp.expand(c[1]**2-2*c[0]*c[2]) == 0, &#39;one spinor square occupies constrained conic not all triplet states&#39;)
+    special = np.array([1., math.sqrt(2), 1.], dtype=complex)/2
+    su3 = np.diag([np.exp(.31j), np.exp(-.31j), 1.])
+    close(np.linalg.det(su3), 1., &#39;constraint-control mixing is in SU3&#39;)
+    transformed = su3@special
+    check(abs(transformed[1]**2-2*transformed[0]*transformed[2]) &gt; .1,
+          &#39;generic SU3 mixing fails to preserve a one-spinor-square source&#39;)
+    # Every binary quadratic factors over C: two distinct spinors fill the triplet carrier.
+    rng = np.random.default_rng(425)
+    for _ in range(8):
+        desired = rng.normal(size=3)+1j*rng.normal(size=3)
+        a, b, c0 = desired
+        roots = np.roots([a, math.sqrt(2)*b, c0])
+        u = np.array([1., -roots[0]])
+        v = a*np.array([1., -roots[1]])
+        actual = np.array([u[0]*v[0], (u[0]*v[1]+u[1]*v[0])/math.sqrt(2), u[1]*v[1]])
+        close(actual, desired, &#39;distinct spinor pair parametrizes arbitrary complex triplet&#39;)
+        norm = (np.vdot(u, u).real*np.vdot(v, v).real+abs(np.vdot(u, v))**2)/2
+        close(np.vdot(actual, actual).real, norm, &#39;canonical symmetric distinct-pair kinetic norm&#39;)
+    # A uniform unit spinor already induces exactly isotropic triplet covariance.
+    t = sp.symbols(&#39;t&#39;, real=True)
+    moments = [sp.integrate(t**2, (t, 0, 1)), sp.integrate(2*t*(1-t), (t, 0, 1)),
+               sp.integrate((1-t)**2, (t, 0, 1))]
+    check(moments == [sp.Rational(1, 3)]*3, &#39;uniform spinor source has triplet covariance I/3&#39;)
+    s = sp.symbols(&#39;s&#39;, real=True)
+    phase_averaged_pair = sp.integrate((1-t)*(s*(1-t)+(1-s)*t), (t, 0, 1))
+    check(sp.simplify(phase_averaged_pair-(1+s)/6) == 0, &#39;third spinor pair-area fourth moment&#39;)
+    check(sp.expand(2*(1-s)*phase_averaged_pair-(1-s**2)/3) == 0,
+          &#39;actual spinor-source third-slot contraction preserves canonical triplet pair operator&#39;)
+    # A full Dirac kinetic carrier is retained: a source projection does not compress its principal symbol.
+    for m in range(1, 7):
+        gamma = gamma_monomials(m)
+        keep = np.array([j for j in range(2**m) if j.bit_count() % 2 == 0])
+        for g in gamma:
+            matrix = dense(g)
+            close(matrix@matrix, np.eye(2**m), &#39;full field Clifford kinetic direction survives source-only construction&#39;)
+            close(matrix[np.ix_(keep, keep)], 0., &#39;chiral fibre-only kinetic compression would remove derivative&#39;)
+    CASES.append({&#39;name&#39;: &#39;triplet-source-geometry&#39;, &#39;real_depth&#39;: 4,
+                  &#39;parameters&#39;: {&#39;carrier&#39;: &#39;Sym^2 C^2&#39;, &#39;one_spinor_source&#39;: &#39;(x^2,sqrt(2)xy,y^2)&#39;},
+                  &#39;measurements&#39;: {&#39;source_constraint&#39;: &#39;c_2^2-2 c_1 c_3=0&#39;,
+                                   &#39;three_slot_volume&#39;: &#39;sqrt(2) product_{i&lt;j} det(w_i,w_j)&#39;,
+                                   &#39;independent_color_derived&#39;: False,
+                                   &#39;two_distinct_spinor_pairs_can_fill_carrier&#39;: True,
+                                   &#39;uniform_unit_spinor_triplet_covariance&#39;: &#39;I_3/3&#39;,
+                                   &#39;unit_spinor_pair_energy_after_third_average&#39;: &#39;(1-|u^dagger v|^4)/3&#39;,
+                                   &#39;full_Dirac_kinetic_carrier_must_be_retained&#39;: True}})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--output&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    rng = np.random.default_rng(20261009)
+    for m in range(1, 7):
+        data = bilinear_data(m)
+        rotation_and_fierz_checks(data, rng)
+    triplet_geometry_checks()
+    report = {&#39;title&#39;: &#39;Spatial spinor bilinears generate the full middle-Hodge carrier&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;checks_passed&#39;: CHECKS, &#39;cases&#39;: CASES,
+              &#39;scope&#39;: &#39;Exact algebraic field-source construction across maintained and neighboring depths; no particle simulations.&#39;,
+              &#39;statistics&#39;: &#39;Commuting classical amplitudes; identical Grassmann spinor squares require a different slot symmetry.&#39;,
+              &#39;limitations&#39;: [&#39;The bilinear is a geometric source, not an independently derived color multiplet.&#39;,
+                              &#39;One spinor square obeys algebraic constraints not preserved by arbitrary full-channel unitary mixing.&#39;,
+                              &#39;Odd depths use the declared even-carrier shadow.&#39;,
+                              &#39;The full kinetic spinor carrier is retained; a pointwise chiral compression would kill its symbol.&#39;],
+              &#39;sources&#39;: {&#39;experiments/spinor-hodge-source-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest()}}
+    args.output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;checks_passed&#39;: CHECKS, &#39;cases&#39;: len(CASES), &#39;output&#39;: str(args.output)}))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

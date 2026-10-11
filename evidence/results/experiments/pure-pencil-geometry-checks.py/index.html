@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>pure-pencil-geometry-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/pure-pencil-geometry-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="pure-pencil-geometry-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/pure-pencil-geometry-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="pure-pencil-geometry-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>pure-pencil-geometry-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/pure-pencil-geometry-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Compare pure spatial spinor pencils, their stabilizers and charge characters.&quot;&quot;&quot;
+from __future__ import annotations
+
+import argparse
+from collections import defaultdict
+from datetime import datetime, timezone
+from hashlib import sha256
+from itertools import combinations
+import importlib.util
+import json
+import math
+from pathlib import Path
+
+import numpy as np
+import sympy as sp
+
+
+HERE = Path(__file__).resolve().parent
+spec = importlib.util.spec_from_file_location(&#39;spinor_source&#39;, HERE/&#39;spinor-hodge-source-checks.py&#39;)
+source = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(source)
+CHECKS = 0
+CASES = []
+
+
+def check(value, message):
+    global CHECKS
+    if not value:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def close(a, b, message):
+    check(np.allclose(a, b, atol=3e-10, rtol=3e-10), message)
+
+
+def basis(m, occupied=()):
+    value = np.zeros(2**m, dtype=complex)
+    value[sum(1 &lt;&lt; (m-1-j) for j in occupied)] = 1
+    return value
+
+
+def annihilator_dimension(gamma, psi):
+    return int(len(gamma)-np.linalg.matrix_rank(np.column_stack([g@psi for g in gamma]), tol=1e-9))
+
+
+def complex_structure(gamma, psi):
+    psi = psi/np.linalg.norm(psi)
+    j = np.zeros((len(gamma), len(gamma)))
+    for a, b in combinations(range(len(gamma)), 2):
+        entry = -1j*np.vdot(psi, gamma[a]@gamma[b]@psi)
+        close(entry.imag, 0, &#39;Hermitian spinor bilinear defines a real skew matrix&#39;)
+        j[a, b] = entry.real
+        j[b, a] = -entry.real
+    return j
+
+
+def realify(matrix):
+    return np.block([[matrix.real, -matrix.imag], [matrix.imag, matrix.real]])
+
+
+def real_vector(vector):
+    return np.concatenate((vector.real, vector.imag))
+
+
+def purity_defect(gamma, psi):
+    norm = np.vdot(psi, psi).real
+    entries = [-1j*np.vdot(psi, gamma[a]@gamma[b]@psi)
+               for a, b in combinations(range(len(gamma)), 2)]
+    return float(len(gamma)*norm**2-2*sum(abs(value)**2 for value in entries))
+
+
+def defect_hessian(gamma, keep, psi):
+    rank = len(keep)
+    d = len(gamma)
+    norm = np.vdot(psi, psi).real
+    grad_norm = 2*real_vector(psi)
+    matrices = [(-1j*gamma[a]@gamma[b])[np.ix_(keep, keep)]
+                for a, b in combinations(range(d), 2)]
+    moments = np.array([np.vdot(psi, b@psi).real for b in matrices])
+    gradients = np.array([2*real_vector(b@psi) for b in matrices])
+    return (2*d*np.outer(grad_norm, grad_norm)+4*d*norm*np.eye(2*rank)
+            -4*gradients.T@gradients
+            -8*sum(j*realify(b) for j, b in zip(moments, matrices)))
+
+
+def purity_action_checks(m, gamma, first, second, rng):
+    keep = np.array([j for j in range(2**m) if j.bit_count()%2 == 0])
+    rank = len(keep)
+    u, v = first[keep], second[keep]
+    size = 2*rank
+    full_hessian = np.zeros((2*size, 2*size))
+    # Positive quartic defects enforce purity without an independently fitted gap.
+    full_hessian[:size,:size] += defect_hessian(gamma, keep, u)
+    full_hessian[size:,size:] += defect_hessian(gamma, keep, v)
+    for phase in (1, 1j, -1, -1j):
+        mapping = np.concatenate((np.eye(size), realify(phase*np.eye(rank))), axis=1)
+        full_hessian += mapping.T@defect_hessian(gamma, keep, u+phase*v)@mapping/4
+        close(purity_defect(gamma, first+phase*second), 0, &#39;phase-averaged purity action vanishes on the pencil&#39;)
+    gu = np.concatenate((2*real_vector(u), np.zeros(size)))
+    gv = np.concatenate((np.zeros(size), 2*real_vector(v)))
+    full_hessian += 2*(np.outer(gu,gu)+np.outer(gv,gv))
+    # At u^dagger v=0, the orthogonality penalty has only its linear-square Hessian.
+    cz = []
+    for index in range(2*size):
+        direction = np.eye(2*size)[index]
+        du = direction[:rank]+1j*direction[rank:size]
+        dv = direction[size:size+rank]+1j*direction[size+rank:]
+        cz.append(np.vdot(du,v)+np.vdot(u,dv))
+    cz = np.array(cz)
+    full_hessian += 2*(np.outer(cz.real,cz.real)+np.outer(cz.imag,cz.imag))
+    close(full_hessian, full_hessian.T, &#39;complete positive pencil potential has a symmetric Hessian&#39;)
+    exact = sp.Matrix(np.rint(full_hessian).astype(int))
+    close(full_hessian, np.array(exact,dtype=float), &#39;quarter-phase average gives an exact integer Hessian&#39;)
+    eigenvalues = np.linalg.eigvalsh(full_hessian)
+    check(eigenvalues[0] &gt; -1e-8, &#39;pencil potential has no negative local directions&#39;)
+    nullity = int(sum(abs(eigenvalues)&lt;1e-8))
+    expected_nullity = 4 if m == 2 else m*m+3*m-6
+    check(nullity == expected_nullity, &#39;pencil vacuum has precisely the homogeneous-orbit flat directions&#39;)
+    check(2*size-exact.rank() == nullity, &#39;exact rational Hessian rank matches its numerical spectrum&#39;)
+    positive_spectrum = defaultdict(int)
+    for value in eigenvalues[eigenvalues&gt;1e-8]:
+        integer = round(float(value))
+        close(value, integer, &#39;positive purity-action Hessian values are exact integers at this preparation&#39;)
+        positive_spectrum[str(integer)] += 1
+    # Independently differentiate the entire quartic along random real directions.
+    def potential(uu,vv):
+        uf, vf = np.zeros(2**m, complex), np.zeros(2**m, complex)
+        uf[keep], vf[keep] = uu,vv
+        return (purity_defect(gamma,uf)+purity_defect(gamma,vf)
+                +sum(purity_defect(gamma,uf+p*vf) for p in (1,1j,-1,-1j))/4
+                +(np.vdot(uu,uu).real-1)**2+(np.vdot(vv,vv).real-1)**2
+                +abs(np.vdot(uu,vv))**2)
+    for _ in range(4):
+        direction = rng.normal(size=2*size)
+        direction /= np.linalg.norm(direction)
+        du = direction[:rank]+1j*direction[rank:size]
+        dv = direction[size:size+rank]+1j*direction[size+rank:]
+        step = 1e-3
+        second_difference = (potential(u+step*du,v+step*dv)+potential(u-step*du,v-step*dv)
+                             -2*potential(u,v))/step**2
+        fourth_difference = (potential(u+2*step*du,v+2*step*dv)+potential(u-2*step*du,v-2*step*dv)
+                             -2*potential(u,v))/(2*step)**2
+        extrapolated = (4*second_difference-fourth_difference)/3
+        check(abs(extrapolated-direction@full_hessian@direction)&lt;3e-6,
+              &#39;independent quartic finite difference reproduces the exact action Hessian&#39;)
+    for _ in range(6):
+        test = rng.normal(size=2**m)+1j*rng.normal(size=2**m)
+        test[np.setdiff1d(np.arange(2**m),keep)] = 0
+        test /= np.linalg.norm(test)
+        check(purity_defect(gamma,test)&gt;-1e-10, &#39;unrestricted chiral comparison has nonnegative purity defect&#39;)
+    CASES.append({&#39;real_depth&#39;: 2*m, &#39;geometry&#39;: &#39;positive local mode-polarization potential&#39;,
+                  &#39;parameters&#39;: {&#39;unit_norm_control_only&#39;: True, &#39;same_common_coefficient&#39;: 1},
+                  &#39;measurements&#39;: {&#39;real_variables&#39;: 4*rank, &#39;hessian_nullity&#39;: nullity,
+                                   &#39;positive_hessian_spectrum&#39;: dict(positive_spectrum),
+                                   &#39;particle_mass_identified_with_hessian&#39;: False,
+                                   &#39;local_color_gauge_dynamics_derived&#39;: False}})
+
+
+def real_constraints(columns):
+    value = np.column_stack(columns)
+    return sp.Matrix(np.rint(np.vstack((value.real, value.imag))*2).astype(int))
+
+
+def stabilizer(gamma, first, second, condition):
+    pairs = list(combinations(range(len(gamma)), 2))
+    spin_generators = [gamma[a]@gamma[b]/2 for a, b in pairs]
+    columns = [np.concatenate((g@first, g@second)) for g in spin_generators]
+    size = len(first)
+    if condition in (&#39;fixed-projective&#39;, &#39;rays&#39;):
+        columns.append(np.concatenate((np.zeros(size), -1j*second)))
+    if condition == &#39;rays&#39;:
+        columns.append(np.concatenate((-1j*first, np.zeros(size))))
+    nullspace = real_constraints(columns).nullspace()
+    ordinary = []
+    for vector in nullspace:
+        coefficients = np.array(vector[:len(pairs)], dtype=float).reshape(-1)
+        check(np.linalg.norm(coefficients) &gt; 0, &#39;phase variables add no spurious stabilizer dimension&#39;)
+        x = sum(c*g for c, g in zip(coefficients, spin_generators))
+        r = np.zeros((len(gamma), len(gamma)))
+        for c, (a, b) in zip(coefficients, pairs):
+            r[a, b] = c
+            r[b, a] = -c
+        for i in range(len(gamma)):
+            close(x@gamma[i]-gamma[i]@x,
+                  sum(r[j, i]*gamma[j] for j in range(len(gamma))),
+                  &#39;spin stabilizer uses the corresponding ordinary spatial rotation&#39;)
+        ordinary.append(r)
+    return len(nullspace), ordinary
+
+
+def pencil_checks(m, rng):
+    gamma = [source.dense(g) for g in source.gamma_monomials(m)]
+    first, second = basis(m), basis(m, (0, 1))
+    d, k = 2*m, m-2
+    for psi in (first, second, first+second, first+2j*second,
+                (1+.3j)*first+(.4-.7j)*second):
+        check(annihilator_dimension(gamma, psi) == m, &#39;every sampled pure-pencil member has maximal annihilator&#39;)
+        j = complex_structure(gamma, psi)
+        close(j@j, -np.eye(d), &#39;pencil member gives an orthogonal spatial complex structure&#39;)
+    j1, j2 = complex_structure(gamma, first), complex_structure(gamma, second)
+    close(j1@j2, j2@j1, &#39;orthogonal pure-pencil endpoints give commuting complex structures&#39;)
+    product = j1@j2
+    base = (np.eye(d)+product)/2
+    normal = (np.eye(d)-product)/2
+    close(base@base, base, &#39;four-plane is an orthogonal projector&#39;)
+    close(normal@normal, normal, &#39;complement is an orthogonal projector&#39;)
+    check(np.linalg.matrix_rank(base, tol=1e-9) == 4, &#39;pencil selects four ordinary spatial directions&#39;)
+    check(np.linalg.matrix_rank(normal, tol=1e-9) == d-4, &#39;pencil complement retains all other spatial directions&#39;)
+    expected = {&#39;fixed-projective&#39;: 3 if k == 0 else k*k+3,
+                &#39;fixed-fixed&#39;: 3 if k == 0 else k*k+2,
+                &#39;rays&#39;: 4 if k == 0 else k*k+4}
+    dimensions = {}
+    for condition in expected:
+        dimension, rotations = stabilizer(gamma, first, second, condition)
+        check(dimension == expected[condition], &#39;exact real stabilizer dimension agrees with block unitary group&#39;)
+        for r in rotations:
+            close(r@j1, j1@r, &#39;stabilizer preserves first spatial complex structure&#39;)
+            close(r@j2, j2@r, &#39;stabilizer preserves second spatial complex structure&#39;)
+            close(r@base, base@r, &#39;stabilizer preserves the derived four-plane&#39;)
+        dimensions[condition] = dimension
+    # Covariantly rotate the field pair; no preferred coordinate split is inserted.
+    a, b, angle = 0, d-1, .371
+    spin = math.cos(angle/2)*np.eye(2**m)+math.sin(angle/2)*gamma[a]@gamma[b]
+    rotation = np.eye(d)
+    rotation[a, a] = rotation[b, b] = math.cos(angle)
+    rotation[a, b], rotation[b, a] = math.sin(angle), -math.sin(angle)
+    rj1 = complex_structure(gamma, spin@first)
+    rj2 = complex_structure(gamma, spin@second)
+    close(rj1, rotation@j1@rotation.T, &#39;first complex structure transforms under physical rotation&#39;)
+    close(rj2, rotation@j2@rotation.T, &#39;second complex structure transforms under physical rotation&#39;)
+    close((np.eye(d)+rj1@rj2)/2, rotation@base@rotation.T, &#39;derived four-plane is spatially covariant&#39;)
+    controls = []
+    for degree in range(4, m+1, 2):
+        alternate = basis(m, range(degree))
+        check(annihilator_dimension(gamma, alternate) == m, &#39;higher even-grade endpoint is itself pure&#39;)
+        value = annihilator_dimension(gamma, first+alternate)
+        check(value == m-degree, &#39;higher-grade sum fails the pure-pencil premise&#39;)
+        controls.append({&#39;second_grade&#39;: degree, &#39;annihilator_dimension_of_sum&#39;: value})
+    if m &gt;= 4:
+        psi = basis(m, (0, 1))+basis(m, (2, 3))
+        check(annihilator_dimension(gamma, psi) &lt; m, &#39;nondecomposable grade-two state is not pure&#39;)
+        j = complex_structure(gamma, psi)
+        close(j[:8, :8], 0, &#39;nonpure polarization loses a full spatial rotation structure&#39;)
+    purity_action_checks(m, gamma, first, second, rng)
+    CASES.append({&#39;real_depth&#39;: d, &#39;geometry&#39;: &#39;orthogonal pure pencil in the even spatial carrier&#39;,
+                  &#39;parameters&#39;: {&#39;m&#39;: m, &#39;chiral_rank&#39;: 2**(m-1)},
+                  &#39;measurements&#39;: {&#39;base_rank&#39;: 4, &#39;normal_rank&#39;: d-4,
+                                   &#39;stabilizer_dimensions&#39;: dimensions, &#39;higher_grade_controls&#39;: controls,
+                                   &#39;normal_universal_frame_rule_passes&#39;: k == 3}})
+
+
+def charge_checks():
+    k_symbol = sp.symbols(&#39;k&#39;, positive=True, integer=True)
+    yq, yu, yd = sp.Rational(1,2)-1/k_symbol, -1+1/k_symbol, 1/k_symbol
+    cubic_minimal = sp.factor(2*k_symbol*yq**3+k_symbol*yu**3+k_symbol*yd**3
+                             +2*(-sp.Rational(1,2))**3+1)
+    mixed_minimal = sp.factor((k_symbol*yq-sp.Rational(1,2))/2)
+    check(sp.simplify(cubic_minimal+3*(k_symbol-3)/4) == 0, &#39;minimal geometric family cubic trace selects three&#39;)
+    check(sp.simplify(mixed_minimal-(k_symbol-3)/4) == 0, &#39;minimal geometric family weak mixed trace selects three&#39;)
+    for k in range(1, 11):
+        m = k+2
+        rows = []
+        tr_y = tr_y3 = mixed = sp.S.Zero
+        doublets = 0
+        for p in range(k+1):
+            for q in range(3):
+                if (p+q) % 2:
+                    continue
+                y = -sp.Rational(p, k)+sp.Rational(q, 2)
+                color_rank = math.comb(k, p)
+                weak_rank = math.comb(2, q)
+                multiplicity = color_rank*weak_rank
+                charges = [y-sp.Rational(1, 2), y+sp.Rational(1, 2)] if q == 1 else [y]
+                rows.append({&#39;color_grade&#39;: p, &#39;weak_grade&#39;: q,
+                             &#39;color_rank&#39;: color_rank, &#39;weak_rank&#39;: weak_rank,
+                             &#39;hypercharge&#39;: str(y), &#39;electric_weights&#39;: list(map(str, charges))})
+                tr_y += multiplicity*y
+                tr_y3 += multiplicity*y**3
+                if q == 1:
+                    doublets += color_rank
+                    mixed += color_rank*y/2
+        check(sum(r[&#39;color_rank&#39;]*r[&#39;weak_rank&#39;] for r in rows) == 2**(k+1),
+              &#39;branching exhausts every even exterior spinor component&#39;)
+        check(tr_y == 0, &#39;full chiral exterior carrier has zero hypercharge trace&#39;)
+        check(tr_y3 == (sp.Rational(3, 4) if k == 1 else 0), &#39;full carrier cubic trace includes its small-rank exception&#39;)
+        check(mixed == (-sp.Rational(1, 4) if k == 1 else 0),
+              &#39;full weak mixed trace includes its small-rank exception&#39;)
+        check(doublets == 2**(k-1), &#39;full weak doublet count follows the odd-binomial identity&#39;)
+        geometry = [1-sp.Rational(1, k), -sp.Rational(1, k)]
+        minimal = [sp.Rational(k+1, 2*k), sp.Rational(1-k, 2*k)]
+        check((geometry == minimal) == (k == 3), &#39;geometric fundamental doublet matches minimal family only at three colors&#39;)
+        if k == 3:
+            check(len(rows) == 6, &#39;six ordinary one-family representation blocks at parent ten&#39;)
+            expected = {(0,0):&#39;0&#39;, (0,2):&#39;1&#39;, (1,1):&#39;1/6&#39;,
+                        (2,0):&#39;-2/3&#39;, (2,2):&#39;1/3&#39;, (3,1):&#39;-1/2&#39;}
+            check({(r[&#39;color_grade&#39;],r[&#39;weak_grade&#39;]):r[&#39;hypercharge&#39;] for r in rows} == expected,
+                  &#39;canonical determinant-trivial charge table at parent ten&#39;)
+        minimal_family = []
+        extra_rank = None
+        if k &gt;= 3 and k % 2:
+            minimal_family = [r for r in rows if (r[&#39;color_grade&#39;],r[&#39;weak_grade&#39;])
+                              in ((0,0),(0,2),(1,1),(k-1,0),(k-1,2),(k,1))]
+            family_rank = sum(r[&#39;color_rank&#39;]*r[&#39;weak_rank&#39;] for r in minimal_family)
+            check(family_rank == 4*(k+1), &#39;minimal selected subfamily has its full fundamental and singlet count&#39;)
+            extra_rank = 2**(k+1)-family_rank
+            check((extra_rank == 0) == (k == 3), &#39;no exterior exotics in this subfamily only at parent ten&#39;)
+            family_y3 = sum(r[&#39;color_rank&#39;]*r[&#39;weak_rank&#39;]*sp.Rational(r[&#39;hypercharge&#39;])**3
+                            for r in minimal_family)
+            family_mixed = sum(r[&#39;color_rank&#39;]*sp.Rational(r[&#39;hypercharge&#39;])/2
+                              for r in minimal_family if r[&#39;weak_grade&#39;] == 1)
+            check(family_y3 == cubic_minimal.subs(k_symbol,k), &#39;selected subfamily cubic trace matches exact general formula&#39;)
+            check(family_mixed == mixed_minimal.subs(k_symbol,k), &#39;selected subfamily weak mixed trace matches exact general formula&#39;)
+        has_colorless_doublet = any(r[&#39;color_rank&#39;] == 1 and r[&#39;weak_rank&#39;] == 2 for r in rows)
+        check(has_colorless_doublet == bool(k%2), &#39;positive chirality has a colorless weak doublet precisely at odd normal rank&#39;)
+        CASES.append({&#39;real_depth&#39;: 2*m, &#39;geometry&#39;: &#39;complete even exterior carrier for a derived two-plus-k complex split&#39;,
+                      &#39;parameters&#39;: {&#39;complex_normal_rank&#39;: k, &#39;normal_real_depth&#39;: 2*k},
+                      &#39;measurements&#39;: {&#39;branching&#39;: rows, &#39;trace_y&#39;: str(tr_y),
+                                       &#39;trace_y_cubed&#39;: str(tr_y3), &#39;su2_squared_y_trace&#39;: str(mixed),
+                                       &#39;number_of_weak_doublets&#39;: doublets,
+                                       &#39;minimal_family_match&#39;: k == 3,
+                                       &#39;geometric_fundamental_doublet&#39;: list(map(str, geometry)),
+                                       &#39;minimal_family_doublet&#39;: list(map(str, minimal)),
+                                       &#39;minimal_subfamily_cubic_trace&#39;: str(cubic_minimal.subs(k_symbol,k)) if minimal_family else None,
+                                       &#39;minimal_subfamily_weak_trace&#39;: str(mixed_minimal.subs(k_symbol,k)) if minimal_family else None,
+                                       &#39;additional_full_carrier_components&#39;: extra_rank,
+                                       &#39;colorless_weak_doublet_present&#39;: has_colorless_doublet,
+                                       &#39;anomaly_traces_exclude_higher_complete_carriers&#39;: False}})
+
+
+def flag_checks():
+    projectors = {d: np.diag([1.]*d+[0.]*(10-d)) for d in (2,3,4,5,6,10)}
+    for a, b in combinations(projectors, 2):
+        close(projectors[a]@projectors[b], projectors[a], &#39;all physical sectors coexist in one nested flat flag&#39;)
+    base = projectors[4]
+    normal = np.eye(10)-base
+    close(base@normal, 0, &#39;pencil normal six-plane is orthogonal to physical four-sector&#39;)
+    check(not np.allclose(normal, projectors[6]), &#39;normal six-plane differs from the nested physical six-sector&#39;)
+    close(projectors[6]-base, np.diag([0.]*4+[1.]*2+[0.]*4), &#39;physical six-sector needs an additional normal complex line&#39;)
+    # SU3 acting on the normal plane must reduce to preserve that line.
+    generators = []
+    for a, b in combinations(range(3), 2):
+        x = np.zeros((3,3), complex); x[a,b] = 1; x[b,a] = -1; generators.append(x)
+        x = np.zeros((3,3), complex); x[a,b] = 1j; x[b,a] = 1j; generators.append(x)
+    generators.extend((1j*np.diag([1.,-1.,0.]), 1j*np.diag([0.,1.,-1.])))
+    line = np.diag([1.,0.,0.])
+    constraints = real_constraints([(g@line-line@g).reshape(-1) for g in generators])
+    check(len(constraints.nullspace()) == 4, &#39;preserving a normal complex line reduces ambient SU3 to U2&#39;)
+    real_axis = np.zeros((6,6)); real_axis[0,0] = 1
+    realified = [np.array([[g[a//2,b//2].real if a%2 == b%2 else
+                           (-g[a//2,b//2].imag if a%2 == 0 else g[a//2,b//2].imag)
+                           for b in range(6)] for a in range(6)]) for g in generators]
+    constraint = real_constraints([(g@real_axis-real_axis@g).reshape(-1) for g in realified])
+    check(len(constraint.nullspace()) == 3, &#39;preserving the actual normal real-line sector reduces ambient SU3 further to SU2&#39;)
+    CASES.append({&#39;geometry&#39;: &#39;one compatible physical nested flag&#39;,
+                  &#39;parameters&#39;: {&#39;depths&#39;: [2,3,4,5,6,10]},
+                  &#39;measurements&#39;: {&#39;pencil_normal_plane_is_physical_Q6&#39;: False,
+                                   &#39;extra_normal_line_needed&#39;: True,
+                                   &#39;ambient_su3_stabilizer_of_Q6_dimension&#39;: 4,
+                                   &#39;ambient_su3_stabilizer_of_Q5_dimension&#39;: 3}})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--output&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    rng = np.random.default_rng(20261009)
+    check(2**(1-1) == 1, &#39;depth two has no independent same-chirality spinor pair&#39;)
+    CASES.append({&#39;real_depth&#39;: 2, &#39;measurements&#39;: {&#39;independent_chiral_pair_exists&#39;: False}})
+    for m in range(2, 7):
+        pencil_checks(m, rng)
+    charge_checks()
+    flag_checks()
+    report = {&#39;title&#39;: &#39;Pure spatial spinor pencils and their four-plane, stabilizer and charge character&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;checks_passed&#39;: CHECKS, &#39;cases&#39;: CASES,
+              &#39;scope&#39;: &#39;Bounded spatial Clifford algebra and exact stabilizers; classical field amplitudes, no particle simulations.&#39;,
+              &#39;assumptions&#39;: [&#39;Two orthogonal same-chirality spinors span an everywhere-pure local pencil.&#39;,
+                              &#39;One spinor is fixed exactly while the other is fixed projectively.&#39;,
+                              &#39;The earlier universal nonzero alternating normal-vector channel is imposed on the complement.&#39;],
+              &#39;limitations&#39;: [&#39;Pure pencils exist at every even parent depth at least four; their presence alone does not select ten.&#39;,
+                              &#39;The normal channel criterion selects ten only in combination with the pencil premise.&#39;,
+                              &#39;The normal six-plane is not the nested physical depth-six sector.&#39;,
+                              &#39;The pair itself shares a normal vacuum and does not generate the additional normal frame.&#39;,
+                              &#39;Charge characters are representation weights, not derived occupied-particle electric charges.&#39;,
+                              &#39;Full higher-rank carriers retain extra representations and cancel the displayed anomaly traces.&#39;,
+                              &#39;Preserving fixed lower-sector flags reduces ambient spatial SU3; an independent color action requires its own dynamics.&#39;],
+              &#39;sources&#39;: {&#39;experiments/pure-pencil-geometry-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/spinor-hodge-source-checks.py&#39;: sha256((HERE/&#39;spinor-hodge-source-checks.py&#39;).read_bytes()).hexdigest()}}
+    args.output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;checks_passed&#39;: CHECKS, &#39;cases&#39;: len(CASES), &#39;output&#39;: str(args.output)}))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

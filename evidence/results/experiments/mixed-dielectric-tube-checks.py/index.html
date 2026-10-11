@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>mixed-dielectric-tube-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/mixed-dielectric-tube-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="mixed-dielectric-tube-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/mixed-dielectric-tube-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="mixed-dielectric-tube-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>mixed-dielectric-tube-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/mixed-dielectric-tube-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Test flux-guide robustness under a quadratic plus quartic dielectric.&quot;&quot;&quot;
+from pathlib import Path
+import argparse
+import hashlib
+import importlib.util
+import json
+import math
+
+import numpy as np
+import sympy as sp
+from scipy.optimize import brentq, minimize
+
+CHECKS = 0
+CASES = []
+
+
+def check(condition, label):
+    global CHECKS
+    CHECKS += 1
+    if not condition:
+        raise AssertionError(label)
+
+
+def close(a, b, label, atol=2e-7, rtol=2e-7):
+    check(np.allclose(a, b, atol=atol, rtol=rtol), label)
+
+
+def qshape(n, t):
+    return (1-t)**(1-n/2)*t**(-1.5)*(2+(2-n)*t)
+
+
+def shape_energy(n, t):
+    return math.sqrt(t)*(3+(1-n)*t)/(2+(2-n)*t)
+
+
+def reduced_energy(log_moments, n, constant, q, k2, k4, omega):
+    kinetic, mass = np.exp(log_moments)
+    quartic = constant*kinetic**(n/2)*mass**((4-n)/2)
+    return q*q/(2*(k2*mass+k4*quartic))+(kinetic+omega*omega*mass)/2
+
+
+def moment_derivatives(kinetic, mass, quartic, n, q, k2, k4, omega):
+    integral = k2*mass+k4*quartic
+    derivative = np.array([k4*n*quartic/2, k2*mass+k4*(4-n)*quartic/2])
+    second = np.array([[k4*n*n*quartic/4, k4*n*(4-n)*quartic/4],
+                       [k4*n*(4-n)*quartic/4, k2*mass+k4*(4-n)**2*quartic/4]])
+    gradient = -q*q*derivative/(2*integral**2)+np.array([kinetic, omega*omega*mass])/2
+    hessian = q*q*np.outer(derivative, derivative)/integral**3-q*q*second/(2*integral**2)
+    hessian += np.diag([kinetic, omega*omega*mass])/2
+    return gradient, hessian
+
+
+def algebra_checks():
+    t = sp.symbols(&#39;t&#39;, positive=True)
+    t_fold = (9-sp.sqrt(33))/4
+    t_bind = (9-sp.sqrt(17))/8
+    q3 = (2-t)/(sp.sqrt(1-t)*t**sp.Rational(3, 2))
+    derivative = sp.diff(q3, t)
+    check(sp.simplify(derivative.subs(t, t_fold)) == 0, &#39;exact three-transverse branch fold&#39;)
+    difference = sp.expand(t*(3-2*t)**2-(2-t)**2)
+    check(sp.expand(difference-(t-1)*(4*t*t-9*t+4)) == 0, &#39;binding threshold factorization&#39;)
+    check(sp.simplify(difference.subs(t, t_bind)) == 0, &#39;exact three-transverse global binding threshold&#39;)
+    n = sp.symbols(&#39;n&#39;, integer=True)
+    k, mass, quartic, e2, k2, k4, om2 = sp.symbols(&#39;K M P E2 k2 k4 Omega2&#39;, positive=True)
+    # Combine the ordinary equation with its independent spatial scaling.
+    equation = k+(om2-k2*e2)*mass-2*k4*e2*quartic
+    scaling = (n-2)*k/2+n*(om2-k2*e2)*mass/2-n*k4*e2*quartic/2
+    check(sp.expand(4*scaling-n*equation-((n-4)*k+n*(om2-k2*e2)*mass)) == 0,
+          &#39;mixed dielectric retains the subcritical cubic support identity&#39;)
+    return float(t_fold), float(t_bind), str(t_fold), str(t_bind)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--tube-source&#39;, type=Path, required=True)
+    parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    spec = importlib.util.spec_from_file_location(&#39;tube_geometry&#39;, args.tube_source)
+    tube = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(tube)
+    t_fold, t_bind, fold_exact, bind_exact = algebra_checks()
+    rng = np.random.default_rng(2026101060)
+    for d in tube.DEPTHS:
+        gate = tube.hodge_coefficient(d)
+        check(bool(gate) == (d in (3, 4)), &#39;actual mixed dielectric has the same occupied-sector zeros&#39;)
+        CASES.append({&#39;case&#39;: f&#39;mixed-dielectric-occupied-depth-{d}&#39;, &#39;real_depth&#39;: d,
+                      &#39;transverse_dimension&#39;: d-1, &#39;hodge_coefficient&#39;: gate,
+                      &#39;quadratic_dielectric_is_an_ordinary_positive_vacuum_floor&#39;: False,
+                      &#39;independent_connection_zero_source_constraint_retained&#39;: gate == 0 and d != 10,
+                      &#39;independent_connection_present&#39;: d != 10})
+    for n in (1, 2, 3):
+        _, profile = tube.solve_profile(n, 25.)
+        mn, kn, pn = (profile[k] for k in (&#39;mass_integral&#39;, &#39;gradient_integral&#39;, &#39;quartic_integral&#39;))
+        constant = pn/(kn**(n/2)*mn**((4-n)/2))
+        close(constant, 4*(4-n)**(n/2-1)/(n**(n/2)*mn), &#39;sharp interpolation normalization&#39;)
+        for k2, k4, omega in ((1., 1., 1.), (1.2, .7, .9), (.4, 2.3, 1.6)):
+            q0 = k2**1.5*omega**(1-n)*mn/(2*k4*(4-n))
+            for t in (.2, .5, .8, .95):
+                electric = omega*math.sqrt(t/k2)
+                inverse_width = omega*math.sqrt(1-t)
+                amplitude = math.sqrt(k2*(1-t)/(2*k4*t))
+                mass = amplitude**2*inverse_width**(-n)*mn
+                kinetic = amplitude**2*inverse_width**(2-n)*kn
+                quartic = amplitude**4*inverse_width**(-n)*pn
+                q = electric*(k2*mass+k4*quartic)
+                close(q, q0*qshape(n, t), &#39;flux from direct profile moments agrees with the universal branch curve&#39;)
+                electric_energy = q*electric/2
+                tension = electric_energy+(kinetic+omega*omega*mass)/2
+                diffuse = q*omega/math.sqrt(k2)
+                close(tension/diffuse, shape_energy(n, t), &#39;complete tension against diffuse-flux threshold&#39;)
+                close(kinetic/n-(kinetic+omega*omega*mass)/2+electric_energy, 0,
+                      &#39;mixed tube retains vanishing complete transverse stress&#39;)
+                close(2*electric_energy+kinetic/n, tension, &#39;complete transverse boost inertia stays positive&#39;)
+                gradient, hessian = moment_derivatives(kinetic, mass, quartic, n, q, k2, k4, omega)
+                close(gradient, 0, &#39;profile is stationary under independent amplitude and width variations&#39;)
+                eigenvalues = np.linalg.eigvalsh(hessian)
+                stable = n &lt; 3 or t &lt; t_fold
+                check((eigenvalues.min() &gt; 0) == stable, &#39;exact moment Hessian distinguishes the folded unstable branch&#39;)
+                step = 2e-4
+                derivative_q = (qshape(n, t+step)-qshape(n, t-step))/(2*step)
+                def tension_from_t(value):
+                    qq = q0*qshape(n, value)
+                    return qq*omega/math.sqrt(k2)*shape_energy(n, value)
+                derivative_tension = (tension_from_t(t+step)-tension_from_t(t-step))/(2*step)
+                close(derivative_tension/(q0*derivative_q), electric,
+                      &#39;envelope derivative of tension is the actual electric field&#39;, atol=2e-5, rtol=2e-5)
+                log_pair = np.log([kinetic, mass])
+                for _ in range(2):
+                    direction = rng.normal(size=2); direction /= np.linalg.norm(direction)
+                    finite = (reduced_energy(log_pair+step*direction, n, constant, q, k2, k4, omega)
+                              -2*tension+reduced_energy(log_pair-step*direction, n, constant, q, k2, k4, omega))/step**2
+                    close(finite, direction@hessian@direction, &#39;direct energy differences verify the fixed-flux moment Hessian&#39;, atol=2e-5, rtol=2e-5)
+                CASES.append({&#39;case&#39;: f&#39;mixed-profile-n{n}-k2{k2}-t{t}&#39;, &#39;transverse_dimension&#39;: n,
+                              &#39;real_depth&#39;: n+1, &#39;actual_hodge_active&#39;: n in (2, 3),
+                              &#39;quadratic_coefficient&#39;: k2, &#39;quartic_coefficient&#39;: k4,
+                              &#39;neutral_restoring_frequency&#39;: omega, &#39;t&#39;: t,
+                              &#39;commuting_flux_Q&#39;: q, &#39;width&#39;: 1/inverse_width, &#39;amplitude&#39;: amplitude,
+                              &#39;complete_tension&#39;: tension, &#39;diffuse_threshold&#39;: diffuse,
+                              &#39;tension_to_diffuse_ratio&#39;: tension/diffuse,
+                              &#39;bound_below_diffuse_threshold&#39;: tension &lt; diffuse,
+                              &#39;moment_hessian_eigenvalues&#39;: eigenvalues.tolist(),
+                              &#39;stable_moment_branch&#39;: stable})
+        if n in (2, 3):
+            q0 = mn/(2*(4-n))
+            if n == 2:
+                critical = 2*q0
+                trials = (.7*critical, 1.2*critical, 3*critical)
+                cuts = (0., 1.)
+            else:
+                critical = q0*qshape(n, t_bind)
+                fold = q0*qshape(n, t_fold)
+                trials = (.9*fold, (fold+critical)/2, 1.3*critical)
+                cuts = (0., t_fold, 1.)
+            for q in trials:
+                roots = []
+                for left, right in zip(cuts[:-1], cuts[1:]):
+                    lo, hi = max(left, 1e-9), min(right, 1-1e-9)
+                    fun = lambda t: q0*qshape(n, t)-q
+                    if fun(lo)*fun(hi) &lt; 0:
+                        roots.append(brentq(fun, lo, hi, xtol=1e-13))
+                candidate = min([q]+[q*shape_energy(n, t) for t in roots])
+                finite_minimum = q &gt; critical
+                check((candidate &lt; q*(1-1e-9)) == finite_minimum, &#39;exact branches cross the global diffuse threshold at the predicted flux&#39;)
+                observed = []
+                for start in ((-5., 0.), (0., 0.), (3., 2.)):
+                    result = minimize(reduced_energy, np.array(start), args=(n, constant, q, 1., 1., 1.),
+                                      method=&#39;L-BFGS-B&#39;, bounds=((-30., 20.), (-30., 20.)),
+                                      options={&#39;ftol&#39;: 1e-13, &#39;gtol&#39;: 1e-8, &#39;maxiter&#39;: 500})
+                    observed.append(result.fun)
+                close(min(observed), candidate, &#39;independent two-moment minimization agrees with analytic global branch selection&#39;, atol=2e-5)
+                CASES.append({&#39;case&#39;: f&#39;global-selection-n{n}-Q{q:.8g}&#39;, &#39;real_depth&#39;: n+1,
+                              &#39;commuting_flux_Q&#39;: q, &#39;critical_global_binding_flux&#39;: critical,
+                              &#39;stationary_t_values&#39;: roots, &#39;global_energy_infimum&#39;: candidate,
+                              &#39;finite_profile_global_minimum&#39;: finite_minimum,
+                              &#39;independent_optimizer_energies&#39;: observed})
+        if n == 3:
+            close(shape_energy(n, t_bind), 1., &#39;the finite three-transverse binding profile exactly ties the diffuse threshold&#39;)
+            CASES.append({&#39;case&#39;: &#39;exact-three-transverse-thresholds&#39;, &#39;real_depth&#39;: 4,
+                          &#39;fold_t_exact&#39;: fold_exact, &#39;binding_t_exact&#39;: bind_exact,
+                          &#39;fold_t&#39;: t_fold, &#39;binding_t&#39;: t_bind,
+                          &#39;dimensionless_fold_flux&#39;: qshape(n, t_fold),
+                          &#39;dimensionless_binding_flux&#39;: qshape(n, t_bind),
+                          &#39;binding_width_times_Omega&#39;: 1/math.sqrt(1-t_bind)})
+    for _ in range(8):
+        first, other = rng.normal(size=(2, 4))
+        u2 = first@first+other@other
+        area2 = (first@first)*(other@other)-(first@other)**2
+        close(u2*u2/4-area2, ((first@first-other@other)**2)/4+(first@other)**2,
+              &#39;neutral-frame area deficit survives the added quadratic invariant&#39;)
+        for k2, k4 in ((1., 1.), (.4, 2.3)):
+            check(k2*u2+k4*area2 &lt;= k2*u2+k4*u2*u2/4+1e-9,
+                  &#39;mixed frame dielectric is bounded by the scalar law with quartic coefficient divided by four&#39;)
+    CASES.append({&#39;case&#39;: &#39;mixed-neutral-frame-completion&#39;,
+                  &#39;active_depths&#39;: [3, 4], &#39;effective_quartic_coefficient&#39;: &#39;kappa4/4&#39;,
+                  &#39;effective_quadratic_coefficient&#39;: &#39;kappa2&#39;,
+                  &#39;balanced_orthogonal_frame_attains_scalar_energy_bound&#39;: True})
+    report = {&#39;title&#39;: &#39;Quadratic Dielectric Corrections Preserve Conditional Three/Four Flux Guides Above Derived Thresholds&#39;,
+              &#39;sources&#39;: {&#39;experiments/mixed-dielectric-tube-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/hodge-flux-tube-checks.py&#39;: hashlib.sha256(args.tube_source.read_bytes()).hexdigest()},
+              &#39;checks_passed&#39;: CHECKS, &#39;dependency_checks_passed&#39;: tube.CHECKS, &#39;case_count&#39;: len(CASES),
+              &#39;occupied_depths&#39;: list(tube.DEPTHS),
+              &#39;scope&#39;: &#39;complete fixed commuting flux energy, sharp interpolation reduction, global threshold and local branch stability; not full non-Abelian confinement&#39;,
+              &#39;cases&#39;: CASES}
+    args.report.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(f&#39;{CHECKS} mixed-dielectric checks plus {tube.CHECKS} dependency checks passed across {len(CASES)} cases&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

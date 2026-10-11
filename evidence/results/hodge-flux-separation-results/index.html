@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>hodge-flux-separation-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/hodge-flux-separation-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="hodge-flux-separation-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/hodge-flux-separation-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hodge-flux-separation-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>hodge-flux-separation-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/hodge-flux-separation-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">title</th><td>Finite Commuting-Source Separation Bounds and Complete Electric Variations</td></tr><tr><th scope="row">checks_passed</th><td>231</td></tr><tr><th scope="row">case_count</th><td>15</td></tr><tr><th scope="row">scope</th><td>finite-source bounds at active three/four with the same explicit occupied-sector Hodge and profile controls</td></tr><tr><th scope="row">conclusion</th><td>A sharp plane energy bound and fixed-shape finite cap trials share the same positive linear separation coefficient. Completing the entire Abelian electric quadratic energy retains the fixed-flux stability bound. Prescribed sources, exact vacuum zero and commuting flux remain premises.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;title&quot;: &quot;Finite Commuting-Source Separation Bounds and Complete Electric Variations&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/hodge-flux-separation-checks.py&quot;: &quot;d76c72a080f60704d114dd939ee9839b51b6542857c912371c16e25de2a76d64&quot;,
+    &quot;experiments/hodge-flux-tube-checks.py&quot;: &quot;24ef86b4855274c5c8ca74890aa5e6bfa5f15bcccf2bc6ae566c02d998adb38b&quot;
+  },
+  &quot;checks_passed&quot;: 231,
+  &quot;case_count&quot;: 15,
+  &quot;occupied_depths&quot;: [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  &quot;scope&quot;: &quot;finite-source bounds at active three/four with the same explicit occupied-sector Hodge and profile controls&quot;,
+  &quot;conclusion&quot;: &quot;A sharp plane energy bound and fixed-shape finite cap trials share the same positive linear separation coefficient. Completing the entire Abelian electric quadratic energy retains the fixed-flux stability bound. Prescribed sources, exact vacuum zero and commuting flux remain premises.&quot;,
+  &quot;cases&quot;: [
+    {
+      &quot;case&quot;: &quot;exact-cap-and-hamiltonian-identities&quot;,
+      &quot;cap_polynomial&quot;: &quot;10s^3-15s^4+6s^5&quot;,
+      &quot;alpha2_exact&quot;: &quot;181/462&quot;,
+      &quot;alpha4_exact&quot;: &quot;2549/8398&quot;,
+      &quot;alpha_gradient_exact&quot;: &quot;10/7&quot;,
+      &quot;cap_charge_exact&quot;: &quot;1&quot;,
+      &quot;electric_second_variation&quot;: &quot;(p-4 kappa E u^3 h)^2/(2 kappa u^4)-3 kappa E^2 u^2 h^2&quot;
+    },
+    {
+      &quot;case&quot;: &quot;occupied-sector-source-control-2&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;hodge_coefficient&quot;: 0.0,
+      &quot;transverse_dimension&quot;: 1,
+      &quot;nonzero_color_source_allowed_in_this_action&quot;: false,
+      &quot;regular_quartic_transverse_profile_possible&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;occupied-sector-source-control-3&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;hodge_coefficient&quot;: 1.0,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;nonzero_color_source_allowed_in_this_action&quot;: true,
+      &quot;regular_quartic_transverse_profile_possible&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;occupied-sector-source-control-4&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;hodge_coefficient&quot;: 1.0,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;nonzero_color_source_allowed_in_this_action&quot;: true,
+      &quot;regular_quartic_transverse_profile_possible&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;occupied-sector-source-control-5&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;hodge_coefficient&quot;: 0.0,
+      &quot;transverse_dimension&quot;: 4,
+      &quot;nonzero_color_source_allowed_in_this_action&quot;: false,
+      &quot;regular_quartic_transverse_profile_possible&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;occupied-sector-source-control-6&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;hodge_coefficient&quot;: 0.0,
+      &quot;transverse_dimension&quot;: 5,
+      &quot;nonzero_color_source_allowed_in_this_action&quot;: false,
+      &quot;regular_quartic_transverse_profile_possible&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;occupied-sector-source-control-10&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;hodge_coefficient&quot;: 0.0,
+      &quot;transverse_dimension&quot;: 9,
+      &quot;nonzero_color_source_allowed_in_this_action&quot;: false,
+      &quot;regular_quartic_transverse_profile_possible&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;finite-source-separation-n2-Q1.0&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;classical_commuting_flux&quot;: 1.0,
+      &quot;dielectric_coefficient&quot;: 1.0,
+      &quot;neutral_restoring_frequency&quot;: 1.0,
+      &quot;tension&quot;: 2.702843957387151,
+      &quot;fixed_cap_width&quot;: 0.9,
+      &quot;one_cap_energy&quot;: 2.3115339360920513,
+      &quot;lengths&quot;: [
+        2.0,
+        5.0,
+        11.0
+      ],
+      &quot;upper_bound_energies&quot;: [
+        10.028755786958406,
+        18.137287659119856,
+        34.35435140344276
+      ],
+      &quot;lower_bound_energies&quot;: [
+        5.405687914774302,
+        13.514219786935755,
+        29.73128353125866
+      ],
+      &quot;source_total_charges&quot;: [
+        1.0,
+        -1.0
+      ],
+      &quot;exact_endpoint_stationary_solution_claimed&quot;: false,
+      &quot;scope&quot;: &quot;prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim&quot;
+    },
+    {
+      &quot;case&quot;: &quot;finite-source-separation-n2-Q1.7&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;classical_commuting_flux&quot;: 1.7,
+      &quot;dielectric_coefficient&quot;: 0.8,
+      &quot;neutral_restoring_frequency&quot;: 1.3,
+      &quot;tension&quot;: 4.93991140585993,
+      &quot;fixed_cap_width&quot;: 0.6923076923076923,
+      &quot;one_cap_energy&quot;: 3.2497885805188327,
+      &quot;lengths&quot;: [
+        1.5384615384615383,
+        3.846153846153846,
+        8.461538461538462
+      ],
+      &quot;upper_bound_energies&quot;: [
+        14.099440862360636,
+        25.499236414345088,
+        48.298827518314
+      ],
+      &quot;lower_bound_energies&quot;: [
+        7.599863701322969,
+        18.99965925330742,
+        41.79925035727633
+      ],
+      &quot;source_total_charges&quot;: [
+        1.7,
+        -1.7
+      ],
+      &quot;exact_endpoint_stationary_solution_claimed&quot;: false,
+      &quot;scope&quot;: &quot;prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim&quot;
+    },
+    {
+      &quot;case&quot;: &quot;finite-source-separation-n2-Q0.6&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;classical_commuting_flux&quot;: 0.6,
+      &quot;dielectric_coefficient&quot;: 2.0,
+      &quot;neutral_restoring_frequency&quot;: 0.7,
+      &quot;tension&quot;: 1.2031243090786885,
+      &quot;fixed_cap_width&quot;: 1.2857142857142858,
+      &quot;one_cap_energy&quot;: 1.469913444409312,
+      &quot;lengths&quot;: [
+        2.857142857142857,
+        7.142857142857143,
+        15.714285714285715
+      ],
+      &quot;upper_bound_energies&quot;: [
+        6.377324914757734,
+        11.5335719536664,
+        21.84606603148373
+      ],
+      &quot;lower_bound_energies&quot;: [
+        3.43749802593911,
+        8.593745064847775,
+        18.906239142665108
+      ],
+      &quot;source_total_charges&quot;: [
+        0.6,
+        -0.6
+      ],
+      &quot;exact_endpoint_stationary_solution_claimed&quot;: false,
+      &quot;scope&quot;: &quot;prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim&quot;
+    },
+    {
+      &quot;case&quot;: &quot;complete-electric-variation-n2&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;directions_checked&quot;: 3,
+      &quot;full_Abelian_quadratic_bound&quot;: true,
+      &quot;non_Abelian_variations_checked&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;finite-source-separation-n3-Q1.0&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;classical_commuting_flux&quot;: 1.0,
+      &quot;dielectric_coefficient&quot;: 1.0,
+      &quot;neutral_restoring_frequency&quot;: 1.0,
+      &quot;tension&quot;: 3.9953743016504832,
+      &quot;fixed_cap_width&quot;: 0.9,
+      &quot;one_cap_energy&quot;: 2.3599581036559565,
+      &quot;lengths&quot;: [
+        2.0,
+        5.0,
+        11.0
+      ],
+      &quot;upper_bound_energies&quot;: [
+        12.710664810612881,
+        24.69678771556433,
+        48.66903352546723
+      ],
+      &quot;lower_bound_energies&quot;: [
+        7.9907486033009665,
+        19.976871508252415,
+        43.94911731815532
+      ],
+      &quot;source_total_charges&quot;: [
+        1.0,
+        -1.0
+      ],
+      &quot;exact_endpoint_stationary_solution_claimed&quot;: false,
+      &quot;scope&quot;: &quot;prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim&quot;
+    },
+    {
+      &quot;case&quot;: &quot;finite-source-separation-n3-Q1.7&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;classical_commuting_flux&quot;: 1.7,
+      &quot;dielectric_coefficient&quot;: 0.8,
+      &quot;neutral_restoring_frequency&quot;: 1.3,
+      &quot;tension&quot;: 6.690745971142438,
+      &quot;fixed_cap_width&quot;: 0.6923076923076923,
+      &quot;one_cap_energy&quot;: 3.0400309846734244,
+      &quot;lengths&quot;: [
+        1.5384615384615383,
+        3.846153846153846,
+        8.461538461538462
+      ],
+      &quot;upper_bound_energies&quot;: [
+        16.373517309565987,
+        31.813700319894686,
+        62.6940663405521
+      ],
+      &quot;lower_bound_energies&quot;: [
+        10.293455340219134,
+        25.733638350547835,
+        56.61400437120525
+      ],
+      &quot;source_total_charges&quot;: [
+        1.7,
+        -1.7
+      ],
+      &quot;exact_endpoint_stationary_solution_claimed&quot;: false,
+      &quot;scope&quot;: &quot;prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim&quot;
+    },
+    {
+      &quot;case&quot;: &quot;finite-source-separation-n3-Q0.6&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;classical_commuting_flux&quot;: 0.6,
+      &quot;dielectric_coefficient&quot;: 2.0,
+      &quot;neutral_restoring_frequency&quot;: 0.7,
+      &quot;tension&quot;: 2.003000173587494,
+      &quot;fixed_cap_width&quot;: 1.2857142857142858,
+      &quot;one_cap_energy&quot;: 1.6901675839516208,
+      &quot;lengths&quot;: [
+        2.857142857142857,
+        7.142857142857143,
+        15.714285714285715
+      ],
+      &quot;upper_bound_energies&quot;: [
+        9.103192806724653,
+        17.68747926495677,
+        34.856052181421006
+      ],
+      &quot;lower_bound_energies&quot;: [
+        5.722857638821411,
+        14.307144097053529,
+        31.475717013517762
+      ],
+      &quot;source_total_charges&quot;: [
+        0.6,
+        -0.6
+      ],
+      &quot;exact_endpoint_stationary_solution_claimed&quot;: false,
+      &quot;scope&quot;: &quot;prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim&quot;
+    },
+    {
+      &quot;case&quot;: &quot;complete-electric-variation-n3&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;directions_checked&quot;: 3,
+      &quot;full_Abelian_quadratic_bound&quot;: true,
+      &quot;non_Abelian_variations_checked&quot;: false
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

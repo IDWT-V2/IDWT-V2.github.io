@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>complex-comb-response-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/complex-comb-response-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="complex-comb-response-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/complex-comb-response-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="complex-comb-response-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>complex-comb-response-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/complex-comb-response-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Compare real and positive-frequency density sources at occupied V2 depths.&quot;&quot;&quot;
+import argparse
+from collections import Counter
+from datetime import datetime, timezone
+from fractions import Fraction as F
+from hashlib import sha256
+import importlib.util
+import json
+import math
+from pathlib import Path
+
+import mpmath as mp
+import numpy as np
+from scipy.special import digamma
+
+mp.mp.dps = 60
+CHECKS = Counter()
+VARIANCE_LIMIT = float(17 * mp.zeta(4) / 4)
+
+
+def exact(label, actual, expected):
+    if actual != expected:
+        raise AssertionError((label, actual, expected))
+    CHECKS[label] += 1
+
+
+def close(label, actual, expected, tolerance=3e-11):
+    if not np.allclose(actual, expected, atol=tolerance, rtol=tolerance):
+        raise AssertionError((label, actual, expected))
+    CHECKS[label] += 1
+
+
+def require(label, condition):
+    if not condition:
+        raise AssertionError(label)
+    CHECKS[label] += 1
+
+
+def harmonics(cutoff):
+    h = [F(0)]
+    h2 = [F(0)]
+    for k in range(1, cutoff + 1):
+        h.append(h[-1] + F(1, k))
+        h2.append(h2[-1] + F(1, k*k))
+    return h, h2
+
+
+def derivative_identity(cutoff, h, h2):
+    return ((cutoff+1)*(h*h-2*h2)-(4*cutoff+2)*h+8*cutoff)/2
+
+
+def tail_envelope(last):
+    logarithm = math.log(last)
+    return (logarithm**2+4*logarithm+5)/last
+
+
+def variance_deficit_bound(cutoff):
+    if cutoff == 1:
+        return VARIANCE_LIMIT
+    h = mp.harmonic(cutoff-1)
+    h2 = mp.zeta(2)-mp.polygamma(1, cutoff)
+    hk = h+mp.mpf(1)/cutoff
+    return float((h*h+h2+2*h*(hk-1))/(cutoff+1))+tail_envelope(cutoff-1)
+
+
+def coefficients(cutoff, limit=None):
+    number = cutoff-1 if limit is None else min(cutoff-1, limit)
+    p = np.arange(1, number+1, dtype=float)
+    if cutoff &lt;= 150000:
+        h = np.r_[0., np.cumsum(1/np.arange(1, cutoff+1, dtype=float))]
+        values = (h[np.arange(1, number+1)]+h[cutoff-np.arange(1, number+1)]-h[-1])/p
+    else:
+        values = (digamma(p+1)+np.euler_gamma+digamma(cutoff-p+1)-digamma(cutoff+1))/p
+    mean = float((mp.zeta(2)-mp.polygamma(1, cutoff+1))/2)
+    return mean, values
+
+
+def susceptibility(x):
+    return (3/(2-x*x)+2/(3-x*x))/5
+
+
+def response(cutoff, ratio, limit=65536):
+    count = cutoff-1 if cutoff &lt;= 150000 else min(cutoff-1, limit)
+    mean, values = coefficients(cutoff, count)
+    p = np.arange(1, count+1, dtype=float)
+    x = ratio*p
+    q0 = float(np.dot(values*values, susceptibility(x))/2)
+    q1 = float(np.dot(values*values*x*x, susceptibility(x))/2)
+    b0 = b1 = 0.
+    if count &lt; cutoff-1:
+        lowest = ratio*(count+1)
+        require(&#39;omitted_frequencies_above_poles&#39;, lowest*lowest &gt; 3)
+        tail = tail_envelope(count)
+        b0 = tail/(2*(lowest*lowest-3))
+        b1 = tail/(2*(1-3/(lowest*lowest)))
+    result = {&#39;density_response&#39;: q0, &#39;density_tail_bound&#39;: b0,
+              &#39;derivative_response&#39;: q1, &#39;derivative_tail_bound&#39;: b1,
+              &#39;static_source_term&#39;: mean*mean*13/30,
+              &#39;evaluated_harmonics&#39;: count}
+    if count &lt; cutoff-1:
+        # Separate the exactly known limiting variance from a fast-decaying correction.
+        correction = float(.6*np.dot(values*values, 1/(2-x*x)+1/(3-x*x)))
+        correction_bound = 1.2*tail_envelope(count)/(lowest*lowest-3)
+        variance_bound = variance_deficit_bound(cutoff)
+        center = -VARIANCE_LIMIT/2+correction
+        result.update(derivative_interval_lower=center-correction_bound,
+                      derivative_interval_upper=center+variance_bound/2,
+                      variance_deficit_bound=variance_bound,
+                      derivative_interval_method=&#39;limiting variance plus exact finite coefficients&#39;)
+        require(&#39;response_tail_and_variance_intervals_overlap&#39;,
+                max(q1-b1, result[&#39;derivative_interval_lower&#39;]) &lt;=
+                min(q1, result[&#39;derivative_interval_upper&#39;])+1e-12)
+    else:
+        result.update(derivative_interval_lower=q1, derivative_interval_upper=q1,
+                      variance_deficit_bound=variance_deficit_bound(cutoff))
+    h = mp.harmonic(cutoff)
+    h2 = mp.zeta(2)-mp.polygamma(1, cutoff+1)
+    derivative_norm = float(derivative_identity(cutoff, h, h2))
+    result[&#39;density_derivative_norm&#39;] = derivative_norm
+    if cutoff &gt; 1 and ratio*(cutoff-1) &lt; math.sqrt(2):
+        leading = (13/30)*ratio*ratio*derivative_norm
+        maximum = float(susceptibility(ratio*(cutoff-1)))/float(susceptibility(0))
+        require(&#39;slow_comb_derivative_sandwich&#39;, leading*(1-2e-11) &lt;= q1 &lt;= leading*maximum*(1+2e-11))
+        result.update(slow_derivative_leading=leading,
+                      slow_derivative_relative_upper=maximum-1)
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&#39;--baseline&#39;, type=Path, required=True)
+    parser.add_argument(&#39;--output&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    spec = importlib.util.spec_from_file_location(&#39;real_comb_baseline&#39;, args.baseline)
+    baseline = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(baseline)
+    finite_cases = []
+    for cutoff in range(1, 41):
+        h, h2 = harmonics(cutoff)
+        values = [(h[p]+h[cutoff-p]-h[cutoff])/p for p in range(1, cutoff)]
+        for p, value in enumerate(values, 1):
+            direct = sum((F(1, k*(k+p)) for k in range(1, cutoff-p+1)), F(0))
+            exact(&#39;telescoping_density_coefficient&#39;, value, direct)
+            exact(&#39;limiting_coefficient_deficit&#39;, h[p]/p-value, (h[cutoff]-h[cutoff-p])/p)
+            require(&#39;coefficient_deficit_bound&#39;, h[p]/p-value &lt;= F(1, cutoff-p+1))
+        norm = sum(((p+1)**2*v*v/2 for p, v in enumerate(values)), F(0))
+        exact(&#39;finite_derivative_identity&#39;, norm, derivative_identity(cutoff, h[-1], h2[-1]))
+        exact(&#39;partial_harmonic_square_identity&#39;, sum((v*v for v in h[1:-1]), F(0)),
+              cutoff*h[-1]**2-(2*cutoff+1)*h[-1]+2*cutoff)
+        exact(&#39;harmonic_convolution_identity&#39;, sum((h[p]*h[cutoff-p] for p in range(1, cutoff)), F(0)),
+              (cutoff+1)*(h[-1]**2-h2[-1])-2*cutoff*h[-1]+2*cutoff)
+        samples = 1 &lt;&lt; (4*cutoff).bit_length()
+        spectrum = np.zeros(samples, dtype=complex)
+        spectrum[np.arange(1, cutoff+1)] = 1/np.arange(1, cutoff+1)
+        z = np.fft.ifft(spectrum)*samples
+        density = np.abs(z)**2/2
+        density_spectrum = np.fft.fft(density)/samples
+        close(&#39;density_mean_independent_fft&#39;, density_spectrum[0], float(h2[-1]/2))
+        close(&#39;density_coefficients_independent_fft&#39;, 2*density_spectrum[1:cutoff], [float(v) for v in values])
+        derivative_spectrum = np.zeros(samples, dtype=complex)
+        for p, value in enumerate(values, 1):
+            derivative_spectrum[p] = 1j*p*float(value)/2
+            derivative_spectrum[-p] = -1j*p*float(value)/2
+        derivative = np.fft.ifft(derivative_spectrum)*samples
+        close(&#39;derivative_norm_independent_fft&#39;, np.mean(np.abs(derivative)**2), float(norm))
+        variance = sum((v*v for v in values), F(0))
+        deficit = VARIANCE_LIMIT-float(variance)
+        require(&#39;finite_variance_deficit_bound&#39;, 0 &lt;= deficit &lt;= variance_deficit_bound(cutoff))
+        finite_cases.append({&#39;cutoff&#39;: cutoff, &#39;density_derivative_norm_exact&#39;: str(norm),
+                             &#39;variance_exact&#39;: str(variance)})
+    for cutoff in (64, 1024, 18564, 100000):
+        _, values = coefficients(cutoff)
+        close(&#39;numeric_derivative_identity&#39;, np.dot(values*values, np.arange(1, cutoff, dtype=float)**2)/2,
+              float(derivative_identity(cutoff, mp.harmonic(cutoff), mp.zeta(2)-mp.polygamma(1, cutoff+1))), 1e-9)
+        require(&#39;large_finite_variance_bound&#39;,
+                0 &lt;= VARIANCE_LIMIT-float(np.dot(values, values)) &lt;= variance_deficit_bound(cutoff))
+        full = response(cutoff, 1.)
+        for limit in (16, 64, 256):
+            # Exercise the same analytic tail bounds against an independently full sum.
+            p = np.arange(1, limit+1, dtype=float)
+            head = values[:limit]
+            if len(head) &lt; limit:
+                continue
+            center = -VARIANCE_LIMIT/2+float(.6*np.dot(head*head, 1/(2-p*p)+1/(3-p*p)))
+            bound = 1.2*tail_envelope(limit)/((limit+1)**2-3)
+            require(&#39;variance_response_bound_vs_full_sum&#39;,
+                    center-bound &lt;= full[&#39;derivative_response&#39;] &lt;= center+variance_deficit_bound(cutoff)/2)
+    last = 65536
+    p = np.arange(1, last+1, dtype=float)
+    limiting = (digamma(p+1)+np.euler_gamma)/p
+    variance_head = float(np.dot(limiting, limiting))
+    require(&#39;external_euler_sum_independent_partial_bound&#39;,
+            variance_head &lt; VARIANCE_LIMIT &lt; variance_head+tail_envelope(last))
+    limit_q0 = float(np.dot(limiting*limiting, susceptibility(p))/2)
+    limit_q1 = -VARIANCE_LIMIT/2+float(.6*np.dot(limiting*limiting, 1/(2-p*p)+1/(3-p*p)))
+    limit_bound = 1.2*tail_envelope(last)/((last+1)**2-3)
+    electron = mp.mpf(&#39;0.51099895000&#39;)
+    mu6 = electron/18564
+    mu5 = mp.sqrt(mp.mpf(&#39;2.534e-3&#39;)/(65780**2-2002**2))/10**6
+    scales = {2: electron*mp.sqrt(2890), 3: electron*mp.sqrt(32*mp.sqrt(7)),
+              4: electron*mp.sqrt(48/mp.sqrt(7))/15, 5: mu5, 6: mu6, 10: mu6}
+    assigned = [(&#39;W&#39;,2,76),(&#39;Z&#39;,2,81),(&#39;Higgs&#39;,2,95),(&#39;down&#39;,3,1),(&#39;strange&#39;,3,4),
+                (&#39;up&#39;,4,3),(&#39;charm&#39;,4,20),(&#39;top&#39;,4,72),(&#39;nu1&#39;,5,10),(&#39;nu2&#39;,5,15),(&#39;nu3&#39;,5,22),
+                (&#39;electron&#39;,6,13),(&#39;muon&#39;,6,35),(&#39;tau&#39;,10,23)]
+    particles = []
+    for name, depth, index in assigned:
+        cutoff = math.comb(index+depth-1, depth)
+        ratio = float(scales[depth]/mu6)
+        actual = response(cutoff, ratio)
+        real = baseline.response_sum(cutoff, ratio)
+        mean, low = coefficients(cutoff, 12)
+        for p, value in enumerate(low, 1):
+            reference = (mp.harmonic(p)+mp.harmonic(cutoff-p)-mp.harmonic(cutoff))/p
+            close(&#39;large_cutoff_coefficients_high_precision&#39;, value, float(reference), 3e-13)
+        if cutoff &gt; 1:
+            close(&#39;fundamental_matches_real_preparation&#39;, low[0], 1-1/cutoff)
+        close(&#39;equal_mean_source&#39;, mean*mean*13/30, real[&#39;static_source_term&#39;])
+        particles.append({&#39;particle&#39;: name, &#39;real_depth&#39;: depth, &#39;mode_index&#39;: index,
+                          &#39;cutoff&#39;: cutoff, &#39;fundamental_over_depth6&#39;: ratio,
+                          &#39;complex&#39;: actual, &#39;real&#39;: real})
+    report = {&#39;experiment&#39;: &#39;complex-comb-sector-response&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;status&#39;: &#39;passed&#39;, &#39;checks&#39;: sum(CHECKS.values()), &#39;check_counts&#39;: dict(CHECKS),
+              &#39;scope&#39;: &#39;Conditional real versus positive-frequency combs at occupied sectors; signed conservative receiver diagnostics, not charges or rates.&#39;,
+              &#39;finite_cases&#39;: finite_cases, &#39;particle_cases&#39;: particles,
+              &#39;limiting_variance&#39;: {&#39;exact&#39;: &#39;17*zeta(4)/4&#39;, &#39;value&#39;: VARIANCE_LIMIT,
+                                    &#39;partial_sum&#39;: variance_head, &#39;tail_bound&#39;: tail_envelope(last)},
+              &#39;limiting_response_r1&#39;: {&#39;density_response&#39;: limit_q0,
+                                       &#39;derivative_response&#39;: limit_q1,
+                                       &#39;derivative_tail_bound&#39;: limit_bound},
+              &#39;sources&#39;: {&#39;experiments/complex-comb-response-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/sawtooth-sector-coupling-checks.py&#39;: sha256(args.baseline.read_bytes()).hexdigest()}}
+    args.output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;checks&#39;: report[&#39;checks&#39;], &#39;particle_cases&#39;: particles,
+                      &#39;limiting_response&#39;: report[&#39;limiting_response_r1&#39;]}, indent=2))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,235 @@
+{
+  "title": "Neutral Geometric Frames Realize the Hodge-Gated Quartic Dielectric",
+  "sources": {
+    "experiments/neutral-frame-dielectric-checks.py": "78ff3b7ab1a1178a9d3c61ba5f76cc8bc8104369846a1de7ce08343200b22e62",
+    "experiments/hodge-flux-tube-checks.py": "24ef86b4855274c5c8ca74890aa5e6bfa5f15bcccf2bc6ae566c02d998adb38b"
+  },
+  "checks_passed": 543,
+  "case_count": 22,
+  "occupied_depths": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  "status": "explicit positive retained geometric-mode action; master-field reduction and vacuum Cauchy problem remain open",
+  "conclusion": "Squared middle-form volume gives a quartic dielectric on the active four-carrier. Exact Gram and gradient bounds reduce the entire neutral-frame fixed-flux energy to its balanced scalar branch. Amplitude imbalance, nonorthogonality and spatial frame twists cannot lower the tube minimum. All occupied-sector Hodge zeros and geometric-degree profile controls use the same law.",
+  "cases": [
+    {
+      "case": "geometric-frame-depth-2",
+      "real_depth": 2,
+      "even_source_carrier": 2,
+      "frame_vectors": 1,
+      "balanced_dielectric_power": 2,
+      "hodge_coefficient": 0.0,
+      "balanced_coefficient_fraction": "1",
+      "pohozaev_gradient_coefficient": 4,
+      "pohozaev_mass_coefficient": 0,
+      "nongated_regular_finite_width_profile_possible": false,
+      "active_color_source_permitted": false,
+      "random_frame_comparisons": 12,
+      "largest_sampled_area_fraction": 1.0
+    },
+    {
+      "case": "geometric-frame-depth-3",
+      "real_depth": 3,
+      "even_source_carrier": 4,
+      "frame_vectors": 2,
+      "balanced_dielectric_power": 4,
+      "hodge_coefficient": 1.0,
+      "balanced_coefficient_fraction": "1/4",
+      "pohozaev_gradient_coefficient": 4,
+      "pohozaev_mass_coefficient": 4,
+      "nongated_regular_finite_width_profile_possible": true,
+      "active_color_source_permitted": true,
+      "random_frame_comparisons": 12,
+      "largest_sampled_area_fraction": 0.9458033041345619
+    },
+    {
+      "case": "geometric-frame-depth-4",
+      "real_depth": 4,
+      "even_source_carrier": 4,
+      "frame_vectors": 2,
+      "balanced_dielectric_power": 4,
+      "hodge_coefficient": 1.0,
+      "balanced_coefficient_fraction": "1/4",
+      "pohozaev_gradient_coefficient": 2,
+      "pohozaev_mass_coefficient": 6,
+      "nongated_regular_finite_width_profile_possible": true,
+      "active_color_source_permitted": true,
+      "random_frame_comparisons": 12,
+      "largest_sampled_area_fraction": 0.953272234119911
+    },
+    {
+      "case": "geometric-frame-depth-5",
+      "real_depth": 5,
+      "even_source_carrier": 6,
+      "frame_vectors": 3,
+      "balanced_dielectric_power": 6,
+      "hodge_coefficient": 0.0,
+      "balanced_coefficient_fraction": "1/27",
+      "pohozaev_gradient_coefficient": -4,
+      "pohozaev_mass_coefficient": 16,
+      "nongated_regular_finite_width_profile_possible": false,
+      "active_color_source_permitted": false,
+      "random_frame_comparisons": 12,
+      "largest_sampled_area_fraction": 0.7641702420801575
+    },
+    {
+      "case": "geometric-frame-depth-6",
+      "real_depth": 6,
+      "even_source_carrier": 6,
+      "frame_vectors": 3,
+      "balanced_dielectric_power": 6,
+      "hodge_coefficient": 0.0,
+      "balanced_coefficient_fraction": "1/27",
+      "pohozaev_gradient_coefficient": -8,
+      "pohozaev_mass_coefficient": 20,
+      "nongated_regular_finite_width_profile_possible": false,
+      "active_color_source_permitted": false,
+      "random_frame_comparisons": 12,
+      "largest_sampled_area_fraction": 0.7048127546329586
+    },
+    {
+      "case": "geometric-frame-depth-10",
+      "real_depth": 10,
+      "even_source_carrier": 10,
+      "frame_vectors": 5,
+      "balanced_dielectric_power": 10,
+      "hodge_coefficient": 0.0,
+      "balanced_coefficient_fraction": "1/3125",
+      "pohozaev_gradient_coefficient": -52,
+      "pohozaev_mass_coefficient": 72,
+      "nongated_regular_finite_width_profile_possible": false,
+      "active_color_source_permitted": false,
+      "random_frame_comparisons": 12,
+      "largest_sampled_area_fraction": 0.44307547865360264
+    },
+    {
+      "case": "frame-imbalance-n2-s0.1",
+      "real_depth": 3,
+      "relative_log_amplitude": 0.1,
+      "reference_tension": 2.7028439573935117,
+      "complete_energy": 2.7393649524492796,
+      "positive_excess": 0.03652099505576789
+    },
+    {
+      "case": "frame-imbalance-n2-s0.3",
+      "real_depth": 3,
+      "relative_log_amplitude": 0.3,
+      "reference_tension": 2.7028439573935117,
+      "complete_energy": 3.0680232076710006,
+      "positive_excess": 0.3651792502774889
+    },
+    {
+      "case": "frame-imbalance-n2-s0.7",
+      "real_depth": 3,
+      "relative_log_amplitude": 0.7,
+      "reference_tension": 2.7028439573935117,
+      "complete_energy": 5.970009486740711,
+      "positive_excess": 3.2671655293471993
+    },
+    {
+      "case": "frame-angle-n2-theta0.4",
+      "real_depth": 3,
+      "relative_angle": 0.4,
+      "area_fraction": 0.1516466453264173,
+      "complete_energy": 7.742996639248165,
+      "positive_excess": 5.040152681854654
+    },
+    {
+      "case": "frame-angle-n2-theta0.9",
+      "real_depth": 3,
+      "relative_angle": 0.9,
+      "area_fraction": 0.6136010473465435,
+      "complete_energy": 3.270192008072596,
+      "positive_excess": 0.5673480506790844
+    },
+    {
+      "case": "frame-angle-n2-theta1.2",
+      "real_depth": 3,
+      "relative_angle": 1.2,
+      "area_fraction": 0.8686968577706227,
+      "complete_energy": 2.839021843225628,
+      "positive_excess": 0.1361778858321161
+    },
+    {
+      "case": "frame-twist-n2-theta0.2",
+      "real_depth": 3,
+      "twist_amplitude": 0.2,
+      "positive_gradient_excess": 0.01514152915955072,
+      "rigid_common_rotations_remain_free": true
+    },
+    {
+      "case": "frame-twist-n2-theta0.6",
+      "real_depth": 3,
+      "twist_amplitude": 0.6,
+      "positive_gradient_excess": 0.13627376243595749,
+      "rigid_common_rotations_remain_free": true
+    },
+    {
+      "case": "frame-imbalance-n3-s0.1",
+      "real_depth": 4,
+      "relative_log_amplitude": 0.1,
+      "reference_tension": 3.9953743016380896,
+      "complete_energy": 4.049360046807625,
+      "positive_excess": 0.053985745169535804
+    },
+    {
+      "case": "frame-imbalance-n3-s0.3",
+      "real_depth": 4,
+      "relative_log_amplitude": 0.3,
+      "reference_tension": 3.9953743016380896,
+      "complete_energy": 4.535186371834373,
+      "positive_excess": 0.539812070196283
+    },
+    {
+      "case": "frame-imbalance-n3-s0.7",
+      "real_depth": 4,
+      "relative_log_amplitude": 0.7,
+      "reference_tension": 3.9953743016380896,
+      "complete_energy": 8.824935090567617,
+      "positive_excess": 4.829560788929528
+    },
+    {
+      "case": "frame-angle-n3-theta0.4",
+      "real_depth": 4,
+      "relative_angle": 0.4,
+      "area_fraction": 0.1516466453264173,
+      "complete_energy": 11.445784617202012,
+      "positive_excess": 7.450410315563922
+    },
+    {
+      "case": "frame-angle-n3-theta0.9",
+      "real_depth": 4,
+      "relative_angle": 0.9,
+      "area_fraction": 0.6136010473465435,
+      "complete_energy": 4.834034563759179,
+      "positive_excess": 0.8386602621210892
+    },
+    {
+      "case": "frame-angle-n3-theta1.2",
+      "real_depth": 4,
+      "relative_angle": 1.2,
+      "area_fraction": 0.8686968577706227,
+      "complete_energy": 4.1966739823021175,
+      "positive_excess": 0.20129968066402792
+    },
+    {
+      "case": "frame-twist-n3-theta0.2",
+      "real_depth": 4,
+      "twist_amplitude": 0.2,
+      "positive_gradient_excess": 0.012048232347417967,
+      "rigid_common_rotations_remain_free": true
+    },
+    {
+      "case": "frame-twist-n3-theta0.6",
+      "real_depth": 4,
+      "twist_amplitude": 0.6,
+      "positive_gradient_excess": 0.10843409112676371,
+      "rigid_common_rotations_remain_free": true
+    }
+  ]
+}

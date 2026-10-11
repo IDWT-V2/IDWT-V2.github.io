@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>classical-color-source-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/classical-color-source-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="classical-color-source-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/classical-color-source-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="classical-color-source-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>classical-color-source-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/classical-color-source-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Test classical color-current cancellation with the actual spatial symbol.&quot;&quot;&quot;
+from pathlib import Path
+from itertools import combinations
+import argparse
+import hashlib
+import importlib.util
+import json
+import math
+
+import numpy as np
+
+
+DEPTHS = (2, 3, 4, 5, 6, 10)
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    CHECKS += 1
+    if not condition:
+        raise AssertionError(message)
+
+
+def close(actual, expected, message, atol=3e-10):
+    check(np.allclose(actual, expected, atol=atol, rtol=3e-10), message)
+
+
+def unit(vector):
+    return vector / np.linalg.norm(vector)
+
+
+def currents(psi, gamma, algebra):
+    density = np.array([np.vdot(psi, t @ psi).real for t in algebra])
+    spatial = np.array([[np.vdot(psi, g @ t @ psi).real for t in algebra]
+                        for g in gamma])
+    return density, spatial
+
+
+def symbol_projector(momentum, gamma):
+    direction = momentum / np.linalg.norm(momentum)
+    symbol = sum(p * g for p, g in zip(direction, gamma))
+    return (np.eye(len(symbol)) + symbol) / 2
+
+
+def color_paired_line(gamma, algebra, number, rng):
+    # Complementary occupation states have opposite SU(3) weights.
+    eta = np.zeros(8, complex)
+    eta[4] = eta[3] = 1 / math.sqrt(2)
+    embed = np.kron(np.eye(4), eta[:, None])
+    close(embed.conj().T @ embed, np.eye(4), &#39;complex-linear embedding has positive norm&#39;)
+    casimir = sum(t @ t for t in algebra)
+    close(embed.conj().T @ casimir @ embed, 4 * np.eye(4) / 3,
+          &#39;classically canceled normal line retains nonzero SU(3) Casimir&#39;)
+    central = sum(number)
+    close(embed.conj().T @ central @ embed, 1.5 * np.eye(4), &#39;normal number mean&#39;)
+    close(embed.conj().T @ central @ central @ embed - 2.25 * np.eye(4),
+          np.eye(4) / 4, &#39;canceled normal line is not one central-weight eigenline&#39;)
+    for t in algebra:
+        close(embed.conj().T @ t @ embed, 0, &#39;all color densities vanish on paired line&#39;)
+    for d in (2, 3, 4):
+        base = [g[np.ix_([0, 8, 16, 24], [0, 8, 16, 24])] for g in gamma[:d]]
+        for g, b in zip(gamma[:d], base):
+            close(g @ embed, embed @ b, &#39;complete free spatial dynamics preserves paired line&#39;)
+            for t in algebra:
+                close(embed.conj().T @ g @ t @ embed, 0, &#39;all spatial current compressions vanish&#39;)
+        # Arbitrary positive-energy directions, amplitudes and interference are retained.
+        momenta = rng.normal(size=(5, d))
+        modes = []
+        for p in momenta:
+            spin = unit(symbol_projector(p, base) @ (rng.normal(size=4) + 1j*rng.normal(size=4)))
+            modes.append(embed @ spin)
+        maximum = 0.
+        for time in (0., .31, 1.2):
+            for position in (np.zeros(d), rng.normal(size=d), rng.normal(size=d)):
+                phases = np.exp(1j * (momenta @ position - np.linalg.norm(momenta, axis=1)*time))
+                wave = sum(phase * mode for phase, mode in zip(phases, modes))
+                density, spatial = currents(wave, gamma[:d], algebra)
+                maximum = max(maximum, float(np.max(np.abs(density))), float(np.max(np.abs(spatial))))
+                close(density, 0, &#39;interfering positive-frequency packet density remains canceled&#39;)
+                close(spatial, 0, &#39;interfering packet spatial currents remain canceled&#39;)
+        CASES.append({&#39;case&#39;: f&#39;complex-paired-normal-line-depth-{d}&#39;, &#39;real_depth&#39;: d,
+                      &#39;linear_branch_rank&#39;: 4, &#39;normal_casimir&#39;: &#39;4/3&#39;,
+                      &#39;normal_number_variance&#39;: &#39;1/4&#39;, &#39;complex_symplectic_norm&#39;: &#39;I_4&#39;,
+                      &#39;maximum_packet_source&#39;: maximum,
+                      &#39;full_free_spatial_dynamics_preserved&#39;: True,
+                      &#39;fibre_singlet&#39;: False, &#39;physical_particle_identified&#39;: False})
+
+
+def pure_triplet_floor(gamma, algebra, number, rng):
+    normal_number = np.diag(sum(number)).real[:8]
+    indices = np.flatnonzero(np.isclose(normal_number, 2))
+    for d in (2, 3, 4):
+        p = rng.normal(size=d)
+        base = [g[np.ix_([0, 8, 16, 24], [0, 8, 16, 24])] for g in gamma[:d]]
+        values, vectors = np.linalg.eigh(symbol_projector(p, base))
+        spin_basis = vectors[:, values &gt; .5]
+        check(spin_basis.shape[1] == 2, &#39;positive base symbol has exactly two spin multiplicities&#39;)
+        eigenvalues = []
+        for sample in range(5):
+            if sample == 0:
+                coefficients = np.array([[1., 0, 0], [0, 1., 0]], complex) / math.sqrt(2)
+            else:
+                coefficients = rng.normal(size=(2, 3)) + 1j*rng.normal(size=(2, 3))
+                coefficients /= np.linalg.norm(coefficients)
+            field = np.zeros((4, 8), complex)
+            field[:, indices] = spin_basis @ coefficients
+            psi = field.reshape(32)
+            reduced = coefficients.conj().T @ coefficients
+            q, j = currents(psi, gamma[:d], algebra)
+            norm = float(q @ q)
+            purity = float(np.trace(reduced @ reduced).real)
+            close(norm, (purity - 1/3) / 2, &#39;SU(3) completeness fixes pure triplet source norm&#39;)
+            check(norm &gt;= 1/12 - 1e-10, &#39;positive pure triplet cannot satisfy zero classical Gauss density&#39;)
+            if sample == 0:
+                close(norm, 1/12, &#39;rank-two color reduction saturates exact source lower bound&#39;)
+            eigenvalues.append(norm)
+        CASES.append({&#39;case&#39;: f&#39;positive-pure-triplet-floor-depth-{d}&#39;, &#39;real_depth&#39;: d,
+                      &#39;positive_spin_multiplicity&#39;: 2, &#39;exact_density_norm_floor&#39;: &#39;1/12&#39;,
+                      &#39;sample_density_norms&#39;: eigenvalues, &#39;zero_source_allowed&#39;: False})
+
+
+def residual_entangled_state(momentum, gamma, algebra, rng):
+    positive = symbol_projector(momentum, gamma)
+    up = (np.eye(32) + 2*algebra[2])/2
+    # Remove the residual singlets: they have Tz=0 rather than +1/2.
+    up = up @ (2*algebra[2] @ algebra[2] + algebra[2])
+    projector = positive @ up
+    values, vectors = np.linalg.eigh(projector)
+    basis = vectors[:, values &gt; .9]
+    check(basis.shape[1] == 4, &#39;positive residual up sector has four spin multiplicities&#39;)
+    random = rng.normal(size=(4, 2)) + 1j*rng.normal(size=(4, 2))
+    orthogonal, _ = np.linalg.qr(random)
+    first, second = (basis @ orthogonal[:, i] for i in range(2))
+    lowered = (algebra[0] - 1j*algebra[1]) @ second
+    close(np.linalg.norm(lowered), 1, &#39;SU(2) lowering preserves fundamental norm&#39;)
+    psi = (first + lowered)/math.sqrt(2)
+    return psi
+
+
+def positive_symbol_controls(gamma, color, residual, geometry, rng):
+    for d in DEPTHS:
+        hodge = geometry.hodge(d if d % 2 == 0 else d + 1)
+        hodge_active = bool(np.linalg.norm(hodge) &gt; 1e-10)
+        check(hodge_active == (d in (3, 4)), &#39;actual Hodge coefficient is tested at every occupied depth&#39;)
+        algebra = color if d &lt;= 4 else residual if d &lt;= 6 else []
+        casimir = sum((t @ t for t in algebra), np.zeros((32, 32), complex))
+        for sample in range(4):
+            p = rng.normal(size=d)
+            projector = symbol_projector(p, gamma[:d])
+            psi = unit(projector @ (rng.normal(size=32) + 1j*rng.normal(size=32)))
+            q, j = currents(psi, gamma[:d], algebra)
+            close(j, np.outer(p/np.linalg.norm(p), q) if algebra else np.empty((d, 0)),
+                  &#39;positive symbol relates every current to density without dropping a spatial direction&#39;)
+            close(np.vdot(psi, sum(a*g for a, g in zip(p, gamma[:d])) @ psi),
+                  np.linalg.norm(p), &#39;positive mode has positive bare spatial energy&#39;)
+            if d in (5, 6):
+                canceled = residual_entangled_state(p, gamma[:d], residual, rng)
+                q0, j0 = currents(canceled, gamma[:d], residual)
+                close(q0, 0, &#39;entangled nonsinglet residual SU(2) density cancels&#39;)
+                close(j0, 0, &#39;all residual SU(2) spatial currents cancel in a positive mode&#39;)
+                close(np.vdot(canceled, casimir @ canceled), .75,
+                      &#39;current-canceled residual mode retains fundamental Casimir&#39;)
+                close(np.vdot(canceled, canceled), 1, &#39;common complex mode amplitude has positive kinetic norm&#39;)
+            CASES.append({&#39;case&#39;: f&#39;positive-symbol-depth-{d}-sample-{sample}&#39;, &#39;real_depth&#39;: d,
+                          &#39;momentum&#39;: p.tolist(), &#39;algebra_dimension&#39;: len(algebra),
+                          &#39;hodge_coefficient_active&#39;: hodge_active,
+                          &#39;maximum_symbol_identity_error&#39;: float(np.max(np.abs(j-np.outer(p/np.linalg.norm(p), q)))) if algebra else 0.,
+                          &#39;residual_canceled_nonsinglet_exists&#39;: d in (5, 6),
+                          &#39;residual_casimir&#39;: &#39;3/4&#39; if d in (5, 6) else None})
+
+
+def packet_and_reality_controls(gamma, residual, rng):
+    spin_gamma = [g[::4, ::4] for g in gamma[:6]]
+    conjugation = spin_gamma[0] @ spin_gamma[2] @ spin_gamma[4]
+    close(conjugation @ conjugation.conj(), -np.eye(8), &#39;spatial charge conjugation is quaternionic&#39;)
+    for g in spin_gamma:
+        close(conjugation @ g.conj(), g @ conjugation, &#39;antiunitary map commutes with full spatial Clifford action&#39;)
+    def embed_pair(f):
+        result = np.zeros((8, 4), complex)
+        result[:, 2] = f
+        result[:, 1] = conjugation @ f.conj()
+        return result.reshape(32)
+    for d in (5, 6):
+        # Reality pairing cancels all currents but pulls the first-order symplectic form to zero.
+        f = rng.normal(size=8) + 1j*rng.normal(size=8)
+        psi = embed_pair(f)
+        q, j = currents(psi, gamma[:d], residual)
+        close(q, 0, &#39;quaternionic reality pairing cancels algebraic density&#39;)
+        close(j, 0, &#39;quaternionic reality pairing cancels every spatial current&#39;)
+        close(np.vdot(psi, psi).real, 2*np.vdot(f, f).real, &#39;reality-paired norm is positive&#39;)
+        for _ in range(4):
+            h = rng.normal(size=8) + 1j*rng.normal(size=8)
+            k = rng.normal(size=8) + 1j*rng.normal(size=8)
+            close(np.vdot(embed_pair(h), embed_pair(k)).imag, 0,
+                  &#39;imposed antiunitary relation has degenerate first-order symplectic form&#39;)
+        p = rng.normal(size=d)
+        positive = symbol_projector(p, spin_gamma[:d])
+        f_positive = unit(positive @ f)
+        conjugate_partner = conjugation @ f_positive.conj()
+        symbol = sum(p_i*g for p_i, g in zip(p, spin_gamma[:d]))
+        first_energy = np.vdot(f_positive, symbol @ f_positive).real
+        # Conjugating the full spatial wave reverses its momentum as well as its phase.
+        second_energy = np.vdot(conjugate_partner, -symbol @ conjugate_partner).real
+        close(first_energy + second_energy, 0, &#39;imposed conjugate full waves cancel bare first-order Hamiltonian&#39;)
+        # Two individually positive source-free modes need not remain source-free when interfered.
+        p = rng.normal(size=d)
+        r = rng.normal(size=d)*1.7
+        first = residual_entangled_state(p, gamma[:d], residual, rng)
+        second = residual_entangled_state(r, gamma[:d], residual, rng)
+        sources = []
+        for phase in (0., .4, 1.3, 2.2):
+            wave = first + np.exp(1j*phase)*second
+            density, spatial = currents(wave, gamma[:d], residual)
+            sources.append(float(np.sum(density*density) + np.sum(spatial*spatial)))
+        check(max(sources) &gt; 1e-4, &#39;positive canceled modes generically source color when coherently superposed&#39;)
+        # Matrix-algebra dimensions prove the absence of a fixed colored complex-linear Clifford-invariant dark subspace.
+        blades = []
+        for order in range(d+1):
+            for indices in combinations(range(d), order):
+                blade = np.eye(8, dtype=complex)
+                for i in indices:
+                    blade = blade @ spin_gamma[i]
+                blades.append(blade.reshape(-1))
+        algebra_rank = int(np.linalg.matrix_rank(np.column_stack(blades), tol=1e-9))
+        check(algebra_rank == (32 if d == 5 else 64), &#39;full complex Clifford algebra has the stated irreducible spatial blocks&#39;)
+        for _ in range(4):
+            eta = unit(rng.normal(size=2) + 1j*rng.normal(size=2))
+            f = unit(rng.normal(size=8) + 1j*rng.normal(size=8))
+            separable = np.zeros((8, 4), complex)
+            separable[:, [2, 1]] = np.outer(f, eta)
+            density, _ = currents(separable.reshape(32), gamma[:d], residual)
+            close(density @ density, .25, &#39;a fundamental color line has exact SU(2) source norm one quarter&#39;)
+        CASES.append({&#39;case&#39;: f&#39;residual-packet-and-reality-depth-{d}&#39;, &#39;real_depth&#39;: d,
+                      &#39;full_spatial_clifford_algebra_dimension&#39;: algebra_rank,
+                      &#39;coherent_two_mode_source_norms&#39;: sources,
+                      &#39;antiunitary_current_cancellation&#39;: True,
+                      &#39;antiunitary_first_order_symplectic_form&#39;: &#39;0&#39;,
+                      &#39;antiunitary_full_wave_energy&#39;: &#39;0&#39;,
+                      &#39;pure_residual_color_line_density_norm&#39;: &#39;1/4&#39;,
+                      &#39;fixed_colored_complex_linear_full_clifford_dark_subspace&#39;: False,
+                      &#39;all_nonlinear_source_free_packets_excluded&#39;: False})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--geometry-source&#39;, type=Path, required=True)
+    parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    spec = importlib.util.spec_from_file_location(&#39;gauss_geometry&#39;, args.geometry_source)
+    geometry = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(geometry)
+    gamma, color, residual, number = geometry.build_geometry()
+    rng = np.random.default_rng(2026101021)
+    color_paired_line(gamma, color, number, rng)
+    pure_triplet_floor(gamma, color, number, rng)
+    positive_symbol_controls(gamma, color, residual, geometry, rng)
+    packet_and_reality_controls(gamma, residual, rng)
+    report = {&#39;title&#39;: &#39;Classical Zero Color Currents and Complete Spatial Dynamics&#39;,
+              &#39;sources&#39;: {&#39;experiments/classical-color-source-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/hodge-gated-gauss-checks.py&#39;: hashlib.sha256(args.geometry_source.read_bytes()).hexdigest()},
+              &#39;checks_passed&#39;: CHECKS, &#39;dependency_checks_passed&#39;: geometry.CHECKS,
+              &#39;case_count&#39;: len(CASES), &#39;occupied_depths&#39;: list(DEPTHS),
+              &#39;scope&#39;: &#39;actual finite-parent Clifford and source algebra; free-mode controls, not localized particles or derived occupation&#39;,
+              &#39;cases&#39;: CASES}
+    args.report.write_text(json.dumps(report, indent=2) + &#39;\n&#39;)
+    print(f&#39;{CHECKS} current and kinetic checks plus {geometry.CHECKS} dependency checks passed across {len(CASES)} cases&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

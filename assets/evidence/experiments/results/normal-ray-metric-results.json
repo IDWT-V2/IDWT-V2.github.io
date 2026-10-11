@@ -1,0 +1,93 @@
+{
+  "title": "Chiral Ray and Ordinary Normal Rotation Kinetics",
+  "checks_passed": 340,
+  "cases": [
+    {
+      "case": "normal-ray-rank-2",
+      "complex_normal_rank": 2,
+      "ordinary_normal_directions": 4,
+      "full_chiral_projective_real_dimension": 2,
+      "pure_orientation_dimension": 2,
+      "differential_rank_on_pure_orbit": 2,
+      "pure_metric_to_fs_ratio": 16
+    },
+    {
+      "case": "normal-ray-rank-3",
+      "complex_normal_rank": 3,
+      "ordinary_normal_directions": 6,
+      "full_chiral_projective_real_dimension": 6,
+      "pure_orientation_dimension": 6,
+      "differential_rank_on_pure_orbit": 6,
+      "pure_metric_to_fs_ratio": 16
+    },
+    {
+      "case": "normal-ray-rank-4",
+      "complex_normal_rank": 4,
+      "ordinary_normal_directions": 8,
+      "full_chiral_projective_real_dimension": 14,
+      "pure_orientation_dimension": 12,
+      "differential_rank_on_pure_orbit": 12,
+      "pure_metric_to_fs_ratio": 16
+    }
+  ],
+  "occupied_depths": [
+    {
+      "real_depth": 2,
+      "even_carrier": 2,
+      "complex_normal_rank": 4,
+      "has_nontrivial_normal_orientation": true,
+      "full_positive_chiral_ray_is_pure": false,
+      "pure_metric_to_fs_ratio": 16,
+      "caveat": "generic ray has two extra real directions"
+    },
+    {
+      "real_depth": 3,
+      "even_carrier": 4,
+      "complex_normal_rank": 3,
+      "has_nontrivial_normal_orientation": true,
+      "full_positive_chiral_ray_is_pure": true,
+      "pure_metric_to_fs_ratio": 16,
+      "caveat": null
+    },
+    {
+      "real_depth": 4,
+      "even_carrier": 4,
+      "complex_normal_rank": 3,
+      "has_nontrivial_normal_orientation": true,
+      "full_positive_chiral_ray_is_pure": true,
+      "pure_metric_to_fs_ratio": 16,
+      "caveat": null
+    },
+    {
+      "real_depth": 5,
+      "even_carrier": 6,
+      "complex_normal_rank": 2,
+      "has_nontrivial_normal_orientation": true,
+      "full_positive_chiral_ray_is_pure": true,
+      "pure_metric_to_fs_ratio": 16,
+      "caveat": null
+    },
+    {
+      "real_depth": 6,
+      "even_carrier": 6,
+      "complex_normal_rank": 2,
+      "has_nontrivial_normal_orientation": true,
+      "full_positive_chiral_ray_is_pure": true,
+      "pure_metric_to_fs_ratio": 16,
+      "caveat": null
+    },
+    {
+      "real_depth": 10,
+      "even_carrier": 10,
+      "complex_normal_rank": 0,
+      "has_nontrivial_normal_orientation": false,
+      "full_positive_chiral_ray_is_pure": false,
+      "pure_metric_to_fs_ratio": null,
+      "caveat": "empty normal carrier"
+    }
+  ],
+  "sources": {
+    "experiments/normal-ray-metric-checks.py": "b5da18cd20d140d71924517df8de04c0dc4ae9457cbbe77c64f4aea182f7e5ed"
+  },
+  "scope": "Exact local geometric kinetic map on pure rays; no physical charge selection, particle state or absolute amplitude calibration"
+}

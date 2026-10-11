@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>cavity-phase-lock-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/cavity-phase-lock-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="cavity-phase-lock-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/cavity-phase-lock-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="cavity-phase-lock-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>cavity-phase-lock-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/cavity-phase-lock-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Finite exact/spectral tests of a candidate same-field comb-locking energy.&quot;&quot;&quot;
+from collections import Counter
+from datetime import datetime, timezone
+from fractions import Fraction as F
+from hashlib import sha256
+import json
+from pathlib import Path
+
+import numpy as np
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+counts = Counter()
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    counts[label] += 1
+
+
+def close(a, b, label, tol=3e-10):
+    check(np.allclose(a, b, atol=tol, rtol=tol), label)
+
+
+T,tau,phi,n = sp.symbols(&#39;T tau phi n&#39;, real=True)
+wn = (2*sp.pi*n-phi)/(T+tau)
+check(sp.simplify(wn*(T+tau)+phi-2*sp.pi*n)==0,&#39;roundtrip phase closure&#39;)
+check(sp.simplify(wn.subs(n,n+1)-wn-2*sp.pi/(T+tau))==0,
+      &#39;roundtrip spacing uses group delay&#39;)
+check(sp.simplify(wn+phi/(T+tau)-2*sp.pi*n/(T+tau))==0,
+      &#39;cavity offset remains independent condition&#39;)
+
+
+def constraints(a, weights):
+    x = a * weights
+    return x[:-2] * x[2:] - x[1:-1] ** 2
+
+
+def gradient(a, weights):
+    x = a * weights
+    c = constraints(a, weights)
+    g = np.zeros_like(a, dtype=complex)
+    g[:-2] += weights[:-2] * np.conj(x[2:]) * c
+    g[2:] += weights[2:] * np.conj(x[:-2]) * c
+    g[1:-1] -= 2 * weights[1:-1] * np.conj(x[1:-1]) * c
+    return g
+
+
+def linear_constraint(b, w):
+    m = len(b)
+    x = b * w
+    l = np.zeros((max(0, m-2), m))
+    for j in range(1, m-1):
+        l[j-1, j-1] = w[j-1] * x[j+1]
+        l[j-1, j+1] = w[j+1] * x[j-1]
+        l[j-1, j] = -2 * w[j] * x[j]
+    return l
+
+
+rng = np.random.default_rng(20261010)
+stability = []
+for m in (3, 4, 5, 8, 13):
+    for ratio in (F(1, 2), F(1), F(3, 2)):
+        for weighted in (False, True):
+            w_exact = [F(j+1) if weighted else F(1) for j in range(m)]
+            b_exact = [ratio**j / w_exact[j] for j in range(m)]
+            x = [w_exact[j]*b_exact[j] for j in range(m)]
+            check(all(x[j-1]*x[j+1] == x[j]**2 for j in range(1, m-1)), &#39;exact locked constraint&#39;)
+            le = sp.zeros(m-2, m)
+            for j in range(1, m-1):
+                le[j-1, j-1] = w_exact[j-1]*x[j+1]
+                le[j-1, j+1] = w_exact[j+1]*x[j-1]
+                le[j-1, j] = -2*w_exact[j]*x[j]
+            check(le.rank() == m-2, &#39;exact transverse rank&#39;)
+            be = sp.Matrix(b_exact)
+            je = sp.Matrix([j*b_exact[j] for j in range(m)])
+            check(le*be == sp.zeros(m-2, 1), &#39;overall amplitude null&#39;)
+            check(le*je == sp.zeros(m-2, 1), &#39;index slope null&#39;)
+            w = np.array(w_exact, dtype=float)
+            b = np.array(b_exact, dtype=float)
+            b /= np.linalg.norm(b)
+            l = linear_constraint(b, w)
+            eig = np.linalg.eigvalsh(l.T@l)
+            close(eig[:2], 0, &#39;two complex neutral modes&#39;, 1e-8)
+            check(eig[2] &gt; 0, &#39;positive transverse Hessian&#39;)
+            a = b + .09*(rng.normal(size=m)+1j*rng.normal(size=m))
+            g = gradient(a, w)
+            delta = rng.normal(size=m)+1j*rng.normal(size=m)
+            eps = 1e-6
+            energy = lambda z: float(np.vdot(constraints(z,w), constraints(z,w)).real)
+            fd = (energy(a+eps*delta)-energy(a-eps*delta))/(2*eps)
+            close(fd, 2*np.vdot(g,delta).real, &#39;full complex energy variation&#39;, 3e-6)
+            adot = -1j*g
+            close(2*np.vdot(a,adot).real, 0, &#39;norm conservation&#39;)
+            close(2*np.vdot(np.arange(m)*a,adot).real, 0, &#39;index moment conservation&#39;)
+            close(2*np.vdot(g,adot).real, 0, &#39;locking energy conservation&#39;)
+            phases = np.exp(1j*(.27+np.arange(m)*.43))
+            close(energy(a*phases), energy(a), &#39;two phase symmetries&#39;)
+            close(gradient(a*phases,w), phases*g, &#39;equivariant field equation&#39;)
+            omega = 100-np.arange(m)
+            free = b*np.exp(-1j*omega*.37)
+            close(gradient(free,w), 0, &#39;unchanged free mass frequencies&#39;, 1e-7)
+            # Independent second variation, with the finite first-order constraint.
+            eps = 1e-5
+            close(energy(b+eps*delta)/eps**2, np.linalg.norm(l@delta)**2,
+                  &#39;second variation from quartic&#39;, 5e-4)
+            stability.append({&#39;bandwidth&#39;:m, &#39;ratio&#39;:str(ratio), &#39;weighted&#39;:weighted,
+                              &#39;minimum_positive_curvature&#39;:float(eig[2]),
+                              &#39;maximum_curvature&#39;:float(eig[-1]), &#39;complex_nullity&#39;:2})
+
+# Independent Fourier extraction avoids evaluating huge optical carriers.
+envelope = []
+theta = 2*np.pi*np.arange(256)/256
+for m in (5,8,13):
+    for ratio in (F(1,2),F(1),F(3,2)):
+        b0 = [ratio**j for j in range(m)]
+        norm = sum(x*x for x in b0)
+        d = [sum(b0[j]*b0[j+p] for j in range(m-p))/norm for p in range(1,m)]
+        expected = (F(m-1,m) if ratio == 1 else
+                    ratio*(1-ratio**(2*(m-1)))/(1-ratio**(2*m)))
+        check(d[0] == expected, &#39;geometric fundamental exact&#39;)
+        b = np.array(b0,dtype=float)/np.sqrt(float(norm))
+        z = b@np.exp(1j*np.arange(m)[:,None]*theta)
+        density = abs(z)**2/2
+        fft = np.fft.fft(density)/len(theta)
+        close(fft[0], .5, &#39;common density mean&#39;)
+        close(2*fft[1:m], np.array(d,dtype=float), &#39;independent density coefficients&#39;)
+        for carrier in (m, m+1, 18564, 3838380, 64512240):
+            # Factorization includes an arbitrary comb offset and upper mass label.
+            optical = np.exp(-1j*(carrier+.137)*theta)*z
+            close(abs(optical)**2/2, density, &#39;carrier and offset blind density&#39;)
+            field_vertex_mean = sum((carrier-j)*float(b[j]**2) for j in range(m))
+            check(field_vertex_mean &gt; 0, &#39;field energy vertex retains carrier&#39;)
+        matrix = rng.normal(size=(m,m))+1j*rng.normal(size=(m,m))
+        matrix = (matrix+matrix.conj().T)/2
+        modal = b[:,None]*np.exp(1j*np.arange(m)[:,None]*theta)
+        source = np.einsum(&#39;it,ij,jt-&gt;t&#39;,modal.conj(),matrix,modal)
+        shifted_modal = modal*np.exp(-1j*13.137*theta)
+        shifted_source = np.einsum(&#39;it,ij,jt-&gt;t&#39;,shifted_modal.conj(),matrix,shifted_modal)
+        close(source,shifted_source,&#39;general Hermitian source carrier cancellation&#39;)
+        close(np.fft.fft(source)*np.fft.fftfreq(len(theta))*1j,
+              np.fft.fft(shifted_source)*np.fft.fftfreq(len(theta))*1j,
+              &#39;source derivative carrier cancellation&#39;)
+        corr0 = F(1,4)+sum(x*x for x in d)/2
+        corrpi = F(1,4)+sum((-1)**p*d[p-1]**2 for p in range(1,m))/2
+        if ratio == 1:
+            check(corr0 == F(2*m*m+1,12*m), &#39;flat in phase exact&#39;)
+            if m%2 == 0:
+                check(corrpi == F(1,4*m), &#39;flat opposite phase exact&#39;)
+        close(np.mean(density**2), float(corr0), &#39;pair correlation by Fourier&#39;)
+        shifted = abs(b@np.exp(1j*np.arange(m)[:,None]*(theta+np.pi)))**2/2
+        close(np.mean(density*shifted), float(corrpi), &#39;opposite phase pair correlation&#39;)
+        envelope.append({&#39;bandwidth&#39;:m,&#39;ratio&#39;:str(ratio),&#39;fundamental&#39;:str(d[0]),
+                         &#39;in_phase_density_correlation&#39;:str(corr0),
+                         &#39;opposite_phase_density_correlation&#39;:str(corrpi)})
+
+baseline_file = ROOT/&#39;grounding/complex-comb-response-results.json&#39;
+baseline = json.loads(baseline_file.read_text())
+assigned = []
+for source in baseline[&#39;particle_cases&#39;]:
+    k = source[&#39;cutoff&#39;]
+    r = source[&#39;fundamental_over_depth6&#39;]
+    for target_m in (5,8,13):
+        m = min(k,target_m)
+        p = np.arange(1,m,dtype=float)
+        d = (m-p)/m
+        freq = p*r
+        chi = (3/(2-freq*freq)+2/(3-freq*freq))/5
+        q0 = float(np.sum(d*d*chi)/2)
+        q1 = float(np.sum(freq*freq*d*d*chi)/2)
+        # Only diagnostic shape normalization; physical amplitude is uncalibrated.
+        check(k &gt;= m &gt;= 1, &#39;mass endpoint retained&#39;)
+        if k &gt;= target_m:
+            check(F(m-1,m) == F(target_m-1,target_m), &#39;same envelope fundamental&#39;)
+        # Weighted full-comb constraints vanish exactly, including huge K.
+        for j in sorted(set([2, min(3,k-1), max(2,k//2), k-1])):
+            if 2 &lt;= j &lt;= k-1:
+                check(F(j-1)*F(1,j-1)*F(j+1)*F(1,j+1)
+                      == (F(j)*F(1,j))**2, &#39;assigned sawtooth locking constraint&#39;)
+        assigned.append({&#39;particle&#39;:source[&#39;particle&#39;],&#39;real_depth&#39;:source[&#39;real_depth&#39;],
+                         &#39;cutoff&#39;:k,&#39;requested_bandwidth&#39;:target_m,&#39;bandwidth&#39;:m,
+                         &#39;fundamental_over_depth6&#39;:r,&#39;fundamental&#39;:str(F(m-1,m)),
+                         &#39;density_response&#39;:q0,&#39;derivative_response&#39;:q1})
+
+# Explicit endpoint control: the retained-band zero is not a zero of the
+# unprojected adjacent-quartet action. Its next empty mode is forced.
+endpoint = []
+for k in (3,5,8,13):
+    a = np.array([1/j for j in range(1,k+1)]+[0.,0.],complex)
+    w = np.arange(1,k+3,dtype=float)
+    g = gradient(a,w)
+    close(g[k], -(k+1), &#39;unprojected next mode forcing&#39;)
+    close(np.linalg.norm(constraints(a,w))**2, 1, &#39;nonzero endpoint energy&#39;)
+    endpoint.append({&#39;cutoff&#39;:k,&#39;next_mode_gradient&#39;:float(g[k].real),
+                     &#39;locking_energy&#39;:1, &#39;requires_band_invariance&#39;:True})
+
+
+def octic_constraints(a, weights):
+    x = a*weights
+    p = x[:-2]*x[2:]
+    return p*(p-x[1:-1]**2)
+
+
+def octic_gradient(a, weights):
+    x = a*weights
+    p = x[:-2]*x[2:]
+    f = octic_constraints(a,weights)
+    g = np.zeros_like(a,dtype=complex)
+    g[:-2] += weights[:-2]*np.conj((2*p-x[1:-1]**2)*x[2:])*f
+    g[2:] += weights[2:]*np.conj((2*p-x[1:-1]**2)*x[:-2])*f
+    g[1:-1] -= 2*weights[1:-1]*np.conj(p*x[1:-1])*f
+    return g
+
+
+# A separate positive eight-wave variant makes every coordinate support
+# invariant. It locks existing harmonics, and cannot generate absent ones.
+closed_support = []
+for size in (8,13,21):
+    w = np.arange(1,size+1,dtype=float)
+    for k in (3,5):
+        a = np.zeros(size,dtype=complex)
+        a[:k] = 1/w[:k]
+        close(octic_constraints(a,w),0,&#39;octic finite sawtooth zero&#39;)
+        close(octic_gradient(a,w),0,&#39;octic finite sawtooth exact orbit&#39;)
+        for trial in range(3):
+            arbitrary = rng.normal(size=size)+1j*rng.normal(size=size)
+            absent = rng.choice(size,size//2,replace=False)
+            arbitrary[absent] = 0
+            close(octic_gradient(arbitrary,w)[absent],0,&#39;arbitrary support invariant&#39;)
+        l = np.zeros((size-2,size))
+        x = a.real*w
+        for j in range(1,size-1):
+            p0 = x[j-1]*x[j+1]
+            l[j-1,j-1] = w[j-1]*(2*p0-x[j]**2)*x[j+1]
+            l[j-1,j+1] = w[j+1]*(2*p0-x[j]**2)*x[j-1]
+            l[j-1,j] = -2*w[j]*p0*x[j]
+        eig = np.linalg.eigvalsh(l.T@l)
+        check(np.min(eig)&gt;-1e-9,&#39;octic complete linear nonnegativity&#39;)
+        check(np.linalg.matrix_rank(l)==k-1,&#39;octic boundary adds one curvature&#39;)
+        close((l.T@l)[k,k],(k+1)**2,&#39;octic next empty mode positive curvature&#39;)
+        delta = rng.normal(size=size)+1j*rng.normal(size=size)
+        eps = 1e-6
+        e = lambda z:float(np.linalg.norm(octic_constraints(z,w))**2)
+        close(e(a+eps*delta)/eps**2,np.linalg.norm(l@delta)**2,
+              &#39;octic full second variation&#39;,2e-3)
+        z = .1*(rng.normal(size=size)+1j*rng.normal(size=size))
+        g = octic_gradient(z,w)
+        fd = (e(z+eps*delta)-e(z-eps*delta))/(2*eps)
+        close(fd,2*np.vdot(g,delta).real,&#39;octic full complex variation&#39;,1e-4)
+        close(2*np.vdot(z,-1j*g).real,0,&#39;octic norm conservation&#39;,1e-5)
+        close(2*np.vdot(np.arange(size)*z,-1j*g).real,0,&#39;octic index conservation&#39;,1e-4)
+        closed_support.append({&#39;ambient_retained_modes&#39;:size,&#39;occupied_cutoff&#39;:k,
+                               &#39;next_mode_curvature&#39;:(k+1)**2,
+                               &#39;complex_transverse_rank&#39;:k-1,
+                               &#39;all_empty_modes_remain_empty&#39;:True,
+                               &#39;harmonic_generation&#39;:False})
+
+# Curvature of the bare frequency ladder breaks the exact free locked orbit.
+for m in (5,8,13):
+    a = np.ones(m,dtype=complex)
+    omega = 100-np.arange(m)+.03*np.arange(m)**2/2
+    c = constraints(a*np.exp(-1j*omega*.7),np.ones(m))
+    close(np.linalg.norm(c)**2,4*(m-2)*np.sin(.03*.7/2)**2,
+          &#39;dispersion spoils free exact locking&#39;)
+
+# A retained fundamental mode can exchange energy reciprocally with two
+# adjacent high-frequency modes through one positive mismatch energy.
+# Every amplitude labels a mode of the same field, not a constituent object.
+resonant_feedback = []
+for depth in (2,3,4,5,6,10):
+    for aa,bb,eta in ((1.,.5,.4),(.5,1.,.4),(1.,1.,.4),(.5,1.5,.8)):
+        rvec = np.array([-eta*bb,-eta*aa,1.])
+        svec = np.array([eta*bb,-eta*aa,1.])
+        qmat = np.block([[np.zeros((3,3)),np.outer(svec,svec)],
+                         [-np.outer(rvec,rvec),np.zeros((3,3))]])
+        freq = abs(1+eta*eta*(aa*aa-bb*bb))
+        eig = np.linalg.eigvals(qmat)
+        # The four symmetry/constraint zeros can form small numerical
+        # Jordan artifacts; the nonzero pair is checked independently.
+        nonzero = sorted(eig,key=abs)[-2:]
+        close(sorted(abs(v.imag) for v in nonzero),[freq,freq],
+              &#39;same field feedback oscillation frequency&#39;,1e-7)
+        close([v.real for v in nonzero],0,&#39;same field feedback has no growing pair&#39;,1e-7)
+        state = .4*(rng.normal(size=3)+1j*rng.normal(size=3))
+        a0,a1,b = state
+        mismatch = b-eta*np.conj(a0)*a1
+        g = np.array([-eta*np.conj(mismatch)*a1,
+                      -eta*mismatch*a0,mismatch])
+        adot = -1j*g
+        ndot = 2*np.real(np.conj(state)*adot)
+        close(ndot[0]+ndot[1],0,&#39;feedback high band norm conservation&#39;)
+        close(ndot[1]+ndot[2],0,&#39;feedback resonant energy exchange balance&#39;)
+        close(np.dot([20.,21.,1.],ndot),0,&#39;feedback complete bare energy balance&#39;)
+        close(2*np.vdot(g,adot).real,0,&#39;feedback interaction energy conservation&#39;)
+        close(ndot[1],-2*eta*np.imag(np.conj(a1)*b*a0),
+              &#39;feedback phase resolved transfer&#39;)
+        delta = rng.normal(size=3)+1j*rng.normal(size=3)
+        e = lambda z:float(abs(z[2]-eta*np.conj(z[0])*z[1])**2)
+        eps = 1e-6
+        fd = (e(state+eps*delta)-e(state-eps*delta))/(2*eps)
+        close(fd,2*np.vdot(g,delta).real,&#39;feedback full complex variation&#39;,1e-6)
+        resonant_feedback.append({&#39;real_depth&#39;:depth,&#39;a0&#39;:aa,&#39;a1&#39;:bb,&#39;eta&#39;:eta,
+                                  &#39;fundamental_amplitude&#39;:eta*aa*bb,
+                                  &#39;feedback_disturbance_frequency_over_g&#39;:freq})
+
+four_mode_feedback = []
+for depth in (2,3,4,5,6,10):
+    for aa,bb,cc,eta in ((1.,.5,1.,.4),(.5,1.,1.,.4),(1.,1.,1.,.4),(.5,1.5,1.,.8)):
+        dd = eta*aa*bb/cc
+        rvec = np.array([-eta*bb,-eta*aa,dd,cc])
+        svec = np.array([eta*bb,-eta*aa,-dd,cc])
+        qmat = np.block([[np.zeros((4,4)),np.outer(svec,svec)],
+                         [-np.outer(rvec,rvec),np.zeros((4,4))]])
+        freq = abs(eta*eta*(aa*aa-bb*bb)+cc*cc-dd*dd)
+        eig = sorted(np.linalg.eigvals(qmat),key=abs)[-2:]
+        close(sorted(abs(v.imag) for v in eig),[freq,freq],
+              &#39;four mode reciprocal oscillation frequency&#39;,1e-7)
+        close([v.real for v in eig],0,&#39;four mode no growing disturbance pair&#39;,1e-7)
+        z = .4*(rng.normal(size=4)+1j*rng.normal(size=4))
+        a0,a1,c0,c1 = z
+        beat_a,beat_c = np.conj(a0)*a1,np.conj(c0)*c1
+        mismatch = beat_c-eta*beat_a
+        g = np.array([-eta*np.conj(mismatch)*a1,-eta*mismatch*a0,
+                      np.conj(mismatch)*c1,mismatch*c0])
+        ndot = 2*np.real(np.conj(z)*(-1j*g))
+        close(ndot[0]+ndot[1],0,&#39;four mode first pair norm conservation&#39;)
+        close(ndot[2]+ndot[3],0,&#39;four mode second pair norm conservation&#39;)
+        close(ndot[1]+ndot[3],0,&#39;four mode total sideband action conservation&#39;)
+        close(np.dot([20.,21.,3.,4.],ndot),0,&#39;four mode full energy exchange balance&#39;)
+        close(ndot[1],-2*eta*np.imag(np.conj(beat_a)*beat_c),
+              &#39;four mode phase resolved transfer&#39;)
+        e = lambda q:float(abs(np.conj(q[2])*q[3]-eta*np.conj(q[0])*q[1])**2)
+        delta = rng.normal(size=4)+1j*rng.normal(size=4)
+        eps = 1e-6
+        close((e(z+eps*delta)-e(z-eps*delta))/(2*eps),2*np.vdot(g,delta).real,
+              &#39;four mode complete complex variation&#39;,1e-6)
+        for alpha in (.17,1.1):
+            close(e(z*np.exp(1j*alpha)),e(z),&#39;four mode common field phase symmetry&#39;)
+        # Independent cycle averaging of the density mismatch gives a DC
+        # term plus precisely twice the beat-mismatch energy.
+        wave_a = a0+a1*np.exp(-1j*theta)
+        wave_c = c0+c1*np.exp(-1j*theta)
+        dc = abs(c0)**2+abs(c1)**2-eta*(abs(a0)**2+abs(a1)**2)
+        averaged = np.mean((abs(wave_c)**2-eta*abs(wave_a)**2)**2)
+        close(averaged,dc*dc+2*e(z),&#39;local density mismatch generates beat interaction&#39;)
+        four_mode_feedback.append({&#39;real_depth&#39;:depth,&#39;a0&#39;:aa,&#39;a1&#39;:bb,&#39;c0&#39;:cc,&#39;c1&#39;:dd,
+                                   &#39;eta&#39;:eta,&#39;disturbance_frequency_over_g&#39;:freq,
+                                   &#39;common_field_phase_preserved&#39;:True})
+
+# Combine locking and reciprocal beat response in one positive energy.
+combined = []
+for m in (5,8,13):
+    for eta in (.2,.4,.8):
+        a = np.ones(m)/np.sqrt(m)
+        c0 = 1.
+        c1 = eta*(m-1)/m
+        modes = m+2
+        l = linear_constraint(a,np.ones(m))
+        rlock = np.zeros((2*(m-2),2*modes))
+        rlock[:m-2,:m] = l
+        rlock[m-2:,modes:modes+m] = l
+        # Variation of C1=sum conj(a_j) a_(j+1).
+        rr = np.zeros(modes)
+        ss = np.zeros(modes)
+        for j in range(m-1):
+            rr[j] -= eta*a[j+1]
+            rr[j+1] -= eta*a[j]
+            ss[j] += eta*a[j+1]
+            ss[j+1] -= eta*a[j]
+        rr[m:] = [c1,c0]
+        ss[m:] = [-c1,c0]
+        ltotal = np.vstack((rlock,np.r_[rr,np.zeros(modes)],np.r_[np.zeros(modes),ss]))
+        kmat = ltotal.T@ltotal
+        check(np.linalg.matrix_rank(ltotal)==2*m-2,&#39;combined action full transverse rank&#39;)
+        symplectic = np.block([[np.zeros((modes,modes)),np.eye(modes)],
+                               [-np.eye(modes),np.zeros((modes,modes))]])
+        eig = np.linalg.eigvals(symplectic@kmat)
+        close([x.real for x in eig],0,&#39;combined action no growing linear modes&#39;,1e-7)
+        nonzero = [x for x in eig if abs(x)&gt;1e-6]
+        check(len(nonzero)==2*(m-1),&#39;combined action disturbance pair count&#39;)
+        combined.append({&#39;high_bandwidth&#39;:m,&#39;eta&#39;:eta,&#39;real_neutral_directions&#39;:6,
+                         &#39;nonzero_frequency_pairs&#39;:m-1,
+                         &#39;minimum_nonzero_disturbance_frequency&#39;:min(abs(x.imag) for x in nonzero),
+                         &#39;maximum_nonzero_disturbance_frequency&#39;:max(abs(x.imag) for x in nonzero)})
+
+# Symbolic rotating-pattern phase bunching and symmetry controls.
+ell,I,V,omega,p,psi = sp.symbols(&#39;ell I V omega p psi&#39;,positive=True,real=True)
+h = ell**2/(2*I)*(p-I*omega/ell**2)**2-V*sp.cos(psi)
+check(sp.simplify(sp.diff(h,p,2)*sp.diff(h,psi,2).subs(psi,0)-ell**2*V/I)==0,
+      &#39;phase bunching libration frequency&#39;)
+rotating = []
+for depth in (2,3,4,5,6,10):
+    for l in (1,2,3,5,8):
+        ang = 2*np.pi*(np.arange(256*l)+.25)/(256*l)
+        acceptance = np.mean(np.cos(l*ang)&gt;0)
+        close(acceptance,.5,&#39;total spoke acceptance independent of order&#39;)
+        t = theta
+        single = np.cos(l*t)
+        mixed = np.cos(l*t)+np.cos((l+1)*t)
+        sf = np.fft.fft(single**2)/len(t)
+        mf = np.fft.fft(mixed**2)/len(t)
+        close(sf[1],0,&#39;single rotating order has no fundamental density&#39;)
+        close(2*mf[1],1,&#39;adjacent rotating orders restore fundamental density&#39;)
+        rotating.append({&#39;real_depth&#39;:depth,&#39;azimuthal_order&#39;:l,&#39;total_spoke_fraction&#39;:&#39;1/2&#39;,
+                         &#39;single_order_density_fundamental&#39;:0,
+                         &#39;adjacent_order_density_fundamental&#39;:1})
+
+report = {&#39;experiment&#39;:&#39;cavity-phase-lock&#39;,&#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),
+          &#39;status&#39;:&#39;passed&#39;,&#39;checks&#39;:sum(counts.values()),&#39;check_counts&#39;:dict(counts),
+          &#39;scope&#39;:&#39;Finite retained-mode inverse action; no particle simulation or derived band confinement.&#39;,
+          &#39;stability_cases&#39;:stability,&#39;envelope_cases&#39;:envelope,&#39;particle_cases&#39;:assigned,
+          &#39;endpoint_controls&#39;:endpoint,&#39;rotating_cases&#39;:rotating,
+          &#39;closed_support_cases&#39;:closed_support,
+          &#39;resonant_feedback_cases&#39;:resonant_feedback,
+          &#39;four_mode_feedback_cases&#39;:four_mode_feedback,&#39;combined_action_cases&#39;:combined,
+          &#39;sources&#39;:{&#39;experiments/cavity-phase-lock-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest(),
+                     &#39;results/complex-comb-response-results.json&#39;:sha256(baseline_file.read_bytes()).hexdigest()}}
+out = ROOT/&#39;cavity-phase-lock-results.json&#39;
+out.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;status&#39;:report[&#39;status&#39;],&#39;checks&#39;:report[&#39;checks&#39;],
+                  &#39;stability_cases&#39;:len(stability),&#39;particle_cases&#39;:len(assigned),
+                  &#39;rotating_cases&#39;:len(rotating),&#39;report&#39;:str(out)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>chiral-self-contact-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/chiral-self-contact-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="chiral-self-contact-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/chiral-self-contact-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="chiral-self-contact-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>chiral-self-contact-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/chiral-self-contact-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Test a parity-even chiral self-wedge current on occupied sector depths.&quot;&quot;&quot;
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+import importlib.util
+import json
+from pathlib import Path
+
+import numpy as np
+from scipy.linalg import expm
+import sympy as sp
+
+HERE = Path(__file__).resolve().parent
+spec = importlib.util.spec_from_file_location(&#39;current&#39;, HERE/&#39;hodge-color-current-checks.py&#39;)
+current = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(current)
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    if not condition:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def close(actual, expected, message, tolerance=2e-10):
+    check(np.allclose(actual, expected, atol=tolerance, rtol=tolerance), message)
+
+
+def chirality(gamma, dimension):
+    value = (1j)**(dimension//2)*np.eye(len(gamma[0]), dtype=complex)
+    for g in gamma[:dimension]:
+        value = value@g
+    close(value.conj().T, value, &#39;oriented full-volume Clifford operator is Hermitian&#39;)
+    close(value@value, np.eye(len(value)), &#39;full-volume chirality squares to one&#39;)
+    return value
+
+
+def projected_data(data, gamma):
+    volume = chirality(gamma, data[&#39;dimension&#39;])
+    result = {}
+    for sign in (1, -1):
+        projector = (np.eye(len(volume))+sign*volume)/2
+        operators = np.einsum(&#39;ij,abjk,kl-&gt;abil&#39;, projector, data[&#39;operators&#39;], projector, optimize=True)
+        result[sign] = {&#39;projector&#39;: projector, &#39;operators&#39;: operators}
+    return volume, result
+
+
+def wedge_energy_gradient(star, blocks, psi):
+    energy = 0.
+    gradient = np.zeros_like(psi)
+    currents = {}
+    for sign, block in blocks.items():
+        value = np.einsum(&#39;i,abij,j-&gt;ab&#39;, psi.conj(), block[&#39;operators&#39;], psi).real
+        currents[sign] = value
+        energy += sign*np.vdot(value, star@value).real
+        coefficient = sign*(star+star.T)@value
+        gradient += np.einsum(&#39;ab,abij,j-&gt;i&#39;, coefficient, block[&#39;operators&#39;], psi)
+    return energy, gradient, currents
+
+
+def wedge(left, right):
+    result = {}
+    for a, va in left.items():
+        for b, vb in right.items():
+            if set(a).intersection(b):
+                continue
+            index = tuple(sorted(a+b))
+            result[index] = result.get(index, 0)+current.source.parity(a+b)*va*vb
+    return {index:sp.simplify(value) for index,value in result.items() if sp.simplify(value) != 0}
+
+
+def exterior_derivative(form, coordinates):
+    result = {}
+    for index, coefficient in form.items():
+        for axis, coordinate in enumerate(coordinates):
+            if axis in index:
+                continue
+            new_index = tuple(sorted((axis,)+index))
+            result[new_index] = result.get(new_index,0)+current.source.parity((axis,)+index)*sp.diff(coefficient,coordinate)
+    return {index:sp.simplify(value) for index,value in result.items() if sp.simplify(value) != 0}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&#39;--output&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    rng = np.random.default_rng(202610092336)
+    gamma, colors, keep, projector = current.color_data()
+    by_dimension = {}
+    for depth in (2, 3, 4, 5, 6, 10):
+        dimension = depth+depth%2
+        if dimension not in by_dimension:
+            data = current.hodge_data(depth, gamma, colors)
+            volume, blocks = projected_data(data, gamma)
+            by_dimension[dimension] = data, volume, blocks
+        data, volume, blocks = by_dimension[dimension]
+        middle = data[&#39;degree&#39;]
+        active = middle%2 == 0
+        sample_energies = []
+        for repetition in range(4):
+            psi = rng.normal(size=32)+1j*rng.normal(size=32)
+            psi /= np.linalg.norm(psi)
+            energy, gradient, currents = wedge_energy_gradient(data[&#39;star&#39;], blocks, psi)
+            previous, previous_gradient = current.energy_and_gradient(data, psi)
+            close(energy, previous, &#39;self-wedge and symmetric-current actions agree at every occupied sector&#39;)
+            close(gradient, previous_gradient, &#39;occupied-sector agreement includes the complete field variation&#39;)
+            if active:
+                for sign, value in currents.items():
+                    close(data[&#39;star&#39;]@value, sign*value, &#39;actual projected even-middle current has its Clifford chirality&#39;)
+                close(energy, sum(np.vdot(v,v).real for v in currents.values()),
+                      &#39;chirality-weighted self-contact is the positive sum of both source norms&#39;)
+                check(energy &gt; 0, &#39;the occupied quark channel can have nonzero self-contact&#39;)
+            else:
+                close(data[&#39;star&#39;].T, -data[&#39;star&#39;], &#39;odd-middle order reversal is skew on real currents&#39;)
+                close(energy, 0, &#39;the identical odd-middle self-contact cancels without a sector coefficient&#39;)
+                close(gradient, 0, &#39;the cancelled local polynomial has no hidden first variation&#39;)
+            # Reversing orientation swaps the two source chiralities and star&#39;s sign.
+            reversed_blocks = {sign: blocks[-sign] for sign in (1,-1)}
+            reversed_energy, reversed_gradient, _ = wedge_energy_gradient(-data[&#39;star&#39;], reversed_blocks, psi)
+            close(reversed_energy, energy, &#39;the contact is independent of orientation convention&#39;)
+            close(reversed_gradient, gradient, &#39;orientation reversal preserves its field equation&#39;)
+            direction = rng.normal(size=32)+1j*rng.normal(size=32)
+            direction /= np.linalg.norm(direction)
+            step = 2e-5
+            difference = (wedge_energy_gradient(data[&#39;star&#39;], blocks, psi+step*direction)[0]
+                          -wedge_energy_gradient(data[&#39;star&#39;], blocks, psi-step*direction)[0])/(2*step)
+            close(difference, 2*np.vdot(gradient,direction).real,
+                  &#39;direct variation retains both current factors and both chiralities&#39;, 2e-7)
+            close(np.vdot(psi,gradient).imag, 0, &#39;the mode completion conserves total canonical norm&#39;)
+            omega = .7
+            velocity = -1j*(omega*psi+gradient)
+            close(2*np.vdot(omega*psi+gradient,velocity).real, 0,
+                  &#39;the full retained-mode energy is conserved under its reciprocal variation&#39;)
+            sample_energies.append(float(energy))
+        if depth in (3,4):
+            unitary = expm(.31j*sum((i+1)*t for i,t in enumerate(colors))/20)
+            rotated = wedge_energy_gradient(data[&#39;star&#39;], blocks, unitary@psi)[0]
+            close(rotated, energy, &#39;independent normal SU3 is retained in the occupied active channel&#39;)
+            # A reflection in one base direction swaps source chirality and preserves the energy.
+            reflected = wedge_energy_gradient(data[&#39;star&#39;], blocks, gamma[0]@psi)[0]
+            close(reflected, energy, &#39;including both source chiralities retains physical base parity&#39;)
+            close(blocks[1][&#39;projector&#39;]@gamma[0]@blocks[1][&#39;projector&#39;], np.zeros((32,32)),
+                  &#39;source projection must not be substituted for the full kinetic field&#39;)
+        CASES.append({&#39;real_depth&#39;:depth, &#39;geometry&#39;:&#39;chirality-weighted identical middle-current self-wedge&#39;,
+                      &#39;parameters&#39;:{&#39;even_carrier_depth&#39;:dimension, &#39;middle_degree&#39;:middle,
+                                    &#39;both_source_chiralities_retained&#39;:True,
+                                    &#39;full_kinetic_field_retained&#39;:True},
+                      &#39;measurements&#39;:{&#39;active&#39;:active, &#39;sample_energies&#39;:sample_energies,
+                                      &#39;equals_previous_hodge_current_action&#39;:True,
+                                      &#39;complete_strong_force_derived&#39;:False}})
+    data, volume, blocks = by_dimension[4]
+    lookup = {pair:i for i,pair in enumerate(data[&#39;blades&#39;])}
+    indices = {sign:np.array([i for i in keep if blocks[sign][&#39;projector&#39;][i,i].real &gt; .5])
+               for sign in (1,-1)}
+    for repetition in range(12):
+        psi = np.zeros(32,complex)
+        psi[keep] = rng.normal(size=12)+1j*rng.normal(size=12)
+        norm_total = np.vdot(psi,psi).real
+        energy = wedge_energy_gradient(data[&#39;star&#39;], blocks, psi)[0]
+        predicted = 0.
+        for sign in (1,-1):
+            matrix = psi[indices[sign]].reshape((2,3))
+            norm_chiral = np.vdot(matrix,matrix).real
+            purity = np.trace((matrix@matrix.conj().T)@(matrix@matrix.conj().T)).real
+            predicted += (7*norm_chiral**2-5*purity)/3
+        close(energy,predicted,&#39;full Dirac triplet has the sum of two exact chiral Fierz energies&#39;)
+        check(norm_total**2/3-1e-8 &lt;= energy &lt;= 3*norm_total**2/2+1e-8,
+              &#39;full Dirac triplet self-contact has uniform sharp positive bounds&#39;)
+    lower = np.zeros(32,complex)
+    lower[indices[1][0]] = 1/np.sqrt(2)
+    lower[indices[-1][0]] = 1/np.sqrt(2)
+    upper = np.zeros(32,complex)
+    upper[indices[1][0]] = upper[indices[1][4]] = 1/np.sqrt(2)
+    close(wedge_energy_gradient(data[&#39;star&#39;],blocks,lower)[0],1/3,
+          &#39;balanced factorized source chiralities attain the full-triplet lower bound&#39;)
+    close(wedge_energy_gradient(data[&#39;star&#39;],blocks,upper)[0],3/2,
+          &#39;a maximally entangled one-chirality source attains the full-triplet upper bound&#39;)
+    for repetition in range(8):
+        psi = rng.normal(size=32)+1j*rng.normal(size=32)
+        _, _, currents = wedge_energy_gradient(data[&#39;star&#39;], blocks, psi)
+        for sign, value in currents.items():
+            spatial = np.array([value[lookup[(1,2)]], -value[lookup[(0,2)]], value[lookup[(0,1)]]])
+            normal = np.array([value[lookup[(0,3)]], value[lookup[(1,3)]], value[lookup[(2,3)]]])
+            close(normal, sign*spatial, &#39;the fourth-direction current is tied to the three-direction magnetic form by chirality&#39;)
+            close(np.vdot(value,data[&#39;star&#39;]@value).real, 2*np.vdot(normal,spatial).real,
+                  &#39;normal contraction of the parent top form has the explicit three-shadow density&#39;)
+            close(sign*2*np.vdot(normal,spatial).real, np.vdot(value,value).real,
+                  &#39;the three-shadow contact has exactly the inherited positive norm&#39;)
+    # A local algebraic current is not automatically a closed curvature form.
+    x = sp.symbols(&#39;x0:4&#39;, real=True)
+    amplitude = sp.exp(-sum(t*t for t in x)/2)
+    # Selfdual e12+e34 is a simple current-form control, not a particle solution.
+    form = {(0,1):amplitude**2, (2,3):amplitude**2}
+    derivative = {}
+    for pair, coefficient in form.items():
+        for axis in range(4):
+            if axis in pair:
+                continue
+            index = tuple(sorted((axis,)+pair))
+            derivative[index] = derivative.get(index,0)+current.source.parity((axis,)+pair)*sp.diff(coefficient,x[axis])
+    check(any(sp.simplify(value) != 0 for value in derivative.values()),
+          &#39;a varying algebraic current need not obey a curvature Bianchi identity&#39;)
+    norm = sp.integrate(sp.exp(-2*x[0]**2),(x[0],-sp.oo,sp.oo))**4
+    check(sp.simplify(norm-sp.pi**2/4) == 0, &#39;a decaying trial density has a finite positive bulk self-contact integral&#39;)
+    alpha = sp.symbols(&#39;alpha&#39;, real=True)
+    check(sp.diff(alpha**4*norm,alpha).subs(alpha,1) == sp.pi**2,
+          &#39;the decaying algebraic current has a nonzero bulk amplitude variation&#39;)
+    product = np.zeros(32,complex)
+    selected = [i for i in keep if blocks[1][&#39;projector&#39;][i,i].real &gt; .5]
+    product[selected[0]] = 1
+    product_energy, _, actual_currents = wedge_energy_gradient(data[&#39;star&#39;], blocks, product)
+    close(product_energy, 2/3, &#39;an actual factorized spin-color current attains the established source norm&#39;)
+    excluded = [i for i,pair in enumerate(data[&#39;blades&#39;]) if 0 not in pair]
+    nonclosed_norm = sum(np.vdot(value[excluded],value[excluded]).real for value in actual_currents.values())
+    close(nonclosed_norm, product_energy/2, &#39;an actual selfdual spinor current has a nonzero exterior derivative under a varying profile&#39;)
+    for dimension in (2,4,6,10):
+        coordinates = sp.symbols(&#39;q0:&#39;+str(dimension), real=True)
+        degree = dimension//2
+        potential = {tuple(range(1,degree)):coordinates[0],
+                     tuple(range(degree+1,dimension)):coordinates[degree]}
+        curvature = exterior_derivative(potential,coordinates)
+        check(exterior_derivative(curvature,coordinates) == {}, &#39;exact differential form obeys its Bianchi identity&#39;)
+        check(exterior_derivative(wedge(potential,curvature),coordinates) == wedge(curvature,curvature),
+              &#39;exact closed curvature self-contact is a boundary term at every occupied even carrier&#39;)
+    CASES.append({&#39;real_depth&#39;:4, &#39;geometry&#39;:&#39;algebraic current versus a closed exact differential form&#39;,
+                  &#39;parameters&#39;:{&#39;trial_profile_is_particle_solution&#39;:False},
+                  &#39;measurements&#39;:{&#39;algebraic_current_closed&#39;:False,
+                                  &#39;gaussian_fourth_power_integral&#39;:&#39;pi^2/4&#39;,
+                                  &#39;bulk_amplitude_variation_at_one&#39;:&#39;pi^2&#39;,
+                                  &#39;actual_factorized_spinor_current_integrated_contact&#39;:&#39;pi^2/6&#39;,
+                                  &#39;actual_current_bulk_amplitude_variation&#39;:&#39;2*pi^2/3&#39;,
+                                  &#39;exact_closed_form_self_wedge_is_boundary_term&#39;:True}})
+    sources = {&#39;experiments/chiral-self-contact-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest()}
+    for filename in (&#39;hodge-color-current-checks.py&#39;,&#39;normal-color-kinetics-checks.py&#39;,&#39;spinor-hodge-source-checks.py&#39;):
+        sources[&#39;experiments/&#39;+filename] = sha256((HERE/filename).read_bytes()).hexdigest()
+    report = {&#39;experiment&#39;:&#39;chiral-self-contact&#39;, &#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),
+              &#39;status&#39;:&#39;passed&#39;, &#39;checks&#39;:CHECKS, &#39;cases&#39;:CASES, &#39;sources&#39;:sources,
+              &#39;scope&#39;:&#39;A proposed orientation-even local self-wedge interaction equals the positive Hodge-current action at occupied sectors. Its selection, spatial dynamics and force law remain open.&#39;}
+    args.output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;checks&#39;:CHECKS,&#39;cases&#39;:len(CASES),&#39;report&#39;:str(args.output)}))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

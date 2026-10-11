@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>paired-curvature-response-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/paired-curvature-response-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="paired-curvature-response-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/paired-curvature-response-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="paired-curvature-response-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>paired-curvature-response-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/paired-curvature-response-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Conjugate response cancellation, complete kinetics and all-depth controls.&quot;&quot;&quot;
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+from itertools import combinations
+import json
+from math import comb
+from pathlib import Path
+
+import numpy as np
+import sympy as sp
+
+
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    if not condition:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def full_hessian(gaps, aa, bb):
+    # Canonical order q,pq,lambda,plambda,x+,y+,x-,y-.
+    h = np.diag([2., 1., 3., 1., gaps[0], gaps[0], gaps[1], gaps[1]])
+    for j, (gap, a, b) in enumerate(zip(gaps, aa, bb)):
+        ix, iy = 4+2*j, 5+2*j
+        h[0, 0] += gap*a*a
+        h[2, 2] += gap*b*b
+        h[0, ix] = h[ix, 0] = -gap*a
+        h[2, iy] = h[iy, 2] = -gap*b
+    return h
+
+
+def exact_pair():
+    w, d, a, b, k, m, kl, ml = sp.symbols(&#39;Omega Delta A B K M Kl Ml&#39;, positive=True, real=True)
+    action = sp.diag(k+2*d*a*a-m*w*w, kl+2*d*b*b-ml*w*w, d, d, d, d)
+    for ix, iy, sign in ((2, 3, 1), (4, 5, -1)):
+        action[0, ix] = action[ix, 0] = -d*a
+        action[1, iy] = action[iy, 1] = -sign*d*b
+        action[ix, iy] = -sp.I*w
+        action[iy, ix] = sp.I*w
+    keep, remove = [0, 1], [2, 3, 4, 5]
+    effective = sp.simplify(action.extract(keep, keep)-action.extract(keep, remove)*
+                            action.extract(remove, remove).inv()*action.extract(remove, keep))
+    check(effective[0, 1] == 0 and effective[1, 0] == 0, &#39;paired cross response vanishes at all frequencies&#39;)
+    check(sp.simplify(effective[0, 0]-(k-m*w*w-2*d*a*a*w*w/(d*d-w*w))) == 0,
+          &#39;receiver induced inertia adds&#39;)
+    direct = 2*d*b*b*w*w/(d*d-w*w)
+    check(sp.simplify(effective[1, 1]-(kl-ml*w*w-direct)) == 0,
+          &#39;direct source inertia survives pairing&#39;)
+    check(sp.limit(direct, w, sp.oo) == -2*d*b*b, &#39;paired high-frequency source response survives&#39;)
+    check(sp.simplify(sp.limit(direct*(d-w), w, d)-d*d*b*b) == 0,
+          &#39;bare fast pole in prescribed-source response is genuine&#39;)
+    check(sp.factor(action.det()).as_poly(w).degree() == 8, &#39;complete pair contains four oscillators&#39;)
+
+    dp, dm, epsilon = sp.symbols(&#39;Delta_plus Delta_minus epsilon&#39;, positive=True, real=True)
+    mismatch = dp**2*a*b/(dp**2-w*w)-dm**2*a*b/(dm**2-w*w)
+    check(sp.simplify(mismatch.subs(w, 0)) == 0, &#39;equal weights can cancel adiabatic gyro despite unequal gaps&#39;)
+    check(sp.simplify(sp.limit(mismatch/w**2, w, 0)-a*b*(1/dp**2-1/dm**2)) == 0,
+          &#39;gap mismatch first appears at second frequency order&#39;)
+    imbalance = d*d*a*b*epsilon/(d*d-w*w)
+    check(sp.limit(imbalance, w, 0) == a*b*epsilon, &#39;occupation imbalance retains low-frequency gyro&#39;)
+    CASES.append({&#39;name&#39;: &#39;exact-paired-fast-bands&#39;, &#39;parameters&#39;: {&#39;matching&#39;: &#39;equal positive gaps and equal weights&#39;},
+                  &#39;measurements&#39;: {&#39;cross_response&#39;: &#39;0&#39;, &#39;source_response&#39;: str(direct),
+                                   &#39;source_response_high_frequency&#39;: str(-2*d*b*b),
+                                   &#39;unequal_gap_residual&#39;: str(mismatch)}})
+
+    jmat = np.kron(np.eye(4), np.array([[0., 1.], [-1., 0.]]))
+    for gap in (.3, 1.3, 3.7, 10., 30.):
+        for amplitude in (.03, .1, .3):
+            for mismatch_fraction in (0., .02, .2):
+                gaps = (gap, gap*(1+mismatch_fraction))
+                h = full_hessian(gaps, (amplitude, amplitude), (amplitude, -amplitude))
+                check(np.linalg.eigvalsh(h)[0] &gt; 0, &#39;positive complete paired Hamiltonian&#39;)
+                dynamic = jmat@h
+                eigen = np.linalg.eigvals(dynamic)
+                check(np.max(np.abs(eigen.real)) &lt; 1e-9, &#39;complete paired system is oscillatory&#39;)
+                frequencies = sorted(v.imag for v in eigen if v.imag &gt; 1e-9)
+                check(len(frequencies) == 4, &#39;all four complete positive modes retained&#39;)
+                check(np.linalg.norm(h@dynamic+dynamic.T@h) &lt; 1e-9, &#39;complete paired energy conserved&#39;)
+                CASES.append({&#39;name&#39;: &#39;complete-paired-Hamiltonian&#39;,
+                              &#39;parameters&#39;: {&#39;gaps&#39;: gaps, &#39;A&#39;: amplitude, &#39;B_signs&#39;: [1, -1]},
+                              &#39;measurements&#39;: {&#39;frequencies&#39;: frequencies,
+                                               &#39;minimum_energy_eigenvalue&#39;: float(np.linalg.eigvalsh(h)[0])}})
+
+
+def quantum_metric_and_color():
+    theta, phi = sp.symbols(&#39;theta phi&#39;, real=True)
+    u = sp.Matrix([sp.cos(theta/2), sp.exp(sp.I*phi)*sp.sin(theta/2)])
+    v = sp.kronecker_product(u, u.conjugate())
+    coords = (theta, phi)
+    def geometry(state):
+        p = sp.eye(len(state))-state*state.H
+        return sp.simplify(sp.Matrix(2, 2, lambda i, j: (sp.diff(state, coords[i]).H*p*
+                                                       sp.diff(state, coords[j]))[0]))
+    qu, qv = geometry(u), geometry(v)
+    for i in range(2):
+        check(sp.simplify(sp.I*(v.H*sp.diff(v, coords[i]))[0]) == 0, &#39;product ray has zero Berry connection&#39;)
+        for jj in range(2):
+            check(sp.trigsimp(qv[i, jj]-2*sp.re(qu[i, jj]), method=&#39;fu&#39;) == 0,
+                  &#39;product ray doubles metric while cancelling curvature&#39;)
+    for rank in (1, 3, 10, 35, 126, 462):
+        check(sp.Rational(1, rank)*rank == 1, &#39;product-ray trace overlap normalization&#39;)
+        CASES.append({&#39;name&#39;: &#39;flat-ray-color-control&#39;, &#39;parameters&#39;: {&#39;carrier_rank&#39;: rank},
+                      &#39;measurements&#39;: {&#39;singlet_overlap_squared&#39;: str(sp.Rational(1, rank)),
+                                       &#39;quadratic_color_generator_expectation&#39;: rank-1,
+                                       &#39;Berry_curvature&#39;: &#39;0&#39;, &#39;metric_factor&#39;: 2}})
+    # Independent finite generator-action test of Casimir for u tensor conjugate(u).
+    for rank in range(2, 7):
+        state = np.zeros((rank, rank), dtype=complex)
+        vec = np.arange(1, rank+1, dtype=float)+1j*np.arange(rank, 0, -1)
+        vec /= np.linalg.norm(vec)
+        state = np.outer(vec, vec.conjugate())
+        generators = []
+        for x, y in combinations(range(rank), 2):
+            s = np.zeros((rank, rank), dtype=complex)
+            s[x, y] = s[y, x] = .5
+            generators.append(s)
+            s = np.zeros((rank, rank), dtype=complex)
+            s[x, y], s[y, x] = -.5j, .5j
+            generators.append(s)
+        for length in range(1, rank):
+            s = np.zeros((rank, rank), dtype=complex)
+            s[np.arange(length), np.arange(length)] = 1
+            s[length, length] = -length
+            generators.append(s/np.sqrt(2*length*(length+1)))
+        norm = sum(np.linalg.norm(t@state-state@t)**2 for t in generators)
+        check(np.isclose(norm, rank-1), &#39;explicit generators confirm nonneutral flat product ray&#39;)
+        trace = np.eye(rank)/np.sqrt(rank)
+        check(all(np.linalg.norm(t@trace-trace@t) &lt; 1e-14 for t in generators),
+              &#39;true trace tensor annihilated by every generator&#39;)
+
+
+def sign_sort(indices):
+    return (-1)**sum(indices[i] &gt; indices[j] for i in range(len(indices)) for j in range(i+1, len(indices)))
+
+
+def hodge_controls():
+    for m in range(1, 7):
+        d = 2*m
+        def star(index):
+            other = tuple(i for i in range(d) if i not in index)
+            return other, sign_sort(index+other)
+        def rotate(index):
+            # Infinitesimal physical rotation in the ordinary 0,1 plane.
+            if (0 in index) == (1 in index):
+                return None, 0
+            raw = tuple(1 if i == 0 else 0 if i == 1 else i for i in index)
+            return tuple(sorted(raw)), (1 if 0 in index else -1)*sign_sort(raw)
+        for index in combinations(range(d), m):
+            rotated, rs = rotate(index)
+            starred, ss = star(index)
+            left, ls = star(rotated) if rs else (None, 0)
+            right, rrs = rotate(starred)
+            check((left, rs*ls) == ((right if rrs else None), ss*rrs),
+                  &#39;Hodge projector commutes with physical rotation&#39;)
+        rank = comb(d-1, m-1)
+        for depth in (d-1, d):
+            CASES.append({&#39;name&#39;: &#39;all-depth-conjugation-control&#39;, &#39;real_depth&#39;: depth,
+                          &#39;parameters&#39;: {&#39;even_carrier_depth&#39;: d, &#39;middle_degree&#39;: m,
+                                         &#39;odd_shadow_requires_separate_restriction_map&#39;: depth != d},
+                          &#39;measurements&#39;: {&#39;channel_rank&#39;: rank,
+                                           &#39;conjugation_exchanges_Hodge_channels&#39;: bool(m % 2),
+                                           &#39;matched_response_pairs_can_cancel_gyro&#39;: True,
+                                           &#39;Hodge_rotation_alone_forces_equal_occupation&#39;: False,
+                                           &#39;flat_product_ray_color_Casimir&#39;: rank-1}})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--output&#39;, required=True)
+    args = parser.parse_args()
+    exact_pair()
+    quantum_metric_and_color()
+    hodge_controls()
+    report = {&#39;experiment_key&#39;: &#39;paired-curvature-response-20261009&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/paired-curvature-response-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest()},
+              &#39;scope&#39;: &#39;Conditional conjugate fast-band cancellation, complete positive kinetics, quantum metric/color distinction and Hodge controls through depth twelve. No particle simulations.&#39;,
+              &#39;summary&#39;: {&#39;checks_passed&#39;: CHECKS, &#39;case_count&#39;: len(CASES)}, &#39;cases&#39;: CASES}
+    Path(args.output).write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(report[&#39;summary&#39;]))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,275 @@
+{
+  "title": "Spatial spinor bilinears generate the full middle-Hodge carrier",
+  "created_utc": "2026-10-09T22:36:08.818858+00:00",
+  "checks_passed": 5578,
+  "cases": [
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 1,
+      "parameters": {
+        "even_carrier_depth": 2,
+        "middle_degree": 1,
+        "minimal_spinor_rank": 1,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": true
+      },
+      "measurements": {
+        "middle_channel_rank": 1,
+        "symmetric_square_rank": 1,
+        "lower_symmetric_grades": [],
+        "Hodge_eigenvalue": "(-0-1j)",
+        "symmetric_Hodge_filter_active": false,
+        "middle_source_is_full_symmetric_square": true
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 2,
+      "parameters": {
+        "even_carrier_depth": 2,
+        "middle_degree": 1,
+        "minimal_spinor_rank": 1,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": false
+      },
+      "measurements": {
+        "middle_channel_rank": 1,
+        "symmetric_square_rank": 1,
+        "lower_symmetric_grades": [],
+        "Hodge_eigenvalue": "(-0-1j)",
+        "symmetric_Hodge_filter_active": false,
+        "middle_source_is_full_symmetric_square": true
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 3,
+      "parameters": {
+        "even_carrier_depth": 4,
+        "middle_degree": 2,
+        "minimal_spinor_rank": 2,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": true
+      },
+      "measurements": {
+        "middle_channel_rank": 3,
+        "symmetric_square_rank": 3,
+        "lower_symmetric_grades": [],
+        "Hodge_eigenvalue": "(1-0j)",
+        "symmetric_Hodge_filter_active": true,
+        "middle_source_is_full_symmetric_square": true
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 4,
+      "parameters": {
+        "even_carrier_depth": 4,
+        "middle_degree": 2,
+        "minimal_spinor_rank": 2,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": false
+      },
+      "measurements": {
+        "middle_channel_rank": 3,
+        "symmetric_square_rank": 3,
+        "lower_symmetric_grades": [],
+        "Hodge_eigenvalue": "(1-0j)",
+        "symmetric_Hodge_filter_active": true,
+        "middle_source_is_full_symmetric_square": true
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 5,
+      "parameters": {
+        "even_carrier_depth": 6,
+        "middle_degree": 3,
+        "minimal_spinor_rank": 4,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": true
+      },
+      "measurements": {
+        "middle_channel_rank": 10,
+        "symmetric_square_rank": 10,
+        "lower_symmetric_grades": [],
+        "Hodge_eigenvalue": "(-0-1j)",
+        "symmetric_Hodge_filter_active": false,
+        "middle_source_is_full_symmetric_square": true
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 6,
+      "parameters": {
+        "even_carrier_depth": 6,
+        "middle_degree": 3,
+        "minimal_spinor_rank": 4,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": false
+      },
+      "measurements": {
+        "middle_channel_rank": 10,
+        "symmetric_square_rank": 10,
+        "lower_symmetric_grades": [],
+        "Hodge_eigenvalue": "(-0-1j)",
+        "symmetric_Hodge_filter_active": false,
+        "middle_source_is_full_symmetric_square": true
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 7,
+      "parameters": {
+        "even_carrier_depth": 8,
+        "middle_degree": 4,
+        "minimal_spinor_rank": 8,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": true
+      },
+      "measurements": {
+        "middle_channel_rank": 35,
+        "symmetric_square_rank": 36,
+        "lower_symmetric_grades": [
+          0
+        ],
+        "Hodge_eigenvalue": "(1-0j)",
+        "symmetric_Hodge_filter_active": true,
+        "middle_source_is_full_symmetric_square": false
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 8,
+      "parameters": {
+        "even_carrier_depth": 8,
+        "middle_degree": 4,
+        "minimal_spinor_rank": 8,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": false
+      },
+      "measurements": {
+        "middle_channel_rank": 35,
+        "symmetric_square_rank": 36,
+        "lower_symmetric_grades": [
+          0
+        ],
+        "Hodge_eigenvalue": "(1-0j)",
+        "symmetric_Hodge_filter_active": true,
+        "middle_source_is_full_symmetric_square": false
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 9,
+      "parameters": {
+        "even_carrier_depth": 10,
+        "middle_degree": 5,
+        "minimal_spinor_rank": 16,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": true
+      },
+      "measurements": {
+        "middle_channel_rank": 126,
+        "symmetric_square_rank": 136,
+        "lower_symmetric_grades": [
+          1
+        ],
+        "Hodge_eigenvalue": "-1j",
+        "symmetric_Hodge_filter_active": false,
+        "middle_source_is_full_symmetric_square": false
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 10,
+      "parameters": {
+        "even_carrier_depth": 10,
+        "middle_degree": 5,
+        "minimal_spinor_rank": 16,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": false
+      },
+      "measurements": {
+        "middle_channel_rank": 126,
+        "symmetric_square_rank": 136,
+        "lower_symmetric_grades": [
+          1
+        ],
+        "Hodge_eigenvalue": "-1j",
+        "symmetric_Hodge_filter_active": false,
+        "middle_source_is_full_symmetric_square": false
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 11,
+      "parameters": {
+        "even_carrier_depth": 12,
+        "middle_degree": 6,
+        "minimal_spinor_rank": 32,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": true
+      },
+      "measurements": {
+        "middle_channel_rank": 462,
+        "symmetric_square_rank": 528,
+        "lower_symmetric_grades": [
+          2
+        ],
+        "Hodge_eigenvalue": "(1+0j)",
+        "symmetric_Hodge_filter_active": true,
+        "middle_source_is_full_symmetric_square": false
+      }
+    },
+    {
+      "name": "spinor-generated-Hodge-channel",
+      "real_depth": 12,
+      "parameters": {
+        "even_carrier_depth": 12,
+        "middle_degree": 6,
+        "minimal_spinor_rank": 32,
+        "source": "F_I=psi^T C gamma_I psi",
+        "odd_shadow_requires_declared_even_carrier": false
+      },
+      "measurements": {
+        "middle_channel_rank": 462,
+        "symmetric_square_rank": 528,
+        "lower_symmetric_grades": [
+          2
+        ],
+        "Hodge_eigenvalue": "(1+0j)",
+        "symmetric_Hodge_filter_active": true,
+        "middle_source_is_full_symmetric_square": false
+      }
+    },
+    {
+      "name": "triplet-source-geometry",
+      "real_depth": 4,
+      "parameters": {
+        "carrier": "Sym^2 C^2",
+        "one_spinor_source": "(x^2,sqrt(2)xy,y^2)"
+      },
+      "measurements": {
+        "source_constraint": "c_2^2-2 c_1 c_3=0",
+        "three_slot_volume": "sqrt(2) product_{i<j} det(w_i,w_j)",
+        "independent_color_derived": false,
+        "two_distinct_spinor_pairs_can_fill_carrier": true,
+        "uniform_unit_spinor_triplet_covariance": "I_3/3",
+        "unit_spinor_pair_energy_after_third_average": "(1-|u^dagger v|^4)/3",
+        "full_Dirac_kinetic_carrier_must_be_retained": true
+      }
+    }
+  ],
+  "scope": "Exact algebraic field-source construction across maintained and neighboring depths; no particle simulations.",
+  "statistics": "Commuting classical amplitudes; identical Grassmann spinor squares require a different slot symmetry.",
+  "limitations": [
+    "The bilinear is a geometric source, not an independently derived color multiplet.",
+    "One spinor square obeys algebraic constraints not preserved by arbitrary full-channel unitary mixing.",
+    "Odd depths use the declared even-carrier shadow.",
+    "The full kinetic spinor carrier is retained; a pointwise chiral compression would kill its symbol."
+  ],
+  "sources": {
+    "experiments/spinor-hodge-source-checks.py": "c1a9212b8dd1f0e9e525e36db80c322b9487986ca656aa028c2a4cbb8456b38e"
+  }
+}

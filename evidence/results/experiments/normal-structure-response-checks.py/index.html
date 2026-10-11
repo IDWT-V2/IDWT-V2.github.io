@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>normal-structure-response-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/normal-structure-response-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="normal-structure-response-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/normal-structure-response-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="normal-structure-response-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>normal-structure-response-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/normal-structure-response-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact retained-normal-structure checks; read-only inputs, no database access.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from itertools import combinations
+from pathlib import Path
+import hashlib
+import argparse
+import json
+import sympy as s
+
+
+TASK = Path(__file__).resolve().parent
+REPO = next(p for p in TASK.parents if (p/&quot;database&quot;/&quot;research.py&quot;).is_file())
+CHECKS = 0
+
+
+def check(condition, label):
+    global CHECKS
+    CHECKS += 1
+    if not condition:
+        raise AssertionError(label)
+
+
+def comm(x, y):
+    return x*y-y*x
+
+
+def inner(x, y):
+    return s.trace(x.T*y)
+
+
+def norm2(x):
+    return inner(x, x)
+
+
+def jmat(q):
+    j = s.zeros(2*q)
+    for r in range(q):
+        j[2*r, 2*r+1] = -1
+        j[2*r+1, 2*r] = 1
+    return j
+
+
+def skew(n, i, j):
+    x = s.zeros(n)
+    x[i, j], x[j, i] = 1, -1
+    return x
+
+
+def ph(x, j):
+    return (x-j*x*j)/2
+
+
+def pm(x, j):
+    return (x+j*x*j)/2
+
+
+def vec(x):
+    return x.reshape(x.rows*x.cols, 1)
+
+
+def independent_matrices(matrices, n):
+    if not matrices:
+        return []
+    cols = s.Matrix.hstack(*(vec(x) for x in matrices)).columnspace()
+    return [x.reshape(n, n) for x in cols]
+
+
+sources = {&#39;experiments/normal-structure-response-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+
+rank_cases = []
+for q in (4, 3, 2, 0):
+    n = 2*q
+    j = jmat(q)
+    ident = s.eye(n)
+    check(j.T == -j, &#39;J is skew&#39;)
+    check(j*j == -ident, &#39;J squares to minus identity&#39;)
+    basis = [skew(n, i, k) for i, k in combinations(range(n), 2)]
+    hs = [ph(x, j) for x in basis]
+    ms = [pm(x, j) for x in basis]
+    hb = independent_matrices(hs, n)
+    mb = independent_matrices(ms, n)
+    check(len(hb) == q*q, &#39;commuting rank&#39;)
+    check(len(mb) == q*(q-1), &#39;complement rank&#39;)
+    check(len(basis) == q*(2*q-1), &#39;full skew rank&#39;)
+    check(len(hb)+len(mb) == len(basis), &#39;direct sum dimension&#39;)
+    for x, h, m in zip(basis, hs, ms):
+        check(h+m == x, &#39;splitting reconstructs X&#39;)
+        check(h.T == -h and m.T == -m, &#39;splitting is metric&#39;)
+        check(comm(h, j) == s.zeros(n), &#39;h commutes with J&#39;)
+        check(m*j+j*m == s.zeros(n), &#39;m anticommutes with J&#39;)
+        check(ph(h, j) == h and pm(m, j) == m, &#39;idempotent projections&#39;)
+        check(pm(h, j) == s.zeros(n) and ph(m, j) == s.zeros(n),
+              &#39;orthogonal projection composition&#39;)
+        check(comm(comm(x, j), j) == -4*m, &#39;commutator quadratic eigenvalue&#39;)
+        check(norm2(comm(x, j)) == 4*norm2(m), &#39;commutator norm identity&#39;)
+        check(norm2(x) == norm2(h)+norm2(m), &#39;Pythagorean splitting&#39;)
+    for h in hb:
+        for m in mb:
+            check(inner(h, m) == 0, &#39;h and m are orthogonal&#39;)
+            check(ph(comm(h, m), j) == s.zeros(n), &#39;[h,m] lies in m&#39;)
+    for h1, h2 in combinations(hb, 2):
+        check(pm(comm(h1, h2), j) == s.zeros(n), &#39;[h,h] lies in h&#39;)
+        check(s.trace(j*comm(h1, h2)) == 0, &#39;commutator has zero complex trace&#39;)
+    for m1, m2 in combinations(mb, 2):
+        check(pm(comm(m1, m2), j) == s.zeros(n), &#39;[m,m] lies in h&#39;)
+
+    if q:
+        su = [h-inner(j, h)*j/(2*q) for h in hb]
+        sub = independent_matrices(su, n)
+        check(len(sub) == q*q-1, &#39;traceless unitary rank&#39;)
+        for h in hb:
+            central = inner(j, h)*j/(2*q)
+            traceless = h-central
+            check(s.trace(j*traceless) == 0, &#39;zero complex trace&#39;)
+            check(inner(central, traceless) == 0, &#39;su and central are orthogonal&#39;)
+            check(comm(j, h) == s.zeros(n), &#39;central J is central&#39;)
+        # Exact spectrum on the skew basis, whose upper entries are coordinates.
+        coords = list(combinations(range(n), 2))
+        quad = s.Matrix.hstack(*(s.Matrix([
+            (-comm(comm(x, j), j))[i, k] for i, k in coords
+        ]) for x in basis))
+        eig = {str(value): int(mult) for value, mult in quad.eigenvals().items()}
+        expected_eig = {&#39;0&#39;: q*q, &#39;4&#39;: q*(q-1)}
+        check(eig == expected_eig, &#39;full exact positive-commutator spectrum&#39;)
+        # The orientation tangent map has no kernel on m.
+        tangent = independent_matrices([comm(x, j) for x in mb], n)
+        check(len(tangent) == q*(q-1), &#39;orientation coordinate count&#39;)
+    else:
+        eig = {}
+        check(not basis and not hb and not mb, &#39;empty normal boundary&#39;)
+    rank_cases.append({&#39;q&#39;: q, &#39;real_normal_rank&#39;: n,
+                       &#39;so_dimension&#39;: len(basis), &#39;u_dimension&#39;: len(hb),
+                       &#39;su_dimension&#39;: q*q-1 if q else 0,
+                       &#39;central_dimension&#39;: 1 if q else 0,
+                       &#39;orientation_dimension&#39;: len(mb),
+                       &#39;commutator_quadratic_eigenvalues&#39;: eig})
+
+# Derive the reviewed depth-four second fundamental matrices from the graph.
+x = s.symbols(&#39;x0:4&#39;, real=True)
+z1, z2 = x[0]+s.I*x[1], x[2]+s.I*x[3]
+f_complex = (z1*z1/2, z1*z2, z2*z2/2)
+f_real = [v.expand(complex=True) for z in f_complex for v in (s.re(z), s.im(z))]
+B = [s.Matrix([[s.diff(y, x[i], x[k]) for k in range(4)]
+               for y in f_real]) for i in range(4)]
+j = jmat(3)
+for i, k in combinations(range(4), 2):
+    fij = B[i]*B[k].T-B[k]*B[i].T
+    check(comm(fij, j) == s.zeros(6), &#39;static graph curvature is unitary&#39;)
+eta, n = s.eye(6)[:, 0], s.eye(4)[:, 0]
+check(B[2]*n == s.eye(6)[:, 2], &#39;reviewed axial bending vector&#39;)
+w2 = eta*(B[2]*n).T-(B[2]*n)*eta.T
+check(w2 == skew(6, 0, 2), &#39;reviewed W2 exact matrix&#39;)
+check(norm2(w2) == 2, &#39;W2 norm&#39;)
+check(norm2(comm(w2, j)) == 4, &#39;reviewed nonunitary electric curvature&#39;)
+check(norm2(pm(w2, j)) == 1, &#39;W2 nonunitary projection norm&#39;)
+check(norm2(ph(w2, j)) == 1, &#39;W2 unitary projection norm&#39;)
+delta_j = comm(skew(6, 0, 4)+skew(6, 1, 3), j)
+f0i = s.zeros(6)
+check(comm(w2, j)+comm(f0i, delta_j) == comm(w2, j),
+      &#39;zero background electric curvature cannot cancel first variation&#39;)
+check(comm(w2, j) != s.zeros(6), &#39;linear parallel continuation obstructed&#39;)
+
+# Verify the actual compatible connection, its derivative correction and curvature.
+# Use J(s,t)=exp(sX) exp(tY) J0 exp(-tY) exp(-sX) at s=t=0.
+# First and mixed jets are exact; no matrix exponential approximation is used.
+X = skew(6, 0, 2)+skew(6, 1, 4)
+Y = skew(6, 0, 5)-skew(6, 2, 3)
+A = skew(6, 0, 1)+2*skew(6, 0, 3)-skew(6, 2, 5)
+C = skew(6, 1, 4)+skew(6, 2, 3)+skew(6, 3, 5)
+js, jt = comm(X, j), comm(Y, j)
+jst = comm(X, comm(Y, j))
+ks, kt = js+comm(A, j), jt+comm(C, j)
+for k in (ks, kt):
+    check(k.T == -k and k*j+j*k == s.zeros(6), &#39;DJ tangent constraints&#39;)
+    corr = -j*k/2
+    check(corr.T == -corr, &#39;projected connection is metric&#39;)
+    check(ph(corr, j) == s.zeros(6), &#39;projection correction is orthogonal&#39;)
+    check(k+comm(corr, j) == s.zeros(6), &#39;projection makes J parallel&#39;)
+    check(comm(j, k) == 2*j*k, &#39;vacuum algebraic orientation equation&#39;)
+    check(norm2(comm(j, k)) == 4*norm2(k), &#39;vacuum current is injective on DJ&#39;)
+corr_s, corr_t = -j*ks/2, -j*kt/2
+check(A+corr_s == ph(A, j)-j*js/2, &#39;varying-J connection formula&#39;)
+check(C+corr_t == ph(C, j)-j*jt/2, &#39;second varying-J connection formula&#39;)
+ds_kt = jst+comm(C, js)
+dt_ks = jst+comm(A, jt)
+ds_corr_t = -(js*kt+j*ds_kt)/2
+dt_corr_s = -(jt*ks+j*dt_ks)/2
+F = comm(A, C)
+check(ds_kt+comm(A, kt)-dt_ks-comm(C, ks) == comm(F, j),
+      &#39;curvature integrability identity&#39;)
+Fhat_direct = (F+ds_corr_t-dt_corr_s+comm(A, corr_t)
+               +comm(corr_s, C)+comm(corr_s, corr_t))
+Fhat_formula = ph(F, j)-comm(ks, kt)/4
+check(Fhat_direct == Fhat_formula, &#39;projected curvature exact formula&#39;)
+check(comm(Fhat_direct, j) == s.zeros(6), &#39;projected curvature preserves J&#39;)
+
+# Explicit first-order orientation kinetic normalization on every m basis
+# is already verified by norm identity; verify it on one mixed orientation jet.
+theta_jet = pm(X+2*Y, j)
+a_complement = pm(A, j)
+linear_K = comm(theta_jet+a_complement, j)
+check(norm2(linear_K)/2 == 2*norm2(theta_jet+a_complement),
+      &#39;orientation quadratic kinetic coefficient&#39;)
+
+# Common Cartan history is traceless unitary and leaves the entire J term zero.
+j1, j2 = s.zeros(6), s.zeros(6)
+j1[:2, :2] = jmat(1)
+j2[2:4, 2:4] = jmat(1)
+T = (j1-j2)/2
+check(norm2(T) == 1, &#39;common Cartan Frobenius normalization&#39;)
+check(comm(T, j) == s.zeros(6), &#39;common Cartan preserves J&#39;)
+check(s.trace(j*T) == 0, &#39;common Cartan is already in su3&#39;)
+t, x1, x2 = s.symbols(&#39;t x1 x2&#39;, real=True)
+b = s.Function(&#39;b&#39;)(t)
+A2 = b*x1*T
+F12, F02 = A2.diff(x1), A2.diff(t)
+check(F12 == b*T, &#39;Cartan magnetic history&#39;)
+check(F02 == b.diff(t)*x1*T, &#39;Cartan electric history&#39;)
+check(F12.diff(t)-F02.diff(x1) == s.zeros(6), &#39;Cartan Bianchi identity&#39;)
+check(comm(A2, j) == s.zeros(6), &#39;Cartan DJ stays exactly zero&#39;)
+check(comm(F12, j) == s.zeros(6) and comm(F02, j) == s.zeros(6),
+      &#39;Cartan curvature obstruction vanishes&#39;)
+check(F02.diff(x2) == s.zeros(6), &#39;Cartan vacuum divergence&#39;)
+u, kappa, h, settled_B, omega = s.symbols(&#39;u kappa h B Omega&#39;, real=True)
+epsilon = kappa*h*u**4
+check(epsilon.subs(u, 0) == 0 and s.diff(epsilon, u).subs(u, 0) == 0,
+      &#39;exact vacuum dielectric and amplitude derivative vanish&#39;)
+V = omega**2*u**2/2+epsilon*settled_B**2/2
+check(s.diff(V, u) == omega**2*u+2*kappa*h*settled_B**2*u**3,
+      &#39;identical later neutral probe equation unchanged&#39;)
+check(s.diff(A2, x1, x1) == s.zeros(6), &#39;settled constant magnetic curvature&#39;)
+
+depths = [2, 3, 4, 5, 6, 10]
+even_carrier = {2: 2, 3: 4, 4: 4, 5: 6, 6: 6, 10: 10}
+occupied = []
+for depth in depths:
+    even = even_carrier[depth]
+    q = (10-even)//2
+    m = even//2
+    hd = 1 if m % 2 == 0 else 0
+    check(q in (4, 3, 2, 0), &#39;only assigned normal ranks&#39;)
+    check(hd == (1 if depth in (3, 4) else 0), &#39;separate Hodge premise&#39;)
+    occupied.append({&#39;depth&#39;: depth, &#39;even_carrier&#39;: even, &#39;q&#39;: q,
+                     &#39;u_dimension&#39;: q*q, &#39;su_dimension&#39;: q*q-1 if q else 0,
+                     &#39;orientation_dimension&#39;: q*(q-1), &#39;hodge_coefficient&#39;: hd})
+
+report = {
+    &#39;title&#39;: &#39;Retained Ordinary Normal Complex Structure: Exact Geometric Response&#39;,
+    &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+    &#39;sources&#39;: sources,
+    &#39;checks_passed&#39;: CHECKS,
+    &#39;exact_arithmetic&#39;: &#39;SymPy integers and rational numbers; no numerical rank tolerance&#39;,
+    &#39;rank_cases&#39;: rank_cases,
+    &#39;occupied_depths&#39;: occupied,
+    &#39;depth_four_real_wave&#39;: {
+        &#39;W2_norm_squared&#39;: 2, &#39;commutator_norm_squared&#39;: 4,
+        &#39;unitary_projection_norm_squared&#39;: 1, &#39;complement_projection_norm_squared&#39;: 1,
+        &#39;first_order_parallel_J_continuation&#39;: &#39;obstructed: background F0i is zero&#39;},
+    &#39;projected_metric_connection&#39;: &#39;Ahat=A-J(DJ)/2&#39;,
+    &#39;projected_curvature&#39;: &#39;Fhat=P_h(F)-[K_mu,K_nu]/4&#39;,
+    &#39;vacuum_cartan_history&#39;: {
+        &#39;generator&#39;: &#39;(j_1-j_2)/2&#39;, &#39;generator_norm_squared&#39;: 1,
+        &#39;generator_algebra&#39;: &#39;su3, hence also u3&#39;,
+        &#39;A2&#39;: &#39;b(t)*x1*T&#39;, &#39;DJ&#39;: &#39;0&#39;, &#39;vacuum_energy&#39;: &#39;0&#39;,
+        &#39;independent_connection_vacuum_ambiguity&#39;: &#39;survives&#39;},
+    &#39;scope&#39;: &#39;local geometric identities and explicit comparison action; no graph evolution or particle simulation&#39;
+}
+parser = argparse.ArgumentParser()
+parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+output = parser.parse_args().report
+output.write_text(json.dumps(report, indent=2, sort_keys=True)+&#39;\n&#39;)
+print(json.dumps({&#39;checks_passed&#39;: CHECKS, &#39;result&#39;: str(output)}, indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

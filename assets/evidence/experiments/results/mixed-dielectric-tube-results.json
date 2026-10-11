@@ -1,0 +1,982 @@
+{
+  "title": "Quadratic Dielectric Corrections Preserve Conditional Three/Four Flux Guides Above Derived Thresholds",
+  "sources": {
+    "experiments/mixed-dielectric-tube-checks.py": "3e36076f207ab13bcd009cd1e3ea525ede79a909ef3d2e48c681415291d62eb1",
+    "experiments/hodge-flux-tube-checks.py": "24ef86b4855274c5c8ca74890aa5e6bfa5f15bcccf2bc6ae566c02d998adb38b"
+  },
+  "checks_passed": 374,
+  "dependency_checks_passed": 26,
+  "case_count": 50,
+  "occupied_depths": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  "scope": "complete fixed commuting flux energy, sharp interpolation reduction, global threshold and local branch stability; not full non-Abelian confinement",
+  "cases": [
+    {
+      "case": "mixed-dielectric-occupied-depth-2",
+      "real_depth": 2,
+      "transverse_dimension": 1,
+      "hodge_coefficient": 0.0,
+      "quadratic_dielectric_is_an_ordinary_positive_vacuum_floor": false,
+      "independent_connection_zero_source_constraint_retained": true,
+      "independent_connection_present": true
+    },
+    {
+      "case": "mixed-dielectric-occupied-depth-3",
+      "real_depth": 3,
+      "transverse_dimension": 2,
+      "hodge_coefficient": 1.0,
+      "quadratic_dielectric_is_an_ordinary_positive_vacuum_floor": false,
+      "independent_connection_zero_source_constraint_retained": false,
+      "independent_connection_present": true
+    },
+    {
+      "case": "mixed-dielectric-occupied-depth-4",
+      "real_depth": 4,
+      "transverse_dimension": 3,
+      "hodge_coefficient": 1.0,
+      "quadratic_dielectric_is_an_ordinary_positive_vacuum_floor": false,
+      "independent_connection_zero_source_constraint_retained": false,
+      "independent_connection_present": true
+    },
+    {
+      "case": "mixed-dielectric-occupied-depth-5",
+      "real_depth": 5,
+      "transverse_dimension": 4,
+      "hodge_coefficient": 0.0,
+      "quadratic_dielectric_is_an_ordinary_positive_vacuum_floor": false,
+      "independent_connection_zero_source_constraint_retained": true,
+      "independent_connection_present": true
+    },
+    {
+      "case": "mixed-dielectric-occupied-depth-6",
+      "real_depth": 6,
+      "transverse_dimension": 5,
+      "hodge_coefficient": 0.0,
+      "quadratic_dielectric_is_an_ordinary_positive_vacuum_floor": false,
+      "independent_connection_zero_source_constraint_retained": true,
+      "independent_connection_present": true
+    },
+    {
+      "case": "mixed-dielectric-occupied-depth-10",
+      "real_depth": 10,
+      "transverse_dimension": 9,
+      "hodge_coefficient": 0.0,
+      "quadratic_dielectric_is_an_ordinary_positive_vacuum_floor": false,
+      "independent_connection_zero_source_constraint_retained": false,
+      "independent_connection_present": false
+    },
+    {
+      "case": "mixed-profile-n1-k21.0-t0.2",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.2,
+      "commuting_flux_Q": 14.666666666733738,
+      "width": 1.118033988749895,
+      "amplitude": 1.4142135623730951,
+      "complete_tension": 8.944271910037315,
+      "diffuse_threshold": 14.666666666733738,
+      "tension_to_diffuse_ratio": 0.6098367211361191,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        1.230199615539839,
+        10.64128855593981
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k21.0-t0.5",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.5,
+      "commuting_flux_Q": 3.3333333333703004,
+      "width": 1.414213562373095,
+      "amplitude": 0.7071067811865476,
+      "complete_tension": 2.8284271247739428,
+      "diffuse_threshold": 3.3333333333703004,
+      "tension_to_diffuse_ratio": 0.8485281374227726,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.19631063210865932,
+        3.0563805613745947
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k21.0-t0.8",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.8,
+      "commuting_flux_Q": 1.166666666685579,
+      "width": 2.2360679774997902,
+      "amplitude": 0.35355339059327373,
+      "complete_tension": 1.1180339887670656,
+      "diffuse_threshold": 1.166666666685579,
+      "tension_to_diffuse_ratio": 0.9583148474990929,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.02344472375230119,
+        1.1425050073895366
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k21.0-t0.95",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.95,
+      "commuting_flux_Q": 0.4749308174951558,
+      "width": 4.472135954999577,
+      "amplitude": 0.16222142113076263,
+      "complete_tension": 0.47075115316638594,
+      "diffuse_threshold": 0.4749308174951558,
+      "tension_to_diffuse_ratio": 0.9911994248955797,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.0020851253746765447,
+        0.472854915171495
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k21.2-t0.2",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.2,
+      "commuting_flux_Q": 27.54262003467145,
+      "width": 1.2422599874998832,
+      "amplitude": 1.851640199545103,
+      "complete_tension": 13.799733804057574,
+      "diffuse_threshold": 22.628571428674913,
+      "tension_to_diffuse_ratio": 0.6098367211361191,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        1.8980222639757511,
+        16.417988057735712
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k21.2-t0.5",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.5,
+      "commuting_flux_Q": 6.259686371557034,
+      "width": 1.5713484026367721,
+      "amplitude": 0.9258200997725515,
+      "complete_tension": 4.36385899250837,
+      "diffuse_threshold": 5.1428571429141785,
+      "tension_to_diffuse_ratio": 0.8485281374227727,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.3028792609676459,
+        4.715558580406517
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k21.2-t0.8",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.8,
+      "commuting_flux_Q": 2.1908902300561803,
+      "width": 2.484519974999767,
+      "amplitude": 0.4629100498862757,
+      "complete_tension": 1.7249667255263303,
+      "diffuse_threshold": 1.8000000000291794,
+      "tension_to_diffuse_ratio": 0.9583148474990929,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.036171859503550424,
+        1.762722011401
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k21.2-t0.95",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.95,
+      "commuting_flux_Q": 0.891875389702169,
+      "width": 4.96903994999953,
+      "amplitude": 0.2123976976214367,
+      "complete_tension": 0.7263017791709954,
+      "diffuse_threshold": 0.7327504041353831,
+      "tension_to_diffuse_ratio": 0.9911994248955798,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.0032170505780723824,
+        0.7295475834074494
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k20.4-t0.2",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.2,
+      "commuting_flux_Q": 1.613219907803421,
+      "width": 0.6987712429686843,
+      "amplitude": 0.5897678246195887,
+      "complete_tension": 2.4888408793147327,
+      "diffuse_threshold": 4.081159420308521,
+      "tension_to_diffuse_ratio": 0.6098367211361191,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.34231641475891184,
+        2.9610542068702124
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k20.4-t0.5",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.5,
+      "commuting_flux_Q": 0.3666408881395302,
+      "width": 0.8838834764831842,
+      "amplitude": 0.29488391230979427,
+      "complete_tension": 0.7870405912414449,
+      "diffuse_threshold": 0.9275362318943441,
+      "tension_to_diffuse_ratio": 0.8485281374227728,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.05462556719545304,
+        0.8504711127303223
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k20.4-t0.8",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.8,
+      "commuting_flux_Q": 0.12832431084949278,
+      "width": 1.3975424859373689,
+      "amplitude": 0.14744195615489714,
+      "complete_tension": 0.31110510991779233,
+      "diffuse_threshold": 0.32463768116468306,
+      "tension_to_diffuse_ratio": 0.9583148474990927,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.006523749218031635,
+        0.3179144368388278
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n1-k20.4-t0.95",
+      "transverse_dimension": 1,
+      "real_depth": 2,
+      "actual_hodge_active": false,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.95,
+      "commuting_flux_Q": 0.05223871701879783,
+      "width": 2.795084971874736,
+      "amplitude": 0.06765100914917388,
+      "complete_tension": 0.13099162522890745,
+      "diffuse_threshold": 0.1321546622595217,
+      "tension_to_diffuse_ratio": 0.9911994248955796,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.000580208799909995,
+        0.13157701987380738
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k21.0-t0.2",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.2,
+      "commuting_flux_Q": 65.4100000647004,
+      "width": 1.118033988749895,
+      "amplitude": 1.4142135623730951,
+      "complete_tension": 40.95313783488753,
+      "diffuse_threshold": 65.4100000647004,
+      "tension_to_diffuse_ratio": 0.6260990337009429,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        11.155803122421927,
+        36.81787262696896
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k21.0-t0.5",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.5,
+      "commuting_flux_Q": 16.547566556533354,
+      "width": 1.414213562373095,
+      "amplitude": 0.7071067811865476,
+      "complete_tension": 14.626120655335558,
+      "diffuse_threshold": 16.547566556533354,
+      "tension_to_diffuse_ratio": 0.8838834764837875,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        2.0395375292603886,
+        12.586583126064504
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k21.0-t0.8",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.8,
+      "commuting_flux_Q": 8.176250008123334,
+      "width": 2.2360679774997902,
+      "amplitude": 0.35355339059327373,
+      "complete_tension": 8.044366360447567,
+      "diffuse_threshold": 8.176250008123334,
+      "tension_to_diffuse_ratio": 0.9838699101000168,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.2171538167540129,
+        7.388428924033682
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k21.0-t0.95",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.95,
+      "commuting_flux_Q": 6.3183508073258245,
+      "width": 4.472135954999577,
+      "amplitude": 0.16222142113076263,
+      "complete_tension": 6.312325756529676,
+      "diffuse_threshold": 6.3183508073258245,
+      "tension_to_diffuse_ratio": 0.9990464203429219,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.011539711499614191,
+        6.16222279671685
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k21.2-t0.2",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.2,
+      "commuting_flux_Q": 136.48202865466965,
+      "width": 1.2422599874998832,
+      "amplitude": 1.851640199545103,
+      "complete_tension": 70.20537914552149,
+      "diffuse_threshold": 112.13142868234355,
+      "tension_to_diffuse_ratio": 0.6260990337009429,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        19.124233924151874,
+        63.116353074803946
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k21.2-t0.5",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.5,
+      "commuting_flux_Q": 34.52752561840535,
+      "width": 1.5713484026367721,
+      "amplitude": 0.9258200997725515,
+      "complete_tension": 25.07334969486096,
+      "diffuse_threshold": 28.367256954057183,
+      "tension_to_diffuse_ratio": 0.8838834764837875,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        3.4963500501606672,
+        21.576999644681997
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k21.2-t0.8",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.8,
+      "commuting_flux_Q": 17.060253581908373,
+      "width": 2.484519974999767,
+      "amplitude": 0.4629100498862757,
+      "complete_tension": 13.79034233219583,
+      "diffuse_threshold": 14.016428585354289,
+      "tension_to_diffuse_ratio": 0.9838699101000169,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.3722636858640225,
+        12.665878155486311
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k21.2-t0.95",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.95,
+      "commuting_flux_Q": 13.183631479631734,
+      "width": 4.96903994999953,
+      "amplitude": 0.2123976976214367,
+      "complete_tension": 10.821129868336584,
+      "diffuse_threshold": 10.831458526844266,
+      "tension_to_diffuse_ratio": 0.9990464203429221,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.019782362570767285,
+        10.56381050865745
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k20.4-t0.2",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.2,
+      "commuting_flux_Q": 4.496621346874227,
+      "width": 0.6987712429686843,
+      "amplitude": 0.5897678246195887,
+      "complete_tension": 7.122284840850011,
+      "diffuse_threshold": 11.375652185165295,
+      "tension_to_diffuse_ratio": 0.6260990337009429,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        1.940139673464683,
+        6.403108282951129
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k20.4-t0.5",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.5,
+      "commuting_flux_Q": 1.1375652185190175,
+      "width": 0.8838834764831842,
+      "amplitude": 0.29488391230979427,
+      "complete_tension": 2.543673157449662,
+      "diffuse_threshold": 2.8778376620058,
+      "tension_to_diffuse_ratio": 0.8838834764837876,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.35470217900180656,
+        2.188970978446
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k20.4-t0.8",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.8,
+      "commuting_flux_Q": 0.5620776683617383,
+      "width": 1.3975424859373689,
+      "amplitude": 0.14744195615489714,
+      "complete_tension": 1.3990202365995779,
+      "diffuse_threshold": 1.421956523151885,
+      "tension_to_diffuse_ratio": 0.9838699101000171,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.037765881174610896,
+        1.2849441607015102
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n2-k20.4-t0.95",
+      "transverse_dimension": 2,
+      "real_depth": 3,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.95,
+      "commuting_flux_Q": 0.43435607841550666,
+      "width": 2.795084971874736,
+      "amplitude": 0.06765100914917388,
+      "complete_tension": 1.0977957837442918,
+      "diffuse_threshold": 1.0988436186653612,
+      "tension_to_diffuse_ratio": 0.9990464203429219,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.002006906347758991,
+        1.071690921168148
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "global-selection-n2-Q4.0953138",
+      "real_depth": 3,
+      "commuting_flux_Q": 4.095313783506099,
+      "critical_global_binding_flux": 5.85044826215157,
+      "stationary_t_values": [],
+      "global_energy_infimum": 4.095313783506099,
+      "finite_profile_global_minimum": false,
+      "independent_optimizer_energies": [
+        4.095313822928052,
+        4.095313828806727,
+        4.095313843509489
+      ]
+    },
+    {
+      "case": "global-selection-n2-Q7.0205379",
+      "real_depth": 3,
+      "commuting_flux_Q": 7.020537914581884,
+      "critical_global_binding_flux": 5.85044826215157,
+      "stationary_t_values": [
+        0.8855488076521759
+      ],
+      "global_energy_infimum": 6.984644548544465,
+      "finite_profile_global_minimum": true,
+      "independent_optimizer_energies": [
+        6.984644548544377,
+        6.984644548544377,
+        6.9846445485443835
+      ]
+    },
+    {
+      "case": "global-selection-n2-Q17.551345",
+      "real_depth": 3,
+      "commuting_flux_Q": 17.55134478645471,
+      "critical_global_binding_flux": 5.85044826215157,
+      "stationary_t_values": [
+        0.4807498567691361
+      ],
+      "global_energy_infimum": 15.328910050479625,
+      "finite_profile_global_minimum": true,
+      "independent_optimizer_energies": [
+        15.328910050478882,
+        15.328910050478884,
+        15.32891005047888
+      ]
+    },
+    {
+      "case": "mixed-profile-n3-k21.0-t0.2",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.2,
+      "commuting_flux_Q": 212.59407715019054,
+      "width": 1.118033988749895,
+      "amplitude": 1.4142135623730951,
+      "complete_tension": 137.33050012378274,
+      "diffuse_threshold": 212.59407715019054,
+      "tension_to_diffuse_ratio": 0.645975193498751,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        26.3848017267632,
+        150.8537069808304
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n3-k21.0-t0.5",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.5,
+      "commuting_flux_Q": 56.69175390634013,
+      "width": 1.414213562373095,
+      "amplitude": 0.7071067811865476,
+      "complete_tension": 53.44949816605179,
+      "diffuse_threshold": 56.69175390634013,
+      "tension_to_diffuse_ratio": 0.942809041582223,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        8.324564809662174,
+        42.897870933226976
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n3-k21.0-t0.8",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.8,
+      "commuting_flux_Q": 35.43234619110883,
+      "width": 2.2360679774997902,
+      "amplitude": 0.35355339059327373,
+      "complete_tension": 36.97359618668136,
+      "diffuse_threshold": 35.43234619110883,
+      "tension_to_diffuse_ratio": 1.0434983895014913,
+      "bound_below_diffuse_threshold": false,
+      "moment_hessian_eigenvalues": [
+        0.25801731336332434,
+        27.032017967279618
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n3-k21.0-t0.95",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.0,
+      "quartic_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "t": 0.95,
+      "commuting_flux_Q": 47.916769624351524,
+      "width": 4.472135954999577,
+      "amplitude": 0.16222142113076263,
+      "complete_tension": 48.92746563011174,
+      "diffuse_threshold": 47.916769624351524,
+      "tension_to_diffuse_ratio": 1.0210927408855746,
+      "bound_below_diffuse_threshold": false,
+      "moment_hessian_eigenvalues": [
+        -1.2124888433556589,
+        43.415075539310415
+      ],
+      "stable_moment_branch": false
+    },
+    {
+      "case": "mixed-profile-n3-k21.2-t0.2",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.2,
+      "commuting_flux_Q": 492.87861014667936,
+      "width": 1.2422599874998832,
+      "amplitude": 1.851640199545103,
+      "complete_tension": 261.5819049976815,
+      "diffuse_threshold": 404.9410993336964,
+      "tension_to_diffuse_ratio": 0.645975193498751,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        50.25676519383465,
+        287.3403942492007
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n3-k21.2-t0.5",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.5,
+      "commuting_flux_Q": 131.4342960382396,
+      "width": 1.5713484026367721,
+      "amplitude": 0.9258200997725515,
+      "complete_tension": 101.80856793533675,
+      "diffuse_threshold": 107.9842931549336,
+      "tension_to_diffuse_ratio": 0.9428090415822231,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        15.856313923166043,
+        81.71023034900375
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n3-k21.2-t0.8",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.8,
+      "commuting_flux_Q": 82.14643502307963,
+      "width": 2.484519974999767,
+      "amplitude": 0.4629100498862757,
+      "complete_tension": 70.4258974984407,
+      "diffuse_threshold": 67.4901832211597,
+      "tension_to_diffuse_ratio": 1.043498389501491,
+      "bound_below_diffuse_threshold": false,
+      "moment_hessian_eigenvalues": [
+        0.4914615492634651,
+        51.48955803291358
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n3-k21.2-t0.95",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 1.2,
+      "quartic_coefficient": 0.7,
+      "neutral_restoring_frequency": 0.9,
+      "t": 0.95,
+      "commuting_flux_Q": 111.09035177157953,
+      "width": 4.96903994999953,
+      "amplitude": 0.2123976976214367,
+      "complete_tension": 93.19517262878423,
+      "diffuse_threshold": 91.27003737971717,
+      "tension_to_diffuse_ratio": 1.0210927408855746,
+      "bound_below_diffuse_threshold": false,
+      "moment_hessian_eigenvalues": [
+        -2.3095025587726816,
+        82.6953819796389
+      ],
+      "stable_moment_branch": false
+    },
+    {
+      "case": "mixed-profile-n3-k20.4-t0.2",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.2,
+      "commuting_flux_Q": 9.13425952250219,
+      "width": 0.6987712429686843,
+      "amplitude": 0.5897678246195887,
+      "complete_tension": 14.92722827432422,
+      "diffuse_threshold": 23.108051864151168,
+      "tension_to_diffuse_ratio": 0.6459751934987508,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        2.867913231169913,
+        16.397142063133753
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n3-k20.4-t0.5",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.5,
+      "commuting_flux_Q": 2.4358025393177005,
+      "width": 0.8838834764831842,
+      "amplitude": 0.29488391230979427,
+      "complete_tension": 5.809728061527366,
+      "diffuse_threshold": 6.16214716373262,
+      "tension_to_diffuse_ratio": 0.9428090415822231,
+      "bound_below_diffuse_threshold": true,
+      "moment_hessian_eigenvalues": [
+        0.9048440010502358,
+        4.662812057959451
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n3-k20.4-t0.8",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.8,
+      "commuting_flux_Q": 1.5223765870583652,
+      "width": 1.3975424859373689,
+      "amplitude": 0.14744195615489714,
+      "complete_tension": 4.018869150726236,
+      "diffuse_threshold": 3.85134197729444,
+      "tension_to_diffuse_ratio": 1.043498389501491,
+      "bound_below_diffuse_threshold": false,
+      "moment_hessian_eigenvalues": [
+        0.028045360148186704,
+        2.9382628225303944
+      ],
+      "stable_moment_branch": true
+    },
+    {
+      "case": "mixed-profile-n3-k20.4-t0.95",
+      "transverse_dimension": 3,
+      "real_depth": 4,
+      "actual_hodge_active": true,
+      "quadratic_coefficient": 0.4,
+      "quartic_coefficient": 2.3,
+      "neutral_restoring_frequency": 1.6,
+      "t": 0.95,
+      "commuting_flux_Q": 2.0587789419907834,
+      "width": 2.795084971874736,
+      "amplitude": 0.06765100914917388,
+      "complete_tension": 5.318202785881712,
+      "diffuse_threshold": 5.208344524386037,
+      "tension_to_diffuse_ratio": 1.0210927408855743,
+      "bound_below_diffuse_threshold": false,
+      "moment_hessian_eigenvalues": [
+        -0.13179226558213697,
+        4.719029949925049
+      ],
+      "stable_moment_branch": false
+    },
+    {
+      "case": "global-selection-n3-Q31.842173",
+      "real_depth": 4,
+      "commuting_flux_Q": 31.842172676604633,
+      "critical_global_binding_flux": 44.174976838076084,
+      "stationary_t_values": [],
+      "global_energy_infimum": 31.842172676604633,
+      "finite_profile_global_minimum": false,
+      "independent_optimizer_energies": [
+        31.842172694336163,
+        31.842172983498006,
+        31.84217273426987
+      ]
+    },
+    {
+      "case": "global-selection-n3-Q39.777584",
+      "real_depth": 4,
+      "commuting_flux_Q": 39.77758435048506,
+      "critical_global_binding_flux": 44.174976838076084,
+      "stationary_t_values": [
+        0.6719014767840188,
+        0.911907200073964
+      ],
+      "global_energy_infimum": 39.77758435048506,
+      "finite_profile_global_minimum": false,
+      "independent_optimizer_energies": [
+        39.777584452452786,
+        39.77758445981716,
+        40.66051875968424
+      ]
+    },
+    {
+      "case": "global-selection-n3-Q57.42747",
+      "real_depth": 4,
+      "commuting_flux_Q": 57.42746988949891,
+      "critical_global_binding_flux": 44.174976838076084,
+      "stationary_t_values": [
+        0.4951975428948975,
+        0.9682551662271646
+      ],
+      "global_energy_infimum": 53.968471202365286,
+      "finite_profile_global_minimum": true,
+      "independent_optimizer_energies": [
+        57.42747046743459,
+        53.968471202645176,
+        53.968471202645176
+      ]
+    },
+    {
+      "case": "exact-three-transverse-thresholds",
+      "real_depth": 4,
+      "fold_t_exact": "9/4 - sqrt(33)/4",
+      "binding_t_exact": "9/8 - sqrt(17)/8",
+      "fold_t": 0.8138593383654928,
+      "binding_t": 0.6096117967977924,
+      "dimensionless_fold_flux": 3.7444802207444594,
+      "dimensionless_binding_flux": 4.675280667301902,
+      "binding_width_times_Omega": 1.600485180440241
+    },
+    {
+      "case": "mixed-neutral-frame-completion",
+      "active_depths": [
+        3,
+        4
+      ],
+      "effective_quartic_coefficient": "kappa4/4",
+      "effective_quadratic_coefficient": "kappa2",
+      "balanced_orthogonal_frame_attains_scalar_energy_bound": true
+    }
+  ]
+}

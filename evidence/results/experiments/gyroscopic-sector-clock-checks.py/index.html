@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>gyroscopic-sector-clock-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/gyroscopic-sector-clock-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="gyroscopic-sector-clock-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/gyroscopic-sector-clock-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="gyroscopic-sector-clock-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>gyroscopic-sector-clock-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/gyroscopic-sector-clock-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Ordinary rotation-plane clocks, canonical currents and exact fast-band controls.&quot;&quot;&quot;
+from collections import Counter
+from datetime import datetime,timezone
+from hashlib import sha256
+import json
+from pathlib import Path
+
+import mpmath as mp
+import numpy as np
+import sympy as sp
+
+ROOT=Path(__file__).resolve().parent
+OUTPUT_ROOT=ROOT.parent/&#39;results&#39; if ROOT.name==&#39;experiments&#39; else ROOT
+counts=Counter()
+
+
+def check(value,label):
+    if not bool(value):
+        raise AssertionError(label)
+    counts[label]+=1
+
+
+def close(a,b,label,tol=2e-10):
+    check(np.allclose(a,b,atol=tol,rtol=tol),label)
+
+
+k,omega,c,w=sp.symbols(&#39;k Omega c w&#39;,positive=True)
+energy=sp.sqrt(c*c*k*k+omega*omega/4)
+upper=energy+omega/2
+lower=c*c*k*k/upper
+for frequency,sign in ((upper,1),(lower,-1)):
+    check(sp.simplify(frequency**2-sign*omega*frequency-c*c*k*k)==0,
+          &#39;exact circular wave dispersion&#39;)
+    check(sp.simplify((frequency**2+c*c*k*k)/(2*energy)-frequency)==0,
+          &#39;canonical gyro wave energy normalization&#39;)
+check(sp.simplify((upper+lower)/(4*energy)-sp.Rational(1,2))==0,
+      &#39;canonical gyro partial velocity vertex exactly one half&#39;)
+check(sp.simplify(2*upper-omega-2*energy)==0,&#39;upper symplectic residue&#39;)
+check(sp.simplify(2*lower+omega-2*energy)==0,&#39;lower symplectic residue&#39;)
+response_frequency=sp.symbols(&#39;response_frequency&#39;,real=True)
+denominator=(lower**2-response_frequency**2)*(upper**2-response_frequency**2)
+gyro_response=(c*c*k*k-response_frequency**2)/denominator
+bending_response=(omega**2+c*c*k*k-response_frequency**2)/denominator
+check(sp.simplify(gyro_response-(lower/(upper+lower)/(lower**2-response_frequency**2)
+                               +upper/(upper+lower)/(upper**2-response_frequency**2)))==0,
+      &#39;gyro response has lower branch residue suppressed at small wave number&#39;)
+check(sp.simplify(bending_response-(upper/(upper+lower)/(lower**2-response_frequency**2)
+                                  +lower/(upper+lower)/(upper**2-response_frequency**2)))==0,
+      &#39;bending response has the opposite diagonal residue weights&#39;)
+check(sp.simplify(gyro_response.subs(response_frequency,0)-1/(c*c*k*k))==0,
+      &#39;gyro static response is second order despite quadratic lower dispersion&#39;)
+check(sp.simplify(bending_response.subs(response_frequency,0)
+                  -1/(c*c*k*k)-omega**2/(c**4*k**4))==0,
+      &#39;bending static response retains fourth order with identical branch frequencies&#39;)
+
+rng=np.random.default_rng(20261012)
+sector=[]
+frame_controls=[]
+for depth in (2,3,4,5,6,10):
+    skew=np.zeros((depth,depth))
+    for j in range(depth//2):
+        skew[2*j,2*j+1]=-1.
+        skew[2*j+1,2*j]=1.
+    # An arbitrary common ordinary rotation removes any preferred axes.
+    rotation=np.linalg.qr(rng.normal(size=(depth,depth)))[0]
+    rotated=rotation@skew@rotation.T
+    close(rotated.T,-rotated,&#39;ordinary gyroscopic tensor antisymmetric&#39;)
+    check(np.linalg.matrix_rank(rotated,tol=1e-10)==2*(depth//2),
+          &#39;ordinary even rank and odd axis&#39;)
+    eigen=np.linalg.eigvalsh(1j*rotated)
+    expected=sorted([-1.,1.]*(depth//2)+([0.] if depth%2 else []))
+    close(eigen,expected,&#39;rotation plane frequencies are coordinate invariant&#39;)
+    for wave_number in (.03,.2,1.,5.,100.):
+        operator=np.block([[np.zeros((depth,depth)),np.eye(depth)],
+                            [-wave_number**2*np.eye(depth),-rotated]])
+        freqs=sorted(x.imag for x in np.linalg.eigvals(operator) if x.imag&gt;1e-8)
+        up=(np.sqrt(1+4*wave_number**2)+1)/2
+        low=wave_number**2/up
+        expect=sorted([low,up]*(depth//2)+([wave_number] if depth%2 else []))
+        close(freqs,expect,&#39;full spatial gyro spectrum&#39;)
+        vlow=np.array([1.,1j])/np.sqrt(2)
+        vup=np.array([1.,-1j])/np.sqrt(2)
+        e0=np.sqrt(wave_number**2+.25)
+        t=2*np.pi*np.arange(128)/128
+        field=(vlow[:,None]*np.exp(1j*t)+vup[:,None])/np.sqrt(2*e0)
+        velocity=(-1j*low*vlow[:,None]*np.exp(1j*t)-1j*up*vup[:,None])/np.sqrt(2*e0)
+        current=(1j*(field[0].conj()*velocity[0]-velocity[0].conj()*field[0])).real
+        close(abs(2*np.fft.fft(current)[1]/len(t)),1.,&#39;full canonical gyro partial current coefficient&#39;)
+        total_energy=np.sum(abs(velocity)**2+wave_number**2*abs(field)**2,axis=0)
+        close(total_energy,up+low,&#39;full canonical gyro energy has no beat&#39;)
+        total_mechanical=(1j*np.sum(field.conj()*velocity-velocity.conj()*field,axis=0)).real
+        # Circular modes remain orthogonal even though their action
+        # normalization differs from the unmodified wave normalization.
+        close(np.ptp(total_mechanical),0,&#39;total gyro identity readout has no beat&#39;)
+        # Counterpropagating equal-action circular waves have zero
+        # canonical translation momentum but a residual energy flux.
+        # The fixed gyro background is consequently a physical frame.
+        shape=(vlow+vup)/np.sqrt(2*e0)
+        time_derivative=(-1j*low*vlow-1j*up*vup)/np.sqrt(2*e0)
+        spatial_derivative=(1j*wave_number*vlow-1j*wave_number*vup)/np.sqrt(2*e0)
+        plane_gyro=np.array([[0.,-1.],[1.,0.]])
+        canonical_momentum=time_derivative+plane_gyro@shape/2
+        translation=-2*np.vdot(canonical_momentum,spatial_derivative).real
+        flux=-2*np.vdot(time_derivative,spatial_derivative).real
+        close(translation,0,&#39;counterpropagating gyro waves have zero translation momentum&#39;)
+        close(flux,-wave_number/e0,&#39;zero gyro translation momentum does not imply zero energy flux&#39;)
+        check(abs(flux)&gt;0,&#39;fixed gyro background cannot be omitted from rest frame analysis&#39;)
+        frame_controls.append({&#39;real_depth&#39;:depth,&#39;wave_number&#39;:wave_number,
+                               &#39;equal_canonical_actions&#39;:1,&#39;complete_fixed_background_wave_momentum&#39;:translation,
+                               &#39;fixed_background_wave_energy_flux&#39;:flux,
+                               &#39;complete_particle_boost_law_derived&#39;:False})
+        if depth%2:
+            check(low&lt;wave_number&lt;up,&#39;odd null-axis branch is not lowest energy&#39;)
+        sector.append({&#39;real_depth&#39;:depth,&#39;wave_number&#39;:wave_number,&#39;rotation_planes&#39;:depth//2,
+                       &#39;unpaired_axes&#39;:depth%2,&#39;lower_frequency&#39;:low,&#39;upper_frequency&#39;:up,
+                       &#39;fundamental_gap&#39;:1,&#39;canonical_partial_velocity_vertex&#39;:&#39;1/2&#39;,
+                       &#39;odd_axis_selected_by_energy&#39;:False,
+                       &#39;neutrino_neutrality_derived&#39;:False})
+
+orientation_cases=[]
+orientation_moments=[]
+for depth in (2,3,4,5,6,10):
+    vlow=np.zeros(depth,dtype=complex)
+    vup=np.zeros(depth,dtype=complex)
+    vlow[:2]=np.array([1.,1j])/np.sqrt(2)
+    vup[:2]=np.array([1.,-1j])/np.sqrt(2)
+    for eta in ((1.,) if depth==2 else (0.,.25,1.)):
+        for angle in (0.,.3,.9,1.4):
+            axis=np.zeros(depth)
+            axis[:2]=np.sqrt(eta)*np.array([np.cos(angle),np.sin(angle)])
+            if depth&gt;2:
+                axis[2]=np.sqrt(1-eta)
+            probe=np.outer(axis,axis)
+            vertex=np.vdot(vlow,probe@vup)
+            close(vertex,eta*np.exp(-2j*angle)/2,&#39;polarized gyro readout amplitude and phase&#39;)
+            rotation=np.linalg.qr(rng.normal(size=(depth,depth)))[0]
+            close(np.vdot(rotation@vlow,(rotation@probe@rotation.T)@(rotation@vup)),vertex,
+                  &#39;gyro source and polarized readout common rotation covariance&#39;)
+            orientation_cases.append({&#39;real_depth&#39;:depth,&#39;readout_plane_projection_squared&#39;:eta,
+                                      &#39;readout_plane_angle&#39;:angle,&#39;partial_vertex_absolute&#39;:abs(vertex),
+                                      &#39;reciprocal_encounter_dynamics_derived&#39;:False})
+    orientation_moments.append({&#39;real_depth&#39;:depth,
+                                &#39;isotropic_mean_absolute_vertex&#39;:str(sp.Rational(1,depth)),
+                                &#39;isotropic_mean_squared_vertex&#39;:str(sp.Rational(2,depth*(depth+2))),
+                                &#39;depth_five_uniquely_suppressed&#39;:False})
+
+# Parallel gyroscopic tensors must commute with the spatial holonomy.
+# These pointwise holonomy controls do not construct nested manifolds.
+holonomy_cases=[]
+for depth in (2,3,4,5,6,10):
+    basis=[]
+    def skew_generator(i,j):
+        value=np.zeros((depth,depth),dtype=np.int64)
+        value[i,j]=-1
+        value[j,i]=1
+        return value
+    for i in range(depth):
+        for j in range(i+1,depth):
+            basis.append(skew_generator(i,j))
+    j_tensor=sum((skew_generator(2*j,2*j+1) for j in range(depth//2)),
+                 np.zeros((depth,depth),dtype=np.int64))
+    unitary_generators=[skew_generator(2*j,2*j+1) for j in range(depth//2)]
+    for i in range(depth//2):
+        for j in range(i+1,depth//2):
+            unitary_generators.extend([
+                skew_generator(2*i,2*j)+skew_generator(2*i+1,2*j+1),
+                skew_generator(2*i,2*j+1)-skew_generator(2*i+1,2*j)])
+    for name,generators,expected in (
+        (&#39;full round-space SO(d) holonomy&#39;,basis,1 if depth==2 else 0),
+        (&#39;Kahler U(m) holonomy with one flat axis when odd&#39;,unitary_generators,1)):
+        constraints=np.concatenate([
+            np.column_stack([(g@b-b@g).reshape(-1) for b in basis]) for g in generators],axis=0)
+        gram=constraints.T@constraints
+        dimension=len(basis)-sp.Matrix(gram.tolist()).rank()
+        check(dimension==expected,&#39;exact ordinary skew holonomy commutant&#39;)
+        if name.startswith(&#39;Kahler&#39;):
+            check(all(np.array_equal(g@j_tensor,j_tensor@g) for g in generators),
+                  &#39;parallel complex rotation candidate commutes with unitary holonomy&#39;)
+        holonomy_cases.append({&#39;real_depth&#39;:depth,&#39;holonomy&#39;:name,
+                               &#39;parallel_antisymmetric_tensor_dimension&#39;:int(dimension),
+                               &#39;nested_geometry_constructed&#39;:False})
+
+# A positive isotropic density self-interaction preserves the gap on
+# exact constant-density complex circular preparations. This is a changed
+# nonlinear action, not a result for the real wave with a quartic added.
+nonlinear=[]
+kap,lam,norm,eg,ap,am,om=sp.symbols(&#39;kappa lambda N E aplus aminus Omega&#39;,positive=True)
+nonlinear_energy=(kap+lam*norm+om**2/4)**sp.Rational(1,2)
+wp=nonlinear_energy+om/2
+wm=nonlinear_energy-om/2
+check(sp.simplify(wp-wm-om)==0,&#39;nonlinear isotropic branch gap exact&#39;)
+check(sp.simplify((wp+wm)/(4*nonlinear_energy)-sp.Rational(1,2))==0,
+      &#39;nonlinear phase action partial vertex exact&#39;)
+# H=E Itotal+Omega(Iplus-Iminus)/2-lambda N²/2,
+# Itotal=2EN. Its complete derivative must give the phase frequencies.
+dn=sp.diff(2*nonlinear_energy*norm,norm)
+de=sp.diff(nonlinear_energy,norm)
+check(sp.simplify(nonlinear_energy+(2*nonlinear_energy*norm*de-lam*norm)/dn-nonlinear_energy)==0,
+      &#39;nonlinear complete energy derivative gives both phase frequencies&#39;)
+for depth in (2,3,4,5,6,10):
+    for stiffness in (.04,1.,100.):
+        for coefficient in (.1,.8,2.):
+            amplitudes=np.zeros(depth,dtype=complex)
+            amplitudes[:2]=(.6,.8)
+            density=np.vdot(amplitudes,amplitudes).real
+            e=np.sqrt(stiffness+coefficient*density+.25)
+            high=e+.5
+            low=e-.5
+            t=np.linspace(0,2*np.pi,129)
+            z=amplitudes[:,None]*np.exp(-1j*np.array([low,high]+[low]*(depth-2))[:,None]*t)
+            close(np.sum(abs(z)**2,axis=0),density,&#39;nonlinear circular preparation constant density&#39;)
+            close(low**2+low,stiffness+coefficient*density,&#39;nonlinear lower exact equation&#39;)
+            close(high**2-high,stiffness+coefficient*density,&#39;nonlinear upper exact equation&#39;)
+            # Linearize the homogeneous two-circular-component subsystem
+            # in its exact rotating frame. The remaining empty components
+            # are stable decoupled linear waves with positive stiffness.
+            b=amplitudes[:2].real
+            identity=np.eye(2)
+            zero=np.zeros((2,2))
+            curvature=2*coefficient*np.outer(b,b)
+            operator=np.block([[zero,zero,identity,zero],
+                               [zero,zero,zero,identity],
+                               [-curvature,zero,zero,-2*e*identity],
+                               [zero,zero,2*e*identity,zero]])
+            values=np.linalg.eigvals(operator)
+            check(max(abs(values.real))&lt;1e-6,&#39;nonlinear circular subsystem has no exponential normal modes&#39;)
+            frequencies=sorted(v.imag for v in values if v.imag&gt;1e-6)
+            close(frequencies,[2*e,np.sqrt(4*e*e+2*coefficient*density)],
+                  &#39;nonlinear radial and transverse disturbance frequencies&#39;)
+            energy_check=(low**2*abs(b[0])**2+high**2*abs(b[1])**2
+                          +stiffness*density+coefficient*density**2/2)
+            actions=2*e*abs(b)**2
+            close(energy_check,low*actions[0]+high*actions[1]-coefficient*density**2/2,
+                  &#39;nonlinear complete energy retains interaction term&#39;)
+            phases=2*np.pi*np.arange(128)/128
+            circular_low=np.array([1.,1j])/np.sqrt(2)
+            circular_high=np.array([1.,-1j])/np.sqrt(2)
+            phi=b[0]*circular_low[:,None]*np.exp(1j*phases)+b[1]*circular_high[:,None]
+            phidot=(-1j*low*b[0]*circular_low[:,None]*np.exp(1j*phases)
+                    -1j*high*b[1]*circular_high[:,None])
+            current=(1j*(phi[0].conj()*phidot[0]-phidot[0].conj()*phi[0])).real
+            close(abs(2*np.fft.fft(current)[1]/len(phases)),np.sqrt(actions[0]*actions[1]),
+                  &#39;nonlinear physical partial current agrees with phase action vertex&#39;)
+            nonlinear.append({&#39;real_depth&#39;:depth,&#39;bare_spatial_stiffness&#39;:stiffness,
+                              &#39;density_interaction_coefficient&#39;:coefficient,&#39;prepared_density&#39;:density,
+                              &#39;lower_frequency&#39;:low,&#39;upper_frequency&#39;:high,&#39;gap&#39;:high-low,
+                              &#39;partial_phase_action_current_vertex&#39;:&#39;1/2&#39;,
+                              &#39;full_spatial_stability_tested&#39;:False,
+                              &#39;particle_mass_frequency_amplitude_independent&#39;:False})
+
+# The previously derived positive same-field completion must be retained
+# when mass-frequency carriers approach its eliminated gap.
+mp.mp.dps=75
+
+
+def bisect(fun,left,right):
+    fl,fr=fun(left),fun(right)
+    if fl==0:
+        return left
+    if fr==0:
+        return right
+    check(fl*fr&lt;0,&#39;full fast-band root bracket&#39;)
+    for iteration in range(300):
+        middle=(left+right)/2
+        fm=fun(middle)
+        if fl*fm&lt;=0:
+            right=middle
+        else:
+            left,fl=middle,fm
+    return (left+right)/2
+
+
+completion=[]
+baseline_path=ROOT/&#39;grounding/complex-comb-response-results.json&#39;
+if not baseline_path.is_file():
+    baseline_path=ROOT.parent/&#39;results/complex-comb-response-results.json&#39;
+baseline=json.loads(baseline_path.read_text())
+for case in baseline[&#39;particle_cases&#39;]:
+    cutoff=case[&#39;cutoff&#39;]
+    if cutoff==1:
+        continue
+    for gap in (100,10**10):
+        delta=mp.mpf(gap)
+        amplitude_squared=delta/(delta-1)
+        effective_mass=amplitude_squared
+        stiffness=effective_mass*cutoff*(cutoff-1)
+        def poly(freq):
+            return (stiffness-freq*freq)*(delta-freq)-delta*amplitude_squared*freq
+        bound=mp.sqrt(stiffness)+delta+amplitude_squared+1
+        negative=bisect(poly,-bound,mp.mpf(0))
+        pos0=bisect(poly,mp.mpf(0),delta)
+        pos1=bisect(poly,delta,bound)
+        def residue(freq):
+            return 2*freq+delta*delta*amplitude_squared/(delta-freq)**2
+        strengths=[2*p/residue(p) for p in (pos0,pos1)]
+        selected=pos0 if strengths[0]&gt;=strengths[1] else pos1
+        signed=abs(negative)-selected
+        canonical_vertex=(abs(negative)+selected)/(2*mp.sqrt(abs(residue(negative))*residue(selected)))
+        effective_vertex=effective_mass*canonical_vertex
+        check(residue(negative)&lt;0 and residue(pos0)&gt;0 and residue(pos1)&gt;0,
+              &#39;full positive energy branch symplectic signs&#39;)
+        for root in (negative,pos0,pos1):
+            check(abs(poly(root))/max(mp.mpf(1),bound**3)&lt;mp.mpf(&#39;1e-65&#39;),
+                  &#39;full fast-band cubic residual&#39;)
+            fast_ratio=delta*mp.sqrt(amplitude_squared)/(delta-root)
+            full_energy=root**2+stiffness+delta*(fast_ratio-mp.sqrt(amplitude_squared))**2
+            check(abs(full_energy-root*residue(root))/max(mp.mpf(1),abs(full_energy))&lt;mp.mpf(&#39;1e-65&#39;),
+                  &#39;full completion canonical mode energy identity&#39;)
+        if gap==10**10:
+            check(abs(effective_vertex-mp.mpf(&#39;.5&#39;))&lt;mp.mpf(&#39;1e-4&#39;),
+                  &#39;far fast-band canonical partial vertex approaches one half&#39;)
+        if gap==10**10:
+            check(abs(abs(signed)-1)&lt;mp.mpf(&#39;1e-4&#39;),
+                  &#39;far fast-band completion approaches common clock&#39;)
+        if gap==100 and cutoff&gt;10000:
+            check(abs(signed)&lt;mp.mpf(&#39;.001&#39;),
+                  &#39;high carriers do not inherit constant adiabatic gyro clock&#39;)
+        completion.append({&#39;particle&#39;:case[&#39;particle&#39;],&#39;real_depth&#39;:case[&#39;real_depth&#39;],&#39;cutoff&#39;:cutoff,
+                           &#39;fast_gap_over_own_sector_clock&#39;:gap,&#39;bare_slow_mass&#39;:1,
+                           &#39;common_coupling_amplitude_squared&#39;:str(amplitude_squared),
+                           &#39;exact_positive_frequencies&#39;:[str(abs(negative)),str(pos0),str(pos1)],
+                           &#39;positive_branch_coordinate_strengths&#39;:list(map(str,strengths)),
+                           &#39;full_symplectic_residues&#39;:list(map(lambda p:str(residue(p)),(negative,pos0,pos1))),
+                           &#39;bare_displacement_partial_velocity_vertex&#39;:str(canonical_vertex),
+                           &#39;effective_mass_normalized_partial_velocity_vertex&#39;:str(effective_vertex),
+                           &#39;dominant_displacement_gap_signed&#39;:str(signed),
+                           &#39;dominant_displacement_gap_absolute&#39;:str(abs(signed)),
+                           &#39;mass_and_spatial_targets_retuned&#39;:False})
+
+report={&#39;experiment&#39;:&#39;gyroscopic-sector-clock&#39;,&#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),
+        &#39;status&#39;:&#39;passed&#39;,&#39;checks&#39;:sum(counts.values()),&#39;check_counts&#39;:dict(counts),
+        &#39;scope&#39;:&#39;Ordinary spatial rotation-plane wave prototype with correct symplectic normalization; full finite-gap completion tests its adiabatic domain. No assigned depth or particle occupation is selected.&#39;,
+        &#39;sector_cases&#39;:sector,&#39;fixed_background_frame_cases&#39;:frame_controls,
+        &#39;polarized_readout_cases&#39;:orientation_cases,&#39;isotropic_orientation_moments&#39;:orientation_moments,
+        &#39;holonomy_cases&#39;:holonomy_cases,&#39;nonlinear_cases&#39;:nonlinear,
+        &#39;full_fast_band_cases&#39;:completion,
+        &#39;sources&#39;:{&#39;experiments/gyroscopic-sector-clock-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest(),
+                   &#39;results/complex-comb-response-results.json&#39;:sha256(baseline_path.read_bytes()).hexdigest()}}
+out=OUTPUT_ROOT/&#39;gyroscopic-sector-clock-results.json&#39;
+out.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;checks&#39;:report[&#39;checks&#39;],&#39;sector_cases&#39;:len(sector),
+                  &#39;full_completion_cases&#39;:len(completion),&#39;report&#39;:str(out)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>gradient-gauss-causality-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/gradient-gauss-causality-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="gradient-gauss-causality-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/gradient-gauss-causality-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="gradient-gauss-causality-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>gradient-gauss-causality-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/gradient-gauss-causality-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">title</th><td>Gradient Gauss Static Energy and Physical Retarded Response</td></tr><tr><th scope="row">checks_passed</th><td>149</td></tr><tr><th scope="row">case_count</th><td>50</td></tr><tr><th scope="row">conclusion</th><td>Positive ordinary gradient-electric Gauss law realizes the static k^-4 energy and ordinary continuity, but its minimally coupled physical field has a nonzero spacelike retarded response. Finite positive ordinary gauge channels have only simple infrared poles. These are scoped linear results, not a general confinement no-go.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;title&quot;: &quot;Gradient Gauss Static Energy and Physical Retarded Response&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/gradient-gauss-causality-checks.py&quot;: &quot;4f36b19294076a5c1b147ee65096f24b44ac78bc7f1814cf646f06ee0def543c&quot;,
+    &quot;content/notes/topics/gauge-topology/biharmonic-color-window.md&quot;: &quot;b89119a0a4b96f86b11ee9079ba07c833237b475a17c4423183d3756eb984ddc&quot;,
+    &quot;content/notes/topics/gauge-topology/normal-color-kinetics.md&quot;: &quot;33e558e6945c95c9bae48a734f6292c6ca9871b25caa969b5dd1d656f6f54098&quot;
+  },
+  &quot;checks_passed&quot;: 149,
+  &quot;case_count&quot;: 50,
+  &quot;occupied_depths&quot;: [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  &quot;conclusion&quot;: &quot;Positive ordinary gradient-electric Gauss law realizes the static k^-4 energy and ordinary continuity, but its minimally coupled physical field has a nonzero spacelike retarded response. Finite positive ordinary gauge channels have only simple infrared poles. These are scoped linear results, not a general confinement no-go.&quot;,
+  &quot;cases&quot;: [
+    {
+      &quot;case&quot;: &quot;quadrupole-tail-depth-2&quot;,
+      &quot;depth&quot;: 2,
+      &quot;sphere_area&quot;: &quot;2*pi&quot;,
+      &quot;tail_at_r_4t&quot;: &quot;-53*t**2/(2560*pi)&quot;,
+      &quot;tail_relative_bracket&quot;: &quot;159/160&quot;,
+      &quot;infrared_energy_power&quot;: 1,
+      &quot;isolated_cost_diverges&quot;: true,
+      &quot;neutral_dipole_cost_finite&quot;: false,
+      &quot;conditional_confinement_window&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;quadrupole-tail-depth-3&quot;,
+      &quot;depth&quot;: 3,
+      &quot;sphere_area&quot;: &quot;4*pi&quot;,
+      &quot;tail_at_r_4t&quot;: &quot;-157*t/(61440*pi)&quot;,
+      &quot;tail_relative_bracket&quot;: &quot;157/160&quot;,
+      &quot;infrared_energy_power&quot;: 2,
+      &quot;isolated_cost_diverges&quot;: true,
+      &quot;neutral_dipole_cost_finite&quot;: true,
+      &quot;conditional_confinement_window&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;quadrupole-tail-depth-4&quot;,
+      &quot;depth&quot;: 4,
+      &quot;sphere_area&quot;: &quot;2*pi**2&quot;,
+      &quot;tail_at_r_4t&quot;: &quot;-77/(61440*pi**2)&quot;,
+      &quot;tail_relative_bracket&quot;: &quot;77/80&quot;,
+      &quot;infrared_energy_power&quot;: 3,
+      &quot;isolated_cost_diverges&quot;: true,
+      &quot;neutral_dipole_cost_finite&quot;: true,
+      &quot;conditional_confinement_window&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;quadrupole-tail-depth-5&quot;,
+      &quot;depth&quot;: 5,
+      &quot;sphere_area&quot;: &quot;8*pi**2/3&quot;,
+      &quot;tail_at_r_4t&quot;: &quot;-15/(65536*pi**2*t)&quot;,
+      &quot;tail_relative_bracket&quot;: &quot;15/16&quot;,
+      &quot;infrared_energy_power&quot;: 4,
+      &quot;isolated_cost_diverges&quot;: false,
+      &quot;neutral_dipole_cost_finite&quot;: true,
+      &quot;conditional_confinement_window&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;quadrupole-tail-depth-6&quot;,
+      &quot;depth&quot;: 6,
+      &quot;sphere_area&quot;: &quot;pi**3&quot;,
+      &quot;tail_at_r_4t&quot;: &quot;-29/(196608*pi**3*t**2)&quot;,
+      &quot;tail_relative_bracket&quot;: &quot;29/32&quot;,
+      &quot;infrared_energy_power&quot;: 5,
+      &quot;isolated_cost_diverges&quot;: false,
+      &quot;neutral_dipole_cost_finite&quot;: true,
+      &quot;conditional_confinement_window&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;quadrupole-tail-depth-10&quot;,
+      &quot;depth&quot;: 10,
+      &quot;sphere_area&quot;: &quot;pi**5/12&quot;,
+      &quot;tail_at_r_4t&quot;: &quot;-23/(4194304*pi**5*t**6)&quot;,
+      &quot;tail_relative_bracket&quot;: &quot;23/32&quot;,
+      &quot;infrared_energy_power&quot;: 9,
+      &quot;isolated_cost_diverges&quot;: false,
+      &quot;neutral_dipole_cost_finite&quot;: true,
+      &quot;conditional_confinement_window&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;gradient-electric-action&quot;,
+      &quot;static_kernel&quot;: &quot;1/(ell**2*k**4)&quot;,
+      &quot;ordinary_current_conservation&quot;: true,
+      &quot;positive_nonzero_k_energy&quot;: true,
+      &quot;homogeneous_wave_speed_finite&quot;: true,
+      &quot;gauge_invariant_source_response_has_spacelike_tail&quot;: true,
+      &quot;zero_spatial_mode_requires_domain_choice&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 1.0,
+      &quot;r&quot;: 4.0,
+      &quot;damping&quot;: 0.5,
+      &quot;numeric&quot;: 0.018286224141926245,
+      &quot;closed&quot;: 0.018286224141933954,
+      &quot;undamped_limit&quot;: 0.019894367886486918,
+      &quot;quadrature_error&quot;: 2.3980443085718728e-09,
+      &quot;outside_wave_cone&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 1.0,
+      &quot;r&quot;: 4.0,
+      &quot;damping&quot;: 0.2,
+      &quot;numeric&quot;: 0.019247999011165275,
+      &quot;closed&quot;: 0.019247999011633047,
+      &quot;undamped_limit&quot;: 0.019894367886486918,
+      &quot;quadrature_error&quot;: 1.21504949510511e-08,
+      &quot;outside_wave_cone&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 1.0,
+      &quot;r&quot;: 4.0,
+      &quot;damping&quot;: 0.05,
+      &quot;numeric&quot;: 0.019732635227773486,
+      &quot;closed&quot;: 0.019732635214406137,
+      &quot;undamped_limit&quot;: 0.019894367886486918,
+      &quot;quadrature_error&quot;: 2.18848432258633e-08,
+      &quot;outside_wave_cone&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 0.5,
+      &quot;r&quot;: 3.0,
+      &quot;damping&quot;: 0.5,
+      &quot;numeric&quot;: 0.011855962520459368,
+      &quot;closed&quot;: 0.011855962520463111,
+      &quot;undamped_limit&quot;: 0.013262911924324612,
+      &quot;quadrature_error&quot;: 3.6958380352229553e-09,
+      &quot;outside_wave_cone&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 0.5,
+      &quot;r&quot;: 3.0,
+      &quot;damping&quot;: 0.2,
+      &quot;numeric&quot;: 0.01269559553965035,
+      &quot;closed&quot;: 0.012695595539785475,
+      &quot;undamped_limit&quot;: 0.013262911924324612,
+      &quot;quadrature_error&quot;: 5.288015995288931e-09,
+      &quot;outside_wave_cone&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 0.5,
+      &quot;r&quot;: 3.0,
+      &quot;damping&quot;: 0.05,
+      &quot;numeric&quot;: 0.013120876689200452,
+      &quot;closed&quot;: 0.013120876685033478,
+      &quot;undamped_limit&quot;: 0.013262911924324612,
+      &quot;quadrature_error&quot;: 1.0768529484395426e-08,
+      &quot;outside_wave_cone&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 2.0,
+      &quot;r&quot;: 0.7,
+      &quot;damping&quot;: 0.5,
+      &quot;numeric&quot;: 0.0666786778501255,
+      &quot;closed&quot;: 0.06667867785012932,
+      &quot;undamped_limit&quot;: 0.07957747154594767,
+      &quot;quadrature_error&quot;: 5.64931715429008e-10,
+      &quot;outside_wave_cone&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 2.0,
+      &quot;r&quot;: 0.7,
+      &quot;damping&quot;: 0.2,
+      &quot;numeric&quot;: 0.07430961365818115,
+      &quot;closed&quot;: 0.07430961365818393,
+      &quot;undamped_limit&quot;: 0.07957747154594767,
+      &quot;quadrature_error&quot;: 1.0099315641051044e-08,
+      &quot;outside_wave_cone&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 2.0,
+      &quot;r&quot;: 0.7,
+      &quot;damping&quot;: 0.05,
+      &quot;numeric&quot;: 0.0782554142443273,
+      &quot;closed&quot;: 0.07825541425139138,
+      &quot;undamped_limit&quot;: 0.07957747154594767,
+      &quot;quadrature_error&quot;: 1.525190297812798e-08,
+      &quot;outside_wave_cone&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 1.0,
+      &quot;r&quot;: 1.0,
+      &quot;damping&quot;: 0.5,
+      &quot;numeric&quot;: 0.04922517439269182,
+      &quot;closed&quot;: 0.04922517439269186,
+      &quot;undamped_limit&quot;: 0.07957747154594767,
+      &quot;quadrature_error&quot;: 1.4737411284153968e-09,
+      &quot;outside_wave_cone&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 1.0,
+      &quot;r&quot;: 1.0,
+      &quot;damping&quot;: 0.2,
+      &quot;numeric&quot;: 0.0628379617892564,
+      &quot;closed&quot;: 0.06283796178926714,
+      &quot;undamped_limit&quot;: 0.07957747154594767,
+      &quot;quadrature_error&quot;: 9.407668506533048e-10,
+      &quot;outside_wave_cone&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;three-dimensional-retarded-Fourier&quot;,
+      &quot;t&quot;: 1.0,
+      &quot;r&quot;: 1.0,
+      &quot;damping&quot;: 0.05,
+      &quot;numeric&quot;: 0.07363880436802249,
+      &quot;closed&quot;: 0.07363880443896412,
+      &quot;undamped_limit&quot;: 0.07957747154594767,
+      &quot;quadrature_error&quot;: 1.9230052985944644e-08,
+      &quot;outside_wave_cone&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 1,
+      &quot;wave_number&quot;: 0.001,
+      &quot;response&quot;: 44521.71717924774,
+      &quot;spectral_response&quot;: 44521.717179247746,
+      &quot;k_squared_response&quot;: 0.04452171717924774,
+      &quot;upper_bound&quot;: 0.04452171717924774,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 1,
+      &quot;wave_number&quot;: 0.03,
+      &quot;response&quot;: 49.468574643608605,
+      &quot;spectral_response&quot;: 49.468574643608605,
+      &quot;k_squared_response&quot;: 0.044521717179247744,
+      &quot;upper_bound&quot;: 0.04452171717924774,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 1,
+      &quot;wave_number&quot;: 0.2,
+      &quot;response&quot;: 1.1130429294811932,
+      &quot;spectral_response&quot;: 1.1130429294811934,
+      &quot;k_squared_response&quot;: 0.04452171717924774,
+      &quot;upper_bound&quot;: 0.04452171717924774,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 1,
+      &quot;wave_number&quot;: 1.0,
+      &quot;response&quot;: 0.04452171717924774,
+      &quot;spectral_response&quot;: 0.044521717179247744,
+      &quot;k_squared_response&quot;: 0.04452171717924774,
+      &quot;upper_bound&quot;: 0.04452171717924774,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 1,
+      &quot;wave_number&quot;: 10.0,
+      &quot;response&quot;: 0.00044521717179247736,
+      &quot;spectral_response&quot;: 0.00044521717179247746,
+      &quot;k_squared_response&quot;: 0.04452171717924774,
+      &quot;upper_bound&quot;: 0.04452171717924774,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 1,
+      &quot;wave_number&quot;: 100.0,
+      &quot;response&quot;: 4.452171717924774e-06,
+      &quot;spectral_response&quot;: 4.452171717924775e-06,
+      &quot;k_squared_response&quot;: 0.04452171717924774,
+      &quot;upper_bound&quot;: 0.04452171717924774,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 2,
+      &quot;wave_number&quot;: 0.001,
+      &quot;response&quot;: 69078.62871971204,
+      &quot;spectral_response&quot;: 69078.62868731003,
+      &quot;k_squared_response&quot;: 0.06907862871971204,
+      &quot;upper_bound&quot;: 0.2477486136784356,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 2,
+      &quot;wave_number&quot;: 0.03,
+      &quot;response&quot;: 76.79863970372253,
+      &quot;spectral_response&quot;: 76.79863970372382,
+      &quot;k_squared_response&quot;: 0.06911877573335028,
+      &quot;upper_bound&quot;: 0.2477486136784356,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 2,
+      &quot;wave_number&quot;: 0.2,
+      &quot;response&quot;: 1.7711898553613303,
+      &quot;spectral_response&quot;: 1.7711898553613397,
+      &quot;k_squared_response&quot;: 0.07084759421445323,
+      &quot;upper_bound&quot;: 0.2477486136784356,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 2,
+      &quot;wave_number&quot;: 1.0,
+      &quot;response&quot;: 0.10481258995153823,
+      &quot;spectral_response&quot;: 0.10481258995153814,
+      &quot;k_squared_response&quot;: 0.10481258995153823,
+      &quot;upper_bound&quot;: 0.2477486136784356,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 2,
+      &quot;wave_number&quot;: 10.0,
+      &quot;response&quot;: 0.0024087668946079633,
+      &quot;spectral_response&quot;: 0.0024087668946079625,
+      &quot;k_squared_response&quot;: 0.24087668946079632,
+      &quot;upper_bound&quot;: 0.2477486136784356,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 2,
+      &quot;wave_number&quot;: 100.0,
+      &quot;response&quot;: 2.4767717424234656e-05,
+      &quot;spectral_response&quot;: 2.4767717424234652e-05,
+      &quot;k_squared_response&quot;: 0.24767717424234656,
+      &quot;upper_bound&quot;: 0.2477486136784356,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 3,
+      &quot;wave_number&quot;: 0.001,
+      &quot;response&quot;: 211448.93995107635,
+      &quot;spectral_response&quot;: 211448.9399970211,
+      &quot;k_squared_response&quot;: 0.21144893995107633,
+      &quot;upper_bound&quot;: 0.589699540512747,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 3,
+      &quot;wave_number&quot;: 0.03,
+      &quot;response&quot;: 235.03770299568464,
+      &quot;spectral_response&quot;: 235.03770299569968,
+      &quot;k_squared_response&quot;: 0.21153393269611617,
+      &quot;upper_bound&quot;: 0.589699540512747,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 3,
+      &quot;wave_number&quot;: 0.2,
+      &quot;response&quot;: 5.37984754553216,
+      &quot;spectral_response&quot;: 5.379847545532138,
+      &quot;k_squared_response&quot;: 0.21519390182128642,
+      &quot;upper_bound&quot;: 0.589699540512747,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 3,
+      &quot;wave_number&quot;: 1.0,
+      &quot;response&quot;: 0.2870989844500461,
+      &quot;spectral_response&quot;: 0.2870989844500461,
+      &quot;k_squared_response&quot;: 0.2870989844500461,
+      &quot;upper_bound&quot;: 0.589699540512747,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 3,
+      &quot;wave_number&quot;: 10.0,
+      &quot;response&quot;: 0.005751514368558865,
+      &quot;spectral_response&quot;: 0.0057515143685588615,
+      &quot;k_squared_response&quot;: 0.5751514368558865,
+      &quot;upper_bound&quot;: 0.589699540512747,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 3,
+      &quot;wave_number&quot;: 100.0,
+      &quot;response&quot;: 5.895483007306285e-05,
+      &quot;spectral_response&quot;: 5.8954830073062835e-05,
+      &quot;k_squared_response&quot;: 0.5895483007306285,
+      &quot;upper_bound&quot;: 0.589699540512747,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 8,
+      &quot;wave_number&quot;: 0.001,
+      &quot;response&quot;: 2250209.7071148125,
+      &quot;spectral_response&quot;: 2250209.7110282118,
+      &quot;k_squared_response&quot;: 2.2502097071148124,
+      &quot;upper_bound&quot;: 2.778415999123257,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 8,
+      &quot;wave_number&quot;: 0.03,
+      &quot;response&quot;: 2500.348284120526,
+      &quot;spectral_response&quot;: 2500.3482841245504,
+      &quot;k_squared_response&quot;: 2.2503134557084734,
+      &quot;upper_bound&quot;: 2.778415999123257,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 8,
+      &quot;wave_number&quot;: 0.2,
+      &quot;response&quot;: 56.36954900784704,
+      &quot;spectral_response&quot;: 56.369549007847226,
+      &quot;k_squared_response&quot;: 2.254781960313882,
+      &quot;upper_bound&quot;: 2.778415999123257,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 8,
+      &quot;wave_number&quot;: 1.0,
+      &quot;response&quot;: 2.343060791731941,
+      &quot;spectral_response&quot;: 2.343060791731944,
+      &quot;k_squared_response&quot;: 2.343060791731941,
+      &quot;upper_bound&quot;: 2.778415999123257,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 8,
+      &quot;wave_number&quot;: 10.0,
+      &quot;response&quot;: 0.027435175105165084,
+      &quot;spectral_response&quot;: 0.02743517510516509,
+      &quot;k_squared_response&quot;: 2.7435175105165084,
+      &quot;upper_bound&quot;: 2.778415999123257,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;positive-ordinary-gauge-spectral-bound&quot;,
+      &quot;channels&quot;: 8,
+      &quot;wave_number&quot;: 100.0,
+      &quot;response&quot;: 0.0002777998721485137,
+      &quot;spectral_response&quot;: 0.0002777998721485138,
+      &quot;k_squared_response&quot;: 2.7779987214851367,
+      &quot;upper_bound&quot;: 2.778415999123257,
+      &quot;applies_to_depths&quot;: [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;covariant-box-factor-control&quot;,
+      &quot;partial_fractions&quot;: &quot;(1/z - 1/(z+m^2))/m^2&quot;,
+      &quot;residues_opposite_signs&quot;: true,
+      &quot;static_with_lower_term_has_simple_IR_pole&quot;: true,
+      &quot;scope&quot;: &quot;ordinary finite quadratic canonical realization&quot;
+    },
+    {
+      &quot;case&quot;: &quot;neutral-determinant-mobility-depth-2&quot;,
+      &quot;depth&quot;: 2,
+      &quot;dipole_squared&quot;: 6.666666666666666,
+      &quot;translated_dipole_squared&quot;: 6.666666666666666,
+      &quot;dilated_dipole_squared&quot;: 26.666666666666664,
+      &quot;translation_allowed_by_Abelian_dipole_conservation&quot;: true,
+      &quot;unassisted_dilation_preserves_dipole&quot;: false,
+      &quot;non_Abelian_completion_not_inferred&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;neutral-determinant-mobility-depth-3&quot;,
+      &quot;depth&quot;: 3,
+      &quot;dipole_squared&quot;: 6.666666666666666,
+      &quot;translated_dipole_squared&quot;: 6.666666666666666,
+      &quot;dilated_dipole_squared&quot;: 26.666666666666664,
+      &quot;translation_allowed_by_Abelian_dipole_conservation&quot;: true,
+      &quot;unassisted_dilation_preserves_dipole&quot;: false,
+      &quot;non_Abelian_completion_not_inferred&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;neutral-determinant-mobility-depth-4&quot;,
+      &quot;depth&quot;: 4,
+      &quot;dipole_squared&quot;: 6.666666666666666,
+      &quot;translated_dipole_squared&quot;: 6.666666666666666,
+      &quot;dilated_dipole_squared&quot;: 26.666666666666664,
+      &quot;translation_allowed_by_Abelian_dipole_conservation&quot;: true,
+      &quot;unassisted_dilation_preserves_dipole&quot;: false,
+      &quot;non_Abelian_completion_not_inferred&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;neutral-determinant-mobility-depth-5&quot;,
+      &quot;depth&quot;: 5,
+      &quot;dipole_squared&quot;: 6.666666666666666,
+      &quot;translated_dipole_squared&quot;: 6.666666666666666,
+      &quot;dilated_dipole_squared&quot;: 26.666666666666664,
+      &quot;translation_allowed_by_Abelian_dipole_conservation&quot;: true,
+      &quot;unassisted_dilation_preserves_dipole&quot;: false,
+      &quot;non_Abelian_completion_not_inferred&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;neutral-determinant-mobility-depth-6&quot;,
+      &quot;depth&quot;: 6,
+      &quot;dipole_squared&quot;: 6.666666666666666,
+      &quot;translated_dipole_squared&quot;: 6.666666666666666,
+      &quot;dilated_dipole_squared&quot;: 26.666666666666664,
+      &quot;translation_allowed_by_Abelian_dipole_conservation&quot;: true,
+      &quot;unassisted_dilation_preserves_dipole&quot;: false,
+      &quot;non_Abelian_completion_not_inferred&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;neutral-determinant-mobility-depth-10&quot;,
+      &quot;depth&quot;: 10,
+      &quot;dipole_squared&quot;: 6.666666666666666,
+      &quot;translated_dipole_squared&quot;: 6.666666666666664,
+      &quot;dilated_dipole_squared&quot;: 26.666666666666664,
+      &quot;translation_allowed_by_Abelian_dipole_conservation&quot;: true,
+      &quot;unassisted_dilation_preserves_dipole&quot;: false,
+      &quot;non_Abelian_completion_not_inferred&quot;: true
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>local-cavity-wave-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/local-cavity-wave-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="local-cavity-wave-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/local-cavity-wave-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="local-cavity-wave-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>local-cavity-wave-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/local-cavity-wave-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Local positive wave action: matrix-source beats, flux and finite disturbances.&quot;&quot;&quot;
+from collections import Counter
+from datetime import datetime,timezone
+from fractions import Fraction as F
+from hashlib import sha256
+import json
+from pathlib import Path
+
+import numpy as np
+from scipy.linalg import eigvals
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+counts = Counter()
+
+
+def check(value,label):
+    if not bool(value):
+        raise AssertionError(label)
+    counts[label]+=1
+
+
+def close(a,b,label,tol=2e-10):
+    check(np.allclose(a,b,atol=tol,rtol=tol),label)
+
+
+def outer(z):
+    return np.outer(z,z.conj())
+
+
+def potential(a,c,eta):
+    d = outer(c)-eta*outer(a)
+    return np.linalg.norm(d)**2/2
+
+
+kinetic,quartic,weighted_norm=sp.symbols(&#39;T V W&#39;,nonnegative=True)
+localization=[]
+for depth in (2,3,4,5,6,10):
+    scaling=(2-depth)*kinetic-depth*quartic+depth*weighted_norm
+    eliminated=sp.expand(scaling.subs(weighted_norm,kinetic+2*quartic))
+    check(eliminated==2*kinetic+depth*quartic,
+          &#39;ambient localization Pohozaev obstruction&#39;)
+    localization.append({&#39;real_depth&#39;:depth,&#39;integrated_field_equation&#39;:&#39;T+2V=W&#39;,
+                         &#39;eliminated_scaling_identity&#39;:str(eliminated),
+                         &#39;nontrivial_finite_energy_time_harmonic_state&#39;:False,
+                         &#39;scope&#39;:&#39;Flat noncompact space, sufficient decay, homogeneous positive quartic, common phase within each polarization block.&#39;})
+
+
+rng=np.random.default_rng(20261011)
+# Check the actual nonlinear field variation, not just the zero branch.
+for trial in range(20):
+    a=rng.normal(size=2)+1j*rng.normal(size=2)
+    c=rng.normal(size=2)+1j*rng.normal(size=2)
+    da=rng.normal(size=2)+1j*rng.normal(size=2)
+    dc=rng.normal(size=2)+1j*rng.normal(size=2)
+    eta=.4
+    d=outer(c)-eta*outer(a)
+    ga=-eta*d@a
+    gc=d@c
+    eps=1e-6
+    fd=(potential(a+eps*da,c+eps*dc,eta)-potential(a-eps*da,c-eps*dc,eta))/(2*eps)
+    close(fd,2*np.vdot(ga,da).real+2*np.vdot(gc,dc).real,
+          &#39;full local matrix potential variation&#39;,2e-7)
+    matrix=rng.normal(size=(2,2))+1j*rng.normal(size=(2,2))
+    unitary=np.linalg.qr(matrix)[0]
+    close(potential(unitary@a,unitary@c,eta),potential(a,c,eta),
+          &#39;common polarization covariance&#39;)
+    close(potential(a*np.exp(.3j),c*np.exp(.3j),eta),potential(a,c,eta),
+          &#39;common physical field phase symmetry&#39;)
+    # The real kinetic equation uses half the real potential derivative.
+    close(np.vdot(a,ga).imag+np.vdot(c,gc).imag,0,
+          &#39;local common phase torque vanishes&#39;)
+
+baseline_path=ROOT/&#39;grounding/complex-comb-response-results.json&#39;
+baseline=json.loads(baseline_path.read_text())
+theta=2*np.pi*np.arange(128)/128
+pauli=np.array([[0,1],[1,0]],complex)
+cases=[]
+for source in baseline[&#39;particle_cases&#39;]:
+    cutoff=source[&#39;cutoff&#39;]
+    for eta_exact in (F(1,4),F(1),F(2)):
+        eta=float(eta_exact)
+        if cutoff == 1:
+            amps=np.array([1.,0.])
+            high=np.array([1,1],dtype=np.int64)
+        else:
+            amps=np.array([1.,.5])
+            high=np.array([cutoff-1,cutoff],dtype=np.int64)
+        low=np.array([1,2],dtype=np.int64)
+        envelope=amps[:,None]*np.array([np.ones_like(theta),np.exp(1j*theta)])
+        a=envelope*np.exp(1j*int(high[0])*theta)
+        c=np.sqrt(eta)*envelope*np.exp(1j*theta)
+        # Common carriers are factored; no huge frequency sum is needed.
+        qa=np.einsum(&#39;it,jt-&gt;tij&#39;,a,a.conj())
+        qc=np.einsum(&#39;it,jt-&gt;tij&#39;,c,c.conj())
+        close(qc,eta*qa,&#39;exact pointwise matrix source match&#39;)
+        density_a=np.einsum(&#39;it,it-&gt;t&#39;,a.conj(),a).real
+        close(density_a,amps@amps,&#39;orthogonal polarizations keep density constant&#39;)
+        readout=np.einsum(&#39;it,ij,jt-&gt;t&#39;,a.conj(),pauli,a).real
+        expected=2*amps[0]*amps[1]*np.cos(theta)
+        close(readout,expected,&#39;off diagonal source retains fundamental&#39;)
+        flux_factor=float(np.sum(high.astype(float)**2*amps**2)+
+                          eta*np.sum(low.astype(float)**2*amps**2))
+        energy_density=np.full(len(theta),2*flux_factor)
+        momentum_vector=np.mean(energy_density[:,None]*
+                                np.array([-np.sin(theta),np.cos(theta)]).T,axis=0)
+        # Relative error is the meaningful diagnostic for huge supplied K.
+        close(momentum_vector/float(energy_density[0]),0,&#39;complete loop linear momentum vanishes&#39;)
+        energy_exact=2*sum(F(int(high[j])**2)*F(str(float(amps[j]**2)))+
+                           eta_exact*F(int(low[j])**2)*F(str(float(amps[j]**2))) for j in range(2))
+        flux_exact=energy_exact  # Dimensionless v=R=1 in this comparison.
+        check(flux_exact/energy_exact==1,&#39;energy flux over energy density equals wave speed&#39;)
+        # Each retained term solves d_t^2-d_theta^2 exactly. The interaction
+        # gradient vanishes because the matrix mismatch vanishes.
+        check(all(-F(int(n))**2+F(int(n))**2==0 for n in list(high)+list(low)),
+              &#39;complete local wave equation exact on each carrier&#39;)
+        check(max(high)==cutoff,&#39;assigned upper mass endpoint preserved&#39;)
+        cases.append({&#39;particle&#39;:source[&#39;particle&#39;],&#39;real_depth&#39;:source[&#39;real_depth&#39;],
+                      &#39;cutoff&#39;:cutoff,&#39;eta&#39;:str(eta_exact),&#39;occupied_high_labels&#39;:list(map(int,high)),
+                      &#39;low_labels&#39;:[1,2],&#39;matrix_source_fundamental&#39;:float(2*amps[0]*amps[1]),
+                      &#39;identity_density_fundamental&#39;:0,
+                      &#39;energy_density_over_common_amplitude_squared&#39;:str(energy_exact),
+                      &#39;linear_momentum_vector_exact&#39;:[0,0],
+                      &#39;angular_momentum_over_total_energy&#39;:&#39;R/v&#39;,
+                      &#39;prescribed_path_requires_normal_stress&#39;:True})
+
+# A scalar adjacent comb would instead have a rotating net momentum on a
+# prescribed circular path. Independent quadrature resolves its coefficient.
+scalar=[]
+for k in (1,2,5,13):
+    aa,bb=1.,.5
+    for t in (.0,.3,1.1):
+        density=2*(k*k*aa*aa+(k+1)**2*bb*bb+
+                   2*k*(k+1)*aa*bb*np.cos(theta-t))
+        p=np.mean(density[:,None]*np.array([-np.sin(theta),np.cos(theta)]).T,axis=0)
+        expected=2*k*(k+1)*aa*bb*np.array([-np.sin(t),np.cos(t)])
+        close(p,expected,&#39;scalar adjacent comb momentum must be balanced&#39;)
+        scalar.append({&#39;lower_label&#39;:k,&#39;phase&#39;:t,&#39;momentum_per_unit_loop_length&#39;:p.tolist()})
+
+
+def matrix_source_jacobian(a,c,eta):
+    &quot;&quot;&quot;Real Hermitian matrix coordinates have their Frobenius norm.&quot;&quot;&quot;
+    jac=np.empty((4,8))
+    for j in range(8):
+        da=np.zeros(2,dtype=complex)
+        dc=np.zeros(2,dtype=complex)
+        target=da if j&lt;4 else dc
+        local=j%4
+        target[local//2]=1 if local%2==0 else 1j
+        d=(np.outer(dc,c.conj())+np.outer(c,dc.conj())-
+           eta*(np.outer(da,a.conj())+np.outer(a,da.conj())))
+        jac[:,j]=[d[0,0].real,d[1,1].real,
+                  np.sqrt(2)*d[0,1].real,np.sqrt(2)*d[0,1].imag]
+    return jac
+
+
+spectral=[]
+for depth in (2,3,4,5,6,10):
+    for cutoff in (2,4,6):
+        modes=np.arange(-cutoff,cutoff+1)
+        grid=8*cutoff+33
+        x=2*np.pi*np.arange(grid)/grid
+        eta=.4
+        a=np.array([np.exp(2j*x),.5*np.exp(3j*x)])
+        c=np.sqrt(eta)*np.array([np.exp(1j*x),.5*np.exp(2j*x)])
+        local=[]
+        for j in range(grid):
+            jac=matrix_source_jacobian(a[:,j],c[:,j],eta)
+            local.append(jac.T@jac/2)
+        local=np.array(local)
+        basis=np.exp(1j*x[:,None]*modes)
+        kspec=np.einsum(&#39;xq,xab,xr-&gt;aqbr&#39;,basis.conj(),local,basis)/grid
+        kspec=kspec.reshape(8*len(modes),8*len(modes))
+        close(kspec,kspec.conj().T,&#39;projected local Hessian Hermitian&#39;)
+        check(np.linalg.eigvalsh(kspec)[0]&gt;-1e-10,&#39;projected local potential nonnegative&#39;)
+        size=len(kspec)
+        gyro=np.diag(np.tile(2j*modes,8))
+        operator=np.block([[np.zeros((size,size)),np.eye(size)],[-kspec,gyro]])
+        spectrum=eigvals(operator,check_finite=True)
+        max_real=float(np.max(abs(spectrum.real)))
+        check(max_real&lt;2e-6,&#39;full wave disturbance operator has no resolved growing mode&#39;)
+        du=rng.normal(size=size)+1j*rng.normal(size=size)
+        velocity=rng.normal(size=size)+1j*rng.normal(size=size)
+        acceleration=-kspec@du+gyro@velocity
+        edot=2*np.vdot(velocity,acceleration).real+2*np.vdot(du,kspec@velocity).real
+        close(edot,0,&#39;full linear comoving energy conserved&#39;,2e-8)
+        spectral.append({&#39;real_depth&#39;:depth,&#39;spatial_fourier_cutoff&#39;:cutoff,
+                         &#39;real_component_count&#39;:8,&#39;full_first_order_matrix_size&#39;:2*size,
+                         &#39;maximum_absolute_growth_rate&#39;:max_real,
+                         &#39;minimum_potential_hessian_eigenvalue&#39;:float(np.linalg.eigvalsh(kspec)[0]),
+                         &#39;nonlinear_localization_claim&#39;:False})
+
+report={&#39;experiment&#39;:&#39;local-cavity-wave&#39;,&#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),
+        &#39;status&#39;:&#39;passed&#39;,&#39;checks&#39;:sum(counts.values()),&#39;check_counts&#39;:dict(counts),
+        &#39;scope&#39;:&#39;Local causal positive wave prototype on a prescribed closed spatial path; no self-confined particle or simplex selection is claimed.&#39;,
+        &#39;particle_cases&#39;:cases,&#39;scalar_momentum_controls&#39;:scalar,&#39;spectral_cases&#39;:spectral,
+        &#39;ambient_localization_controls&#39;:localization,
+        &#39;sources&#39;:{&#39;experiments/local-cavity-wave-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest(),
+                   &#39;results/complex-comb-response-results.json&#39;:sha256(baseline_path.read_bytes()).hexdigest()}}
+out=ROOT/&#39;local-cavity-wave-results.json&#39;
+out.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;checks&#39;:report[&#39;checks&#39;],&#39;particle_cases&#39;:len(cases),
+                  &#39;spectral_cases&#39;:len(spectral),&#39;report&#39;:str(out)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

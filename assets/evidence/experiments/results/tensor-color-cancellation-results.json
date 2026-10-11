@@ -1,0 +1,660 @@
+{
+  "experiment_key": "tensor-color-cancellation-20261009",
+  "created": "2026-10-09T20:58:09.869575+00:00",
+  "sources": {
+    "experiments/tensor-color-cancellation-checks.py": "c14fea1a32bb3f33bcce2bce5eb5e231f8f64b6ccff08633c63001950d83228c"
+  },
+  "scope": "Exact oscillator count, representation and source tests; no particle simulations.",
+  "summary": {
+    "checks_passed": 3750,
+    "case_count": 38,
+    "count_identity_selects_depth": false,
+    "conjugate_pair_all_rank_singlet": true,
+    "full_dual_pair_also_cancels_U1": true,
+    "neutrality_does_not_imply_zero_nonuniform_response": true
+  },
+  "cases": [
+    {
+      "name": "shell-splits",
+      "real_depth": 2,
+      "parameters": {
+        "splits": [
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "measurements": {
+        "all_splits_factorize": true
+      }
+    },
+    {
+      "name": "shell-splits",
+      "real_depth": 3,
+      "parameters": {
+        "splits": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      "measurements": {
+        "all_splits_factorize": true
+      }
+    },
+    {
+      "name": "shell-splits",
+      "real_depth": 4,
+      "parameters": {
+        "splits": [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            1
+          ]
+        ]
+      },
+      "measurements": {
+        "all_splits_factorize": true
+      }
+    },
+    {
+      "name": "shell-splits",
+      "real_depth": 5,
+      "parameters": {
+        "splits": [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            1
+          ]
+        ]
+      },
+      "measurements": {
+        "all_splits_factorize": true
+      }
+    },
+    {
+      "name": "shell-splits",
+      "real_depth": 6,
+      "parameters": {
+        "splits": [
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            5,
+            1
+          ]
+        ]
+      },
+      "measurements": {
+        "all_splits_factorize": true
+      }
+    },
+    {
+      "name": "shell-splits",
+      "real_depth": 10,
+      "parameters": {
+        "splits": [
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            8,
+            2
+          ],
+          [
+            9,
+            1
+          ]
+        ]
+      },
+      "measurements": {
+        "all_splits_factorize": true
+      }
+    },
+    {
+      "name": "paired-casimir",
+      "parameters": {
+        "rank": 2
+      },
+      "measurements": {
+        "fundamental_casimir": "3/4",
+        "dual_pair_singlet_rank": 1,
+        "dual_pair_adjoint_gap": 2,
+        "identical_antisymmetric_casimir": "0",
+        "identical_symmetric_casimir": "2",
+        "singlet_source_norm": "3/4*(a-b)^2"
+      }
+    },
+    {
+      "name": "paired-casimir",
+      "parameters": {
+        "rank": 3
+      },
+      "measurements": {
+        "fundamental_casimir": "4/3",
+        "dual_pair_singlet_rank": 1,
+        "dual_pair_adjoint_gap": 3,
+        "identical_antisymmetric_casimir": "4/3",
+        "identical_symmetric_casimir": "10/3",
+        "singlet_source_norm": "4/3*(a-b)^2"
+      }
+    },
+    {
+      "name": "paired-casimir",
+      "parameters": {
+        "rank": 4
+      },
+      "measurements": {
+        "fundamental_casimir": "15/8",
+        "dual_pair_singlet_rank": 1,
+        "dual_pair_adjoint_gap": 4,
+        "identical_antisymmetric_casimir": "5/2",
+        "identical_symmetric_casimir": "9/2",
+        "singlet_source_norm": "15/8*(a-b)^2"
+      }
+    },
+    {
+      "name": "paired-casimir",
+      "parameters": {
+        "rank": 5
+      },
+      "measurements": {
+        "fundamental_casimir": "12/5",
+        "dual_pair_singlet_rank": 1,
+        "dual_pair_adjoint_gap": 5,
+        "identical_antisymmetric_casimir": "18/5",
+        "identical_symmetric_casimir": "28/5",
+        "singlet_source_norm": "12/5*(a-b)^2"
+      }
+    },
+    {
+      "name": "three-triplet-two-body-control",
+      "parameters": {
+        "rank": 3,
+        "slots": 3
+      },
+      "measurements": {
+        "total_generator_squared": 0,
+        "each_pair_contraction": "-2/3",
+        "sum_pair_contraction": "-2"
+      }
+    },
+    {
+      "name": "full-hodge-pairing",
+      "real_depth": 2,
+      "parameters": {
+        "channel_rank": 1
+      },
+      "measurements": {
+        "endomorphism_rank": 1,
+        "trace_singlet_rank": 1,
+        "traceless_rank": 0,
+        "casimir_gap": 0
+      }
+    },
+    {
+      "name": "full-hodge-pairing",
+      "real_depth": 3,
+      "parameters": {
+        "channel_rank": 3
+      },
+      "measurements": {
+        "endomorphism_rank": 9,
+        "trace_singlet_rank": 1,
+        "traceless_rank": 8,
+        "casimir_gap": 3
+      }
+    },
+    {
+      "name": "full-hodge-pairing",
+      "real_depth": 4,
+      "parameters": {
+        "channel_rank": 3
+      },
+      "measurements": {
+        "endomorphism_rank": 9,
+        "trace_singlet_rank": 1,
+        "traceless_rank": 8,
+        "casimir_gap": 3
+      }
+    },
+    {
+      "name": "full-hodge-pairing",
+      "real_depth": 5,
+      "parameters": {
+        "channel_rank": 10
+      },
+      "measurements": {
+        "endomorphism_rank": 100,
+        "trace_singlet_rank": 1,
+        "traceless_rank": 99,
+        "casimir_gap": 10
+      }
+    },
+    {
+      "name": "full-hodge-pairing",
+      "real_depth": 6,
+      "parameters": {
+        "channel_rank": 10
+      },
+      "measurements": {
+        "endomorphism_rank": 100,
+        "trace_singlet_rank": 1,
+        "traceless_rank": 99,
+        "casimir_gap": 10
+      }
+    },
+    {
+      "name": "full-hodge-pairing",
+      "real_depth": 7,
+      "parameters": {
+        "channel_rank": 35
+      },
+      "measurements": {
+        "endomorphism_rank": 1225,
+        "trace_singlet_rank": 1,
+        "traceless_rank": 1224,
+        "casimir_gap": 35
+      }
+    },
+    {
+      "name": "full-hodge-pairing",
+      "real_depth": 8,
+      "parameters": {
+        "channel_rank": 35
+      },
+      "measurements": {
+        "endomorphism_rank": 1225,
+        "trace_singlet_rank": 1,
+        "traceless_rank": 1224,
+        "casimir_gap": 35
+      }
+    },
+    {
+      "name": "full-hodge-pairing",
+      "real_depth": 10,
+      "parameters": {
+        "channel_rank": 126
+      },
+      "measurements": {
+        "endomorphism_rank": 15876,
+        "trace_singlet_rank": 1,
+        "traceless_rank": 15875,
+        "casimir_gap": 126
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 2,
+      "mode_index": 76,
+      "parameters": {
+        "particle": "W",
+        "complex_rank": 1,
+        "unpaired_real_directions": 0,
+        "group": "SU(1)"
+      },
+      "measurements": {
+        "shell_singlets": 76,
+        "band_singlets": 2926,
+        "full_band_count": 2926,
+        "singlet_fraction": "1"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 2,
+      "mode_index": 81,
+      "parameters": {
+        "particle": "Z",
+        "complex_rank": 1,
+        "unpaired_real_directions": 0,
+        "group": "SU(1)"
+      },
+      "measurements": {
+        "shell_singlets": 81,
+        "band_singlets": 3321,
+        "full_band_count": 3321,
+        "singlet_fraction": "1"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 2,
+      "mode_index": 95,
+      "parameters": {
+        "particle": "H",
+        "complex_rank": 1,
+        "unpaired_real_directions": 0,
+        "group": "SU(1)"
+      },
+      "measurements": {
+        "shell_singlets": 95,
+        "band_singlets": 4560,
+        "full_band_count": 4560,
+        "singlet_fraction": "1"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 3,
+      "mode_index": 1,
+      "parameters": {
+        "particle": "down",
+        "complex_rank": 1,
+        "unpaired_real_directions": 1,
+        "group": "SU(1)"
+      },
+      "measurements": {
+        "shell_singlets": 1,
+        "band_singlets": 1,
+        "full_band_count": 1,
+        "singlet_fraction": "1"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 3,
+      "mode_index": 4,
+      "parameters": {
+        "particle": "strange",
+        "complex_rank": 1,
+        "unpaired_real_directions": 1,
+        "group": "SU(1)"
+      },
+      "measurements": {
+        "shell_singlets": 10,
+        "band_singlets": 20,
+        "full_band_count": 20,
+        "singlet_fraction": "1"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 4,
+      "mode_index": 3,
+      "parameters": {
+        "particle": "up",
+        "complex_rank": 2,
+        "unpaired_real_directions": 0,
+        "group": "SU(2)"
+      },
+      "measurements": {
+        "shell_singlets": 1,
+        "band_singlets": 2,
+        "full_band_count": 15,
+        "singlet_fraction": "2/15"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 4,
+      "mode_index": 20,
+      "parameters": {
+        "particle": "charm",
+        "complex_rank": 2,
+        "unpaired_real_directions": 0,
+        "group": "SU(2)"
+      },
+      "measurements": {
+        "shell_singlets": 0,
+        "band_singlets": 10,
+        "full_band_count": 8855,
+        "singlet_fraction": "2/1771"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 4,
+      "mode_index": 72,
+      "parameters": {
+        "particle": "top",
+        "complex_rank": 2,
+        "unpaired_real_directions": 0,
+        "group": "SU(2)"
+      },
+      "measurements": {
+        "shell_singlets": 0,
+        "band_singlets": 36,
+        "full_band_count": 1215450,
+        "singlet_fraction": "2/67525"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 5,
+      "mode_index": 10,
+      "parameters": {
+        "particle": "nu1",
+        "complex_rank": 2,
+        "unpaired_real_directions": 1,
+        "group": "SU(2)"
+      },
+      "measurements": {
+        "shell_singlets": 5,
+        "band_singlets": 30,
+        "full_band_count": 2002,
+        "singlet_fraction": "15/1001"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 5,
+      "mode_index": 15,
+      "parameters": {
+        "particle": "nu2",
+        "complex_rank": 2,
+        "unpaired_real_directions": 1,
+        "group": "SU(2)"
+      },
+      "measurements": {
+        "shell_singlets": 8,
+        "band_singlets": 64,
+        "full_band_count": 11628,
+        "singlet_fraction": "16/2907"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 5,
+      "mode_index": 22,
+      "parameters": {
+        "particle": "nu3",
+        "complex_rank": 2,
+        "unpaired_real_directions": 1,
+        "group": "SU(2)"
+      },
+      "measurements": {
+        "shell_singlets": 11,
+        "band_singlets": 132,
+        "full_band_count": 65780,
+        "singlet_fraction": "3/1495"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 6,
+      "mode_index": 13,
+      "parameters": {
+        "particle": "electron",
+        "complex_rank": 3,
+        "unpaired_real_directions": 0,
+        "group": "SU(3)"
+      },
+      "measurements": {
+        "shell_singlets": 1,
+        "band_singlets": 7,
+        "full_band_count": 18564,
+        "singlet_fraction": "1/2652"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 6,
+      "mode_index": 35,
+      "parameters": {
+        "particle": "muon",
+        "complex_rank": 3,
+        "unpaired_real_directions": 0,
+        "group": "SU(3)"
+      },
+      "measurements": {
+        "shell_singlets": 1,
+        "band_singlets": 18,
+        "full_band_count": 3838380,
+        "singlet_fraction": "3/639730"
+      }
+    },
+    {
+      "name": "assigned-oscillator-invariants",
+      "real_depth": 10,
+      "mode_index": 23,
+      "parameters": {
+        "particle": "tau",
+        "complex_rank": 5,
+        "unpaired_real_directions": 0,
+        "group": "SU(5)"
+      },
+      "measurements": {
+        "shell_singlets": 1,
+        "band_singlets": 12,
+        "full_band_count": 64512240,
+        "singlet_fraction": "1/5376020"
+      }
+    },
+    {
+      "name": "same-color-subgroup",
+      "real_depth": 6,
+      "mode_index": 13,
+      "parameters": {
+        "singlet_spectators": 0
+      },
+      "measurements": {
+        "shell_singlets": 1,
+        "band_singlets": 7,
+        "full_band_count": 18564,
+        "singlet_fraction": "1/2652"
+      }
+    },
+    {
+      "name": "same-color-subgroup",
+      "real_depth": 6,
+      "mode_index": 35,
+      "parameters": {
+        "singlet_spectators": 0
+      },
+      "measurements": {
+        "shell_singlets": 1,
+        "band_singlets": 18,
+        "full_band_count": 3838380,
+        "singlet_fraction": "3/639730"
+      }
+    },
+    {
+      "name": "same-color-subgroup",
+      "real_depth": 7,
+      "mode_index": 8,
+      "parameters": {
+        "singlet_spectators": 1
+      },
+      "measurements": {
+        "shell_singlets": 4,
+        "band_singlets": 20,
+        "full_band_count": 3432,
+        "singlet_fraction": "5/858"
+      }
+    },
+    {
+      "name": "same-color-subgroup",
+      "real_depth": 8,
+      "mode_index": 8,
+      "parameters": {
+        "singlet_spectators": 2
+      },
+      "measurements": {
+        "shell_singlets": 20,
+        "band_singlets": 70,
+        "full_band_count": 6435,
+        "singlet_fraction": "14/1287"
+      }
+    },
+    {
+      "name": "same-color-subgroup",
+      "real_depth": 10,
+      "mode_index": 23,
+      "parameters": {
+        "singlet_spectators": 4
+      },
+      "measurements": {
+        "shell_singlets": 8086,
+        "band_singlets": 44408,
+        "full_band_count": 64512240,
+        "singlet_fraction": "427/620310"
+      }
+    }
+  ]
+}

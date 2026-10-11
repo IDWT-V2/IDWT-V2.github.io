@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>hodge-reality-cancellation-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/hodge-reality-cancellation-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="hodge-reality-cancellation-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/hodge-reality-cancellation-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hodge-reality-cancellation-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>hodge-reality-cancellation-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/hodge-reality-cancellation-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">experiment_key</th><td>hodge-reality-cancellation-20261009</td></tr><tr><th scope="row">created_utc</th><td>2026-10-09T21:09:16.357832+00:00</td></tr><tr><th scope="row">scope</th><td>Middle-Hodge conjugation and explicit same-law kinetic current counterexample; no particle simulations.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;experiment_key&quot;: &quot;hodge-reality-cancellation-20261009&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-09T21:09:16.357832+00:00&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/hodge-reality-cancellation-checks.py&quot;: &quot;42f0d3f5b4010588c2e94b063ef62956d8900f52c33897d81faca93fe8883c44&quot;
+  },
+  &quot;scope&quot;: &quot;Middle-Hodge conjugation and explicit same-law kinetic current counterexample; no particle simulations.&quot;,
+  &quot;summary&quot;: {
+    &quot;checks_passed&quot;: 1915,
+    &quot;case_count&quot;: 7,
+    &quot;six_and_ten_have_naturally_conjugate_middle_channels&quot;: true,
+    &quot;conjugate_reality_alone_forces_neutral_current&quot;: false
+  },
+  &quot;cases&quot;: [
+    {
+      &quot;name&quot;: &quot;middle-hodge-reality&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;middle_degree&quot;: 1,
+        &quot;shadow_depth&quot;: 1
+      },
+      &quot;measurements&quot;: {
+        &quot;each_channel_rank&quot;: 1,
+        &quot;star_squared&quot;: -1,
+        &quot;chirality_exchanged_by_conjugation&quot;: true,
+        &quot;eigenvalues&quot;: [
+          &quot;i&quot;,
+          &quot;-i&quot;
+        ]
+      }
+    },
+    {
+      &quot;name&quot;: &quot;middle-hodge-reality&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;parameters&quot;: {
+        &quot;middle_degree&quot;: 2,
+        &quot;shadow_depth&quot;: 3
+      },
+      &quot;measurements&quot;: {
+        &quot;each_channel_rank&quot;: 3,
+        &quot;star_squared&quot;: 1,
+        &quot;chirality_exchanged_by_conjugation&quot;: false,
+        &quot;eigenvalues&quot;: [
+          &quot;1&quot;,
+          &quot;-1&quot;
+        ]
+      }
+    },
+    {
+      &quot;name&quot;: &quot;middle-hodge-reality&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;parameters&quot;: {
+        &quot;middle_degree&quot;: 3,
+        &quot;shadow_depth&quot;: 5
+      },
+      &quot;measurements&quot;: {
+        &quot;each_channel_rank&quot;: 10,
+        &quot;star_squared&quot;: -1,
+        &quot;chirality_exchanged_by_conjugation&quot;: true,
+        &quot;eigenvalues&quot;: [
+          &quot;i&quot;,
+          &quot;-i&quot;
+        ]
+      }
+    },
+    {
+      &quot;name&quot;: &quot;middle-hodge-reality&quot;,
+      &quot;real_depth&quot;: 8,
+      &quot;parameters&quot;: {
+        &quot;middle_degree&quot;: 4,
+        &quot;shadow_depth&quot;: 7
+      },
+      &quot;measurements&quot;: {
+        &quot;each_channel_rank&quot;: 35,
+        &quot;star_squared&quot;: 1,
+        &quot;chirality_exchanged_by_conjugation&quot;: false,
+        &quot;eigenvalues&quot;: [
+          &quot;1&quot;,
+          &quot;-1&quot;
+        ]
+      }
+    },
+    {
+      &quot;name&quot;: &quot;middle-hodge-reality&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;parameters&quot;: {
+        &quot;middle_degree&quot;: 5,
+        &quot;shadow_depth&quot;: 9
+      },
+      &quot;measurements&quot;: {
+        &quot;each_channel_rank&quot;: 126,
+        &quot;star_squared&quot;: -1,
+        &quot;chirality_exchanged_by_conjugation&quot;: true,
+        &quot;eigenvalues&quot;: [
+          &quot;i&quot;,
+          &quot;-i&quot;
+        ]
+      }
+    },
+    {
+      &quot;name&quot;: &quot;middle-hodge-reality&quot;,
+      &quot;real_depth&quot;: 12,
+      &quot;parameters&quot;: {
+        &quot;middle_degree&quot;: 6,
+        &quot;shadow_depth&quot;: 11
+      },
+      &quot;measurements&quot;: {
+        &quot;each_channel_rank&quot;: 462,
+        &quot;star_squared&quot;: 1,
+        &quot;chirality_exchanged_by_conjugation&quot;: false,
+        &quot;eigenvalues&quot;: [
+          &quot;1&quot;,
+          &quot;-1&quot;
+        ]
+      }
+    },
+    {
+      &quot;name&quot;: &quot;conjugate-reality-noether-control&quot;,
+      &quot;parameters&quot;: {
+        &quot;kinetics&quot;: &quot;positive second-order norm&quot;,
+        &quot;representations&quot;: &quot;3 direct-sum conjugate3&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;sum_algebraic_densities&quot;: &quot;0&quot;,
+        &quot;sum_noether_currents&quot;: &quot;-2*omega&quot;,
+        &quot;kinetic_norm&quot;: &quot;2*omega**2&quot;,
+        &quot;same-sign_first-order_kinetic_sum&quot;: &quot;0&quot;
+      }
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

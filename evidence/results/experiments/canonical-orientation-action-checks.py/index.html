@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>canonical-orientation-action-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/canonical-orientation-action-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="canonical-orientation-action-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/canonical-orientation-action-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="canonical-orientation-action-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>canonical-orientation-action-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/canonical-orientation-action-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact principal response of a first-derivative normal orientation action.&quot;&quot;&quot;
+import argparse
+import hashlib
+import json
+from itertools import combinations
+from pathlib import Path
+import sympy as s
+
+checks = 0
+
+
+def check(ok):
+    global checks
+    if not ok:
+        raise AssertionError(&#39;Exact orientation action condition failed&#39;)
+    checks += 1
+
+
+def anti(b):
+    r, i = s.re(b), s.im(b)
+    return r.row_join(i).col_join(i.row_join(-r))
+
+
+def inner(a, b):
+    return s.trace(a.T*b)
+
+
+cases = []
+for q in (2, 3, 4):
+    basis = []
+    for i, j in combinations(range(q), 2):
+        e = s.zeros(q)
+        e[i, j], e[j, i] = 1, -1
+        basis.extend((anti(e)/2, anti(s.I*e)/2))
+    gram = s.Matrix(len(basis), len(basis), lambda i, j: inner(basis[i], basis[j]))
+    check(gram == s.eye(len(basis)))
+    x = basis[0]
+    brackets = [x*y-y*x for y in basis]
+    c = s.Matrix(len(basis), len(basis), lambda i, j: inner(brackets[i], brackets[j]))
+    check(c.T == c)
+    eigenvalues = c.eigenvals()
+    check(all(v &gt;= 0 for v in eigenvalues))
+    for f2, epsilon, k2 in ((1, 1, 1), (s.Rational(1, 3), 2, 3), (2, 0, 4)):
+        kinetic = 4*f2*s.eye(len(basis))+epsilon*k2*c
+        for cos2 in (0, s.Rational(1, 4), 1):
+            gradient = 4*f2*s.eye(len(basis))+epsilon*k2*(1-cos2)*c
+            for v in eigenvalues:
+                speed2 = (4*f2+epsilon*k2*(1-cos2)*v)/(4*f2+epsilon*k2*v)
+                check(0 &lt; speed2 &lt;= 1)
+            check(kinetic-gradient == epsilon*k2*cos2*c)
+    cases.append({&#39;complex_normal_rank&#39;: q,
+                  &#39;orientation_real_dimension&#39;: len(basis),
+                  &#39;unit_geodesic_curvature_gram_eigenvalues&#39;: {str(v): m for v, m in eigenvalues.items()}})
+
+q2 = cases[0][&#39;unit_geodesic_curvature_gram_eigenvalues&#39;]
+check(q2 == {&#39;0&#39;: 1, &#39;1&#39;: 1})
+f2, epsilon, k2, cos2, c = s.symbols(&#39;f2 epsilon k2 cos2 c&#39;, nonnegative=True)
+v2 = (4*f2+epsilon*k2*(1-cos2)*c)/(4*f2+epsilon*k2*c)
+check(s.factor(1-v2) == epsilon*k2*cos2*c/(4*f2+epsilon*k2*c))
+
+parser = argparse.ArgumentParser()
+parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+args = parser.parse_args()
+report = {&#39;checks_passed&#39;: checks,
+          &#39;cases&#39;: cases,
+          &#39;occupied_cases&#39;: [{&#39;real_depth&#39;: d, &#39;even_carrier&#39;: d if d % 2 == 0 else d+1,
+                              &#39;complex_normal_rank&#39;: (10-(d if d % 2 == 0 else d+1))//2,
+                              &#39;hodge_coefficient&#39;: int(d in (3, 4))}
+                             for d in (2, 3, 4, 5, 6, 10)],
+          &#39;sources&#39;: {&#39;experiments/canonical-orientation-action-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
+          &#39;scope&#39;: &#39;Exact frozen principal symbol on a static single-geodesic orientation background; no general hyperbolicity, particle solution or fixed-flux guide existence claim&#39;}
+args.report.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;checks_passed&#39;: checks, &#39;cases&#39;: cases}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

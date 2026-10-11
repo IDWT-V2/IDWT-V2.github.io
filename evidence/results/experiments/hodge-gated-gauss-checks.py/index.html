@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>hodge-gated-gauss-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/hodge-gated-gauss-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="hodge-gated-gauss-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/hodge-gated-gauss-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hodge-gated-gauss-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>hodge-gated-gauss-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/hodge-gated-gauss-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Test one geometric zero-dielectric constraint without erasing active kinetics.&quot;&quot;&quot;
+from pathlib import Path
+from itertools import combinations
+import argparse
+import hashlib
+import json
+import math
+
+import numpy as np
+from scipy.linalg import expm
+from scipy.integrate import quad
+
+
+DEPTHS=(2,3,4,5,6,10)
+CHECKS=0
+CASES=[]
+
+
+def check(condition,message):
+    global CHECKS
+    CHECKS+=1
+    if not condition:
+        raise AssertionError(message)
+
+
+def close(actual,expected,message,atol=2e-10):
+    check(np.allclose(actual,expected,atol=atol,rtol=2e-10),message)
+
+
+def tensor(factors):
+    result=np.ones((1,1),complex)
+    for factor in factors:
+        result=np.kron(result,factor)
+    return result
+
+
+def build_geometry():
+    x=np.array([[0,1],[1,0]],complex)
+    y=np.array([[0,-1j],[1j,0]],complex)
+    z=np.diag([1.,-1.])
+    identity=np.eye(2)
+    gamma=[]
+    for mode in range(5):
+        for pauli in (x,y):
+            gamma.append(tensor([z]*mode+[pauli]+[identity]*(4-mode)))
+    for i,g in enumerate(gamma):
+        close(g,g.conj().T,&#39;Hermitian full spatial Clifford matrix&#39;)
+        for j,h in enumerate(gamma):
+            close(g@h+h@g,2*np.eye(32) if i==j else 0,&#39;full ten-dimensional Clifford relation&#39;)
+    annihilate=[(gamma[2*j]+1j*gamma[2*j+1])/2 for j in range(2,5)]
+    number=[a.conj().T@a for a in annihilate]
+    fundamental=[]
+    for i,j in combinations(range(3),2):
+        g=np.zeros((3,3),complex);g[i,j]=g[j,i]=.5;fundamental.append(g)
+        g=np.zeros((3,3),complex);g[i,j]=-.5j;g[j,i]=.5j;fundamental.append(g)
+    fundamental.extend([np.diag([1.,-1.,0])/2,np.diag([1.,1.,-2.])/(2*math.sqrt(3))])
+    lifted=[sum((g[i,j]*annihilate[i].conj().T@annihilate[j]
+                 for i in range(3) for j in range(3)),np.zeros((32,32),complex))
+            for g in fundamental]
+    for i,g in enumerate(fundamental):
+        for j,h in enumerate(fundamental):
+            close(np.trace(g@h),.5 if i==j else 0,&#39;fundamental color normalization&#39;)
+    residual=[]
+    for g in (np.array([[0,0,0],[0,0,1],[0,1,0]],complex)/2,
+              np.array([[0,0,0],[0,0,-1j],[0,1j,0]],complex)/2,
+              np.diag([0.,1.,-1.])/2):
+        residual.append(sum((g[i,j]*annihilate[i].conj().T@annihilate[j]
+                             for i in range(3) for j in range(3)),np.zeros((32,32),complex)))
+    return gamma,lifted,residual,number
+
+
+def hodge(even_depth):
+    m=even_depth//2
+    basis=list(combinations(range(even_depth),m))
+    lookup={item:i for i,item in enumerate(basis)}
+    star=np.zeros((len(basis),len(basis)))
+    for j,item in enumerate(basis):
+        complement=tuple(i for i in range(even_depth) if i not in item)
+        ordered=item+complement
+        sign=(-1)**sum(ordered[i]&gt;ordered[j] for i in range(even_depth) for j in range(i+1,even_depth))
+        star[lookup[complement],j]=sign
+    close(star.T@star,np.eye(len(basis)),&#39;Hodge map preserves form metric&#39;)
+    close(star@star,(-1)**m*np.eye(len(basis)),&#39;middle-degree Hodge square&#39;)
+    symmetric=(star+star.T)/2
+    close(symmetric,star if m%2==0 else 0,&#39;one symmetric Hodge law yields its zeros&#39;)
+    return symmetric
+
+
+def source_prefactor(psi,gamma,color):
+    total=0.
+    for i,j in combinations(range(4),2):
+        blade=1j*gamma[i]@gamma[j]
+        for generator in color:
+            current=psi.conj()@((blade@generator+generator@blade)/2)@psi
+            close(current.imag,0,&#39;Hermitian middle-form color current is real&#39;)
+            total+=current.real**2
+    return total
+
+
+def geometric_constraint_checks():
+    gamma,color,residual,number=build_geometry()
+    normal_n=sum(number)
+    triplet_mask=np.isclose(np.diag(normal_n),2)
+    triplet=np.diag(triplet_mask.astype(float))
+    expected_commutants={2:8,3:8,4:8,5:3,6:3,10:0}
+    expected_singlets={2:8,3:8,4:8,5:16,6:16,10:32}
+    rng=np.random.default_rng(20261010)
+    for d in DEPTHS:
+        even=d if d%2==0 else d+1
+        symmetric=hodge(even)
+        active=bool(np.linalg.norm(symmetric)&gt;1e-10)
+        check(active==(d in (3,4)),&#39;Hodge prefactor supports only occupied three/four&#39;)
+        columns=[np.concatenate([(g@v-v@g).reshape(-1) for v in gamma[:d]]) for g in color]
+        matrix=np.column_stack(columns)
+        gram=(matrix.conj().T@matrix).real
+        commutant=int(np.count_nonzero(np.linalg.eigvalsh(gram)&lt;1e-9))
+        check(commutant==expected_commutants[d],&#39;actual pointwise normal color commutant&#39;)
+        algebra=color if d&lt;=4 else residual if d&lt;=6 else []
+        check(len(algebra)==commutant,&#39;selected surviving generators span the commutant&#39;)
+        for g in algebra:
+            for v in gamma[:d]:
+                close(g@v,v@g,&#39;retained gauge algebra preserves every active kinetic direction&#39;)
+        casimir=sum((g@g for g in algebra),np.zeros((32,32),complex))
+        values,vectors=np.linalg.eigh(casimir)
+        check(np.min(values)&gt;-1e-10,&#39;surviving color Casimir is positive semidefinite&#39;)
+        kernel=vectors[:,values&lt;1e-9]
+        projector=kernel@kernel.conj().T
+        rank=kernel.shape[1]
+        check(rank==expected_singlets[d],&#39;joint color singlet rank&#39;)
+        close(projector@projector,projector,&#39;singlet projector is idempotent&#39;)
+        if d&lt;=4:
+            expected=np.diag((np.isclose(np.diag(normal_n),0)|np.isclose(np.diag(normal_n),3)).astype(float))
+        elif d&lt;=6:
+            last_two=number[1]+number[2]
+            expected=np.diag((np.isclose(np.diag(last_two),0)|np.isclose(np.diag(last_two),2)).astype(float))
+        else:
+            expected=np.eye(32)
+        close(projector,expected,&#39;Casimir kernel equals the complete exterior singlet branch&#39;)
+        for i,v in enumerate(gamma[:d]):
+            close(projector@v,v@projector,&#39;singlet constraint preserves the full active spatial symbol&#39;)
+            close(np.linalg.norm(projector@v@projector)**2,rank,&#39;no active kinetic direction is erased&#39;)
+            for j,w in enumerate(gamma[:d]):
+                compressed=projector@v@projector@w@projector+projector@w@projector@v@projector
+                close(compressed,2*projector if i==j else 0,&#39;constrained Clifford metric is unchanged&#39;)
+        psi=projector@(rng.normal(size=32)+1j*rng.normal(size=32))
+        psi/=np.linalg.norm(psi)
+        for g in algebra:
+            close(g@projector,0,&#39;singlet annihilates the actual gauge generator&#39;)
+            close(psi.conj()@g@psi,0,&#39;singlet Gauss source vanishes&#39;)
+            for v in gamma[:d]:
+                close(psi.conj()@v@g@psi,0,&#39;singlet spatial source current vanishes&#39;)
+        for i,j in combinations(range(3),2):
+            spin=gamma[i]@gamma[j]/2
+            close(projector@spin,spin@projector,&#39;observer spin is retained by the singlet constraint&#39;)
+        if active:
+            for v in gamma[:d]:
+                close(triplet@v,v@triplet,&#39;active full triplet retains every spatial direction&#39;)
+            colored=triplet@(rng.normal(size=32)+1j*rng.normal(size=32))
+            colored/=np.linalg.norm(colored)
+            epsilon=source_prefactor(colored,gamma,color)
+            check(epsilon&gt;1e-8,&#39;nonzero colored state has positive actual current prefactor&#39;)
+            rotation=expm(1j*sum(rng.normal()*g for g in color))
+            close(source_prefactor(rotation@colored,gamma,color),epsilon,&#39;current prefactor is gauge invariant&#39;)
+            spin_rotation=expm(.37*gamma[0]@gamma[1]+.19*gamma[1]@gamma[2])
+            close(source_prefactor(spin_rotation@colored,gamma,color),epsilon,&#39;current prefactor is observer-spin invariant&#39;)
+        else:
+            epsilon=0.
+        CASES.append({&#39;case&#39;:f&#39;hodge-gauss-sector-depth-{d}&#39;,&#39;depth&#39;:d,&#39;even_source_carrier&#39;:even,
+                      &#39;hodge_prefactor_active&#39;:active,&#39;independent_normal_algebra_dimension&#39;:commutant,
+                      &#39;joint_singlet_rank&#39;:rank,&#39;all_active_kinetic_directions_preserved&#39;:True,
+                      &#39;allowed_active_triplet_rank&#39;:12 if active else None,
+                      &#39;example_current_prefactor&#39;:epsilon,
+                      &#39;zero_dielectric_enforces_source_constraint&#39;:not active and commutant&gt;0,
+                      &#39;all_higher_forces_excluded&#39;:False})
+
+
+def finite_floor_checks():
+    sigma=1.3
+    for d in DEPTHS:
+        # A smooth neutral quadrupole has a positive, finite ordinary Gauss energy.
+        area=2*math.pi**(d/2)/math.gamma(d/2)
+        angular=3/(d*(d+2))
+        radial,error=quad(lambda k:k**(d+1)*math.exp(-sigma*sigma*k*k),0,np.inf,
+                          epsabs=1e-11)
+        unit_numeric=area/(2*(2*math.pi)**d)*angular*radial
+        unit_closed=3/(4*(d+2)*(4*math.pi)**(d/2)*sigma**(d+2))
+        close(unit_numeric,unit_closed,&#39;independent finite quadrupole Gauss energy&#39;)
+        energies=[]
+        for floor in (1.,.1,.01,.001):
+            energy=unit_closed/floor
+            check(energy&gt;0,&#39;finite positive Gauss energy for positive floor&#39;)
+            energies.append(energy)
+        for i in range(3):
+            close(energies[i+1]/energies[i],10,&#39;inactive nonzero sources diverge as inverse dielectric floor&#39;)
+        CASES.append({&#39;case&#39;:f&#39;finite-floor-source-depth-{d}&#39;,&#39;depth&#39;:d,&#39;sigma&#39;:sigma,
+                      &#39;unit_floor_energy&#39;:unit_closed,&#39;independent_integral&#39;:unit_numeric,
+                      &#39;floors&#39;:[1.,.1,.01,.001],&#39;energies&#39;:energies,
+                      &#39;source_total_charge_zero&#39;:True,&#39;source_dipole_zero&#39;:True,
+                      &#39;source_constraint_requires_exact_zero_prefactor&#39;:True})
+
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument(&#39;--report&#39;,type=Path,required=True)
+    args=parser.parse_args()
+    geometric_constraint_checks()
+    finite_floor_checks()
+    result={&#39;title&#39;:&#39;A Hodge-Gated Gauss Constraint Retains Complete Spatial Singlet Branches&#39;,
+            &#39;sources&#39;:{&#39;experiments/hodge-gated-gauss-checks.py&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
+            &#39;checks_passed&#39;:CHECKS,&#39;case_count&#39;:len(CASES),&#39;occupied_depths&#39;:list(DEPTHS),
+            &#39;status&#39;:&#39;conditional common action, not a derived master-field coefficient or complete color force&#39;,
+            &#39;conclusion&#39;:&#39;Putting the existing positive Hodge-current norm in the actual connection dielectric gives exact inactive-sector source constraints. Complete singlet branches of the surviving normal gauge algebra retain every active spatial Clifford direction. Active three/four triplets retain independent color. An ordinary dielectric floor removes the exact constraint.&#39;,
+            &#39;cases&#39;:CASES}
+    args.report.write_text(json.dumps(result,indent=2)+&#39;\n&#39;)
+    print(f&#39;{CHECKS} checks passed across {len(CASES)} cases; {args.report}&#39;)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

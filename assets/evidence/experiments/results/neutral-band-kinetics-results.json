@@ -1,0 +1,595 @@
+{
+  "experiment_key": "neutral-band-kinetics-20261009",
+  "created_utc": "2026-10-09T21:06:51.372165+00:00",
+  "sources": {
+    "experiments/neutral-band-kinetics-checks.py": "60d605bc612befa222996f59c9960c06c4312bdf134b07a86a34f2b302ab6a2d"
+  },
+  "scope": "Exact Clifford compression and finite equivariant-evaluation controls; no spatial particle solution or independent color derivation.",
+  "summary": {
+    "checks_passed": 548,
+    "case_count": 40,
+    "spinor_fibre_only_singlet_loses_spatial_depth_at_d4_and_above": true,
+    "separate_color_multiplicity_preserves_full_Clifford_symbol": true,
+    "equivariant_source_can_retain_full_contact_count": true
+  },
+  "cases": [
+    {
+      "name": "pointwise-spinor-singlet",
+      "real_depth": 2,
+      "parameters": {
+        "spinor_rank": 2,
+        "rotation_subgroup": "SU(1)"
+      },
+      "measurements": {
+        "invariant_fibre_rank": 2,
+        "retained_principal_directions": 2,
+        "squared_leakage_per_direction": [
+          0,
+          0
+        ],
+        "complete_depth_retained": true
+      }
+    },
+    {
+      "name": "pointwise-spinor-singlet",
+      "real_depth": 3,
+      "parameters": {
+        "spinor_rank": 2,
+        "rotation_subgroup": "SU(1)"
+      },
+      "measurements": {
+        "invariant_fibre_rank": 2,
+        "retained_principal_directions": 3,
+        "squared_leakage_per_direction": [
+          0,
+          0,
+          0
+        ],
+        "complete_depth_retained": true
+      }
+    },
+    {
+      "name": "pointwise-spinor-singlet",
+      "real_depth": 4,
+      "parameters": {
+        "spinor_rank": 4,
+        "rotation_subgroup": "SU(2)"
+      },
+      "measurements": {
+        "invariant_fibre_rank": 2,
+        "retained_principal_directions": 0,
+        "squared_leakage_per_direction": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "complete_depth_retained": false
+      }
+    },
+    {
+      "name": "pointwise-spinor-singlet",
+      "real_depth": 5,
+      "parameters": {
+        "spinor_rank": 4,
+        "rotation_subgroup": "SU(2)"
+      },
+      "measurements": {
+        "invariant_fibre_rank": 2,
+        "retained_principal_directions": 1,
+        "squared_leakage_per_direction": [
+          2,
+          2,
+          2,
+          2,
+          0
+        ],
+        "complete_depth_retained": false
+      }
+    },
+    {
+      "name": "pointwise-spinor-singlet",
+      "real_depth": 6,
+      "parameters": {
+        "spinor_rank": 8,
+        "rotation_subgroup": "SU(3)"
+      },
+      "measurements": {
+        "invariant_fibre_rank": 2,
+        "retained_principal_directions": 0,
+        "squared_leakage_per_direction": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "complete_depth_retained": false
+      }
+    },
+    {
+      "name": "pointwise-spinor-singlet",
+      "real_depth": 7,
+      "parameters": {
+        "spinor_rank": 8,
+        "rotation_subgroup": "SU(3)"
+      },
+      "measurements": {
+        "invariant_fibre_rank": 2,
+        "retained_principal_directions": 1,
+        "squared_leakage_per_direction": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0
+        ],
+        "complete_depth_retained": false
+      }
+    },
+    {
+      "name": "pointwise-spinor-singlet",
+      "real_depth": 8,
+      "parameters": {
+        "spinor_rank": 16,
+        "rotation_subgroup": "SU(4)"
+      },
+      "measurements": {
+        "invariant_fibre_rank": 2,
+        "retained_principal_directions": 0,
+        "squared_leakage_per_direction": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "complete_depth_retained": false
+      }
+    },
+    {
+      "name": "pointwise-spinor-singlet",
+      "real_depth": 9,
+      "parameters": {
+        "spinor_rank": 16,
+        "rotation_subgroup": "SU(4)"
+      },
+      "measurements": {
+        "invariant_fibre_rank": 2,
+        "retained_principal_directions": 1,
+        "squared_leakage_per_direction": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0
+        ],
+        "complete_depth_retained": false
+      }
+    },
+    {
+      "name": "pointwise-spinor-singlet",
+      "real_depth": 10,
+      "parameters": {
+        "spinor_rank": 32,
+        "rotation_subgroup": "SU(5)"
+      },
+      "measurements": {
+        "invariant_fibre_rank": 2,
+        "retained_principal_directions": 0,
+        "squared_leakage_per_direction": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "complete_depth_retained": false
+      }
+    },
+    {
+      "name": "separate-relative-mode-multiplicity",
+      "real_depth": 2,
+      "parameters": {
+        "carrier_rank": 9,
+        "singlet_rank": 1
+      },
+      "measurements": {
+        "retained_principal_directions": 2,
+        "complete_depth_retained": true
+      }
+    },
+    {
+      "name": "separate-relative-mode-multiplicity",
+      "real_depth": 3,
+      "parameters": {
+        "carrier_rank": 9,
+        "singlet_rank": 1
+      },
+      "measurements": {
+        "retained_principal_directions": 3,
+        "complete_depth_retained": true
+      }
+    },
+    {
+      "name": "separate-relative-mode-multiplicity",
+      "real_depth": 4,
+      "parameters": {
+        "carrier_rank": 9,
+        "singlet_rank": 1
+      },
+      "measurements": {
+        "retained_principal_directions": 4,
+        "complete_depth_retained": true
+      }
+    },
+    {
+      "name": "separate-relative-mode-multiplicity",
+      "real_depth": 5,
+      "parameters": {
+        "carrier_rank": 9,
+        "singlet_rank": 1
+      },
+      "measurements": {
+        "retained_principal_directions": 5,
+        "complete_depth_retained": true
+      }
+    },
+    {
+      "name": "separate-relative-mode-multiplicity",
+      "real_depth": 6,
+      "parameters": {
+        "carrier_rank": 9,
+        "singlet_rank": 1
+      },
+      "measurements": {
+        "retained_principal_directions": 6,
+        "complete_depth_retained": true
+      }
+    },
+    {
+      "name": "separate-relative-mode-multiplicity",
+      "real_depth": 10,
+      "parameters": {
+        "carrier_rank": 9,
+        "singlet_rank": 1
+      },
+      "measurements": {
+        "retained_principal_directions": 10,
+        "complete_depth_retained": true
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 2,
+      "mode_index": 1,
+      "measurements": {
+        "full_spatial_count": 1,
+        "selected_contact_eigenvalue": 1,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 2,
+      "mode_index": 2,
+      "measurements": {
+        "full_spatial_count": 3,
+        "selected_contact_eigenvalue": 3,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 2,
+      "mode_index": 3,
+      "measurements": {
+        "full_spatial_count": 6,
+        "selected_contact_eigenvalue": 6,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 3,
+      "mode_index": 1,
+      "measurements": {
+        "full_spatial_count": 1,
+        "selected_contact_eigenvalue": 1,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 3,
+      "mode_index": 2,
+      "measurements": {
+        "full_spatial_count": 4,
+        "selected_contact_eigenvalue": 4,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 3,
+      "mode_index": 3,
+      "measurements": {
+        "full_spatial_count": 10,
+        "selected_contact_eigenvalue": 10,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 4,
+      "mode_index": 1,
+      "measurements": {
+        "full_spatial_count": 1,
+        "selected_contact_eigenvalue": 1,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 4,
+      "mode_index": 2,
+      "measurements": {
+        "full_spatial_count": 5,
+        "selected_contact_eigenvalue": 5,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 4,
+      "mode_index": 3,
+      "measurements": {
+        "full_spatial_count": 15,
+        "selected_contact_eigenvalue": 15,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 5,
+      "mode_index": 1,
+      "measurements": {
+        "full_spatial_count": 1,
+        "selected_contact_eigenvalue": 1,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 5,
+      "mode_index": 2,
+      "measurements": {
+        "full_spatial_count": 6,
+        "selected_contact_eigenvalue": 6,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 5,
+      "mode_index": 3,
+      "measurements": {
+        "full_spatial_count": 21,
+        "selected_contact_eigenvalue": 21,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 6,
+      "mode_index": 1,
+      "measurements": {
+        "full_spatial_count": 1,
+        "selected_contact_eigenvalue": 1,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 6,
+      "mode_index": 2,
+      "measurements": {
+        "full_spatial_count": 7,
+        "selected_contact_eigenvalue": 7,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 6,
+      "mode_index": 3,
+      "measurements": {
+        "full_spatial_count": 28,
+        "selected_contact_eigenvalue": 28,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 10,
+      "mode_index": 1,
+      "measurements": {
+        "full_spatial_count": 1,
+        "selected_contact_eigenvalue": 1,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 10,
+      "mode_index": 2,
+      "measurements": {
+        "full_spatial_count": 11,
+        "selected_contact_eigenvalue": 11,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "reference-normalized-multiplicity",
+      "real_depth": 10,
+      "mode_index": 3,
+      "measurements": {
+        "full_spatial_count": 66,
+        "selected_contact_eigenvalue": 66,
+        "selected_carrier_rank": 1,
+        "reference_carrier_rank": 1
+      }
+    },
+    {
+      "name": "invariant-evaluation-with-kinetic-complement",
+      "real_depth": 2,
+      "mode_index": 5,
+      "parameters": {
+        "kinetic_radius": 1,
+        "contact_coefficient": 1,
+        "scope": "abstract equivariant evaluation control with spatial shell weights"
+      },
+      "measurements": {
+        "source_space_rank": 5,
+        "contact_eigenvalue": 15,
+        "dressed_frequency": 18.765486041016864,
+        "kinetic_mean": 3.6666666666666665,
+        "kinetic_variance": 1.5555555555555556
+      }
+    },
+    {
+      "name": "invariant-evaluation-with-kinetic-complement",
+      "real_depth": 3,
+      "mode_index": 5,
+      "parameters": {
+        "kinetic_radius": 1,
+        "contact_coefficient": 1,
+        "scope": "abstract equivariant evaluation control with spatial shell weights"
+      },
+      "measurements": {
+        "source_space_rank": 5,
+        "contact_eigenvalue": 35,
+        "dressed_frequency": 39.53333749334899,
+        "kinetic_mean": 4.5,
+        "kinetic_variance": 1.2
+      }
+    },
+    {
+      "name": "invariant-evaluation-with-kinetic-complement",
+      "real_depth": 4,
+      "mode_index": 5,
+      "parameters": {
+        "kinetic_radius": 1,
+        "contact_coefficient": 1,
+        "scope": "abstract equivariant evaluation control with spatial shell weights"
+      },
+      "measurements": {
+        "source_space_rank": 5,
+        "contact_eigenvalue": 70,
+        "dressed_frequency": 75.21350022183711,
+        "kinetic_mean": 5.2,
+        "kinetic_variance": 0.96
+      }
+    },
+    {
+      "name": "invariant-evaluation-with-kinetic-complement",
+      "real_depth": 5,
+      "mode_index": 10,
+      "parameters": {
+        "kinetic_radius": 1,
+        "contact_coefficient": 1,
+        "scope": "abstract equivariant evaluation control with spatial shell weights"
+      },
+      "measurements": {
+        "source_space_rank": 10,
+        "contact_eigenvalue": 2002,
+        "dressed_frequency": 2012.0013366131188,
+        "kinetic_mean": 10.0,
+        "kinetic_variance": 2.6785714285714284
+      }
+    },
+    {
+      "name": "invariant-evaluation-with-kinetic-complement",
+      "real_depth": 6,
+      "mode_index": 13,
+      "parameters": {
+        "kinetic_radius": 1,
+        "contact_coefficient": 1,
+        "scope": "abstract equivariant evaluation control with spatial shell weights"
+      },
+      "measurements": {
+        "source_space_rank": 13,
+        "contact_eigenvalue": 18564,
+        "dressed_frequency": 18577.28590224809,
+        "kinetic_mean": 13.285714285714286,
+        "kinetic_variance": 3.489795918367347
+      }
+    },
+    {
+      "name": "invariant-evaluation-with-kinetic-complement",
+      "real_depth": 6,
+      "mode_index": 35,
+      "parameters": {
+        "kinetic_radius": 1,
+        "contact_coefficient": 1,
+        "scope": "abstract equivariant evaluation control with spatial shell weights"
+      },
+      "measurements": {
+        "source_space_rank": 35,
+        "contact_eigenvalue": 3838380,
+        "dressed_frequency": 3838412.142862701,
+        "kinetic_mean": 32.14285714285714,
+        "kinetic_variance": 21.336734693877553
+      }
+    },
+    {
+      "name": "invariant-evaluation-with-kinetic-complement",
+      "real_depth": 10,
+      "mode_index": 23,
+      "parameters": {
+        "kinetic_radius": 1,
+        "contact_coefficient": 1,
+        "scope": "abstract equivariant evaluation control with spatial shell weights"
+      },
+      "measurements": {
+        "source_space_rank": 23,
+        "contact_eigenvalue": 64512240,
+        "dressed_frequency": 64512265.00000007,
+        "kinetic_mean": 25.0,
+        "kinetic_variance": 5.0
+      }
+    }
+  ]
+}

@@ -85,6 +85,18 @@ read-only run, or <code>--output FILE</code> to choose an explicit new filename.
 not a neighboring project or a fixed machine path. Python requires the
 scientific packages used by each calculation, including NumPy, SciPy,
 SymPy, and mpmath.</p>
+<h2 id="reproducing-the-normal-geometry-and-coupling-checks">Reproducing the Normal-Geometry and Coupling Checks</h2>
+<p>The geometric color synthesis and sector-case paper link the standalone Python
+sources and their frozen JSON reports. Download source files into an
+<code>experiments/</code> directory beneath a common working root. Recent frozen reports
+are published under <code>experiments/results/</code>; when a checker names an input under
+<code>results/</code>, save that report beneath the working root at its original <code>results/</code>
+path. These download copies retain the original bytes and source hashes.
+Install the dependencies imported by the selected checker, including SymPy,
+NumPy or SciPy where used, and retain any sibling checker it imports. Use a
+fresh output filename where the checker accepts one. A passing calculation
+verifies its stated mathematical comparison, not the identification of a
+physical color force or electric charge.</p>
 </div>
     
   </article>
@@ -92,7 +104,7 @@ SymPy, and mpmath.</p>
   <aside class="article-sidebar">
     <details class="page-toc" open>
       <summary>On this page</summary>
-      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#recorded-evidence">Recorded evidence</a></li></ol></nav>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#recorded-evidence">Recorded evidence</a></li><li class="toc-level-2"><a href="#reproducing-the-normal-geometry-and-coupling-checks">Reproducing the Normal-Geometry and Coupling Checks</a></li></ol></nav>
     </details>
   </aside>
   

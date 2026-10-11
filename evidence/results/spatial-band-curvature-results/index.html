@@ -1,0 +1,1076 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>spatial-band-curvature-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/spatial-band-curvature-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="spatial-band-curvature-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/spatial-band-curvature-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="spatial-band-curvature-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>spatial-band-curvature-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/spatial-band-curvature-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">experiment_key</th><td>actual-spatial-band-curvature-20261009</td></tr><tr><th scope="row">created_utc</th><td>2026-10-09T21:41:43.553023+00:00</td></tr><tr><th scope="row">scope</th><td>Actual monogenic sphere Dirac bands, probability-normalized spatial integration, contact and quantum tensor; exact maintained-branch moments. A spatial control family, not an empirical identification or compactification.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;experiment_key&quot;: &quot;actual-spatial-band-curvature-20261009&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-09T21:41:43.553023+00:00&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/spatial-band-curvature-checks.py&quot;: &quot;1adbe50fbe865da9b237fe8d3dd424ee43dcb951fc8f8c01a31a3e4b9330f657&quot;
+  },
+  &quot;scope&quot;: &quot;Actual monogenic sphere Dirac bands, probability-normalized spatial integration, contact and quantum tensor; exact maintained-branch moments. A spatial control family, not an empirical identification or compactification.&quot;,
+  &quot;summary&quot;: {
+    &quot;checks_passed&quot;: 4456,
+    &quot;case_count&quot;: 51
+  },
+  &quot;cases&quot;: [
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 76,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;W&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 2926,
+        &quot;curvature_coefficient_exact&quot;: &quot;650&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;325/2&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;2925/2&quot;,
+        &quot;geometric_ratio&quot;: 9
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 81,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;Z&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 3321,
+        &quot;curvature_coefficient_exact&quot;: &quot;6640/9&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;1660/9&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;1660&quot;,
+        &quot;geometric_ratio&quot;: 9
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 95,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;Higgs&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 4560,
+        &quot;curvature_coefficient_exact&quot;: &quot;9118/9&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;4559/18&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;4559/2&quot;,
+        &quot;geometric_ratio&quot;: 9
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;mode_index&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;down&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 1,
+        &quot;curvature_coefficient_exact&quot;: &quot;0&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;0&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;0&quot;,
+        &quot;geometric_ratio&quot;: null
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;mode_index&quot;: 4,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;strange&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 20,
+        &quot;curvature_coefficient_exact&quot;: &quot;21/16&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;21/80&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;21/5&quot;,
+        &quot;geometric_ratio&quot;: 16
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;up&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 15,
+        &quot;curvature_coefficient_exact&quot;: &quot;14/25&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;7/75&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;7/3&quot;,
+        &quot;geometric_ratio&quot;: 25
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 20,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;charm&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 8855,
+        &quot;curvature_coefficient_exact&quot;: &quot;456/25&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;76/25&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;76&quot;,
+        &quot;geometric_ratio&quot;: 25
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 72,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;top&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 1215450,
+        &quot;curvature_coefficient_exact&quot;: &quot;5396/25&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;2698/75&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;2698/3&quot;,
+        &quot;geometric_ratio&quot;: 25
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;mode_index&quot;: 10,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;nu1&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 2002,
+        &quot;curvature_coefficient_exact&quot;: &quot;15/4&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;15/28&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;135/7&quot;,
+        &quot;geometric_ratio&quot;: 36
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;mode_index&quot;: 15,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;nu2&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 11628,
+        &quot;curvature_coefficient_exact&quot;: &quot;70/9&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;10/9&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;40&quot;,
+        &quot;geometric_ratio&quot;: 36
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;mode_index&quot;: 22,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;nu3&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 65780,
+        &quot;curvature_coefficient_exact&quot;: &quot;63/4&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;9/4&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;81&quot;,
+        &quot;geometric_ratio&quot;: 36
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;mode_index&quot;: 13,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;electron&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 18564,
+        &quot;curvature_coefficient_exact&quot;: &quot;228/49&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;57/98&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;57/2&quot;,
+        &quot;geometric_ratio&quot;: 49
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;mode_index&quot;: 35,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;muon&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 3838380,
+        &quot;curvature_coefficient_exact&quot;: &quot;1394/49&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;697/196&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;697/4&quot;,
+        &quot;geometric_ratio&quot;: 49
+      }
+    },
+    {
+      &quot;name&quot;: &quot;maintained-branch-geometric-moments&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;mode_index&quot;: 23,
+      &quot;parameters&quot;: {
+        &quot;particle&quot;: &quot;tau&quot;,
+        &quot;sphere_radius&quot;: &quot;R; eigenvalues listed in R^-2&quot;
+      },
+      &quot;measurements&quot;: {
+        &quot;contact_count&quot;: 64512240,
+        &quot;curvature_coefficient_exact&quot;: &quot;6&quot;,
+        &quot;Clifford_trace_eigenvalue_exact&quot;: &quot;1/2&quot;,
+        &quot;twistor_eigenvalue_exact&quot;: &quot;121/2&quot;,
+        &quot;geometric_ratio&quot;: 121
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 0,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 2,
+        &quot;coefficient_dimension&quot;: 2
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 1,
+        &quot;curvature_coefficient&quot;: 0.0,
+        &quot;metric_diagonal&quot;: 0.0,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.0,
+        &quot;twistor_eigenvalue&quot;: 0.0,
+        &quot;geometric_spectral_ratio&quot;: null,
+        &quot;maximum_spectrum_error&quot;: 0.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 1,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 6,
+        &quot;coefficient_dimension&quot;: 8
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 3,
+        &quot;curvature_coefficient&quot;: 0.4444444444444444,
+        &quot;metric_diagonal&quot;: 0.5555555555555556,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.1111111111111111,
+        &quot;twistor_eigenvalue&quot;: 1.0,
+        &quot;geometric_spectral_ratio&quot;: 9,
+        &quot;maximum_spectrum_error&quot;: 2.220446049250313e-16
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 2,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 12,
+        &quot;coefficient_dimension&quot;: 20
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 6,
+        &quot;curvature_coefficient&quot;: 1.1111111111111112,
+        &quot;metric_diagonal&quot;: 1.3888888888888888,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.2777777777777778,
+        &quot;twistor_eigenvalue&quot;: 2.5,
+        &quot;geometric_spectral_ratio&quot;: 9,
+        &quot;maximum_spectrum_error&quot;: 8.881784197001252e-16
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 4,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 3,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 20,
+        &quot;coefficient_dimension&quot;: 40
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 10,
+        &quot;curvature_coefficient&quot;: 2.0,
+        &quot;metric_diagonal&quot;: 2.5,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.5,
+        &quot;twistor_eigenvalue&quot;: 4.5,
+        &quot;geometric_spectral_ratio&quot;: 9,
+        &quot;maximum_spectrum_error&quot;: 1.7763568394002505e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 5,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 4,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 30,
+        &quot;coefficient_dimension&quot;: 70
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 15,
+        &quot;curvature_coefficient&quot;: 3.111111111111111,
+        &quot;metric_diagonal&quot;: 3.888888888888889,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.7777777777777778,
+        &quot;twistor_eigenvalue&quot;: 7.0,
+        &quot;geometric_spectral_ratio&quot;: 9,
+        &quot;maximum_spectrum_error&quot;: 1.887379141862766e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 6,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 5,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 42,
+        &quot;coefficient_dimension&quot;: 112
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 21,
+        &quot;curvature_coefficient&quot;: 4.444444444444445,
+        &quot;metric_diagonal&quot;: 5.555555555555555,
+        &quot;Clifford_trace_eigenvalue&quot;: 1.1111111111111112,
+        &quot;twistor_eigenvalue&quot;: 10.0,
+        &quot;geometric_spectral_ratio&quot;: 9,
+        &quot;maximum_spectrum_error&quot;: 3.552713678800501e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;mode_index&quot;: 7,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 6,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 56,
+        &quot;coefficient_dimension&quot;: 168
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 28,
+        &quot;curvature_coefficient&quot;: 6.0,
+        &quot;metric_diagonal&quot;: 7.5,
+        &quot;Clifford_trace_eigenvalue&quot;: 1.5,
+        &quot;twistor_eigenvalue&quot;: 13.5,
+        &quot;geometric_spectral_ratio&quot;: 9,
+        &quot;maximum_spectrum_error&quot;: 3.552713678800501e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;mode_index&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 0,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 2,
+        &quot;coefficient_dimension&quot;: 2
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 1,
+        &quot;curvature_coefficient&quot;: 0.0,
+        &quot;metric_diagonal&quot;: 0.0,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.0,
+        &quot;twistor_eigenvalue&quot;: 0.0,
+        &quot;geometric_spectral_ratio&quot;: null,
+        &quot;maximum_spectrum_error&quot;: 0.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;mode_index&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 1,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 8,
+        &quot;coefficient_dimension&quot;: 10
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 4,
+        &quot;curvature_coefficient&quot;: 0.3125,
+        &quot;metric_diagonal&quot;: 0.6875,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.0625,
+        &quot;twistor_eigenvalue&quot;: 1.0,
+        &quot;geometric_spectral_ratio&quot;: 16,
+        &quot;maximum_spectrum_error&quot;: 4.440892098500626e-16
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;mode_index&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 2,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 20,
+        &quot;coefficient_dimension&quot;: 30
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 10,
+        &quot;curvature_coefficient&quot;: 0.75,
+        &quot;metric_diagonal&quot;: 1.6500000000000001,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.15,
+        &quot;twistor_eigenvalue&quot;: 2.4,
+        &quot;geometric_spectral_ratio&quot;: 16,
+        &quot;maximum_spectrum_error&quot;: 1.7763568394002505e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;mode_index&quot;: 4,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 3,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 40,
+        &quot;coefficient_dimension&quot;: 70
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 20,
+        &quot;curvature_coefficient&quot;: 1.3125,
+        &quot;metric_diagonal&quot;: 2.8875,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.2625,
+        &quot;twistor_eigenvalue&quot;: 4.2,
+        &quot;geometric_spectral_ratio&quot;: 16,
+        &quot;maximum_spectrum_error&quot;: 7.105427357601002e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;mode_index&quot;: 5,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 4,
+        &quot;spinor_rank&quot;: 2,
+        &quot;physical_band_dimension&quot;: 70,
+        &quot;coefficient_dimension&quot;: 140
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 35,
+        &quot;curvature_coefficient&quot;: 2.0,
+        &quot;metric_diagonal&quot;: 4.4,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.4,
+        &quot;twistor_eigenvalue&quot;: 6.4,
+        &quot;geometric_spectral_ratio&quot;: 16,
+        &quot;maximum_spectrum_error&quot;: 3.552713678800501e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 0,
+        &quot;spinor_rank&quot;: 4,
+        &quot;physical_band_dimension&quot;: 4,
+        &quot;coefficient_dimension&quot;: 4
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 1,
+        &quot;curvature_coefficient&quot;: 0.0,
+        &quot;metric_diagonal&quot;: 0.0,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.0,
+        &quot;twistor_eigenvalue&quot;: 0.0,
+        &quot;geometric_spectral_ratio&quot;: null,
+        &quot;maximum_spectrum_error&quot;: 0.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 1,
+        &quot;spinor_rank&quot;: 4,
+        &quot;physical_band_dimension&quot;: 20,
+        &quot;coefficient_dimension&quot;: 24
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 5,
+        &quot;curvature_coefficient&quot;: 0.24,
+        &quot;metric_diagonal&quot;: 0.7599999999999999,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.04,
+        &quot;twistor_eigenvalue&quot;: 1.0,
+        &quot;geometric_spectral_ratio&quot;: 25,
+        &quot;maximum_spectrum_error&quot;: 1.3322676295501878e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 2,
+        &quot;spinor_rank&quot;: 4,
+        &quot;physical_band_dimension&quot;: 60,
+        &quot;coefficient_dimension&quot;: 84
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 15,
+        &quot;curvature_coefficient&quot;: 0.56,
+        &quot;metric_diagonal&quot;: 1.7733333333333334,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.09333333333333334,
+        &quot;twistor_eigenvalue&quot;: 2.3333333333333335,
+        &quot;geometric_spectral_ratio&quot;: 25,
+        &quot;maximum_spectrum_error&quot;: 2.6645352591003757e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 4,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 3,
+        &quot;spinor_rank&quot;: 4,
+        &quot;physical_band_dimension&quot;: 140,
+        &quot;coefficient_dimension&quot;: 224
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 35,
+        &quot;curvature_coefficient&quot;: 0.96,
+        &quot;metric_diagonal&quot;: 3.0399999999999996,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.16,
+        &quot;twistor_eigenvalue&quot;: 4.0,
+        &quot;geometric_spectral_ratio&quot;: 25,
+        &quot;maximum_spectrum_error&quot;: 3.552713678800501e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;mode_index&quot;: 5,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 4,
+        &quot;spinor_rank&quot;: 4,
+        &quot;physical_band_dimension&quot;: 280,
+        &quot;coefficient_dimension&quot;: 504
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 70,
+        &quot;curvature_coefficient&quot;: 1.44,
+        &quot;metric_diagonal&quot;: 4.56,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.24,
+        &quot;twistor_eigenvalue&quot;: 6.0,
+        &quot;geometric_spectral_ratio&quot;: 25,
+        &quot;maximum_spectrum_error&quot;: 7.105427357601002e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;mode_index&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 0,
+        &quot;spinor_rank&quot;: 4,
+        &quot;physical_band_dimension&quot;: 4,
+        &quot;coefficient_dimension&quot;: 4
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 1,
+        &quot;curvature_coefficient&quot;: 0.0,
+        &quot;metric_diagonal&quot;: 0.0,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.0,
+        &quot;twistor_eigenvalue&quot;: 0.0,
+        &quot;geometric_spectral_ratio&quot;: null,
+        &quot;maximum_spectrum_error&quot;: 0.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;mode_index&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 1,
+        &quot;spinor_rank&quot;: 4,
+        &quot;physical_band_dimension&quot;: 24,
+        &quot;coefficient_dimension&quot;: 28
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 6,
+        &quot;curvature_coefficient&quot;: 0.19444444444444445,
+        &quot;metric_diagonal&quot;: 0.8055555555555557,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.02777777777777778,
+        &quot;twistor_eigenvalue&quot;: 1.0,
+        &quot;geometric_spectral_ratio&quot;: 36,
+        &quot;maximum_spectrum_error&quot;: 1.3322676295501878e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;mode_index&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 2,
+        &quot;spinor_rank&quot;: 4,
+        &quot;physical_band_dimension&quot;: 84,
+        &quot;coefficient_dimension&quot;: 112
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 21,
+        &quot;curvature_coefficient&quot;: 0.4444444444444444,
+        &quot;metric_diagonal&quot;: 1.8412698412698414,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.06349206349206349,
+        &quot;twistor_eigenvalue&quot;: 2.2857142857142856,
+        &quot;geometric_spectral_ratio&quot;: 36,
+        &quot;maximum_spectrum_error&quot;: 3.552713678800501e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;mode_index&quot;: 4,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 3,
+        &quot;spinor_rank&quot;: 4,
+        &quot;physical_band_dimension&quot;: 224,
+        &quot;coefficient_dimension&quot;: 336
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 56,
+        &quot;curvature_coefficient&quot;: 0.75,
+        &quot;metric_diagonal&quot;: 3.1071428571428577,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.10714285714285714,
+        &quot;twistor_eigenvalue&quot;: 3.857142857142857,
+        &quot;geometric_spectral_ratio&quot;: 36,
+        &quot;maximum_spectrum_error&quot;: 3.552713678800501e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;mode_index&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 0,
+        &quot;spinor_rank&quot;: 8,
+        &quot;physical_band_dimension&quot;: 8,
+        &quot;coefficient_dimension&quot;: 8
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 1,
+        &quot;curvature_coefficient&quot;: 0.0,
+        &quot;metric_diagonal&quot;: 0.0,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.0,
+        &quot;twistor_eigenvalue&quot;: 0.0,
+        &quot;geometric_spectral_ratio&quot;: null,
+        &quot;maximum_spectrum_error&quot;: 0.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;mode_index&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 1,
+        &quot;spinor_rank&quot;: 8,
+        &quot;physical_band_dimension&quot;: 56,
+        &quot;coefficient_dimension&quot;: 64
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 7,
+        &quot;curvature_coefficient&quot;: 0.16326530612244897,
+        &quot;metric_diagonal&quot;: 0.836734693877551,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.02040816326530612,
+        &quot;twistor_eigenvalue&quot;: 0.9999999999999999,
+        &quot;geometric_spectral_ratio&quot;: 49,
+        &quot;maximum_spectrum_error&quot;: 1.9984014443252818e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;mode_index&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 2,
+        &quot;spinor_rank&quot;: 8,
+        &quot;physical_band_dimension&quot;: 224,
+        &quot;coefficient_dimension&quot;: 288
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 28,
+        &quot;curvature_coefficient&quot;: 0.3673469387755102,
+        &quot;metric_diagonal&quot;: 1.8826530612244898,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.04591836734693878,
+        &quot;twistor_eigenvalue&quot;: 2.25,
+        &quot;geometric_spectral_ratio&quot;: 49,
+        &quot;maximum_spectrum_error&quot;: 4.440892098500626e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;mode_index&quot;: 4,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 3,
+        &quot;spinor_rank&quot;: 8,
+        &quot;physical_band_dimension&quot;: 672,
+        &quot;coefficient_dimension&quot;: 960
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 84,
+        &quot;curvature_coefficient&quot;: 0.6122448979591837,
+        &quot;metric_diagonal&quot;: 3.1377551020408165,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.07653061224489796,
+        &quot;twistor_eigenvalue&quot;: 3.75,
+        &quot;geometric_spectral_ratio&quot;: 49,
+        &quot;maximum_spectrum_error&quot;: 6.661338147750939e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 7,
+      &quot;mode_index&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 0,
+        &quot;spinor_rank&quot;: 8,
+        &quot;physical_band_dimension&quot;: 8,
+        &quot;coefficient_dimension&quot;: 8
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 1,
+        &quot;curvature_coefficient&quot;: 0.0,
+        &quot;metric_diagonal&quot;: 0.0,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.0,
+        &quot;twistor_eigenvalue&quot;: 0.0,
+        &quot;geometric_spectral_ratio&quot;: null,
+        &quot;maximum_spectrum_error&quot;: 0.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 7,
+      &quot;mode_index&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 1,
+        &quot;spinor_rank&quot;: 8,
+        &quot;physical_band_dimension&quot;: 64,
+        &quot;coefficient_dimension&quot;: 72
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 8,
+        &quot;curvature_coefficient&quot;: 0.140625,
+        &quot;metric_diagonal&quot;: 0.859375,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.015625,
+        &quot;twistor_eigenvalue&quot;: 1.0,
+        &quot;geometric_spectral_ratio&quot;: 64,
+        &quot;maximum_spectrum_error&quot;: 1.887379141862766e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 7,
+      &quot;mode_index&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 2,
+        &quot;spinor_rank&quot;: 8,
+        &quot;physical_band_dimension&quot;: 288,
+        &quot;coefficient_dimension&quot;: 360
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 36,
+        &quot;curvature_coefficient&quot;: 0.3125,
+        &quot;metric_diagonal&quot;: 1.909722222222222,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.034722222222222224,
+        &quot;twistor_eigenvalue&quot;: 2.2222222222222223,
+        &quot;geometric_spectral_ratio&quot;: 64,
+        &quot;maximum_spectrum_error&quot;: 5.773159728050814e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 8,
+      &quot;mode_index&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 0,
+        &quot;spinor_rank&quot;: 16,
+        &quot;physical_band_dimension&quot;: 16,
+        &quot;coefficient_dimension&quot;: 16
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 1,
+        &quot;curvature_coefficient&quot;: 0.0,
+        &quot;metric_diagonal&quot;: 0.0,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.0,
+        &quot;twistor_eigenvalue&quot;: 0.0,
+        &quot;geometric_spectral_ratio&quot;: null,
+        &quot;maximum_spectrum_error&quot;: 0.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 8,
+      &quot;mode_index&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 1,
+        &quot;spinor_rank&quot;: 16,
+        &quot;physical_band_dimension&quot;: 144,
+        &quot;coefficient_dimension&quot;: 160
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 9,
+        &quot;curvature_coefficient&quot;: 0.12345679012345678,
+        &quot;metric_diagonal&quot;: 0.8765432098765431,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.012345679012345678,
+        &quot;twistor_eigenvalue&quot;: 1.0,
+        &quot;geometric_spectral_ratio&quot;: 81,
+        &quot;maximum_spectrum_error&quot;: 2.886579864025407e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 8,
+      &quot;mode_index&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 2,
+        &quot;spinor_rank&quot;: 16,
+        &quot;physical_band_dimension&quot;: 720,
+        &quot;coefficient_dimension&quot;: 880
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 45,
+        &quot;curvature_coefficient&quot;: 0.2716049382716049,
+        &quot;metric_diagonal&quot;: 1.928395061728395,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.027160493827160494,
+        &quot;twistor_eigenvalue&quot;: 2.2,
+        &quot;geometric_spectral_ratio&quot;: 81,
+        &quot;maximum_spectrum_error&quot;: 4.884981308350689e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 9,
+      &quot;mode_index&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 0,
+        &quot;spinor_rank&quot;: 16,
+        &quot;physical_band_dimension&quot;: 16,
+        &quot;coefficient_dimension&quot;: 16
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 1,
+        &quot;curvature_coefficient&quot;: 0.0,
+        &quot;metric_diagonal&quot;: 0.0,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.0,
+        &quot;twistor_eigenvalue&quot;: 0.0,
+        &quot;geometric_spectral_ratio&quot;: null,
+        &quot;maximum_spectrum_error&quot;: 0.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 9,
+      &quot;mode_index&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 1,
+        &quot;spinor_rank&quot;: 16,
+        &quot;physical_band_dimension&quot;: 160,
+        &quot;coefficient_dimension&quot;: 176
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 10,
+        &quot;curvature_coefficient&quot;: 0.11,
+        &quot;metric_diagonal&quot;: 0.8900000000000001,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.01,
+        &quot;twistor_eigenvalue&quot;: 1.0,
+        &quot;geometric_spectral_ratio&quot;: 100,
+        &quot;maximum_spectrum_error&quot;: 2.6645352591003757e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 9,
+      &quot;mode_index&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 2,
+        &quot;spinor_rank&quot;: 16,
+        &quot;physical_band_dimension&quot;: 880,
+        &quot;coefficient_dimension&quot;: 1056
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 55,
+        &quot;curvature_coefficient&quot;: 0.24,
+        &quot;metric_diagonal&quot;: 1.9418181818181819,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.021818181818181816,
+        &quot;twistor_eigenvalue&quot;: 2.1818181818181817,
+        &quot;geometric_spectral_ratio&quot;: 100,
+        &quot;maximum_spectrum_error&quot;: 6.217248937900877e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;mode_index&quot;: 1,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 0,
+        &quot;spinor_rank&quot;: 32,
+        &quot;physical_band_dimension&quot;: 32,
+        &quot;coefficient_dimension&quot;: 32
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 1,
+        &quot;curvature_coefficient&quot;: 0.0,
+        &quot;metric_diagonal&quot;: 0.0,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.0,
+        &quot;twistor_eigenvalue&quot;: 0.0,
+        &quot;geometric_spectral_ratio&quot;: null,
+        &quot;maximum_spectrum_error&quot;: 0.0
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;mode_index&quot;: 2,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 1,
+        &quot;spinor_rank&quot;: 32,
+        &quot;physical_band_dimension&quot;: 352,
+        &quot;coefficient_dimension&quot;: 384
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 11,
+        &quot;curvature_coefficient&quot;: 0.09917355371900827,
+        &quot;metric_diagonal&quot;: 0.9008264462809918,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.008264462809917356,
+        &quot;twistor_eigenvalue&quot;: 1.0,
+        &quot;geometric_spectral_ratio&quot;: 121,
+        &quot;maximum_spectrum_error&quot;: 5.551115123125783e-15
+      }
+    },
+    {
+      &quot;name&quot;: &quot;actual-spatial-monogenic-band&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;mode_index&quot;: 3,
+      &quot;parameters&quot;: {
+        &quot;sphere_radius&quot;: 1,
+        &quot;shell_cutoff&quot;: 2,
+        &quot;spinor_rank&quot;: 32,
+        &quot;physical_band_dimension&quot;: 2112,
+        &quot;coefficient_dimension&quot;: 2496
+      },
+      &quot;measurements&quot;: {
+        &quot;reference_normalized_contact_eigenvalue&quot;: 66,
+        &quot;curvature_coefficient&quot;: 0.21487603305785125,
+        &quot;metric_diagonal&quot;: 1.9517906336088156,
+        &quot;Clifford_trace_eigenvalue&quot;: 0.01790633608815427,
+        &quot;twistor_eigenvalue&quot;: 2.1666666666666665,
+        &quot;geometric_spectral_ratio&quot;: 121,
+        &quot;maximum_spectrum_error&quot;: 1.2434497875801753e-14
+      }
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

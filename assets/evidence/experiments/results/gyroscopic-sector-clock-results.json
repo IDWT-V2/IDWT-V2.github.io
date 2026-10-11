@@ -1,0 +1,2574 @@
+{
+  "experiment": "gyroscopic-sector-clock",
+  "created_utc": "2026-10-10T01:39:55.787478+00:00",
+  "status": "passed",
+  "checks": 1068,
+  "check_counts": {
+    "exact circular wave dispersion": 2,
+    "canonical gyro wave energy normalization": 2,
+    "canonical gyro partial velocity vertex exactly one half": 1,
+    "upper symplectic residue": 1,
+    "lower symplectic residue": 1,
+    "gyro response has lower branch residue suppressed at small wave number": 1,
+    "bending response has the opposite diagonal residue weights": 1,
+    "gyro static response is second order despite quadratic lower dispersion": 1,
+    "bending static response retains fourth order with identical branch frequencies": 1,
+    "ordinary gyroscopic tensor antisymmetric": 6,
+    "ordinary even rank and odd axis": 6,
+    "rotation plane frequencies are coordinate invariant": 6,
+    "full spatial gyro spectrum": 30,
+    "full canonical gyro partial current coefficient": 30,
+    "full canonical gyro energy has no beat": 30,
+    "total gyro identity readout has no beat": 30,
+    "counterpropagating gyro waves have zero translation momentum": 30,
+    "zero gyro translation momentum does not imply zero energy flux": 30,
+    "fixed gyro background cannot be omitted from rest frame analysis": 30,
+    "odd null-axis branch is not lowest energy": 10,
+    "polarized gyro readout amplitude and phase": 64,
+    "gyro source and polarized readout common rotation covariance": 64,
+    "exact ordinary skew holonomy commutant": 12,
+    "parallel complex rotation candidate commutes with unitary holonomy": 6,
+    "nonlinear isotropic branch gap exact": 1,
+    "nonlinear phase action partial vertex exact": 1,
+    "nonlinear complete energy derivative gives both phase frequencies": 1,
+    "nonlinear circular preparation constant density": 54,
+    "nonlinear lower exact equation": 54,
+    "nonlinear upper exact equation": 54,
+    "nonlinear circular subsystem has no exponential normal modes": 54,
+    "nonlinear radial and transverse disturbance frequencies": 54,
+    "nonlinear complete energy retains interaction term": 54,
+    "nonlinear physical partial current agrees with phase action vertex": 54,
+    "full fast-band root bracket": 78,
+    "full positive energy branch symplectic signs": 26,
+    "full fast-band cubic residual": 78,
+    "full completion canonical mode energy identity": 78,
+    "far fast-band canonical partial vertex approaches one half": 13,
+    "far fast-band completion approaches common clock": 13,
+    "high carriers do not inherit constant adiabatic gyro clock": 6
+  },
+  "scope": "Ordinary spatial rotation-plane wave prototype with correct symplectic normalization; full finite-gap completion tests its adiabatic domain. No assigned depth or particle occupation is selected.",
+  "sector_cases": [
+    {
+      "real_depth": 2,
+      "wave_number": 0.03,
+      "rotation_planes": 1,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.0008991914547277447,
+      "upper_frequency": 1.0008991914547276,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 2,
+      "wave_number": 0.2,
+      "rotation_planes": 1,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.03851648071345041,
+      "upper_frequency": 1.0385164807134504,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 2,
+      "wave_number": 1.0,
+      "rotation_planes": 1,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.6180339887498948,
+      "upper_frequency": 1.618033988749895,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 2,
+      "wave_number": 5.0,
+      "rotation_planes": 1,
+      "unpaired_axes": 0,
+      "lower_frequency": 4.524937810560445,
+      "upper_frequency": 5.524937810560445,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 2,
+      "wave_number": 100.0,
+      "rotation_planes": 1,
+      "unpaired_axes": 0,
+      "lower_frequency": 99.5012499921876,
+      "upper_frequency": 100.5012499921876,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 3,
+      "wave_number": 0.03,
+      "rotation_planes": 1,
+      "unpaired_axes": 1,
+      "lower_frequency": 0.0008991914547277447,
+      "upper_frequency": 1.0008991914547276,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 3,
+      "wave_number": 0.2,
+      "rotation_planes": 1,
+      "unpaired_axes": 1,
+      "lower_frequency": 0.03851648071345041,
+      "upper_frequency": 1.0385164807134504,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 3,
+      "wave_number": 1.0,
+      "rotation_planes": 1,
+      "unpaired_axes": 1,
+      "lower_frequency": 0.6180339887498948,
+      "upper_frequency": 1.618033988749895,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 3,
+      "wave_number": 5.0,
+      "rotation_planes": 1,
+      "unpaired_axes": 1,
+      "lower_frequency": 4.524937810560445,
+      "upper_frequency": 5.524937810560445,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 3,
+      "wave_number": 100.0,
+      "rotation_planes": 1,
+      "unpaired_axes": 1,
+      "lower_frequency": 99.5012499921876,
+      "upper_frequency": 100.5012499921876,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 4,
+      "wave_number": 0.03,
+      "rotation_planes": 2,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.0008991914547277447,
+      "upper_frequency": 1.0008991914547276,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 4,
+      "wave_number": 0.2,
+      "rotation_planes": 2,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.03851648071345041,
+      "upper_frequency": 1.0385164807134504,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 4,
+      "wave_number": 1.0,
+      "rotation_planes": 2,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.6180339887498948,
+      "upper_frequency": 1.618033988749895,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 4,
+      "wave_number": 5.0,
+      "rotation_planes": 2,
+      "unpaired_axes": 0,
+      "lower_frequency": 4.524937810560445,
+      "upper_frequency": 5.524937810560445,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 4,
+      "wave_number": 100.0,
+      "rotation_planes": 2,
+      "unpaired_axes": 0,
+      "lower_frequency": 99.5012499921876,
+      "upper_frequency": 100.5012499921876,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 5,
+      "wave_number": 0.03,
+      "rotation_planes": 2,
+      "unpaired_axes": 1,
+      "lower_frequency": 0.0008991914547277447,
+      "upper_frequency": 1.0008991914547276,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 5,
+      "wave_number": 0.2,
+      "rotation_planes": 2,
+      "unpaired_axes": 1,
+      "lower_frequency": 0.03851648071345041,
+      "upper_frequency": 1.0385164807134504,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 5,
+      "wave_number": 1.0,
+      "rotation_planes": 2,
+      "unpaired_axes": 1,
+      "lower_frequency": 0.6180339887498948,
+      "upper_frequency": 1.618033988749895,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 5,
+      "wave_number": 5.0,
+      "rotation_planes": 2,
+      "unpaired_axes": 1,
+      "lower_frequency": 4.524937810560445,
+      "upper_frequency": 5.524937810560445,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 5,
+      "wave_number": 100.0,
+      "rotation_planes": 2,
+      "unpaired_axes": 1,
+      "lower_frequency": 99.5012499921876,
+      "upper_frequency": 100.5012499921876,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 6,
+      "wave_number": 0.03,
+      "rotation_planes": 3,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.0008991914547277447,
+      "upper_frequency": 1.0008991914547276,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 6,
+      "wave_number": 0.2,
+      "rotation_planes": 3,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.03851648071345041,
+      "upper_frequency": 1.0385164807134504,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 6,
+      "wave_number": 1.0,
+      "rotation_planes": 3,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.6180339887498948,
+      "upper_frequency": 1.618033988749895,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 6,
+      "wave_number": 5.0,
+      "rotation_planes": 3,
+      "unpaired_axes": 0,
+      "lower_frequency": 4.524937810560445,
+      "upper_frequency": 5.524937810560445,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 6,
+      "wave_number": 100.0,
+      "rotation_planes": 3,
+      "unpaired_axes": 0,
+      "lower_frequency": 99.5012499921876,
+      "upper_frequency": 100.5012499921876,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 10,
+      "wave_number": 0.03,
+      "rotation_planes": 5,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.0008991914547277447,
+      "upper_frequency": 1.0008991914547276,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 10,
+      "wave_number": 0.2,
+      "rotation_planes": 5,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.03851648071345041,
+      "upper_frequency": 1.0385164807134504,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 10,
+      "wave_number": 1.0,
+      "rotation_planes": 5,
+      "unpaired_axes": 0,
+      "lower_frequency": 0.6180339887498948,
+      "upper_frequency": 1.618033988749895,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 10,
+      "wave_number": 5.0,
+      "rotation_planes": 5,
+      "unpaired_axes": 0,
+      "lower_frequency": 4.524937810560445,
+      "upper_frequency": 5.524937810560445,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    },
+    {
+      "real_depth": 10,
+      "wave_number": 100.0,
+      "rotation_planes": 5,
+      "unpaired_axes": 0,
+      "lower_frequency": 99.5012499921876,
+      "upper_frequency": 100.5012499921876,
+      "fundamental_gap": 1,
+      "canonical_partial_velocity_vertex": "1/2",
+      "odd_axis_selected_by_energy": false,
+      "neutrino_neutrality_derived": false
+    }
+  ],
+  "fixed_background_frame_cases": [
+    {
+      "real_depth": 2,
+      "wave_number": 0.03,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 9.412095278092445e-18,
+      "fixed_background_wave_energy_flux": -0.059892290727946704,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 2,
+      "wave_number": 0.2,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.3713906763541035,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 2,
+      "wave_number": 1.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.8944271909999157,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 2,
+      "wave_number": 5.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.9950371902099889,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 2,
+      "wave_number": 100.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 1.1934822922776458e-14,
+      "fixed_background_wave_energy_flux": -0.9999875002343577,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 3,
+      "wave_number": 0.03,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 9.412095278092445e-18,
+      "fixed_background_wave_energy_flux": -0.059892290727946704,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 3,
+      "wave_number": 0.2,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.3713906763541035,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 3,
+      "wave_number": 1.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.8944271909999157,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 3,
+      "wave_number": 5.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.9950371902099889,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 3,
+      "wave_number": 100.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 1.1934822922776458e-14,
+      "fixed_background_wave_energy_flux": -0.9999875002343577,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 4,
+      "wave_number": 0.03,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 9.412095278092445e-18,
+      "fixed_background_wave_energy_flux": -0.059892290727946704,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 4,
+      "wave_number": 0.2,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.3713906763541035,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 4,
+      "wave_number": 1.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.8944271909999157,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 4,
+      "wave_number": 5.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.9950371902099889,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 4,
+      "wave_number": 100.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 1.1934822922776458e-14,
+      "fixed_background_wave_energy_flux": -0.9999875002343577,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 5,
+      "wave_number": 0.03,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 9.412095278092445e-18,
+      "fixed_background_wave_energy_flux": -0.059892290727946704,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 5,
+      "wave_number": 0.2,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.3713906763541035,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 5,
+      "wave_number": 1.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.8944271909999157,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 5,
+      "wave_number": 5.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.9950371902099889,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 5,
+      "wave_number": 100.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 1.1934822922776458e-14,
+      "fixed_background_wave_energy_flux": -0.9999875002343577,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 6,
+      "wave_number": 0.03,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 9.412095278092445e-18,
+      "fixed_background_wave_energy_flux": -0.059892290727946704,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 6,
+      "wave_number": 0.2,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.3713906763541035,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 6,
+      "wave_number": 1.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.8944271909999157,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 6,
+      "wave_number": 5.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.9950371902099889,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 6,
+      "wave_number": 100.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 1.1934822922776458e-14,
+      "fixed_background_wave_energy_flux": -0.9999875002343577,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 10,
+      "wave_number": 0.03,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 9.412095278092445e-18,
+      "fixed_background_wave_energy_flux": -0.059892290727946704,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 10,
+      "wave_number": 0.2,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.3713906763541035,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 10,
+      "wave_number": 1.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.8944271909999157,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 10,
+      "wave_number": 5.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": -0.0,
+      "fixed_background_wave_energy_flux": -0.9950371902099889,
+      "complete_particle_boost_law_derived": false
+    },
+    {
+      "real_depth": 10,
+      "wave_number": 100.0,
+      "equal_canonical_actions": 1,
+      "complete_fixed_background_wave_momentum": 1.1934822922776458e-14,
+      "fixed_background_wave_energy_flux": -0.9999875002343577,
+      "complete_particle_boost_law_derived": false
+    }
+  ],
+  "polarized_readout_cases": [
+    {
+      "real_depth": 2,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 2,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 2,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 2,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 3,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 4,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 5,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 6,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 0.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.0,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 0.25,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.12499999999999997,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.0,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.3,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 0.9,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    },
+    {
+      "real_depth": 10,
+      "readout_plane_projection_squared": 1.0,
+      "readout_plane_angle": 1.4,
+      "partial_vertex_absolute": 0.4999999999999999,
+      "reciprocal_encounter_dynamics_derived": false
+    }
+  ],
+  "isotropic_orientation_moments": [
+    {
+      "real_depth": 2,
+      "isotropic_mean_absolute_vertex": "1/2",
+      "isotropic_mean_squared_vertex": "1/4",
+      "depth_five_uniquely_suppressed": false
+    },
+    {
+      "real_depth": 3,
+      "isotropic_mean_absolute_vertex": "1/3",
+      "isotropic_mean_squared_vertex": "2/15",
+      "depth_five_uniquely_suppressed": false
+    },
+    {
+      "real_depth": 4,
+      "isotropic_mean_absolute_vertex": "1/4",
+      "isotropic_mean_squared_vertex": "1/12",
+      "depth_five_uniquely_suppressed": false
+    },
+    {
+      "real_depth": 5,
+      "isotropic_mean_absolute_vertex": "1/5",
+      "isotropic_mean_squared_vertex": "2/35",
+      "depth_five_uniquely_suppressed": false
+    },
+    {
+      "real_depth": 6,
+      "isotropic_mean_absolute_vertex": "1/6",
+      "isotropic_mean_squared_vertex": "1/24",
+      "depth_five_uniquely_suppressed": false
+    },
+    {
+      "real_depth": 10,
+      "isotropic_mean_absolute_vertex": "1/10",
+      "isotropic_mean_squared_vertex": "1/60",
+      "depth_five_uniquely_suppressed": false
+    }
+  ],
+  "holonomy_cases": [
+    {
+      "real_depth": 2,
+      "holonomy": "full round-space SO(d) holonomy",
+      "parallel_antisymmetric_tensor_dimension": 1,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 2,
+      "holonomy": "Kahler U(m) holonomy with one flat axis when odd",
+      "parallel_antisymmetric_tensor_dimension": 1,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 3,
+      "holonomy": "full round-space SO(d) holonomy",
+      "parallel_antisymmetric_tensor_dimension": 0,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 3,
+      "holonomy": "Kahler U(m) holonomy with one flat axis when odd",
+      "parallel_antisymmetric_tensor_dimension": 1,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 4,
+      "holonomy": "full round-space SO(d) holonomy",
+      "parallel_antisymmetric_tensor_dimension": 0,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 4,
+      "holonomy": "Kahler U(m) holonomy with one flat axis when odd",
+      "parallel_antisymmetric_tensor_dimension": 1,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 5,
+      "holonomy": "full round-space SO(d) holonomy",
+      "parallel_antisymmetric_tensor_dimension": 0,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 5,
+      "holonomy": "Kahler U(m) holonomy with one flat axis when odd",
+      "parallel_antisymmetric_tensor_dimension": 1,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 6,
+      "holonomy": "full round-space SO(d) holonomy",
+      "parallel_antisymmetric_tensor_dimension": 0,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 6,
+      "holonomy": "Kahler U(m) holonomy with one flat axis when odd",
+      "parallel_antisymmetric_tensor_dimension": 1,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 10,
+      "holonomy": "full round-space SO(d) holonomy",
+      "parallel_antisymmetric_tensor_dimension": 0,
+      "nested_geometry_constructed": false
+    },
+    {
+      "real_depth": 10,
+      "holonomy": "Kahler U(m) holonomy with one flat axis when odd",
+      "parallel_antisymmetric_tensor_dimension": 1,
+      "nested_geometry_constructed": false
+    }
+  ],
+  "nonlinear_cases": [
+    {
+      "real_depth": 2,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.12449979983983983,
+      "upper_frequency": 1.1244997998398398,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 2,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.5440306508910551,
+      "upper_frequency": 1.544030650891055,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 2,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.0132745950421556,
+      "upper_frequency": 2.0132745950421556,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 2,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.6618950038622251,
+      "upper_frequency": 1.661895003862225,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 2,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.9317821063276353,
+      "upper_frequency": 1.9317821063276353,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 2,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.3027756377319946,
+      "upper_frequency": 2.302775637731995,
+      "gap": 1.0000000000000002,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 2,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.5174847142384,
+      "upper_frequency": 10.5174847142384,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 2,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.552362906302179,
+      "upper_frequency": 10.552362906302179,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 2,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.611874208078342,
+      "upper_frequency": 10.611874208078342,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 3,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.12449979983983983,
+      "upper_frequency": 1.1244997998398398,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 3,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.5440306508910551,
+      "upper_frequency": 1.544030650891055,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 3,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.0132745950421556,
+      "upper_frequency": 2.0132745950421556,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 3,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.6618950038622251,
+      "upper_frequency": 1.661895003862225,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 3,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.9317821063276353,
+      "upper_frequency": 1.9317821063276353,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 3,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.3027756377319946,
+      "upper_frequency": 2.302775637731995,
+      "gap": 1.0000000000000002,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 3,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.5174847142384,
+      "upper_frequency": 10.5174847142384,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 3,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.552362906302179,
+      "upper_frequency": 10.552362906302179,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 3,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.611874208078342,
+      "upper_frequency": 10.611874208078342,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 4,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.12449979983983983,
+      "upper_frequency": 1.1244997998398398,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 4,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.5440306508910551,
+      "upper_frequency": 1.544030650891055,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 4,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.0132745950421556,
+      "upper_frequency": 2.0132745950421556,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 4,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.6618950038622251,
+      "upper_frequency": 1.661895003862225,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 4,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.9317821063276353,
+      "upper_frequency": 1.9317821063276353,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 4,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.3027756377319946,
+      "upper_frequency": 2.302775637731995,
+      "gap": 1.0000000000000002,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 4,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.5174847142384,
+      "upper_frequency": 10.5174847142384,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 4,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.552362906302179,
+      "upper_frequency": 10.552362906302179,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 4,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.611874208078342,
+      "upper_frequency": 10.611874208078342,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 5,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.12449979983983983,
+      "upper_frequency": 1.1244997998398398,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 5,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.5440306508910551,
+      "upper_frequency": 1.544030650891055,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 5,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.0132745950421556,
+      "upper_frequency": 2.0132745950421556,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 5,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.6618950038622251,
+      "upper_frequency": 1.661895003862225,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 5,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.9317821063276353,
+      "upper_frequency": 1.9317821063276353,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 5,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.3027756377319946,
+      "upper_frequency": 2.302775637731995,
+      "gap": 1.0000000000000002,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 5,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.5174847142384,
+      "upper_frequency": 10.5174847142384,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 5,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.552362906302179,
+      "upper_frequency": 10.552362906302179,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 5,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.611874208078342,
+      "upper_frequency": 10.611874208078342,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 6,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.12449979983983983,
+      "upper_frequency": 1.1244997998398398,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 6,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.5440306508910551,
+      "upper_frequency": 1.544030650891055,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 6,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.0132745950421556,
+      "upper_frequency": 2.0132745950421556,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 6,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.6618950038622251,
+      "upper_frequency": 1.661895003862225,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 6,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.9317821063276353,
+      "upper_frequency": 1.9317821063276353,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 6,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.3027756377319946,
+      "upper_frequency": 2.302775637731995,
+      "gap": 1.0000000000000002,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 6,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.5174847142384,
+      "upper_frequency": 10.5174847142384,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 6,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.552362906302179,
+      "upper_frequency": 10.552362906302179,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 6,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.611874208078342,
+      "upper_frequency": 10.611874208078342,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 10,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.12449979983983983,
+      "upper_frequency": 1.1244997998398398,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 10,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.5440306508910551,
+      "upper_frequency": 1.544030650891055,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 10,
+      "bare_spatial_stiffness": 0.04,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.0132745950421556,
+      "upper_frequency": 2.0132745950421556,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 10,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.6618950038622251,
+      "upper_frequency": 1.661895003862225,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 10,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 0.9317821063276353,
+      "upper_frequency": 1.9317821063276353,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 10,
+      "bare_spatial_stiffness": 1.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 1.3027756377319946,
+      "upper_frequency": 2.302775637731995,
+      "gap": 1.0000000000000002,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 10,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.1,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.5174847142384,
+      "upper_frequency": 10.5174847142384,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 10,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 0.8,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.552362906302179,
+      "upper_frequency": 10.552362906302179,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    },
+    {
+      "real_depth": 10,
+      "bare_spatial_stiffness": 100.0,
+      "density_interaction_coefficient": 2.0,
+      "prepared_density": 1.0,
+      "lower_frequency": 9.611874208078342,
+      "upper_frequency": 10.611874208078342,
+      "gap": 1.0,
+      "partial_phase_action_current_vertex": "1/2",
+      "full_spatial_stability_tested": false,
+      "particle_mass_frequency_amplitude_independent": false
+    }
+  ],
+  "full_fast_band_cases": [
+    {
+      "particle": "W",
+      "real_depth": 2,
+      "cutoff": 2926,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "2940.25469775641693263515732209056216029381337135233037191724811938967072279",
+        "99.998830238370630815586122065211758471832026088366468988686744962785050852",
+        "2940.25586751804630181957120002535040182198134526396390292856137442688567194"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.0000000270928592773690638405805593848258374192681773327948991696704817872954287647",
+        "0.999999787071075466687668533928372932677879456332186639801646644947275508988"
+      ],
+      "full_symplectic_residues": [
+        "-5880.50830270230918616779878094561083290928464313764668927316583730725739507",
+        "7381932576.0054165450115308995693830380564825444971748009280854316715947666",
+        "5880.51298716739866536923949891765536046579756934681961394250434376571807821"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999993226785134781294429435212285530255332155185974436120792275986963073",
+      "effective_mass_normalized_partial_velocity_vertex": "0.50505049820887387351645901963152756114167205268200603478396039623837066977",
+      "dominant_displacement_gap_signed": "-0.0011697616293691844138779347882415281679739116335310113132550372149491475996",
+      "dominant_displacement_gap_absolute": "0.0011697616293691844138779347882415281679739116335310113132550372149491475996",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "W",
+      "real_depth": 2,
+      "cutoff": 2926,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "2926.00000000000004281468372263718301676152480226935067048791479078209666049",
+        "2924.99999999999995722917373974695913382053880341963518495181397230189234121",
+        "10000000001.0000000000000855855099828902238829409859988497154855361008184802"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.999829088944624806590394366372744668223992592566998074441425812507304045551",
+        "0.000000000199999999960034234209981175582334384011779329535593229363206858705102438688"
+      ],
+      "full_symplectic_residues": [
+        "-5851.00000058509982884369763163718285736434967694558768939644223362123749416",
+        "5851.00000058510017118570759746158089351952793884352641468843589423811813891",
+        "100000000029982882901.001712442587609927248829402527843367514326054385149796"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.49999999995000000000749144144825385024918566732700111860354107080668130968",
+      "effective_mass_normalized_partial_velocity_vertex": "0.500000000000000000007491441449002994394085966766409715280182042334699513914",
+      "dominant_displacement_gap_signed": "1.00000000000008558550998289022388294098599884971548553610081848020431928244",
+      "dominant_displacement_gap_absolute": "1.00000000000008558550998289022388294098599884971548553610081848020431928244",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "Z",
+      "real_depth": 2,
+      "cutoff": 3321,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "3337.24272124403734788752061990036854905076404283374597774133339560740225683",
+        "99.9990922229067715625308265956136792929693783099608649458237324556254692605",
+        "3337.24362902113057632498979330475486975779466452378511279550966315177678757"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.0000000163162247870900957854886804268984120482151551813678715047984752294263943772",
+        "0.999999855590400111274998654755558548344938360298698826088989085978745966639"
+      ],
+      "full_symplectic_residues": [
+        "-6674.48458753081681510918817197387932254065590271711819926585138714778539197",
+        "12257626200.642830274846721985683193356965167282870409184921579681813840836",
+        "6674.48822190243473958815144326337880172243195817866126604868401117659235025"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999995920943786588776461459120664472254573160605897928729594604270743603",
+      "effective_mass_normalized_partial_velocity_vertex": "0.505050500930246249079572183292041075224499568849096866594676358186132064246",
+      "dominant_displacement_gap_signed": "-0.000907777093228437469173404386320707030621690039135054176267544374530739310666",
+      "dominant_displacement_gap_absolute": "0.000907777093228437469173404386320707030621690039135054176267544374530739310666",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "Z",
+      "real_depth": 2,
+      "cutoff": 3321,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "3321.00000000000005515349043371405391835755611763520026522424047640401509436",
+        "3319.99999999999994489628045575333826159757646912905328251863565739633849252",
+        "10000000001.0000000000001102572099779607156567599796485061469827056048190077"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.99984942016804693108884974733672252549371662046653163225864002939159420655",
+        "0.000000000199999999960044102889975750707400006230379530915875920404858930141570328221"
+      ],
+      "full_symplectic_residues": [
+        "-6641.00000066409977950230735509815173389580883741531117292828405005534936132",
+        "6641.00000066410022053111731109252395271765869733225960788286305152523409634",
+        "100000000029977948561.002206359764794791166567587625433536349905318855551624"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999950000000007488974278254959750919409681756693843889502786784388764",
+      "effective_mass_normalized_partial_velocity_vertex": "0.500000000000000000007488974279003857178819795399638673383853370125169725776",
+      "dominant_displacement_gap_signed": "1.00000000000011025720997796071565675997964850614698270560481900767660183821",
+      "dominant_displacement_gap_absolute": "1.00000000000011025720997796071565675997964850614698270560481900767660183821",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "Higgs",
+      "real_depth": 2,
+      "cutoff": 4560,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "4582.48067709393194484132333206180953866817344401697248840552244463748316689",
+        "99.9995187504473627001649497926776578627627121407832912468971981976585839579",
+        "4582.48115834348458214115838226913188080541073187618919715862524643982458293"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.00000000458568032218849763862025228015184308586579076625746723890248200528222794613",
+        "0.999999945147408253617968536012272042174188951457023883494213543880318557202"
+      ],
+      "full_symplectic_residues": [
+        "-9164.96089349358645024290871661561172122622254116178697529440677322410953968",
+        "43613820294.7051447917240892226642500603448921278629794920295154573903056893",
+        "9164.96281940893306809095153726233753616906663237682816690772353743594289916"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999998853579918138596586249830025489730635429443905600749235324339296509",
+      "effective_mass_normalized_partial_velocity_vertex": "0.505050503892504967816764228535181843929020843868125157172473975075090198494",
+      "dominant_displacement_gap_signed": "-0.000481249552637299835050207322342137237287859216708753102801802341416040904838",
+      "dominant_displacement_gap_absolute": "0.000481249552637299835050207322342137237287859216708753102801802341416040904838",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "Higgs",
+      "real_depth": 2,
+      "cutoff": 4560,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "4560.00000000000010397935383555173334957111733033526155901240218283540382051",
+        "4558.99999999999989608894387708659591871145510000328693775210202143703815804",
+        "10000000001.0000000000002078904099584651374308596622303319746212603001613984"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.999890338752955299540605172443464929282606871786789483128633193354604628379",
+        "0.000000000199999999960083156169954290040469728915724719584227701534867629001697947128"
+      ],
+      "full_symplectic_residues": [
+        "-9119.00000091189958424227690457547915869192741940346548578497513462807061034",
+        "9119.0000009119004158038868217650655391307680567425883517112076277769933024",
+        "100000000029958421921.004162129941425867384308553313042135449304918105617764"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999950000000007479210958259348585652564033075929783919091415992165569",
+      "effective_mass_normalized_partial_velocity_vertex": "0.500000000000000000007479210959007269681553291001231258884042217304396387299",
+      "dominant_displacement_gap_signed": "1.00000000000020789040995846513743085966223033197462126030016139836566246853",
+      "dominant_displacement_gap_absolute": "1.00000000000020789040995846513743085966223033197462126030016139836566246853",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "strange",
+      "real_depth": 3,
+      "cutoff": 20,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "20.0171280045947885251205465427020445458949819985462028950836214922006865162",
+        "18.9783553207113875258518129600454964072797287002068402724346766912279271079",
+        "101.038772683883400999268733582656548138615253298339362622648944800972759408"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.961040289453295322676026198212141091021949087268991622118614583130883848672",
+        "0.0211309437401893217818396679766889312112232425824364171002355421625115708217"
+      ],
+      "full_symplectic_residues": [
+        "-39.3329971747594632723341670333304562349435487824779591575355395926967184979",
+        "39.4954416146435626704112287458145057392414991124029577689815924710976219467",
+        "9563.11028283284317332919566556024322322297477694280227411582667439432636899"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.494689057959596140443546672442035459690810723750387578780513420199894421827",
+      "effective_mass_normalized_partial_velocity_vertex": "0.499685917130905192367218861052561070394758306818573311899508505252418607907",
+      "dominant_displacement_gap_signed": "1.03877268388340099926873358265654813861525329833936262264894480097275940828",
+      "dominant_displacement_gap_absolute": "1.03877268388340099926873358265654813861525329833936262264894480097275940828",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "strange",
+      "real_depth": 3,
+      "cutoff": 20,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "20.0000000000000000020512820471794871882155801493187680587880028897149105118",
+        "18.9999999999999999982412820479404871735472801580436280001444879570101018589",
+        "10000000001.0000000000000000038099999992390000146682999912751400586435149327"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.974358974261538461265576964559381141170069606377786366875306442946258794243",
+        "0.000000000199999999960000001529999999161400009006699990343248050006533315698807557591"
+      ],
+      "full_symplectic_residues": [
+        "-39.0000000038999999924925641256082307065304451145213493486842386660376844966",
+        "39.000000003900000007702564124087230822658845073952470022494180177983922687",
+        "100000000029999999241.000000076100001436400000146681999898387700042013753341"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999950000000007499999618250000171418747771193127043002956616977283725",
+      "effective_mass_normalized_partial_velocity_vertex": "0.500000000000000000007499999619000000133318747784525001821455456799122829405",
+      "dominant_displacement_gap_signed": "1.00000000000000000380999999923900001466829999127514005864351493270480865293",
+      "dominant_displacement_gap_absolute": "1.00000000000000000380999999923900001466829999127514005864351493270480865293",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "up",
+      "real_depth": 4,
+      "cutoff": 15,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "15.0101360326786896347410797264049216892479153217559123108630726087691392488",
+        "13.9890207037933754246165188149250040506996377051488840794504914632628920517",
+        "101.021115328885314210124560911479917638548277616607028231412581145506247197"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.953468601252678852505044759637939803383957851218295195736308542243046421359",
+        "0.0204297258411831360964874677248696344830040455176778896577255929210567511978"
+      ],
+      "full_symplectic_residues": [
+        "-29.2566252039464945798741386554165560161641142943117208973123828844146403865",
+        "29.3434323593129901423176839665436293853660094950379354957314011504202907919",
+        "9889.6202635517042115082635253959436337015051755063444924722880524410650568"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.494866212768364512412391279942598705927494131953652800296500973920115912714",
+      "effective_mass_normalized_partial_velocity_vertex": "0.499864861382186376174132606002624955482317305003689697269192902949612033044",
+      "dominant_displacement_gap_signed": "1.02111532888531421012456091147991763854827761660702823141258114550624719705",
+      "dominant_displacement_gap_absolute": "1.02111532888531421012456091147991763854827761660702823141258114550624719705",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "up",
+      "real_depth": 4,
+      "cutoff": 15,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "15.0000000000000000011637931017025862097392651352863611749891131362546717219",
+        "13.9999999999999999990537931021235862052029651379660211645720481478115212948",
+        "10000000001.0000000000000000021099999995790000045362999973203400104170649884"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.965517241282758620491638033190930336894225327599070331039145307137814456385",
+        "0.000000000199999999960000000849999999535400002835699997019488009285413385345620707085"
+      ],
+      "full_symplectic_residues": [
+        "-29.0000000028999999958675862164919310147678096292219170111014514047646087436",
+        "29.0000000029000000042775862156509310503842096167982371269299133216831436979",
+        "100000000029999999581.000000042100000436800000045361999968835700013125852668"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999950000000007499999788250000094918749303743125629240466542212643754",
+      "effective_mass_normalized_partial_velocity_vertex": "0.500000000000000000007499999789000000073818749311125000560352966598247940414",
+      "dominant_displacement_gap_signed": "1.00000000000000000210999999957900000453629999732034001041706498844315042702",
+      "dominant_displacement_gap_absolute": "1.00000000000000000210999999957900000453629999732034001041706498844315042702",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "charm",
+      "real_depth": 4,
+      "cutoff": 8855,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "8899.1129332516639335431258145719412070002058354007809961129558600842867263",
+        "99.9998724365649772029991699963809811483015952543485515369029557770575927508",
+        "8899.11306081509895634012664457556022585190424014643244457605290430722913355"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.000000000322193701999657078805552383761663378061060718180172455114335719717397303408",
+        "0.999999992669893475008943473958927363170558415929172150901731408342538803167"
+      ],
+      "full_symplectic_residues": [
+        "-17798.2257417749134648062233590192473525915029042772207605056304872402297966",
+        "620743806076.454035136366622936731838944934026449118214471743546417428822663",
+        "17798.2262520930922964149460655288587806878392352600226686336561042662088462"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999919451574493597681447051460451564279315579434795379757245801919827",
+      "effective_mass_normalized_partial_velocity_vertex": "0.505050504969143004538987557017223697425822504359171146257959350753335272553",
+      "dominant_displacement_gap_signed": "-0.00012756343502279700083000361901885169840474565144846309704422294240724897832",
+      "dominant_displacement_gap_absolute": "0.00012756343502279700083000361901885169840474565144846309704422294240724897832",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "charm",
+      "real_depth": 4,
+      "cutoff": 8855,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "8855.00000000000039207691656596100981943931474982559522813921482407843926946",
+        "8853.99999999999960805520672215066074669545454753402187293468459495406418415",
+        "10000000001.0000000000007840217098438103490727438602022915733552045302291244"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.999943531437641744214031366650023544531123216651147839676069254314508055217",
+        "0.000000000199999999960313608689827884037485799177801276519423684203699715795706073765"
+      ],
+      "full_symplectic_residues": [
+        "-17709.0000017708984320029502905534652036442961791990703321434315366552553563",
+        "17709.0000017709015680897599818623045359395396424536912683864816894331643181",
+        "100000000029843195661.015741903101045192500726819091709517549640926933384811"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999950000000007421597828285188773401988968565072336654004479104031966",
+      "effective_mass_normalized_partial_velocity_vertex": "0.500000000000000000007421597829027348556304723824195544719073558951011387861",
+      "dominant_displacement_gap_signed": "1.00000000000078402170984381034907274386020229157335520453022912437508530382",
+      "dominant_displacement_gap_absolute": "1.00000000000078402170984381034907274386020229157335520453022912437508530382",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "top",
+      "real_depth": 4,
+      "cutoff": 1215450,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "1221572.71007913922778880528993440039412254618712313387239011115915280046989",
+        "99.999999993230974280074977031530480000418765034921785008141680182252384745",
+        "1221572.7100791459968145252149573688636425457683580989506051030174726182175"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.000000000000000000907230242039317565458681072430634933723598660721083751219088389438689312407",
+        "0.999999999999997228927102540273270807037502292209315380185409757061168406887"
+      ],
+      "full_symplectic_residues": [
+        "-2443145.42015827168766004763729286283038911029525660904792711913067819774748",
+        "220451204907909522576.01010098302490703986396072835941684612775911982856197",
+        "2443145.42015829876376310878343314457198236517759849897044629100976063621091"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.49999999999999999977319243949017060858388806238792134574242773995467041734",
+      "effective_mass_normalized_partial_velocity_vertex": "0.505050505050505050275951959080980412710998042816082167416593676721889310445",
+      "dominant_displacement_gap_signed": "-0.00000000676902571992502296846951999958123496507821499185831981774761533391369295693",
+      "dominant_displacement_gap_absolute": "0.00000000676902571992502296846951999958123496507821499185831981774761533391369295693",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "top",
+      "real_depth": 4,
+      "cutoff": 1215450,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "1215450.00000000738569885635886606856591997353628084089636124104451893056327",
+        "1215448.99999999261252377055680219415921005642923813258642231450923857151709",
+        "10000000001.000000014773175085802063874406709917107042708309938926535280359"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.999999588529538196914191571392269101087938336022955384399096474879352790707",
+        "0.000000000200000005869270075907921417755105584118971918232618747341397657367296997551"
+      ],
+      "full_symplectic_residues": [
+        "-2430899.00024306035904228074477646452181368455714351473813938799085635212921",
+        "2430899.00024311945174350281911063293525713530232380068577798006506792088079",
+        "99999997075365048021.1330750002897833088639142846803813945642021981105972615"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999949999998530182480876037891488463853595384687221147494365634574424",
+      "effective_mass_normalized_partial_velocity_vertex": "0.499999999999999998530182480729056139561369467551521633976299657763264540201",
+      "dominant_displacement_gap_signed": "1.00000001477317508580206387440670991710704270830993892653528035904618523059",
+      "dominant_displacement_gap_absolute": "1.00000001477317508580206387440670991710704270830993892653528035904618523059",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "nu1",
+      "real_depth": 5,
+      "cutoff": 2002,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "2011.60704244204017595340965701414290768048124835557190386710682121582312281",
+        "99.9974976243042362581805284062586001684650079882342461768685508706830891034",
+        "2011.60954481773593969522912860788430751201624036733765769023827034514003371"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.000000123982187680692422764277688543301233472374025136804788999325165540329102429",
+        "0.999999312943515168707801355576521637177317079142912803758958974437234647338"
+      ],
+      "full_symplectic_residues": [
+        "-4023.21181951691278943547245473998721622662655773267026393052560685564886617",
+        "1613094582.29340004421067412971933257645709494505742848734903218892151817669",
+        "4023.22185381613645874009655650696446471591256358875557517594752301803430789"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.49999996900445211910290587194623546545529406786525619532153001569444058611",
+      "effective_mass_normalized_partial_velocity_vertex": "0.505050473741870827376672597925490369146761684712379995274272743125697561727",
+      "dominant_displacement_gap_signed": "-0.00250237569576374181947159374139983153499201176575382313144912931691089645244",
+      "dominant_displacement_gap_absolute": "0.00250237569576374181947159374139983153499201176575382313144912931691089645244",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "nu1",
+      "real_depth": 5,
+      "cutoff": 2002,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "2002.00000000000002004502223729881439515375615142776661649704984114029854417",
+        "2000.99999999999997998499224530921458754871707090122155984390285866451938064",
+        "10000000001.0000000000000400600299919895998076050390805265450566531469824758"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.999750187259505340969259422928590804101614112228110607627535198693209565595",
+        "0.000000000199999999960016024017991187755886725783618667919606916173538272628766391211"
+      ],
+      "full_symplectic_residues": [
+        "-4003.00000040029991988998656267462499266547851233346276491154437907610099475",
+        "4003.0000004003000801300765466634544406897926277886234243131584626559784894",
+        "100000000029991987997.00080136098044013604807604878435797944726514552079164"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.49999999995000000000749599399625180246059730887416322084003289872835058881",
+      "effective_mass_normalized_partial_velocity_vertex": "0.500000000000000000007495993997001401860297449060192965746052195302955808341",
+      "dominant_displacement_gap_signed": "1.00000000000004006002999198959980760503908052654505665314698247577916352144",
+      "dominant_displacement_gap_absolute": "1.00000000000004006002999198959980760503908052654505665314698247577916352144",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "nu2",
+      "real_depth": 5,
+      "cutoff": 11628,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "11686.0814712662476987124794675061726608632020398490629173550008371012841631",
+        "99.999926029460580222133369486663799644742154152130660477406906000190036374",
+        "11686.0815452367871184903460980195088612184598856969322568775939311010941268"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.000000000108338405750348013373372348732619623181013652889102865713383626979532594365",
+        "0.999999996780468087815720329400263675903404317598556472831397624358435610222"
+      ],
+      "full_symplectic_residues": [
+        "-23372.1628698171740455335222702124452086331817614301604315464606739523762911",
+        "1846066043465.64980510627564983712357030337674906244342678378160679475035043",
+        "23372.1631657209994057974088009191694696717484356564798348527198790233980795"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.49999999997291539856167942102158423564128140706924114718275416132893901719",
+      "effective_mass_normalized_partial_velocity_vertex": "0.505050505023146867234019617193519429940688289968930451699751678110039411303",
+      "dominant_displacement_gap_signed": "-0.0000739705394197778666305133362003552578458478693395225930939998099636241686331",
+      "dominant_displacement_gap_absolute": "0.0000739705394197778666305133362003552578458478693395225930939998099636241686331",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "nu2",
+      "real_depth": 5,
+      "cutoff": 11628,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "11628.0000000000006760802051039913552317605960298710761227953450132789786137",
+        "11626.9999999999993240926353725609977893408395104761947724725552927510729172",
+        "10000000001.0000000000013519875697314303574424197565193948813503227897205279"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.999956998394951448914044756662791074094490922160476514117058719877167816289",
+        "0.000000000199999999960540795033703659456537911315783090527205727100159303802432971942"
+      ],
+      "full_symplectic_residues": [
+        "-23255.0000023254972960877288338307084445123611236946634247924479633224791772",
+        "23255.0000023255027040379783076586465549000179581286548739040475086065309359",
+        "100000000029729602489.027222538333553778944422344981279229635104528044850178"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999950000000007364801242310565260042338399719721962780680236819816706",
+      "effective_mass_normalized_partial_velocity_vertex": "0.500000000000000000007364801243047045384347042938154426256596122862479428992",
+      "dominant_displacement_gap_signed": "1.00000000000135198756973143035744241975651939488135032278972052790569652887",
+      "dominant_displacement_gap_absolute": "1.00000000000135198756973143035744241975651939488135032278972052790569652887",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "nu3",
+      "real_depth": 5,
+      "cutoff": 65780,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "66110.8857297242234827545362339733764582285075995090704614800886295964935668",
+        "99.9999976888940928833412208303094064863793592770307420721254035753809684776",
+        "66110.8857320353293898711950131430670517421282402320397194079632260211125984"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.000000000000105755965731264769924147080832136881315953970435749930073991712232494181013",
+        "0.999999999982468030206741602063557952400466999631418732825817063855640722896"
+      ],
+      "full_symplectic_residues": [
+        "-132221.771457144322103442451663102391697136167685010780394486764552318512244",
+        "1891146225131221.45453621010067488567317358210906907844346472115151626842378",
+        "132221.77146638876688310223303497482808260317876574417433276137042306254691"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999999973561008567183108498695245226980347263643253031719420147973768",
+      "effective_mass_normalized_partial_velocity_vertex": "0.505050505050478344453098164756059288126491899340670346720234060020351488655",
+      "dominant_displacement_gap_signed": "-0.00000231110590711665877916969059351362064072296925792787459642461903152118268785",
+      "dominant_displacement_gap_absolute": "0.00000231110590711665877916969059351362064072296925792787459642461903152118268785",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "nu3",
+      "real_depth": 5,
+      "cutoff": 65780,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "65780.000000000021635064135798142010755125617588789862813867877656715216773",
+        "65778.9999999999783656379325797840065240486609336318454669475670235361965773",
+        "10000000001.000000000043269426203218358004231076956655158017346920310633179"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.999992398747665079494478500773695559521777428025404775494324284957633064839",
+        "0.000000000199999999977307770481604072182329724393795016723571175505415525192410443749"
+      ],
+      "full_symplectic_residues": [
+        "-131559.000013155813462330366031212718506317017061459003127831124998333474012",
+        "131559.000013155986540035173701388189577246337264131120329940401461692906162",
+        "100000000021346114762.052612848399908224049628417414658929968370314155720215"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999950000000003173057379916287692399129377654917540383550415179344394",
+      "effective_mass_normalized_partial_velocity_vertex": "0.5000000000000000000031730573802335934304224887206971664124532670564246711",
+      "dominant_displacement_gap_signed": "1.00000000004326942620321835800423107695665515801734692031063317902019572832",
+      "dominant_displacement_gap_absolute": "1.00000000004326942620321835800423107695665515801734692031063317902019572832",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "electron",
+      "real_depth": 6,
+      "cutoff": 18564,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "18657.0221693912855982379022844053148664399542953565288191352716113359407034",
+        "99.9999709803195148272286716668420039651433275048560089778053464974038584282",
+        "18657.0221984109660834106736127384728624748109678516728101574662648385368449"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.0000000000166744038989998696349844862663398456653647974529955697993351663437336837925",
+        "0.99999999921390342040772320235785285438492669810889376390821919260115122151"
+      ],
+      "full_symplectic_residues": [
+        "-37314.0443100723180395046212047531642663842682546359605966783186299044222598",
+        "11994428296932.1033182613775219634024697236395711180941625544272837753659278",
+        "37314.0444261543748609755621693729590387005175264249676563373085200991691116"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999995831399025232655357167047177487435507347472353873007867901030222",
+      "effective_mass_normalized_partial_velocity_vertex": "0.505050505046294342449729954906229340583320641926613608438255563502930333557",
+      "dominant_displacement_gap_signed": "-0.0000290196804851727713283331579960348566724951439910221946535025961415716117197",
+      "dominant_displacement_gap_absolute": "0.0000290196804851727713283331579960348566724951439910221946535025961415716117197",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "electron",
+      "real_depth": 6,
+      "cutoff": 18564,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "18564.0000000000017231536923875195198947904802479459166462055772846238026978",
+        "18562.9999999999982771183630648514252684250318372414113602083287176338083392",
+        "10000000001.00000000000344603532932266809462636544841070450528599724856699"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.999973065324087312807686397180609075769002063286444546245425058002841615219",
+        "0.000000000199999999961378414137248997322958350813383957015599373033049169282640195124"
+      ],
+      "full_symplectic_residues": [
+        "-37127.000003712693108041364284819770666204220473596025723065257499680683904",
+        "37127.0000037127068921826530014069175983105113928235102186133014468179293589",
+        "100000000029310792937.070108222435895431196251370101564689433930451898452929"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999950000000007155396466403290315849541629647548215707145252300564287",
+      "effective_mass_normalized_partial_velocity_vertex": "0.500000000000000000007155396467118829962561424625903690678297514320130315719",
+      "dominant_displacement_gap_signed": "1.00000000000344603532932266809462636544841070450528599724856698999435857812",
+      "dominant_displacement_gap_absolute": "1.00000000000344603532932266809462636544841070450528599724856698999435857812",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "muon",
+      "real_depth": 6,
+      "cutoff": 3838380,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "3857716.54682880570222145066631021519543131209498251846615855530535578426622",
+        "99.9999999993212588530487908949747352191642055669229988303483233960134833233",
+        "3857716.54682880638096259761751932022069609293077695154315972495703238825273"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.00000000000000000000912165298231801568056540624992302298017507625557609051642714883806950233387",
+        "0.999999999999999912023560003002367840523854913206632393135345923763531899168"
+      ],
+      "full_symplectic_residues": [
+        "-7715433.09365761072573694222089046508969070700416041562190505789858499483897",
+        "21925850543353826680750.34343434071937884471426732686968117487051312497448",
+        "7715433.09365761344070153185005748165435296647708131979127120910310501304167"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999999999999997719586754420496079853448152948629808100831872966321832",
+      "effective_mass_normalized_partial_velocity_vertex": "0.505050505050505050502747057327697470787730755710049121018283668558551840235",
+      "dominant_displacement_gap_signed": "-0.000000000678741146951209105025264780835794433077001169651676603986516725964669260632",
+      "dominant_displacement_gap_absolute": "0.000000000678741146951209105025264780835794433077001169651676603986516725964669260632",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "muon",
+      "real_depth": 6,
+      "cutoff": 3838380,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "3838380.00000007363754982810386283900910788367977118130877978410969492750198",
+        "3838378.99999992630595629076492536209269174681835744155503026822505364351654",
+        "10000000001.000000147331593537338937476916416136861413739753749515884641284"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.999999869636637281321939682372677168611989912409195398594531351579147575502",
+        "0.000000000200000058892641735634838409557966094636609967189705103798041622695902545313"
+      ],
+      "full_symplectic_residues": [
+        "-7676759.0007673814064430617344231959124242790393046423932693708886293053602",
+        "7676759.00076797073290409638664487861644780420290098461777065433334160999211",
+        "99999970563687801566.838333703006206798581045100619303153168736325889261091"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999949999985274339564618724137227305631910111071743503838634569682338",
+      "effective_mass_normalized_partial_velocity_vertex": "0.49999999999999998527433956314615809354192144126430321586993416022156309836",
+      "dominant_displacement_gap_signed": "1.00000014733159353733893747691641613686141373975374951588464128398544028034",
+      "dominant_displacement_gap_absolute": "1.00000014733159353733893747691641613686141373975374951588464128398544028034",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "tau",
+      "real_depth": 10,
+      "cutoff": 64512240,
+      "fast_gap_over_own_sector_clock": 100,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.01010101010101010101010101010101010101010101010101010101010101010101010101",
+      "exact_positive_frequencies": [
+        "64837240.2445598209979510286665231360490758746126892700935777679304260184623",
+        "99.9999999999975972102911570142416423147467060549739515691513175270224006266",
+        "64837240.2445598210003538183753661218074335598659832151196261987791084914399"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "1.14313288021448106698577818176910521509900845418488973462886676139502971064e-25",
+        "0.999999999999999999981470547546830983790839285836500539244380920695009555761"
+      ],
+      "full_symplectic_residues": [
+        "-129674480.489119641993499275035949973603274261553276057275532446215878648024",
+        "1749577879016742667693713298.34343434342473227550803953774330839321543971723",
+        "129674480.489119642003110433871344779294309292187791552945978357159327621044"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999999999999999999971421677994637973325355544639051880980365338855469",
+      "effective_mass_normalized_partial_velocity_vertex": "0.505050505050505050505050476183513125896942752884388524294829273096301874212",
+      "dominant_displacement_gap_signed": "-0.00000000000240278970884298575835768525329394502604843084868247297760210613666833997914",
+      "dominant_displacement_gap_absolute": "0.00000000000240278970884298575835768525329394502604843084868247297760210613666833997914",
+      "mass_and_spatial_targets_retuned": false
+    },
+    {
+      "particle": "tau",
+      "real_depth": 10,
+      "cutoff": 64512240,
+      "fast_gap_over_own_sector_clock": 10000000000,
+      "bare_slow_mass": 1,
+      "common_coupling_amplitude_squared": "1.0000000001000000000100000000010000000001000000000100000000010000000001",
+      "exact_positive_frequencies": [
+        "64512240.0000206757617400296703277549835208553704644671438033546204659481136",
+        "64512238.9999790557391411112268498411814275625021320841727010363556967385941",
+        "10000000001.0000416200225989184434779138020932928683323829711023182647692095"
+      ],
+      "positive_branch_coordinate_strengths": [
+        "0.999999992148556667666559308385714599912362341716990289817498046479852425649",
+        "0.000000000200016648315478996460669771715544841458094743685562721676545433248178564926"
+      ],
+      "full_symplectic_residues": [
+        "-129024479.012820009913273559041707323996777379165640261419234580144077104768",
+        "129024479.012986496932591006718392864767611929205594046895022307592546443561",
+        "99991676545118431687.6030414202974506390549912679023331308273629825798443302"
+      ],
+      "bare_displacement_partial_velocity_vertex": "0.499999999949995837918629834659372619205173652366114905707090391038270973854",
+      "effective_mass_normalized_partial_velocity_vertex": "0.499999999999995837918629418451235561050297208471144626554204853693691459224",
+      "dominant_displacement_gap_signed": "1.00004162002259891844347791380209329286833238297110231826476920951959286068",
+      "dominant_displacement_gap_absolute": "1.00004162002259891844347791380209329286833238297110231826476920951959286068",
+      "mass_and_spatial_targets_retuned": false
+    }
+  ],
+  "sources": {
+    "experiments/gyroscopic-sector-clock-checks.py": "b7aa2ecea9bf8dd3d0681e70d304f137529d7ed9b2e282836a68dcb2d25c1a05",
+    "results/complex-comb-response-results.json": "30a613f13f33d19eaa2f3e542be8b7f9171c22c47a24f8592ae554d287dca8d6"
+  }
+}

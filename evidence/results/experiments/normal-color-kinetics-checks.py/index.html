@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>normal-color-kinetics-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/normal-color-kinetics-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="normal-color-kinetics-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/normal-color-kinetics-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="normal-color-kinetics-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>normal-color-kinetics-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/normal-color-kinetics-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Test independent normal color against the same nested spatial Clifford flag.&quot;&quot;&quot;
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+from itertools import combinations, permutations
+import importlib.util
+import json
+import math
+from pathlib import Path
+
+import numpy as np
+import sympy as sp
+
+
+HERE = Path(__file__).resolve().parent
+spec = importlib.util.spec_from_file_location(&#39;spinor_source&#39;, HERE/&#39;spinor-hodge-source-checks.py&#39;)
+source = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(source)
+CHECKS = 0
+CASES = []
+
+
+def check(value, message):
+    global CHECKS
+    if not value:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def close(a, b, message, atol=1e-10):
+    check(np.allclose(a,b,atol=atol,rtol=1e-10),message)
+
+
+def su_generators(k):
+    result = []
+    for a,b in combinations(range(k),2):
+        g = np.zeros((k,k),complex); g[a,b]=1; g[b,a]=-1; result.append(g)
+        g = np.zeros((k,k),complex); g[a,b]=1j; g[b,a]=1j; result.append(g)
+    for a in range(k-1):
+        g=np.zeros((k,k),complex); g[a,a]=1j; g[a+1,a+1]=-1j; result.append(g)
+    return result
+
+
+def constraints(columns):
+    matrix=np.column_stack(columns)
+    matrix=np.rint(np.vstack((matrix.real,matrix.imag))*2).astype(int)
+    matrix=matrix[np.any(matrix!=0,axis=1)]
+    return sp.Matrix(matrix)
+
+
+def realify_interleaved(matrix):
+    k=len(matrix)
+    result=np.zeros((2*k,2*k))
+    for a in range(k):
+        for b in range(k):
+            z=matrix[a,b]
+            result[2*a:2*a+2,2*b:2*b+2]=[[z.real,-z.imag],[z.imag,z.real]]
+    return result
+
+
+def data_for_parent(k):
+    m=k+2
+    gamma=[source.dense(g) for g in source.gamma_monomials(m)]
+    size=len(gamma[0])
+    create=[(gamma[2*j]-1j*gamma[2*j+1])/2 for j in range(m)]
+    destroy=[g.conj().T for g in create]
+    algebra=su_generators(k)
+    lifted=[sum(a[i,j]*create[i+2]@destroy[j+2] for i in range(k) for j in range(k))
+            for a in algebra]
+    for a,x in zip(algebra,lifted):
+        close(x.conj().T,-x,&#39;normal SU generators are skew Hermitian on the full spatial field&#39;)
+        ordinary=np.zeros((2*m,2*m)); ordinary[4:,4:]=realify_interleaved(a)
+        for i in range(2*m):
+            close(x@gamma[i]-gamma[i]@x,sum(ordinary[j,i]*gamma[j] for j in range(2*m)),
+                  &#39;normal color generator is an actual ordinary spatial rotation&#39;)
+    # One full normal exterior grade is fundamental or conjugate fundamental.
+    grade=k-1
+    keep=np.array([j for j in range(size) if (j&amp;((1&lt;&lt;k)-1)).bit_count()==grade])
+    projector=np.zeros((size,size)); projector[keep,keep]=1
+    check(len(keep)==4*k,&#39;triplet/fundamental projection retains a full four-dimensional Dirac factor&#39;)
+    for x in lifted:
+        close(projector@x,x@projector,&#39;normal exterior grade is preserved by its SU group&#39;)
+    return gamma,algebra,lifted,keep,projector
+
+
+def kinetic_checks(k):
+    gamma,algebra,lifted,keep,p=data_for_parent(k)
+    size=len(gamma[0]); d_parent=len(gamma)
+    for d in range(2,d_parent+1):
+        columns=[np.concatenate([(x@g-g@x).reshape(-1) for g in gamma[:d]]) for x in lifted]
+        null=constraints(columns).nullspace() if columns else []
+        expected=(k*k-1 if d&lt;=4 else max(k-math.ceil((d-4)/2),0)**2-1)
+        expected=max(expected,0)
+        check(len(null)==expected,&#39;normal SU commutant is fixed by the number of active normal complex planes&#39;)
+        for vector in null:
+            x=sum(float(c)*g for c,g in zip(vector,lifted))
+            for g in gamma[:d]:
+                close(x@g,g@x,&#39;surviving independent color commutes with every tangent Clifford vector&#39;)
+        invariance=[]
+        compressed=[]
+        for i,g in enumerate(gamma[:d]):
+            residual=np.linalg.norm((np.eye(size)-p)@g@p)**2
+            invariance.append(residual)
+            cg=g[np.ix_(keep,keep)]
+            compressed.append(cg)
+            if i&lt;4:
+                close(residual,0,&#39;normal triplet retains each base kinetic direction&#39;)
+                close(cg@cg,np.eye(len(keep)),&#39;compressed base kinetic symbol has the original spatial metric&#39;)
+            else:
+                close(cg,0,&#39;fixed normal chirality compression kills an added normal kinetic direction&#39;)
+                close(residual,len(keep),&#39;all normal-triplet amplitude leaks under an added normal Clifford vector&#39;)
+        for a,b in combinations(range(min(d,4)),2):
+            close(compressed[a]@compressed[b]+compressed[b]@compressed[a],0,
+                  &#39;full independent-color base symbol retains Clifford anticommutators&#39;)
+        if k==3:
+            CASES.append({&#39;real_depth&#39;: d,&#39;geometry&#39;:&#39;one flat nested flag in the selected ten-dimensional parent&#39;,
+                          &#39;parameters&#39;:{&#39;parent_depth&#39;:10,&#39;normal_complex_rank&#39;:3,&#39;projected_full_spinor_rank&#39;:len(keep)},
+                          &#39;measurements&#39;:{&#39;independent_normal_su3_subalgebra_dimension&#39;:len(null),
+                                          &#39;full_triplet_kinetic_compatibility&#39;:d&lt;=4,
+                                          &#39;retained_spatial_symbol_directions&#39;:min(d,4),
+                                          &#39;squared_leak_by_tangent_direction&#39;:invariance,
+                                          &#39;spatial_three_form_can_be_nonzero&#39;:d&gt;=3,
+                                          &#39;combined_kinetic_and_three_form_candidate&#39;:3&lt;=d&lt;=4,
+                                          &#39;all_color_interactions_proved_absent&#39;:False}})
+    return gamma,algebra,lifted,keep,p
+
+
+def actual_connection_and_pair(gamma,algebra,lifted,keep):
+    # Select one fixed four-dimensional Dirac spin state and all normal grade-two components.
+    normal_keep=np.array([j for j in keep if j&gt;&gt;3==0])
+    color=[x[np.ix_(normal_keep,normal_keep)] for x in lifted]
+    check(len(normal_keep)==3,&#39;one base spinor component contains an independent color triplet&#39;)
+    base_gamma=[source.dense(g) for g in source.gamma_monomials(2)]
+    for g,cg in zip(gamma[:4],base_gamma):
+        close(g[np.ix_(keep,keep)],np.kron(cg,np.eye(3)),
+              &#39;actual projected ambient spinor factors into full base Dirac spin and independent color&#39;)
+    for x,c in zip(lifted,color):
+        close(x[np.ix_(keep,keep)],np.kron(np.eye(4),c),
+              &#39;normal color generators act as identity on every observer spin component&#39;)
+    close(sum(x@x for x in color[:6]),np.diag([-4.,-4.,-4.]),
+          &#39;off-diagonal color generators act in the usual three-dimensional exterior representation&#39;)
+    # Complete orthonormal Hermitian generators for the actual projected normal representation.
+    hermitian=[1j*x for x in color]
+    normalized=[]
+    for candidate in hermitian:
+        value=candidate.copy()
+        for previous in normalized:
+            value-=2*np.trace(previous@value).real*previous
+        norm=np.trace(value@value).real
+        check(norm&gt;0,&#39;independent normal generators survive in the triplet&#39;)
+        normalized.append(value/math.sqrt(2*norm))
+    for a,t in enumerate(normalized):
+        close(np.trace(t),0,&#39;normal triplet color generators are traceless&#39;)
+        for b,u in enumerate(normalized):
+            close(np.trace(t@u),.5 if a==b else 0,&#39;normal color uses the empirical Casimir convention&#39;)
+    pair=sum(np.kron(t,t) for t in normalized)
+    swap=np.zeros((9,9))
+    for a in range(3):
+        for b in range(3):swap[3*a+b,3*b+a]=1
+    close(pair,(swap-np.eye(9)/3)/2,&#39;actual normal triplet has the standard color pair-Casimir identity&#39;)
+    eigenvalues=np.linalg.eigvalsh(pair)
+    close(eigenvalues[:3],-2/3,&#39;normal triplet antisymmetric pair has minus two-thirds contraction&#39;)
+    close(eigenvalues[3:],1/3,&#39;normal triplet symmetric pair has one-third contraction&#39;)
+    determinant=np.zeros(27,complex)
+    for perm in permutations(range(3)):
+        sign=(-1)**sum(perm[i]&gt;perm[j] for i in range(3) for j in range(i+1,3))
+        determinant[9*perm[0]+3*perm[1]+perm[2]]=sign/math.sqrt(6)
+    for t in normalized:
+        total=(np.kron(np.kron(t,np.eye(3)),np.eye(3))
+               +np.kron(np.kron(np.eye(3),t),np.eye(3))
+               +np.kron(np.kron(np.eye(3),np.eye(3)),t))
+        close(total@determinant,0,&#39;three normal triplets have the invariant determinant singlet&#39;)
+    # A real connection metric realizes the normal action on the zero section.
+    a,b=algebra[0],algebra[1]
+    curvature=a@b-b@a
+    curv_spin=lifted[0]@lifted[1]-lifted[1]@lifted[0]
+    curv_triplet=curv_spin[np.ix_(normal_keep,normal_keep)]
+    check(np.linalg.norm(curvature)&gt;0,&#39;constant noncommuting normal connections have nonzero curvature&#39;)
+    check(np.linalg.norm(curv_triplet)&gt;0,&#39;the triplet sees actual nonzero normal curvature&#39;)
+    vacuum_keep=np.array([j for j in range(32) if j&amp;7==0])
+    close(curv_spin[np.ix_(vacuum_keep,vacuum_keep)],0,&#39;normal vacuum is a color singlet for the same connection&#39;)
+    # The same curvature can survive on Q2: a third-form zero does not remove minimal kinetic coupling.
+    for d in (2,3,4):
+        for g in gamma[:d]:close(curv_spin@g,g@curv_spin,&#39;normal curvature acts independently of every lower-sector tangent direction&#39;)
+    connection_metric_checks(gamma,algebra,lifted)
+    spin_retained_volume_checks()
+    charge_spin_checks(gamma,lifted)
+    CASES.append({&#39;geometry&#39;:&#39;normal connection and standard color contractions&#39;,
+                  &#39;parameters&#39;:{&#39;connection_metric&#39;:&#39;g=g_B+|dy+A y|^2&#39;,&#39;normal_group&#39;:&#39;SU3&#39;},
+                  &#39;measurements&#39;:{&#39;qq_antisymmetric_casimir&#39;:&#39;-2/3&#39;,&#39;qq_symmetric_casimir&#39;:&#39;1/3&#39;,
+                                  &#39;determinant_singlet_present&#39;:True,&#39;observer_spin_and_color_commute&#39;:True,
+                                  &#39;normal_curvature_can_couple_a_depth_two_triplet&#39;:True,
+                                  &#39;three_form_zero_alone_removes_all_depth_two_color_coupling&#39;:False}})
+
+
+def charge_spin_checks(gamma,normal_su3):
+    create=[(gamma[2*j]-1j*gamma[2*j+1])/2 for j in range(5)]
+    destroy=[g.conj().T for g in create]
+    numbers=[a@b for a,b in zip(create,destroy)]
+    observer=[gamma[a]@gamma[b]/2 for a,b in ((0,1),(0,2),(1,2))]
+    y=(numbers[0]+numbers[1])/2-sum(numbers[2:])/3
+    t3=(numbers[0]-numbers[1])/2
+    q=y+t3
+    check(sum(np.linalg.norm(q@s-s@q)&gt;1e-9 for s in observer)==2,
+          &#39;ambient exterior Q is not independent of fixed observer spatial spin&#39;)
+    weak=[]
+    for a in su_generators(2):
+        weak.append(sum(a[i,j]*create[i]@destroy[j] for i in range(2) for j in range(2)))
+    fixed_projective=normal_su3+weak+[1j*y]
+    columns=[np.concatenate([(x@s-s@x).reshape(-1) for s in observer]) for x in fixed_projective]
+    check(len(constraints(columns).nullspace())==8,
+          &#39;fixed/projective pure-pair stabilizer retains only normal SU3 as an observer-spin commutant&#39;)
+    both_rays=fixed_projective+[1j*(sum(numbers)-2.5*np.eye(32))]
+    columns=[np.concatenate([(x@s-s@x).reshape(-1) for s in observer]) for x in both_rays]
+    check(len(constraints(columns).nullspace())==9,
+          &#39;both-ray geometry retains normal U3 as an observer-spin commutant&#39;)
+    volume=1j*gamma[0]@gamma[1]@gamma[2]
+    close(volume.conj().T,volume,&#39;observer three-volume gives a Hermitian Clifford branch&#39;)
+    close(volume@volume,np.eye(32),&#39;observer three-volume has two unit eigenvalues&#39;)
+    for g in gamma[:3]:close(volume@g,g@volume,&#39;observer volume commutes with every three-sector Clifford direction&#39;)
+    close(volume@gamma[3],-gamma[3]@volume,&#39;observer volume anticommutes with the fourth direction&#39;)
+    branch=(np.eye(32)-volume)/2
+    q_normal=sum(numbers[2:])/3-branch
+    for s in observer:close(q_normal@s,s@q_normal,&#39;normal charge with an auxiliary Clifford branch is independent of observer spin&#39;)
+    for g in gamma[:3]:close(q_normal@g,g@q_normal,&#39;auxiliary branch charge retains three-sector first-order kinetics&#39;)
+    check(np.linalg.norm(q_normal@gamma[3]-gamma[3]@q_normal)&gt;0,
+          &#39;the same branch charge is not a pointwise four-sector kinetic commutant&#39;)
+    normal_even=np.array([j for j in range(32) if (j&amp;7).bit_count()%2==0])
+    values=np.linalg.eigvalsh(q_normal[np.ix_(normal_even,normal_even)])
+    expected=np.array([-1.]*2+[-1/3]*6+[0.]*2+[2/3]*6)
+    close(values,expected,&#39;the root-free normal charge table is present with a separate observer spin doublet&#39;)
+    CASES.append({&#39;geometry&#39;:&#39;charge character versus independent observer spin&#39;,
+                  &#39;parameters&#39;:{&#39;observer_sector_depth&#39;:3,&#39;containing_base_depth&#39;:4},
+                  &#39;measurements&#39;:{&#39;ambient_Q_commutes_with_observer_spin&#39;:False,
+                                  &#39;fixed_projective_stabilizer_observer_commutant_dimension&#39;:8,
+                                  &#39;both_rays_stabilizer_observer_commutant_dimension&#39;:9,
+                                  &#39;auxiliary_branch_operator&#39;:&#39;(I-i gamma1 gamma2 gamma3)/2&#39;,
+                                  &#39;normal_branch_charge&#39;:&#39;N_normal/3-branch&#39;,
+                                  &#39;normal_charge_weights_with_spin_multiplicities&#39;:{&#39;0&#39;:2,&#39;2/3&#39;:6,&#39;-1&#39;:2,&#39;-1/3&#39;:6},
+                                  &#39;normal_branch_charge_commutes_with_Cl3&#39;:True,
+                                  &#39;normal_branch_charge_commutes_with_Cl4&#39;:False,
+                                  &#39;physical_total_charge_generator_derived&#39;:False}})
+
+
+def connection_metric_checks(gamma,algebra,lifted):
+    # The exact first metric jet at y=0 determines the full Levi-Civita connection there.
+    selected=[algebra[0],algebra[1],np.zeros((3,3),complex),np.zeros((3,3),complex)]
+    ordinary=[realify_interleaved(a) for a in selected]
+    dg=np.zeros((10,10,10))
+    for mu,a in enumerate(ordinary):
+        for i in range(6):
+            for j in range(6):
+                dg[4+j,mu,4+i]=a[i,j]
+                dg[4+j,4+i,mu]=a[i,j]
+    christoffel=np.zeros((10,10,10))
+    for a in range(10):
+        for b in range(10):
+            for c in range(10):
+                christoffel[a,b,c]=(dg[b,c,a]+dg[c,b,a]-dg[a,b,c])/2
+    for mu,a in enumerate(ordinary):
+        close(christoffel[4:,mu,4:],a,&#39;connection metric has exactly the declared ordinary normal connection&#39;)
+        close(christoffel[4:,:4,:4],0,&#39;the four-dimensional zero section is totally geodesic&#39;)
+        omega=christoffel[:,mu,:]
+        close(omega+omega.T,0,&#39;metric connection in the coordinate frame is skew at the zero section&#39;)
+        spin=sum(omega[i,j]*gamma[i]@gamma[j]/4 for i in range(10) for j in range(10))
+        expected=lifted[mu] if mu&lt;2 else np.zeros((32,32),complex)
+        close(spin,expected,&#39;Levi-Civita spin connection induces precisely the normal SU3 color action&#39;)
+    # A connection on two base directions can already generate full SU3 holonomy.
+    first=algebra[6]+3*algebra[7]
+    second=algebra[0]+algebra[4]
+    generated=[first,second]
+    rank=2
+    while True:
+        additions=[]
+        for a,b in combinations(generated,2):
+            comm=a@b-b@a
+            matrix=constraints([x.reshape(-1) for x in generated+additions+[comm]])
+            new_rank=matrix.rank()
+            if new_rank&gt;rank:
+                additions.append(comm);rank=new_rank
+        if not additions:break
+        generated.extend(additions)
+    check(rank==8,&#39;a depth-two pullback can retain full normal SU3 holonomy&#39;)
+
+
+def spin_retained_volume_checks():
+    from scipy.linalg import expm
+    rng=np.random.default_rng(20261009)
+    epsilon=np.zeros((3,3,3))
+    for perm in permutations(range(3)):
+        epsilon[perm]=(-1)**sum(perm[i]&gt;perm[j] for i in range(3) for j in range(i+1,3))
+    def volume(a,b,c):
+        tensor=np.einsum(&#39;abc,Aa,Bb,Cc-&gt;ABC&#39;,epsilon,a,b,c)
+        return np.vdot(tensor,tensor).real
+    for spin_rank in (2,4):
+        a=rng.normal(size=(spin_rank,3))+1j*rng.normal(size=(spin_rank,3))
+        b=rng.normal(size=(spin_rank,3))+1j*rng.normal(size=(spin_rank,3))
+        c=rng.normal(size=(spin_rank,3))+1j*rng.normal(size=(spin_rank,3))
+        energy=volume(a,b,c)
+        raw=rng.normal(size=(3,3))+1j*rng.normal(size=(3,3))
+        generator=raw-raw.conj().T;generator-=np.trace(generator)*np.eye(3)/3
+        color_rotation=expm(generator)
+        close(volume(a@color_rotation.T,b@color_rotation.T,c@color_rotation.T),energy,
+              &#39;spin-retained normal color volume is SU3 invariant&#39;)
+        raw=rng.normal(size=(spin_rank,spin_rank))+1j*rng.normal(size=(spin_rank,spin_rank))
+        spin_rotation=expm(raw-raw.conj().T)
+        close(volume(spin_rotation@a,spin_rotation@b,spin_rotation@c),energy,
+              &#39;independent observer spin rotation preserves the normal color volume&#39;)
+        summed=0
+        for index in range(3):
+            third=np.zeros((spin_rank,3));third[0,index]=1
+            summed+=volume(a,b,third)
+        rho_a=a.T@a.conj();rho_b=b.T@b.conj()
+        close(summed,np.trace(rho_a).real*np.trace(rho_b).real-np.trace(rho_a@rho_b).real,
+              &#39;third normal-color contraction gives I-minus-color-swap with every spin index retained&#39;)
+        repeated=volume(a,a,a)
+        if spin_rank==2:
+            close(repeated,0,&#39;one pointwise chiral spinor has rank at most two and zero repeated color volume&#39;)
+        else:
+            check(repeated&gt;0,&#39;full four-component Dirac source can have a nonzero rank-three color volume&#39;)
+        CASES.append({&#39;geometry&#39;:&#39;independent spin and normal color volume&#39;,
+                      &#39;parameters&#39;:{&#39;spin_rank&#39;:spin_rank,&#39;color_rank&#39;:3},
+                      &#39;measurements&#39;:{&#39;third_contraction&#39;:&#39;tr(rho_a) tr(rho_b)-tr(rho_a rho_b)&#39;,
+                                      &#39;pair_operator&#39;:&#39;I_spin tensor (I_color-swap_color)&#39;,
+                                      &#39;same_chiral_pointwise_field_volume_vanishes&#39;:spin_rank==2,
+                                      &#39;distinct_modes_or_spatial_jets_needed_for_chiral_source&#39;:spin_rank==2}})
+
+
+def determinant_form_checks():
+    rng=np.random.default_rng(20261009)
+    for k in range(2,7):
+        for d in (2,3,4,5,6,10):
+            derivative=rng.normal(size=(k,d))+1j*rng.normal(size=(k,d))
+            norm=sum(abs(np.linalg.det(derivative[:,index]))**2 for index in combinations(range(d),k))
+            check((norm&gt;0)==(d&gt;=k),&#39;one determinant differential form has the same spatial degree rule at every depth&#39;)
+            if d&gt;=k:
+                close(norm,np.linalg.det(derivative@derivative.conj().T).real,&#39;Cauchy-Binet computes the complete determinant-form energy&#39;)
+            # Exact all-depth comparison: a color factor cannot retain more than the four base directions.
+            allowed=d&gt;=k and d&lt;=4
+            if k==3:check(allowed==(d in (3,4)),&#39;conditional determinant-contact plus kinetic rule leaves only maintained depths three and four&#39;)
+            CASES.append({&#39;real_depth&#39;:d,&#39;geometry&#39;:&#39;determinant spatial differential-form candidate&#39;,
+                          &#39;parameters&#39;:{&#39;normal_complex_rank&#39;:k,&#39;contact_form_degree&#39;:k},
+                          &#39;measurements&#39;:{&#39;spatial_form_nonzero&#39;:d&gt;=k,&#39;base_color_kinetics_preserved&#39;:d&lt;=4,
+                                          &#39;combined_candidate_allowed&#39;:allowed,
+                                          &#39;measured_force_derived&#39;:False}})
+
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument(&#39;--output&#39;,type=Path,required=True)
+    args=parser.parse_args()
+    data=None
+    for k in (2,3,4):
+        current=kinetic_checks(k)
+        if k==3:data=current
+    actual_connection_and_pair(*data[:-1])
+    determinant_form_checks()
+    report={&#39;title&#39;:&#39;Independent normal color and kinetic compatibility across nested spatial sectors&#39;,
+            &#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),&#39;checks_passed&#39;:CHECKS,&#39;cases&#39;:CASES,
+            &#39;scope&#39;:&#39;Finite ordinary spatial parent, full tangent Clifford symbols, exact real commutants and derivative-form controls.&#39;,
+            &#39;limitations&#39;:[&#39;The selected ten-dimensional parent is within the infinite containing manifold; higher ambient normals are not excluded.&#39;,
+                           &#39;The normal SU3 triplet is distinct from the base middle-Hodge spin-one triplet.&#39;,
+                           &#39;Depth two also admits the triplet kinematically, and its normal curvature need not vanish.&#39;,
+                           &#39;A determinant three-form vanishes at depth two but does not remove an independently present covariant kinetic connection.&#39;,
+                           &#39;Residual SU2 and higher equivalent-mode interactions are not excluded at five/six.&#39;,
+                           &#39;No occupied particle representation, strong dynamics or all-sector force absence is derived.&#39;],
+            &#39;sources&#39;:{&#39;experiments/normal-color-kinetics-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest(),
+                       &#39;experiments/spinor-hodge-source-checks.py&#39;:sha256((HERE/&#39;spinor-hodge-source-checks.py&#39;).read_bytes()).hexdigest()}}
+    args.output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;checks_passed&#39;:CHECKS,&#39;cases&#39;:len(CASES),&#39;output&#39;:str(args.output)}))
+
+
+if __name__==&#39;__main__&#39;:main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

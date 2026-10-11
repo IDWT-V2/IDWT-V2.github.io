@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>spatial-band-curvature-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/spatial-band-curvature-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="spatial-band-curvature-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/spatial-band-curvature-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="spatial-band-curvature-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>spatial-band-curvature-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/spatial-band-curvature-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Actual spherical monogenic bands, contact and quantum geometric tensors.&quot;&quot;&quot;
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+from itertools import product
+import json
+from math import comb, factorial, prod, sqrt
+from pathlib import Path
+
+import numpy as np
+import scipy.linalg as la
+import sympy as sp
+
+
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    if not condition:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def gammas(depth):
+    m = depth//2
+    identity = np.eye(2, dtype=complex)
+    sx = np.array([[0, 1], [1, 0]], dtype=complex)
+    sy = np.array([[0, -1j], [1j, 0]], dtype=complex)
+    sz = np.diag([1., -1.]).astype(complex)
+    def tensor(factors):
+        result = np.ones((1, 1), dtype=complex)
+        for factor in factors:
+            result = np.kron(result, factor)
+        return result
+    result = []
+    for index in range(m):
+        for axis in (sx, sy):
+            result.append(tensor([sz]*index+[axis]+[identity]*(m-index-1)))
+    if depth % 2:
+        result.append(tensor([sz]*m))
+    return result
+
+
+def compositions(total, length):
+    if length == 1:
+        yield (total,)
+        return
+    for first in range(total+1):
+        for remaining in compositions(total-first, length-1):
+            yield (first,)+remaining
+
+
+def sphere_monomial(exponents):
+    if any(a % 2 for a in exponents):
+        return sp.Integer(0)
+    numerator = prod(prod(range(1, a, 2)) for a in exponents)
+    degree = sum(exponents)//2
+    return sp.Rational(numerator, prod(len(exponents)+2*j for j in range(degree)))
+
+
+def shell_data(depth, level, gamma):
+    rank = len(gamma[0])
+    ambient = depth+1
+    symbol = gamma+[1j*np.eye(rank)]
+    indices = list(compositions(level, ambient))
+    lookup = {alpha: j for j, alpha in enumerate(indices)}
+    dim = len(indices)*rank
+    if level:
+        lower = list(compositions(level-1, ambient))
+        c = np.zeros((len(lower)*rank, dim), dtype=complex)
+        for ib, beta in enumerate(lower):
+            for axis in range(ambient):
+                alpha = list(beta)
+                alpha[axis] += 1
+                ia = lookup[tuple(alpha)]
+                c[ib*rank:(ib+1)*rank, ia*rank:(ia+1)*rank] = symbol[axis]*sqrt(alpha[axis])
+        gram = c@c.conj().T
+        cholesky = la.cho_factor(gram, lower=True)
+        def project(z):
+            return z-c.conj().T@la.cho_solve(cholesky, c@z)
+        check(np.min(np.diag(cholesky[0]).real) &gt; 0, &#39;surjective polynomial Dirac constraint&#39;)
+        check(dim-len(lower)*rank == rank*comb(level+depth-1, depth-1), &#39;actual monogenic shell rank&#39;)
+    else:
+        c = np.zeros((0, dim), dtype=complex)
+        def project(z):
+            return z
+    normalization = sqrt(prod(ambient+2*j for j in range(level)))
+    evaluation = np.zeros((dim, rank), dtype=complex)
+    north = (0,)*depth+(level,)
+    j = lookup[north]
+    evaluation[j*rank:(j+1)*rank] = np.eye(rank)*normalization/sqrt(factorial(level))
+    derivatives = []
+    for axis in range(depth):
+        derivative = np.zeros_like(evaluation)
+        if level:
+            alpha = [0]*ambient
+            alpha[-1] = level-1
+            alpha[axis] = 1
+            j = lookup[tuple(alpha)]
+            derivative[j*rank:(j+1)*rank] = np.eye(rank)*normalization/sqrt(factorial(level-1))
+        derivatives.append(derivative)
+    projected = project(np.concatenate([evaluation]+derivatives, axis=1))
+    w = projected[:, :rank]
+    dd = [projected[:, (a+1)*rank:(a+2)*rank] for a in range(depth)]
+    check(np.linalg.norm(c@w) &lt; 1e-8, &#39;evaluation state is monogenic&#39;)
+    multiplicity = comb(level+depth-1, depth-1)
+    check(np.allclose(w.conj().T@w, multiplicity*np.eye(rank), atol=1e-9), &#39;physical sphere norm gives exact shell kernel&#39;)
+    for a in range(depth):
+        expected = -level/depth*symbol[-1].conj().T@symbol[a]
+        check(np.allclose(w.conj().T@dd[a]/multiplicity, expected, atol=1e-9), &#39;actual shell connection moment&#39;)
+        for b in range(depth):
+            expected = (level*(level+depth-1)/depth*np.eye(rank) if a == b else
+                        -level/depth*gamma[a]@gamma[b])
+            check(np.allclose(dd[a].conj().T@dd[b]/multiplicity, expected, atol=1e-9),
+                  &#39;actual shell derivative moment&#39;)
+    # At the north pole, ambient monogenicity plus Euler homogeneity is the intrinsic Dirac equation.
+    if level:
+        gradient = [np.zeros((rank, rank), dtype=complex) for _ in range(ambient)]
+        for axis in range(depth):
+            alpha = [0]*ambient
+            alpha[-1], alpha[axis] = level-1, 1
+            j = lookup[tuple(alpha)]
+            gradient[axis] = w[j*rank:(j+1)*rank]/sqrt(factorial(level-1))
+        j = lookup[north]
+        gradient[-1] = level*w[j*rank:(j+1)*rank]/sqrt(factorial(level))
+        value = w[j*rank:(j+1)*rank]/sqrt(factorial(level))
+        equation = sum(1j*gamma[a]@gradient[a] for a in range(depth))
+        check(np.allclose(equation, level*value, atol=1e-8), &#39;positive spherical Dirac branch at evaluation&#39;)
+    return w, dd, multiplicity, dim
+
+
+def spatial_checks():
+    for depth in range(2, 11):
+        gamma = gammas(depth)
+        rank = len(gamma[0])
+        max_level = (6 if depth == 2 else 4 if depth &lt;= 4 else 3 if depth &lt;= 6 else 2)
+        shells = []
+        for level in range(max_level+1):
+            shells.append(shell_data(depth, level, gamma))
+            count = comb(level+depth, depth)
+            w = np.vstack([s[0] for s in shells])/sqrt(count)
+            dd = [np.vstack([s[1][a] for s in shells])/sqrt(count) for a in range(depth)]
+            check(np.allclose(w.conj().T@w, np.eye(rank), atol=1e-9), &#39;cumulative evaluation frame normalized&#39;)
+            aa = [w.conj().T@derivative for derivative in dd]
+            q = np.block([[dd[a].conj().T@dd[b]-aa[a].conj().T@aa[b]
+                           for b in range(depth)] for a in range(depth)])
+            cval = level*(level+depth+1)/(depth+1)**2
+            metric = (depth-1+1/(depth+2))*cval
+            for a in range(depth):
+                for b in range(depth):
+                    expected = metric*np.eye(rank) if a == b else -cval*gamma[a]@gamma[b]
+                    check(np.allclose(q[a*rank:(a+1)*rank, b*rank:(b+1)*rank], expected, atol=1e-8),
+                          &#39;full spatial quantum geometric tensor&#39;)
+            eigen = np.linalg.eigvalsh(q)
+            target = sorted([cval/(depth+2)]*rank+[(depth+1)**2*cval/(depth+2)]*((depth-1)*rank))
+            check(np.allclose(eigen, target, atol=1e-8), &#39;independent full tensor spectrum&#39;)
+            check(np.min(eigen) &gt; -1e-8, &#39;positive spatial quantum tensor&#39;)
+            CASES.append({&#39;name&#39;: &#39;actual-spatial-monogenic-band&#39;, &#39;real_depth&#39;: depth, &#39;mode_index&#39;: level+1,
+                          &#39;parameters&#39;: {&#39;sphere_radius&#39;: 1, &#39;shell_cutoff&#39;: level,
+                                         &#39;spinor_rank&#39;: rank, &#39;physical_band_dimension&#39;: rank*count,
+                                         &#39;coefficient_dimension&#39;: sum(s[3] for s in shells)},
+                          &#39;measurements&#39;: {&#39;reference_normalized_contact_eigenvalue&#39;: count,
+                                           &#39;curvature_coefficient&#39;: cval, &#39;metric_diagonal&#39;: metric,
+                                           &#39;Clifford_trace_eigenvalue&#39;: cval/(depth+2),
+                                           &#39;twistor_eigenvalue&#39;: (depth+1)**2*cval/(depth+2),
+                                           &#39;geometric_spectral_ratio&#39;: (depth+1)**2 if level else None,
+                                           &#39;maximum_spectrum_error&#39;: float(np.max(np.abs(eigen-target)))}})
+
+
+def exact_moments_and_integration():
+    for depth in range(2, 13):
+        for level in range(41):
+            total = comb(level+depth, depth)
+            mean = sp.Rational(depth*level, depth+1)
+            variance = sp.Rational(depth*level*(level+depth+1), (depth+1)**2*(depth+2))
+            shell_mean = sp.Rational(sum(j*comb(j+depth-1, depth-1) for j in range(level+1)), total)
+            shell_second = sp.Rational(sum(j*j*comb(j+depth-1, depth-1) for j in range(level+1)), total)
+            check(shell_mean == mean and shell_second-mean**2 == variance, &#39;exact cumulative shell moments&#39;)
+            cval = sp.Rational(level*(level+depth+1), (depth+1)**2)
+            metric = (shell_second+(depth-1)*shell_mean)/depth-(shell_mean/depth)**2
+            check(metric == (depth-1+sp.Rational(1, depth+2))*cval, &#39;count moments fix geometric metric&#39;)
+            check(variance/depth == cval/(depth+2), &#39;kinetic variance fixes Clifford trace metric&#39;)
+    # A harmonic test polynomial (x0+i*x1)^l independently checks Fischer/sphere normalization.
+    for ambient in range(3, 12):
+        for level in range(9):
+            integral = sum(comb(level, j)*sphere_monomial((2*j, 2*(level-j))+(0,)*(ambient-2))
+                           for j in range(level+1))
+            fischer = 2**level*factorial(level)
+            expected = sp.Rational(fischer, prod(ambient+2*j for j in range(level)))
+            check(integral == expected, &#39;independent angular integral fixes polynomial normalization&#39;)
+    for name, depth, n in [(&#39;W&#39;, 2, 76), (&#39;Z&#39;, 2, 81), (&#39;Higgs&#39;, 2, 95), (&#39;down&#39;, 3, 1),
+                            (&#39;strange&#39;, 3, 4), (&#39;up&#39;, 4, 3), (&#39;charm&#39;, 4, 20), (&#39;top&#39;, 4, 72),
+                            (&#39;nu1&#39;, 5, 10), (&#39;nu2&#39;, 5, 15), (&#39;nu3&#39;, 5, 22),
+                            (&#39;electron&#39;, 6, 13), (&#39;muon&#39;, 6, 35), (&#39;tau&#39;, 10, 23)]:
+        level = n-1
+        cval = sp.Rational(level*(level+depth+1), (depth+1)**2)
+        CASES.append({&#39;name&#39;: &#39;maintained-branch-geometric-moments&#39;, &#39;real_depth&#39;: depth, &#39;mode_index&#39;: n,
+                      &#39;parameters&#39;: {&#39;particle&#39;: name, &#39;sphere_radius&#39;: &#39;R; eigenvalues listed in R^-2&#39;},
+                      &#39;measurements&#39;: {&#39;contact_count&#39;: comb(level+depth, depth),
+                                       &#39;curvature_coefficient_exact&#39;: str(cval),
+                                       &#39;Clifford_trace_eigenvalue_exact&#39;: str(cval/(depth+2)),
+                                       &#39;twistor_eigenvalue_exact&#39;: str(cval*(depth+1)**2/(depth+2)),
+                                       &#39;geometric_ratio&#39;: (depth+1)**2 if level else None}})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--output&#39;, required=True)
+    args = parser.parse_args()
+    exact_moments_and_integration()
+    spatial_checks()
+    report = {&#39;experiment_key&#39;: &#39;actual-spatial-band-curvature-20261009&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/spatial-band-curvature-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest()},
+              &#39;scope&#39;: &#39;Actual monogenic sphere Dirac bands, probability-normalized spatial integration, contact and quantum tensor; exact maintained-branch moments. A spatial control family, not an empirical identification or compactification.&#39;,
+              &#39;summary&#39;: {&#39;checks_passed&#39;: CHECKS, &#39;case_count&#39;: len(CASES)}, &#39;cases&#39;: CASES}
+    Path(args.output).write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(report[&#39;summary&#39;]))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

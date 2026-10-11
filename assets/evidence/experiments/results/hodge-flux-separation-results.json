@@ -1,0 +1,278 @@
+{
+  "title": "Finite Commuting-Source Separation Bounds and Complete Electric Variations",
+  "sources": {
+    "experiments/hodge-flux-separation-checks.py": "d76c72a080f60704d114dd939ee9839b51b6542857c912371c16e25de2a76d64",
+    "experiments/hodge-flux-tube-checks.py": "24ef86b4855274c5c8ca74890aa5e6bfa5f15bcccf2bc6ae566c02d998adb38b"
+  },
+  "checks_passed": 231,
+  "case_count": 15,
+  "occupied_depths": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  "scope": "finite-source bounds at active three/four with the same explicit occupied-sector Hodge and profile controls",
+  "conclusion": "A sharp plane energy bound and fixed-shape finite cap trials share the same positive linear separation coefficient. Completing the entire Abelian electric quadratic energy retains the fixed-flux stability bound. Prescribed sources, exact vacuum zero and commuting flux remain premises.",
+  "cases": [
+    {
+      "case": "exact-cap-and-hamiltonian-identities",
+      "cap_polynomial": "10s^3-15s^4+6s^5",
+      "alpha2_exact": "181/462",
+      "alpha4_exact": "2549/8398",
+      "alpha_gradient_exact": "10/7",
+      "cap_charge_exact": "1",
+      "electric_second_variation": "(p-4 kappa E u^3 h)^2/(2 kappa u^4)-3 kappa E^2 u^2 h^2"
+    },
+    {
+      "case": "occupied-sector-source-control-2",
+      "real_depth": 2,
+      "hodge_coefficient": 0.0,
+      "transverse_dimension": 1,
+      "nonzero_color_source_allowed_in_this_action": false,
+      "regular_quartic_transverse_profile_possible": true
+    },
+    {
+      "case": "occupied-sector-source-control-3",
+      "real_depth": 3,
+      "hodge_coefficient": 1.0,
+      "transverse_dimension": 2,
+      "nonzero_color_source_allowed_in_this_action": true,
+      "regular_quartic_transverse_profile_possible": true
+    },
+    {
+      "case": "occupied-sector-source-control-4",
+      "real_depth": 4,
+      "hodge_coefficient": 1.0,
+      "transverse_dimension": 3,
+      "nonzero_color_source_allowed_in_this_action": true,
+      "regular_quartic_transverse_profile_possible": true
+    },
+    {
+      "case": "occupied-sector-source-control-5",
+      "real_depth": 5,
+      "hodge_coefficient": 0.0,
+      "transverse_dimension": 4,
+      "nonzero_color_source_allowed_in_this_action": false,
+      "regular_quartic_transverse_profile_possible": false
+    },
+    {
+      "case": "occupied-sector-source-control-6",
+      "real_depth": 6,
+      "hodge_coefficient": 0.0,
+      "transverse_dimension": 5,
+      "nonzero_color_source_allowed_in_this_action": false,
+      "regular_quartic_transverse_profile_possible": false
+    },
+    {
+      "case": "occupied-sector-source-control-10",
+      "real_depth": 10,
+      "hodge_coefficient": 0.0,
+      "transverse_dimension": 9,
+      "nonzero_color_source_allowed_in_this_action": false,
+      "regular_quartic_transverse_profile_possible": false
+    },
+    {
+      "case": "finite-source-separation-n2-Q1.0",
+      "real_depth": 3,
+      "classical_commuting_flux": 1.0,
+      "dielectric_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "tension": 2.702843957387151,
+      "fixed_cap_width": 0.9,
+      "one_cap_energy": 2.3115339360920513,
+      "lengths": [
+        2.0,
+        5.0,
+        11.0
+      ],
+      "upper_bound_energies": [
+        10.028755786958406,
+        18.137287659119856,
+        34.35435140344276
+      ],
+      "lower_bound_energies": [
+        5.405687914774302,
+        13.514219786935755,
+        29.73128353125866
+      ],
+      "source_total_charges": [
+        1.0,
+        -1.0
+      ],
+      "exact_endpoint_stationary_solution_claimed": false,
+      "scope": "prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim"
+    },
+    {
+      "case": "finite-source-separation-n2-Q1.7",
+      "real_depth": 3,
+      "classical_commuting_flux": 1.7,
+      "dielectric_coefficient": 0.8,
+      "neutral_restoring_frequency": 1.3,
+      "tension": 4.93991140585993,
+      "fixed_cap_width": 0.6923076923076923,
+      "one_cap_energy": 3.2497885805188327,
+      "lengths": [
+        1.5384615384615383,
+        3.846153846153846,
+        8.461538461538462
+      ],
+      "upper_bound_energies": [
+        14.099440862360636,
+        25.499236414345088,
+        48.298827518314
+      ],
+      "lower_bound_energies": [
+        7.599863701322969,
+        18.99965925330742,
+        41.79925035727633
+      ],
+      "source_total_charges": [
+        1.7,
+        -1.7
+      ],
+      "exact_endpoint_stationary_solution_claimed": false,
+      "scope": "prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim"
+    },
+    {
+      "case": "finite-source-separation-n2-Q0.6",
+      "real_depth": 3,
+      "classical_commuting_flux": 0.6,
+      "dielectric_coefficient": 2.0,
+      "neutral_restoring_frequency": 0.7,
+      "tension": 1.2031243090786885,
+      "fixed_cap_width": 1.2857142857142858,
+      "one_cap_energy": 1.469913444409312,
+      "lengths": [
+        2.857142857142857,
+        7.142857142857143,
+        15.714285714285715
+      ],
+      "upper_bound_energies": [
+        6.377324914757734,
+        11.5335719536664,
+        21.84606603148373
+      ],
+      "lower_bound_energies": [
+        3.43749802593911,
+        8.593745064847775,
+        18.906239142665108
+      ],
+      "source_total_charges": [
+        0.6,
+        -0.6
+      ],
+      "exact_endpoint_stationary_solution_claimed": false,
+      "scope": "prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim"
+    },
+    {
+      "case": "complete-electric-variation-n2",
+      "real_depth": 3,
+      "directions_checked": 3,
+      "full_Abelian_quadratic_bound": true,
+      "non_Abelian_variations_checked": false
+    },
+    {
+      "case": "finite-source-separation-n3-Q1.0",
+      "real_depth": 4,
+      "classical_commuting_flux": 1.0,
+      "dielectric_coefficient": 1.0,
+      "neutral_restoring_frequency": 1.0,
+      "tension": 3.9953743016504832,
+      "fixed_cap_width": 0.9,
+      "one_cap_energy": 2.3599581036559565,
+      "lengths": [
+        2.0,
+        5.0,
+        11.0
+      ],
+      "upper_bound_energies": [
+        12.710664810612881,
+        24.69678771556433,
+        48.66903352546723
+      ],
+      "lower_bound_energies": [
+        7.9907486033009665,
+        19.976871508252415,
+        43.94911731815532
+      ],
+      "source_total_charges": [
+        1.0,
+        -1.0
+      ],
+      "exact_endpoint_stationary_solution_claimed": false,
+      "scope": "prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim"
+    },
+    {
+      "case": "finite-source-separation-n3-Q1.7",
+      "real_depth": 4,
+      "classical_commuting_flux": 1.7,
+      "dielectric_coefficient": 0.8,
+      "neutral_restoring_frequency": 1.3,
+      "tension": 6.690745971142438,
+      "fixed_cap_width": 0.6923076923076923,
+      "one_cap_energy": 3.0400309846734244,
+      "lengths": [
+        1.5384615384615383,
+        3.846153846153846,
+        8.461538461538462
+      ],
+      "upper_bound_energies": [
+        16.373517309565987,
+        31.813700319894686,
+        62.6940663405521
+      ],
+      "lower_bound_energies": [
+        10.293455340219134,
+        25.733638350547835,
+        56.61400437120525
+      ],
+      "source_total_charges": [
+        1.7,
+        -1.7
+      ],
+      "exact_endpoint_stationary_solution_claimed": false,
+      "scope": "prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim"
+    },
+    {
+      "case": "finite-source-separation-n3-Q0.6",
+      "real_depth": 4,
+      "classical_commuting_flux": 0.6,
+      "dielectric_coefficient": 2.0,
+      "neutral_restoring_frequency": 0.7,
+      "tension": 2.003000173587494,
+      "fixed_cap_width": 1.2857142857142858,
+      "one_cap_energy": 1.6901675839516208,
+      "lengths": [
+        2.857142857142857,
+        7.142857142857143,
+        15.714285714285715
+      ],
+      "upper_bound_energies": [
+        9.103192806724653,
+        17.68747926495677,
+        34.856052181421006
+      ],
+      "lower_bound_energies": [
+        5.722857638821411,
+        14.307144097053529,
+        31.475717013517762
+      ],
+      "source_total_charges": [
+        0.6,
+        -0.6
+      ],
+      "exact_endpoint_stationary_solution_claimed": false,
+      "scope": "prescribed rapidly decaying opposite commuting sources; no non-Abelian screening claim"
+    },
+    {
+      "case": "complete-electric-variation-n3",
+      "real_depth": 4,
+      "directions_checked": 3,
+      "full_Abelian_quadratic_bound": true,
+      "non_Abelian_variations_checked": false
+    }
+  ]
+}

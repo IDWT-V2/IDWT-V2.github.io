@@ -1,0 +1,152 @@
+{
+  "title": "Compact Non-Abelian Gauss Data Limit the Commuting Flux-Confinement Claim",
+  "sources": {
+    "experiments/nonabelian-gauss-compact-checks.py": "2c13b8126f7afea6011dadd8eb3265b7b4bb3e80e00fd1c1dea326ac70d39123",
+    "experiments/hodge-gated-gauss-checks.py": "d24406f940aea7e81ee65cb9596a57a3dc88e0f5d03c07106db93cc948ff1faa"
+  },
+  "checks_passed": 846,
+  "dependency_checks_passed": 18,
+  "case_count": 8,
+  "occupied_depths": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  "scope": "admissible full classical Gauss phase-space data for fixed extended sources; not a static solution, quantum center screening or particle construction",
+  "conclusion": "The full proposed classical connection Hamiltonian permits finite compact Gauss data for a one-signed mean-color source. Two opposite fixed cores give a separation-independent energy upper bound. Thus the commuting-channel linear lower bound cannot be transferred to this full classical source problem. Inactive Hodge source constraints remain unchanged.",
+  "cases": [
+    {
+      "case": "compact-source-gate-depth-2",
+      "real_depth": 2,
+      "hodge_coefficient_active": false,
+      "nonzero_finite_energy_displacement_permitted": false,
+      "independent_normal_algebra_dimension": 8,
+      "exact_inactive_source_constraint_retained": true
+    },
+    {
+      "case": "compact-nonabelian-gauss-depth-3",
+      "real_depth": 3,
+      "source_core_radius": 1,
+      "source_charge_scale": 1.1,
+      "gauge_coupling": 0.7,
+      "dielectric_coefficient": 1.3,
+      "neutral_restoring_frequency": 0.9,
+      "scalar_amplitudes": [
+        0.3,
+        1.0,
+        2.0
+      ],
+      "complete_single_core_trial_energies": [
+        22.99063661401704,
+        24.53165341297574,
+        29.611928574378055
+      ],
+      "exact_integrals": {
+        "source": "633825300114114700748351602688*pi/2444789209684704726957840711075",
+        "electric": "147573952589676412928*pi/205152091333295551445",
+        "magnetic": "3128556081471108233082266140727676936126464*pi/158520660078501016449518387697974681757375",
+        "gradient": "262144*pi/255255",
+        "restoring": "131072*pi/2078505"
+      },
+      "independent_integrals": [
+        0.8144754969507778,
+        2.259870919686268,
+        62.00232068820594,
+        3.2263801476274416,
+        0.19811106169642184
+      ],
+      "connection_energy_after_balance": 22.838228359174966,
+      "maximum_gauss_error": 3.552763266907874e-15,
+      "pair_energy_upper_bound_for_all_separations_above_two": 49.06330682595148,
+      "exterior_field_strength": "0",
+      "ordinary_source_integral": "Q H != 0 in the chosen source gauge",
+      "static_solution_constructed": false,
+      "localized_master_field_source_derived": false,
+      "quantum_fundamental_triality_screened": false
+    },
+    {
+      "case": "compact-source-gate-depth-3",
+      "real_depth": 3,
+      "hodge_coefficient_active": true,
+      "nonzero_finite_energy_displacement_permitted": true,
+      "independent_normal_algebra_dimension": 8,
+      "exact_inactive_source_constraint_retained": false
+    },
+    {
+      "case": "compact-nonabelian-gauss-depth-4",
+      "real_depth": 4,
+      "source_core_radius": 1,
+      "source_charge_scale": 1.1,
+      "gauge_coupling": 0.7,
+      "dielectric_coefficient": 1.3,
+      "neutral_restoring_frequency": 0.9,
+      "scalar_amplitudes": [
+        0.3,
+        1.0,
+        2.0
+      ],
+      "complete_single_core_trial_energies": [
+        25.011113897283202,
+        26.1920175469871,
+        30.085106502054895
+      ],
+      "exact_integrals": {
+        "source": "48*pi**2/2303",
+        "electric": "24*pi**2/341",
+        "magnetic": "20504*pi**2/13237",
+        "gradient": "16*pi**2/63",
+        "restoring": "pi**2/90"
+      },
+      "independent_integrals": [
+        0.2057060404916584,
+        0.6946349138596616,
+        15.287932963657648,
+        2.5065661971020594,
+        0.10966227112321508
+      ],
+      "connection_energy_after_balance": 24.89432122863117,
+      "maximum_gauss_error": 1.776512849088884e-14,
+      "pair_energy_upper_bound_for_all_separations_above_two": 52.3840350939742,
+      "exterior_field_strength": "0",
+      "ordinary_source_integral": "Q H != 0 in the chosen source gauge",
+      "static_solution_constructed": false,
+      "localized_master_field_source_derived": false,
+      "quantum_fundamental_triality_screened": false
+    },
+    {
+      "case": "compact-source-gate-depth-4",
+      "real_depth": 4,
+      "hodge_coefficient_active": true,
+      "nonzero_finite_energy_displacement_permitted": true,
+      "independent_normal_algebra_dimension": 8,
+      "exact_inactive_source_constraint_retained": false
+    },
+    {
+      "case": "compact-source-gate-depth-5",
+      "real_depth": 5,
+      "hodge_coefficient_active": false,
+      "nonzero_finite_energy_displacement_permitted": false,
+      "independent_normal_algebra_dimension": 3,
+      "exact_inactive_source_constraint_retained": true
+    },
+    {
+      "case": "compact-source-gate-depth-6",
+      "real_depth": 6,
+      "hodge_coefficient_active": false,
+      "nonzero_finite_energy_displacement_permitted": false,
+      "independent_normal_algebra_dimension": 3,
+      "exact_inactive_source_constraint_retained": true
+    },
+    {
+      "case": "compact-source-gate-depth-10",
+      "real_depth": 10,
+      "hodge_coefficient_active": false,
+      "nonzero_finite_energy_displacement_permitted": false,
+      "independent_normal_algebra_dimension": 0,
+      "exact_inactive_source_constraint_retained": false
+    }
+  ]
+}

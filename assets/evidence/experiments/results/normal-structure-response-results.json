@@ -1,0 +1,135 @@
+{
+  "checks_passed": 1532,
+  "created_utc": "2026-10-10T23:30:28.965559+00:00",
+  "depth_four_real_wave": {
+    "W2_norm_squared": 2,
+    "commutator_norm_squared": 4,
+    "complement_projection_norm_squared": 1,
+    "first_order_parallel_J_continuation": "obstructed: background F0i is zero",
+    "unitary_projection_norm_squared": 1
+  },
+  "exact_arithmetic": "SymPy integers and rational numbers; no numerical rank tolerance",
+  "occupied_depths": [
+    {
+      "depth": 2,
+      "even_carrier": 2,
+      "hodge_coefficient": 0,
+      "orientation_dimension": 12,
+      "q": 4,
+      "su_dimension": 15,
+      "u_dimension": 16
+    },
+    {
+      "depth": 3,
+      "even_carrier": 4,
+      "hodge_coefficient": 1,
+      "orientation_dimension": 6,
+      "q": 3,
+      "su_dimension": 8,
+      "u_dimension": 9
+    },
+    {
+      "depth": 4,
+      "even_carrier": 4,
+      "hodge_coefficient": 1,
+      "orientation_dimension": 6,
+      "q": 3,
+      "su_dimension": 8,
+      "u_dimension": 9
+    },
+    {
+      "depth": 5,
+      "even_carrier": 6,
+      "hodge_coefficient": 0,
+      "orientation_dimension": 2,
+      "q": 2,
+      "su_dimension": 3,
+      "u_dimension": 4
+    },
+    {
+      "depth": 6,
+      "even_carrier": 6,
+      "hodge_coefficient": 0,
+      "orientation_dimension": 2,
+      "q": 2,
+      "su_dimension": 3,
+      "u_dimension": 4
+    },
+    {
+      "depth": 10,
+      "even_carrier": 10,
+      "hodge_coefficient": 0,
+      "orientation_dimension": 0,
+      "q": 0,
+      "su_dimension": 0,
+      "u_dimension": 0
+    }
+  ],
+  "projected_curvature": "Fhat=P_h(F)-[K_mu,K_nu]/4",
+  "projected_metric_connection": "Ahat=A-J(DJ)/2",
+  "rank_cases": [
+    {
+      "central_dimension": 1,
+      "commutator_quadratic_eigenvalues": {
+        "0": 16,
+        "4": 12
+      },
+      "orientation_dimension": 12,
+      "q": 4,
+      "real_normal_rank": 8,
+      "so_dimension": 28,
+      "su_dimension": 15,
+      "u_dimension": 16
+    },
+    {
+      "central_dimension": 1,
+      "commutator_quadratic_eigenvalues": {
+        "0": 9,
+        "4": 6
+      },
+      "orientation_dimension": 6,
+      "q": 3,
+      "real_normal_rank": 6,
+      "so_dimension": 15,
+      "su_dimension": 8,
+      "u_dimension": 9
+    },
+    {
+      "central_dimension": 1,
+      "commutator_quadratic_eigenvalues": {
+        "0": 4,
+        "4": 2
+      },
+      "orientation_dimension": 2,
+      "q": 2,
+      "real_normal_rank": 4,
+      "so_dimension": 6,
+      "su_dimension": 3,
+      "u_dimension": 4
+    },
+    {
+      "central_dimension": 0,
+      "commutator_quadratic_eigenvalues": {},
+      "orientation_dimension": 0,
+      "q": 0,
+      "real_normal_rank": 0,
+      "so_dimension": 0,
+      "su_dimension": 0,
+      "u_dimension": 0
+    }
+  ],
+  "scope": "local geometric identities and explicit comparison action; no graph evolution or particle simulation",
+  "sources": {
+    "experiments/normal-structure-response-checks.py": "42b0350ff80c267d0a25c564fd28ad5b1c57ad702ea8c129de0dd30e18f882fe"
+  },
+  "title": "Retained Ordinary Normal Complex Structure: Exact Geometric Response",
+  "vacuum_cartan_history": {
+    "A2": "b(t)*x1*T",
+    "DJ": "0",
+    "generator": "(j_1-j_2)/2",
+    "generator_algebra": "su3, hence also u3",
+    "generator_norm_squared": 1,
+    "independent_connection_vacuum_ambiguity": "survives",
+    "vacuum_energy": "0"
+  }
+}

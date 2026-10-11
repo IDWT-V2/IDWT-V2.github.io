@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>orientation-hyperbolicity-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/orientation-hyperbolicity-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="orientation-hyperbolicity-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/orientation-hyperbolicity-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="orientation-hyperbolicity-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>orientation-hyperbolicity-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/orientation-hyperbolicity-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact static-background cones and a moving-background failure threshold.&quot;&quot;&quot;
+import argparse
+import hashlib
+import json
+from itertools import combinations
+from pathlib import Path
+import sympy as s
+
+checks = 0
+
+
+def check(ok):
+    global checks
+    if not ok:
+        raise AssertionError(&#39;Orientation principal identity failed&#39;)
+    checks += 1
+
+
+def anti(b):
+    r, i = s.re(b), s.im(b)
+    return r.row_join(i).col_join(i.row_join(-r))
+
+
+def bracket(a, b):
+    return a*b-b*a
+
+
+def inner(a, b):
+    return s.trace(a.T*b)
+
+
+cases = []
+for q in (2, 3, 4):
+    basis = []
+    for i, j in combinations(range(q), 2):
+        e = s.zeros(q)
+        e[i, j], e[j, i] = 1, -1
+        basis.extend((anti(e)/2, anti(s.I*e)/2))
+    size = len(basis)
+    spatial = [basis[0], basis[1], basis[-1]+basis[0]/3]
+    for n in ((1, 0, 0), (0, s.Rational(3, 5), s.Rational(4, 5)),
+              (s.Rational(1, 3), s.Rational(2, 3), s.Rational(2, 3))):
+        check(sum(z*z for z in n) == 1)
+        b = [[bracket(eta, a) for a in spatial] for eta in basis]
+        c = s.Matrix(size, size, lambda r, t: sum(inner(b[r][i], b[t][i]) for i in range(3)))
+        bn = [sum((n[i]*b[r][i] for i in range(3)), s.zeros(2*q)) for r in range(size)]
+        cn = s.Matrix(size, size, lambda r, t: inner(bn[r], bn[t]))
+        mag = [[n[i]*b[r][j]-n[j]*b[r][i] for i, j in combinations(range(3), 2)] for r in range(size)]
+        g = s.Matrix(size, size, lambda r, t: sum(inner(x, y) for x, y in zip(mag[r], mag[t])))
+        check(g == c-cn)
+        check(cn.T == cn and g.T == g)
+        for eta in basis:
+            for i, j in combinations(range(3), 2):
+                check(bracket(n[i]*eta, n[j]*eta) == s.zeros(2*q))
+        for amplitude in (0, s.Rational(1, 2), 3):
+            k = 4*s.eye(size)+amplitude*c
+            gradient = 4*s.eye(size)+amplitude*g
+            check(k-gradient == amplitude*cn)
+            check(gradient-4*s.eye(size) == amplitude*g)
+    x = basis[0]
+    brackets = [bracket(x, eta) for eta in basis]
+    c = s.Matrix(size, size, lambda r, t: inner(brackets[r], brackets[t]))
+    eigenvalues = c.eigenvals()
+    check(max(eigenvalues) == 1)
+    # Full moving symbol: nonzero symmetric mixed term, with exact
+    # positive-definite linearization and null-covector bounds.
+    time = (basis[0]+basis[1])/4
+    time_norm = inner(time, time)
+    b0 = [bracket(eta, time) for eta in basis]
+    c0 = s.Matrix(size, size, lambda r, t: inner(b0[r], b0[t]))
+    for n in ((1, 0, 0), (s.Rational(1, 3), s.Rational(2, 3), s.Rational(2, 3))):
+        bi = [[bracket(eta, a) for a in spatial] for eta in basis]
+        cn_all = s.Matrix(size, size, lambda r, t: sum(inner(bi[r][i], bi[t][i]) for i in range(3)))
+        bn = [sum((n[i]*bi[r][i] for i in range(3)), s.zeros(2*q)) for r in range(size)]
+        cnn = s.Matrix(size, size, lambda r, t: inner(bn[r], bn[t]))
+        cross = s.Matrix(size, size, lambda r, t: inner(bn[r], b0[t])+inner(b0[r], bn[t]))
+        for epsilon in (1, 5, 20):
+            check(epsilon*time_norm &lt; 4)
+            kinetic = 4*s.eye(size)+epsilon*cn_all
+            gradient = 4*s.eye(size)+epsilon*(cn_all-cnn-c0)
+            mixed = -epsilon*cross
+            for sign in (-1, 1):
+                null_gram = s.Matrix(size, size, lambda r, t: inner(bn[r]-sign*b0[r], bn[t]-sign*b0[t]))
+                check(kinetic+sign*mixed-gradient == epsilon*null_gram)
+            for positive in (kinetic, gradient):
+                _, diagonal = positive.LDLdecomposition(hermitian=True)
+                check(all(diagonal[i, i] &gt; 0 for i in range(size)))
+            zero = s.zeros(size)
+            linearized = zero.row_join(gradient).col_join(gradient.row_join(-mixed))
+            symmetrizer = gradient.row_join(zero).col_join(zero.row_join(kinetic))
+            check(linearized.T == linearized and symmetrizer.T == symmetrizer)
+    for moving_strength in (0, 2, 4, 5):
+        speeds = {str(value): str(1-s.Rational(moving_strength, 4)*value) for value in eigenvalues}
+        if moving_strength &lt; 4:
+            check(all(s.sympify(value) &gt; 0 for value in speeds.values()))
+        elif moving_strength == 4:
+            check(min(s.sympify(value) for value in speeds.values()) == 0)
+        else:
+            check(min(s.sympify(value) for value in speeds.values()) &lt; 0)
+    cases.append({&#39;complex_normal_rank&#39;: q,
+                  &#39;static_background_spatial_rank&#39;: 3 if q &gt; 2 else 2,
+                  &#39;moving_critical_epsilon_times_speed_squared_over_f_squared&#39;: 4,
+                  &#39;curvature_gram_eigenvalues&#39;: {str(v): m for v, m in eigenvalues.items()}})
+
+parser = argparse.ArgumentParser()
+parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+args = parser.parse_args()
+report = {&#39;checks_passed&#39;: checks, &#39;cases&#39;: cases,
+          &#39;sources&#39;: {&#39;experiments/orientation-hyperbolicity-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
+          &#39;scope&#39;: &#39;Exact static symbol, full mixed moving pencil in a sufficient causal regime, and finite-energy moving-geodesic hyperbolicity threshold for the explicitly chosen action; no identified particle solution&#39;}
+args.report.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;checks_passed&#39;: checks, &#39;cases&#39;: cases}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

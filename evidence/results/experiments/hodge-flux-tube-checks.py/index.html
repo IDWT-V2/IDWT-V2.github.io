@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>hodge-flux-tube-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/hodge-flux-tube-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="hodge-flux-tube-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/hodge-flux-tube-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hodge-flux-tube-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>hodge-flux-tube-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/hodge-flux-tube-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Check one positive neutral-mode dielectric tube at every occupied depth.&quot;&quot;&quot;
+from pathlib import Path
+from fractions import Fraction
+from itertools import combinations
+import argparse
+import hashlib
+import json
+import math
+import platform
+
+import numpy as np
+import scipy
+import sympy as sp
+from scipy.integrate import quad, simpson, solve_bvp
+from scipy.sparse import diags
+from scipy.sparse.linalg import LinearOperator, eigsh
+
+
+DEPTHS = (2, 3, 4, 5, 6, 10)
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    CHECKS += 1
+    if not condition:
+        raise AssertionError(message)
+
+
+def close(actual, expected, message, atol=2e-9, rtol=2e-9):
+    check(np.allclose(actual, expected, atol=atol, rtol=rtol), message)
+
+
+def hodge_coefficient(d):
+    even = d if d % 2 == 0 else d + 1
+    m = even // 2
+    basis = list(combinations(range(even), m))
+    lookup = {v: i for i, v in enumerate(basis)}
+    star = np.zeros((len(basis), len(basis)))
+    for j, item in enumerate(basis):
+        complement = tuple(i for i in range(even) if i not in item)
+        permutation = item + complement
+        sign = (-1)**sum(permutation[i] &gt; permutation[k]
+                         for i in range(even) for k in range(i + 1, even))
+        star[lookup[complement], j] = sign
+    close(star @ star, (-1)**m * np.eye(len(basis)), &#39;middle Hodge square&#39;)
+    symmetric = (star + star.T) / 2
+    return float(np.trace(symmetric.T @ symmetric) / len(basis))
+
+
+def algebraic_checks():
+    n, k, mass, p = sp.symbols(&#39;n K M p&#39;, real=True)
+    scale = (n - 2) * k / 2 + n * mass / 2 - n * (k + mass) / 4
+    check(sp.simplify(4 * scale - ((n - 4) * k + n * mass)) == 0,
+          &#39;cubic Pohozaev identity follows from two independent variations&#39;)
+    general = (n - 2) * k / 2 + n * mass / 2 - n * (k + mass) / p
+    check(sp.simplify(-2 * p * general - ((2 * p - n * (p - 2)) * k - n * (p - 2) * mass)) == 0,
+          &#39;general dielectric exponent support identity&#39;)
+    a, width, ck, cm, cp, q, kap = sp.symbols(&#39;a w K M P Q kappa&#39;, positive=True)
+    energy = q**2 / (2 * kap * a**4 * width**n * cp) + a**2 * (width**(n - 2) * ck + width**n * cm) / 2
+    optimal_a6 = 2 * q**2 / (kap * width**n * cp * (width**(n - 2) * ck + width**n * cm))
+    check(sp.simplify(sp.diff(energy, a) * a**5 - (width**(n - 2) * ck + width**n * cm) * (a**6 - optimal_a6)) == 0,
+          &#39;amplitude is varied in the complete positive energy&#39;)
+    reduced_width_log_derivative = (n - 4) / width + 4 * width * cm / (ck + width**2 * cm)
+    check(sp.simplify(reduced_width_log_derivative -
+                      ((n - 4) * ck + n * width**2 * cm) / (width * (ck + width**2 * cm))) == 0,
+          &#39;positive width requires n below four&#39;)
+    for d in DEPTHS:
+        transverse = d - 1
+        gate = hodge_coefficient(d)
+        support = transverse &lt; 4
+        check((gate &gt; 0 and support) == (d in (3, 4)), &#39;one common law leaves only occupied three/four&#39;)
+        CASES.append({&#39;case&#39;: f&#39;occupied-depth-{d}&#39;, &#39;real_depth&#39;: d,
+                      &#39;transverse_dimension&#39;: transverse, &#39;hodge_coefficient&#39;: gate,
+                      &#39;pohozaev_gradient_coefficient&#39;: 4 - transverse,
+                      &#39;pohozaev_mass_coefficient&#39;: transverse,
+                      &#39;nonzero_quartic_profile_possible&#39;: support,
+                      &#39;active_finite_width_tube_possible&#39;: bool(gate &gt; 0 and support),
+                      &#39;exclusion_reason&#39;: None if gate &gt; 0 and support else
+                      &#39;zero geometric dielectric&#39; if not gate else &#39;positive integral identity&#39;,
+                      &#39;nongated_profile_exclusion&#39;: transverse &gt;= 4})
+    for exponent in (Fraction(3), Fraction(4), Fraction(5), Fraction(6)):
+        by_depth = []
+        for d in DEPTHS:
+            coefficient = 2 * exponent - (d - 1) * (exponent - 2)
+            by_depth.append({&#39;real_depth&#39;: d, &#39;gradient_coefficient&#39;: str(coefficient),
+                             &#39;nongated_support_not_excluded&#39;: coefficient &gt; 0})
+        CASES.append({&#39;case&#39;: f&#39;dielectric-exponent-{exponent}&#39;, &#39;dielectric_power&#39;: str(exponent),
+                      &#39;classification&#39;: &#39;necessary Pohozaev support test; no extra profiles solved&#39;,
+                      &#39;occupied_depths&#39;: by_depth})
+
+
+def solve_profile(n, radius):
+    x = np.unique(np.concatenate((np.linspace(0, 4, 241), np.linspace(4, radius, 241))))
+    central = {1: math.sqrt(2), 2: 2.2062, 3: 4.3374}[n]
+    width = {1: 1., 2: .8, 3: .5}[n]
+    v = central / np.cosh(x / width)
+    derivative = -v * np.tanh(x / width) / width
+    def equation(r, y):
+        return np.vstack((y[1], y[0] - y[0]**3))
+    def boundary(left, right):
+        return np.array([left[1], right[1] + (1 + (n - 1) / (2 * radius)) * right[0]])
+    solution = solve_bvp(equation, boundary, x, np.vstack((v, derivative)),
+                         S=np.array([[0., 0.], [0., -(n - 1)]]), tol=2e-8, max_nodes=8000)
+    check(solution.status == 0, &#39;nonlinear profile converged&#39;)
+    check(central / 2 &lt; solution.sol(0)[0] &lt; 2 * central, &#39;profile is not the zero branch&#39;)
+    sample = solution.sol(np.linspace(0, radius, 2001))[0]
+    check(np.min(sample) &gt;= -1e-9, &#39;profile has no radial node&#39;)
+    check(np.max(np.diff(sample)) &lt; 1e-8, &#39;positive ground profile is radially decreasing&#39;)
+    area = 2 * math.pi**(n / 2) / math.gamma(n / 2)
+    def integral(kind):
+        def integrand(r):
+            value, gradient = solution.sol(r)
+            return r**(n - 1) * (value**2 if kind == 0 else gradient**2 if kind == 1 else value**4)
+        return area * quad(integrand, 0, radius, epsabs=2e-8, epsrel=2e-8, limit=1000)[0]
+    mass, gradient, quartic = (integral(i) for i in range(3))
+    close(gradient + mass, quartic, &#39;integrated profile equation&#39;)
+    close((4 - n) * gradient, n * mass, &#39;independent spatial scaling identity&#39;)
+    case = {&#39;case&#39;: f&#39;profile-n{n}-radius-{radius}&#39;, &#39;transverse_dimension&#39;: n,
+            &#39;radius&#39;: radius, &#39;central_value&#39;: float(solution.sol(0)[0]),
+            &#39;mass_integral&#39;: mass, &#39;gradient_integral&#39;: gradient, &#39;quartic_integral&#39;: quartic,
+            &#39;equation_relative_error&#39;: abs(gradient + mass - quartic) / quartic,
+            &#39;pohozaev_relative_error&#39;: abs((4 - n) * gradient - n * mass) / (n * mass),
+            &#39;nodes&#39;: len(solution.x), &#39;maximum_rms_residual&#39;: float(max(solution.rms_residuals))}
+    if n == 1:
+        close([mass, gradient, quartic], [4, 4/3, 16/3], &#39;exact one-dimensional sech integrals&#39;)
+        close(sample, math.sqrt(2) / np.cosh(np.linspace(0, radius, 2001)), &#39;exact sech profile&#39;)
+    CASES.append(case)
+    return solution, case
+
+
+def energy_checks(n, solution, profile):
+    mass, gradient, quartic = (profile[k] for k in (&#39;mass_integral&#39;, &#39;gradient_integral&#39;, &#39;quartic_integral&#39;))
+    for q, kap, omega in ((1., 1., 1.), (2.1, .7, 1.4), (.4, 2.3, .6)):
+        amplitude = (2 * q*q * omega**(2*n - 2) / (kap * quartic**2))**(1/6)
+        i4 = amplitude**4 * omega**(-n) * quartic
+        electric = q*q / (2 * kap * i4)
+        kinetic = amplitude**2 * omega**(2 - n) * gradient / 2
+        restoring = amplitude**2 * omega**(2 - n) * mass / 2
+        tension = electric + kinetic + restoring
+        formula = .75 * (2 * q*q * quartic / kap)**(1/3) * omega**((4 - n)/3)
+        close(tension, formula, &#39;tension formula uses complete scalar and electric energy&#39;)
+        close([electric/tension, kinetic/tension, restoring/tension],
+              [1/3, n/6, (4 - n)/6], &#39;exact energy fractions&#39;)
+        transverse_stress = 2 * kinetic / n - kinetic - restoring + electric
+        close(transverse_stress, 0, &#39;integrated stress in every transverse direction vanishes&#39;)
+        for beta in (.2, .65):
+            gamma = 1 / math.sqrt(1 - beta*beta)
+            # Boosted fields have E_z&#39;=gamma E_z and B_iz&#39;=gamma beta E_z.
+            boosted_electric = gamma * (1 + beta*beta) * electric
+            boosted_scalar = (kinetic + restoring + (gamma*gamma - 1) * 2 * kinetic / n) / gamma
+            momentum = gamma * beta * (2 * electric + 2 * kinetic / n)
+            close(boosted_electric + boosted_scalar, gamma * tension, &#39;complete transverse boost energy&#39;)
+            close(momentum, gamma * beta * tension, &#39;complete transverse boost momentum&#39;)
+        CASES.append({&#39;case&#39;: f&#39;tension-n{n}-Q{q}&#39;, &#39;transverse_dimension&#39;: n,
+                      &#39;classical_commuting_flux&#39;: q, &#39;dielectric_coefficient&#39;: kap,
+                      &#39;neutral_restoring_frequency&#39;: omega, &#39;amplitude&#39;: amplitude, &#39;tension&#39;: tension,
+                      &#39;energy_fractions_exact&#39;: {&#39;electric&#39;: &#39;1/3&#39;, &#39;gradient&#39;: str(Fraction(n, 6)),
+                                                 &#39;restoring&#39;: str(Fraction(4 - n, 6))},
+                      &#39;integrated_transverse_stress&#39;: transverse_stress,
+                      &#39;transverse_inertia_per_length_in_c1_units&#39;: tension,
+                      &#39;quantum_Casimir_scaling_derived&#39;: False})
+    # Independent discrete flux minimization at a fixed nonzero profile.
+    r = (np.arange(800) + .5) * (5/800)
+    weight = r**(n - 1) * (5/800)
+    epsilon = solution.sol(r)[0]**4
+    total = np.dot(weight, epsilon)
+    optimum = epsilon / total
+    disturbance = np.sin(1.3 * r)
+    disturbance -= np.dot(weight, epsilon * disturbance) / total
+    trial = optimum + .2 * epsilon * disturbance
+    close(np.dot(weight, trial), 1, &#39;varied electric displacement retains total flux&#39;)
+    direct = np.dot(weight, trial*trial / (2 * epsilon))
+    remainder = np.dot(weight, (trial - optimum)**2 / (2 * epsilon))
+    close(direct, 1/(2*total) + remainder, &#39;exact positive constrained electric-energy remainder&#39;)
+    check(remainder &gt; 0, &#39;nonoptimal flux redistribution costs positive energy&#39;)
+    # Direct energy second differences independently check the nonlocal Hessian.
+    x = np.linspace(0, 20, 20001)
+    v, dv = solution.sol(x)
+    measure = x**(n - 1)
+    p_radial = simpson(measure * v**4, x=x)
+    q2 = p_radial**2 / 2
+    def energy(value, derivative):
+        return q2 / (2 * simpson(measure * value**4, x=x)) + \
+            simpson(measure * (derivative**2 + value**2), x=x) / 2
+    for rate in (1., 1.7, 2.4):
+        direction = np.exp(-rate*x*x)
+        derivative = -2*rate*x*direction
+        b = simpson(measure * v**3 * direction, x=x)
+        hessian = simpson(measure * (derivative**2 + (1 - 3*v*v)*direction**2), x=x) + 8*b*b/p_radial
+        delta = 2e-4
+        difference = (energy(v + delta*direction, dv + delta*derivative) -
+                      2*energy(v, dv) + energy(v - delta*direction, dv - delta*derivative)) / delta**2
+        close(difference, hessian, &#39;finite-difference variation of complete fixed-flux energy&#39;, atol=3e-6, rtol=2e-6)
+        check(hessian &gt; 0, &#39;tested radial shape direction has positive fixed-flux second variation&#39;)
+    CASES.append({&#39;case&#39;: f&#39;flux-and-hessian-variation-n{n}&#39;, &#39;transverse_dimension&#39;: n,
+                  &#39;positive_flux_remainder&#39;: remainder, &#39;shape_directions_checked&#39;: 3})
+
+
+def spectrum(n, solution, cells, angular):
+    radius = 20.
+    step = radius / cells
+    edges = np.arange(cells + 1) * step
+    r = (edges[1:] + edges[:-1]) / 2
+    weight = (edges[1:]**n - edges[:-1]**n) / n
+    conductance = edges[1:-1]**(n - 1) / step
+    diagonal = np.zeros(cells)
+    diagonal[:-1] += conductance
+    diagonal[1:] += conductance
+    diagonal[-1] += radius**(n - 1) * 2 / step
+    v = solution.sol(r)[0]
+    off = -conductance / np.sqrt(weight[:-1] * weight[1:])
+    local = diags((off, diagonal/weight + 1 - 3*v*v + angular*(angular + n - 2)/r**2, off),
+                  (-1, 0, 1)).tocsr()
+    low = np.sort(eigsh(local, k=3, which=&#39;SA&#39;, tol=1e-9, return_eigenvectors=False,
+                        v0=np.exp(-r)*np.sqrt(weight)))
+    q = np.sqrt(weight) * v**3
+    p = np.dot(weight, v**4)
+    operator = LinearOperator((cells, cells), matvec=lambda value: local@value + (8/p)*q*np.dot(q, value), dtype=float)
+    fixed = np.sort(eigsh(operator, k=3, which=&#39;SA&#39;, tol=1e-9, return_eigenvectors=False,
+                          v0=np.exp(-r)*np.sqrt(weight))) if angular == 0 else low
+    if angular == 0:
+        check(low[0] &lt; -1 and low[1] &gt; 0, &#39;local cubic radial operator has one sampled negative mode&#39;)
+        check(fixed[0] &gt; .9, &#39;fixed-flux rank-one term removes the sampled negative radial mode&#39;)
+    elif angular == 1:
+        check(abs(low[0]) &lt; .003, &#39;translation eigenvalue approaches zero with mesh refinement&#39;)
+        check(low[1] &gt; 1, &#39;next sampled angular-one mode is positive&#39;)
+    else:
+        check(low[0] &gt; 1, &#39;angular-two channel is positive&#39;)
+    case = {&#39;case&#39;: f&#39;hessian-n{n}-ell{angular}-cells{cells}&#39;, &#39;transverse_dimension&#39;: n,
+            &#39;angular_degree&#39;: angular, &#39;cells&#39;: cells, &#39;radius&#39;: radius,
+            &#39;local_eigenvalues&#39;: low.tolist(), &#39;fixed_flux_eigenvalues&#39;: fixed.tolist(),
+            &#39;scope&#39;: &#39;transverse scalar fixed-flux variations only&#39;}
+    CASES.append(case)
+    return case
+
+
+def floor_checks():
+    for d in DEPTHS:
+        n = d - 1
+        energy = []
+        for width in (2., 4., 8.):
+            # u=0 and a Gaussian displacement carry fixed flux in a positive floor.
+            area_factor = (2 * math.pi)**(n / 2)
+            cost = 1 / (2 * .1 * area_factor * width**n)
+            energy.append(cost)
+            check(cost &gt; 0, &#39;ordinary positive floor permits finite flux energy&#39;)
+        close(energy[1]/energy[0], 2**(-n), &#39;flux can spread in the ordinary floor&#39;)
+        close(energy[2]/energy[1], 2**(-n), &#39;spread flux energy tends to zero&#39;)
+        CASES.append({&#39;case&#39;: f&#39;floor-depth-{d}&#39;, &#39;real_depth&#39;: d, &#39;transverse_dimension&#39;: n,
+                      &#39;floor&#39;: .1, &#39;widths&#39;: [2., 4., 8.], &#39;trial_energies&#39;: energy,
+                      &#39;infinite_plane_energy_infimum&#39;: 0,
+                      &#39;exact_vacuum_zero_required_for_absolute_tube_minimum&#39;: True})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    algebraic_checks()
+    for n in (1, 2, 3):
+        solutions = []
+        for radius in (15., 20., 25.):
+            solutions.append(solve_profile(n, radius))
+        for _, profile in solutions[:-1]:
+            for key in (&#39;central_value&#39;, &#39;mass_integral&#39;, &#39;gradient_integral&#39;, &#39;quartic_integral&#39;):
+                close(profile[key], solutions[-1][1][key], &#39;independent radial cutoff convergence&#39;)
+        solution, profile = solutions[-1]
+        energy_checks(n, solution, profile)
+        if n &gt; 1:
+            for angular in (0, 1, 2):
+                results = [spectrum(n, solution, cells, angular) for cells in (400, 800, 1600)]
+                close(results[-1][&#39;fixed_flux_eigenvalues&#39;], results[-2][&#39;fixed_flux_eigenvalues&#39;],
+                      &#39;scalar Hessian spectral mesh convergence&#39;, atol=7e-4, rtol=7e-4)
+        print(f&#39;transverse n={n}: profile, complete energy and scalar variations checked&#39;, flush=True)
+    floor_checks()
+    report = {&#39;title&#39;: &#39;Positive Hodge-Gated Neutral Dielectric Flux Tubes&#39;,
+              &#39;sources&#39;: {&#39;experiments/hodge-flux-tube-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
+              &#39;checks_passed&#39;: CHECKS, &#39;case_count&#39;: len(CASES), &#39;occupied_depths&#39;: list(DEPTHS),
+              &#39;runtime&#39;: {&#39;python&#39;: platform.python_version(), &#39;numpy&#39;: np.__version__, &#39;scipy&#39;: scipy.__version__, &#39;sympy&#39;: sp.__version__},
+              &#39;status&#39;: &#39;conditional neutral-mode same-field action; finite endpoints, vacuum Cauchy problem and full non-Abelian stability unresolved&#39;,
+              &#39;conclusion&#39;: &#39;One positive quartic dielectric action supports finite-width commuting color tubes only at occupied three/four after the common Hodge gate. Exact support, positive tension, complete transverse stress and boost response, and restricted scalar stability are checked. A positive ordinary dielectric floor removes absolute flux confinement.&#39;,
+              &#39;cases&#39;: CASES}
+    args.report.write_text(json.dumps(report, indent=2) + &#39;\n&#39;)
+    print(f&#39;{CHECKS} checks passed across {len(CASES)} cases; {args.report}&#39;, flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

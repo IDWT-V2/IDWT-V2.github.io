@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>induced-curvature-response-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/induced-curvature-response-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="induced-curvature-response-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/induced-curvature-response-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="induced-curvature-response-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>induced-curvature-response-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/induced-curvature-response-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">title</th><td>Induced Normal Curvature Gives Mixed Spatial Inertia and a Retained-Orientation Comparison</td></tr><tr><th scope="row">checks_passed</th><td>270</td></tr><tr><th scope="row">case_count</th><td>12</td></tr><tr><th scope="row">scope</th><td>actual squared-first-curvature-variation symbols, not the complete nonzero-background curvature Hessian; frozen real-normal response and finite-lock retained-orientation comparison</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;title&quot;: &quot;Induced Normal Curvature Gives Mixed Spatial Inertia and a Retained-Orientation Comparison&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/induced-curvature-response-checks.py&quot;: &quot;8806acad8023a188818ba3454eb5ae5ae73f1ae9e09eb6738b3d561e5149c3ae&quot;,
+    &quot;experiments/nested-normal-curvature-checks.py&quot;: &quot;a77678aea22b4191f1f5180c8095cc03701e96c2a8c1b7db7e3d1ada0d872d2f&quot;
+  },
+  &quot;checks_passed&quot;: 270,
+  &quot;case_count&quot;: 12,
+  &quot;occupied_depths&quot;: [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  &quot;scope&quot;: &quot;actual squared-first-curvature-variation symbols, not the complete nonzero-background curvature Hessian; frozen real-normal response and finite-lock retained-orientation comparison&quot;,
+  &quot;cases&quot;: [
+    {
+      &quot;case&quot;: &quot;induced-curvature-depth-2&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;hodge_active&quot;: false,
+      &quot;axial_electric_symbol_diagonal&quot;: [
+        4,
+        4,
+        2,
+        2,
+        4,
+        4,
+        4,
+        4
+      ],
+      &quot;axial_magnetic_symbol_diagonal&quot;: [
+        2,
+        2,
+        2,
+        0,
+        2,
+        2,
+        2,
+        2
+      ],
+      &quot;independent_gauss_source_constraint_survives_induced_reduction&quot;: false,
+      &quot;frozen_symbol_is_complete_variable_geometry_solution&quot;: false,
+      &quot;background_curvature_second_variation_included&quot;: false,
+      &quot;arbitrary_real_graph_waves_preserve_unitary_normal_carrier&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;induced-curvature-depth-3&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;hodge_active&quot;: true,
+      &quot;axial_electric_symbol_diagonal&quot;: [
+        4,
+        4,
+        4,
+        6,
+        6,
+        6
+      ],
+      &quot;axial_magnetic_symbol_diagonal&quot;: [
+        4,
+        2,
+        2,
+        4,
+        4,
+        4
+      ],
+      &quot;independent_gauss_source_constraint_survives_induced_reduction&quot;: false,
+      &quot;frozen_symbol_is_complete_variable_geometry_solution&quot;: false,
+      &quot;background_curvature_second_variation_included&quot;: false,
+      &quot;arbitrary_real_graph_waves_preserve_unitary_normal_carrier&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;active-depth-3-axial-symbol-4-2&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;electric_symbol_a&quot;: 4,
+      &quot;magnetic_symbol_b&quot;: 2,
+      &quot;high_frequency_locked_speed_squared&quot;: 0.5,
+      &quot;compact_probe_acceleration_at_x_2&quot;: 0.11320762071319146,
+      &quot;compact_unforced_displacement_acceleration_at_x_2&quot;: 0.014150952589148932,
+      &quot;retained_lock_coefficient&quot;: 0.3333333333333333,
+      &quot;retained_bare_speed_squared&quot;: 0.6666666666666667,
+      &quot;retained_orientation_gap_squared&quot;: 0.08333333333333333,
+      &quot;independent_orientation_is_exact_integrable_graph&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;active-depth-3-axial-symbol-4-4&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;electric_symbol_a&quot;: 4,
+      &quot;magnetic_symbol_b&quot;: 4,
+      &quot;high_frequency_locked_speed_squared&quot;: 1.0,
+      &quot;compact_probe_acceleration_at_x_2&quot;: 0.11320762071319146,
+      &quot;compact_unforced_displacement_acceleration_at_x_2&quot;: 0.0,
+      &quot;retained_lock_coefficient&quot;: 0.3333333333333333,
+      &quot;retained_bare_speed_squared&quot;: 0.6666666666666667,
+      &quot;retained_orientation_gap_squared&quot;: 0.08333333333333333,
+      &quot;independent_orientation_is_exact_integrable_graph&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;active-depth-3-axial-symbol-6-4&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;electric_symbol_a&quot;: 6,
+      &quot;magnetic_symbol_b&quot;: 4,
+      &quot;high_frequency_locked_speed_squared&quot;: 0.6666666666666666,
+      &quot;compact_probe_acceleration_at_x_2&quot;: 0.11032580961956652,
+      &quot;compact_unforced_displacement_acceleration_at_x_2&quot;: 0.0061292116455314745,
+      &quot;retained_lock_coefficient&quot;: 0.3333333333333333,
+      &quot;retained_bare_speed_squared&quot;: 0.6666666666666667,
+      &quot;retained_orientation_gap_squared&quot;: 0.05555555555555555,
+      &quot;independent_orientation_is_exact_integrable_graph&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;induced-curvature-depth-4&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;hodge_active&quot;: true,
+      &quot;axial_electric_symbol_diagonal&quot;: [
+        6,
+        6,
+        6,
+        6,
+        8,
+        8
+      ],
+      &quot;axial_magnetic_symbol_diagonal&quot;: [
+        6,
+        4,
+        4,
+        4,
+        6,
+        6
+      ],
+      &quot;independent_gauss_source_constraint_survives_induced_reduction&quot;: false,
+      &quot;frozen_symbol_is_complete_variable_geometry_solution&quot;: false,
+      &quot;background_curvature_second_variation_included&quot;: false,
+      &quot;arbitrary_real_graph_waves_preserve_unitary_normal_carrier&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;active-depth-4-axial-symbol-6-4&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;electric_symbol_a&quot;: 6,
+      &quot;magnetic_symbol_b&quot;: 4,
+      &quot;high_frequency_locked_speed_squared&quot;: 0.6666666666666666,
+      &quot;compact_probe_acceleration_at_x_2&quot;: 0.11032580961956652,
+      &quot;compact_unforced_displacement_acceleration_at_x_2&quot;: 0.0061292116455314745,
+      &quot;retained_lock_coefficient&quot;: 0.3333333333333333,
+      &quot;retained_bare_speed_squared&quot;: 0.6666666666666667,
+      &quot;retained_orientation_gap_squared&quot;: 0.05555555555555555,
+      &quot;independent_orientation_is_exact_integrable_graph&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;active-depth-4-axial-symbol-6-6&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;electric_symbol_a&quot;: 6,
+      &quot;magnetic_symbol_b&quot;: 6,
+      &quot;high_frequency_locked_speed_squared&quot;: 1.0,
+      &quot;compact_probe_acceleration_at_x_2&quot;: 0.11032580961956652,
+      &quot;compact_unforced_displacement_acceleration_at_x_2&quot;: 0.0,
+      &quot;retained_lock_coefficient&quot;: 0.3333333333333333,
+      &quot;retained_bare_speed_squared&quot;: 0.6666666666666667,
+      &quot;retained_orientation_gap_squared&quot;: 0.05555555555555555,
+      &quot;independent_orientation_is_exact_integrable_graph&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;active-depth-4-axial-symbol-8-6&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;electric_symbol_a&quot;: 8,
+      &quot;magnetic_symbol_b&quot;: 6,
+      &quot;high_frequency_locked_speed_squared&quot;: 0.75,
+      &quot;compact_probe_acceleration_at_x_2&quot;: 0.10624032162673534,
+      &quot;compact_unforced_displacement_acceleration_at_x_2&quot;: 0.0033200100508354795,
+      &quot;retained_lock_coefficient&quot;: 0.3333333333333333,
+      &quot;retained_bare_speed_squared&quot;: 0.6666666666666667,
+      &quot;retained_orientation_gap_squared&quot;: 0.041666666666666664,
+      &quot;independent_orientation_is_exact_integrable_graph&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;induced-curvature-depth-5&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;hodge_active&quot;: false,
+      &quot;axial_electric_symbol_diagonal&quot;: [
+        2,
+        2,
+        4,
+        4
+      ],
+      &quot;axial_magnetic_symbol_diagonal&quot;: [
+        2,
+        2,
+        4,
+        4
+      ],
+      &quot;independent_gauss_source_constraint_survives_induced_reduction&quot;: false,
+      &quot;frozen_symbol_is_complete_variable_geometry_solution&quot;: false,
+      &quot;background_curvature_second_variation_included&quot;: false,
+      &quot;arbitrary_real_graph_waves_preserve_unitary_normal_carrier&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;induced-curvature-depth-6&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;hodge_active&quot;: false,
+      &quot;axial_electric_symbol_diagonal&quot;: [
+        2,
+        2,
+        4,
+        4
+      ],
+      &quot;axial_magnetic_symbol_diagonal&quot;: [
+        2,
+        2,
+        4,
+        4
+      ],
+      &quot;independent_gauss_source_constraint_survives_induced_reduction&quot;: false,
+      &quot;frozen_symbol_is_complete_variable_geometry_solution&quot;: false,
+      &quot;background_curvature_second_variation_included&quot;: false,
+      &quot;arbitrary_real_graph_waves_preserve_unitary_normal_carrier&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;depth-10-no-normal-connection&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;hodge_active&quot;: false,
+      &quot;normal_curvature_response_present&quot;: false
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

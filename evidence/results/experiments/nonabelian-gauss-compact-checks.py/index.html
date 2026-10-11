@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>nonabelian-gauss-compact-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/nonabelian-gauss-compact-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="nonabelian-gauss-compact-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/nonabelian-gauss-compact-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="nonabelian-gauss-compact-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>nonabelian-gauss-compact-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/nonabelian-gauss-compact-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Construct finite-energy non-Abelian Gauss data for compact classical sources.&quot;&quot;&quot;
+from pathlib import Path
+import argparse
+import hashlib
+import importlib.util
+import json
+import math
+
+import numpy as np
+import sympy as sp
+from scipy.integrate import quad
+
+
+DEPTHS = (2, 3, 4, 5, 6, 10)
+CHECKS = 0
+CASES = []
+S = 4
+L = 24
+
+
+def check(condition, message):
+    global CHECKS
+    CHECKS += 1
+    if not condition:
+        raise AssertionError(message)
+
+
+def close(actual, expected, message, atol=3e-9):
+    check(np.allclose(actual, expected, atol=atol, rtol=3e-9), message)
+
+
+def norm2(matrix):
+    return float((2*np.trace(matrix.conj().T @ matrix)).real)
+
+
+def color_matrices():
+    source = np.diag([1/3, -1/6, -1/6])
+    index = np.arange(3)
+    fourier = np.exp(2j*math.pi*np.outer(index, index)/3)/math.sqrt(3)
+    rotated = fourier @ source @ fourier.conj().T
+    close(np.diag(rotated), 0, &#39;pure fundamental mean source has a zero-diagonal unitary representative&#39;)
+    eigenvalues = np.array([-1., 0., 1.])
+    first = np.diag(eigenvalues)
+    second = np.zeros((3, 3), complex)
+    for i in range(3):
+        for j in range(3):
+            if i != j:
+                second[i, j] = 1j*rotated[i, j]/(eigenvalues[i]-eigenvalues[j])
+    first = fourier.conj().T @ first @ fourier
+    second = fourier.conj().T @ second @ fourier
+    for matrix in (first, second, source):
+        close(matrix, matrix.conj().T, &#39;ordinary SU3 connection and displacement matrices are Hermitian&#39;)
+        close(np.trace(matrix), 0, &#39;all matrices lie in su3&#39;)
+    close(-1j*(first @ second-second @ first), source, &#39;one actual commutator supplies a pure fundamental mean-color source&#39;)
+    close(norm2(first), 4, &#39;connection generator metric&#39;)
+    close(norm2(second), .25, &#39;displacement generator metric&#39;)
+    close(norm2(source), 1/3, &#39;pure fundamental source Casimir expectation norm&#39;)
+    z = np.exp(2j*math.pi/3)*np.eye(3)
+    close(z @ first @ z.conj().T, first, &#39;connection remains center neutral&#39;)
+    close(z @ second @ z.conj().T, second, &#39;displacement remains center neutral&#39;)
+    check(np.linalg.norm(z-np.eye(3)) &gt; 1, &#39;fundamental center action remains nontrivial&#39;)
+    return first, second, source
+
+
+def radial_moment(d, power, exponent):
+    # Integral over the unit d-ball of r^(2*power)*(1-r^2)^exponent.
+    result = (sp.pi**sp.Rational(d, 2)*sp.gamma(sp.Rational(d+2*power, 2))*sp.gamma(exponent+1)
+              /(sp.gamma(sp.Rational(d, 2))*sp.gamma(sp.Rational(d+2*power, 2)+exponent+1)))
+    return sp.simplify(result)
+
+
+def integral_data(d):
+    source = sp.Rational(8*L*L, d)*radial_moment(d, 1, 2*L-2)
+    electric = sp.Rational(8*L*L, d)*radial_moment(d, 1, 2*L-2-4*S)
+    magnetic = 16*L*L*(radial_moment(d, 0, 2*L-2+4*S)
+                          - sp.Rational(4*(L-1), d)*radial_moment(d, 1, 2*L-3+4*S)
+                          + sp.Rational(2*(L-1)**2, d)*radial_moment(d, 2, 2*L-4+4*S))
+    gradient = 4*S*S*radial_moment(d, 1, 2*S-2)
+    restoring = radial_moment(d, 0, 2*S)
+    values = [sp.simplify(x) for x in (source, electric, magnetic, gradient, restoring)]
+    for value in values:
+        check(value &gt; 0, &#39;every complete compact-core energy integral is positive and finite&#39;)
+    area = 2*math.pi**(d/2)/math.gamma(d/2)
+    functions = [lambda r: 8*L*L/d*r*r*(1-r*r)**(2*L-2),
+                 lambda r: 8*L*L/d*r*r*(1-r*r)**(2*L-2-4*S),
+                 lambda r: 16*L*L*((1-r*r)**(2*L-2+4*S)
+                                   - 4*(L-1)/d*r*r*(1-r*r)**(2*L-3+4*S)
+                                   + 2*(L-1)**2/d*r**4*(1-r*r)**(2*L-4+4*S)),
+                 lambda r: 4*S*S*r*r*(1-r*r)**(2*S-2),
+                 lambda r: (1-r*r)**(2*S)]
+    numeric = []
+    for exact, function in zip(values, functions):
+        value, error = quad(lambda r: area*r**(d-1)*function(r), 0, 1, epsabs=1e-11, epsrel=1e-11)
+        close(value, float(exact), &#39;independent radial quadrature agrees with exact beta integral&#39;)
+        numeric.append(value)
+    return values, numeric
+
+
+def core_fields(position):
+    d = len(position)
+    q = 1-position @ position
+    if q &lt;= 0:
+        return 0., np.zeros(d), np.zeros((d, d)), np.zeros(d)
+    rotation = np.zeros((d, d))
+    rotation[0, 1] = -1
+    rotation[1, 0] = 1
+    gradient_f = -2*L*q**(L-1)*position
+    hessian = -2*L*q**(L-1)*np.eye(d) + 4*L*(L-1)*q**(L-2)*np.outer(position, position)
+    vector = rotation @ gradient_f
+    derivative = rotation @ hessian
+    gradient_w = -2*S*q**(S-1)*position
+    return q**S, vector, derivative, gradient_w
+
+
+def gauss_core_checks(d, matrices, rng):
+    first, second, source = matrices
+    exact, numeric = integral_data(d)
+    i0, ie, im, k, mass = (float(x) for x in exact)
+    charge = 1.1
+    coupling = .7
+    kappa = 1.3
+    omega = .9
+    product = charge/(coupling*i0)
+    electric_coefficient = norm2(second)*ie/(2*kappa)
+    magnetic_coefficient = kappa*norm2(first)*im/2
+    ratio = product*math.sqrt(magnetic_coefficient/electric_coefficient)
+    connection_minimum = 2*product*math.sqrt(electric_coefficient*magnetic_coefficient)
+    close(connection_minimum, charge/coupling*math.sqrt(ie*im)/i0,
+          &#39;optimized electric and magnetic trial energy has the exact normalization&#39;)
+    core_energies = []
+    largest_gauss_error = 0.
+    for amplitude in (.3, 1., 2.):
+        beta = amplitude**2*math.sqrt(ratio)
+        alpha = product/beta
+        close(alpha*beta, product, &#39;source is held fixed as constitutive amplitude varies&#39;)
+        electric_energy = electric_coefficient*beta*beta/amplitude**4
+        magnetic_energy = magnetic_coefficient*alpha*alpha*amplitude**4
+        scalar_energy = amplitude*amplitude*(k+omega*omega*mass)/2
+        close(electric_energy, magnetic_energy, &#39;balanced positive electric and magnetic energies&#39;)
+        close(electric_energy+magnetic_energy, connection_minimum, &#39;full connection energy remains finite&#39;)
+        core_energies.append(electric_energy+magnetic_energy+scalar_energy)
+        for sample in range(12):
+            position = rng.normal(size=d)
+            position *= rng.uniform(.04, .96)/np.linalg.norm(position)
+            w, vector, derivative, gradient_w = core_fields(position)
+            close(np.trace(derivative), 0, &#39;compact displacement vector has exactly zero ordinary divergence&#39;)
+            a = [alpha*v*first for v in vector]
+            displacement = [beta*v*second for v in vector]
+            divergence = beta*np.trace(derivative)*second
+            commutator = sum((-1j*coupling*(ai @ di-di @ ai) for ai, di in zip(a, displacement)),
+                             np.zeros((3, 3), complex))
+            rho = charge/i0*(vector @ vector)*source
+            error = float(np.max(np.abs(divergence+commutator-rho)))
+            largest_gauss_error = max(largest_gauss_error, error)
+            close(divergence+commutator, rho, &#39;full non-Abelian Gauss law supports fixed one-signed compact mean-color density&#39;)
+            epsilon = kappa*(amplitude*w)**4
+            electric = [di/epsilon for di in displacement]
+            electric_density = sum(norm2(di) for di in displacement)/(2*epsilon)
+            close(electric_density, sum(epsilon*norm2(ei)/2 for ei in electric), &#39;positive complete electric constitutive Hamiltonian&#39;)
+            curl_squared = 0.
+            for i in range(d):
+                for j in range(i+1, d):
+                    curvature = alpha*(derivative[j, i]-derivative[i, j])*first -1j*coupling*(a[i] @ a[j]-a[j] @ a[i])
+                    expected = alpha*(derivative[j, i]-derivative[i, j])*first
+                    close(curvature, expected, &#39;same-color connection has genuine derivative curvature and no self commutator&#39;)
+                    curl_squared += (derivative[j, i]-derivative[i, j])**2
+            r2 = position @ position
+            q = 1-r2
+            s2 = position[0]**2+position[1]**2
+            closed_curl = 16*L*L*q**(2*L-2) -32*L*L*(L-1)*s2*q**(2*L-3) +16*L*L*(L-1)**2*r2*s2*q**(2*L-4)
+            close(curl_squared, closed_curl, &#39;independent tensor curl agrees with the exact radial-angular polynomial&#39;)
+            check(electric_density &gt;= 0 and curl_squared &gt;= 0, &#39;every local electric and magnetic energy is nonnegative&#39;)
+        # Fields vanish outside the fixed source ball, with no exterior electric or magnetic flux.
+        w, vector, derivative, _ = core_fields(np.array([1.2]+[0.]*(d-1)))
+        close(w, 0, &#39;neutral scalar has compact support&#39;)
+        close(vector, 0, &#39;displacement and connection have compact support&#39;)
+        close(derivative, 0, &#39;curvature also vanishes outside source ball&#39;)
+    # Two cores with opposite source signs have disjoint support for any separation above two radii.
+    for separation in (3., 10., 100.):
+        check(separation &gt; 2, &#39;fixed unit source balls have disjoint supports&#39;)
+        for _ in range(4):
+            offset = rng.normal(size=d)
+            offset *= .83/np.linalg.norm(offset)
+            shifted = offset - np.array([separation]+[0.]*(d-1))
+            w1, v1, derivative1, gradient1 = core_fields(offset)
+            w2, v2, derivative2, gradient2 = core_fields(shifted)
+            close((w1+w2)**4, w1**4+w2**4, &#39;combined dielectric has no cross energy on disjoint cores&#39;)
+            close(np.sum((gradient1+gradient2)**2), np.sum(gradient1**2)+np.sum(gradient2**2),
+                  &#39;complete scalar gradient has no intercore cross energy&#39;)
+            a1 = [product/math.sqrt(ratio)*v*first for v in v1]
+            a2 = [-product/math.sqrt(ratio)*v*first for v in v2]
+            d1 = [math.sqrt(ratio)*v*second for v in v1]
+            d2 = [math.sqrt(ratio)*v*second for v in v2]
+            gauss = sum((-1j*coupling*((ai+aj) @ (di+dj)-(di+dj) @ (ai+aj))
+                         for ai, aj, di, dj in zip(a1, a2, d1, d2)), np.zeros((3, 3), complex))
+            close(gauss, charge/i0*(v1 @ v1-v2 @ v2)*source,
+                  &#39;opposite compact cores satisfy full combined Gauss without intercore displacement&#39;)
+        midpoint = np.array([separation/2]+[0.]*(d-1))
+        close(core_fields(midpoint)[1], 0, &#39;separating plane has no compulsory electric displacement flux&#39;)
+    CASES.append({&#39;case&#39;: f&#39;compact-nonabelian-gauss-depth-{d}&#39;, &#39;real_depth&#39;: d,
+                  &#39;source_core_radius&#39;: 1, &#39;source_charge_scale&#39;: charge, &#39;gauge_coupling&#39;: coupling,
+                  &#39;dielectric_coefficient&#39;: kappa, &#39;neutral_restoring_frequency&#39;: omega,
+                  &#39;scalar_amplitudes&#39;: [.3, 1., 2.], &#39;complete_single_core_trial_energies&#39;: core_energies,
+                  &#39;exact_integrals&#39;: dict(zip((&#39;source&#39;, &#39;electric&#39;, &#39;magnetic&#39;, &#39;gradient&#39;, &#39;restoring&#39;), map(str, exact))),
+                  &#39;independent_integrals&#39;: numeric, &#39;connection_energy_after_balance&#39;: connection_minimum,
+                  &#39;maximum_gauss_error&#39;: largest_gauss_error,
+                  &#39;pair_energy_upper_bound_for_all_separations_above_two&#39;: 2*core_energies[1],
+                  &#39;exterior_field_strength&#39;: &#39;0&#39;, &#39;ordinary_source_integral&#39;: &#39;Q H != 0 in the chosen source gauge&#39;,
+                  &#39;static_solution_constructed&#39;: False, &#39;localized_master_field_source_derived&#39;: False,
+                  &#39;quantum_fundamental_triality_screened&#39;: False})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--geometry-source&#39;, type=Path, required=True)
+    parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    spec = importlib.util.spec_from_file_location(&#39;gauss_geometry&#39;, args.geometry_source)
+    geometry = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(geometry)
+    matrices = color_matrices()
+    rng = np.random.default_rng(2026101022)
+    for d in DEPTHS:
+        hodge = geometry.hodge(d if d % 2 == 0 else d+1)
+        active = bool(np.linalg.norm(hodge) &gt; 1e-10)
+        check(active == (d in (3, 4)), &#39;same Hodge dielectric tested across all occupied sectors&#39;)
+        if active:
+            gauss_core_checks(d, matrices, rng)
+        CASES.append({&#39;case&#39;: f&#39;compact-source-gate-depth-{d}&#39;, &#39;real_depth&#39;: d,
+                      &#39;hodge_coefficient_active&#39;: active,
+                      &#39;nonzero_finite_energy_displacement_permitted&#39;: active,
+                      &#39;independent_normal_algebra_dimension&#39;: 8 if d &lt;= 4 else 3 if d &lt;= 6 else 0,
+                      &#39;exact_inactive_source_constraint_retained&#39;: not active and d != 10})
+    report = {&#39;title&#39;: &#39;Compact Non-Abelian Gauss Data Limit the Commuting Flux-Confinement Claim&#39;,
+              &#39;sources&#39;: {&#39;experiments/nonabelian-gauss-compact-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/hodge-gated-gauss-checks.py&#39;: hashlib.sha256(args.geometry_source.read_bytes()).hexdigest()},
+              &#39;checks_passed&#39;: CHECKS, &#39;dependency_checks_passed&#39;: geometry.CHECKS,
+              &#39;case_count&#39;: len(CASES), &#39;occupied_depths&#39;: list(DEPTHS),
+              &#39;scope&#39;: &#39;admissible full classical Gauss phase-space data for fixed extended sources; not a static solution, quantum center screening or particle construction&#39;,
+              &#39;conclusion&#39;: &#39;The full proposed classical connection Hamiltonian permits finite compact Gauss data for a one-signed mean-color source. Two opposite fixed cores give a separation-independent energy upper bound. Thus the commuting-channel linear lower bound cannot be transferred to this full classical source problem. Inactive Hodge source constraints remain unchanged.&#39;,
+              &#39;cases&#39;: CASES}
+    args.report.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(f&#39;{CHECKS} compact Gauss and energy checks plus {geometry.CHECKS} geometry checks passed across {len(CASES)} cases&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

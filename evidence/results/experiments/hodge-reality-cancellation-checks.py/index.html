@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>hodge-reality-cancellation-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/hodge-reality-cancellation-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="hodge-reality-cancellation-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/hodge-reality-cancellation-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hodge-reality-cancellation-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>hodge-reality-cancellation-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/hodge-reality-cancellation-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Test whether geometrically conjugate Hodge channels force neutral dynamics.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from itertools import combinations
+from math import comb
+from pathlib import Path
+import argparse
+import json
+import sympy as sp
+
+
+def main():
+    ap=argparse.ArgumentParser()
+    ap.add_argument(&#39;--output&#39;,required=True)
+    args=ap.parse_args()
+    checks=0
+    cases=[]
+    for m in range(1,7):
+        d=2*m
+        basis=list(combinations(range(d),m))
+        seen=set()
+        eigenvalue=sp.I if m%2 else sp.Integer(1)
+        for indices in basis:
+            if indices in seen:
+                continue
+            other=tuple(i for i in range(d) if i not in indices)
+            sign=(-1)**sum(i&gt;j for i in indices for j in other)
+            reverse=(-1)**sum(i&gt;j for i in other for j in indices)
+            block=sp.Matrix([[0,reverse],[sign,0]])
+            assert block*block==(-1)**m*sp.eye(2)
+            checks+=1
+            plus=(sp.eye(2)+block/eigenvalue)/2
+            minus=(sp.eye(2)-block/eigenvalue)/2
+            assert plus*plus==plus and minus*minus==minus and plus*minus==sp.zeros(2)
+            checks+=1
+            assert plus.conjugate()==(minus if m%2 else plus)
+            checks+=1
+            seen.update((indices,other))
+        k=comb(2*m-1,m-1)
+        cases.append({&#39;name&#39;:&#39;middle-hodge-reality&#39;,&#39;real_depth&#39;:d,
+            &#39;parameters&#39;:{&#39;middle_degree&#39;:m,&#39;shadow_depth&#39;:d-1},
+            &#39;measurements&#39;:{&#39;each_channel_rank&#39;:k,&#39;star_squared&#39;:(-1)**m,
+                &#39;chirality_exchanged_by_conjugation&#39;:bool(m%2),
+                &#39;eigenvalues&#39;:[&#39;i&#39;,&#39;-i&#39;] if m%2 else [&#39;1&#39;,&#39;-1&#39;]}})
+
+    # A concrete second-order kinetic Noether current on a realified representation.
+    t=sp.symbols(&#39;t&#39;,real=True)
+    omega=sp.symbols(&#39;omega&#39;,positive=True,real=True)
+    x=sp.Matrix([sp.exp(-sp.I*omega*t),0,0])
+    y=x.conjugate()
+    generator=sp.diag(sp.Rational(1,2),-sp.Rational(1,2),0)
+    dual=-generator.T
+    density_x=(x.H*generator*x)[0]
+    density_y=(y.H*dual*y)[0]
+    current_x=sp.simplify(2*sp.im((x.H*generator*sp.diff(x,t))[0]))
+    current_y=sp.simplify(2*sp.im((y.H*dual*sp.diff(y,t))[0]))
+    assert sp.simplify(density_x+density_y)==0
+    checks+=1
+    assert sp.simplify(current_x+current_y)==-2*omega
+    checks+=1
+    kinetic=sp.simplify((sp.diff(x,t).H*sp.diff(x,t))[0]+(sp.diff(y,t).H*sp.diff(y,t))[0])
+    assert kinetic==2*omega**2
+    checks+=1
+    schrodinger_x=sp.I*(x.H*sp.diff(x,t)-sp.diff(x,t).H*x)[0]/2
+    schrodinger_y=sp.I*(y.H*sp.diff(y,t)-sp.diff(y,t).H*y)[0]/2
+    assert sp.simplify(schrodinger_x+schrodinger_y)==0
+    checks+=1
+    cases.append({&#39;name&#39;:&#39;conjugate-reality-noether-control&#39;,
+        &#39;parameters&#39;:{&#39;kinetics&#39;:&#39;positive second-order norm&#39;,&#39;representations&#39;:&#39;3 direct-sum conjugate3&#39;},
+        &#39;measurements&#39;:{&#39;sum_algebraic_densities&#39;:&#39;0&#39;,&#39;sum_noether_currents&#39;:str(current_x+current_y),
+                        &#39;kinetic_norm&#39;:str(kinetic),&#39;same-sign_first-order_kinetic_sum&#39;:&#39;0&#39;}})
+    report={&#39;experiment_key&#39;:&#39;hodge-reality-cancellation-20261009&#39;,
+        &#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),
+        &#39;sources&#39;:{&#39;experiments/hodge-reality-cancellation-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest()},
+        &#39;scope&#39;:&#39;Middle-Hodge conjugation and explicit same-law kinetic current counterexample; no particle simulations.&#39;,
+        &#39;summary&#39;:{&#39;checks_passed&#39;:checks,&#39;case_count&#39;:len(cases),
+                   &#39;six_and_ten_have_naturally_conjugate_middle_channels&#39;:True,
+                   &#39;conjugate_reality_alone_forces_neutral_current&#39;:False},
+        &#39;cases&#39;:cases}
+    Path(args.output).write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(report,indent=2))
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

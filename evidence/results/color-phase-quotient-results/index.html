@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>color-phase-quotient-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/color-phase-quotient-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="color-phase-quotient-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/color-phase-quotient-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="color-phase-quotient-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>color-phase-quotient-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/color-phase-quotient-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">title</th><td>A Dynamical Zero-Color Pair Phase and Its Actual Central Character</td></tr><tr><th scope="row">checks_passed</th><td>453</td></tr><tr><th scope="row">dependency_checks_passed</th><td>192</td></tr><tr><th scope="row">case_count</th><td>14</td></tr><tr><th scope="row">scope</th><td>explicit local commuting-amplitude zero-moment reduction and full spatial-current audit; not physical charge quantization or a particle identification</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;title&quot;: &quot;A Dynamical Zero-Color Pair Phase and Its Actual Central Character&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/color-phase-quotient-checks.py&quot;: &quot;81ed2484622d413085312fbf054eb6ef393d94bb669076c13881ef2030b6cbfa&quot;,
+    &quot;experiments/hodge-gated-gauss-checks.py&quot;: &quot;d24406f940aea7e81ee65cb9596a57a3dc88e0f5d03c07106db93cc948ff1faa&quot;
+  },
+  &quot;checks_passed&quot;: 453,
+  &quot;dependency_checks_passed&quot;: 192,
+  &quot;case_count&quot;: 14,
+  &quot;occupied_depths&quot;: [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  &quot;scope&quot;: &quot;explicit local commuting-amplitude zero-moment reduction and full spatial-current audit; not physical charge quantization or a particle identification&quot;,
+  &quot;cases&quot;: [
+    {
+      &quot;case&quot;: &quot;normal-SU3-phase-quotient-0&quot;,
+      &quot;radius_r&quot;: 1.9200239212756895,
+      &quot;pair_phase&quot;: 1.2480181912663522,
+      &quot;quotient_coordinate&quot;: &quot;B = w^T z = R exp(i phi), R = r^2&quot;,
+      &quot;canonical_one_form&quot;: &quot;-R dphi&quot;,
+      &quot;canonical_two_form&quot;: &quot;-dR wedge dphi&quot;,
+      &quot;reduced_metric&quot;: &quot;(dR^2 + R^2 dphi^2)/(2R)&quot;,
+      &quot;central_characters&quot;: [
+        {
+          &quot;lift&quot;: &quot;exterior&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            2.0
+          ],
+          &quot;bilinear_weight&quot;: 3.0,
+          &quot;determinant_normalized_weight&quot;: 1.0
+        },
+        {
+          &quot;lift&quot;: &quot;spin-lift&quot;,
+          &quot;component_weights&quot;: [
+            -0.5,
+            0.5
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        },
+        {
+          &quot;lift&quot;: &quot;common-inverse-determinant&quot;,
+          &quot;component_weights&quot;: [
+            -2.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: -3.0,
+          &quot;determinant_normalized_weight&quot;: -1.0
+        },
+        {
+          &quot;lift&quot;: &quot;mixed-determinant-branches&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        }
+      ],
+      &quot;common_clock_bilinear_frequency_factor&quot;: 2,
+      &quot;fixed_absolute_electric_charge_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;normal-SU3-phase-quotient-1&quot;,
+      &quot;radius_r&quot;: 0.9854275276835998,
+      &quot;pair_phase&quot;: 2.504758678692279,
+      &quot;quotient_coordinate&quot;: &quot;B = w^T z = R exp(i phi), R = r^2&quot;,
+      &quot;canonical_one_form&quot;: &quot;-R dphi&quot;,
+      &quot;canonical_two_form&quot;: &quot;-dR wedge dphi&quot;,
+      &quot;reduced_metric&quot;: &quot;(dR^2 + R^2 dphi^2)/(2R)&quot;,
+      &quot;central_characters&quot;: [
+        {
+          &quot;lift&quot;: &quot;exterior&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            2.0
+          ],
+          &quot;bilinear_weight&quot;: 3.0,
+          &quot;determinant_normalized_weight&quot;: 1.0
+        },
+        {
+          &quot;lift&quot;: &quot;spin-lift&quot;,
+          &quot;component_weights&quot;: [
+            -0.5,
+            0.5
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        },
+        {
+          &quot;lift&quot;: &quot;common-inverse-determinant&quot;,
+          &quot;component_weights&quot;: [
+            -2.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: -3.0,
+          &quot;determinant_normalized_weight&quot;: -1.0
+        },
+        {
+          &quot;lift&quot;: &quot;mixed-determinant-branches&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        }
+      ],
+      &quot;common_clock_bilinear_frequency_factor&quot;: 2,
+      &quot;fixed_absolute_electric_charge_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;normal-SU3-phase-quotient-2&quot;,
+      &quot;radius_r&quot;: 0.22450415566833348,
+      &quot;pair_phase&quot;: -1.7456991045653758,
+      &quot;quotient_coordinate&quot;: &quot;B = w^T z = R exp(i phi), R = r^2&quot;,
+      &quot;canonical_one_form&quot;: &quot;-R dphi&quot;,
+      &quot;canonical_two_form&quot;: &quot;-dR wedge dphi&quot;,
+      &quot;reduced_metric&quot;: &quot;(dR^2 + R^2 dphi^2)/(2R)&quot;,
+      &quot;central_characters&quot;: [
+        {
+          &quot;lift&quot;: &quot;exterior&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            2.0
+          ],
+          &quot;bilinear_weight&quot;: 3.0,
+          &quot;determinant_normalized_weight&quot;: 1.0
+        },
+        {
+          &quot;lift&quot;: &quot;spin-lift&quot;,
+          &quot;component_weights&quot;: [
+            -0.5,
+            0.5
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        },
+        {
+          &quot;lift&quot;: &quot;common-inverse-determinant&quot;,
+          &quot;component_weights&quot;: [
+            -2.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: -3.0,
+          &quot;determinant_normalized_weight&quot;: -1.0
+        },
+        {
+          &quot;lift&quot;: &quot;mixed-determinant-branches&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        }
+      ],
+      &quot;common_clock_bilinear_frequency_factor&quot;: 2,
+      &quot;fixed_absolute_electric_charge_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;normal-SU3-phase-quotient-3&quot;,
+      &quot;radius_r&quot;: 0.2926929848431782,
+      &quot;pair_phase&quot;: 1.748208988684996,
+      &quot;quotient_coordinate&quot;: &quot;B = w^T z = R exp(i phi), R = r^2&quot;,
+      &quot;canonical_one_form&quot;: &quot;-R dphi&quot;,
+      &quot;canonical_two_form&quot;: &quot;-dR wedge dphi&quot;,
+      &quot;reduced_metric&quot;: &quot;(dR^2 + R^2 dphi^2)/(2R)&quot;,
+      &quot;central_characters&quot;: [
+        {
+          &quot;lift&quot;: &quot;exterior&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            2.0
+          ],
+          &quot;bilinear_weight&quot;: 3.0,
+          &quot;determinant_normalized_weight&quot;: 1.0
+        },
+        {
+          &quot;lift&quot;: &quot;spin-lift&quot;,
+          &quot;component_weights&quot;: [
+            -0.5,
+            0.5
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        },
+        {
+          &quot;lift&quot;: &quot;common-inverse-determinant&quot;,
+          &quot;component_weights&quot;: [
+            -2.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: -3.0,
+          &quot;determinant_normalized_weight&quot;: -1.0
+        },
+        {
+          &quot;lift&quot;: &quot;mixed-determinant-branches&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        }
+      ],
+      &quot;common_clock_bilinear_frequency_factor&quot;: 2,
+      &quot;fixed_absolute_electric_charge_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;normal-SU3-phase-quotient-4&quot;,
+      &quot;radius_r&quot;: 1.6873717335680023,
+      &quot;pair_phase&quot;: -1.481312273754724,
+      &quot;quotient_coordinate&quot;: &quot;B = w^T z = R exp(i phi), R = r^2&quot;,
+      &quot;canonical_one_form&quot;: &quot;-R dphi&quot;,
+      &quot;canonical_two_form&quot;: &quot;-dR wedge dphi&quot;,
+      &quot;reduced_metric&quot;: &quot;(dR^2 + R^2 dphi^2)/(2R)&quot;,
+      &quot;central_characters&quot;: [
+        {
+          &quot;lift&quot;: &quot;exterior&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            2.0
+          ],
+          &quot;bilinear_weight&quot;: 3.0,
+          &quot;determinant_normalized_weight&quot;: 1.0
+        },
+        {
+          &quot;lift&quot;: &quot;spin-lift&quot;,
+          &quot;component_weights&quot;: [
+            -0.5,
+            0.5
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        },
+        {
+          &quot;lift&quot;: &quot;common-inverse-determinant&quot;,
+          &quot;component_weights&quot;: [
+            -2.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: -3.0,
+          &quot;determinant_normalized_weight&quot;: -1.0
+        },
+        {
+          &quot;lift&quot;: &quot;mixed-determinant-branches&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        }
+      ],
+      &quot;common_clock_bilinear_frequency_factor&quot;: 2,
+      &quot;fixed_absolute_electric_charge_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;normal-SU3-phase-quotient-5&quot;,
+      &quot;radius_r&quot;: 0.8981629961265616,
+      &quot;pair_phase&quot;: -0.37755407618298076,
+      &quot;quotient_coordinate&quot;: &quot;B = w^T z = R exp(i phi), R = r^2&quot;,
+      &quot;canonical_one_form&quot;: &quot;-R dphi&quot;,
+      &quot;canonical_two_form&quot;: &quot;-dR wedge dphi&quot;,
+      &quot;reduced_metric&quot;: &quot;(dR^2 + R^2 dphi^2)/(2R)&quot;,
+      &quot;central_characters&quot;: [
+        {
+          &quot;lift&quot;: &quot;exterior&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            2.0
+          ],
+          &quot;bilinear_weight&quot;: 3.0,
+          &quot;determinant_normalized_weight&quot;: 1.0
+        },
+        {
+          &quot;lift&quot;: &quot;spin-lift&quot;,
+          &quot;component_weights&quot;: [
+            -0.5,
+            0.5
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        },
+        {
+          &quot;lift&quot;: &quot;common-inverse-determinant&quot;,
+          &quot;component_weights&quot;: [
+            -2.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: -3.0,
+          &quot;determinant_normalized_weight&quot;: -1.0
+        },
+        {
+          &quot;lift&quot;: &quot;mixed-determinant-branches&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        }
+      ],
+      &quot;common_clock_bilinear_frequency_factor&quot;: 2,
+      &quot;fixed_absolute_electric_charge_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;normal-SU3-phase-quotient-6&quot;,
+      &quot;radius_r&quot;: 1.3486198046840943,
+      &quot;pair_phase&quot;: 1.7689078437009282,
+      &quot;quotient_coordinate&quot;: &quot;B = w^T z = R exp(i phi), R = r^2&quot;,
+      &quot;canonical_one_form&quot;: &quot;-R dphi&quot;,
+      &quot;canonical_two_form&quot;: &quot;-dR wedge dphi&quot;,
+      &quot;reduced_metric&quot;: &quot;(dR^2 + R^2 dphi^2)/(2R)&quot;,
+      &quot;central_characters&quot;: [
+        {
+          &quot;lift&quot;: &quot;exterior&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            2.0
+          ],
+          &quot;bilinear_weight&quot;: 3.0,
+          &quot;determinant_normalized_weight&quot;: 1.0
+        },
+        {
+          &quot;lift&quot;: &quot;spin-lift&quot;,
+          &quot;component_weights&quot;: [
+            -0.5,
+            0.5
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        },
+        {
+          &quot;lift&quot;: &quot;common-inverse-determinant&quot;,
+          &quot;component_weights&quot;: [
+            -2.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: -3.0,
+          &quot;determinant_normalized_weight&quot;: -1.0
+        },
+        {
+          &quot;lift&quot;: &quot;mixed-determinant-branches&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        }
+      ],
+      &quot;common_clock_bilinear_frequency_factor&quot;: 2,
+      &quot;fixed_absolute_electric_charge_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;normal-SU3-phase-quotient-7&quot;,
+      &quot;radius_r&quot;: 1.4582760027472847,
+      &quot;pair_phase&quot;: 0.784930581963466,
+      &quot;quotient_coordinate&quot;: &quot;B = w^T z = R exp(i phi), R = r^2&quot;,
+      &quot;canonical_one_form&quot;: &quot;-R dphi&quot;,
+      &quot;canonical_two_form&quot;: &quot;-dR wedge dphi&quot;,
+      &quot;reduced_metric&quot;: &quot;(dR^2 + R^2 dphi^2)/(2R)&quot;,
+      &quot;central_characters&quot;: [
+        {
+          &quot;lift&quot;: &quot;exterior&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            2.0
+          ],
+          &quot;bilinear_weight&quot;: 3.0,
+          &quot;determinant_normalized_weight&quot;: 1.0
+        },
+        {
+          &quot;lift&quot;: &quot;spin-lift&quot;,
+          &quot;component_weights&quot;: [
+            -0.5,
+            0.5
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        },
+        {
+          &quot;lift&quot;: &quot;common-inverse-determinant&quot;,
+          &quot;component_weights&quot;: [
+            -2.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: -3.0,
+          &quot;determinant_normalized_weight&quot;: -1.0
+        },
+        {
+          &quot;lift&quot;: &quot;mixed-determinant-branches&quot;,
+          &quot;component_weights&quot;: [
+            1.0,
+            -1.0
+          ],
+          &quot;bilinear_weight&quot;: 0.0,
+          &quot;determinant_normalized_weight&quot;: 0.0
+        }
+      ],
+      &quot;common_clock_bilinear_frequency_factor&quot;: 2,
+      &quot;fixed_absolute_electric_charge_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;actual-sector-phase-quotient-depth-2&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;hodge_coefficient_active&quot;: false,
+      &quot;normal_algebra_dimension&quot;: 8,
+      &quot;normal_SU3_pair_reduction_retains_arbitrary_base_spinor&quot;: true,
+      &quot;residual_added_direction_current_norm&quot;: null,
+      &quot;all_particle_charges_or_occupations_selected&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;actual-sector-phase-quotient-depth-3&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;hodge_coefficient_active&quot;: true,
+      &quot;normal_algebra_dimension&quot;: 8,
+      &quot;normal_SU3_pair_reduction_retains_arbitrary_base_spinor&quot;: true,
+      &quot;residual_added_direction_current_norm&quot;: null,
+      &quot;all_particle_charges_or_occupations_selected&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;actual-sector-phase-quotient-depth-4&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;hodge_coefficient_active&quot;: true,
+      &quot;normal_algebra_dimension&quot;: 8,
+      &quot;normal_SU3_pair_reduction_retains_arbitrary_base_spinor&quot;: true,
+      &quot;residual_added_direction_current_norm&quot;: null,
+      &quot;all_particle_charges_or_occupations_selected&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;actual-sector-phase-quotient-depth-5&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;hodge_coefficient_active&quot;: false,
+      &quot;normal_algebra_dimension&quot;: 3,
+      &quot;normal_SU3_pair_reduction_retains_arbitrary_base_spinor&quot;: false,
+      &quot;residual_added_direction_current_norm&quot;: 0.08802178396187565,
+      &quot;all_particle_charges_or_occupations_selected&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;actual-sector-phase-quotient-depth-6&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;hodge_coefficient_active&quot;: false,
+      &quot;normal_algebra_dimension&quot;: 3,
+      &quot;normal_SU3_pair_reduction_retains_arbitrary_base_spinor&quot;: false,
+      &quot;residual_added_direction_current_norm&quot;: 0.17138152960758493,
+      &quot;all_particle_charges_or_occupations_selected&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;actual-sector-phase-quotient-depth-10&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;hodge_coefficient_active&quot;: false,
+      &quot;normal_algebra_dimension&quot;: 0,
+      &quot;normal_SU3_pair_reduction_retains_arbitrary_base_spinor&quot;: false,
+      &quot;residual_added_direction_current_norm&quot;: null,
+      &quot;all_particle_charges_or_occupations_selected&quot;: false
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

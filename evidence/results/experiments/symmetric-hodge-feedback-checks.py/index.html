@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>symmetric-hodge-feedback-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/symmetric-hodge-feedback-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="symmetric-hodge-feedback-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/symmetric-hodge-feedback-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="symmetric-hodge-feedback-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>symmetric-hodge-feedback-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/symmetric-hodge-feedback-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Symmetric Hodge feedback, color pair operators and nested-source controls.&quot;&quot;&quot;
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+import importlib.util
+from itertools import combinations
+import json
+from math import comb
+from pathlib import Path
+
+import numpy as np
+import mpmath as mp
+import sympy as sp
+
+
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    if not condition:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def sign_sort(index):
+    return (-1)**sum(index[i] &gt; index[j] for i in range(len(index)) for j in range(i+1, len(index)))
+
+
+def hodge_blocks():
+    for m in range(1, 7):
+        depth = 2*m
+        seen = set()
+        lam = sp.I if m % 2 else sp.Integer(1)
+        rank = comb(depth-1, m-1)
+        for index in combinations(range(depth), m):
+            if index in seen:
+                continue
+            other = tuple(i for i in range(depth) if i not in index)
+            star = sp.Matrix([[0, sign_sort(other+index)], [sign_sort(index+other), 0]])
+            hermitian = (star+star.H)/2
+            complementary = (star-star.H)/(2*sp.I)
+            check(star.H == (-1)**m*star, &#39;real Hodge adjoint parity&#39;)
+            check(hermitian == (sp.zeros(2) if m % 2 else star), &#39;canonical symmetric feedback filter&#39;)
+            check(hermitian**2 == (sp.zeros(2) if m % 2 else sp.eye(2)), &#39;symmetric activation projector&#39;)
+            check(hermitian**2+complementary**2 == sp.eye(2), &#39;complementary Hermitian source remains available&#39;)
+            check(complementary.conjugate() == -complementary, &#39;complementary current is conjugation odd&#39;)
+            plus = (sp.eye(2)+star/lam)/2
+            check(hermitian*plus == sp.re(lam)*plus, &#39;complete chiral-channel filter eigenvalue&#39;)
+            seen.update((index, other))
+        for actual_depth in (depth-1, depth):
+            CASES.append({&#39;name&#39;: &#39;all-sector-symmetric-Hodge-rule&#39;, &#39;real_depth&#39;: actual_depth,
+                          &#39;parameters&#39;: {&#39;even_carrier_depth&#39;: depth, &#39;middle_degree&#39;: m,
+                                         &#39;odd_depth_uses_declared_isometric_shadow&#39;: actual_depth != depth,
+                                         &#39;common_kernel&#39;: &#39;Hermitian part of raw real Hodge star&#39;},
+                          &#39;measurements&#39;: {&#39;channel_rank&#39;: rank, &#39;symmetric_filter_active&#39;: not bool(m % 2),
+                                           &#39;nonabelian_volume_channel_active&#39;: not bool(m % 2) and rank &gt;= 3,
+                                           &#39;isotropic_pair_coefficient_sigma2_units&#39;: rank-2 if not m % 2 and rank &gt;= 3 else 0,
+                                           &#39;complementary_Hermitian_channel_available&#39;: bool(m % 2)}})
+
+
+def filtered_volume(patterns, gate):
+    mapped = gate*patterns
+    gram = mapped.conj().T@mapped
+    return float(np.linalg.det(gram).real)
+
+
+def norm_volume_and_pair():
+    rng = np.random.default_rng(20261009)
+    for m in range(1, 7):
+        rank = comb(2*m-1, m-1)
+        lam = 1j if m % 2 else 1.
+        gate = float(np.real(lam))
+        for _ in range(4):
+            patterns = rng.normal(size=(rank, 3))+1j*rng.normal(size=(rank, 3))
+            value = filtered_volume(patterns, gate)
+            check(value &gt;= -1e-8, &#39;positive common filtered volume action&#39;)
+            check(abs(value) &lt; 1e-10 if m % 2 else True, &#39;odd-middle-degree source vanishes for every pattern&#39;)
+            phases = np.exp(1j*rng.normal(size=3))
+            check(np.isclose(filtered_volume(patterns*phases, gate), value, rtol=1e-9, atol=1e-8),
+                  &#39;independent electric phase characters preserve volume energy&#39;)
+            # A nontrivial unitary mode change preserves the same action at every rank.
+            unitary = np.eye(rank, dtype=complex)
+            if rank &gt;= 2:
+                angle = .731
+                unitary[:2, :2] = [[np.cos(angle), 1j*np.sin(angle)],
+                                   [1j*np.sin(angle), np.cos(angle)]]
+            check(np.isclose(filtered_volume(unitary@patterns, gate), value, rtol=1e-9, atol=1e-8),
+                  &#39;full complex unitary mode covariance&#39;)
+        # Independently contract the third slot using a complete isotropic basis.
+        if rank &lt;= 35:
+            a = rng.normal(size=rank)+1j*rng.normal(size=rank)
+            b = rng.normal(size=rank)+1j*rng.normal(size=rank)
+            contracted = sum(filtered_volume(np.column_stack([a, b, np.eye(rank)[:, j]]), gate)
+                             for j in range(rank))
+            expected = gate**6*(rank-2)*(np.vdot(a, a).real*np.vdot(b, b).real-abs(np.vdot(a, b))**2)
+            check(np.isclose(contracted, expected, rtol=1e-8, atol=1e-8), &#39;same-law isotropic third-slot contraction&#39;)
+    # Exact triplet pair operator and its familiar Casimir decomposition.
+    rank = 3
+    swap = sp.zeros(rank**2)
+    for i in range(rank):
+        for j in range(rank):
+            swap[i*rank+j, j*rank+i] = 1
+    pair = sp.eye(rank**2)-swap
+    check(pair.eigenvals() == {sp.Integer(2): 3, sp.Integer(0): 6}, &#39;triplet volume pair retains antisymmetric channel&#39;)
+    generators = []
+    for i, j in combinations(range(rank), 2):
+        t = sp.zeros(rank); t[i, j] = t[j, i] = sp.Rational(1, 2); generators.append(t)
+        t = sp.zeros(rank); t[i, j] = -sp.I/2; t[j, i] = sp.I/2; generators.append(t)
+    generators += [sp.diag(1, -1, 0)/2, sp.diag(1, 1, -2)/(2*sp.sqrt(3))]
+    contraction = sum((sp.kronecker_product(t, t) for t in generators), sp.zeros(9))
+    check(pair == sp.Rational(2, 3)*sp.eye(9)-2*contraction, &#39;existing color Casimir pair operator preserved&#39;)
+    check(contraction.eigenvals() == {sp.Rational(-2, 3): 3, sp.Rational(1, 3): 6}, &#39;standard qq pair Casimirs retained&#39;)
+    CASES.append({&#39;name&#39;: &#39;filtered-color-pair&#39;, &#39;parameters&#39;: {&#39;active_rank&#39;: 3, &#39;third_slot_covariance&#39;: &#39;sigma^2 I&#39;},
+                  &#39;measurements&#39;: {&#39;pair_operator&#39;: &#39;sigma^2 (I-swap)&#39;,
+                                   &#39;qq_pair_weights&#39;: [&#39;-2/3&#39;, &#39;1/3&#39;],
+                                   &#39;odd_middle_degree_pair_operator&#39;: &#39;0&#39;,
+                                   &#39;higher_control_rank35_pair_coefficient&#39;: &#39;33 sigma^2&#39;}})
+
+
+def alternative_sources_and_restriction():
+    # The naive complex self-wedge pairing does not have full SU(3) symmetry.
+    a = np.array([1., 1., 0.], dtype=complex)/np.sqrt(2)
+    u = np.diag([np.exp(1j*np.pi/4), np.exp(-1j*np.pi/4), 1])
+    check(np.isclose(np.linalg.det(u), 1), &#39;symmetry control lies in SU3&#39;)
+    check(not np.isclose(abs(a@a)**2, abs((u@a)@(u@a))**2), &#39;complex bilinear self-wedge is not SU3 invariant&#39;)
+    check(np.isclose(np.vdot(a, a), np.vdot(u@a, u@a)), &#39;Hermitian filtered source preserves SU3&#39;)
+    star = np.array([[0., -1.], [1., 0.]])
+    complementary = star/1j
+    field = np.array([1., 1j])/np.sqrt(2)
+    current = float(np.vdot(field, complementary@field).real)
+    reversed_current = float(np.vdot(field.conjugate(), complementary@field.conjugate()).real)
+    check(np.isclose(current, -reversed_current) and abs(current) &gt; .9, &#39;complementary source changes under time reversal&#39;)
+    check(np.isclose(current**2, reversed_current**2), &#39;squared complementary energy is time-reversal even&#39;)
+    CASES.append({&#39;name&#39;: &#39;allowed-alternative-channel&#39;, &#39;parameters&#39;: {&#39;odd_middle_degree&#39;: True},
+                  &#39;measurements&#39;: {&#39;symmetric_Hodge_source&#39;: &#39;0&#39;, &#39;complementary_source&#39;: current,
+                                   &#39;time_reversal_forbids_complementary_squared_energy&#39;: False,
+                                   &#39;generic_norm_overlap_also_remains_allowed&#39;: True}})
+    # Contract selected ordinary normal directions, then restrict to a four-plane.
+    for parent_depth in (6, 10):
+        degree = parent_depth//2
+        parent_basis = list(combinations(range(parent_depth), degree))
+        child_basis = list(combinations(range(4), 2))
+        selected_normals = tuple(range(4, 4+degree-2))
+        r = np.zeros((6, len(parent_basis)))
+        for j, child in enumerate(child_basis):
+            index = tuple(sorted(child+selected_normals))
+            r[j, parent_basis.index(index)] = sign_sort(selected_normals+child)
+        child_star = np.zeros((6, 6))
+        for j, child in enumerate(child_basis):
+            other = tuple(i for i in range(4) if i not in child)
+            child_star[child_basis.index(other), j] = sign_sort(child+other)
+        check(np.allclose(r@r.T, np.eye(6)), &#39;ordinary normal contraction reaches full child two-form space&#39;)
+        mismatch = child_star@r  # Parent symmetric Hodge filter is zero.
+        check(np.isclose(np.linalg.norm(mismatch)**2, 6), &#39;symmetric filter does not commute with lower-depth contraction&#39;)
+        CASES.append({&#39;name&#39;: &#39;nested-source-ordering&#39;, &#39;real_depth&#39;: parent_depth,
+                      &#39;parameters&#39;: {&#39;child_depth&#39;: 4, &#39;normal_contractions&#39;: degree-2},
+                      &#39;measurements&#39;: {&#39;filter_parent_then_restrict&#39;: &#39;0&#39;,
+                                       &#39;restrict_then_filter_squared_Hilbert_Schmidt_norm&#39;: 6,
+                                       &#39;intrinsic_source_first_is_an_additional_physical_premise&#39;: True}})
+
+
+def contact_order_and_reciprocity():
+    q1, q2, v1, v2 = sp.symbols(&#39;q1 q2 v1 v2&#39;, real=True)
+    q, v = sp.Matrix([q1, q2]), sp.Matrix([v1, v2])
+    for middle_degree in range(1, 7):
+        star = sp.Matrix([[0, (-1)**middle_degree], [1, 0]])
+        symmetric, skew = (star+star.T)/2, (star-star.T)/2
+        energy = (q.T*star*q)[0]/2
+        velocity_action = (q.T*star*v)[0]/2
+        euler_velocity = sp.Matrix([sum(sp.diff(sp.diff(velocity_action, vv), qq)*dv
+                                        for qq, dv in zip(q, v))-sp.diff(velocity_action, qq)
+                                   for vv, qq in zip(v, q)])
+        check(sp.expand(energy-(q.T*symmetric*q)[0]/2) == 0, &#39;real instantaneous self-energy uses symmetric Hodge part&#39;)
+        check(euler_velocity == -skew*v, &#39;real velocity term uses antisymmetric Hodge part&#39;)
+        check((v.T*skew*v)[0].expand() == 0, &#39;Hodge gyroscopic response performs no instantaneous work&#39;)
+        # Complete positive second-order control; no simulated particle trajectory.
+        kk = 2*np.eye(2)+.3*np.array(symmetric, dtype=float)
+        aa = .4*np.array(skew, dtype=float)
+        dynamics = np.block([[np.zeros((2, 2)), np.eye(2)], [-kk, aa]])
+        eigen = np.linalg.eigvals(dynamics)
+        frequencies = sorted(x.imag for x in eigen if x.imag &gt; 1e-10)
+        check(np.linalg.eigvalsh(kk)[0] &gt; 0 and np.max(np.abs(eigen.real)) &lt; 1e-10,
+              &#39;same-law static and gyro oscillator controls remain positive and oscillatory&#39;)
+        expected = sorted([np.sqrt(2.04)-.2, np.sqrt(2.04)+.2] if middle_degree % 2 else
+                          [np.sqrt(1.7), np.sqrt(2.3)])
+        check(np.allclose(frequencies, expected), &#39;complete Hodge oscillator frequencies&#39;)
+        # Both participants are canonical coordinates of the same field reduction.
+        # Positive potential and gyroscopic reciprocity are checked before prescribing a source.
+        hs = np.array(symmetric, dtype=float)
+        sa = np.array(skew, dtype=float)
+        full_k = np.block([[2*np.eye(2), -hs], [-hs, 3*np.eye(2)]])
+        full_g = np.block([[np.zeros((2, 2)), sa], [sa, np.zeros((2, 2))]])
+        full_dynamics = np.block([[np.zeros((4, 4)), np.eye(4)], [-full_k, full_g]])
+        full_eigen = np.linalg.eigvals(full_dynamics)
+        energy_matrix = sp.diag(*([1]*8))
+        check(np.linalg.eigvalsh(full_k)[0] &gt; 0, &#39;common reciprocal q/source potential positive&#39;)
+        check(np.allclose(full_g+full_g.T, 0), &#39;complete gyro coupling antisymmetric across both participants&#39;)
+        check(np.max(np.abs(full_eigen.real)) &lt; 1e-9, &#39;complete reciprocal q/source modes oscillatory&#39;)
+        metric_energy = la_block_energy = np.block([[full_k, np.zeros((4, 4))],
+                                                   [np.zeros((4, 4)), np.eye(4)]])
+        check(np.linalg.norm(metric_energy@full_dynamics+full_dynamics.T@metric_energy) &lt; 1e-10,
+              &#39;complete reciprocal mode energy conserved&#39;)
+    # Reciprocity applies to the full kernel, not the fibre factor alone.
+    skew = sp.Matrix([[0, -1], [1, 0]])
+    cross_kernel = sp.BlockMatrix([[sp.zeros(2), skew], [-skew, sp.zeros(2)]]).as_explicit()
+    check(cross_kernel == cross_kernel.T and cross_kernel != sp.zeros(4),
+          &#39;antisymmetric fibre map can survive in a reciprocal two-slot kernel&#39;)
+    check((2*sp.eye(4)+cross_kernel).is_positive_definite is True,
+          &#39;reciprocal cross-kernel counterexample admits positive complete energy&#39;)
+    CASES.append({&#39;name&#39;: &#39;position-versus-velocity-Hodge-contact&#39;,
+                  &#39;parameters&#39;: {&#39;common_bare_stiffness&#39;: 2, &#39;static_coefficient&#39;: .3, &#39;gyro_coefficient&#39;: .4},
+                  &#39;measurements&#39;: {&#39;even_middle_degree_static_active&#39;: True,
+                                   &#39;odd_middle_degree_velocity_active&#39;: True,
+                                   &#39;reciprocity_alone_forces_symmetric_fibre_filter&#39;: False,
+                                   &#39;velocity_term_requires_time_reversal_parities_or_circulation&#39;: True}})
+
+
+def all_sector_spectral_response(source):
+    spec = importlib.util.spec_from_file_location(&#39;frozen_sawtooth&#39;, source)
+    saw = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(saw)
+    mp.mp.dps = 50
+    electron = mp.mpf(&#39;0.51099895000&#39;)
+    mu6 = electron/18564
+    mu5 = mp.sqrt(mp.mpf(&#39;2.534e-3&#39;)/(65780**2-2002**2))/mp.mpf(10**6)
+    scales = {2: electron*mp.sqrt(2890), 3: electron*mp.sqrt(32*mp.sqrt(7)),
+              4: electron*mp.sqrt(48/mp.sqrt(7))/15, 5: mu5, 6: mu6, 10: mu6}
+    assigned = [(&#39;W&#39;, 2, 76), (&#39;Z&#39;, 2, 81), (&#39;Higgs&#39;, 2, 95), (&#39;down&#39;, 3, 1),
+                (&#39;strange&#39;, 3, 4), (&#39;up&#39;, 4, 3), (&#39;charm&#39;, 4, 20), (&#39;top&#39;, 4, 72),
+                (&#39;nu1&#39;, 5, 10), (&#39;nu2&#39;, 5, 15), (&#39;nu3&#39;, 5, 22),
+                (&#39;electron&#39;, 6, 13), (&#39;muon&#39;, 6, 35), (&#39;tau&#39;, 10, 23)]
+    for label, depth, n in assigned:
+        middle_degree = (depth+1)//2
+        static_gate = int(middle_degree % 2 == 0)
+        derivative_gate = 1-static_gate
+        cutoff = comb(n+depth-1, depth)
+        ratio = float(scales[depth]/mu6)
+        response = saw.response_sum(cutoff, ratio)
+        dynamic = (static_gate*response[&#39;density_response&#39;]+
+                   derivative_gate*response[&#39;derivative_source_response&#39;])
+        static = static_gate*response[&#39;static_source_term&#39;]
+        bound = (static_gate*response[&#39;density_tail_bound&#39;]+
+                 derivative_gate*response[&#39;derivative_tail_bound&#39;])
+        check(np.isfinite(dynamic+static), &#39;all-sector common-order response finite&#39;)
+        check(not static_gate if depth in (2, 5, 6, 10) else bool(static_gate),
+              &#39;same real-Hodge contact law chooses all maintained interaction orders&#39;)
+        if depth == 5:
+            check(abs(dynamic) &lt; 1e-9 and static == 0, &#39;slow neutrino source suppression survives common Hodge order rule&#39;)
+        CASES.append({&#39;name&#39;: &#39;all-sector-Hodge-order-response&#39;, &#39;real_depth&#39;: depth, &#39;mode_index&#39;: n,
+                      &#39;parameters&#39;: {&#39;particle&#39;: label, &#39;cutoff&#39;: cutoff, &#39;fundamental_ratio&#39;: ratio,
+                                     &#39;source_map&#39;: &#39;conditional real sawtooth density in fixed unit form direction&#39;,
+                                     &#39;common_g0_g1_in_reference_time_units&#39;: [1, 1],
+                                     &#39;receiver&#39;: &#39;scalar susceptibility times form identity; shape weights 3/5 at2,2/5 at3&#39;,
+                                     &#39;interaction_order&#39;: &#39;density&#39; if static_gate else &#39;velocity&#39;},
+                      &#39;measurements&#39;: {&#39;signed_dynamic_response&#39;: dynamic, &#39;static_source_response&#39;: static,
+                                       &#39;signed_total_response&#39;: dynamic+static, &#39;absolute_omitted_tail_bound&#39;: bound}})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--output&#39;, required=True)
+    parser.add_argument(&#39;--sawtooth-source&#39;, required=True)
+    args = parser.parse_args()
+    hodge_blocks()
+    norm_volume_and_pair()
+    alternative_sources_and_restriction()
+    contact_order_and_reciprocity()
+    all_sector_spectral_response(Path(args.sawtooth_source))
+    report = {&#39;experiment_key&#39;: &#39;symmetric-Hodge-feedback-20261009&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/symmetric-hodge-feedback-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/sawtooth-sector-coupling-checks.py&#39;: sha256(Path(args.sawtooth_source).read_bytes()).hexdigest()},
+              &#39;scope&#39;: &#39;A conditional common raw-Hodge reciprocal contact kernel and filtered color-volume action. It selects 3/4 among maintained sectors, allows 7/8 controls, and retains alternative interactions and nested-source ordering as explicit physical premises.&#39;,
+              &#39;summary&#39;: {&#39;checks_passed&#39;: CHECKS, &#39;case_count&#39;: len(CASES)}, &#39;cases&#39;: CASES}
+    Path(args.output).write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(report[&#39;summary&#39;]))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>canonical-normal-structure-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/canonical-normal-structure-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="canonical-normal-structure-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/canonical-normal-structure-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="canonical-normal-structure-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>canonical-normal-structure-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/canonical-normal-structure-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact canonical normal-structure algebra and transported surface jets.&quot;&quot;&quot;
+from pathlib import Path
+from itertools import combinations
+from datetime import datetime, timezone
+import argparse
+import hashlib,json,math
+import sympy as S
+checks=0
+
+def require(ok):
+ global checks
+ assert ok
+ checks+=1
+
+def bracket(A,B):return A*B-B*A
+
+def anti(B):
+ R,I=S.re(B),S.im(B)
+ return R.row_join(I).col_join(I.row_join(-R))
+
+def linear(B):
+ R,I=S.re(B),S.im(B)
+ return R.row_join(-I).col_join(I.row_join(R))
+
+def E(q,a,b):
+ B=S.zeros(q);B[a,b]=1;B[b,a]=-1
+ return B
+
+def rank(ms,n):
+ return S.Matrix.hstack(*(m.reshape(n*n,1) for m in ms)).rank() if ms else 0
+
+def independent(ms,n):
+ if not ms:return []
+ M=S.Matrix.hstack(*(m.reshape(n*n,1) for m in ms))
+ return [ms[k] for k in M.rref()[1]]
+
+def closure(ms,n):
+ basis=independent(ms,n)
+ while True:
+  nxt=independent(basis+[bracket(a,b) for a,b in combinations(basis,2)],n)
+  if len(nxt)==len(basis):return basis
+  basis=nxt
+
+cases=[]
+for q,depths in [(4,[2]),(3,[3,4]),(2,[5,6]),(0,[10])]:
+ if q==0:
+  cases.append(dict(q=q,physical_depths=depths,orientation_dimension=0,curvature_rank=0,central_rank=0,traceless_rank=0,holonomy_dimension=0));continue
+ n=2*q;J=linear(S.I*S.eye(q));zero=S.zeros(n)
+ mb=[anti(f*E(q,a,b)) for a,b in combinations(range(q),2) for f in [1,S.I]]
+ require(len(mb)==q*(q-1));require(rank(mb,n)==q*(q-1))
+ for X in mb:
+  require(X.T==-X);require(X*J+J*X==zero)
+ comm=[bracket(X,Y) for X,Y in combinations(mb,2)]
+ for Z in comm:
+  require(Z.T==-Z);require(bracket(Z,J)==zero)
+ cent=lambda Z:(J.T*Z).trace()*J/S.Integer(n)
+ cr=rank([cent(Z) for Z in comm],n)
+ tr=rank([Z-cent(Z) for Z in comm],n)
+ total=rank(comm,n);hol=len(closure(comm,n))
+ expected={4:(16,1,15),3:(9,1,8),2:(1,1,0)}[q]
+ require((total,cr,tr)==expected);require(hol==total)
+ for X,Y in combinations(mb,2):
+  require(bracket(bracket(X,J),bracket(Y,J))/4==bracket(X,Y))
+ if q==2:
+  # Entire traceless isotropy kernel: real skew E12, imaginary symmetric,
+  # and traceless imaginary diagonal all act trivially on m.
+  su=[linear(E(q,0,1)),linear(S.I*S.Matrix([[0,1],[1,0]])),linear(S.I*S.diag(1,-1))]
+  for H in su:
+   for X in mb:require(bracket(H,X)==zero)
+ cases.append(dict(q=q,physical_depths=depths,orientation_dimension=q*(q-1),curvature_rank=total,central_rank=cr,traceless_rank=tr,holonomy_dimension=hol))
+surfaces=[]
+for q in [3,4]:
+ n=2*q;X=anti(E(q,0,1))
+ Ys=[anti(S.I*E(q,0,1))]
+ for k in range(2,q):
+  for a in [0,1]:
+   Ys.extend([anti(E(q,a,k)),anti(S.I*E(q,a,k))])
+ # Y(s)=sum s^r Ys[r], J=g J0 g^-1, g=exp(sX)exp(tY(s)).
+ # Along t=0 theta_s=X, theta_t=Y(s), A_h=0.
+ # Thus these are exact curvature jets / r! in a common transported frame.
+ coefficients=[-bracket(X,Y) for Y in Ys]
+ jets=[math.factorial(r)*C for r,C in enumerate(coefficients)]
+ hol=closure(jets,n);require(len(hol)==q*q)
+ require(rank(jets,n)==len(Ys))
+ J=linear(S.I*S.eye(q));cent=lambda Z:(J.T*Z).trace()*J/S.Integer(n)
+ require(rank([H-cent(H) for H in hol],n)==q*q-1)
+ # A Vandermonde evaluation at distinct points is an alternative to jets.
+ values=[sum((S.Integer(s)**r*C for r,C in enumerate(coefficients)),S.zeros(n)) for s in range(len(Ys))]
+ require(rank(values,n)==len(Ys));require(len(closure(values,n))==q*q)
+ # Arbitrarily small distinct rational s work by the same Vandermonde fact.
+ require(S.Matrix([[S.Rational(s,100)**r for r in range(len(Ys))] for s in range(len(Ys))]).det()!=0)
+ surfaces.append(dict(q=q,base_dimension=2,curvature_at_one_point_rank=1,transported_curvature_span=len(Ys),jet_orders=list(range(len(Ys))),holonomy_dimension=len(hol),traceless_dimension=q*q-1,coefficient_matrices=[[[str(z) for z in row] for row in C.tolist()] for C in coefficients]))
+# Direct second-order adapted-frame expansion, independent of the curvature ranks.
+for q in [2,3,4]:
+ n=2*q;J=linear(S.I*S.eye(q));P=anti(E(q,0,1));Q=anti(S.I*E(q,0,1))
+ Ph=lambda Z:(Z-J*Z*J)/2
+ require(Ph(Q)==S.zeros(n))
+ # exp(-eps P) d_z exp(eps(P+zQ)) at z=0:
+ second=(P*Q+Q*P)/2-P*Q
+ require(Ph(second)==-bracket(P,Q)/2)
+ # Curvature from d_t a_s at t=0; polynomial Y&#39; stays in m.
+ require(Ph(bracket(P,Q)+Q)==bracket(P,Q))
+# Chern-root algebra for W=Lambda^2 Q, independent symbolic root check.
+x,y,z=S.symbols(&#39;x y z&#39;);h=x+y+z
+roots=[h-x,h-y,h-z]
+require(S.expand(sum(roots))==2*h)
+require(S.expand(sum(a*b for a,b in combinations(roots,2))-h*h-(x*y+x*z+y*z))==0)
+require(S.expand(S.prod(roots)-h*(x*y+x*z+y*z)+x*y*z)==0)
+require(S.expand(4*h*h-2*(h*h+x*y+x*z+y*z)-2*(h*h-(x*y+x*z+y*z)))==0)
+# Spin lift and the distinct determinant branches, exact rational weights.
+spin={str(q):{&#39;spin_weights&#39;: [str(S.Rational(r)-S.Rational(q,2)) for r in range(q+1)],&#39;vacuum_weight&#39;:str(-S.Rational(q,2))} for q in [2,3,4]}
+require(spin[&#39;3&#39;][&#39;spin_weights&#39;]==[&#39;-3/2&#39;,&#39;-1/2&#39;,&#39;1/2&#39;,&#39;3/2&#39;])
+parser = argparse.ArgumentParser()
+parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+args = parser.parse_args()
+result = {
+    &#39;generated_utc&#39;: datetime.now(timezone.utc).isoformat(),
+    &#39;scope&#39;: &#39;Exact canonical normal-structure algebra, transported two-dimensional curvature jets and Spin weights; no particle dynamics.&#39;,
+    &#39;checks_passed&#39;: checks,
+    &#39;cases&#39;: cases,
+    &#39;occupied_cases&#39;: cases,
+    &#39;two_dimensional_pullbacks&#39;: surfaces,
+    &#39;spin_lift&#39;: spin,
+    &#39;sources&#39;: {&#39;experiments/canonical-normal-structure-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+}
+args.report.write_text(json.dumps(result, indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;checks_passed&#39;: checks, &#39;surface_holonomy&#39;: [(x[&#39;q&#39;], x[&#39;holonomy_dimension&#39;]) for x in surfaces]}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>hodge-flux-tube-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/hodge-flux-tube-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="hodge-flux-tube-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/hodge-flux-tube-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hodge-flux-tube-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>hodge-flux-tube-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/hodge-flux-tube-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">title</th><td>Positive Hodge-Gated Neutral Dielectric Flux Tubes</td></tr><tr><th scope="row">checks_passed</th><td>256</td></tr><tr><th scope="row">case_count</th><td>55</td></tr><tr><th scope="row">status</th><td>conditional neutral-mode same-field action; finite endpoints, vacuum Cauchy problem and full non-Abelian stability unresolved</td></tr><tr><th scope="row">conclusion</th><td>One positive quartic dielectric action supports finite-width commuting color tubes only at occupied three/four after the common Hodge gate. Exact support, positive tension, complete transverse stress and boost response, and restricted scalar stability are checked. A positive ordinary dielectric floor removes absolute flux confinement.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;title&quot;: &quot;Positive Hodge-Gated Neutral Dielectric Flux Tubes&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/hodge-flux-tube-checks.py&quot;: &quot;24ef86b4855274c5c8ca74890aa5e6bfa5f15bcccf2bc6ae566c02d998adb38b&quot;,
+    &quot;content/notes/topics/gauge-topology/hodge-gated-gauss.md&quot;: &quot;257281d62ec1664f9980181fd6a299acae121c182d063ab43b3da695e3404583&quot;
+  },
+  &quot;checks_passed&quot;: 256,
+  &quot;case_count&quot;: 55,
+  &quot;occupied_depths&quot;: [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  &quot;runtime&quot;: {
+    &quot;python&quot;: &quot;3.14.6&quot;,
+    &quot;numpy&quot;: &quot;2.4.4&quot;,
+    &quot;scipy&quot;: &quot;1.17.1&quot;,
+    &quot;sympy&quot;: &quot;1.14.0&quot;
+  },
+  &quot;status&quot;: &quot;conditional neutral-mode same-field action; finite endpoints, vacuum Cauchy problem and full non-Abelian stability unresolved&quot;,
+  &quot;conclusion&quot;: &quot;One positive quartic dielectric action supports finite-width commuting color tubes only at occupied three/four after the common Hodge gate. Exact support, positive tension, complete transverse stress and boost response, and restricted scalar stability are checked. A positive ordinary dielectric floor removes absolute flux confinement.&quot;,
+  &quot;cases&quot;: [
+    {
+      &quot;case&quot;: &quot;occupied-depth-2&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;transverse_dimension&quot;: 1,
+      &quot;hodge_coefficient&quot;: 0.0,
+      &quot;pohozaev_gradient_coefficient&quot;: 3,
+      &quot;pohozaev_mass_coefficient&quot;: 1,
+      &quot;nonzero_quartic_profile_possible&quot;: true,
+      &quot;active_finite_width_tube_possible&quot;: false,
+      &quot;exclusion_reason&quot;: &quot;zero geometric dielectric&quot;,
+      &quot;nongated_profile_exclusion&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;occupied-depth-3&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;hodge_coefficient&quot;: 1.0,
+      &quot;pohozaev_gradient_coefficient&quot;: 2,
+      &quot;pohozaev_mass_coefficient&quot;: 2,
+      &quot;nonzero_quartic_profile_possible&quot;: true,
+      &quot;active_finite_width_tube_possible&quot;: true,
+      &quot;exclusion_reason&quot;: null,
+      &quot;nongated_profile_exclusion&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;occupied-depth-4&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;hodge_coefficient&quot;: 1.0,
+      &quot;pohozaev_gradient_coefficient&quot;: 1,
+      &quot;pohozaev_mass_coefficient&quot;: 3,
+      &quot;nonzero_quartic_profile_possible&quot;: true,
+      &quot;active_finite_width_tube_possible&quot;: true,
+      &quot;exclusion_reason&quot;: null,
+      &quot;nongated_profile_exclusion&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;occupied-depth-5&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;transverse_dimension&quot;: 4,
+      &quot;hodge_coefficient&quot;: 0.0,
+      &quot;pohozaev_gradient_coefficient&quot;: 0,
+      &quot;pohozaev_mass_coefficient&quot;: 4,
+      &quot;nonzero_quartic_profile_possible&quot;: false,
+      &quot;active_finite_width_tube_possible&quot;: false,
+      &quot;exclusion_reason&quot;: &quot;zero geometric dielectric&quot;,
+      &quot;nongated_profile_exclusion&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;occupied-depth-6&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;transverse_dimension&quot;: 5,
+      &quot;hodge_coefficient&quot;: 0.0,
+      &quot;pohozaev_gradient_coefficient&quot;: -1,
+      &quot;pohozaev_mass_coefficient&quot;: 5,
+      &quot;nonzero_quartic_profile_possible&quot;: false,
+      &quot;active_finite_width_tube_possible&quot;: false,
+      &quot;exclusion_reason&quot;: &quot;zero geometric dielectric&quot;,
+      &quot;nongated_profile_exclusion&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;occupied-depth-10&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;transverse_dimension&quot;: 9,
+      &quot;hodge_coefficient&quot;: 0.0,
+      &quot;pohozaev_gradient_coefficient&quot;: -5,
+      &quot;pohozaev_mass_coefficient&quot;: 9,
+      &quot;nonzero_quartic_profile_possible&quot;: false,
+      &quot;active_finite_width_tube_possible&quot;: false,
+      &quot;exclusion_reason&quot;: &quot;zero geometric dielectric&quot;,
+      &quot;nongated_profile_exclusion&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;dielectric-exponent-3&quot;,
+      &quot;dielectric_power&quot;: &quot;3&quot;,
+      &quot;classification&quot;: &quot;necessary Pohozaev support test; no extra profiles solved&quot;,
+      &quot;occupied_depths&quot;: [
+        {
+          &quot;real_depth&quot;: 2,
+          &quot;gradient_coefficient&quot;: &quot;5&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 3,
+          &quot;gradient_coefficient&quot;: &quot;4&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 4,
+          &quot;gradient_coefficient&quot;: &quot;3&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 5,
+          &quot;gradient_coefficient&quot;: &quot;2&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 6,
+          &quot;gradient_coefficient&quot;: &quot;1&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 10,
+          &quot;gradient_coefficient&quot;: &quot;-3&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        }
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;dielectric-exponent-4&quot;,
+      &quot;dielectric_power&quot;: &quot;4&quot;,
+      &quot;classification&quot;: &quot;necessary Pohozaev support test; no extra profiles solved&quot;,
+      &quot;occupied_depths&quot;: [
+        {
+          &quot;real_depth&quot;: 2,
+          &quot;gradient_coefficient&quot;: &quot;6&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 3,
+          &quot;gradient_coefficient&quot;: &quot;4&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 4,
+          &quot;gradient_coefficient&quot;: &quot;2&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 5,
+          &quot;gradient_coefficient&quot;: &quot;0&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        },
+        {
+          &quot;real_depth&quot;: 6,
+          &quot;gradient_coefficient&quot;: &quot;-2&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        },
+        {
+          &quot;real_depth&quot;: 10,
+          &quot;gradient_coefficient&quot;: &quot;-10&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        }
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;dielectric-exponent-5&quot;,
+      &quot;dielectric_power&quot;: &quot;5&quot;,
+      &quot;classification&quot;: &quot;necessary Pohozaev support test; no extra profiles solved&quot;,
+      &quot;occupied_depths&quot;: [
+        {
+          &quot;real_depth&quot;: 2,
+          &quot;gradient_coefficient&quot;: &quot;7&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 3,
+          &quot;gradient_coefficient&quot;: &quot;4&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 4,
+          &quot;gradient_coefficient&quot;: &quot;1&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 5,
+          &quot;gradient_coefficient&quot;: &quot;-2&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        },
+        {
+          &quot;real_depth&quot;: 6,
+          &quot;gradient_coefficient&quot;: &quot;-5&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        },
+        {
+          &quot;real_depth&quot;: 10,
+          &quot;gradient_coefficient&quot;: &quot;-17&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        }
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;dielectric-exponent-6&quot;,
+      &quot;dielectric_power&quot;: &quot;6&quot;,
+      &quot;classification&quot;: &quot;necessary Pohozaev support test; no extra profiles solved&quot;,
+      &quot;occupied_depths&quot;: [
+        {
+          &quot;real_depth&quot;: 2,
+          &quot;gradient_coefficient&quot;: &quot;8&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 3,
+          &quot;gradient_coefficient&quot;: &quot;4&quot;,
+          &quot;nongated_support_not_excluded&quot;: true
+        },
+        {
+          &quot;real_depth&quot;: 4,
+          &quot;gradient_coefficient&quot;: &quot;0&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        },
+        {
+          &quot;real_depth&quot;: 5,
+          &quot;gradient_coefficient&quot;: &quot;-4&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        },
+        {
+          &quot;real_depth&quot;: 6,
+          &quot;gradient_coefficient&quot;: &quot;-8&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        },
+        {
+          &quot;real_depth&quot;: 10,
+          &quot;gradient_coefficient&quot;: &quot;-24&quot;,
+          &quot;nongated_support_not_excluded&quot;: false
+        }
+      ]
+    },
+    {
+      &quot;case&quot;: &quot;profile-n1-radius-15.0&quot;,
+      &quot;transverse_dimension&quot;: 1,
+      &quot;radius&quot;: 15.0,
+      &quot;central_value&quot;: 1.4142135623508936,
+      &quot;mass_integral&quot;: 4.000000000074582,
+      &quot;gradient_integral&quot;: 1.3333333332364674,
+      &quot;quartic_integral&quot;: 5.333333333315177,
+      &quot;equation_relative_error&quot;: 7.738809593175999e-13,
+      &quot;pohozaev_relative_error&quot;: 9.129497158085393e-11,
+      &quot;nodes&quot;: 699,
+      &quot;maximum_rms_residual&quot;: 1.986832154850967e-08
+    },
+    {
+      &quot;case&quot;: &quot;profile-n1-radius-20.0&quot;,
+      &quot;transverse_dimension&quot;: 1,
+      &quot;radius&quot;: 20.0,
+      &quot;central_value&quot;: 1.414213562350847,
+      &quot;mass_integral&quot;: 4.0000000000516795,
+      &quot;gradient_integral&quot;: 1.3333333332275268,
+      &quot;quartic_integral&quot;: 5.333333333267935,
+      &quot;equation_relative_error&quot;: 2.1134760608535953e-12,
+      &quot;pohozaev_relative_error&quot;: 9.227485442289815e-11,
+      &quot;nodes&quot;: 711,
+      &quot;maximum_rms_residual&quot;: 1.9868321554920476e-08
+    },
+    {
+      &quot;case&quot;: &quot;profile-n1-radius-25.0&quot;,
+      &quot;transverse_dimension&quot;: 1,
+      &quot;radius&quot;: 25.0,
+      &quot;central_value&quot;: 1.4142135623508862,
+      &quot;mass_integral&quot;: 4.000000000076222,
+      &quot;gradient_integral&quot;: 1.333333333263948,
+      &quot;quartic_integral&quot;: 5.333333333328756,
+      &quot;equation_relative_error&quot;: 2.1399548799668258e-12,
+      &quot;pohozaev_relative_error&quot;: 7.109435262584426e-11,
+      &quot;nodes&quot;: 726,
+      &quot;maximum_rms_residual&quot;: 1.9868321566730584e-08
+    },
+    {
+      &quot;case&quot;: &quot;tension-n1-Q1.0&quot;,
+      &quot;transverse_dimension&quot;: 1,
+      &quot;classical_commuting_flux&quot;: 1.0,
+      &quot;dielectric_coefficient&quot;: 1.0,
+      &quot;neutral_restoring_frequency&quot;: 1.0,
+      &quot;amplitude&quot;: 0.6424491467128465,
+      &quot;tension&quot;: 1.6509636244491963,
+      &quot;energy_fractions_exact&quot;: {
+        &quot;electric&quot;: &quot;1/3&quot;,
+        &quot;gradient&quot;: &quot;1/6&quot;,
+        &quot;restoring&quot;: &quot;1/2&quot;
+      },
+      &quot;integrated_transverse_stress&quot;: -3.0521474236877566e-11,
+      &quot;transverse_inertia_per_length_in_c1_units&quot;: 1.6509636244491963,
+      &quot;quantum_Casimir_scaling_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;tension-n1-Q2.1&quot;,
+      &quot;transverse_dimension&quot;: 1,
+      &quot;classical_commuting_flux&quot;: 2.1,
+      &quot;dielectric_coefficient&quot;: 0.7,
+      &quot;neutral_restoring_frequency&quot;: 1.4,
+      &quot;amplitude&quot;: 0.8730963678836239,
+      &quot;tension&quot;: 4.268864698627253,
+      &quot;energy_fractions_exact&quot;: {
+        &quot;electric&quot;: &quot;1/3&quot;,
+        &quot;gradient&quot;: &quot;1/6&quot;,
+        &quot;restoring&quot;: &quot;1/2&quot;
+      },
+      &quot;integrated_transverse_stress&quot;: -7.891776121482508e-11,
+      &quot;transverse_inertia_per_length_in_c1_units&quot;: 4.268864698627253,
+      &quot;quantum_Casimir_scaling_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;tension-n1-Q0.4&quot;,
+      &quot;transverse_dimension&quot;: 1,
+      &quot;classical_commuting_flux&quot;: 0.4,
+      &quot;dielectric_coefficient&quot;: 2.3,
+      &quot;neutral_restoring_frequency&quot;: 0.6,
+      &quot;amplitude&quot;: 0.4120065442964074,
+      &quot;tension&quot;: 0.4073985421035935,
+      &quot;energy_fractions_exact&quot;: {
+        &quot;electric&quot;: &quot;1/3&quot;,
+        &quot;gradient&quot;: &quot;1/6&quot;,
+        &quot;restoring&quot;: &quot;1/2&quot;
+      },
+      &quot;integrated_transverse_stress&quot;: -7.531669732330215e-12,
+      &quot;transverse_inertia_per_length_in_c1_units&quot;: 0.4073985421035935,
+      &quot;quantum_Casimir_scaling_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;flux-and-hessian-variation-n1&quot;,
+      &quot;transverse_dimension&quot;: 1,
+      &quot;positive_flux_remainder&quot;: 0.004702872654381716,
+      &quot;shape_directions_checked&quot;: 3
+    },
+    {
+      &quot;case&quot;: &quot;profile-n2-radius-15.0&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;radius&quot;: 15.0,
+      &quot;central_value&quot;: 2.2062008645981694,
+      &quot;mass_integral&quot;: 11.700896524249918,
+      &quot;gradient_integral&quot;: 11.70089652404626,
+      &quot;quartic_integral&quot;: 23.401793048303762,
+      &quot;equation_relative_error&quot;: 3.24122330651448e-13,
+      &quot;pohozaev_relative_error&quot;: 1.740529324896792e-11,
+      &quot;nodes&quot;: 798,
+      &quot;maximum_rms_residual&quot;: 1.955233322339882e-08
+    },
+    {
+      &quot;case&quot;: &quot;profile-n2-radius-20.0&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;radius&quot;: 20.0,
+      &quot;central_value&quot;: 2.2062008645987263,
+      &quot;mass_integral&quot;: 11.700896524281617,
+      &quot;gradient_integral&quot;: 11.700896524165227,
+      &quot;quartic_integral&quot;: 23.401793048241746,
+      &quot;equation_relative_error&quot;: 8.764207095343176e-12,
+      &quot;pohozaev_relative_error&quot;: 9.947139741783937e-12,
+      &quot;nodes&quot;: 807,
+      &quot;maximum_rms_residual&quot;: 1.9552333306405016e-08
+    },
+    {
+      &quot;case&quot;: &quot;profile-n2-radius-25.0&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;radius&quot;: 25.0,
+      &quot;central_value&quot;: 2.206200864598351,
+      &quot;mass_integral&quot;: 11.70089652430314,
+      &quot;gradient_integral&quot;: 11.70089652421503,
+      &quot;quartic_integral&quot;: 23.401793048435568,
+      &quot;equation_relative_error&quot;: 3.5298212224516963e-12,
+      &quot;pohozaev_relative_error&quot;: 7.530113218938944e-12,
+      &quot;nodes&quot;: 823,
+      &quot;maximum_rms_residual&quot;: 1.9552333302317e-08
+    },
+    {
+      &quot;case&quot;: &quot;tension-n2-Q1.0&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;classical_commuting_flux&quot;: 1.0,
+      &quot;dielectric_coefficient&quot;: 1.0,
+      &quot;neutral_restoring_frequency&quot;: 1.0,
+      &quot;amplitude&quot;: 0.3924237538319324,
+      &quot;tension&quot;: 2.7028439573935112,
+      &quot;energy_fractions_exact&quot;: {
+        &quot;electric&quot;: &quot;1/3&quot;,
+        &quot;gradient&quot;: &quot;1/3&quot;,
+        &quot;restoring&quot;: &quot;1/3&quot;
+      },
+      &quot;integrated_transverse_stress&quot;: -6.572631328083389e-12,
+      &quot;transverse_inertia_per_length_in_c1_units&quot;: 2.7028439573935112,
+      &quot;quantum_Casimir_scaling_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;tension-n2-Q2.1&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;classical_commuting_flux&quot;: 2.1,
+      &quot;dielectric_coefficient&quot;: 0.7,
+      &quot;neutral_restoring_frequency&quot;: 1.4,
+      &quot;amplitude&quot;: 0.5966066061634852,
+      &quot;tension&quot;: 6.247215878699476,
+      &quot;energy_fractions_exact&quot;: {
+        &quot;electric&quot;: &quot;1/3&quot;,
+        &quot;gradient&quot;: &quot;1/3&quot;,
+        &quot;restoring&quot;: &quot;1/3&quot;
+      },
+      &quot;integrated_transverse_stress&quot;: -1.5191847779760792e-11,
+      &quot;transverse_inertia_per_length_in_c1_units&quot;: 6.247215878699476,
+      &quot;quantum_Casimir_scaling_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;tension-n2-Q0.4&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;classical_commuting_flux&quot;: 0.4,
+      &quot;dielectric_coefficient&quot;: 2.3,
+      &quot;neutral_restoring_frequency&quot;: 0.6,
+      &quot;amplitude&quot;: 0.21226141858700598,
+      &quot;tension&quot;: 0.7907742565795084,
+      &quot;energy_fractions_exact&quot;: {
+        &quot;electric&quot;: &quot;1/3&quot;,
+        &quot;gradient&quot;: &quot;1/3&quot;,
+        &quot;restoring&quot;: &quot;1/3&quot;
+      },
+      &quot;integrated_transverse_stress&quot;: -1.9229617898020024e-12,
+      &quot;transverse_inertia_per_length_in_c1_units&quot;: 0.7907742565795084,
+      &quot;quantum_Casimir_scaling_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;flux-and-hessian-variation-n2&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;positive_flux_remainder&quot;: 0.0047752668846189564,
+      &quot;shape_directions_checked&quot;: 3
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n2-ell0-cells400&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;angular_degree&quot;: 0,
+      &quot;cells&quot;: 400,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        -5.420047724340268,
+        1.0030254069528737,
+        1.062358123013886
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        0.9777447431238498,
+        1.0481283880232295,
+        1.1603206368904693
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n2-ell0-cells800&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;angular_degree&quot;: 0,
+      &quot;cells&quot;: 800,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        -5.414146613021576,
+        1.0032367176865475,
+        1.0625697355772552
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        0.9781374528385319,
+        1.0482595818873393,
+        1.1604948348104651
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n2-ell0-cells1600&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;angular_degree&quot;: 0,
+      &quot;cells&quot;: 1600,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        -5.4126750060596756,
+        1.0032888688874924,
+        1.0626223570188695
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        0.9782346678255527,
+        1.0482923271578146,
+        1.1605382347562159
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n2-ell1-cells400&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;angular_degree&quot;: 1,
+      &quot;cells&quot;: 400,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        -0.001793606031085656,
+        1.0379623840391803,
+        1.1296822616789184
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        -0.001793606031085656,
+        1.0379623840391803,
+        1.1296822616789184
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n2-ell1-cells800&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;angular_degree&quot;: 1,
+      &quot;cells&quot;: 800,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        -0.0004489209685029611,
+        1.037964804383063,
+        1.129695590250332
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        -0.0004489209685029611,
+        1.037964804383063,
+        1.129695590250332
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n2-ell1-cells1600&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;angular_degree&quot;: 1,
+      &quot;cells&quot;: 1600,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        -0.00011226298944479193,
+        1.0379654106435157,
+        1.1296989277341394
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        -0.00011226298944479193,
+        1.0379654106435157,
+        1.1296989277341394
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n2-ell2-cells400&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;angular_degree&quot;: 2,
+      &quot;cells&quot;: 400,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        1.0658453098560303,
+        1.176169943165908,
+        1.3332754545254708
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        1.0658453098560303,
+        1.176169943165908,
+        1.3332754545254708
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n2-ell2-cells800&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;angular_degree&quot;: 2,
+      &quot;cells&quot;: 800,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        1.0658454854214519,
+        1.1761723926624967,
+        1.3332861590857745
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        1.0658454854214519,
+        1.1761723926624967,
+        1.3332861590857745
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n2-ell2-cells1600&quot;,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;angular_degree&quot;: 2,
+      &quot;cells&quot;: 1600,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        1.0658455293195612,
+        1.1761730050285408,
+        1.3332888352073708
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        1.0658455293195612,
+        1.1761730050285408,
+        1.3332888352073708
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;profile-n3-radius-15.0&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;radius&quot;: 15.0,
+      &quot;central_value&quot;: 4.337387679960676,
+      &quot;mass_integral&quot;: 18.89725130178203,
+      &quot;gradient_integral&quot;: 56.691753907114204,
+      &quot;quartic_integral&quot;: 75.58900520920221,
+      &quot;equation_relative_error&quot;: 4.047862675612578e-12,
+      &quot;pohozaev_relative_error&quot;: 3.118821383825097e-11,
+      &quot;nodes&quot;: 1193,
+      &quot;maximum_rms_residual&quot;: 1.9972682167086253e-08
+    },
+    {
+      &quot;case&quot;: &quot;profile-n3-radius-20.0&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;radius&quot;: 20.0,
+      &quot;central_value&quot;: 4.337387679962668,
+      &quot;mass_integral&quot;: 18.897251301946362,
+      &quot;gradient_integral&quot;: 56.6917539074175,
+      &quot;quartic_integral&quot;: 75.5890052093868,
+      &quot;equation_relative_error&quot;: 3.0343459934154225e-13,
+      &quot;pohozaev_relative_error&quot;: 2.784203583988305e-11,
+      &quot;nodes&quot;: 1201,
+      &quot;maximum_rms_residual&quot;: 1.9972682593829823e-08
+    },
+    {
+      &quot;case&quot;: &quot;profile-n3-radius-25.0&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;radius&quot;: 25.0,
+      &quot;central_value&quot;: 4.33738767996317,
+      &quot;mass_integral&quot;: 18.897251301736034,
+      &quot;gradient_integral&quot;: 56.69175390712043,
+      &quot;quartic_integral&quot;: 75.5890052092082,
+      &quot;equation_relative_error&quot;: 4.6532278614127995e-12,
+      &quot;pohozaev_relative_error&quot;: 3.373200096283533e-11,
+      &quot;nodes&quot;: 1211,
+      &quot;maximum_rms_residual&quot;: 1.9972682295964023e-08
+    },
+    {
+      &quot;case&quot;: &quot;tension-n3-Q1.0&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;classical_commuting_flux&quot;: 1.0,
+      &quot;dielectric_coefficient&quot;: 1.0,
+      &quot;neutral_restoring_frequency&quot;: 1.0,
+      &quot;amplitude&quot;: 0.2654720413408236,
+      &quot;tension&quot;: 3.995374301638089,
+      &quot;energy_fractions_exact&quot;: {
+        &quot;electric&quot;: &quot;1/3&quot;,
+        &quot;gradient&quot;: &quot;1/2&quot;,
+        &quot;restoring&quot;: &quot;1/6&quot;
+      },
+      &quot;integrated_transverse_stress&quot;: 1.7427392862146007e-11,
+      &quot;transverse_inertia_per_length_in_c1_units&quot;: 3.995374301638089,
+      &quot;quantum_Casimir_scaling_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;tension-n3-Q2.1&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;classical_commuting_flux&quot;: 2.1,
+      &quot;dielectric_coefficient&quot;: 0.7,
+      &quot;neutral_restoring_frequency&quot;: 1.4,
+      &quot;amplitude&quot;: 0.45150327485095415,
+      &quot;tension&quot;: 8.254935170894518,
+      &quot;energy_fractions_exact&quot;: {
+        &quot;electric&quot;: &quot;1/3&quot;,
+        &quot;gradient&quot;: &quot;1/2&quot;,
+        &quot;restoring&quot;: &quot;1/6&quot;
+      },
+      &quot;integrated_transverse_stress&quot;: 3.600719722385293e-11,
+      &quot;transverse_inertia_per_length_in_c1_units&quot;: 8.254935170894518,
+      &quot;quantum_Casimir_scaling_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;tension-n3-Q0.4&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;classical_commuting_flux&quot;: 0.4,
+      &quot;dielectric_coefficient&quot;: 2.3,
+      &quot;neutral_restoring_frequency&quot;: 0.6,
+      &quot;amplitude&quot;: 0.12111138780281801,
+      &quot;tension&quot;: 1.385921411089885,
+      &quot;energy_fractions_exact&quot;: {
+        &quot;electric&quot;: &quot;1/3&quot;,
+        &quot;gradient&quot;: &quot;1/2&quot;,
+        &quot;restoring&quot;: &quot;1/6&quot;
+      },
+      &quot;integrated_transverse_stress&quot;: 6.045441924840134e-12,
+      &quot;transverse_inertia_per_length_in_c1_units&quot;: 1.385921411089885,
+      &quot;quantum_Casimir_scaling_derived&quot;: false
+    },
+    {
+      &quot;case&quot;: &quot;flux-and-hessian-variation-n3&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;positive_flux_remainder&quot;: 0.005573286623902329,
+      &quot;shape_directions_checked&quot;: 3
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n3-ell0-cells400&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;angular_degree&quot;: 0,
+      &quot;cells&quot;: 400,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        -15.427110483066992,
+        1.0123132929798944,
+        1.0681017938623356
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        0.9966436888694624,
+        1.0535575563381157,
+        1.1621202068205962
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n3-ell0-cells800&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;angular_degree&quot;: 0,
+      &quot;cells&quot;: 800,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        -15.326045744507043,
+        1.0131956938318134,
+        1.0694719444704173
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        0.9984548177902065,
+        1.054642782222745,
+        1.163266473665837
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n3-ell0-cells1600&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;angular_degree&quot;: 0,
+      &quot;cells&quot;: 1600,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        -15.30086777804235,
+        1.0134008638616985,
+        1.0698039568117477
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        0.9988809910734124,
+        1.0549132214639305,
+        1.1635504385623465
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n3-ell1-cells400&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;angular_degree&quot;: 1,
+      &quot;cells&quot;: 400,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        -0.00023504394787353177,
+        1.0506771138619242,
+        1.1506631302541375
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        -0.00023504394787353177,
+        1.0506771138619242,
+        1.1506631302541375
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n3-ell1-cells800&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;angular_degree&quot;: 1,
+      &quot;cells&quot;: 800,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        6.929375340892084e-05,
+        1.0506773054167033,
+        1.1506660971475924
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        6.929375340892084e-05,
+        1.0506773054167033,
+        1.1506660971475924
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n3-ell1-cells1600&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;angular_degree&quot;: 1,
+      &quot;cells&quot;: 1600,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        3.231716165089103e-05,
+        1.0506773245221102,
+        1.1506666470739242
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        3.231716165089103e-05,
+        1.0506773245221102,
+        1.1506666470739242
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n3-ell2-cells400&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;angular_degree&quot;: 2,
+      &quot;cells&quot;: 400,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        1.0830388370854875,
+        1.2067333823663904,
+        1.3792957709987386
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        1.0830388370854875,
+        1.2067333823663904,
+        1.3792957709987386
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n3-ell2-cells800&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;angular_degree&quot;: 2,
+      &quot;cells&quot;: 800,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        1.0830389554885962,
+        1.2067360853501101,
+        1.379308058680442
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        1.0830389554885962,
+        1.2067360853501101,
+        1.379308058680442
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;hessian-n3-ell2-cells1600&quot;,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;angular_degree&quot;: 2,
+      &quot;cells&quot;: 1600,
+      &quot;radius&quot;: 20.0,
+      &quot;local_eigenvalues&quot;: [
+        1.083038985083485,
+        1.2067367610952908,
+        1.3793111306462873
+      ],
+      &quot;fixed_flux_eigenvalues&quot;: [
+        1.083038985083485,
+        1.2067367610952908,
+        1.3793111306462873
+      ],
+      &quot;scope&quot;: &quot;transverse scalar fixed-flux variations only&quot;
+    },
+    {
+      &quot;case&quot;: &quot;floor-depth-2&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;transverse_dimension&quot;: 1,
+      &quot;floor&quot;: 0.1,
+      &quot;widths&quot;: [
+        2.0,
+        4.0,
+        8.0
+      ],
+      &quot;trial_energies&quot;: [
+        0.9973557010035817,
+        0.49867785050179086,
+        0.24933892525089543
+      ],
+      &quot;infinite_plane_energy_infimum&quot;: 0,
+      &quot;exact_vacuum_zero_required_for_absolute_tube_minimum&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;floor-depth-3&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;transverse_dimension&quot;: 2,
+      &quot;floor&quot;: 0.1,
+      &quot;widths&quot;: [
+        2.0,
+        4.0,
+        8.0
+      ],
+      &quot;trial_energies&quot;: [
+        0.1989436788648692,
+        0.0497359197162173,
+        0.012433979929054324
+      ],
+      &quot;infinite_plane_energy_infimum&quot;: 0,
+      &quot;exact_vacuum_zero_required_for_absolute_tube_minimum&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;floor-depth-4&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;transverse_dimension&quot;: 3,
+      &quot;floor&quot;: 0.1,
+      &quot;widths&quot;: [
+        2.0,
+        4.0,
+        8.0
+      ],
+      &quot;trial_energies&quot;: [
+        0.039683522458900604,
+        0.0049604403073625755,
+        0.0006200550384203219
+      ],
+      &quot;infinite_plane_energy_infimum&quot;: 0,
+      &quot;exact_vacuum_zero_required_for_absolute_tube_minimum&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;floor-depth-5&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;transverse_dimension&quot;: 4,
+      &quot;floor&quot;: 0.1,
+      &quot;widths&quot;: [
+        2.0,
+        4.0,
+        8.0
+      ],
+      &quot;trial_energies&quot;: [
+        0.007915717472057639,
+        0.0004947323420036024,
+        3.092077137522515e-05
+      ],
+      &quot;infinite_plane_energy_infimum&quot;: 0,
+      &quot;exact_vacuum_zero_required_for_absolute_tube_minimum&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;floor-depth-6&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;transverse_dimension&quot;: 5,
+      &quot;floor&quot;: 0.1,
+      &quot;widths&quot;: [
+        2.0,
+        4.0,
+        8.0
+      ],
+      &quot;trial_energies&quot;: [
+        0.001578957189658069,
+        4.9342412176814655e-05,
+        1.541950380525458e-06
+      ],
+      &quot;infinite_plane_energy_infimum&quot;: 0,
+      &quot;exact_vacuum_zero_required_for_absolute_tube_minimum&quot;: true
+    },
+    {
+      &quot;case&quot;: &quot;floor-depth-10&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;transverse_dimension&quot;: 9,
+      &quot;floor&quot;: 0.1,
+      &quot;widths&quot;: [
+        2.0,
+        4.0,
+        8.0
+      ],
+      &quot;trial_energies&quot;: [
+        2.499715802761481e-06,
+        4.882257427268517e-09,
+        9.535659037633823e-12
+      ],
+      &quot;infinite_plane_energy_infimum&quot;: 0,
+      &quot;exact_vacuum_zero_required_for_absolute_tube_minimum&quot;: true
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

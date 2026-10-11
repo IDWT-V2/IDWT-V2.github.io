@@ -1,0 +1,225 @@
+{
+  "title": "Induced Normal Curvature Gives Mixed Spatial Inertia and a Retained-Orientation Comparison",
+  "sources": {
+    "experiments/induced-curvature-response-checks.py": "8806acad8023a188818ba3454eb5ae5ae73f1ae9e09eb6738b3d561e5149c3ae",
+    "experiments/nested-normal-curvature-checks.py": "a77678aea22b4191f1f5180c8095cc03701e96c2a8c1b7db7e3d1ada0d872d2f"
+  },
+  "checks_passed": 270,
+  "case_count": 12,
+  "occupied_depths": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    10
+  ],
+  "scope": "actual squared-first-curvature-variation symbols, not the complete nonzero-background curvature Hessian; frozen real-normal response and finite-lock retained-orientation comparison",
+  "cases": [
+    {
+      "case": "induced-curvature-depth-2",
+      "real_depth": 2,
+      "hodge_active": false,
+      "axial_electric_symbol_diagonal": [
+        4,
+        4,
+        2,
+        2,
+        4,
+        4,
+        4,
+        4
+      ],
+      "axial_magnetic_symbol_diagonal": [
+        2,
+        2,
+        2,
+        0,
+        2,
+        2,
+        2,
+        2
+      ],
+      "independent_gauss_source_constraint_survives_induced_reduction": false,
+      "frozen_symbol_is_complete_variable_geometry_solution": false,
+      "background_curvature_second_variation_included": false,
+      "arbitrary_real_graph_waves_preserve_unitary_normal_carrier": false
+    },
+    {
+      "case": "induced-curvature-depth-3",
+      "real_depth": 3,
+      "hodge_active": true,
+      "axial_electric_symbol_diagonal": [
+        4,
+        4,
+        4,
+        6,
+        6,
+        6
+      ],
+      "axial_magnetic_symbol_diagonal": [
+        4,
+        2,
+        2,
+        4,
+        4,
+        4
+      ],
+      "independent_gauss_source_constraint_survives_induced_reduction": false,
+      "frozen_symbol_is_complete_variable_geometry_solution": false,
+      "background_curvature_second_variation_included": false,
+      "arbitrary_real_graph_waves_preserve_unitary_normal_carrier": false
+    },
+    {
+      "case": "active-depth-3-axial-symbol-4-2",
+      "real_depth": 3,
+      "electric_symbol_a": 4,
+      "magnetic_symbol_b": 2,
+      "high_frequency_locked_speed_squared": 0.5,
+      "compact_probe_acceleration_at_x_2": 0.11320762071319146,
+      "compact_unforced_displacement_acceleration_at_x_2": 0.014150952589148932,
+      "retained_lock_coefficient": 0.3333333333333333,
+      "retained_bare_speed_squared": 0.6666666666666667,
+      "retained_orientation_gap_squared": 0.08333333333333333,
+      "independent_orientation_is_exact_integrable_graph": false
+    },
+    {
+      "case": "active-depth-3-axial-symbol-4-4",
+      "real_depth": 3,
+      "electric_symbol_a": 4,
+      "magnetic_symbol_b": 4,
+      "high_frequency_locked_speed_squared": 1.0,
+      "compact_probe_acceleration_at_x_2": 0.11320762071319146,
+      "compact_unforced_displacement_acceleration_at_x_2": 0.0,
+      "retained_lock_coefficient": 0.3333333333333333,
+      "retained_bare_speed_squared": 0.6666666666666667,
+      "retained_orientation_gap_squared": 0.08333333333333333,
+      "independent_orientation_is_exact_integrable_graph": false
+    },
+    {
+      "case": "active-depth-3-axial-symbol-6-4",
+      "real_depth": 3,
+      "electric_symbol_a": 6,
+      "magnetic_symbol_b": 4,
+      "high_frequency_locked_speed_squared": 0.6666666666666666,
+      "compact_probe_acceleration_at_x_2": 0.11032580961956652,
+      "compact_unforced_displacement_acceleration_at_x_2": 0.0061292116455314745,
+      "retained_lock_coefficient": 0.3333333333333333,
+      "retained_bare_speed_squared": 0.6666666666666667,
+      "retained_orientation_gap_squared": 0.05555555555555555,
+      "independent_orientation_is_exact_integrable_graph": false
+    },
+    {
+      "case": "induced-curvature-depth-4",
+      "real_depth": 4,
+      "hodge_active": true,
+      "axial_electric_symbol_diagonal": [
+        6,
+        6,
+        6,
+        6,
+        8,
+        8
+      ],
+      "axial_magnetic_symbol_diagonal": [
+        6,
+        4,
+        4,
+        4,
+        6,
+        6
+      ],
+      "independent_gauss_source_constraint_survives_induced_reduction": false,
+      "frozen_symbol_is_complete_variable_geometry_solution": false,
+      "background_curvature_second_variation_included": false,
+      "arbitrary_real_graph_waves_preserve_unitary_normal_carrier": false
+    },
+    {
+      "case": "active-depth-4-axial-symbol-6-4",
+      "real_depth": 4,
+      "electric_symbol_a": 6,
+      "magnetic_symbol_b": 4,
+      "high_frequency_locked_speed_squared": 0.6666666666666666,
+      "compact_probe_acceleration_at_x_2": 0.11032580961956652,
+      "compact_unforced_displacement_acceleration_at_x_2": 0.0061292116455314745,
+      "retained_lock_coefficient": 0.3333333333333333,
+      "retained_bare_speed_squared": 0.6666666666666667,
+      "retained_orientation_gap_squared": 0.05555555555555555,
+      "independent_orientation_is_exact_integrable_graph": false
+    },
+    {
+      "case": "active-depth-4-axial-symbol-6-6",
+      "real_depth": 4,
+      "electric_symbol_a": 6,
+      "magnetic_symbol_b": 6,
+      "high_frequency_locked_speed_squared": 1.0,
+      "compact_probe_acceleration_at_x_2": 0.11032580961956652,
+      "compact_unforced_displacement_acceleration_at_x_2": 0.0,
+      "retained_lock_coefficient": 0.3333333333333333,
+      "retained_bare_speed_squared": 0.6666666666666667,
+      "retained_orientation_gap_squared": 0.05555555555555555,
+      "independent_orientation_is_exact_integrable_graph": false
+    },
+    {
+      "case": "active-depth-4-axial-symbol-8-6",
+      "real_depth": 4,
+      "electric_symbol_a": 8,
+      "magnetic_symbol_b": 6,
+      "high_frequency_locked_speed_squared": 0.75,
+      "compact_probe_acceleration_at_x_2": 0.10624032162673534,
+      "compact_unforced_displacement_acceleration_at_x_2": 0.0033200100508354795,
+      "retained_lock_coefficient": 0.3333333333333333,
+      "retained_bare_speed_squared": 0.6666666666666667,
+      "retained_orientation_gap_squared": 0.041666666666666664,
+      "independent_orientation_is_exact_integrable_graph": false
+    },
+    {
+      "case": "induced-curvature-depth-5",
+      "real_depth": 5,
+      "hodge_active": false,
+      "axial_electric_symbol_diagonal": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "axial_magnetic_symbol_diagonal": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "independent_gauss_source_constraint_survives_induced_reduction": false,
+      "frozen_symbol_is_complete_variable_geometry_solution": false,
+      "background_curvature_second_variation_included": false,
+      "arbitrary_real_graph_waves_preserve_unitary_normal_carrier": false
+    },
+    {
+      "case": "induced-curvature-depth-6",
+      "real_depth": 6,
+      "hodge_active": false,
+      "axial_electric_symbol_diagonal": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "axial_magnetic_symbol_diagonal": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "independent_gauss_source_constraint_survives_induced_reduction": false,
+      "frozen_symbol_is_complete_variable_geometry_solution": false,
+      "background_curvature_second_variation_included": false,
+      "arbitrary_real_graph_waves_preserve_unitary_normal_carrier": false
+    },
+    {
+      "case": "depth-10-no-normal-connection",
+      "real_depth": 10,
+      "hodge_active": false,
+      "normal_curvature_response_present": false
+    }
+  ]
+}

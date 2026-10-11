@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>normal-ray-metric-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/normal-ray-metric-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="normal-ray-metric-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/normal-ray-metric-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="normal-ray-metric-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>normal-ray-metric-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/normal-ray-metric-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact metric checks for the chiral-ray to ordinary-normal-rotation map.&quot;&quot;&quot;
+from pathlib import Path
+from itertools import combinations
+import argparse
+import hashlib
+import json
+import sympy as s
+
+CHECKS = 0
+
+
+def check(condition, message):
+    global CHECKS
+    CHECKS += 1
+    if not condition:
+        raise AssertionError(message)
+
+
+def clifford(q):
+    dim = 2**q
+    matrices = []
+    for i in range(q):
+        creation = s.zeros(dim)
+        for mask in range(dim):
+            if not (mask &gt;&gt; i) &amp; 1:
+                creation[mask | (1 &lt;&lt; i), mask] = (-1)**((mask &amp; ((1 &lt;&lt; i)-1)).bit_count())
+        matrices.extend((creation+creation.T, s.I*(creation-creation.T)))
+    return matrices
+
+
+def rotation(psi, gamma):
+    n = len(gamma)
+    return s.Matrix(n, n, lambda i, j: 0 if i == j else
+                    s.simplify(s.I*(psi.conjugate().T*gamma[i]*gamma[j]*psi)[0]))
+
+
+def variation(psi, tangent, gamma):
+    n = len(gamma)
+    return s.Matrix(n, n, lambda i, j: 0 if i == j else s.simplify(s.I*(
+        tangent.conjugate().T*gamma[i]*gamma[j]*psi+
+        psi.conjugate().T*gamma[i]*gamma[j]*tangent)[0]))
+
+
+def inner(x, y):
+    return s.simplify(s.trace(x.T*y))
+
+
+def fs_inner(psi, x, y):
+    return s.simplify(s.re((x.conjugate().T*y)[0]-
+                          (x.conjugate().T*psi)[0]*(psi.conjugate().T*y)[0]))
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    cases = []
+    for q in (2, 3, 4):
+        gamma = clifford(q)
+        dim = 2**q
+        eye = s.eye(dim)
+        vacuum = eye[:, 0]
+        j0 = rotation(vacuum, gamma)
+        check(j0*j0 == -s.eye(2*q), &#39;vacuum gives a full orthogonal normal structure&#39;)
+        for i in range(2*q):
+            for j in range(i, 2*q):
+                check(gamma[i]*gamma[j]+gamma[j]*gamma[i] ==
+                      (2*s.eye(dim) if i == j else s.zeros(dim)), &#39;exact Clifford relation&#39;)
+        pair_masks = [(1 &lt;&lt; i)+(1 &lt;&lt; j) for i, j in combinations(range(q), 2)]
+        tangents = [factor*eye[:, mask] for mask in pair_masks for factor in (1, s.I)]
+        derivatives = [variation(vacuum, tangent, gamma) for tangent in tangents]
+        gram = s.Matrix(len(tangents), len(tangents), lambda i, j: inner(derivatives[i], derivatives[j]))
+        check(gram == 16*s.eye(len(tangents)), &#39;normal metric is sixteen times horizontal ray metric&#39;)
+        for tangent, derivative in zip(tangents, derivatives):
+            check((vacuum.conjugate().T*tangent)[0] == 0, &#39;ray tangent is horizontal&#39;)
+            check(derivative.T == -derivative, &#39;normal variation remains skew&#39;)
+            check(derivative*j0+j0*derivative == s.zeros(2*q), &#39;pure ray variation is an orientation tangent&#39;)
+
+        # A nontrivial exact Spin rotation transports the metric certificate.
+        generator = (gamma[0]*gamma[2]-gamma[1]*gamma[3])/2
+        check(generator.conjugate().T == -generator, &#39;pair mixing is a Spin generator&#39;)
+        check(generator**3 == -generator, &#39;pair generator exact minimal polynomial&#39;)
+        unitary = s.eye(dim)+s.Rational(4, 5)*generator+s.Rational(2, 5)*generator**2
+        check(unitary.conjugate().T*unitary == s.eye(dim), &#39;rational Spin transport is unitary&#39;)
+        psi = unitary*vacuum
+        check((psi.conjugate().T*psi)[0] == 1, &#39;transported ray is normalized&#39;)
+        j = rotation(psi, gamma)
+        check(j*j == -s.eye(2*q), &#39;transported ray remains pure&#39;)
+        transported = [unitary*tangent for tangent in tangents]
+        varied = [variation(psi, tangent, gamma) for tangent in transported]
+        for i, x in enumerate(transported):
+            for k, y in enumerate(transported):
+                check(inner(varied[i], varied[k]) == 16*fs_inner(psi, x, y),
+                      &#39;metric homothety after a nontrivial Spin rotation&#39;)
+
+        full_chiral_ray_dimension = 2*(2**(q-1)-1)
+        pure_dimension = q*(q-1)
+        rank = gram.rank()
+        cases.append(dict(case=f&#39;normal-ray-rank-{q}&#39;, complex_normal_rank=q,
+                          ordinary_normal_directions=2*q,
+                          full_chiral_projective_real_dimension=full_chiral_ray_dimension,
+                          pure_orientation_dimension=pure_dimension,
+                          differential_rank_on_pure_orbit=rank,
+                          pure_metric_to_fs_ratio=16))
+        if q == 4:
+            top = eye[:, dim-1]
+            for tangent in (top, s.I*top):
+                check(variation(vacuum, tangent, gamma) == s.zeros(8),
+                      &#39;generic rank-four ray has an extra null metric direction&#39;)
+                check(fs_inner(vacuum, tangent, tangent) == 1,
+                      &#39;extra direction has nonzero projective kinetic norm&#39;)
+            psi_bad = (vacuum+top)/s.sqrt(2)
+            check(rotation(psi_bad, gamma) == s.zeros(8),
+                  &#39;rank-four chiral polarization need not supply any normal complex structure&#39;)
+            theta = s.symbols(&#39;theta&#39;, real=True)
+            psi_theta = s.cos(theta)*vacuum+s.sin(theta)*top
+            j_theta = rotation(psi_theta, gamma)
+            check(s.simplify(j_theta-s.cos(2*theta)*j0) == s.zeros(8),
+                  &#39;rank-four extra ray direction has exact cosine normal bilinear&#39;)
+            check(s.simplify(s.trace(s.eye(8)+j_theta*j_theta)-8*s.sin(2*theta)**2) == 0,
+                  &#39;unsquared purity deficit gives a quadratic restoring test&#39;)
+            deficit_squared = inner(s.eye(8)+j_theta*j_theta, s.eye(8)+j_theta*j_theta)
+            check(s.simplify(deficit_squared-8*s.sin(2*theta)**4) == 0,
+                  &#39;squared purity deficit begins quartically on the extra ray direction&#39;)
+    occupied = []
+    for d in (2, 3, 4, 5, 6, 10):
+        even = d if d % 2 == 0 else d+1
+        q = (10-even)//2
+        occupied.append(dict(real_depth=d, even_carrier=even, complex_normal_rank=q,
+                             has_nontrivial_normal_orientation=q &gt; 1,
+                             full_positive_chiral_ray_is_pure=q in (2, 3),
+                             pure_metric_to_fs_ratio=16 if q &gt; 1 else None,
+                             caveat=&#39;empty normal carrier&#39; if q == 0 else
+                             &#39;generic ray has two extra real directions&#39; if q == 4 else None))
+    report = dict(title=&#39;Chiral Ray and Ordinary Normal Rotation Kinetics&#39;,
+                  checks_passed=CHECKS, cases=cases, occupied_depths=occupied,
+                  sources={&#39;experiments/normal-ray-metric-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
+                  scope=&#39;Exact local geometric kinetic map on pure rays; no physical charge selection, particle state or absolute amplitude calibration&#39;)
+    args.report.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(checks_passed=CHECKS, cases=len(cases))))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

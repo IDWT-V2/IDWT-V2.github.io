@@ -1,0 +1,4780 @@
+{
+  "title": "Passive Hodge interference and causal return across all sectors",
+  "created_utc": "2026-10-09T22:24:37.132106+00:00",
+  "checks_passed": 11629,
+  "cases": [
+    {
+      "name": "complete-Hodge-passive-converter",
+      "real_depth": 2,
+      "parameters": {
+        "middle_degree": 1,
+        "oriented_blocks": 1
+      },
+      "measurements": {
+        "static_transmission": "zero",
+        "gain": "sin^2(Omega tau/2)",
+        "full_scattering_unitary_and_symmetric": true
+      }
+    },
+    {
+      "name": "complete-Hodge-passive-converter",
+      "real_depth": 4,
+      "parameters": {
+        "middle_degree": 2,
+        "oriented_blocks": 3
+      },
+      "measurements": {
+        "static_transmission": "unit gain",
+        "gain": "cos^2(Omega tau/2)",
+        "full_scattering_unitary_and_symmetric": true
+      }
+    },
+    {
+      "name": "complete-Hodge-passive-converter",
+      "real_depth": 6,
+      "parameters": {
+        "middle_degree": 3,
+        "oriented_blocks": 10
+      },
+      "measurements": {
+        "static_transmission": "zero",
+        "gain": "sin^2(Omega tau/2)",
+        "full_scattering_unitary_and_symmetric": true
+      }
+    },
+    {
+      "name": "complete-Hodge-passive-converter",
+      "real_depth": 8,
+      "parameters": {
+        "middle_degree": 4,
+        "oriented_blocks": 35
+      },
+      "measurements": {
+        "static_transmission": "unit gain",
+        "gain": "cos^2(Omega tau/2)",
+        "full_scattering_unitary_and_symmetric": true
+      }
+    },
+    {
+      "name": "complete-Hodge-passive-converter",
+      "real_depth": 10,
+      "parameters": {
+        "middle_degree": 5,
+        "oriented_blocks": 126
+      },
+      "measurements": {
+        "static_transmission": "zero",
+        "gain": "sin^2(Omega tau/2)",
+        "full_scattering_unitary_and_symmetric": true
+      }
+    },
+    {
+      "name": "complete-Hodge-passive-converter",
+      "real_depth": 12,
+      "parameters": {
+        "middle_degree": 6,
+        "oriented_blocks": 462
+      },
+      "measurements": {
+        "static_transmission": "unit gain",
+        "gain": "cos^2(Omega tau/2)",
+        "full_scattering_unitary_and_symmetric": true
+      }
+    },
+    {
+      "name": "causal-finite-pulse",
+      "real_depth": 2,
+      "parameters": {
+        "input_samples": 64,
+        "path_delays_samples": [
+          3,
+          10
+        ]
+      },
+      "measurements": {
+        "input_norm2": 193.7748373624459,
+        "output_norm2": 193.77483736244585,
+        "first_allowed_output_sample": 3
+      }
+    },
+    {
+      "name": "causal-finite-pulse",
+      "real_depth": 4,
+      "parameters": {
+        "input_samples": 64,
+        "path_delays_samples": [
+          3,
+          10
+        ]
+      },
+      "measurements": {
+        "input_norm2": 193.7748373624459,
+        "output_norm2": 193.77483736244585,
+        "first_allowed_output_sample": 3
+      }
+    },
+    {
+      "name": "causal-finite-pulse",
+      "real_depth": 6,
+      "parameters": {
+        "input_samples": 64,
+        "path_delays_samples": [
+          3,
+          10
+        ]
+      },
+      "measurements": {
+        "input_norm2": 193.7748373624459,
+        "output_norm2": 193.77483736244585,
+        "first_allowed_output_sample": 3
+      }
+    },
+    {
+      "name": "causal-finite-pulse",
+      "real_depth": 8,
+      "parameters": {
+        "input_samples": 64,
+        "path_delays_samples": [
+          3,
+          10
+        ]
+      },
+      "measurements": {
+        "input_norm2": 193.7748373624459,
+        "output_norm2": 193.77483736244585,
+        "first_allowed_output_sample": 3
+      }
+    },
+    {
+      "name": "causal-finite-pulse",
+      "real_depth": 10,
+      "parameters": {
+        "input_samples": 64,
+        "path_delays_samples": [
+          3,
+          10
+        ]
+      },
+      "measurements": {
+        "input_norm2": 193.7748373624459,
+        "output_norm2": 193.77483736244585,
+        "first_allowed_output_sample": 3
+      }
+    },
+    {
+      "name": "causal-finite-pulse",
+      "real_depth": 12,
+      "parameters": {
+        "input_samples": 64,
+        "path_delays_samples": [
+          3,
+          10
+        ]
+      },
+      "measurements": {
+        "input_norm2": 193.7748373624459,
+        "output_norm2": 193.77483736244585,
+        "first_allowed_output_sample": 3
+      }
+    },
+    {
+      "name": "positive-local-wave-action",
+      "real_depth": 2,
+      "parameters": {
+        "boundary_conditions": "P_minus u=0, P_plus outward_derivative u=0",
+        "wave_action": "1/2 sum integral[(u_t)^2-c^2(u_s)^2] ds dt",
+        "converter_maps": "Hadamard, star, star transpose"
+      },
+      "measurements": {
+        "boundary_energy_flux": "0",
+        "wave_energy_nonnegative": true,
+        "local_boundary_scattering_frequency_independent": true
+      }
+    },
+    {
+      "name": "positive-local-wave-action",
+      "real_depth": 4,
+      "parameters": {
+        "boundary_conditions": "P_minus u=0, P_plus outward_derivative u=0",
+        "wave_action": "1/2 sum integral[(u_t)^2-c^2(u_s)^2] ds dt",
+        "converter_maps": "Hadamard, star, star transpose"
+      },
+      "measurements": {
+        "boundary_energy_flux": "0",
+        "wave_energy_nonnegative": true,
+        "local_boundary_scattering_frequency_independent": true
+      }
+    },
+    {
+      "name": "positive-local-wave-action",
+      "real_depth": 6,
+      "parameters": {
+        "boundary_conditions": "P_minus u=0, P_plus outward_derivative u=0",
+        "wave_action": "1/2 sum integral[(u_t)^2-c^2(u_s)^2] ds dt",
+        "converter_maps": "Hadamard, star, star transpose"
+      },
+      "measurements": {
+        "boundary_energy_flux": "0",
+        "wave_energy_nonnegative": true,
+        "local_boundary_scattering_frequency_independent": true
+      }
+    },
+    {
+      "name": "positive-local-wave-action",
+      "real_depth": 8,
+      "parameters": {
+        "boundary_conditions": "P_minus u=0, P_plus outward_derivative u=0",
+        "wave_action": "1/2 sum integral[(u_t)^2-c^2(u_s)^2] ds dt",
+        "converter_maps": "Hadamard, star, star transpose"
+      },
+      "measurements": {
+        "boundary_energy_flux": "0",
+        "wave_energy_nonnegative": true,
+        "local_boundary_scattering_frequency_independent": true
+      }
+    },
+    {
+      "name": "positive-local-wave-action",
+      "real_depth": 10,
+      "parameters": {
+        "boundary_conditions": "P_minus u=0, P_plus outward_derivative u=0",
+        "wave_action": "1/2 sum integral[(u_t)^2-c^2(u_s)^2] ds dt",
+        "converter_maps": "Hadamard, star, star transpose"
+      },
+      "measurements": {
+        "boundary_energy_flux": "0",
+        "wave_energy_nonnegative": true,
+        "local_boundary_scattering_frequency_independent": true
+      }
+    },
+    {
+      "name": "positive-local-wave-action",
+      "real_depth": 12,
+      "parameters": {
+        "boundary_conditions": "P_minus u=0, P_plus outward_derivative u=0",
+        "wave_action": "1/2 sum integral[(u_t)^2-c^2(u_s)^2] ds dt",
+        "converter_maps": "Hadamard, star, star transpose"
+      },
+      "measurements": {
+        "boundary_energy_flux": "0",
+        "wave_energy_nonnegative": true,
+        "local_boundary_scattering_frequency_independent": true
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 5852,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -3.7719367823639603e-13,
+        "static_response": 0.0,
+        "total_response": -3.7719367823639603e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.331710102822144e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 5852,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -3.287770773953217e-13,
+        "static_response": 0.0,
+        "total_response": -3.287770773953217e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.8158761112328868e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 5852,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.1273441095073894e-14,
+        "static_response": 0.0,
+        "total_response": -1.1273441095073894e-14,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.990912474235366e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 5852,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -4.863039216183076e-13,
+        "static_response": 0.0,
+        "total_response": -4.863039216183076e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -2.4060766900302652e-14
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 5852,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -6.987617501300991e-14,
+        "static_response": 0.0,
+        "total_response": -6.987617501300991e-14,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.404885135056006e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 5852,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.3570241583736942e-17,
+        "static_response": 0.0,
+        "total_response": -1.3570241583736942e-17,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -5.103511182770266e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 5852,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.3553448377433387e-15,
+        "static_response": 0.0,
+        "total_response": -1.3553448377433387e-15,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -5.090093436808669e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 5852,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.216469355861518e-13,
+        "static_response": 0.0,
+        "total_response": -1.216469355861518e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -3.887177529324587e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 5852,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -5.024076316572435e-13,
+        "static_response": 0.0,
+        "total_response": -5.024076316572435e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -7.957056861367017e-15
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 5852,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -8.182147412080902e-45,
+        "static_response": 0.0,
+        "total_response": -8.182147412080902e-45,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -5.103646885186103e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 6642,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -3.772260108781726e-13,
+        "static_response": 0.0,
+        "total_response": -3.772260108781726e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.3318283189389078e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 6642,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -3.2880576937932165e-13,
+        "static_response": 0.0,
+        "total_response": -3.2880576937932165e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.8160307339274176e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 6642,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.1274720107421795e-14,
+        "static_response": 0.0,
+        "total_response": -1.1274720107421795e-14,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.991341226646416e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 6642,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -4.863441785311985e-13,
+        "static_response": 0.0,
+        "total_response": -4.863441785311985e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -2.406466424086481e-14
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 6642,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -6.988332363978811e-14,
+        "static_response": 0.0,
+        "total_response": -6.988332363978811e-14,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.405255191322754e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 6642,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.3571786600622028e-17,
+        "static_response": 0.0,
+        "total_response": -1.3571786600622028e-17,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -5.103952709854627e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 6642,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.3555064081079904e-15,
+        "static_response": 0.0,
+        "total_response": -1.3555064081079904e-15,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -5.090533363639556e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 6642,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.2165879481261494e-13,
+        "static_response": 0.0,
+        "total_response": -1.2165879481261494e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -3.887500479594485e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 6642,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -5.024490293577358e-13,
+        "static_response": 0.0,
+        "total_response": -5.024490293577358e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -7.959813414327799e-15
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 6642,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -8.17797953111318e-45,
+        "static_response": 0.0,
+        "total_response": -8.17797953111318e-45,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -5.104088427720636e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 9120,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -3.7729109264713694e-13,
+        "static_response": 0.0,
+        "total_response": -3.7729109264713694e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.3320662805334482e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 9120,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -3.2886352315377633e-13,
+        "static_response": 0.0,
+        "total_response": -3.2886352315377633e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.8163419754670542e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 9120,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.1277295383609362e-14,
+        "static_response": 0.0,
+        "total_response": -1.1277295383609362e-14,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.992204253168724e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 9120,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -4.864252104171541e-13,
+        "static_response": 0.0,
+        "total_response": -4.864252104171541e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -2.4072510283327593e-14
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 9120,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -6.989771407367598e-14,
+        "static_response": 0.0,
+        "total_response": -6.989771407367598e-14,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.406000066268058e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 9120,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.357495787501438e-17,
+        "static_response": 0.0,
+        "total_response": -1.357495787501438e-17,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -5.104841457426065e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 9120,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.3558319880775637e-15,
+        "static_response": 0.0,
+        "total_response": -1.3558319880775637e-15,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -5.091418887124042e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 9120,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.216826670427297e-13,
+        "static_response": 0.0,
+        "total_response": -1.216826670427297e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -3.888150536577521e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 9120,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -5.025323574392915e-13,
+        "static_response": 0.0,
+        "total_response": -5.025323574392915e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -7.965363261190314e-15
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 997976.8822172185,
+        "evaluated_harmonics": 9120,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -8.169383990969268e-45,
+        "static_response": 0.0,
+        "total_response": -8.169383990969268e-45,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -5.104977207004819e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 2,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -4.181748386985895e-13,
+        "static_response": 0.10833333333333334,
+        "total_response": 0.10833333333291516,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -6.528706193983969e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 2,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -8.546501000531025e-13,
+        "static_response": 0.10833333333333334,
+        "total_response": 0.10833333333247869,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -2.1639535804388395e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 2,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -2.7232687151448625e-15,
+        "static_response": 0.10833333333333334,
+        "total_response": 0.10833333333333062,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.0683221893818416e-12
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 2,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.0399319253817825e-12,
+        "static_response": 0.10833333333333334,
+        "total_response": 0.1083333333322934,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -3.111353271520383e-14
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 2,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -9.502066804808036e-13,
+        "static_response": 0.10833333333333334,
+        "total_response": 0.10833333333238312,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.208387776161829e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 2,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.0709383571212806e-12,
+        "static_response": 0.10833333333333334,
+        "total_response": 0.1083333333322624,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.0710097570578516e-16
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 2,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.0603706574632527e-12,
+        "static_response": 0.10833333333333334,
+        "total_response": 0.10833333333227296,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.0674800633733872e-14
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 2,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -3.1266663945587037e-13,
+        "static_response": 0.10833333333333334,
+        "total_response": 0.10833333333302067,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -7.58378818641116e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 2,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.0710454580969864e-12,
+        "static_response": 0.10833333333333334,
+        "total_response": 0.10833333333226229,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.0
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 2,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.0710454580969864e-12,
+        "static_response": 0.10833333333333334,
+        "total_response": 0.10833333333226229,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.0
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 40,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.2637955824714273e-11,
+        "static_response": 0.27600485263205243,
+        "total_response": 0.2760048526194145,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -3.0154617459503216e-12
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 40,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -9.68756750519526e-13,
+        "static_response": 0.27600485263205243,
+        "total_response": 0.27600485263108365,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.4684660820145073e-11
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 40,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -7.353089304607464e-12,
+        "static_response": 0.27600485263205243,
+        "total_response": 0.27600485262469937,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -8.300328266057129e-12
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 40,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -2.837205859165661e-13,
+        "static_response": 0.27600485263205243,
+        "total_response": 0.2760048526317687,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.536969698474803e-11
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 40,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.5178184352603383e-11,
+        "static_response": 0.27600485263205243,
+        "total_response": 0.27600485261687424,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.752332180612089e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 40,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.5652932765688437e-11,
+        "static_response": 0.27600485263205243,
+        "total_response": 0.2760048526163995,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.848049761504504e-16
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 40,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.560711359213046e-11,
+        "static_response": 0.27600485263205243,
+        "total_response": 0.2760048526164453,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.630397853412979e-14
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 40,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.1966631436144727e-11,
+        "static_response": 0.27600485263205243,
+        "total_response": 0.2760048526200858,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -3.6867861345198675e-12
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 40,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.7513431353461076e-13,
+        "static_response": 0.27600485263205243,
+        "total_response": 0.2760048526318773,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.5478283257129984e-11
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 170813.05451879982,
+        "evaluated_harmonics": 40,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.5653417570664593e-11,
+        "static_response": 0.27600485263205243,
+        "total_response": 0.276004852616399,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.0
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 30,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.910751877429685e-09,
+        "static_response": 0.270594078033031,
+        "total_response": 0.2705940761222791,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.393978525766115e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 30,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.4195191910497889e-08,
+        "static_response": 0.270594078033031,
+        "total_response": 0.27059406383783907,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.655345224592941e-09
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 30,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.5689018406111384e-08,
+        "static_response": 0.270594078033031,
+        "total_response": 0.27059406234401256,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.6151872897944744e-10
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 30,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -5.5674116460570914e-09,
+        "static_response": 0.270594078033031,
+        "total_response": 0.27059407246561934,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.028312548903374e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 30,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.4626614606631673e-09,
+        "static_response": 0.270594078033031,
+        "total_response": 0.27059407657036955,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.4387875674427666e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 30,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.5850025008463564e-08,
+        "static_response": 0.270594078033031,
+        "total_response": 0.27059406218300597,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -5.121266272735668e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 30,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.5801091566903484e-08,
+        "static_response": 0.270594078033031,
+        "total_response": 0.27059406223193944,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.94455681873467e-11
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 30,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.2126458096951478e-08,
+        "static_response": 0.270594078033031,
+        "total_response": 0.27059406590657287,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -3.7240790381393533e-09
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 30,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.599747142298157e-10,
+        "static_response": 0.270594078033031,
+        "total_response": 0.2705940778730563,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.5690562420861016e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 30,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.5850537135090832e-08,
+        "static_response": 0.270594078033031,
+        "total_response": 0.2705940621824938,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.0
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 17710,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -2.2609833062222726e-09,
+        "static_response": 0.29308896406801194,
+        "total_response": 0.29308896180702865,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.6040247178870276e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 17710,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.6358664791689055e-08,
+        "static_response": 0.29308896406801194,
+        "total_response": 0.2930889477093471,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.9425656934034833e-09
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 17710,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.8131457572427326e-08,
+        "static_response": 0.29308896406801194,
+        "total_response": 0.2930889459365544,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.6977291266521883e-10
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 17710,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -6.407659808445652e-09,
+        "static_response": 0.29308896406801194,
+        "total_response": 0.29308895766035215,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.1893570676646894e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 17710,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.7551920449820623e-09,
+        "static_response": 0.29308896406801194,
+        "total_response": 0.2930889623128199,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.6546038440110485e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 17710,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.8300743784623722e-08,
+        "static_response": 0.29308896406801194,
+        "total_response": 0.2930889457672681,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.867004688258153e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 17710,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.8252620010940965e-08,
+        "static_response": 0.29308896406801194,
+        "total_response": 0.2930889458153919,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.861047415157716e-11
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 17710,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.3938808476125905e-08,
+        "static_response": 0.29308896406801194,
+        "total_response": 0.29308895012920344,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -4.3624220089666405e-09
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 17710,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -2.8575059321623995e-10,
+        "static_response": 0.29308896406801194,
+        "total_response": 0.29308896378226135,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -1.8015479891876304e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 17710,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.830123048509254e-08,
+        "static_response": 0.29308896406801194,
+        "total_response": 0.29308894576678146,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.0
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -2.261644845061839e-09,
+        "static_response": 0.29312891590360324,
+        "total_response": 0.29312891364195837,
+        "absolute_omitted_tail_bound": 2.7214271004649436e-22,
+        "complementary_dynamic_response": -1.6043951856032234e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.636247219940233e-08,
+        "static_response": 0.29312891590360324,
+        "total_response": 0.293128899541131,
+        "absolute_omitted_tail_bound": 2.7214271004649436e-22,
+        "complementary_dynamic_response": -1.943124501691732e-09
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.8135769108605132e-08,
+        "static_response": 0.29312891590360324,
+        "total_response": 0.29312889776783413,
+        "absolute_omitted_tail_bound": 2.7214271004649436e-22,
+        "complementary_dynamic_response": -1.6982759248893555e-10
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -6.409167071373295e-09,
+        "static_response": 0.29312891590360324,
+        "total_response": 0.29312890949443615,
+        "absolute_omitted_tail_bound": 2.7214271004649436e-22,
+        "complementary_dynamic_response": -1.1896429629720767e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.7557532622582553e-09,
+        "static_response": 0.29312891590360324,
+        "total_response": 0.29312891414785,
+        "absolute_omitted_tail_bound": 2.7214271004649436e-22,
+        "complementary_dynamic_response": -1.6549843438835805e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.8305109837121546e-08,
+        "static_response": 0.29312891590360324,
+        "total_response": 0.2931288975984934,
+        "absolute_omitted_tail_bound": 2.7214271004649436e-22,
+        "complementary_dynamic_response": -4.868639725096772e-13
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.8256970176487278e-08,
+        "static_response": 0.29312891590360324,
+        "total_response": 0.2931288976466331,
+        "absolute_omitted_tail_bound": 2.7214271004649436e-22,
+        "complementary_dynamic_response": -4.862652460677604e-11
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.3942001809190756e-08,
+        "static_response": 0.29312891590360324,
+        "total_response": 0.2931289019616014,
+        "absolute_omitted_tail_bound": 2.7214271004649436e-22,
+        "complementary_dynamic_response": -4.363594891903303e-09
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -2.860234280392249e-10,
+        "static_response": 0.29312891590360324,
+        "total_response": 0.2931289156175798,
+        "absolute_omitted_tail_bound": 2.7214271004649436e-22,
+        "complementary_dynamic_response": -1.8019573273054833e-08
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 5271.40530590165,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": -1.8305596701094056e-08,
+        "static_response": 0.29312891590360324,
+        "total_response": 0.29312889759800653,
+        "absolute_omitted_tail_bound": 2.7214271004649436e-22,
+        "complementary_dynamic_response": 0.0
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 4004,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 3.348136516055707e-17,
+        "static_response": 0.0,
+        "total_response": 3.348136516055707e-17,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.2346799121449269
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 4004,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 3.3481365160468206e-15,
+        "static_response": 0.0,
+        "total_response": 3.3481365160468206e-15,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23467991214492354
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 4004,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 3.3481365151580953e-13,
+        "static_response": 0.0,
+        "total_response": 3.3481365151580953e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.2346799121445921
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 4004,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 3.3044782806867967e-12,
+        "static_response": 0.0,
+        "total_response": 3.3044782806867967e-12,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23467991214162245
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 4004,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.3217913017814001e-11,
+        "static_response": 0.0,
+        "total_response": 1.3217913017814001e-11,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23467991213170897
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 4004,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.0002467914593169156,
+        "static_response": 0.0,
+        "total_response": 0.0002467914593169156,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23443312068561
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 4004,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.0011060077292535135,
+        "static_response": 0.0,
+        "total_response": 0.0011060077292535135,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23357390441567336
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 4004,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.06311954098271687,
+        "static_response": 0.0,
+        "total_response": 0.06311954098271687,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.17156037116221015
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 4004,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.21984618459112762,
+        "static_response": 0.0,
+        "total_response": 0.21984618459112762,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.014833727553799308
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 4004,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 5.869620617735759e-29,
+        "static_response": 0.0,
+        "total_response": 5.869620617735759e-29,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23467991214492692
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 23256,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.9481418913073673e-16,
+        "static_response": 0.0,
+        "total_response": 1.9481418913073673e-16,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.234533965371597
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 23256,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.9481418911330062e-14,
+        "static_response": 0.0,
+        "total_response": 1.9481418911330062e-14,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23453396537157772
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 23256,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.9481418736968885e-12,
+        "static_response": 0.0,
+        "total_response": 1.9481418736968885e-12,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23453396536964904
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 23256,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.9227388068818893e-11,
+        "static_response": 0.0,
+        "total_response": 1.9227388068818893e-11,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23453396535236984
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 23256,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 7.690953168817223e-11,
+        "static_response": 0.0,
+        "total_response": 7.690953168817223e-11,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.2345339652946877
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 23256,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 5.720751279231804e-05,
+        "static_response": 0.0,
+        "total_response": 5.720751279231804e-05,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23447675785880487
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 23256,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.0009056112262889731,
+        "static_response": 0.0,
+        "total_response": 0.0009056112262889731,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23362835414530828
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 23256,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.06301728186115896,
+        "static_response": 0.0,
+        "total_response": 0.06301728186115896,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.17151668351043822
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 23256,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.21984688120512116,
+        "static_response": 0.0,
+        "total_response": 0.21984688120512116,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.01468708416647603
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 23256,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 4.244695643434696e-28,
+        "static_response": 0.0,
+        "total_response": 4.244695643434696e-28,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23453396537159718
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 131560,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.1024777707137203e-15,
+        "static_response": 0.0,
+        "total_response": 1.1024777707137203e-15,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.2345087835257126
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 131560,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.1024777675562541e-13,
+        "static_response": 0.0,
+        "total_response": 1.1024777675562541e-13,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23450878352560348
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 131560,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.1024774518096427e-11,
+        "static_response": 0.0,
+        "total_response": 1.1024774518096427e-11,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23450878351468893
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 131560,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.088098839102751e-10,
+        "static_response": 0.0,
+        "total_response": 1.088098839102751e-10,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23450878341690387
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 131560,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 4.352358075933923e-10,
+        "static_response": 0.0,
+        "total_response": 4.352358075933923e-10,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23450878309047793
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 131560,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.699542774527884e-05,
+        "static_response": 0.0,
+        "total_response": 1.699542774527884e-05,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.2344917880979685
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 131560,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.0008704743989318835,
+        "static_response": 0.0,
+        "total_response": 0.0008704743989318835,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23363830912678188
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 131560,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.06299971547416654,
+        "static_response": 0.0,
+        "total_response": 0.06299971547416654,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.1715090680515472
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 131560,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.21984690592594405,
+        "static_response": 0.0,
+        "total_response": 0.21984690592594405,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.014661877599769682
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 2.7813921180875695e-08,
+        "evaluated_harmonics": 131560,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 1.9160299935805396e-27,
+        "static_response": 0.0,
+        "total_response": 1.9160299935805396e-27,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.23450878352571372
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 37128,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 7.495846598508634e-06,
+        "static_response": 0.0,
+        "total_response": 7.495846598508634e-06,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.37694515913040977
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 37128,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.0007499141425817409,
+        "static_response": 0.0,
+        "total_response": 0.0007499141425817409,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.3762027408344265
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 37128,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.07537727465645194,
+        "static_response": 0.0,
+        "total_response": 0.07537727465645194,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.30157538032055636
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 37128,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.39897599349431967,
+        "static_response": 0.0,
+        "total_response": 0.39897599349431967,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -0.022023338517311322
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 37128,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 4.4839139419965855e-33,
+        "static_response": 0.0,
+        "total_response": 4.4839139419965855e-33,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.37695265497700825
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 37128,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 7.495846598508634e-06,
+        "static_response": 0.0,
+        "total_response": 7.495846598508634e-06,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.37694515913040977
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 37128,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.0007499141425817409,
+        "static_response": 0.0,
+        "total_response": 0.0007499141425817409,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.3762027408344265
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 37128,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.07537727465645194,
+        "static_response": 0.0,
+        "total_response": 0.07537727465645194,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.30157538032055636
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 37128,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.39897599349431967,
+        "static_response": 0.0,
+        "total_response": 0.39897599349431967,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": -0.022023338517311322
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 37128,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 4.4839139419965855e-33,
+        "static_response": 0.0,
+        "total_response": 4.4839139419965855e-33,
+        "absolute_omitted_tail_bound": 0.0,
+        "complementary_dynamic_response": 0.37695265497700825
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 7.495387344671748e-06,
+        "static_response": 0.0,
+        "total_response": 7.495387344671748e-06,
+        "absolute_omitted_tail_bound": 2.3946312986543502e-15,
+        "complementary_dynamic_response": 0.3769773041080603
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.0007498735372741244,
+        "static_response": 0.0,
+        "total_response": 0.0007498735372741244,
+        "absolute_omitted_tail_bound": 2.3946312986543502e-15,
+        "complementary_dynamic_response": 0.3762349259581308
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.07537931789826705,
+        "static_response": 0.0,
+        "total_response": 0.07537931789826705,
+        "absolute_omitted_tail_bound": 2.3946312986543502e-15,
+        "complementary_dynamic_response": 0.30160548159713796
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.39901783506688193,
+        "static_response": 0.0,
+        "total_response": 0.39901783506688193,
+        "absolute_omitted_tail_bound": 2.3946312986543502e-15,
+        "complementary_dynamic_response": -0.022033035571477008
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 4.487853267952695e-33,
+        "static_response": 0.0,
+        "total_response": 4.487853267952695e-33,
+        "absolute_omitted_tail_bound": 2.3946312986543502e-15,
+        "complementary_dynamic_response": 0.3769847994954048
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 7.495387344671748e-06,
+        "static_response": 0.0,
+        "total_response": 7.495387344671748e-06,
+        "absolute_omitted_tail_bound": 2.3946312986543502e-15,
+        "complementary_dynamic_response": 0.3769773041080603
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.0007498735372741244,
+        "static_response": 0.0,
+        "total_response": 0.0007498735372741244,
+        "absolute_omitted_tail_bound": 2.3946312986543502e-15,
+        "complementary_dynamic_response": 0.3762349259581308
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.07537931789826705,
+        "static_response": 0.0,
+        "total_response": 0.07537931789826705,
+        "absolute_omitted_tail_bound": 2.3946312986543502e-15,
+        "complementary_dynamic_response": 0.30160548159713796
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.39901783506688193,
+        "static_response": 0.0,
+        "total_response": 0.39901783506688193,
+        "absolute_omitted_tail_bound": 2.3946312986543502e-15,
+        "complementary_dynamic_response": -0.022033035571477008
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 4.487853267952695e-33,
+        "static_response": 0.0,
+        "total_response": 4.487853267952695e-33,
+        "absolute_omitted_tail_bound": 2.3946312986543502e-15,
+        "complementary_dynamic_response": 0.3769847994954048
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 7.495385192794237e-06,
+        "static_response": 0.0,
+        "total_response": 7.495385192794237e-06,
+        "absolute_omitted_tail_bound": 1.4247691447170004e-16,
+        "complementary_dynamic_response": 0.3769774510344174
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.0007498733511954232,
+        "static_response": 0.0,
+        "total_response": 0.0007498733511954232,
+        "absolute_omitted_tail_bound": 1.4247691447170004e-16,
+        "complementary_dynamic_response": 0.3762350730684148
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.07537932723452358,
+        "static_response": 0.0,
+        "total_response": 0.07537932723452358,
+        "absolute_omitted_tail_bound": 1.4247691447170004e-16,
+        "complementary_dynamic_response": 0.30160561918508655
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.3990180263184901,
+        "static_response": 0.0,
+        "total_response": 0.3990180263184901,
+        "absolute_omitted_tail_bound": 1.4247691447170004e-16,
+        "complementary_dynamic_response": -0.022033079898879874
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 4.4878511245754985e-33,
+        "static_response": 0.0,
+        "total_response": 4.4878511245754985e-33,
+        "absolute_omitted_tail_bound": 1.4247691447170004e-16,
+        "complementary_dynamic_response": 0.3769849464196102
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.01,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 7.495385192794237e-06,
+        "static_response": 0.0,
+        "total_response": 7.495385192794237e-06,
+        "absolute_omitted_tail_bound": 1.4247691447170004e-16,
+        "complementary_dynamic_response": 0.3769774510344174
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.0007498733511954232,
+        "static_response": 0.0,
+        "total_response": 0.0007498733511954232,
+        "absolute_omitted_tail_bound": 1.4247691447170004e-16,
+        "complementary_dynamic_response": 0.3762350730684148
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.07537932723452358,
+        "static_response": 0.0,
+        "total_response": 0.07537932723452358,
+        "absolute_omitted_tail_bound": 1.4247691447170004e-16,
+        "complementary_dynamic_response": 0.30160561918508655
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 3.141592653589793,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 0.3990180263184901,
+        "static_response": 0.0,
+        "total_response": 0.3990180263184901,
+        "absolute_omitted_tail_bound": 1.4247691447170004e-16,
+        "complementary_dynamic_response": -0.022033079898879874
+      }
+    },
+    {
+      "name": "all-sector-passive-sawtooth",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 6.283185307179586,
+        "fundamental_ratio": 1.0,
+        "evaluated_harmonics": 65536,
+        "receiver": "(3/(2-Omega^2)+2/(3-Omega^2))/5",
+        "quantity_is_forward_receiver_diagnostic": true
+      },
+      "measurements": {
+        "dynamic_response": 4.4878511245754985e-33,
+        "static_response": 0.0,
+        "total_response": 4.4878511245754985e-33,
+        "absolute_omitted_tail_bound": 1.4247691447170004e-16,
+        "complementary_dynamic_response": 0.3769849464196102
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 0.0,
+        "common_DC_phase_offset": 0.0
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 0.0,
+        "neutrino_limiting_DC_response": 0.0
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 0.0,
+        "common_DC_phase_offset": 1e-08
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 2.5000000000000003e-17,
+        "neutrino_limiting_DC_response": 7.3282302282525e-18
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 0.0,
+        "common_DC_phase_offset": 1e-05
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 2.4999999999791668e-11,
+        "neutrino_limiting_DC_response": 7.32823022819143e-12
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 0.0,
+        "common_DC_phase_offset": 0.01
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 2.4999791667361107e-05,
+        "neutrino_limiting_DC_response": 7.328169159870824e-06
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 1e-08,
+        "common_DC_phase_offset": 0.0
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 9.999999989472883e-17,
+        "neutrino_limiting_DC_response": 2.9312920882151935e-17
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 1e-08,
+        "common_DC_phase_offset": 1e-08
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 1.2499999939472883e-16,
+        "neutrino_limiting_DC_response": 3.664115096383983e-17
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 1e-08,
+        "common_DC_phase_offset": 1e-05
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 2.5000099999791606e-11,
+        "neutrino_limiting_DC_response": 7.328259541112325e-12
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 1e-08,
+        "common_DC_phase_offset": 0.01
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 2.4999791667461098e-05,
+        "neutrino_limiting_DC_response": 7.3281691599001335e-06
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 1e-05,
+        "common_DC_phase_offset": 0.0
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 1.0000000000020001e-10,
+        "neutrino_limiting_DC_response": 2.931292091306862e-11
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 1e-05,
+        "common_DC_phase_offset": 1e-08
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 1.0000002499970004e-10,
+        "neutrino_limiting_DC_response": 2.93129282411523e-11
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 1e-05,
+        "common_DC_phase_offset": 1e-05
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 1.2499999999698196e-10,
+        "neutrino_limiting_DC_response": 3.664115114037782e-11
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 1e-05,
+        "common_DC_phase_offset": 0.01
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 2.499989166486113e-05,
+        "neutrino_limiting_DC_response": 7.32819847205892e-06
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 0.01,
+        "common_DC_phase_offset": 0.0
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 0.00010000000000000018,
+        "neutrino_limiting_DC_response": 2.9312920913010048e-05
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 0.01,
+        "common_DC_phase_offset": 1e-08
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 0.00010000000000002467,
+        "neutrino_limiting_DC_response": 2.9312920913017224e-05
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 0.01,
+        "common_DC_phase_offset": 1e-05
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 0.00010000002499749978,
+        "neutrino_limiting_DC_response": 2.9312928240507333e-05
+      }
+    },
+    {
+      "name": "coherent-path-robustness",
+      "parameters": {
+        "common_amplitude_imbalance": 0.01,
+        "common_DC_phase_offset": 0.01
+      },
+      "measurements": {
+        "odd_channel_DC_gain": 0.00012499729168819414,
+        "neutrino_limiting_DC_response": 3.664035725596476e-05
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.5500898983813362,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.25631556532586475,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.5214947956356,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.2431312950418135,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.2167247255294731,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 76,
+      "basis_cutoff": 2926,
+      "parameters": {
+        "particle": "W",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451206612226426,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.5500857582756539,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.25631556532586475,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.5215206288110049,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.2431312950418135,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.21683668515202204,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 81,
+      "basis_cutoff": 3321,
+      "parameters": {
+        "particle": "Z",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451235179780918,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.550073920711199,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.25631556532586475,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.521576101236813,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.2431312950418135,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.21688213733092834,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 2,
+      "mode_index": 95,
+      "basis_cutoff": 4560,
+      "parameters": {
+        "particle": "Higgs",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451365383423604,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 1,
+        "three_mode_volume_exists": false,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 4.7471385395808156e-05,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.02311695088312296,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.033446338876588814,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.12387303588623869,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.3101640472201508,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.8937720258664381,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 3,
+      "mode_index": 1,
+      "basis_cutoff": 1,
+      "parameters": {
+        "particle": "down",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.14275059640760546,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.29717728328626813,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.05066914892485228,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.02311695088312296,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.25668257672736955,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.12387303588623869,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 1.8838470379094034,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.8937720258664381,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 3,
+      "mode_index": 4,
+      "basis_cutoff": 20,
+      "parameters": {
+        "particle": "strange",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.6141847105258396,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.29717728328626813,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8985945293601614,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.4673248621391434,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 1.5575202816948015,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.8092167214010848,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 1.9689871132536998,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.8937720258664381,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 3,
+      "basis_cutoff": 15,
+      "parameters": {
+        "particle": "up",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.5764123921265174,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.29717728328626813,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 1.0028163311666738,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.4673248621391434,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 1.736440056107167,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.8092167214010848,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 1.9178814646743874,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.8937720258664381,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 20,
+      "basis_cutoff": 8855,
+      "parameters": {
+        "particle": "charm",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.6377151221493166,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.29717728328626813,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 1.002859536494735,
+        "rigorous_large_cutoff_approximation_bound": 0.03924347191082718,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.4673248621391434,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 1.7365451143201798,
+        "rigorous_large_cutoff_approximation_bound": 0.03924347191082718,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.8092167214010848,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 1.9179972481872787,
+        "rigorous_large_cutoff_approximation_bound": 0.03924347191082718,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.8937720258664381,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 4,
+      "mode_index": 72,
+      "basis_cutoff": 1215450,
+      "parameters": {
+        "particle": "top",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.6377299748381362,
+        "rigorous_large_cutoff_approximation_bound": 0.03924347191082718,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.29717728328626813,
+        "mode_rank": 3,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": false
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 6.395581589623268e-38,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 3.098706121663046e-09,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 6.395581588099361e-32,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 3.0987060475906326e-08,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.21666076486826055,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 10,
+      "basis_cutoff": 2002,
+      "parameters": {
+        "particle": "nu1",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8450982550697348,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 4.228852190246839e-34,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 3.098706121663046e-09,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 4.228852156276735e-28,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 3.0987060475906326e-08,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.21704786973050846,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 15,
+      "basis_cutoff": 11628,
+      "parameters": {
+        "particle": "nu2",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451526473225833,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 2.450136713635874e-30,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 3.098706121663046e-09,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 2.4501360838493375e-24,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 3.0987060475906326e-08,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.2171207947602131,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 5,
+      "mode_index": 22,
+      "basis_cutoff": 65780,
+      "parameters": {
+        "particle": "nu3",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451616070128833,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.2170776159138766,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451566573963114,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.2170776159138766,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 6,
+      "mode_index": 13,
+      "basis_cutoff": 18564,
+      "parameters": {
+        "particle": "electron",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451566573963114,
+        "rigorous_large_cutoff_approximation_bound": 0.0,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.21713696234484423,
+        "rigorous_large_cutoff_approximation_bound": 0.021482345924343726,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451635261282459,
+        "rigorous_large_cutoff_approximation_bound": 0.021482345924343726,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.21713696234484423,
+        "rigorous_large_cutoff_approximation_bound": 0.021482345924343726,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 6,
+      "mode_index": 35,
+      "basis_cutoff": 3838380,
+      "parameters": {
+        "particle": "muon",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451635261282459,
+        "rigorous_large_cutoff_approximation_bound": 0.021482345924343726,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 10,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.21713696234484423,
+        "rigorous_large_cutoff_approximation_bound": 0.005097438502909021,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 126,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "common-receiver-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451635261282459,
+        "rigorous_large_cutoff_approximation_bound": 0.005097438502909021,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 126,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 0.1,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.21713696234484423,
+        "rigorous_large_cutoff_approximation_bound": 0.005097438502909021,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.10118416119150046,
+        "mode_rank": 126,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    },
+    {
+      "name": "finite-delay-color-volume-control",
+      "real_depth": 10,
+      "mode_index": 23,
+      "basis_cutoff": 64512240,
+      "parameters": {
+        "particle": "tau",
+        "delay_law": "source-fundamental-delay",
+        "shared_eta": 1.0,
+        "preparation": "three equal-frequency equal-phase patterns with nonzero mode volume",
+        "this_is_a_control_not_synchronization_of_unlike_particles": true
+      },
+      "measurements": {
+        "sixth_waveform_moment": 0.8451635261282459,
+        "rigorous_large_cutoff_approximation_bound": 0.005097438502909021,
+        "limiting_unfiltered_reference": 2.145958021373447,
+        "limiting_filtered_reference_ratio": 0.3938397292540364,
+        "mode_rank": 126,
+        "three_mode_volume_exists": true,
+        "instantaneous_H_strict_volume_zero": true
+      }
+    }
+  ],
+  "fundamental_ratios": {
+    "2": 997976.8822172185,
+    "3": 170813.05451879982,
+    "4": 5271.40530590165,
+    "5": 2.7813921180875695e-08,
+    "6": 1.0,
+    "10": 1.0
+  },
+  "scope": "Conditional same-field modal network, not particle simulations or derived measured forces.",
+  "physical_premises": [
+    "coherent equal-weight orientation paths",
+    "raw unphased spatial Hodge contact",
+    "selected transmission port before lower-dimensional readout",
+    "prepared finite sawtooth density source",
+    "fixed source orientation and common receiver"
+  ],
+  "limitations": [
+    "Forward gain-weighted receiver sum is not a retarded roundtrip force kernel.",
+    "Seven/eight and eleven/twelve are active static higher-rank controls.",
+    "Source-relative delays can remove neutrino slow-clock suppression.",
+    "Replacing the instantaneous color filter by its delayed transfer generally restores higher-sector volume interactions.",
+    "Complementary modes retain energy and may support other interactions."
+  ],
+  "sources": {
+    "experiments/passive-hodge-transfer-checks.py": "85678c627ef1ca35fb066425ff2287d90e0fbf70acd271022098c9d0669d4dbe",
+    "experiments/sawtooth-sector-coupling-checks.py": "4b76b045f19240c04e8cf1be656643d8594a68423dd1292d29624e5106e584b9"
+  }
+}

@@ -1,0 +1,1500 @@
+{
+  "experiment": "bending-clock",
+  "created_utc": "2026-10-10T01:07:21.884090+00:00",
+  "status": "passed",
+  "checks": 635,
+  "check_counts": {
+    "exact positive stiffness determinant": 1,
+    "static Schur bending stiffness": 1,
+    "static inverse fourth plus second order": 1,
+    "full frequency Schur complement": 1,
+    "exact matched branch frequency": 2,
+    "exact carrier independent branch gap": 1,
+    "exact branch frequency product": 1,
+    "common finite group velocity": 1,
+    "equal branch group velocities": 1,
+    "canonical density vertex retains carrier suppression": 1,
+    "canonical velocity current vertex exactly one half": 1,
+    "unmatched exact gap squared": 1,
+    "unmatched frequency product determinant": 1,
+    "first order spatial Clifford square": 1,
+    "first order mass Clifford square": 1,
+    "first order Clifford anticommutation": 1,
+    "clock polarization involution": 1,
+    "exact Dirac plus clock decomposition": 1,
+    "clock polarization commutes with full first order operator": 1,
+    "exact Dirac dispersion factorization": 1,
+    "full spatial Clifford and mass commutant dimension": 6,
+    "ordinary fixed clock plane compatibility": 6,
+    "independent full modal eigenvalues": 42,
+    "full positive kinetic branch": 42,
+    "integrated identity readout has no gap beat": 42,
+    "displacement source gap coefficient": 42,
+    "shear source adds squared wave number": 42,
+    "independent canonical density source normalization": 42,
+    "independent canonical velocity vertex universal": 42,
+    "gap vertex bounded and nonzero": 42,
+    "both group velocities below characteristic speed": 42,
+    "total conserved current has no branch beat": 42,
+    "full canonical velocity current fundamental coefficient": 42,
+    "full canonical branch energy has no beat": 42,
+    "unmatched speeds remain positive": 20,
+    "independent unequal speed gap identity": 20,
+    "matched control constant gap": 4,
+    "full spatial longitudinal and transverse spectrum": 6,
+    "full spatial q static fourth order response": 6,
+    "longitudinal shear vertex cancels static fourth order pole": 6,
+    "rotation vertex has only second order pole": 6,
+    "assigned adjacent branch exact square": 14,
+    "assigned gap vertex saturation identity": 14,
+    "down endpoint has no paired dynamic gap source": 1,
+    "two sphere exact adjacent ladder identity": 1
+  },
+  "scope": "Positive local coupled displacement/rotation inverse action. Equal characteristic speeds give a constant branch gap; actual IDWT carrier, vertex, spatial selection and confinement are not derived.",
+  "numerical_cases": [
+    {
+      "real_depth": 2,
+      "wave_number_in_clock_units": 0.001,
+      "upper_frequency_over_clock": 1.000000999999,
+      "lower_frequency_over_clock": 9.99999000002e-07,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.0009999980000060004,
+      "shear_source_vertex": 9.999979997357402e-10,
+      "group_velocity_over_c": 0.0019999960000120004,
+      "canonical_density_vertex": 0.4999990000030002,
+      "canonical_velocity_current_vertex": 0.5000000000000002
+    },
+    {
+      "real_depth": 2,
+      "wave_number_in_clock_units": 0.03,
+      "upper_frequency_over_clock": 1.0008991914547276,
+      "lower_frequency_over_clock": 0.0008991914547277447,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.02994614536397336,
+      "shear_source_vertex": 2.695153082757055e-05,
+      "group_velocity_over_c": 0.059892290727946725,
+      "canonical_density_vertex": 0.49910242273288935,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 2,
+      "wave_number_in_clock_units": 0.2,
+      "upper_frequency_over_clock": 1.0385164807134504,
+      "lower_frequency_over_clock": 0.03851648071345041,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.18569533817705192,
+      "shear_source_vertex": 0.007427813527082072,
+      "group_velocity_over_c": 0.37139067635410367,
+      "canonical_density_vertex": 0.46423834544262976,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 2,
+      "wave_number_in_clock_units": 1.0,
+      "upper_frequency_over_clock": 1.618033988749895,
+      "lower_frequency_over_clock": 0.6180339887498948,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4472135954999578,
+      "shear_source_vertex": 0.447213595499958,
+      "group_velocity_over_c": 0.8944271909999159,
+      "canonical_density_vertex": 0.22360679774997894,
+      "canonical_velocity_current_vertex": 0.49999999999999994
+    },
+    {
+      "real_depth": 2,
+      "wave_number_in_clock_units": 3.0,
+      "upper_frequency_over_clock": 3.5413812651491097,
+      "lower_frequency_over_clock": 2.54138126514911,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.49319696191607193,
+      "shear_source_vertex": 4.438772657244646,
+      "group_velocity_over_c": 0.9863939238321437,
+      "canonical_density_vertex": 0.08219949365267866,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 2,
+      "wave_number_in_clock_units": 20.0,
+      "upper_frequency_over_clock": 20.506249023742555,
+      "lower_frequency_over_clock": 19.50624902374256,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4998438232040614,
+      "shear_source_vertex": 199.93752928162456,
+      "group_velocity_over_c": 0.9996876464081228,
+      "canonical_density_vertex": 0.012496095580101535,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 2,
+      "wave_number_in_clock_units": 1000.0,
+      "upper_frequency_over_clock": 1000.5001249999922,
+      "lower_frequency_over_clock": 999.5001249999922,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4999999375000117,
+      "shear_source_vertex": 499999.93750001164,
+      "group_velocity_over_c": 0.9999998750000234,
+      "canonical_density_vertex": 0.0002499999687500059,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 3,
+      "wave_number_in_clock_units": 0.001,
+      "upper_frequency_over_clock": 1.000000999999,
+      "lower_frequency_over_clock": 9.99999000002e-07,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.0009999980000060004,
+      "shear_source_vertex": 9.999979997357402e-10,
+      "group_velocity_over_c": 0.0019999960000120004,
+      "canonical_density_vertex": 0.4999990000030002,
+      "canonical_velocity_current_vertex": 0.5000000000000002
+    },
+    {
+      "real_depth": 3,
+      "wave_number_in_clock_units": 0.03,
+      "upper_frequency_over_clock": 1.0008991914547276,
+      "lower_frequency_over_clock": 0.0008991914547277447,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.02994614536397336,
+      "shear_source_vertex": 2.695153082757055e-05,
+      "group_velocity_over_c": 0.059892290727946725,
+      "canonical_density_vertex": 0.49910242273288935,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 3,
+      "wave_number_in_clock_units": 0.2,
+      "upper_frequency_over_clock": 1.0385164807134504,
+      "lower_frequency_over_clock": 0.03851648071345041,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.18569533817705192,
+      "shear_source_vertex": 0.007427813527082072,
+      "group_velocity_over_c": 0.37139067635410367,
+      "canonical_density_vertex": 0.46423834544262976,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 3,
+      "wave_number_in_clock_units": 1.0,
+      "upper_frequency_over_clock": 1.618033988749895,
+      "lower_frequency_over_clock": 0.6180339887498948,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4472135954999578,
+      "shear_source_vertex": 0.447213595499958,
+      "group_velocity_over_c": 0.8944271909999159,
+      "canonical_density_vertex": 0.22360679774997894,
+      "canonical_velocity_current_vertex": 0.49999999999999994
+    },
+    {
+      "real_depth": 3,
+      "wave_number_in_clock_units": 3.0,
+      "upper_frequency_over_clock": 3.5413812651491097,
+      "lower_frequency_over_clock": 2.54138126514911,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.49319696191607193,
+      "shear_source_vertex": 4.438772657244646,
+      "group_velocity_over_c": 0.9863939238321437,
+      "canonical_density_vertex": 0.08219949365267866,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 3,
+      "wave_number_in_clock_units": 20.0,
+      "upper_frequency_over_clock": 20.506249023742555,
+      "lower_frequency_over_clock": 19.50624902374256,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4998438232040614,
+      "shear_source_vertex": 199.93752928162456,
+      "group_velocity_over_c": 0.9996876464081228,
+      "canonical_density_vertex": 0.012496095580101535,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 3,
+      "wave_number_in_clock_units": 1000.0,
+      "upper_frequency_over_clock": 1000.5001249999922,
+      "lower_frequency_over_clock": 999.5001249999922,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4999999375000117,
+      "shear_source_vertex": 499999.93750001164,
+      "group_velocity_over_c": 0.9999998750000234,
+      "canonical_density_vertex": 0.0002499999687500059,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 4,
+      "wave_number_in_clock_units": 0.001,
+      "upper_frequency_over_clock": 1.000000999999,
+      "lower_frequency_over_clock": 9.99999000002e-07,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.0009999980000060004,
+      "shear_source_vertex": 9.999979997357402e-10,
+      "group_velocity_over_c": 0.0019999960000120004,
+      "canonical_density_vertex": 0.4999990000030002,
+      "canonical_velocity_current_vertex": 0.5000000000000002
+    },
+    {
+      "real_depth": 4,
+      "wave_number_in_clock_units": 0.03,
+      "upper_frequency_over_clock": 1.0008991914547276,
+      "lower_frequency_over_clock": 0.0008991914547277447,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.02994614536397336,
+      "shear_source_vertex": 2.695153082757055e-05,
+      "group_velocity_over_c": 0.059892290727946725,
+      "canonical_density_vertex": 0.49910242273288935,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 4,
+      "wave_number_in_clock_units": 0.2,
+      "upper_frequency_over_clock": 1.0385164807134504,
+      "lower_frequency_over_clock": 0.03851648071345041,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.18569533817705192,
+      "shear_source_vertex": 0.007427813527082072,
+      "group_velocity_over_c": 0.37139067635410367,
+      "canonical_density_vertex": 0.46423834544262976,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 4,
+      "wave_number_in_clock_units": 1.0,
+      "upper_frequency_over_clock": 1.618033988749895,
+      "lower_frequency_over_clock": 0.6180339887498948,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4472135954999578,
+      "shear_source_vertex": 0.447213595499958,
+      "group_velocity_over_c": 0.8944271909999159,
+      "canonical_density_vertex": 0.22360679774997894,
+      "canonical_velocity_current_vertex": 0.49999999999999994
+    },
+    {
+      "real_depth": 4,
+      "wave_number_in_clock_units": 3.0,
+      "upper_frequency_over_clock": 3.5413812651491097,
+      "lower_frequency_over_clock": 2.54138126514911,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.49319696191607193,
+      "shear_source_vertex": 4.438772657244646,
+      "group_velocity_over_c": 0.9863939238321437,
+      "canonical_density_vertex": 0.08219949365267866,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 4,
+      "wave_number_in_clock_units": 20.0,
+      "upper_frequency_over_clock": 20.506249023742555,
+      "lower_frequency_over_clock": 19.50624902374256,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4998438232040614,
+      "shear_source_vertex": 199.93752928162456,
+      "group_velocity_over_c": 0.9996876464081228,
+      "canonical_density_vertex": 0.012496095580101535,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 4,
+      "wave_number_in_clock_units": 1000.0,
+      "upper_frequency_over_clock": 1000.5001249999922,
+      "lower_frequency_over_clock": 999.5001249999922,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4999999375000117,
+      "shear_source_vertex": 499999.93750001164,
+      "group_velocity_over_c": 0.9999998750000234,
+      "canonical_density_vertex": 0.0002499999687500059,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 5,
+      "wave_number_in_clock_units": 0.001,
+      "upper_frequency_over_clock": 1.000000999999,
+      "lower_frequency_over_clock": 9.99999000002e-07,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.0009999980000060004,
+      "shear_source_vertex": 9.999979997357402e-10,
+      "group_velocity_over_c": 0.0019999960000120004,
+      "canonical_density_vertex": 0.4999990000030002,
+      "canonical_velocity_current_vertex": 0.5000000000000002
+    },
+    {
+      "real_depth": 5,
+      "wave_number_in_clock_units": 0.03,
+      "upper_frequency_over_clock": 1.0008991914547276,
+      "lower_frequency_over_clock": 0.0008991914547277447,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.02994614536397336,
+      "shear_source_vertex": 2.695153082757055e-05,
+      "group_velocity_over_c": 0.059892290727946725,
+      "canonical_density_vertex": 0.49910242273288935,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 5,
+      "wave_number_in_clock_units": 0.2,
+      "upper_frequency_over_clock": 1.0385164807134504,
+      "lower_frequency_over_clock": 0.03851648071345041,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.18569533817705192,
+      "shear_source_vertex": 0.007427813527082072,
+      "group_velocity_over_c": 0.37139067635410367,
+      "canonical_density_vertex": 0.46423834544262976,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 5,
+      "wave_number_in_clock_units": 1.0,
+      "upper_frequency_over_clock": 1.618033988749895,
+      "lower_frequency_over_clock": 0.6180339887498948,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4472135954999578,
+      "shear_source_vertex": 0.447213595499958,
+      "group_velocity_over_c": 0.8944271909999159,
+      "canonical_density_vertex": 0.22360679774997894,
+      "canonical_velocity_current_vertex": 0.49999999999999994
+    },
+    {
+      "real_depth": 5,
+      "wave_number_in_clock_units": 3.0,
+      "upper_frequency_over_clock": 3.5413812651491097,
+      "lower_frequency_over_clock": 2.54138126514911,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.49319696191607193,
+      "shear_source_vertex": 4.438772657244646,
+      "group_velocity_over_c": 0.9863939238321437,
+      "canonical_density_vertex": 0.08219949365267866,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 5,
+      "wave_number_in_clock_units": 20.0,
+      "upper_frequency_over_clock": 20.506249023742555,
+      "lower_frequency_over_clock": 19.50624902374256,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4998438232040614,
+      "shear_source_vertex": 199.93752928162456,
+      "group_velocity_over_c": 0.9996876464081228,
+      "canonical_density_vertex": 0.012496095580101535,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 5,
+      "wave_number_in_clock_units": 1000.0,
+      "upper_frequency_over_clock": 1000.5001249999922,
+      "lower_frequency_over_clock": 999.5001249999922,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4999999375000117,
+      "shear_source_vertex": 499999.93750001164,
+      "group_velocity_over_c": 0.9999998750000234,
+      "canonical_density_vertex": 0.0002499999687500059,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 6,
+      "wave_number_in_clock_units": 0.001,
+      "upper_frequency_over_clock": 1.000000999999,
+      "lower_frequency_over_clock": 9.99999000002e-07,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.0009999980000060004,
+      "shear_source_vertex": 9.999979997357402e-10,
+      "group_velocity_over_c": 0.0019999960000120004,
+      "canonical_density_vertex": 0.4999990000030002,
+      "canonical_velocity_current_vertex": 0.5000000000000002
+    },
+    {
+      "real_depth": 6,
+      "wave_number_in_clock_units": 0.03,
+      "upper_frequency_over_clock": 1.0008991914547276,
+      "lower_frequency_over_clock": 0.0008991914547277447,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.02994614536397336,
+      "shear_source_vertex": 2.695153082757055e-05,
+      "group_velocity_over_c": 0.059892290727946725,
+      "canonical_density_vertex": 0.49910242273288935,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 6,
+      "wave_number_in_clock_units": 0.2,
+      "upper_frequency_over_clock": 1.0385164807134504,
+      "lower_frequency_over_clock": 0.03851648071345041,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.18569533817705192,
+      "shear_source_vertex": 0.007427813527082072,
+      "group_velocity_over_c": 0.37139067635410367,
+      "canonical_density_vertex": 0.46423834544262976,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 6,
+      "wave_number_in_clock_units": 1.0,
+      "upper_frequency_over_clock": 1.618033988749895,
+      "lower_frequency_over_clock": 0.6180339887498948,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4472135954999578,
+      "shear_source_vertex": 0.447213595499958,
+      "group_velocity_over_c": 0.8944271909999159,
+      "canonical_density_vertex": 0.22360679774997894,
+      "canonical_velocity_current_vertex": 0.49999999999999994
+    },
+    {
+      "real_depth": 6,
+      "wave_number_in_clock_units": 3.0,
+      "upper_frequency_over_clock": 3.5413812651491097,
+      "lower_frequency_over_clock": 2.54138126514911,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.49319696191607193,
+      "shear_source_vertex": 4.438772657244646,
+      "group_velocity_over_c": 0.9863939238321437,
+      "canonical_density_vertex": 0.08219949365267866,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 6,
+      "wave_number_in_clock_units": 20.0,
+      "upper_frequency_over_clock": 20.506249023742555,
+      "lower_frequency_over_clock": 19.50624902374256,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4998438232040614,
+      "shear_source_vertex": 199.93752928162456,
+      "group_velocity_over_c": 0.9996876464081228,
+      "canonical_density_vertex": 0.012496095580101535,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 6,
+      "wave_number_in_clock_units": 1000.0,
+      "upper_frequency_over_clock": 1000.5001249999922,
+      "lower_frequency_over_clock": 999.5001249999922,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4999999375000117,
+      "shear_source_vertex": 499999.93750001164,
+      "group_velocity_over_c": 0.9999998750000234,
+      "canonical_density_vertex": 0.0002499999687500059,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 10,
+      "wave_number_in_clock_units": 0.001,
+      "upper_frequency_over_clock": 1.000000999999,
+      "lower_frequency_over_clock": 9.99999000002e-07,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.0009999980000060004,
+      "shear_source_vertex": 9.999979997357402e-10,
+      "group_velocity_over_c": 0.0019999960000120004,
+      "canonical_density_vertex": 0.4999990000030002,
+      "canonical_velocity_current_vertex": 0.5000000000000002
+    },
+    {
+      "real_depth": 10,
+      "wave_number_in_clock_units": 0.03,
+      "upper_frequency_over_clock": 1.0008991914547276,
+      "lower_frequency_over_clock": 0.0008991914547277447,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.02994614536397336,
+      "shear_source_vertex": 2.695153082757055e-05,
+      "group_velocity_over_c": 0.059892290727946725,
+      "canonical_density_vertex": 0.49910242273288935,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 10,
+      "wave_number_in_clock_units": 0.2,
+      "upper_frequency_over_clock": 1.0385164807134504,
+      "lower_frequency_over_clock": 0.03851648071345041,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.18569533817705192,
+      "shear_source_vertex": 0.007427813527082072,
+      "group_velocity_over_c": 0.37139067635410367,
+      "canonical_density_vertex": 0.46423834544262976,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 10,
+      "wave_number_in_clock_units": 1.0,
+      "upper_frequency_over_clock": 1.618033988749895,
+      "lower_frequency_over_clock": 0.6180339887498948,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4472135954999578,
+      "shear_source_vertex": 0.447213595499958,
+      "group_velocity_over_c": 0.8944271909999159,
+      "canonical_density_vertex": 0.22360679774997894,
+      "canonical_velocity_current_vertex": 0.49999999999999994
+    },
+    {
+      "real_depth": 10,
+      "wave_number_in_clock_units": 3.0,
+      "upper_frequency_over_clock": 3.5413812651491097,
+      "lower_frequency_over_clock": 2.54138126514911,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.49319696191607193,
+      "shear_source_vertex": 4.438772657244646,
+      "group_velocity_over_c": 0.9863939238321437,
+      "canonical_density_vertex": 0.08219949365267866,
+      "canonical_velocity_current_vertex": 0.5000000000000001
+    },
+    {
+      "real_depth": 10,
+      "wave_number_in_clock_units": 20.0,
+      "upper_frequency_over_clock": 20.506249023742555,
+      "lower_frequency_over_clock": 19.50624902374256,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4998438232040614,
+      "shear_source_vertex": 199.93752928162456,
+      "group_velocity_over_c": 0.9996876464081228,
+      "canonical_density_vertex": 0.012496095580101535,
+      "canonical_velocity_current_vertex": 0.5
+    },
+    {
+      "real_depth": 10,
+      "wave_number_in_clock_units": 1000.0,
+      "upper_frequency_over_clock": 1000.5001249999922,
+      "lower_frequency_over_clock": 999.5001249999922,
+      "branch_gap_over_clock": 1,
+      "q_source_vertex": 0.4999999375000117,
+      "shear_source_vertex": 499999.93750001164,
+      "group_velocity_over_c": 0.9999998750000234,
+      "canonical_density_vertex": 0.0002499999687500059,
+      "canonical_velocity_current_vertex": 0.5
+    }
+  ],
+  "unmatched_speed_controls": [
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 0.5,
+      "wave_number": 0.2,
+      "gap": 1.001714259409876
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 0.5,
+      "wave_number": 1.0,
+      "gap": 1.0420107665599743
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 0.5,
+      "wave_number": 5.0,
+      "gap": 1.7733191874765875
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 0.5,
+      "wave_number": 20.0,
+      "gap": 5.942606755520844
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 0.9,
+      "wave_number": 0.2,
+      "gap": 1.0000526666910892
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 0.9,
+      "wave_number": 1.0,
+      "gap": 1.001315836236985
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 0.9,
+      "wave_number": 5.0,
+      "gap": 1.0323928987911097
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 0.9,
+      "wave_number": 20.0,
+      "gap": 1.4329555330117358
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 1.0,
+      "wave_number": 0.2,
+      "gap": 0.9999999999999999
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 1.0,
+      "wave_number": 1.0,
+      "gap": 1.0
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 1.0,
+      "wave_number": 5.0,
+      "gap": 0.9999999999999991
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 1.0,
+      "wave_number": 20.0,
+      "gap": 1.0
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 1.1,
+      "wave_number": 0.2,
+      "gap": 1.0000476449381737
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 1.1,
+      "wave_number": 1.0,
+      "gap": 1.00119044325228
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 1.1,
+      "wave_number": 5.0,
+      "gap": 1.0293481391115558
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 1.1,
+      "wave_number": 20.0,
+      "gap": 1.3974696647436637
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 2.0,
+      "wave_number": 0.2,
+      "gap": 1.003425590171066
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 2.0,
+      "wave_number": 1.0,
+      "gap": 1.0823922002923938
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 2.0,
+      "wave_number": 5.0,
+      "gap": 2.2998525781765338
+    },
+    {
+      "rotation_speed_squared_over_displacement_speed_squared": 2.0,
+      "wave_number": 20.0,
+      "gap": 8.344408313447033
+    }
+  ],
+  "spatial_tensor_cases": [
+    {
+      "real_depth": 2,
+      "transverse_rotation_modes": 1,
+      "q_response": "1/k^4+1/k^2",
+      "longitudinal_rotation_response": "1/k^2",
+      "longitudinal_shear_response": "1",
+      "direct_q_neutral_confinement_window": false,
+      "rotation_neutral_confinement_window": true
+    },
+    {
+      "real_depth": 3,
+      "transverse_rotation_modes": 2,
+      "q_response": "1/k^4+1/k^2",
+      "longitudinal_rotation_response": "1/k^2",
+      "longitudinal_shear_response": "1",
+      "direct_q_neutral_confinement_window": true,
+      "rotation_neutral_confinement_window": false
+    },
+    {
+      "real_depth": 4,
+      "transverse_rotation_modes": 3,
+      "q_response": "1/k^4+1/k^2",
+      "longitudinal_rotation_response": "1/k^2",
+      "longitudinal_shear_response": "1",
+      "direct_q_neutral_confinement_window": true,
+      "rotation_neutral_confinement_window": false
+    },
+    {
+      "real_depth": 5,
+      "transverse_rotation_modes": 4,
+      "q_response": "1/k^4+1/k^2",
+      "longitudinal_rotation_response": "1/k^2",
+      "longitudinal_shear_response": "1",
+      "direct_q_neutral_confinement_window": false,
+      "rotation_neutral_confinement_window": false
+    },
+    {
+      "real_depth": 6,
+      "transverse_rotation_modes": 5,
+      "q_response": "1/k^4+1/k^2",
+      "longitudinal_rotation_response": "1/k^2",
+      "longitudinal_shear_response": "1",
+      "direct_q_neutral_confinement_window": false,
+      "rotation_neutral_confinement_window": false
+    },
+    {
+      "real_depth": 10,
+      "transverse_rotation_modes": 9,
+      "q_response": "1/k^4+1/k^2",
+      "longitudinal_rotation_response": "1/k^2",
+      "longitudinal_shear_response": "1",
+      "direct_q_neutral_confinement_window": false,
+      "rotation_neutral_confinement_window": false
+    }
+  ],
+  "particle_cases": [
+    {
+      "particle": "W",
+      "real_depth": 2,
+      "cutoff": 2926,
+      "required_spatial_wave_number_squared": 8558550,
+      "upper_frequency_over_sector_clock": 2926,
+      "lower_frequency_over_sector_clock": 2925,
+      "q_vertex_squared_exact": "8558550/34234201",
+      "q_vertex_squared": 0.24999999269736134,
+      "canonical_density_vertex_in_clock_units": "1/11702",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": true,
+      "sphere_degree": 2925,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "Z",
+      "real_depth": 2,
+      "cutoff": 3321,
+      "required_spatial_wave_number_squared": 11025720,
+      "upper_frequency_over_sector_clock": 3321,
+      "lower_frequency_over_sector_clock": 3320,
+      "q_vertex_squared_exact": "11025720/44102881",
+      "q_vertex_squared": 0.24999999433143608,
+      "canonical_density_vertex_in_clock_units": "1/13282",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": true,
+      "sphere_degree": 3320,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "Higgs",
+      "real_depth": 2,
+      "cutoff": 4560,
+      "required_spatial_wave_number_squared": 20789040,
+      "upper_frequency_over_sector_clock": 4560,
+      "lower_frequency_over_sector_clock": 4559,
+      "q_vertex_squared_exact": "20789040/83156161",
+      "q_vertex_squared": 0.2499999969936082,
+      "canonical_density_vertex_in_clock_units": "1/18238",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": true,
+      "sphere_degree": 4559,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "down",
+      "real_depth": 3,
+      "cutoff": 1,
+      "required_spatial_wave_number_squared": 0,
+      "upper_frequency_over_sector_clock": 1,
+      "lower_frequency_over_sector_clock": 0,
+      "q_vertex_squared_exact": "0",
+      "q_vertex_squared": 0.0,
+      "canonical_density_vertex_in_clock_units": null,
+      "canonical_velocity_current_vertex": null,
+      "round_sphere_eigenvalue_matches": true,
+      "sphere_degree": 0,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "strange",
+      "real_depth": 3,
+      "cutoff": 20,
+      "required_spatial_wave_number_squared": 380,
+      "upper_frequency_over_sector_clock": 20,
+      "lower_frequency_over_sector_clock": 19,
+      "q_vertex_squared_exact": "380/1521",
+      "q_vertex_squared": 0.24983563445101906,
+      "canonical_density_vertex_in_clock_units": "1/78",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": false,
+      "sphere_degree": null,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "up",
+      "real_depth": 4,
+      "cutoff": 15,
+      "required_spatial_wave_number_squared": 210,
+      "upper_frequency_over_sector_clock": 15,
+      "lower_frequency_over_sector_clock": 14,
+      "q_vertex_squared_exact": "210/841",
+      "q_vertex_squared": 0.2497027348394768,
+      "canonical_density_vertex_in_clock_units": "1/58",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": false,
+      "sphere_degree": null,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "charm",
+      "real_depth": 4,
+      "cutoff": 8855,
+      "required_spatial_wave_number_squared": 78402170,
+      "upper_frequency_over_sector_clock": 8855,
+      "lower_frequency_over_sector_clock": 8854,
+      "q_vertex_squared_exact": "78402170/313608681",
+      "q_vertex_squared": 0.2499999992028282,
+      "canonical_density_vertex_in_clock_units": "1/35418",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": false,
+      "sphere_degree": null,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "top",
+      "real_depth": 4,
+      "cutoff": 1215450,
+      "required_spatial_wave_number_squared": 1477317487050,
+      "upper_frequency_over_sector_clock": 1215450,
+      "lower_frequency_over_sector_clock": 1215449,
+      "q_vertex_squared_exact": "1477317487050/5909269948201",
+      "q_vertex_squared": 0.2499999999999577,
+      "canonical_density_vertex_in_clock_units": "1/4861798",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": false,
+      "sphere_degree": null,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "nu1",
+      "real_depth": 5,
+      "cutoff": 2002,
+      "required_spatial_wave_number_squared": 4006002,
+      "upper_frequency_over_sector_clock": 2002,
+      "lower_frequency_over_sector_clock": 2001,
+      "q_vertex_squared_exact": "4006002/16024009",
+      "q_vertex_squared": 0.24999998439841115,
+      "canonical_density_vertex_in_clock_units": "1/8006",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": false,
+      "sphere_degree": null,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "nu2",
+      "real_depth": 5,
+      "cutoff": 11628,
+      "required_spatial_wave_number_squared": 135198756,
+      "upper_frequency_over_sector_clock": 11628,
+      "lower_frequency_over_sector_clock": 11627,
+      "q_vertex_squared_exact": "135198756/540795025",
+      "q_vertex_squared": 0.24999999953771765,
+      "canonical_density_vertex_in_clock_units": "1/46510",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": false,
+      "sphere_degree": null,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "nu3",
+      "real_depth": 5,
+      "cutoff": 65780,
+      "required_spatial_wave_number_squared": 4326942620,
+      "upper_frequency_over_sector_clock": 65780,
+      "lower_frequency_over_sector_clock": 65779,
+      "q_vertex_squared_exact": "4326942620/17307770481",
+      "q_vertex_squared": 0.2499999999855556,
+      "canonical_density_vertex_in_clock_units": "1/263118",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": false,
+      "sphere_degree": null,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "electron",
+      "real_depth": 6,
+      "cutoff": 18564,
+      "required_spatial_wave_number_squared": 344603532,
+      "upper_frequency_over_sector_clock": 18564,
+      "lower_frequency_over_sector_clock": 18563,
+      "q_vertex_squared_exact": "344603532/1378414129",
+      "q_vertex_squared": 0.24999999981863216,
+      "canonical_density_vertex_in_clock_units": "1/74254",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": false,
+      "sphere_degree": null,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "muon",
+      "real_depth": 6,
+      "cutoff": 3838380,
+      "required_spatial_wave_number_squared": 14733157186020,
+      "upper_frequency_over_sector_clock": 3838380,
+      "lower_frequency_over_sector_clock": 3838379,
+      "q_vertex_squared_exact": "14733157186020/58932628744081",
+      "q_vertex_squared": 0.24999999999999575,
+      "canonical_density_vertex_in_clock_units": "1/15353518",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": false,
+      "sphere_degree": null,
+      "spatial_target_is_derived": false
+    },
+    {
+      "particle": "tau",
+      "real_depth": 10,
+      "cutoff": 64512240,
+      "required_spatial_wave_number_squared": 4161829045305360,
+      "upper_frequency_over_sector_clock": 64512240,
+      "lower_frequency_over_sector_clock": 64512239,
+      "q_vertex_squared_exact": "4161829045305360/16647316181221441",
+      "q_vertex_squared": 0.24999999999999997,
+      "canonical_density_vertex_in_clock_units": "1/258048958",
+      "canonical_velocity_current_vertex": "1/2",
+      "round_sphere_eigenvalue_matches": false,
+      "sphere_degree": null,
+      "spatial_target_is_derived": false
+    }
+  ],
+  "speed_sensitivity_cases": [
+    {
+      "particle": "W",
+      "real_depth": 2,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.000004279265844,
+      "canonical_velocity_vertex": 0.4999981103753518,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "W",
+      "real_depth": 2,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0000000004279275,
+      "canonical_velocity_vertex": 0.5000000022860364,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "W",
+      "real_depth": 2,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.0000000000000426,
+      "canonical_velocity_vertex": 0.4999999999749787,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "W",
+      "real_depth": 2,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0000000004279275,
+      "canonical_velocity_vertex": 0.4999999972860363,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "W",
+      "real_depth": 2,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.000004279265844,
+      "canonical_velocity_vertex": 0.49999761037749135,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "Z",
+      "real_depth": 2,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.0000055128448042,
+      "canonical_velocity_vertex": 0.4999974935916028,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "Z",
+      "real_depth": 2,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.000000000551286,
+      "canonical_velocity_vertex": 0.5000000022243571,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "Z",
+      "real_depth": 2,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.000000000000055,
+      "canonical_velocity_vertex": 0.49999999997497246,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "Z",
+      "real_depth": 2,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.000000000551286,
+      "canonical_velocity_vertex": 0.49999999722435706,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "Z",
+      "real_depth": 2,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.0000055128448042,
+      "canonical_velocity_vertex": 0.4999969935943592,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "Higgs",
+      "real_depth": 2,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.0000103944659775,
+      "canonical_velocity_vertex": 0.49999505281862205,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "Higgs",
+      "real_depth": 2,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0000000010394519,
+      "canonical_velocity_vertex": 0.5000000019802742,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "Higgs",
+      "real_depth": 2,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.000000000000104,
+      "canonical_velocity_vertex": 0.49999999997494804,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "Higgs",
+      "real_depth": 2,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0000000010394519,
+      "canonical_velocity_vertex": 0.4999999969802741,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "Higgs",
+      "real_depth": 2,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.0000103944659775,
+      "canonical_velocity_vertex": 0.4999945528238192,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "strange",
+      "real_depth": 3,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.00000000019,
+      "canonical_velocity_vertex": 0.5000002499051874,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "strange",
+      "real_depth": 3,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0000000000000189,
+      "canonical_velocity_vertex": 0.5000000024999907,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "strange",
+      "real_depth": 3,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.0,
+      "canonical_velocity_vertex": 0.499999999975,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "strange",
+      "real_depth": 3,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0000000000000189,
+      "canonical_velocity_vertex": 0.4999999974999906,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "strange",
+      "real_depth": 3,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.00000000019,
+      "canonical_velocity_vertex": 0.4999997499051876,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "up",
+      "real_depth": 4,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.000000000105,
+      "canonical_velocity_vertex": 0.5000002499476874,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "up",
+      "real_depth": 4,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0000000000000104,
+      "canonical_velocity_vertex": 0.5000000024999949,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "up",
+      "real_depth": 4,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.0,
+      "canonical_velocity_vertex": 0.499999999975,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "up",
+      "real_depth": 4,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0000000000000104,
+      "canonical_velocity_vertex": 0.4999999974999948,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "up",
+      "real_depth": 4,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.000000000105,
+      "canonical_velocity_vertex": 0.49999974994768753,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "charm",
+      "real_depth": 4,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.0000392003166676,
+      "canonical_velocity_vertex": 0.4999806506003563,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "charm",
+      "real_depth": 4,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0000000039201085,
+      "canonical_velocity_vertex": 0.5000000005399459,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "charm",
+      "real_depth": 4,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.000000000000392,
+      "canonical_velocity_vertex": 0.49999999997480404,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "charm",
+      "real_depth": 4,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0000000039201085,
+      "canonical_velocity_vertex": 0.49999999553994584,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "charm",
+      "real_depth": 4,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.0000392003166676,
+      "canonical_velocity_vertex": 0.49998015061995565,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "top",
+      "real_depth": 4,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.5739496456526174,
+      "canonical_velocity_vertex": 0.3176723292141084,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "top",
+      "real_depth": 4,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0000738631464703,
+      "canonical_velocity_vertex": 0.499963073654261,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "top",
+      "real_depth": 4,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.0000000073865873,
+      "canonical_velocity_vertex": 0.4999999962817063,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "top",
+      "real_depth": 4,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0000738631464703,
+      "canonical_velocity_vertex": 0.4999630686546303,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "top",
+      "real_depth": 4,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.5739496456526174,
+      "canonical_velocity_vertex": 0.31767201154193797,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu1",
+      "real_depth": 5,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.000002002998994,
+      "canonical_velocity_vertex": 0.49999924850219574,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu1",
+      "real_depth": 5,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0000000002003,
+      "canonical_velocity_vertex": 0.5000000023998501,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu1",
+      "real_depth": 5,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.00000000000002,
+      "canonical_velocity_vertex": 0.49999999997499,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu1",
+      "real_depth": 5,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0000000002003,
+      "canonical_velocity_vertex": 0.49999999739985,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu1",
+      "real_depth": 5,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.000002002998994,
+      "canonical_velocity_vertex": 0.49999874850319725,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu2",
+      "real_depth": 5,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.0000675970933166,
+      "canonical_velocity_vertex": 0.49996645372116016,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu2",
+      "real_depth": 5,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0000000067599377,
+      "canonical_velocity_vertex": 0.49999999912003124,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu2",
+      "real_depth": 5,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.000000000000676,
+      "canonical_velocity_vertex": 0.49999999997466205,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu2",
+      "real_depth": 5,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0000000067599377,
+      "canonical_velocity_vertex": 0.4999999941200312,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu2",
+      "real_depth": 5,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.0000675970933166,
+      "canonical_velocity_vertex": 0.4999659537549564,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu3",
+      "real_depth": 5,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.002161136055475,
+      "canonical_velocity_vertex": 0.49892201165193634,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu3",
+      "real_depth": 5,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0000002163471076,
+      "canonical_velocity_vertex": 0.4999998943264691,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu3",
+      "real_depth": 5,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.0000000000216347,
+      "canonical_velocity_vertex": 0.49999999996418265,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu3",
+      "real_depth": 5,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0000002163471076,
+      "canonical_velocity_vertex": 0.49999988932647016,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "nu3",
+      "real_depth": 5,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.002161136055475,
+      "canonical_velocity_vertex": 0.49892151273017415,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "electron",
+      "real_depth": 6,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 1.000172286924608,
+      "canonical_velocity_vertex": 0.4999141213336548,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "electron",
+      "real_depth": 6,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0000000172301764,
+      "canonical_velocity_vertex": 0.49999999388491195,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "electron",
+      "real_depth": 6,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.000000000001723,
+      "canonical_velocity_vertex": 0.49999999997413846,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "electron",
+      "real_depth": 6,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0000000172301764,
+      "canonical_velocity_vertex": 0.49999998888491204,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "electron",
+      "real_depth": 6,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 1.000172286924608,
+      "canonical_velocity_vertex": 0.4999136214197834,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "muon",
+      "real_depth": 6,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 3.9665044038825923,
+      "canonical_velocity_vertex": 0.12605563969896638,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "muon",
+      "real_depth": 6,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.0007363867265955,
+      "canonical_velocity_vertex": 0.4996320800680566,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "muon",
+      "real_depth": 6,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.0000000736657833,
+      "canonical_velocity_vertex": 0.4999999631421111,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "muon",
+      "real_depth": 6,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.0007363867265955,
+      "canonical_velocity_vertex": 0.49963207507173585,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "muon",
+      "real_depth": 6,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 3.9665044038825923,
+      "canonical_velocity_vertex": 0.1260555136433897,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "tau",
+      "real_depth": 10,
+      "rotation_speed_relative_error": -1e-06,
+      "gap_over_sector_clock": 64.51998950174558,
+      "canonical_velocity_vertex": 0.007749540163621074,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "tau",
+      "real_depth": 10,
+      "rotation_speed_relative_error": -1e-08,
+      "gap_over_sector_clock": 1.1900348333265443,
+      "canonical_velocity_vertex": 0.42015577065280796,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "tau",
+      "real_depth": 10,
+      "rotation_speed_relative_error": 1e-10,
+      "gap_over_sector_clock": 1.0000208089287208,
+      "canonical_velocity_vertex": 0.49998959572714136,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "tau",
+      "real_depth": 10,
+      "rotation_speed_relative_error": 1e-08,
+      "gap_over_sector_clock": 1.1900348333265443,
+      "canonical_velocity_vertex": 0.42015576645125025,
+      "spatial_wave_number_held_fixed": true
+    },
+    {
+      "particle": "tau",
+      "real_depth": 10,
+      "rotation_speed_relative_error": 1e-06,
+      "gap_over_sector_clock": 64.51998950174558,
+      "canonical_velocity_vertex": 0.007749532414084785,
+      "spatial_wave_number_held_fixed": true
+    }
+  ],
+  "first_order_clifford_controls": [
+    {
+      "real_depth": 2,
+      "complex_pointwise_commutant_dimension": 128,
+      "fixed_9_10_rotation_clock_commutes": true,
+      "nontrivial_pointwise_independent_clock_allowed": true,
+      "spatial_band_clock_excluded": false
+    },
+    {
+      "real_depth": 3,
+      "complex_pointwise_commutant_dimension": 64,
+      "fixed_9_10_rotation_clock_commutes": true,
+      "nontrivial_pointwise_independent_clock_allowed": true,
+      "spatial_band_clock_excluded": false
+    },
+    {
+      "real_depth": 4,
+      "complex_pointwise_commutant_dimension": 32,
+      "fixed_9_10_rotation_clock_commutes": true,
+      "nontrivial_pointwise_independent_clock_allowed": true,
+      "spatial_band_clock_excluded": false
+    },
+    {
+      "real_depth": 5,
+      "complex_pointwise_commutant_dimension": 16,
+      "fixed_9_10_rotation_clock_commutes": true,
+      "nontrivial_pointwise_independent_clock_allowed": true,
+      "spatial_band_clock_excluded": false
+    },
+    {
+      "real_depth": 6,
+      "complex_pointwise_commutant_dimension": 8,
+      "fixed_9_10_rotation_clock_commutes": true,
+      "nontrivial_pointwise_independent_clock_allowed": true,
+      "spatial_band_clock_excluded": false
+    },
+    {
+      "real_depth": 10,
+      "complex_pointwise_commutant_dimension": 1,
+      "fixed_9_10_rotation_clock_commutes": false,
+      "nontrivial_pointwise_independent_clock_allowed": false,
+      "spatial_band_clock_excluded": false
+    }
+  ],
+  "sources": {
+    "experiments/bending-clock-checks.py": "75dfd497177d052ce3fe434f6480a18196064f6816efdfb0998b2f9fbdc2cc08",
+    "results/complex-comb-response-results.json": "30a613f13f33d19eaa2f3e542be8b7f9171c22c47a24f8592ae554d287dca8d6"
+  }
+}

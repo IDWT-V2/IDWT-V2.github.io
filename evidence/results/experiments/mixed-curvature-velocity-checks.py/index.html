@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>mixed-curvature-velocity-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/mixed-curvature-velocity-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="mixed-curvature-velocity-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/mixed-curvature-velocity-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="mixed-curvature-velocity-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>mixed-curvature-velocity-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/mixed-curvature-velocity-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact and finite-gap checks of a reciprocal geometric velocity interaction.&quot;&quot;&quot;
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+import importlib.util
+import json
+from math import comb, pi
+from pathlib import Path
+
+import mpmath as mp
+import numpy as np
+import sympy as sp
+
+
+CHECKS = 0
+CASES = []
+
+
+def check(ok, message):
+    global CHECKS
+    if not ok:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def response(omega, stiffness, gap, a, b, inertia=1.):
+    squared=omega*omega
+    denominator=(stiffness-inertia*squared)*(gap*gap-squared)-gap*a*a*squared
+    return gap*b*b*squared*(stiffness-inertia*squared+gap*a*a)/denominator
+
+
+def full_hessian(kq, kl, gap, a, b, mq=1., ml=1.):
+    # Canonical order q,pq,lambda,plambda,x,y, c=(x+iy)/sqrt(2).
+    h=np.diag([kq+gap*a*a,1/mq,kl+gap*b*b,1/ml,gap,gap])
+    h[0,4]=h[4,0]=-gap*a
+    h[2,5]=h[5,2]=-gap*b
+    return h
+
+
+def main():
+    ap=argparse.ArgumentParser()
+    ap.add_argument(&#39;--output&#39;,required=True)
+    ap.add_argument(&#39;--sawtooth-source&#39;,required=True)
+    args=ap.parse_args()
+    # Independent exact Schur reduction of the full quadratic Fourier action.
+    w,d,a,b,k,m,kl,ml=sp.symbols(&#39;Omega Delta A B K M Kl Ml&#39;,positive=True,real=True)
+    action=sp.Matrix([[k+d*a*a-m*w*w,0,-d*a,0],
+                      [0,kl+d*b*b-ml*w*w,0,-d*b],
+                      [-d*a,0,d,-sp.I*w],
+                      [0,-d*b,sp.I*w,d]])
+    keep=[1]
+    eliminate=[0,2,3]
+    reduced=action.extract(keep,keep)-action.extract(keep,eliminate)*action.extract(eliminate,eliminate).inv()*action.extract(eliminate,keep)
+    r=d*b*b*w*w*(k-m*w*w+d*a*a)/((k-m*w*w)*(d*d-w*w)-d*a*a*w*w)
+    check(sp.simplify(reduced[0]-(kl-ml*w*w-r))==0,&#39;complete source Schur response&#39;)
+    check(sp.simplify(sp.limit(r/w**2,w,0)-b*b*(a*a*d+k)/(d*k))==0,&#39;low-frequency coefficient&#39;)
+    check(sp.simplify(sp.limit(r,w,sp.oo)+d*b*b)==0,&#39;high-frequency constant&#39;)
+    check(sp.simplify(sp.limit(r,w,d)-b*b*(d*d*m-k-d*a*a)/a**2)==0,&#39;bare gap cancellation&#39;)
+    determinant=sp.factor(action.det())
+    check(sp.Poly(determinant,w).degree()==6,&#39;three complete oscillators&#39;)
+
+    # Frame curvature is invariant under a coordinate-dependent phase.
+    q,l,theta,alpha,beta,chi=sp.symbols(&#39;q lambda theta alpha beta chi&#39;,real=True)
+    u=sp.Matrix([sp.cos((theta+alpha*q)/2),sp.exp(sp.I*beta*l)*sp.sin((theta+alpha*q)/2)])
+    aq=sp.simplify(sp.I*(u.H*sp.diff(u,q))[0])
+    al=sp.simplify(sp.I*(u.H*sp.diff(u,l))[0])
+    curvature=sp.simplify(sp.diff(al,q)-sp.diff(aq,l))
+    check(sp.simplify(curvature+alpha*beta*sp.sin(theta+alpha*q)/2)==0,&#39;CP1 mixed curvature&#39;)
+    phase=chi*q*l
+    transformed=sp.exp(sp.I*phase)*u
+    tq=sp.simplify(sp.I*(transformed.H*sp.diff(transformed,q))[0])
+    tl=sp.simplify(sp.I*(transformed.H*sp.diff(transformed,l))[0])
+    check(sp.simplify(tq-aq+sp.diff(phase,q))==0,&#39;phase gauge q&#39;)
+    check(sp.simplify(tl-al+sp.diff(phase,l))==0,&#39;phase gauge lambda&#39;)
+    check(sp.simplify(sp.diff(tl,q)-sp.diff(tq,l)-curvature)==0,&#39;curvature gauge invariant&#39;)
+    induced_mass_q=a*a/d
+    induced_mass_l=b*b/d
+    check(sp.simplify((a*b)**2/(induced_mass_q*induced_mass_l)-d*d)==0,&#39;curvature-induced inertia relation&#39;)
+
+    j=np.kron(np.eye(3),np.array([[0.,1.],[-1.,0.]]))
+    for gap in (.3,1.3,3.7,10.,30.):
+        for coupling in (.03,.1,.3):
+            h=full_hessian(2.,3.,gap,coupling,coupling)
+            check(np.linalg.eigvalsh(h)[0]&gt;0,&#39;positive complete Hamiltonian&#39;)
+            dynamic=j@h
+            eigen=np.linalg.eigvals(dynamic)
+            check(np.max(np.abs(eigen.real))&lt;1e-10,&#39;oscillatory full dynamics&#39;)
+            frequencies=sorted(v.imag for v in eigen if v.imag&gt;1e-9)
+            check(len(frequencies)==3,&#39;retained fast mode&#39;)
+            test=np.arange(1.,7.)/7
+            check(abs(test@(h@dynamic+dynamic.T@h)@test)&lt;1e-12,&#39;energy conservation&#39;)
+            for frequency in (.13,.91,2.11,7.3,100.):
+                numeric=np.array(action.subs({k:2.,kl:3.,m:1.,ml:1.,d:gap,a:coupling,b:coupling,w:frequency}),dtype=complex)
+                indexes=[0,2,3]
+                schur=numeric[1,1]-numeric[1,indexes]@np.linalg.solve(numeric[np.ix_(indexes,indexes)],numeric[indexes,1])
+                expected=3.-frequency**2-response(frequency,2.,gap,coupling,coupling)
+                check(np.isclose(schur,expected,rtol=1e-10,atol=1e-10),&#39;numeric full versus reduced response&#39;)
+            CASES.append({&#39;name&#39;:&#39;complete-Hamiltonian&#39;,&#39;parameters&#39;:{&#39;gap&#39;:gap,&#39;A&#39;:coupling,&#39;B&#39;:coupling,
+                &#39;bare_masses&#39;:[1,1],&#39;bare_stiffnesses&#39;:[2,3]},
+                &#39;measurements&#39;:{&#39;complete_frequencies&#39;:frequencies,&#39;minimum_energy_eigenvalue&#39;:float(np.linalg.eigvalsh(h)[0])}})
+
+    source=Path(args.sawtooth_source)
+    spec=importlib.util.spec_from_file_location(&#39;frozen_sawtooth&#39;,source)
+    saw=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(saw)
+    mp.mp.dps=50
+    electron=mp.mpf(&#39;0.51099895000&#39;)
+    mu6=electron/18564
+    mu5=mp.sqrt(mp.mpf(&#39;2.534e-3&#39;)/(65780**2-2002**2))/mp.mpf(10**6)
+    scales={2:electron*mp.sqrt(2890),3:electron*mp.sqrt(32*mp.sqrt(7)),
+            4:electron*mp.sqrt(48/mp.sqrt(7))/15,5:mu5,6:mu6,10:mu6}
+    assigned=[(&#39;W&#39;,2,76),(&#39;Z&#39;,2,81),(&#39;Higgs&#39;,2,95),(&#39;down&#39;,3,1),(&#39;strange&#39;,3,4),
+              (&#39;up&#39;,4,3),(&#39;charm&#39;,4,20),(&#39;top&#39;,4,72),(&#39;nu1&#39;,5,10),(&#39;nu2&#39;,5,15),
+              (&#39;nu3&#39;,5,22),(&#39;electron&#39;,6,13),(&#39;muon&#39;,6,35),(&#39;tau&#39;,10,23)]
+    for gap in (1.3,3.7,10.,30.):
+        a=b=.1
+        for label,depth,n in assigned:
+            cutoff=comb(n+depth-1,depth)
+            ratio=float(scales[depth]/mu6)
+            limit=2*cutoff if cutoff&lt;=150000 else 65536
+            _,coeff=saw.coefficients(cutoff,limit)
+            omega=ratio*np.arange(1,len(coeff)+1)
+            rq=response(omega,2.,gap,a,b)
+            rt=response(omega,3.,gap,a,b)
+            average=(3*rq+2*rt)/5
+            quadratic=float(np.sum(coeff*coeff*average)/2)
+            check(np.isfinite(quadratic),&#39;finite all-sector source sum&#39;)
+            # Exact complete response has no DC term and a bounded high-frequency tail.
+            check(response(0.,2.,gap,a,b)==0.,&#39;zero static source response&#39;)
+            omitted=2*cutoff-len(coeff)
+            tail=0.
+            if omitted:
+                low_tail_omega=ratio*(len(coeff)+1)
+                check(low_tail_omega**2&gt;=2*(3+gap*gap+gap*a*a),&#39;tail beyond both shifted poles&#39;)
+                coefficient_tail=4*pi*pi/cutoff+1/(3*len(coeff)**3)
+                tail=3*gap*b*b*coefficient_tail
+            low_coefficient=b*b/gap+a*a*b*b*(13/30)
+            derivative_norm=float(2*cutoff-mp.harmonic(cutoff)-(mp.zeta(2)-mp.polygamma(1,cutoff+1))/2)
+            low_estimate=low_coefficient*ratio*ratio*derivative_norm
+            if depth==5:
+                check(np.isclose(quadratic,low_estimate,rtol=.01),&#39;small neutrino source follows derivative law&#39;)
+            CASES.append({&#39;name&#39;:&#39;all-sector-finite-gap-response&#39;,&#39;real_depth&#39;:depth,&#39;mode_index&#39;:n,
+                &#39;parameters&#39;:{&#39;particle&#39;:label,&#39;gap&#39;:gap,&#39;A&#39;:a,&#39;B&#39;:b,&#39;fundamental_ratio&#39;:ratio,
+                    &#39;cutoff&#39;:cutoff,&#39;evaluated_harmonics&#39;:len(coeff),
+                    &#39;source_map&#39;:&#39;conditional lambda=f_K squared; fixed isotropic direction&#39;},
+                &#39;measurements&#39;:{&#39;signed_complete_response&#39;:quadratic,&#39;absolute_tail_bound&#39;:tail,
+                                &#39;low_frequency_estimate&#39;:low_estimate}})
+
+    report={&#39;experiment_key&#39;:&#39;mixed-curvature-velocity-response-20261009&#39;,
+        &#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),
+        &#39;sources&#39;:{&#39;experiments/mixed-curvature-velocity-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest(),
+                   &#39;experiments/sawtooth-sector-coupling-checks.py&#39;:sha256(source.read_bytes()).hexdigest()},
+        &#39;scope&#39;:&#39;Conditional positive same-field mode action, exact complement and common all-sector Fourier comparison. Not a derived physical rate or electric charge.&#39;,
+        &#39;summary&#39;:{&#39;checks_passed&#39;:CHECKS,&#39;case_count&#39;:len(CASES)},&#39;cases&#39;:CASES}
+    Path(args.output).write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(report[&#39;summary&#39;]))
+    for c in CASES:
+        if c[&#39;name&#39;]==&#39;all-sector-finite-gap-response&#39; and c[&#39;parameters&#39;][&#39;gap&#39;]==10.:
+            print(json.dumps(c))
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

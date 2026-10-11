@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>passive-hodge-transfer-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/passive-hodge-transfer-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="passive-hodge-transfer-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/passive-hodge-transfer-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="passive-hodge-transfer-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>passive-hodge-transfer-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/passive-hodge-transfer-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Bounded passive Hodge interference, retarded return and all-sector combs.&quot;&quot;&quot;
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+import importlib.util
+from itertools import combinations
+import json
+import math
+from pathlib import Path
+
+import numpy as np
+import sympy as sp
+
+
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    if not condition:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def close(actual, expected, message, atol=2e-12):
+    check(np.allclose(actual, expected, atol=atol, rtol=2e-11), message)
+
+
+def orientation(index):
+    return (-1)**sum(index[i] &gt; index[j] for i in range(len(index)) for j in range(i+1, len(index)))
+
+
+def transfers(star, omega, delay, common_delay=0.):
+    phase = np.exp(1j*omega*delay)
+    common = np.exp(1j*omega*common_delay)
+    return common*(star+phase*star.T)/2, common*(star-phase*star.T)/2
+
+
+def algebra_checks():
+    rng = np.random.default_rng(2026100922)
+    for m in range(1, 7):
+        seen = set()
+        block_count = 0
+        for index in combinations(range(2*m), m):
+            if index in seen:
+                continue
+            other = tuple(i for i in range(2*m) if i not in index)
+            star = np.array([[0., orientation(other+index)], [orientation(index+other), 0.]])
+            seen.update((index, other))
+            block_count += 1
+            close(star.T, (-1)**m*star, &#39;actual oriented Hodge block adjoint&#39;)
+            for omega in (0., .17, 1., 2.3, math.pi):
+                t, r = transfers(star, omega, .7, .2)
+                matrix = np.block([[t, r], [r, t]])
+                close(matrix.conj().T@matrix, np.eye(4), &#39;complete converter conserves power&#39;)
+                close(t.conj().T@t+r.conj().T@r, np.eye(2), &#39;two output gains sum to identity&#39;)
+                gain = (np.sin(omega*.7/2) if m % 2 else np.cos(omega*.7/2))**2
+                close(t.conj().T@t, gain*np.eye(2), &#39;exact parity-selective forward gain&#39;)
+                if block_count == 1:
+                    scattering = np.block([[np.zeros((4, 4)), matrix.T],
+                                           [matrix, np.zeros((4, 4))]])
+                    close(scattering.T, scattering, &#39;complete bidirectional scattering is reciprocal&#39;)
+                    close(scattering.conj().T@scattering, np.eye(8), &#39;reciprocal completion is unitary&#39;)
+                    tm, rm = transfers(star, -omega, .7, .2)
+                    close(tm, t.conj(), &#39;transfer is real in time domain&#39;)
+                    f = np.exp(1j*omega*.2)*(1+(-1)**m*np.exp(1j*omega*.7))/2
+                    close(t.T@t, f*f*np.eye(2), &#39;causal roundtrip uses transpose at same frequency&#39;)
+                    if omega &gt; 0:
+                        check(abs(f*f-abs(f)**2) &gt; 1e-3, &#39;forward gain and retarded return differ&#39;)
+                    k, mass, gamma = 2., 1., .3
+                    load = (k-mass*omega**2+1j*gamma*omega)/(k-mass*omega**2-1j*gamma*omega)
+                    close(abs(load), 1., &#39;positive oscillator wave-line reflection is allpass&#39;)
+                    u = rng.normal(size=2)+1j*rng.normal(size=2)
+                    out1 = t.T@(load*t@u)
+                    out2 = r.T@(load*t@u)
+                    out3 = r@u
+                    close(sum(np.vdot(v, v).real for v in (out1, out2, out3)), np.vdot(u, u).real,
+                          &#39;loaded three-output network conserves total field energy&#39;)
+            close(transfers(star, 0., .7)[0], (star+star.T)/2, &#39;zero frequency is symmetric Hodge filter&#39;)
+        check(block_count == math.comb(2*m-1, m-1), &#39;all middle-form orientation blocks covered&#39;)
+        CASES.append({&#39;name&#39;: &#39;complete-Hodge-passive-converter&#39;, &#39;real_depth&#39;: 2*m,
+                      &#39;parameters&#39;: {&#39;middle_degree&#39;: m, &#39;oriented_blocks&#39;: block_count},
+                      &#39;measurements&#39;: {&#39;static_transmission&#39;: &#39;zero&#39; if m % 2 else &#39;unit gain&#39;,
+                                       &#39;gain&#39;: &#39;sin^2(Omega tau/2)&#39; if m % 2 else &#39;cos^2(Omega tau/2)&#39;,
+                                       &#39;full_scattering_unitary_and_symmetric&#39;: True}})
+    for k, mass, gamma in ((2., 1., .3), (3., 2., 7.)):
+        poles = np.roots([mass, 1j*gamma, -k])
+        check(np.max(poles.imag) &lt; 0, &#39;positive oscillator reflection poles strictly below real axis&#39;)
+    # Exact algebra keeps the time arguments of the retarded and advanced terms explicit.
+    z, s = sp.symbols(&#39;z s&#39;, real=True)
+    check(sp.expand(((1+s*z)/2)**2) == (1+2*s*z+s**2*z**2)/4,
+          &#39;causal return only has nonnegative delays zero tau two-tau&#39;)
+    for m in range(1, 7):
+        for zc in (.3+.2j, -.7+1.4j, 1.+3j):
+            star = np.array([[0., (-1)**m], [1., 0.]])
+            t, r = transfers(star, zc, .7, .2)
+            check(np.linalg.norm(np.block([[t, r], [r, t]]), 2) &lt;= 1+1e-12,
+                  &#39;delayed full converter is contractive in causal upper half plane&#39;)
+
+
+def pulse_checks():
+    rng = np.random.default_rng(997)
+    length, lag, common = 64, 7, 3
+    inputs = rng.normal(size=(2, 2, length))
+    total_length = length+lag+common
+    for m in range(1, 7):
+        star = np.array([[0., (-1)**m], [1., 0.]])
+        route1 = star@(inputs[0]+inputs[1])/np.sqrt(2)
+        route2 = star.T@(inputs[0]-inputs[1])/np.sqrt(2)
+        a = np.zeros((2, total_length)); b = a.copy()
+        a[:, common:common+length] = route1
+        b[:, common+lag:common+lag+length] = route2
+        outputs = np.stack([(a+b)/np.sqrt(2), (a-b)/np.sqrt(2)])
+        close(np.sum(outputs**2), np.sum(inputs**2), &#39;finite pulse complete two-port energy conservation&#39;)
+        check(np.max(abs(outputs[:, :, :common])) == 0., &#39;no pulse output before first physical delay&#39;)
+        # Two actual input vectors, arbitrary overlap, no quasistatic energy approximation.
+        CASES.append({&#39;name&#39;: &#39;causal-finite-pulse&#39;, &#39;real_depth&#39;: 2*m,
+                      &#39;parameters&#39;: {&#39;input_samples&#39;: length, &#39;path_delays_samples&#39;: [common, common+lag]},
+                      &#39;measurements&#39;: {&#39;input_norm2&#39;: float(np.sum(inputs**2)),
+                                       &#39;output_norm2&#39;: float(np.sum(outputs**2)),
+                                       &#39;first_allowed_output_sample&#39;: common}})
+
+
+def local_wave_action_checks():
+    &quot;&quot;&quot;Real boundary projectors realize each converter with positive wave energy.&quot;&quot;&quot;
+    rng = np.random.default_rng(231)
+    hadamard = np.array([[1., 1.], [1., -1.]])/np.sqrt(2)
+    for m in range(1, 7):
+        star = np.array([[0., (-1)**m], [1., 0.]])
+        for converter in (np.kron(hadamard, np.eye(2)), star, star.T):
+            size = len(converter)
+            scattering = np.block([[np.zeros((size, size)), converter.T],
+                                   [converter, np.zeros((size, size))]])
+            plus = (np.eye(2*size)+scattering)/2
+            minus = np.eye(2*size)-plus
+            close(plus@minus, 0., &#39;Dirichlet and Neumann boundary projectors are orthogonal&#39;)
+            for wave_number in (.01, .7, 3., 100.):
+                derived = -np.linalg.solve(minus+1j*wave_number*plus, minus-1j*wave_number*plus)
+                close(derived, scattering, &#39;local selfadjoint wave boundary produces desired scattering&#39;)
+                incident = rng.normal(size=2*size)+1j*rng.normal(size=2*size)
+                outgoing = derived@incident
+                value = incident+outgoing
+                derivative = 1j*wave_number*(outgoing-incident)
+                close(minus@value, 0., &#39;incident plus outgoing satisfies value boundary condition&#39;)
+                close(plus@derivative, 0., &#39;incident plus outgoing satisfies derivative boundary condition&#39;)
+            boundary_velocity = plus@rng.normal(size=2*size)
+            boundary_derivative = minus@rng.normal(size=2*size)
+            close(boundary_velocity@boundary_derivative, 0., &#39;local wave energy flux vanishes at junction&#39;)
+            # Independent positive spatial-energy form with a finite ordinary path discretization.
+            eigen, vectors = np.linalg.eigh(plus)
+            basis0 = vectors[:, eigen &gt; .5]
+            segments = 5
+            dofs = basis0.shape[1]+(segments-1)*2*size
+            nodes = []
+            node0 = np.zeros((2*size, dofs)); node0[:, :basis0.shape[1]] = basis0
+            nodes.append(node0)
+            for j in range(segments-1):
+                node = np.zeros((2*size, dofs))
+                start = basis0.shape[1]+j*2*size
+                node[:, start:start+2*size] = np.eye(2*size)
+                nodes.append(node)
+            nodes.append(np.zeros((2*size, dofs)))
+            stiffness = sum(((nodes[j+1]-nodes[j]).T@(nodes[j+1]-nodes[j])
+                             for j in range(segments)), np.zeros((dofs, dofs)))
+            check(np.min(np.linalg.eigvalsh(stiffness)) &gt; 0.,
+                  &#39;finite path action with outer Dirichlet control has strictly positive wave energy&#39;)
+        CASES.append({&#39;name&#39;: &#39;positive-local-wave-action&#39;, &#39;real_depth&#39;: 2*m,
+                      &#39;parameters&#39;: {&#39;boundary_conditions&#39;: &#39;P_minus u=0, P_plus outward_derivative u=0&#39;,
+                                     &#39;wave_action&#39;: &#39;1/2 sum integral[(u_t)^2-c^2(u_s)^2] ds dt&#39;,
+                                     &#39;converter_maps&#39;: &#39;Hadamard, star, star transpose&#39;},
+                      &#39;measurements&#39;: {&#39;boundary_energy_flux&#39;: &#39;0&#39;, &#39;wave_energy_nonnegative&#39;: True,
+                                       &#39;local_boundary_scattering_frequency_independent&#39;: True}})
+
+
+def limiting_volume_moment(delta, odd):
+    delta = delta % (2*math.pi)
+    remainder = 2*math.pi-delta
+    if odd:
+        return (delta*remainder**6+remainder*delta**6)/(2*math.pi*4**6)
+    return (delta**7+remainder**7)/(14*math.pi*4**6)
+
+
+def finite_volume_moment(cutoff, delta, odd):
+    # More than 6K samples integrate the sixth-power trigonometric polynomial exactly.
+    samples = 1 &lt;&lt; (6*cutoff).bit_length()
+    spectrum = np.zeros(samples, dtype=complex)
+    k = np.arange(1, cutoff+1, dtype=float)
+    phase = (delta % (2*math.pi))
+    s = -1 if odd else 1
+    values = -1j/(2*k)*(1+s*np.exp(-1j*k*phase))/2
+    spectrum[1:cutoff+1] = values
+    spectrum[-cutoff:] = values[::-1].conj()
+    waveform = np.fft.ifft(spectrum).real*samples
+    return float(np.mean(waveform**6))
+
+
+def volume_delay_checks(ratios):
+    delta = sp.symbols(&#39;delta&#39;, positive=True)
+    theta = sp.symbols(&#39;theta&#39;, real=True)
+    odd_exact = (delta*(2*sp.pi-delta)**6+(2*sp.pi-delta)*delta**6)/(2*sp.pi*4**6)
+    even_exact = (delta**7+(2*sp.pi-delta)**7)/(14*sp.pi*4**6)
+    integrated = (sp.integrate(((delta-2*theta)/4)**6, (theta, 0, delta))
+                  +sp.integrate(((2*sp.pi+delta-2*theta)/4)**6, (theta, delta, 2*sp.pi)))/(2*sp.pi)
+    check(sp.simplify(integrated-even_exact) == 0, &#39;piecewise limiting even-filter sixth moment&#39;)
+    check(sp.limit(odd_exact/delta, delta, 0) == sp.pi**5/128,
+          &#39;infinite-cutoff odd-color leakage starts linearly in delay&#39;)
+    reference = math.pi**6/448
+    mb, me = math.pi/2, 2*math.pi
+    remainder_coefficient = sum(math.comb(6, j)*mb**(6-j)*me**(j-2) for j in range(2, 7))
+    for cutoff in (1, 2, 8, 128, 2002, 18564):
+        for phase in (.01, .1, 1., math.pi):
+            for odd in (False, True):
+                actual = finite_volume_moment(cutoff, phase, odd)
+                limiting = limiting_volume_moment(phase, odd)
+                bound = 6*mb**5/math.sqrt(2*cutoff)+remainder_coefficient/(2*cutoff)
+                check(abs(actual-limiting) &lt;= bound, &#39;finite-sixth-moment convergence obeys rigorous source bound&#39;)
+                if cutoff == 1:
+                    expected = 5/16*(math.sin(phase/2) if odd else math.cos(phase/2))**6
+                    close(actual, expected, &#39;independent exact single-sine sixth moment&#39;)
+    assigned = [(&#39;W&#39;, 2, 76), (&#39;Z&#39;, 2, 81), (&#39;Higgs&#39;, 2, 95), (&#39;down&#39;, 3, 1),
+                (&#39;strange&#39;, 3, 4), (&#39;up&#39;, 4, 3), (&#39;charm&#39;, 4, 20), (&#39;top&#39;, 4, 72),
+                (&#39;nu1&#39;, 5, 10), (&#39;nu2&#39;, 5, 15), (&#39;nu3&#39;, 5, 22),
+                (&#39;electron&#39;, 6, 13), (&#39;muon&#39;, 6, 35), (&#39;tau&#39;, 10, 23)]
+    for name, depth, n in assigned:
+        cutoff = math.comb(n+depth-1, depth)
+        m = (depth+1)//2
+        odd = bool(m % 2)
+        rank = math.comb(2*m-1, m-1)
+        for law in (&#39;common-receiver-delay&#39;, &#39;source-fundamental-delay&#39;):
+            for eta in (.1, 1.):
+                phase = ratios[depth]*eta if law == &#39;common-receiver-delay&#39; else eta
+                limiting = limiting_volume_moment(phase, odd)
+                bound = 6*mb**5/math.sqrt(2*cutoff)+remainder_coefficient/(2*cutoff)
+                value = finite_volume_moment(cutoff, phase, odd) if cutoff &lt;= 100000 else limiting
+                error = 0. if cutoff &lt;= 100000 else bound
+                if cutoff &lt;= 100000:
+                    check(value &gt;= 0., &#39;prepared finite color-volume energy is nonnegative&#39;)
+                if depth in (6, 10) and eta == 1.:
+                    check(value-error &gt; .5, &#39;bounded delayed Hodge replacement reactivates lepton higher-volume channel&#39;)
+                CASES.append({&#39;name&#39;: &#39;finite-delay-color-volume-control&#39;, &#39;real_depth&#39;: depth,
+                              &#39;mode_index&#39;: n, &#39;basis_cutoff&#39;: cutoff,
+                              &#39;parameters&#39;: {&#39;particle&#39;: name, &#39;delay_law&#39;: law, &#39;shared_eta&#39;: eta,
+                                             &#39;preparation&#39;: &#39;three equal-frequency equal-phase patterns with nonzero mode volume&#39;,
+                                             &#39;this_is_a_control_not_synchronization_of_unlike_particles&#39;: True},
+                              &#39;measurements&#39;: {&#39;sixth_waveform_moment&#39;: value,
+                                               &#39;rigorous_large_cutoff_approximation_bound&#39;: error,
+                                               &#39;limiting_unfiltered_reference&#39;: reference,
+                                               &#39;limiting_filtered_reference_ratio&#39;: limiting/reference,
+                                               &#39;mode_rank&#39;: rank,
+                                               &#39;three_mode_volume_exists&#39;: rank &gt;= 3,
+                                               &#39;instantaneous_H_strict_volume_zero&#39;: odd}})
+
+
+def comb_checks(saw):
+    assigned = [(&#39;W&#39;, 2, 76), (&#39;Z&#39;, 2, 81), (&#39;Higgs&#39;, 2, 95), (&#39;down&#39;, 3, 1),
+                (&#39;strange&#39;, 3, 4), (&#39;up&#39;, 4, 3), (&#39;charm&#39;, 4, 20), (&#39;top&#39;, 4, 72),
+                (&#39;nu1&#39;, 5, 10), (&#39;nu2&#39;, 5, 15), (&#39;nu3&#39;, 5, 22),
+                (&#39;electron&#39;, 6, 13), (&#39;muon&#39;, 6, 35), (&#39;tau&#39;, 10, 23)]
+    ratios = {2: 18564*math.sqrt(2890), 3: 18564*math.sqrt(32*math.sqrt(7)),
+              4: 18564/15*math.sqrt(48/math.sqrt(7)),
+              5: math.sqrt(2.534e-3/(65780**2-2002**2))*18564/(.51099895000e6),
+              6: 1., 10: 1.}
+    eta_values = [.01, .1, 1., math.pi, 2*math.pi]
+    records = {}
+    for name, depth, n in assigned:
+        cutoff = math.comb(n+depth-1, depth)
+        limit = 2*cutoff if cutoff &lt;= 150000 else 65536
+        c0, coefficients = saw.coefficients(cutoff, limit)
+        p = np.arange(1, len(coefficients)+1, dtype=float)
+        ratio = ratios[depth]
+        omega = p*ratio
+        chi = (3/(2-omega**2)+2/(3-omega**2))/5
+        m = (depth+1)//2
+        even = m % 2 == 0
+        static = c0*c0*13/30 if even else 0.
+        tail = saw.response_sum(cutoff, ratio)[&#39;density_tail_bound&#39;]
+        base = float(np.sum(.5*coefficients**2*chi))
+        for law in (&#39;common-receiver-delay&#39;, &#39;source-fundamental-delay&#39;):
+            for eta in eta_values:
+                phase = omega*eta if law == &#39;common-receiver-delay&#39; else p*eta
+                gain = (np.cos(phase/2) if even else np.sin(phase/2))**2
+                value = float(np.sum(.5*coefficients**2*gain*chi))
+                complement = float(np.sum(.5*coefficients**2*(1-gain)*chi))
+                close(value+complement, base, &#39;selected plus complementary diagnostic equals unfiltered sum&#39;)
+                record = {&#39;name&#39;: &#39;all-sector-passive-sawtooth&#39;, &#39;real_depth&#39;: depth,
+                          &#39;mode_index&#39;: n, &#39;basis_cutoff&#39;: cutoff,
+                          &#39;parameters&#39;: {&#39;particle&#39;: name, &#39;delay_law&#39;: law, &#39;shared_eta&#39;: eta,
+                                         &#39;fundamental_ratio&#39;: ratio, &#39;evaluated_harmonics&#39;: len(coefficients),
+                                         &#39;receiver&#39;: &#39;(3/(2-Omega^2)+2/(3-Omega^2))/5&#39;,
+                                         &#39;quantity_is_forward_receiver_diagnostic&#39;: True},
+                          &#39;measurements&#39;: {&#39;dynamic_response&#39;: value, &#39;static_response&#39;: static,
+                                           &#39;total_response&#39;: value+static,
+                                           &#39;absolute_omitted_tail_bound&#39;: tail,
+                                           &#39;complementary_dynamic_response&#39;: complement}}
+                CASES.append(record)
+                records[(name, law, eta)] = record[&#39;measurements&#39;]
+        if depth == 5:
+            derivative = saw.response_sum(cutoff, ratio)[&#39;derivative_source_response&#39;]
+            small = records[(name, &#39;common-receiver-delay&#39;, .01)][&#39;dynamic_response&#39;]
+            close(small/(.01**2/4*derivative), 1., &#39;common-delay odd channel has checked low-frequency derivative limit&#39;, 2e-9)
+            intrinsic = records[(name, &#39;source-fundamental-delay&#39;, 1.)][&#39;dynamic_response&#39;]
+            check(intrinsic &gt; .01, &#39;source-relative delay removes slow-clock neutrino suppression&#39;)
+        if depth in (6, 10):
+            dark = records[(name, &#39;common-receiver-delay&#39;, 2*math.pi)][&#39;dynamic_response&#39;]
+            check(abs(dark) &lt; 1e-20, &#39;unfavorable common two-pi delay makes all charged-lepton comb lines dark&#39;)
+        dark_or_bright = records[(name, &#39;source-fundamental-delay&#39;, 2*math.pi)][&#39;dynamic_response&#39;]
+        close(dark_or_bright, base if even else 0., &#39;intrinsic integer-period delay control&#39;)
+    # Symmetry-breaking floors are common coherent path perturbations, not fitted particle coefficients.
+    for epsilon in (0., 1e-8, 1e-5, .01):
+        alpha, beta = (1+epsilon)/2, (1-epsilon)/2
+        for phase in (0., 1e-8, 1e-5, .01):
+            floor = abs(alpha-beta*np.exp(1j*phase))**2
+            expected = epsilon**2+2*alpha*beta*(1-np.cos(phase))
+            close(floor, expected, &#39;odd-channel static mismatch floor&#39;)
+            CASES.append({&#39;name&#39;: &#39;coherent-path-robustness&#39;,
+                          &#39;parameters&#39;: {&#39;common_amplitude_imbalance&#39;: epsilon, &#39;common_DC_phase_offset&#39;: phase},
+                          &#39;measurements&#39;: {&#39;odd_channel_DC_gain&#39;: floor,
+                                           &#39;neutrino_limiting_DC_response&#39;: float((math.pi**2/12)**2*13/30*floor)}})
+    return ratios
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--sawtooth-source&#39;, type=Path, required=True)
+    parser.add_argument(&#39;--output&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    spec = importlib.util.spec_from_file_location(&#39;sawtooth&#39;, args.sawtooth_source)
+    saw = importlib.util.module_from_spec(spec); spec.loader.exec_module(saw)
+    algebra_checks()
+    pulse_checks()
+    local_wave_action_checks()
+    ratios = comb_checks(saw)
+    volume_delay_checks(ratios)
+    report = {&#39;title&#39;: &#39;Passive Hodge interference and causal return across all sectors&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;checks_passed&#39;: CHECKS, &#39;cases&#39;: CASES,
+              &#39;fundamental_ratios&#39;: ratios,
+              &#39;scope&#39;: &#39;Conditional same-field modal network, not particle simulations or derived measured forces.&#39;,
+              &#39;physical_premises&#39;: [&#39;coherent equal-weight orientation paths&#39;,
+                                    &#39;raw unphased spatial Hodge contact&#39;,
+                                    &#39;selected transmission port before lower-dimensional readout&#39;,
+                                    &#39;prepared finite sawtooth density source&#39;,
+                                    &#39;fixed source orientation and common receiver&#39;],
+              &#39;limitations&#39;: [&#39;Forward gain-weighted receiver sum is not a retarded roundtrip force kernel.&#39;,
+                              &#39;Seven/eight and eleven/twelve are active static higher-rank controls.&#39;,
+                              &#39;Source-relative delays can remove neutrino slow-clock suppression.&#39;,
+                              &#39;Replacing the instantaneous color filter by its delayed transfer generally restores higher-sector volume interactions.&#39;,
+                              &#39;Complementary modes retain energy and may support other interactions.&#39;],
+              &#39;sources&#39;: {&#39;experiments/passive-hodge-transfer-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/sawtooth-sector-coupling-checks.py&#39;: sha256(args.sawtooth_source.read_bytes()).hexdigest()}}
+    args.output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;checks_passed&#39;: CHECKS, &#39;cases&#39;: len(CASES), &#39;output&#39;: str(args.output)}))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

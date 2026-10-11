@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>bending-clock-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/bending-clock-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="bending-clock-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/bending-clock-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="bending-clock-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>bending-clock-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/bending-clock-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Positive displacement/rotation response: exact branch gap and static pole.&quot;&quot;&quot;
+from collections import Counter
+from datetime import datetime,timezone
+from fractions import Fraction as F
+from hashlib import sha256
+import json
+import math
+from pathlib import Path
+
+import numpy as np
+import sympy as sp
+
+ROOT=Path(__file__).resolve().parent
+counts=Counter()
+
+
+def check(value,label):
+    if not bool(value):
+        raise AssertionError(label)
+    counts[label]+=1
+
+
+def close(a,b,label,tol=2e-10):
+    check(np.allclose(a,b,atol=tol,rtol=tol),label)
+
+
+k,c,clock,z=sp.symbols(&#39;k c Omega z&#39;,positive=True)
+c2=sp.symbols(&#39;c_2&#39;,positive=True)
+kap,bend,mass,inertia=sp.symbols(&#39;kappa b M I&#39;,positive=True)
+stiff=sp.Matrix([[kap*k*k,-kap*k],[-kap*k,kap+bend*k*k]])
+check(sp.factor(stiff.det())==kap*bend*k**4,&#39;exact positive stiffness determinant&#39;)
+static=sp.factor(kap*k*k-kap**2*k*k/(kap+bend*k*k))
+check(sp.simplify(static-kap*bend*k**4/(kap+bend*k*k))==0,&#39;static Schur bending stiffness&#39;)
+check(sp.simplify(1/static-1/(bend*k**4)-1/(kap*k*k))==0,&#39;static inverse fourth plus second order&#39;)
+effective=kap*k*k-mass*z-kap**2*k*k/(kap+bend*k*k-inertia*z)
+check(sp.factor(effective*(kap+bend*k*k-inertia*z))==
+      sp.factor((stiff-sp.diag(mass,inertia)*z).det()),&#39;full frequency Schur complement&#39;)
+matched=sp.Matrix([[c*c*k*k,-c*clock*k],[-c*clock*k,clock*clock+c*c*k*k]])
+root=sp.sqrt(clock*clock+4*c*c*k*k)
+plus=(root+clock)/2
+minus=2*c*c*k*k/(root+clock)
+for w in (plus,minus):
+    check(sp.simplify((matched-w*w*sp.eye(2)).det())==0,&#39;exact matched branch frequency&#39;)
+check(sp.simplify(plus-minus-clock)==0,&#39;exact carrier independent branch gap&#39;)
+check(sp.simplify(plus*minus-c*c*k*k)==0,&#39;exact branch frequency product&#39;)
+check(sp.simplify(sp.diff(plus,k)-2*c*c*k/root)==0,&#39;common finite group velocity&#39;)
+check(sp.simplify(sp.diff(minus,k)-sp.diff(plus,k))==0,&#39;equal branch group velocities&#39;)
+raw_vertex=c*k/root
+canonical_density_vertex=raw_vertex/(2*sp.sqrt(sp.simplify(plus*minus)))
+check(sp.simplify(canonical_density_vertex-1/(2*root))==0,
+      &#39;canonical density vertex retains carrier suppression&#39;)
+check(sp.simplify((plus+minus)*canonical_density_vertex-sp.Rational(1,2))==0,
+      &#39;canonical velocity current vertex exactly one half&#39;)
+unmatched_matrix=sp.Matrix([[c*c*k*k,-c*clock*k],[-c*clock*k,clock*clock+c2*c2*k*k]])
+check(sp.simplify(unmatched_matrix.trace()-2*c*c2*k*k-clock**2-(c-c2)**2*k*k)==0,
+      &#39;unmatched exact gap squared&#39;)
+check(sp.factor(unmatched_matrix.det())==c*c*c2*c2*k**4,
+      &#39;unmatched frequency product determinant&#39;)
+
+# The one-dimensional conservative energy system has an exact Dirac
+# factorization plus a commuting clock polarization.
+principal=sp.Matrix([[0,1,0,0],[1,0,0,0],[0,0,0,1],[0,0,1,0]])
+conversion=sp.Matrix([[0,0,0,-1],[0,0,0,0],[0,0,0,0],[1,0,0,0]])
+clock_polarization=sp.Matrix([[0,0,0,-sp.I],[0,0,-sp.I,0],
+                              [0,sp.I,0,0],[sp.I,0,0,0]])
+grading=sp.diag(1,-1,-1,1)
+dirac_mass=clock_polarization*grading
+full_h=-c*k*principal+sp.I*clock*conversion
+dirac_h=-c*k*principal+clock*dirac_mass/2
+check(principal**2==sp.eye(4),&#39;first order spatial Clifford square&#39;)
+check(dirac_mass**2==sp.eye(4),&#39;first order mass Clifford square&#39;)
+check(principal*dirac_mass+dirac_mass*principal==sp.zeros(4),
+      &#39;first order Clifford anticommutation&#39;)
+check(clock_polarization**2==sp.eye(4),&#39;clock polarization involution&#39;)
+check(full_h==dirac_h+clock*clock_polarization/2,&#39;exact Dirac plus clock decomposition&#39;)
+check(full_h*clock_polarization-clock_polarization*full_h==sp.zeros(4),
+      &#39;clock polarization commutes with full first order operator&#39;)
+check(sp.simplify(dirac_h**2-(c*c*k*k+clock*clock/4)*sp.eye(4))==sp.zeros(4),
+      &#39;exact Dirac dispersion factorization&#39;)
+
+clifford_controls=[]
+for depth in (2,3,4,5,6,10):
+    allowed=[]
+    for mask in range(1&lt;&lt;10):
+        degree=mask.bit_count()
+        commutes_beta=(degree%2==0)
+        commutes_tangent=all(((degree-(1 if mask&amp;(1&lt;&lt;j) else 0))%2)==0 for j in range(depth))
+        if commutes_beta and commutes_tangent:
+            allowed.append(mask)
+    expected=2**(9-depth) if depth&lt;10 else 1
+    check(len(allowed)==expected,&#39;full spatial Clifford and mass commutant dimension&#39;)
+    fixed_plane=(1&lt;&lt;8)|(1&lt;&lt;9)
+    check((fixed_plane in allowed)==(depth&lt;10),&#39;ordinary fixed clock plane compatibility&#39;)
+    clifford_controls.append({&#39;real_depth&#39;:depth,
+                              &#39;complex_pointwise_commutant_dimension&#39;:len(allowed),
+                              &#39;fixed_9_10_rotation_clock_commutes&#39;:fixed_plane in allowed,
+                              &#39;nontrivial_pointwise_independent_clock_allowed&#39;:len(allowed)&gt;1,
+                              &#39;spatial_band_clock_excluded&#39;:False})
+
+numerical=[]
+for depth in (2,3,4,5,6,10):
+    for wave_number in (.001,.03,.2,1.,3.,20.,1000.):
+        a=np.array([[wave_number**2,-wave_number],[-wave_number,1+wave_number**2]])
+        values,vectors=np.linalg.eigh(a)
+        big=(math.sqrt(1+4*wave_number**2)+1)/2
+        small=wave_number*wave_number/big
+        close(values,[small**2,big**2],&#39;independent full modal eigenvalues&#39;,2e-9)
+        check(values[0]&gt;0,&#39;full positive kinetic branch&#39;)
+        vminus,vplus=vectors[:,0],vectors[:,1]
+        # Identity sees orthogonal branches; component-selective and strain
+        # readouts see the gap. A unit-mass kinetic basis is used here.
+        close(np.dot(vminus,vplus),0,&#39;integrated identity readout has no gap beat&#39;)
+        q_vertex=abs(vminus[0]*vplus[0])
+        shear=np.array([-wave_number,1.])
+        shear_vertex=abs(np.dot(shear,vminus)*np.dot(shear,vplus))
+        expected=wave_number/math.sqrt(1+4*wave_number**2)
+        close(q_vertex,expected,&#39;displacement source gap coefficient&#39;)
+        close(shear_vertex,wave_number**2*expected,&#39;shear source adds squared wave number&#39;)
+        canonical_density=q_vertex/(2*np.sqrt(big*small))
+        canonical_velocity=(big+small)*canonical_density
+        close(canonical_density,1/(2*np.sqrt(1+4*wave_number**2)),
+              &#39;independent canonical density source normalization&#39;)
+        close(canonical_velocity,.5,&#39;independent canonical velocity vertex universal&#39;)
+        check(0&lt;q_vertex&lt;.5,&#39;gap vertex bounded and nonzero&#39;)
+        group=2*wave_number/math.sqrt(1+4*wave_number**2)
+        check(0&lt;group&lt;1,&#39;both group velocities below characteristic speed&#39;)
+        t=2*np.pi*np.arange(128)/128
+        # Factor the high carrier when evaluating the same canonical field.
+        field=(vminus[:,None]*np.exp(1j*t)/np.sqrt(2*small)+
+               vplus[:,None]/np.sqrt(2*big))
+        time_derivative=(-1j*small*vminus[:,None]*np.exp(1j*t)/np.sqrt(2*small)-
+                         1j*big*vplus[:,None]/np.sqrt(2*big))
+        jq=(1j*(field[0].conj()*time_derivative[0]-
+                time_derivative[0].conj()*field[0])).real
+        jtotal=(1j*np.sum(field.conj()*time_derivative-
+                         time_derivative.conj()*field,axis=0)).real
+        close(jtotal,2,&#39;total conserved current has no branch beat&#39;)
+        close(abs(2*np.fft.fft(jq)[1]/len(t)),1.,
+              &#39;full canonical velocity current fundamental coefficient&#39;)
+        energy=np.sum(abs(time_derivative)**2,axis=0)+np.einsum(&#39;it,ij,jt-&gt;t&#39;,field.conj(),a,field).real
+        close(energy,big+small,&#39;full canonical branch energy has no beat&#39;,2e-9)
+        numerical.append({&#39;real_depth&#39;:depth,&#39;wave_number_in_clock_units&#39;:wave_number,
+                          &#39;upper_frequency_over_clock&#39;:big,&#39;lower_frequency_over_clock&#39;:small,
+                          &#39;branch_gap_over_clock&#39;:1,&#39;q_source_vertex&#39;:q_vertex,
+                          &#39;shear_source_vertex&#39;:shear_vertex,&#39;group_velocity_over_c&#39;:group})
+        numerical[-1].update({&#39;canonical_density_vertex&#39;:canonical_density,
+                              &#39;canonical_velocity_current_vertex&#39;:canonical_velocity})
+
+# Unmatched speeds are a physical control, not a per-particle fit.
+unmatched=[]
+for speed_squared in (.5,.9,1.,1.1,2.):
+    for wave_number in (.2,1.,5.,20.):
+        mat=np.array([[wave_number**2,-wave_number],[-wave_number,1+speed_squared*wave_number**2]])
+        vals=np.linalg.eigvalsh(mat)
+        check(vals[0]&gt;0,&#39;unmatched speeds remain positive&#39;)
+        gap=float(np.sqrt(vals[1])-np.sqrt(vals[0]))
+        close(gap,np.sqrt(1+(1-np.sqrt(speed_squared))**2*wave_number**2),
+              &#39;independent unequal speed gap identity&#39;)
+        if speed_squared==1:
+            close(gap,1,&#39;matched control constant gap&#39;)
+        unmatched.append({&#39;rotation_speed_squared_over_displacement_speed_squared&#39;:speed_squared,
+                          &#39;wave_number&#39;:wave_number,&#39;gap&#39;:gap})
+
+# Full tensor stiffness, evaluated at a generic spatial wave vector, checks
+# that the longitudinal response is identical at every occupied depth.
+tensor=[]
+for depth in (2,3,4,5,6,10):
+    vector=np.arange(1,depth+1,dtype=float)
+    vector/=np.linalg.norm(vector)
+    vector*=.7
+    norm=float(np.linalg.norm(vector))
+    matrix=np.zeros((depth+1,depth+1))
+    matrix[0,0]=norm**2
+    matrix[0,1:]=-vector
+    matrix[1:,0]=-vector
+    matrix[1:,1:]=(1+norm**2)*np.eye(depth)
+    vals=np.linalg.eigvalsh(matrix)
+    big=(np.sqrt(1+4*norm**2)+1)/2
+    small=norm**2/big
+    expected=sorted([small**2,big**2]+[1+norm**2]*(depth-1))
+    close(vals,expected,&#39;full spatial longitudinal and transverse spectrum&#39;)
+    inverse=np.linalg.inv(matrix)
+    close(inverse[0,0],1/norm**4+1/norm**2,&#39;full spatial q static fourth order response&#39;)
+    shear_map=np.column_stack((-vector,np.eye(depth)))
+    shear_response=shear_map@inverse@shear_map.T
+    long=vector/norm
+    close(long@shear_response@long,1.,&#39;longitudinal shear vertex cancels static fourth order pole&#39;)
+    rot_response=long@inverse[1:,1:]@long
+    close(rot_response,1/norm**2,&#39;rotation vertex has only second order pole&#39;)
+    tensor.append({&#39;real_depth&#39;:depth,&#39;transverse_rotation_modes&#39;:depth-1,
+                   &#39;q_response&#39;:&#39;1/k^4+1/k^2&#39;,&#39;longitudinal_rotation_response&#39;:&#39;1/k^2&#39;,
+                   &#39;longitudinal_shear_response&#39;:&#39;1&#39;,
+                   &#39;direct_q_neutral_confinement_window&#39;:depth in (3,4),
+                   &#39;rotation_neutral_confinement_window&#39;:depth in (2,)})
+
+baseline_path=ROOT/&#39;grounding/complex-comb-response-results.json&#39;
+baseline=json.loads(baseline_path.read_text())
+assigned=[]
+speed_sensitivity=[]
+for source in baseline[&#39;particle_cases&#39;]:
+    cutoff=source[&#39;cutoff&#39;]
+    # Inverting the upper branch preserves the supplied target; it does
+    # not select a spatial eigenvalue. Exact arithmetic avoids huge matrices.
+    k_squared=cutoff*(cutoff-1)
+    radicand=1+4*k_squared
+    check(math.isqrt(radicand)==2*cutoff-1,&#39;assigned adjacent branch exact square&#39;)
+    vertex_squared=F(k_squared,(2*cutoff-1)**2)
+    check(vertex_squared==F(1,4)-F(1,4*(2*cutoff-1)**2),&#39;assigned gap vertex saturation identity&#39;)
+    if cutoff==1:
+        check(vertex_squared==0,&#39;down endpoint has no paired dynamic gap source&#39;)
+    # A common unit-radius round sphere does not generally supply the
+    # required spatial eigenvalue. Test the occupied depth itself exactly.
+    depth=source[&#39;real_depth&#39;]
+    discr=(depth-1)**2+4*k_squared
+    integer_root=math.isqrt(discr)
+    spherical=(integer_root**2==discr and (integer_root-(depth-1))%2==0)
+    degree=(integer_root-(depth-1))//2 if spherical else None
+    assigned.append({&#39;particle&#39;:source[&#39;particle&#39;],&#39;real_depth&#39;:depth,&#39;cutoff&#39;:cutoff,
+                     &#39;required_spatial_wave_number_squared&#39;:k_squared,
+                     &#39;upper_frequency_over_sector_clock&#39;:cutoff,
+                     &#39;lower_frequency_over_sector_clock&#39;:cutoff-1,
+                     &#39;q_vertex_squared_exact&#39;:str(vertex_squared),
+                     &#39;q_vertex_squared&#39;:float(vertex_squared),
+                     &#39;canonical_density_vertex_in_clock_units&#39;:str(F(1,2*(2*cutoff-1))) if cutoff&gt;1 else None,
+                     &#39;canonical_velocity_current_vertex&#39;:&#39;1/2&#39; if cutoff&gt;1 else None,
+                     &#39;round_sphere_eigenvalue_matches&#39;:spherical,&#39;sphere_degree&#39;:degree,
+                     &#39;spatial_target_is_derived&#39;:False})
+    if cutoff&gt;1:
+        for epsilon in (-1e-6,-1e-8,1e-10,1e-8,1e-6):
+            gap=math.sqrt(1+epsilon*epsilon*k_squared)
+            velocity_vertex=1/(2*math.sqrt(1+epsilon)*gap)
+            speed_sensitivity.append({&#39;particle&#39;:source[&#39;particle&#39;],&#39;real_depth&#39;:depth,
+                                      &#39;rotation_speed_relative_error&#39;:epsilon,
+                                      &#39;gap_over_sector_clock&#39;:gap,
+                                      &#39;canonical_velocity_vertex&#39;:velocity_vertex,
+                                      &#39;spatial_wave_number_held_fixed&#39;:True})
+
+# On a curved base, a covariant gradient needs a Weitzenbock correction.
+# This formal eigenvalue control is valid only if the chosen rotation
+# stiffness preserves gradients with the stated eigenvalue.
+ell=sp.symbols(&#39;ell&#39;,nonnegative=True,integer=True)
+check(sp.expand(1+4*ell*(ell+1)-(2*ell+1)**2)==0,&#39;two sphere exact adjacent ladder identity&#39;)
+
+report={&#39;experiment&#39;:&#39;bending-clock&#39;,&#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),
+        &#39;status&#39;:&#39;passed&#39;,&#39;checks&#39;:sum(counts.values()),&#39;check_counts&#39;:dict(counts),
+        &#39;scope&#39;:&#39;Positive local coupled displacement/rotation inverse action. Equal characteristic speeds give a constant branch gap; actual IDWT carrier, vertex, spatial selection and confinement are not derived.&#39;,
+        &#39;numerical_cases&#39;:numerical,&#39;unmatched_speed_controls&#39;:unmatched,
+        &#39;spatial_tensor_cases&#39;:tensor,&#39;particle_cases&#39;:assigned,
+        &#39;speed_sensitivity_cases&#39;:speed_sensitivity,
+        &#39;first_order_clifford_controls&#39;:clifford_controls,
+        &#39;sources&#39;:{&#39;experiments/bending-clock-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest(),
+                   &#39;results/complex-comb-response-results.json&#39;:sha256(baseline_path.read_bytes()).hexdigest()}}
+out=ROOT/&#39;bending-clock-results.json&#39;
+out.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;checks&#39;:report[&#39;checks&#39;],&#39;assigned_cases&#39;:len(assigned),
+                  &#39;full_spatial_cases&#39;:len(tensor),&#39;report&#39;:str(out)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

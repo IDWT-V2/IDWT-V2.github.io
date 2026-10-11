@@ -1,0 +1,1712 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>cavity-phase-lock-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/cavity-phase-lock-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="cavity-phase-lock-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/cavity-phase-lock-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="cavity-phase-lock-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>cavity-phase-lock-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/cavity-phase-lock-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">experiment</th><td>cavity-phase-lock</td></tr><tr><th scope="row">created_utc</th><td>2026-10-10T00:43:30.792809+00:00</td></tr><tr><th scope="row">status</th><td>passed</td></tr><tr><th scope="row">checks</th><td>1474</td></tr><tr><th scope="row">scope</th><td>Finite retained-mode inverse action; no particle simulation or derived band confinement.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;experiment&quot;: &quot;cavity-phase-lock&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-10T00:43:30.792809+00:00&quot;,
+  &quot;status&quot;: &quot;passed&quot;,
+  &quot;checks&quot;: 1474,
+  &quot;check_counts&quot;: {
+    &quot;roundtrip phase closure&quot;: 1,
+    &quot;roundtrip spacing uses group delay&quot;: 1,
+    &quot;cavity offset remains independent condition&quot;: 1,
+    &quot;exact locked constraint&quot;: 30,
+    &quot;exact transverse rank&quot;: 30,
+    &quot;overall amplitude null&quot;: 30,
+    &quot;index slope null&quot;: 30,
+    &quot;two complex neutral modes&quot;: 30,
+    &quot;positive transverse Hessian&quot;: 30,
+    &quot;full complex energy variation&quot;: 30,
+    &quot;norm conservation&quot;: 30,
+    &quot;index moment conservation&quot;: 30,
+    &quot;locking energy conservation&quot;: 30,
+    &quot;two phase symmetries&quot;: 30,
+    &quot;equivariant field equation&quot;: 30,
+    &quot;unchanged free mass frequencies&quot;: 30,
+    &quot;second variation from quartic&quot;: 30,
+    &quot;geometric fundamental exact&quot;: 9,
+    &quot;common density mean&quot;: 9,
+    &quot;independent density coefficients&quot;: 9,
+    &quot;carrier and offset blind density&quot;: 45,
+    &quot;field energy vertex retains carrier&quot;: 45,
+    &quot;general Hermitian source carrier cancellation&quot;: 9,
+    &quot;source derivative carrier cancellation&quot;: 9,
+    &quot;pair correlation by Fourier&quot;: 9,
+    &quot;opposite phase pair correlation&quot;: 9,
+    &quot;flat in phase exact&quot;: 3,
+    &quot;flat opposite phase exact&quot;: 1,
+    &quot;mass endpoint retained&quot;: 42,
+    &quot;same envelope fundamental&quot;: 39,
+    &quot;assigned sawtooth locking constraint&quot;: 156,
+    &quot;unprojected next mode forcing&quot;: 4,
+    &quot;nonzero endpoint energy&quot;: 4,
+    &quot;octic finite sawtooth zero&quot;: 6,
+    &quot;octic finite sawtooth exact orbit&quot;: 6,
+    &quot;arbitrary support invariant&quot;: 18,
+    &quot;octic complete linear nonnegativity&quot;: 6,
+    &quot;octic boundary adds one curvature&quot;: 6,
+    &quot;octic next empty mode positive curvature&quot;: 6,
+    &quot;octic full second variation&quot;: 6,
+    &quot;octic full complex variation&quot;: 6,
+    &quot;octic norm conservation&quot;: 6,
+    &quot;octic index conservation&quot;: 6,
+    &quot;dispersion spoils free exact locking&quot;: 3,
+    &quot;same field feedback oscillation frequency&quot;: 24,
+    &quot;same field feedback has no growing pair&quot;: 24,
+    &quot;feedback high band norm conservation&quot;: 24,
+    &quot;feedback resonant energy exchange balance&quot;: 24,
+    &quot;feedback complete bare energy balance&quot;: 24,
+    &quot;feedback interaction energy conservation&quot;: 24,
+    &quot;feedback phase resolved transfer&quot;: 24,
+    &quot;feedback full complex variation&quot;: 24,
+    &quot;four mode reciprocal oscillation frequency&quot;: 24,
+    &quot;four mode no growing disturbance pair&quot;: 24,
+    &quot;four mode first pair norm conservation&quot;: 24,
+    &quot;four mode second pair norm conservation&quot;: 24,
+    &quot;four mode total sideband action conservation&quot;: 24,
+    &quot;four mode full energy exchange balance&quot;: 24,
+    &quot;four mode phase resolved transfer&quot;: 24,
+    &quot;four mode complete complex variation&quot;: 24,
+    &quot;four mode common field phase symmetry&quot;: 48,
+    &quot;local density mismatch generates beat interaction&quot;: 24,
+    &quot;combined action full transverse rank&quot;: 9,
+    &quot;combined action no growing linear modes&quot;: 9,
+    &quot;combined action disturbance pair count&quot;: 9,
+    &quot;phase bunching libration frequency&quot;: 1,
+    &quot;total spoke acceptance independent of order&quot;: 30,
+    &quot;single rotating order has no fundamental density&quot;: 30,
+    &quot;adjacent rotating orders restore fundamental density&quot;: 30
+  },
+  &quot;scope&quot;: &quot;Finite retained-mode inverse action; no particle simulation or derived band confinement.&quot;,
+  &quot;stability_cases&quot;: [
+    {
+      &quot;bandwidth&quot;: 3,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 1.571428571428572,
+      &quot;maximum_curvature&quot;: 1.571428571428572,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 3,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 12.214285714285719,
+      &quot;maximum_curvature&quot;: 12.214285714285719,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 3,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 2.000000000000001,
+      &quot;maximum_curvature&quot;: 2.000000000000001,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 3,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 19.10204081632654,
+      &quot;maximum_curvature&quot;: 19.10204081632654,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 3,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 1.8120300751879697,
+      &quot;maximum_curvature&quot;: 1.8120300751879697,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 3,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 23.55882352941176,
+      &quot;maximum_curvature&quot;: 23.55882352941176,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 4,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 0.2218638298590353,
+      &quot;maximum_curvature&quot;: 1.7193126407291999,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 4,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 3.414577741169901,
+      &quot;maximum_curvature&quot;: 14.685777048490518,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 4,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 0.49999999999999994,
+      &quot;maximum_curvature&quot;: 2.499999999999999,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 4,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 7.7151252014465905,
+      &quot;maximum_curvature&quot;: 49.884874798553405,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 4,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 0.3595164964875028,
+      &quot;maximum_curvature&quot;: 2.125019585986724,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 4,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 8.049521657040726,
+      &quot;maximum_curvature&quot;: 102.59006526206426,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 5,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 0.04224202951641444,
+      &quot;maximum_curvature&quot;: 1.7185689412105551,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 5,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 1.1088546670476802,
+      &quot;maximum_curvature&quot;: 14.859327381990934,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 5,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 0.16421833083994555,
+      &quot;maximum_curvature&quot;: 2.435781669160055,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 5,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 3.9629762877780474,
+      &quot;maximum_curvature&quot;: 92.71460866354862,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 5,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 0.0946848857383128,
+      &quot;maximum_curvature&quot;: 2.114539876468803,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 5,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 3.56063048416637,
+      &quot;maximum_curvature&quot;: 318.62032656306405,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 8,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 0.0005369973708511958,
+      &quot;maximum_curvature&quot;: 1.716934395357671,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 8,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 0.04117932014076653,
+      &quot;maximum_curvature&quot;: 14.862155337084939,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 8,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 0.015489196248719644,
+      &quot;maximum_curvature&quot;: 1.8215877923602275,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 8,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 1.0533534375869125,
+      &quot;maximum_curvature&quot;: 309.5539974272406,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 8,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 0.003943348983775441,
+      &quot;maximum_curvature&quot;: 2.082058663327965,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 8,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 0.43806094101370985,
+      &quot;maximum_curvature&quot;: 3683.527989329723,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 13,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 5.178695375008783e-07,
+      &quot;maximum_curvature&quot;: 1.7169082226018246,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 13,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 0.00010732849507833927,
+      &quot;maximum_curvature&quot;: 14.862152055168913,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 13,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 0.001356066055706562,
+      &quot;maximum_curvature&quot;: 1.1911263489725776,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 13,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 0.2941884723923009,
+      &quot;maximum_curvature&quot;: 993.8400981473428,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 13,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;weighted&quot;: false,
+      &quot;minimum_positive_curvature&quot;: 5.3247293528293746e-05,
+      &quot;maximum_curvature&quot;: 2.078943743478616,
+      &quot;complex_nullity&quot;: 2
+    },
+    {
+      &quot;bandwidth&quot;: 13,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;weighted&quot;: true,
+      &quot;minimum_positive_curvature&quot;: 0.012247173561413489,
+      &quot;maximum_curvature&quot;: 38894.13778642165,
+      &quot;complex_nullity&quot;: 2
+    }
+  ],
+  &quot;envelope_cases&quot;: [
+    {
+      &quot;bandwidth&quot;: 5,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;fundamental&quot;: &quot;170/341&quot;,
+      &quot;in_phase_density_correlation&quot;: &quot;191905/465124&quot;,
+      &quot;opposite_phase_density_correlation&quot;: &quot;205/1364&quot;
+    },
+    {
+      &quot;bandwidth&quot;: 5,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;in_phase_density_correlation&quot;: &quot;17/20&quot;,
+      &quot;opposite_phase_density_correlation&quot;: &quot;1/20&quot;
+    },
+    {
+      &quot;bandwidth&quot;: 5,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;fundamental&quot;: &quot;7566/11605&quot;,
+      &quot;in_phase_density_correlation&quot;: &quot;62828717/107740820&quot;,
+      &quot;opposite_phase_density_correlation&quot;: &quot;4621/46420&quot;
+    },
+    {
+      &quot;bandwidth&quot;: 8,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;fundamental&quot;: &quot;10922/21845&quot;,
+      &quot;in_phase_density_correlation&quot;: &quot;795131297/1908816100&quot;,
+      &quot;opposite_phase_density_correlation&quot;: &quot;65537/436900&quot;
+    },
+    {
+      &quot;bandwidth&quot;: 8,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;in_phase_density_correlation&quot;: &quot;43/32&quot;,
+      &quot;opposite_phase_density_correlation&quot;: &quot;1/32&quot;
+    },
+    {
+      &quot;bandwidth&quot;: 8,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;fundamental&quot;: &quot;5719902/8596237&quot;,
+      &quot;in_phase_density_correlation&quot;: &quot;189102632282449/295581162240676&quot;,
+      &quot;opposite_phase_density_correlation&quot;: &quot;43112257/447004324&quot;
+    },
+    {
+      &quot;bandwidth&quot;: 13,
+      &quot;ratio&quot;: &quot;1/2&quot;,
+      &quot;fundamental&quot;: &quot;11184810/22369621&quot;,
+      &quot;in_phase_density_correlation&quot;: &quot;833999543254433/2001599774734564&quot;,
+      &quot;opposite_phase_density_correlation&quot;: &quot;13421773/89478484&quot;
+    },
+    {
+      &quot;bandwidth&quot;: 13,
+      &quot;ratio&quot;: &quot;1&quot;,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;in_phase_density_correlation&quot;: &quot;113/52&quot;,
+      &quot;opposite_phase_density_correlation&quot;: &quot;1/52&quot;
+    },
+    {
+      &quot;bandwidth&quot;: 13,
+      &quot;ratio&quot;: &quot;3/2&quot;,
+      &quot;fundamental&quot;: &quot;338895311118/508359743893&quot;,
+      &quot;in_phase_density_correlation&quot;: &quot;671597706016586139169249/1033718516843826203181796&quot;,
+      &quot;opposite_phase_density_correlation&quot;: &quot;195533302861/2033438975572&quot;
+    }
+  ],
+  &quot;particle_cases&quot;: [
+    {
+      &quot;particle&quot;: &quot;W&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;cutoff&quot;: 2926,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: -3.7666140799766667e-13,
+      &quot;derivative_response&quot;: -0.6000000000009039
+    },
+    {
+      &quot;particle&quot;: &quot;W&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;cutoff&quot;: 2926,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: -4.88453281016696e-13,
+      &quot;derivative_response&quot;: -1.0937500000011724
+    },
+    {
+      &quot;particle&quot;: &quot;W&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;cutoff&quot;: 2926,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: -5.816338108641412e-13,
+      &quot;derivative_response&quot;: -1.9230769230783193
+    },
+    {
+      &quot;particle&quot;: &quot;Z&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;cutoff&quot;: 3321,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: -3.7666140799766667e-13,
+      &quot;derivative_response&quot;: -0.6000000000009039
+    },
+    {
+      &quot;particle&quot;: &quot;Z&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;cutoff&quot;: 3321,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: -4.88453281016696e-13,
+      &quot;derivative_response&quot;: -1.0937500000011724
+    },
+    {
+      &quot;particle&quot;: &quot;Z&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;cutoff&quot;: 3321,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: -5.816338108641412e-13,
+      &quot;derivative_response&quot;: -1.9230769230783193
+    },
+    {
+      &quot;particle&quot;: &quot;Higgs&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;cutoff&quot;: 4560,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: -3.7666140799766667e-13,
+      &quot;derivative_response&quot;: -0.6000000000009039
+    },
+    {
+      &quot;particle&quot;: &quot;Higgs&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;cutoff&quot;: 4560,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: -4.88453281016696e-13,
+      &quot;derivative_response&quot;: -1.0937500000011724
+    },
+    {
+      &quot;particle&quot;: &quot;Higgs&quot;,
+      &quot;real_depth&quot;: 2,
+      &quot;cutoff&quot;: 4560,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 997976.8822172185,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: -5.816338108641412e-13,
+      &quot;derivative_response&quot;: -1.9230769230783193
+    },
+    {
+      &quot;particle&quot;: &quot;down&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;cutoff&quot;: 1,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 1,
+      &quot;fundamental_over_depth6&quot;: 170813.0545187998,
+      &quot;fundamental&quot;: &quot;0&quot;,
+      &quot;density_response&quot;: 0.0,
+      &quot;derivative_response&quot;: 0.0
+    },
+    {
+      &quot;particle&quot;: &quot;down&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;cutoff&quot;: 1,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 1,
+      &quot;fundamental_over_depth6&quot;: 170813.0545187998,
+      &quot;fundamental&quot;: &quot;0&quot;,
+      &quot;density_response&quot;: 0.0,
+      &quot;derivative_response&quot;: 0.0
+    },
+    {
+      &quot;particle&quot;: &quot;down&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;cutoff&quot;: 1,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 1,
+      &quot;fundamental_over_depth6&quot;: 170813.0545187998,
+      &quot;fundamental&quot;: &quot;0&quot;,
+      &quot;density_response&quot;: 0.0,
+      &quot;derivative_response&quot;: 0.0
+    },
+    {
+      &quot;particle&quot;: &quot;strange&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;cutoff&quot;: 20,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 170813.0545187998,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: -1.2857305699872301e-11,
+      &quot;derivative_response&quot;: -0.6000000000308575
+    },
+    {
+      &quot;particle&quot;: &quot;strange&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;cutoff&quot;: 20,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 170813.0545187998,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: -1.6673311947444945e-11,
+      &quot;derivative_response&quot;: -1.093750000040016
+    },
+    {
+      &quot;particle&quot;: &quot;strange&quot;,
+      &quot;real_depth&quot;: 3,
+      &quot;cutoff&quot;: 20,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 170813.0545187998,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: -1.9854021550428626e-11,
+      &quot;derivative_response&quot;: -1.9230769231245728
+    },
+    {
+      &quot;particle&quot;: &quot;up&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;cutoff&quot;: 15,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: -1.3500172016778227e-08,
+      &quot;derivative_response&quot;: -0.600000032400413
+    },
+    {
+      &quot;particle&quot;: &quot;up&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;cutoff&quot;: 15,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: -1.7506978797554645e-08,
+      &quot;derivative_response&quot;: -1.0937500420167492
+    },
+    {
+      &quot;particle&quot;: &quot;up&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;cutoff&quot;: 15,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: -2.0846724036123665e-08,
+      &quot;derivative_response&quot;: -1.923076973109061
+    },
+    {
+      &quot;particle&quot;: &quot;charm&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;cutoff&quot;: 8855,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: -1.3500172016778227e-08,
+      &quot;derivative_response&quot;: -0.600000032400413
+    },
+    {
+      &quot;particle&quot;: &quot;charm&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;cutoff&quot;: 8855,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: -1.7506978797554645e-08,
+      &quot;derivative_response&quot;: -1.0937500420167492
+    },
+    {
+      &quot;particle&quot;: &quot;charm&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;cutoff&quot;: 8855,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: -2.0846724036123665e-08,
+      &quot;derivative_response&quot;: -1.923076973109061
+    },
+    {
+      &quot;particle&quot;: &quot;top&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;cutoff&quot;: 1215450,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: -1.3500172016778227e-08,
+      &quot;derivative_response&quot;: -0.600000032400413
+    },
+    {
+      &quot;particle&quot;: &quot;top&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;cutoff&quot;: 1215450,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: -1.7506978797554645e-08,
+      &quot;derivative_response&quot;: -1.0937500420167492
+    },
+    {
+      &quot;particle&quot;: &quot;top&quot;,
+      &quot;real_depth&quot;: 4,
+      &quot;cutoff&quot;: 1215450,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 5271.40530590165,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: -2.0846724036123665e-08,
+      &quot;derivative_response&quot;: -1.923076973109061
+    },
+    {
+      &quot;particle&quot;: &quot;nu1&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;cutoff&quot;: 2002,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: 0.26000000000000034,
+      &quot;derivative_response&quot;: 6.972842759256453e-16
+    },
+    {
+      &quot;particle&quot;: &quot;nu1&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;cutoff&quot;: 2002,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: 0.4739583333333346,
+      &quot;derivative_response&quot;: 2.8599550379762903e-15
+    },
+    {
+      &quot;particle&quot;: &quot;nu1&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;cutoff&quot;: 2002,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: 0.8333333333333388,
+      &quot;derivative_response&quot;: 1.2274678821768192e-14
+    },
+    {
+      &quot;particle&quot;: &quot;nu2&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;cutoff&quot;: 11628,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: 0.26000000000000034,
+      &quot;derivative_response&quot;: 6.972842759256453e-16
+    },
+    {
+      &quot;particle&quot;: &quot;nu2&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;cutoff&quot;: 11628,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: 0.4739583333333346,
+      &quot;derivative_response&quot;: 2.8599550379762903e-15
+    },
+    {
+      &quot;particle&quot;: &quot;nu2&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;cutoff&quot;: 11628,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: 0.8333333333333388,
+      &quot;derivative_response&quot;: 1.2274678821768192e-14
+    },
+    {
+      &quot;particle&quot;: &quot;nu3&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;cutoff&quot;: 65780,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: 0.26000000000000034,
+      &quot;derivative_response&quot;: 6.972842759256453e-16
+    },
+    {
+      &quot;particle&quot;: &quot;nu3&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;cutoff&quot;: 65780,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: 0.4739583333333346,
+      &quot;derivative_response&quot;: 2.8599550379762903e-15
+    },
+    {
+      &quot;particle&quot;: &quot;nu3&quot;,
+      &quot;real_depth&quot;: 5,
+      &quot;cutoff&quot;: 65780,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 2.7813921180875695e-08,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: 0.8333333333333388,
+      &quot;derivative_response&quot;: 1.2274678821768192e-14
+    },
+    {
+      &quot;particle&quot;: &quot;electron&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;cutoff&quot;: 18564,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: 0.11633699633699639,
+      &quot;derivative_response&quot;: -0.3812747252747252
+    },
+    {
+      &quot;particle&quot;: &quot;electron&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;cutoff&quot;: 18564,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: 0.06619922302126963,
+      &quot;derivative_response&quot;: -1.0158811728892534
+    },
+    {
+      &quot;particle&quot;: &quot;electron&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;cutoff&quot;: 18564,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: 0.010329167015753682,
+      &quot;derivative_response&quot;: -1.9945164852188482
+    },
+    {
+      &quot;particle&quot;: &quot;muon&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;cutoff&quot;: 3838380,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: 0.11633699633699639,
+      &quot;derivative_response&quot;: -0.3812747252747252
+    },
+    {
+      &quot;particle&quot;: &quot;muon&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;cutoff&quot;: 3838380,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: 0.06619922302126963,
+      &quot;derivative_response&quot;: -1.0158811728892534
+    },
+    {
+      &quot;particle&quot;: &quot;muon&quot;,
+      &quot;real_depth&quot;: 6,
+      &quot;cutoff&quot;: 3838380,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: 0.010329167015753682,
+      &quot;derivative_response&quot;: -1.9945164852188482
+    },
+    {
+      &quot;particle&quot;: &quot;tau&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;cutoff&quot;: 64512240,
+      &quot;requested_bandwidth&quot;: 5,
+      &quot;bandwidth&quot;: 5,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;fundamental&quot;: &quot;4/5&quot;,
+      &quot;density_response&quot;: 0.11633699633699639,
+      &quot;derivative_response&quot;: -0.3812747252747252
+    },
+    {
+      &quot;particle&quot;: &quot;tau&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;cutoff&quot;: 64512240,
+      &quot;requested_bandwidth&quot;: 8,
+      &quot;bandwidth&quot;: 8,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;fundamental&quot;: &quot;7/8&quot;,
+      &quot;density_response&quot;: 0.06619922302126963,
+      &quot;derivative_response&quot;: -1.0158811728892534
+    },
+    {
+      &quot;particle&quot;: &quot;tau&quot;,
+      &quot;real_depth&quot;: 10,
+      &quot;cutoff&quot;: 64512240,
+      &quot;requested_bandwidth&quot;: 13,
+      &quot;bandwidth&quot;: 13,
+      &quot;fundamental_over_depth6&quot;: 1.0,
+      &quot;fundamental&quot;: &quot;12/13&quot;,
+      &quot;density_response&quot;: 0.010329167015753682,
+      &quot;derivative_response&quot;: -1.9945164852188482
+    }
+  ],
+  &quot;endpoint_controls&quot;: [
+    {
+      &quot;cutoff&quot;: 3,
+      &quot;next_mode_gradient&quot;: -4.0,
+      &quot;locking_energy&quot;: 1,
+      &quot;requires_band_invariance&quot;: true
+    },
+    {
+      &quot;cutoff&quot;: 5,
+      &quot;next_mode_gradient&quot;: -6.0,
+      &quot;locking_energy&quot;: 1,
+      &quot;requires_band_invariance&quot;: true
+    },
+    {
+      &quot;cutoff&quot;: 8,
+      &quot;next_mode_gradient&quot;: -9.0,
+      &quot;locking_energy&quot;: 1,
+      &quot;requires_band_invariance&quot;: true
+    },
+    {
+      &quot;cutoff&quot;: 13,
+      &quot;next_mode_gradient&quot;: -14.0,
+      &quot;locking_energy&quot;: 1,
+      &quot;requires_band_invariance&quot;: true
+    }
+  ],
+  &quot;rotating_cases&quot;: [
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;azimuthal_order&quot;: 1,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;azimuthal_order&quot;: 2,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;azimuthal_order&quot;: 3,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;azimuthal_order&quot;: 5,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;azimuthal_order&quot;: 8,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;azimuthal_order&quot;: 1,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;azimuthal_order&quot;: 2,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;azimuthal_order&quot;: 3,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;azimuthal_order&quot;: 5,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;azimuthal_order&quot;: 8,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;azimuthal_order&quot;: 1,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;azimuthal_order&quot;: 2,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;azimuthal_order&quot;: 3,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;azimuthal_order&quot;: 5,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;azimuthal_order&quot;: 8,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;azimuthal_order&quot;: 1,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;azimuthal_order&quot;: 2,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;azimuthal_order&quot;: 3,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;azimuthal_order&quot;: 5,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;azimuthal_order&quot;: 8,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;azimuthal_order&quot;: 1,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;azimuthal_order&quot;: 2,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;azimuthal_order&quot;: 3,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;azimuthal_order&quot;: 5,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;azimuthal_order&quot;: 8,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;azimuthal_order&quot;: 1,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;azimuthal_order&quot;: 2,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;azimuthal_order&quot;: 3,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;azimuthal_order&quot;: 5,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;azimuthal_order&quot;: 8,
+      &quot;total_spoke_fraction&quot;: &quot;1/2&quot;,
+      &quot;single_order_density_fundamental&quot;: 0,
+      &quot;adjacent_order_density_fundamental&quot;: 1
+    }
+  ],
+  &quot;closed_support_cases&quot;: [
+    {
+      &quot;ambient_retained_modes&quot;: 8,
+      &quot;occupied_cutoff&quot;: 3,
+      &quot;next_mode_curvature&quot;: 16,
+      &quot;complex_transverse_rank&quot;: 2,
+      &quot;all_empty_modes_remain_empty&quot;: true,
+      &quot;harmonic_generation&quot;: false
+    },
+    {
+      &quot;ambient_retained_modes&quot;: 8,
+      &quot;occupied_cutoff&quot;: 5,
+      &quot;next_mode_curvature&quot;: 36,
+      &quot;complex_transverse_rank&quot;: 4,
+      &quot;all_empty_modes_remain_empty&quot;: true,
+      &quot;harmonic_generation&quot;: false
+    },
+    {
+      &quot;ambient_retained_modes&quot;: 13,
+      &quot;occupied_cutoff&quot;: 3,
+      &quot;next_mode_curvature&quot;: 16,
+      &quot;complex_transverse_rank&quot;: 2,
+      &quot;all_empty_modes_remain_empty&quot;: true,
+      &quot;harmonic_generation&quot;: false
+    },
+    {
+      &quot;ambient_retained_modes&quot;: 13,
+      &quot;occupied_cutoff&quot;: 5,
+      &quot;next_mode_curvature&quot;: 36,
+      &quot;complex_transverse_rank&quot;: 4,
+      &quot;all_empty_modes_remain_empty&quot;: true,
+      &quot;harmonic_generation&quot;: false
+    },
+    {
+      &quot;ambient_retained_modes&quot;: 21,
+      &quot;occupied_cutoff&quot;: 3,
+      &quot;next_mode_curvature&quot;: 16,
+      &quot;complex_transverse_rank&quot;: 2,
+      &quot;all_empty_modes_remain_empty&quot;: true,
+      &quot;harmonic_generation&quot;: false
+    },
+    {
+      &quot;ambient_retained_modes&quot;: 21,
+      &quot;occupied_cutoff&quot;: 5,
+      &quot;next_mode_curvature&quot;: 36,
+      &quot;complex_transverse_rank&quot;: 4,
+      &quot;all_empty_modes_remain_empty&quot;: true,
+      &quot;harmonic_generation&quot;: false
+    }
+  ],
+  &quot;resonant_feedback_cases&quot;: [
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.12
+    },
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.88
+    },
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.4,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.0
+    },
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;eta&quot;: 0.8,
+      &quot;fundamental_amplitude&quot;: 0.6000000000000001,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.28000000000000025
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.12
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.88
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.4,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.0
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;eta&quot;: 0.8,
+      &quot;fundamental_amplitude&quot;: 0.6000000000000001,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.28000000000000025
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.12
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.88
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.4,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.0
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;eta&quot;: 0.8,
+      &quot;fundamental_amplitude&quot;: 0.6000000000000001,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.28000000000000025
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.12
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.88
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.4,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.0
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;eta&quot;: 0.8,
+      &quot;fundamental_amplitude&quot;: 0.6000000000000001,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.28000000000000025
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.12
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.88
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.4,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.0
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;eta&quot;: 0.8,
+      &quot;fundamental_amplitude&quot;: 0.6000000000000001,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.28000000000000025
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.12
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.2,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.88
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;eta&quot;: 0.4,
+      &quot;fundamental_amplitude&quot;: 0.4,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 1.0
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;eta&quot;: 0.8,
+      &quot;fundamental_amplitude&quot;: 0.6000000000000001,
+      &quot;feedback_disturbance_frequency_over_g&quot;: 0.28000000000000025
+    }
+  ],
+  &quot;four_mode_feedback_cases&quot;: [
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 1.08,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.4,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 2,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.6000000000000001,
+      &quot;eta&quot;: 0.8,
+      &quot;disturbance_frequency_over_g&quot;: 0.6400000000000003,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 1.08,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.4,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 3,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.6000000000000001,
+      &quot;eta&quot;: 0.8,
+      &quot;disturbance_frequency_over_g&quot;: 0.6400000000000003,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 1.08,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.4,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 4,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.6000000000000001,
+      &quot;eta&quot;: 0.8,
+      &quot;disturbance_frequency_over_g&quot;: 0.6400000000000003,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 1.08,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.4,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 5,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.6000000000000001,
+      &quot;eta&quot;: 0.8,
+      &quot;disturbance_frequency_over_g&quot;: 0.6400000000000003,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 1.08,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.4,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 6,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.6000000000000001,
+      &quot;eta&quot;: 0.8,
+      &quot;disturbance_frequency_over_g&quot;: 0.6400000000000003,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 0.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 1.08,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.2,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;a0&quot;: 1.0,
+      &quot;a1&quot;: 1.0,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.4,
+      &quot;eta&quot;: 0.4,
+      &quot;disturbance_frequency_over_g&quot;: 0.84,
+      &quot;common_field_phase_preserved&quot;: true
+    },
+    {
+      &quot;real_depth&quot;: 10,
+      &quot;a0&quot;: 0.5,
+      &quot;a1&quot;: 1.5,
+      &quot;c0&quot;: 1.0,
+      &quot;c1&quot;: 0.6000000000000001,
+      &quot;eta&quot;: 0.8,
+      &quot;disturbance_frequency_over_g&quot;: 0.6400000000000003,
+      &quot;common_field_phase_preserved&quot;: true
+    }
+  ],
+  &quot;combined_action_cases&quot;: [
+    {
+      &quot;high_bandwidth&quot;: 5,
+      &quot;eta&quot;: 0.2,
+      &quot;real_neutral_directions&quot;: 6,
+      &quot;nonzero_frequency_pairs&quot;: 4,
+      &quot;minimum_nonzero_disturbance_frequency&quot;: 0.1640881763899922,
+      &quot;maximum_nonzero_disturbance_frequency&quot;: 2.436207217218661
+    },
+    {
+      &quot;high_bandwidth&quot;: 5,
+      &quot;eta&quot;: 0.4,
+      &quot;real_neutral_directions&quot;: 6,
+      &quot;nonzero_frequency_pairs&quot;: 4,
+      &quot;minimum_nonzero_disturbance_frequency&quot;: 0.16359821231785576,
+      &quot;maximum_nonzero_disturbance_frequency&quot;: 2.4374373462220813
+    },
+    {
+      &quot;high_bandwidth&quot;: 5,
+      &quot;eta&quot;: 0.8,
+      &quot;real_neutral_directions&quot;: 6,
+      &quot;nonzero_frequency_pairs&quot;: 4,
+      &quot;minimum_nonzero_disturbance_frequency&quot;: 0.15829106842006158,
+      &quot;maximum_nonzero_disturbance_frequency&quot;: 2.4418761435628893
+    },
+    {
+      &quot;high_bandwidth&quot;: 8,
+      &quot;eta&quot;: 0.2,
+      &quot;real_neutral_directions&quot;: 6,
+      &quot;nonzero_frequency_pairs&quot;: 7,
+      &quot;minimum_nonzero_disturbance_frequency&quot;: 0.015488493295377262,
+      &quot;maximum_nonzero_disturbance_frequency&quot;: 1.8216496903696666
+    },
+    {
+      &quot;high_bandwidth&quot;: 8,
+      &quot;eta&quot;: 0.4,
+      &quot;real_neutral_directions&quot;: 6,
+      &quot;nonzero_frequency_pairs&quot;: 7,
+      &quot;minimum_nonzero_disturbance_frequency&quot;: 0.015485460078288528,
+      &quot;maximum_nonzero_disturbance_frequency&quot;: 1.8218193246568704
+    },
+    {
+      &quot;high_bandwidth&quot;: 8,
+      &quot;eta&quot;: 0.8,
+      &quot;real_neutral_directions&quot;: 6,
+      &quot;nonzero_frequency_pairs&quot;: 7,
+      &quot;minimum_nonzero_disturbance_frequency&quot;: 0.015430734847329134,
+      &quot;maximum_nonzero_disturbance_frequency&quot;: 1.8223630882997786
+    },
+    {
+      &quot;high_bandwidth&quot;: 13,
+      &quot;eta&quot;: 0.2,
+      &quot;real_neutral_directions&quot;: 6,
+      &quot;nonzero_frequency_pairs&quot;: 12,
+      &quot;minimum_nonzero_disturbance_frequency&quot;: 0.0013560629528152543,
+      &quot;maximum_nonzero_disturbance_frequency&quot;: 1.191142864646611
+    },
+    {
+      &quot;high_bandwidth&quot;: 13,
+      &quot;eta&quot;: 0.4,
+      &quot;real_neutral_directions&quot;: 6,
+      &quot;nonzero_frequency_pairs&quot;: 12,
+      &quot;minimum_nonzero_disturbance_frequency&quot;: 0.001356042467924962,
+      &quot;maximum_nonzero_disturbance_frequency&quot;: 1.1911742286930744
+    },
+    {
+      &quot;high_bandwidth&quot;: 13,
+      &quot;eta&quot;: 0.8,
+      &quot;real_neutral_directions&quot;: 6,
+      &quot;nonzero_frequency_pairs&quot;: 12,
+      &quot;minimum_nonzero_disturbance_frequency&quot;: 0.0013552607420305588,
+      &quot;maximum_nonzero_disturbance_frequency&quot;: 1.1912330678486303
+    }
+  ],
+  &quot;sources&quot;: {
+    &quot;experiments/cavity-phase-lock-checks.py&quot;: &quot;2aafb59369b57b3995e7ce7d1776943a631f754f3d74d942b1831d533b2b7678&quot;,
+    &quot;results/complex-comb-response-results.json&quot;: &quot;30a613f13f33d19eaa2f3e542be8b7f9171c22c47a24f8592ae554d287dca8d6&quot;
+  }
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

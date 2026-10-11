@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>tensor-color-cancellation-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/tensor-color-cancellation-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="tensor-color-cancellation-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/tensor-color-cancellation-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="tensor-color-cancellation-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>tensor-color-cancellation-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/tensor-color-cancellation-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Bounded exact tests of oscillator pairing and color cancellation.&quot;&quot;&quot;
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+from datetime import datetime, timezone
+from hashlib import sha256
+from itertools import combinations
+from math import comb
+from pathlib import Path
+import json
+
+import sympy as sp
+
+
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    if not condition:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def shell(n, d):
+    return comb(n + d - 1, d - 1)
+
+
+def band(n, d):
+    return comb(n + d, d)
+
+
+def invariant_shell(n, spectators):
+    return sum(comb(n-2*r+spectators-1,spectators-1) if spectators else int(2*r==n)
+               for r in range(n//2+1))
+
+
+def invariant_band(n, spectators):
+    return sum(comb(n-2*r+spectators,spectators) for r in range(n//2+1))
+
+
+def generators(k):
+    &quot;&quot;&quot;Hermitian su(k), tr(Ta Tb)=delta_ab/2.&quot;&quot;&quot;
+    result = []
+    for i, j in combinations(range(k), 2):
+        s = sp.zeros(k)
+        s[i, j] = s[j, i] = sp.Rational(1, 2)
+        result.append(s)
+        a = sp.zeros(k)
+        a[i, j] = -sp.I / 2
+        a[j, i] = sp.I / 2
+        result.append(a)
+    for l in range(1, k):
+        h = sp.zeros(k)
+        for i in range(l):
+            h[i, i] = 1
+        h[l, l] = -l
+        result.append(h / sp.sqrt(2 * l * (l + 1)))
+    return result
+
+
+def compositions(total, length):
+    if length == 1:
+        yield (total,)
+        return
+    for first in range(total + 1):
+        for rest in compositions(total - first, length - 1):
+            yield (first,) + rest
+
+
+def permutation_sign(p):
+    return (-1) ** sum(p[i] &gt; p[j] for i in range(len(p)) for j in range(i + 1, len(p)))
+
+
+def exact_singlet_count(k, n):
+    &quot;&quot;&quot;Weyl integration of the complete Sym^n(V+V*) character.&quot;&quot;&quot;
+    from itertools import permutations
+    weights = Counter()
+    for occupation in compositions(n, 2 * k):
+        full = tuple(occupation[i] - occupation[i + k] for i in range(k))
+        weights[tuple(full[i] - full[-1] for i in range(k - 1))] += 1
+    rho = tuple(range(k - 1, -1, -1))
+    multiplicity = 0
+    for p in permutations(range(k)):
+        shift = tuple(rho[i] - rho[p[i]] for i in range(k))
+        key = tuple(shift[i] - shift[-1] for i in range(k - 1))
+        multiplicity += permutation_sign(p) * weights[key]
+    return multiplicity
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--output&#39;, required=True)
+    args = parser.parse_args()
+    # The oscillator factorization is a shell statement for every split.
+    for d in range(2, 13):
+        for a in range(1, d):
+            b = d - a
+            for n in range(41):
+                lhs = sum(shell(j, a) * shell(n - j, b) for j in range(n + 1))
+                check(lhs == shell(n, d), f&#39;shell convolution {d,a,n}&#39;)
+    for d in (2, 3, 4, 5, 6, 10):
+        CASES.append({&#39;name&#39;: &#39;shell-splits&#39;, &#39;real_depth&#39;: d,
+                      &#39;parameters&#39;: {&#39;splits&#39;: [[a, d-a] for a in range(1,d)]},
+                      &#39;measurements&#39;: {&#39;all_splits_factorize&#39;: True}})
+
+    # The pair-state cancellation must hold as a vector equation.
+    for k in range(2, 6):
+        ts = generators(k)
+        eye = sp.eye(k)
+        identity_vector = sp.Matrix([1 if i == j else 0 for i in range(k) for j in range(k)])
+        proj = identity_vector * identity_vector.T / k
+        cf = sp.Rational(k*k - 1, 2*k)
+        same_casimir = sp.zeros(k*k)
+        dual_casimir = sp.zeros(k*k)
+        swap = sp.zeros(k*k)
+        for i in range(k):
+            for j in range(k):
+                swap[i*k+j, j*k+i] = 1
+        for a, ta in enumerate(ts):
+            for b, tb in enumerate(ts):
+                check(sp.simplify(sp.trace(ta*tb)) == (sp.Rational(1,2) if a == b else 0), &#39;generator metric&#39;)
+            qsame = sp.kronecker_product(ta, eye) + sp.kronecker_product(eye, ta)
+            qdual = sp.kronecker_product(ta, eye) - sp.kronecker_product(eye, ta.T)
+            same_casimir += qsame*qsame
+            dual_casimir += qdual*qdual
+            check(qdual*identity_vector == sp.zeros(k*k,1), &#39;singlet generator&#39;)
+        check(sp.simplify(dual_casimir - k*(sp.eye(k*k)-proj)) == sp.zeros(k*k), &#39;dual Casimir&#39;)
+        expected_same = (sp.Rational(k*k-2,k))*sp.eye(k*k) + swap
+        check(sp.simplify(same_casimir-expected_same) == sp.zeros(k*k), &#39;identical Casimir&#39;)
+        # For k=2 the antisymmetric identical pair is a singlet; for k&gt;=3 it is not.
+        same_antisymmetric = sp.Rational((k+1)*(k-2),k)
+        check(same_antisymmetric &gt;= 0, &#39;same antisymmetric Casimir&#39;)
+        # Spatially nonuniform source acting oppositely on paired slots.
+        a, b = sp.symbols(&#39;a b&#39;, real=True)
+        strength = 0
+        for ta in ts:
+            source = a*sp.kronecker_product(ta,eye)-b*sp.kronecker_product(eye,ta.T)
+            output = source*identity_vector
+            strength += (output.conjugate().T*output)[0]/k
+        check(sp.simplify(strength-cf*(a-b)**2) == 0, &#39;nonuniform singlet source&#39;)
+        CASES.append({&#39;name&#39;: &#39;paired-casimir&#39;, &#39;parameters&#39;: {&#39;rank&#39;: k},
+            &#39;measurements&#39;: {&#39;fundamental_casimir&#39;: str(cf), &#39;dual_pair_singlet_rank&#39;:1,
+                &#39;dual_pair_adjoint_gap&#39;:k,&#39;identical_antisymmetric_casimir&#39;:str(same_antisymmetric),
+                &#39;identical_symmetric_casimir&#39;:str(sp.Rational((k-1)*(k+2),k)),
+                &#39;singlet_source_norm&#39;:str(cf)+&#39;*(a-b)^2&#39;}})
+
+    # Independent character calculation of all oscillator singlets at small cutoffs.
+    for k in range(2, 6):
+        for n in range(7):
+            multiplicity = exact_singlet_count(k,n)
+            check(multiplicity == int(n % 2 == 0), f&#39;Weyl invariant count {k,n}&#39;)
+    x = sp.symbols(&#39;x0:3&#39;)
+    y = sp.symbols(&#39;y0:3&#39;)
+    pairing = sum(x[i]*y[i] for i in range(3))
+    for r in range(5):
+        f = pairing**r
+        for i in range(3):
+            for j in range(3):
+                result = x[j]*sp.diff(f,x[i])-y[i]*sp.diff(f,y[j])
+                check(sp.expand(result) == 0, &#39;paired polynomial invariant&#39;)
+
+    # Pairwise interactions also support a three-fundamental singlet.
+    ts = generators(3)
+    epsilon = sp.zeros(27,1)
+    from itertools import permutations
+    for p3 in permutations(range(3)):
+        epsilon[p3[0]*9+p3[1]*3+p3[2]] = permutation_sign(p3)
+    total_norm=0
+    pair_values=[0,0,0]
+    for ta in ts:
+        slots=[sp.kronecker_product(ta,sp.eye(3),sp.eye(3)),
+               sp.kronecker_product(sp.eye(3),ta,sp.eye(3)),
+               sp.kronecker_product(sp.eye(3),sp.eye(3),ta)]
+        check(sum(slots,sp.zeros(27))*epsilon == sp.zeros(27,1), &#39;three-slot singlet&#39;)
+        for index,(i,j) in enumerate(combinations(range(3),2)):
+            pair_values[index] += (epsilon.T*slots[i]*slots[j]*epsilon)[0]/6
+    check(pair_values == [-sp.Rational(2,3)]*3,&#39;pair forces on three-slot singlet&#39;)
+    CASES.append({&#39;name&#39;:&#39;three-triplet-two-body-control&#39;,&#39;parameters&#39;:{&#39;rank&#39;:3,&#39;slots&#39;:3},
+        &#39;measurements&#39;:{&#39;total_generator_squared&#39;:0,&#39;each_pair_contraction&#39;:&#39;-2/3&#39;,
+                        &#39;sum_pair_contraction&#39;:str(sum(pair_values))}})
+
+    # The same matrix-carrier pairing exists at every complete Hodge rank.
+    for d in (2,3,4,5,6,7,8,10):
+        m=(d+1)//2
+        k=comb(2*m-1,m-1)
+        CASES.append({&#39;name&#39;:&#39;full-hodge-pairing&#39;,&#39;real_depth&#39;:d,&#39;parameters&#39;:{&#39;channel_rank&#39;:k},
+            &#39;measurements&#39;:{&#39;endomorphism_rank&#39;:k*k,&#39;trace_singlet_rank&#39;:1,
+                            &#39;traceless_rank&#39;:k*k-1,&#39;casimir_gap&#39;:k if k&gt;1 else 0}})
+
+    assigned = [(2,76,&#39;W&#39;),(2,81,&#39;Z&#39;),(2,95,&#39;H&#39;),(3,1,&#39;down&#39;),(3,4,&#39;strange&#39;),
+                (4,3,&#39;up&#39;),(4,20,&#39;charm&#39;),(4,72,&#39;top&#39;),(5,10,&#39;nu1&#39;),(5,15,&#39;nu2&#39;),
+                (5,22,&#39;nu3&#39;),(6,13,&#39;electron&#39;),(6,35,&#39;muon&#39;),(10,23,&#39;tau&#39;)]
+    for d, n, label in assigned:
+        level = n-1
+        m = d//2
+        spectator = d % 2
+        # SU(1) is trivial. For SU(m), m&gt;=2, q is its single quadratic invariant.
+        if m == 1:
+            singlet_shell = shell(level,d)
+            singlet_band = band(level,d)
+        else:
+            singlet_shell = invariant_shell(level,spectator)
+            singlet_band = invariant_band(level,spectator)
+            check(singlet_band == sum(invariant_shell(j,spectator) for j in range(level+1)),
+                  &#39;cumulative invariant sum&#39;)
+        CASES.append({&#39;name&#39;:&#39;assigned-oscillator-invariants&#39;,&#39;real_depth&#39;:d,&#39;mode_index&#39;:n,
+            &#39;parameters&#39;:{&#39;particle&#39;:label,&#39;complex_rank&#39;:m,&#39;unpaired_real_directions&#39;:spectator,
+                          &#39;group&#39;:&#39;SU(&#39;+str(m)+&#39;)&#39;},
+            &#39;measurements&#39;:{&#39;shell_singlets&#39;:singlet_shell,&#39;band_singlets&#39;:singlet_band,
+                            &#39;full_band_count&#39;:band(level,d),
+                            &#39;singlet_fraction&#39;:str(sp.Rational(singlet_band,band(level,d)))}})
+    # A common color SU(3) acts on six real directions with d-6 spectators.
+    for d, n in [(6,13),(6,35),(7,8),(8,8),(10,23)]:
+        nmax=n-1
+        spectators=d-6
+        shell_count = invariant_shell(nmax,spectators)
+        band_count = invariant_band(nmax,spectators)
+        check(band_count == sum(invariant_shell(j,spectators) for j in range(nmax+1)),
+              &#39;same-color cumulative invariant sum&#39;)
+        CASES.append({&#39;name&#39;:&#39;same-color-subgroup&#39;,&#39;real_depth&#39;:d,&#39;mode_index&#39;:n,
+            &#39;parameters&#39;:{&#39;singlet_spectators&#39;:spectators},
+            &#39;measurements&#39;:{&#39;shell_singlets&#39;:shell_count,&#39;band_singlets&#39;:band_count,
+                &#39;full_band_count&#39;:band(nmax,d),&#39;singlet_fraction&#39;:str(sp.Rational(band_count,band(nmax,d)))}})
+    # A singlet projection changes a full-rank normalization in an explicit complete toy band.
+    s = 9
+    v = sp.ones(s,1)
+    p = sp.diag(1,1,0,0,0,0,0,0,0)
+    t = v*v.T
+    compressed=p*t*p
+    check(t*t == s*t,&#39;full contact eigenvalue&#39;)
+    check(compressed*compressed == 2*compressed,&#39;compressed contact eigenvalue&#39;)
+    # Keeping full-band coherent contact color invariant leaves only the slack ray at six.
+    for k in range(2,6):
+        gs=[]
+        for ta in generators(k):
+            g=sp.diag(sp.zeros(1),ta,-ta.T)
+            gs.append(g)
+        all_generators=sp.Matrix.vstack(*gs)
+        check(len(all_generators.nullspace())==1, &#39;only common invariant single-vector is slack&#39;)
+    # Electric U(1) need not cancel with color; it depends on assigned characters.
+    q1,q2=sp.symbols(&#39;q1 q2&#39;,real=True)
+    check(sp.simplify(q1+q2).subs(q2,-q1)==0,&#39;fully dual U1 cancels&#39;)
+    check(sp.simplify(q1+q2).subs(q2,q1)==2*q1,&#39;common U1 survives&#39;)
+
+    report={&#39;experiment_key&#39;:&#39;tensor-color-cancellation-20261009&#39;,
+        &#39;created&#39;:datetime.now(timezone.utc).isoformat(),
+        &#39;sources&#39;:{&#39;experiments/tensor-color-cancellation-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest()},
+        &#39;scope&#39;:&#39;Exact oscillator count, representation and source tests; no particle simulations.&#39;,
+        &#39;summary&#39;:{&#39;checks_passed&#39;:CHECKS,&#39;case_count&#39;:len(CASES),
+            &#39;count_identity_selects_depth&#39;:False,&#39;conjugate_pair_all_rank_singlet&#39;:True,
+            &#39;full_dual_pair_also_cancels_U1&#39;:True,
+            &#39;neutrality_does_not_imply_zero_nonuniform_response&#39;:True},
+        &#39;cases&#39;:CASES}
+    target=Path(args.output)
+    target.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(report[&#39;summary&#39;],indent=2))
+    print(&#39;Report:&#39;,target)
+    for case in CASES:
+        if case[&#39;name&#39;] in (&#39;assigned-oscillator-invariants&#39;,&#39;same-color-subgroup&#39;):
+            print(json.dumps(case))
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

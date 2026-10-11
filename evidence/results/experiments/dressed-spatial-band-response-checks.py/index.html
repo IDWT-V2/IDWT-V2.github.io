@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>dressed-spatial-band-response-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/dressed-spatial-band-response-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="dressed-spatial-band-response-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/dressed-spatial-band-response-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="dressed-spatial-band-response-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>dressed-spatial-band-response-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/dressed-spatial-band-response-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Kinetic dressing of actual spatial-band geometry and gap-weighted response.&quot;&quot;&quot;
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+import importlib.util
+import json
+from math import comb, sqrt
+from pathlib import Path
+
+import mpmath as mp
+import numpy as np
+import scipy.linalg as la
+
+
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    if not condition:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def dressed_data(depth, cutoff, strength):
+    mp.mp.dps = 60
+    mu = mp.mpf(str(strength))
+    weights = [mp.mpf(comb(l+depth-1, depth-1)) for l in range(cutoff+1)]
+    omega = [mp.mpf(l)+mp.mpf(depth)/2 for l in range(cutoff+1)]
+    total = sum(weights)
+    if cutoff == 0:
+        z = omega[0]+mu
+    else:
+        def secular(value):
+            return 1-mu*sum(g/(value-w) for g, w in zip(weights, omega))
+        z = mp.findroot(secular, (omega[-1]+mu*weights[-1]/2, omega[-1]+mu*total),
+                        solver=&#39;bisect&#39;, maxsteps=260, tol=mp.mpf(&#39;1e-53&#39;))
+    check(abs(1-mu*sum(g/(z-w) for g, w in zip(weights, omega))) &lt; mp.mpf(&#39;1e-45&#39;),
+          &#39;complete kinetic-contact secular root&#39;)
+    raw = [g/(z-w)**2 for g, w in zip(weights, omega)]
+    pp = [p/sum(raw) for p in raw]
+    mean = sum(l*p for l, p in enumerate(pp))
+    variance = sum((l-mean)**2*p for l, p in enumerate(pp))
+    beta = mean/depth
+    curvature = beta*(beta+1)
+    metric = (depth-1)*curvature+variance/depth
+    t0 = sum(p*mp.mpf(l*(l+depth))/(depth**2*(z-w))
+             for l, (p, w) in enumerate(zip(pp, omega)))
+    t1 = sum(p*(mp.mpf(l)/depth-beta)**2/(z-w)
+             for l, (p, w) in enumerate(zip(pp, omega)))
+    check(t0 &gt;= 0 and t1 &gt;= 0, &#39;positive gap-weighted tensors on top complement&#39;)
+    return {&#39;z&#39;: z, &#39;p&#39;: pp, &#39;mean&#39;: mean, &#39;variance&#39;: variance, &#39;curvature&#39;: curvature,
+            &#39;metric&#39;: metric, &#39;t0&#39;: t0, &#39;t1&#39;: t1, &#39;omega&#39;: omega, &#39;weights&#39;: weights}
+
+
+def finite_spatial_comparison(source):
+    spec = importlib.util.spec_from_file_location(&#39;frozen_spatial_band&#39;, source)
+    spatial = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(spatial)
+    for depth in range(2, 7):
+        gamma = spatial.gammas(depth)
+        rank = len(gamma[0])
+        shell_basis, shell_u, shell_d, shell_g = [], [], [], []
+        for level in range(3):
+            w, dd, g, _ = spatial.shell_data(depth, level, gamma)
+            basis = la.orth(np.concatenate([w]+dd, axis=1))
+            shell_basis.append(basis)
+            shell_u.append(basis.conj().T@w/sqrt(g))
+            shell_d.append([basis.conj().T@v/sqrt(g) for v in dd])
+            shell_g.append(g)
+            total = sum(shell_g)
+            raw_u = np.vstack([sqrt(g/total)*u for g, u in zip(shell_g, shell_u)])
+            h0 = la.block_diag(*[(l+depth/2)*np.eye(len(b.T)) for l, b in enumerate(shell_basis)])
+            for strength in (.1, 1., 10.):
+                data = dressed_data(depth, level, strength)
+                z = float(data[&#39;z&#39;])
+                aa = [sqrt(float(p)) for p in data[&#39;p&#39;]]
+                dressed_u = np.vstack([a*u for a, u in zip(aa, shell_u)])
+                derivatives = [np.vstack([a*dd[axis] for a, dd in zip(aa, shell_d)]) for axis in range(depth)]
+                h = h0+strength*total*raw_u@raw_u.conj().T
+                check(np.allclose(h@dressed_u, z*dressed_u, atol=1e-8), &#39;actual complete spatial dressed eigenspace&#39;)
+                eigen, vectors = la.eigh(h)
+                top = np.abs(eigen-z) &lt; 1e-7
+                check(int(sum(top)) == rank, &#39;dressed bright multiplet has unchanged spinor rank&#39;)
+                inverse = np.zeros_like(eigen)
+                inverse[~top] = 1/(z-eigen[~top])
+                resolvent = (vectors*inverse)@vectors.conj().T
+                gap_tensor = np.block([[da.conj().T@resolvent@db for db in derivatives] for da in derivatives])
+                t0, t1 = float(data[&#39;t0&#39;]), float(data[&#39;t1&#39;])
+                for axis in range(depth):
+                    for b in range(depth):
+                        expected = ((depth-1)*t0+t1)*np.eye(rank) if axis == b else (t1-t0)*gamma[axis]@gamma[b]
+                        check(np.allclose(gap_tensor[axis*rank:(axis+1)*rank, b*rank:(b+1)*rank],
+                                          expected, rtol=1e-7, atol=1e-8), &#39;exact gap-weighted spatial response&#39;)
+                target = sorted([depth*t1]*rank+[depth*t0]*((depth-1)*rank))
+                check(np.allclose(np.linalg.eigvalsh(gap_tensor), target, rtol=1e-7, atol=1e-8),
+                      &#39;independent gap tensor Clifford spectrum&#39;)
+                radial = np.diag([float(w) for w in data[&#39;omega&#39;]])+strength*np.outer(np.sqrt(shell_g), np.sqrt(shell_g))
+                re, rv = la.eigh(radial)
+                norm = np.array(aa)
+                jet = norm*(np.arange(level+1)/depth-float(data[&#39;mean&#39;])/depth)
+                rmask = np.abs(re-z) &gt; 1e-7
+                radial_inverse = (rv[:, rmask]/(z-re[rmask]))@rv[:, rmask].T
+                check(np.isclose(jet@radial_inverse@jet, t1, rtol=1e-7, atol=1e-9),
+                      &#39;Fredholm weighted-sum identity versus independent radial spectrum&#39;)
+                q = np.block([[da.conj().T@db-(dressed_u.conj().T@da).conj().T@(dressed_u.conj().T@db)
+                               for db in derivatives] for da in derivatives])
+                curvature, metric = float(data[&#39;curvature&#39;]), float(data[&#39;metric&#39;])
+                for axis in range(depth):
+                    for b in range(depth):
+                        expected = metric*np.eye(rank) if axis == b else -curvature*gamma[axis]@gamma[b]
+                        check(np.allclose(q[axis*rank:(axis+1)*rank, b*rank:(b+1)*rank], expected, atol=1e-8),
+                              &#39;dressed geometric moment law&#39;)
+                CASES.append({&#39;name&#39;: &#39;actual-spatial-dressed-response&#39;, &#39;real_depth&#39;: depth, &#39;mode_index&#39;: level+1,
+                              &#39;parameters&#39;: {&#39;mu_times_radius&#39;: strength, &#39;sphere_radius&#39;: 1,
+                                             &#39;active_physical_dimension&#39;: len(h),
+                                             &#39;complete_physical_band_dimension&#39;: rank*total,
+                                             &#39;omitted_dark_modes&#39;: &#39;orthogonal to every evaluation/first-derivative source; exact zero contribution&#39;},
+                              &#39;measurements&#39;: {&#39;dressed_frequency&#39;: z, &#39;curvature&#39;: curvature,
+                                               &#39;metric_diagonal&#39;: metric, &#39;gap_tensor_Clifford_eigenvalue&#39;: depth*t1,
+                                               &#39;gap_tensor_twistor_eigenvalue&#39;: depth*t0,
+                                               &#39;top_occupation_inertia_sign&#39;: &#39;negative correction -2 I times this positive gap tensor&#39;}})
+
+
+def maintained_branches():
+    assignments = [(&#39;W&#39;, 2, 76), (&#39;Z&#39;, 2, 81), (&#39;Higgs&#39;, 2, 95), (&#39;down&#39;, 3, 1),
+                   (&#39;strange&#39;, 3, 4), (&#39;up&#39;, 4, 3), (&#39;charm&#39;, 4, 20), (&#39;top&#39;, 4, 72),
+                   (&#39;nu1&#39;, 5, 10), (&#39;nu2&#39;, 5, 15), (&#39;nu3&#39;, 5, 22),
+                   (&#39;electron&#39;, 6, 13), (&#39;muon&#39;, 6, 35), (&#39;tau&#39;, 10, 23)]
+    for strength in (.1, 1., 10.):
+        for label, depth, n in assignments:
+            data = dressed_data(depth, n-1, strength)
+            uniform_ratio = (depth+1)**2
+            ratio_q = (1+depth**2*data[&#39;curvature&#39;]/data[&#39;variance&#39;]) if n &gt; 1 else None
+            ratio_gap = data[&#39;t0&#39;]/data[&#39;t1&#39;] if n &gt; 1 else None
+            CASES.append({&#39;name&#39;: &#39;maintained-branch-dressed-geometry&#39;, &#39;real_depth&#39;: depth, &#39;mode_index&#39;: n,
+                          &#39;parameters&#39;: {&#39;particle&#39;: label, &#39;mu_times_radius&#39;: strength,
+                                         &#39;one_common_coefficient_per_comparison&#39;: True,
+                                         &#39;sphere_radius&#39;: &#39;R; frequencies in R^-1, geometry in R^-2, gap tensor in R^-1&#39;},
+                          &#39;measurements&#39;: {&#39;contact_count&#39;: comb(n+depth-1, depth),
+                                           &#39;dressed_frequency&#39;: str(data[&#39;z&#39;]), &#39;mean_shell_degree&#39;: str(data[&#39;mean&#39;]),
+                                           &#39;shell_degree_variance&#39;: str(data[&#39;variance&#39;]),
+                                           &#39;quantum_tensor_ratio&#39;: str(ratio_q), &#39;gap_weighted_tensor_ratio&#39;: str(ratio_gap),
+                                           &#39;uniform_count_tensor_ratio&#39;: uniform_ratio if n &gt; 1 else None,
+                                           &#39;gap_ratio_relative_change&#39;: str(ratio_gap/uniform_ratio-1) if n &gt; 1 else None}})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--spatial-source&#39;, required=True)
+    parser.add_argument(&#39;--output&#39;, required=True)
+    args = parser.parse_args()
+    source = Path(args.spatial_source)
+    finite_spatial_comparison(source)
+    maintained_branches()
+    report = {&#39;experiment_key&#39;: &#39;dressed-spatial-band-response-20261009&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/dressed-spatial-band-response-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/spatial-band-curvature-checks.py&#39;: sha256(source.read_bytes()).hexdigest()},
+              &#39;scope&#39;: &#39;Common kinetic-contact action, exact dressed spatial geometry and complement-gap tensor. Its occupied top-branch adiabatic inertia correction is negative; this is not complete particle inertia or a new empirical mass law.&#39;,
+              &#39;summary&#39;: {&#39;checks_passed&#39;: CHECKS, &#39;case_count&#39;: len(CASES)}, &#39;cases&#39;: CASES}
+    Path(args.output).write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(report[&#39;summary&#39;]))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

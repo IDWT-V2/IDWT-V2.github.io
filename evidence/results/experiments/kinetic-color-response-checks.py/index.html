@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>kinetic-color-response-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/kinetic-color-response-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="kinetic-color-response-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/kinetic-color-response-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="kinetic-color-response-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>kinetic-color-response-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/kinetic-color-response-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Use actual positive spatial Clifford branches in the occupied-sector current.&quot;&quot;&quot;
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+import importlib.util
+import json
+from pathlib import Path
+
+import numpy as np
+
+HERE = Path(__file__).resolve().parent
+spec = importlib.util.spec_from_file_location(&#39;current&#39;, HERE/&#39;hodge-color-current-checks.py&#39;)
+current = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(current)
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    if not condition:
+        raise AssertionError(message)
+    CHECKS += 1
+
+
+def close(actual, expected, message, tolerance=2e-10):
+    check(np.allclose(actual, expected, atol=tolerance, rtol=tolerance), message)
+
+
+def volume(gamma, dimension):
+    value = (1j)**(dimension//2)*np.eye(len(gamma[0]), dtype=complex)
+    for g in gamma[:dimension]:
+        value = value@g
+    return value
+
+
+def quartic(operators, psi):
+    j = np.einsum(&#39;i,abij,j-&gt;ab&#39;,psi.conj(),operators,psi).real
+    return np.vdot(j,j).real
+
+
+def phase_mixed(operators, first, second):
+    return sum(quartic(operators,first+z*second) for z in (1,1j,-1,-1j))/4-quartic(operators,first)-quartic(operators,second)
+
+
+def positive_frame(gamma, direction):
+    symbol = sum(p*g for p,g in zip(direction,gamma))
+    values, vectors = np.linalg.eigh(symbol)
+    result = vectors[:,values&gt;.5]
+    close(result.conj().T@result,np.eye(2),&#39;positive tangent branch retains its complete two-spin multiplicity&#39;)
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&#39;--output&#39;,type=Path,required=True)
+    args = parser.parse_args()
+    rng = np.random.default_rng(202610092350)
+    gamma, colors, keep, triplet = current.color_data()
+    for depth in (2,3,4,5,6,10):
+        dimension = depth+depth%2
+        chirality = volume(gamma,dimension)
+        data = current.hodge_data(depth,gamma,colors)
+        leakages = []
+        for _ in range(4):
+            direction = rng.normal(size=depth)
+            direction /= np.linalg.norm(direction)
+            symbol = sum(p*g for p,g in zip(direction,gamma))
+            positive = (np.eye(32)+symbol)/2
+            close(positive@positive,positive,&#39;full spatial principal symbol gives a positive-frequency projector&#39;)
+            close(positive@chirality@positive,np.zeros((32,32)),
+                  &#39;positive spatial Clifford states balance the two containing source chiralities&#39;)
+            psi = positive@(rng.normal(size=32)+1j*rng.normal(size=32))
+            psi /= np.linalg.norm(psi)
+            close(np.vdot(psi,(np.eye(32)+chirality)@psi).real/2,.5,
+                  &#39;source chirality balance follows from the kinetic branch rather than fitted amplitudes&#39;)
+            leakage = float(np.linalg.norm(triplet@symbol-symbol@triplet))
+            leakages.append(leakage)
+            if depth &lt;= 4:
+                close(leakage,0,&#39;fixed normal triplet preserves every occupied lower tangent kinetic branch&#39;)
+            else:
+                check(leakage&gt;1e-5,&#39;fixed triplet is not a complete higher-depth spatial kinetic carrier&#39;)
+            energy = current.energy_and_gradient(data,psi)[0]
+            if depth not in (3,4):
+                close(energy,0,&#39;inactive occupied-sector current remains zero on the actual positive kinetic branch&#39;)
+        CASES.append({&#39;real_depth&#39;:depth,&#39;geometry&#39;:&#39;positive full spatial principal-symbol branch&#39;,
+                      &#39;parameters&#39;:{&#39;sampled_unit_momenta&#39;:4,&#39;source_chiralities_preserved&#39;:True},
+                      &#39;measurements&#39;:{&#39;positive_branch_source_chiral_weights&#39;:[&#39;1/2&#39;,&#39;1/2&#39;],
+                                      &#39;triplet_symbol_commutator_norms&#39;:leakages,
+                                      &#39;full_particle_solution_derived&#39;:False}})
+    base_gamma = [current.source.dense(g) for g in current.source.gamma_monomials(2)]
+    data = current.hodge_data(4,gamma,colors)
+    operators = data[&#39;operators&#39;][:,:,keep,:][:,:,:,keep]
+    small_color = [t[np.ix_(keep[:3],keep[:3])] for t in colors]
+    for depth in (3,4):
+        for repetition in range(12):
+            direction = rng.normal(size=depth)
+            direction /= np.linalg.norm(direction)
+            frame = positive_frame(base_gamma[:depth],direction)
+            lift = np.kron(frame,np.eye(3))
+            reduced = np.einsum(&#39;ij,abjk,kl-&gt;abil&#39;,lift.conj().T,operators,lift,optimize=True)
+            psi = rng.normal(size=(2,3))+1j*rng.normal(size=(2,3))
+            n = np.vdot(psi,psi).real
+            rho = psi@psi.conj().T
+            purity = np.trace(rho@rho).real
+            energy = quartic(reduced,psi.reshape(-1))
+            close(energy,(7*n*n-5*purity)/6,
+                  &#39;actual positive-symbol spin-color source has the exact half-chiral Fierz norm&#39;)
+            check(n*n/3-1e-8 &lt;= energy &lt;= 3*n*n/4+1e-8,
+                  &#39;kinetically constrained source obeys its stronger uniform norm bounds&#39;)
+            second_direction = rng.normal(size=depth)
+            second_direction /= np.linalg.norm(second_direction)
+            second_frame = positive_frame(base_gamma[:depth],second_direction)
+            c = rng.normal(size=3)+1j*rng.normal(size=3)
+            c /= np.linalg.norm(c)
+            d = rng.normal(size=3)+1j*rng.normal(size=3)
+            d /= np.linalg.norm(d)
+            overlap = abs(np.vdot(c,d))**2
+            spin_average = 0.
+            for first_spin in frame.T:
+                for second_spin in second_frame.T:
+                    spin_average += phase_mixed(operators,np.kron(first_spin,c),np.kron(second_spin,d))/4
+            close(spin_average,(3-overlap)/2,
+                  &#39;unpolarized positive kinetic branches have a direction-independent normal-color pair contraction&#39;)
+            CASES.append({&#39;real_depth&#39;:depth,&#39;geometry&#39;:&#39;independently directed positive kinetic spin-color patterns&#39;,
+                          &#39;parameters&#39;:{&#39;momentum_direction_a&#39;:direction.tolist(),
+                                        &#39;momentum_direction_b&#39;:second_direction.tolist(),
+                                        &#39;relative_phase_uniform_average&#39;:True,
+                                        &#39;spin_preparation&#39;:&#39;independent identity over each positive two-spin branch&#39;},
+                          &#39;measurements&#39;:{&#39;color_overlap_squared&#39;:float(overlap),
+                                          &#39;averaged_pair_contact&#39;:float(spin_average),
+                                          &#39;exact_pair_operator&#39;:&#39;(3 I-swap_color)/2=(4/3)I-sum T_A tensor T_A&#39;,
+                                          &#39;color_casimir_coefficient&#39;:-1}})
+    # The full color operator and its scalar offset remain, including their ordering.
+    swap = np.zeros((9,9))
+    for a in range(3):
+        for b in range(3):
+            swap[3*a+b,3*b+a] = 1
+    casimir = sum(np.kron(t,t) for t in small_color)
+    operator = (3*np.eye(9)-swap)/2
+    close(operator,4*np.eye(9)/3-casimir,
+          &#39;kinetically constrained contraction retains its scalar offset and signed color Casimir&#39;)
+    values = np.linalg.eigvalsh(operator)
+    close(values,np.array([1.]*6+[2.]*3),
+          &#39;symmetric color has lower positive contact than antisymmetric color in this candidate&#39;)
+    report = {&#39;experiment&#39;:&#39;kinetic-color-response&#39;,&#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),
+              &#39;status&#39;:&#39;passed&#39;,&#39;checks&#39;:CHECKS,&#39;cases&#39;:CASES,
+              &#39;scope&#39;:&#39;Positive principal-symbol plane-wave controls, not localized mass solutions or a strong-force sign derivation.&#39;,
+              &#39;sources&#39;:{&#39;experiments/kinetic-color-response-checks.py&#39;:sha256(Path(__file__).read_bytes()).hexdigest()}}
+    for name in (&#39;hodge-color-current-checks.py&#39;,&#39;normal-color-kinetics-checks.py&#39;,&#39;spinor-hodge-source-checks.py&#39;):
+        report[&#39;sources&#39;][&#39;experiments/&#39;+name] = sha256((HERE/name).read_bytes()).hexdigest()
+    args.output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;checks&#39;:CHECKS,&#39;cases&#39;:len(CASES),&#39;report&#39;:str(args.output)}))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

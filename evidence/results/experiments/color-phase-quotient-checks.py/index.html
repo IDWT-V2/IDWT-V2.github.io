@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>color-phase-quotient-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/color-phase-quotient-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="color-phase-quotient-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/color-phase-quotient-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="color-phase-quotient-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>color-phase-quotient-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/color-phase-quotient-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Retain a dynamical pair phase in zero-moment color reduction and audit its lift.&quot;&quot;&quot;
+from pathlib import Path
+import argparse
+import hashlib
+import importlib.util
+import json
+import math
+
+import numpy as np
+from scipy.linalg import expm
+
+
+CHECKS = 0
+CASES = []
+DEPTHS = (2, 3, 4, 5, 6, 10)
+
+
+def check(condition, message):
+    global CHECKS
+    CHECKS += 1
+    if not condition:
+        raise AssertionError(message)
+
+
+def close(actual, expected, message, atol=3e-10):
+    check(np.allclose(actual, expected, atol=atol, rtol=3e-10), message)
+
+
+def unit(v):
+    return v/np.linalg.norm(v)
+
+
+def su_generators(k):
+    result = []
+    for i in range(k):
+        for j in range(i+1, k):
+            t = np.zeros((k, k), complex); t[i, j] = t[j, i] = .5; result.append(t)
+            t = np.zeros((k, k), complex); t[i, j] = -.5j; t[j, i] = .5j; result.append(t)
+    for j in range(1, k):
+        diagonal = np.zeros(k); diagonal[:j] = 1; diagonal[j] = -j
+        result.append(np.diag(diagonal)/math.sqrt(2*j*(j+1)))
+    return result
+
+
+def quotient_controls(rng):
+    generators = su_generators(3)
+    for sample in range(8):
+        r = rng.uniform(.2, 2.)
+        phi = rng.uniform(-3., 3.)
+        u = unit(rng.normal(size=3)+1j*rng.normal(size=3))
+        z = r*np.exp(.5j*phi)*u
+        w = r*np.exp(.5j*phi)*u.conj()
+        pair = np.r_[z, w]
+        density = np.array([np.vdot(z, t@z)-np.vdot(w, t.T@w) for t in generators])
+        close(density, 0, &#39;actual direct-sum color moment vanishes&#39;)
+        close(np.outer(z, z.conj())-np.outer(w.conj(), w), 0,
+              &#39;zero-moment rank-one Hermitian density equality&#39;)
+        invariant = w @ z
+        close(invariant, r*r*np.exp(1j*phi), &#39;bilinear invariant retains the independent pair phase&#39;)
+        dr = pair/r
+        dphi = .5j*pair
+        close(np.vdot(dr, dr).real, 2, &#39;reduced radial metric&#39;)
+        close(np.vdot(dphi, dphi).real, r*r/2, &#39;reduced angular metric&#39;)
+        close(np.vdot(dr, dphi).real, 0, &#39;radial and angular coordinates are metric orthogonal&#39;)
+        close(2*np.vdot(dr, dphi).imag, 2*r, &#39;nonzero canonical symplectic pairing survives the free pair phase&#39;)
+        close(-np.vdot(pair, dphi).imag, -r*r, &#39;first-order canonical one-form is minus R dphi&#39;)
+        for t in generators:
+            gauge = np.r_[1j*t@z, -1j*t.T@w]
+            close(2*np.vdot(dr, gauge).imag, 0, &#39;gauge direction is symplectically null on radial tangent&#39;)
+            close(2*np.vdot(dphi, gauge).imag, 0, &#39;gauge direction is symplectically null on phase tangent&#39;)
+            close(np.vdot(dr, gauge).real, 0, &#39;radial representative is metric horizontal&#39;)
+            close(np.vdot(dphi, gauge).real, 0, &#39;symmetric pair-phase representative is metric horizontal&#39;)
+        rotation = expm(1j*sum(rng.normal()*t for t in generators))
+        close((rotation.conj()@w) @ (rotation@z), invariant, &#39;non-Abelian gauge orbit preserves the invariant bilinear&#39;)
+        charge_cases = []
+        for label, weights in [(&#39;exterior&#39;, (1., 2.)), (&#39;spin-lift&#39;, (-.5, .5)),
+                                (&#39;common-inverse-determinant&#39;, (-2., -1.)),
+                                (&#39;mixed-determinant-branches&#39;, (1., -1.))]:
+            theta = .37
+            rotated_invariant = (np.exp(1j*weights[1]*theta)*w) @ (np.exp(1j*weights[0]*theta)*z)
+            total = sum(weights)
+            close(rotated_invariant, np.exp(1j*total*theta)*invariant, &#39;pair central character uses the actual specified lift&#39;)
+            close((weights[0]*np.vdot(z, z)+weights[1]*np.vdot(w, w))/3,
+                  total*r*r/3, &#39;electric moment agrees with the reduced phase generator&#39;)
+            central_velocity = np.r_[1j*weights[0]*z, 1j*weights[1]*w]
+            difference = (weights[0]-weights[1])/2
+            gauge_generator = difference/(1-1/3)*(np.outer(u, u.conj())-np.eye(3)/3)
+            gauge_velocity = np.r_[1j*gauge_generator@z, -1j*gauge_generator.T@w]
+            close(central_velocity, total*dphi+gauge_velocity,
+                  &#39;central action splits into the measured quotient phase plus a true SU3 gauge motion&#39;)
+            charge_cases.append({&#39;lift&#39;: label, &#39;component_weights&#39;: list(weights),
+                                 &#39;bilinear_weight&#39;: total, &#39;determinant_normalized_weight&#39;: total/3})
+        omega = .83
+        time = .51
+        evolved_z = np.exp(-1j*omega*time)*z
+        evolved_w = np.exp(-1j*omega*time)*w
+        close(evolved_w@evolved_z, np.exp(-2j*omega*time)*invariant,
+              &#39;bilinear frequency is twice the constituent field frequency under the common linear clock&#39;)
+        CASES.append({&#39;case&#39;: f&#39;normal-SU3-phase-quotient-{sample}&#39;, &#39;radius_r&#39;: r, &#39;pair_phase&#39;: phi,
+                      &#39;quotient_coordinate&#39;: &#39;B = w^T z = R exp(i phi), R = r^2&#39;,
+                      &#39;canonical_one_form&#39;: &#39;-R dphi&#39;, &#39;canonical_two_form&#39;: &#39;-dR wedge dphi&#39;,
+                      &#39;reduced_metric&#39;: &#39;(dR^2 + R^2 dphi^2)/(2R)&#39;,
+                      &#39;central_characters&#39;: charge_cases,
+                      &#39;common_clock_bilinear_frequency_factor&#39;: 2,
+                      &#39;fixed_absolute_electric_charge_derived&#39;: False})
+
+
+def sector_current_controls(geometry, rng):
+    gamma, color, residual, number = geometry.build_geometry()
+    parity4 = np.diag([1., -1., -1., 1.])
+    epsilon2 = np.array([[0., 1.], [-1., 0.]])
+    for d in DEPTHS:
+        hodge = geometry.hodge(d if d % 2 == 0 else d+1)
+        active = bool(np.linalg.norm(hodge)&gt;1e-10)
+        check(active == (d in (3, 4)), &#39;phase quotient audit retains the same all-sector Hodge gate&#39;)
+        if d &lt;= 4:
+            r = .9
+            phi = .4
+            normal = np.zeros(8, complex)
+            normal[4] = normal[3] = r*np.exp(.5j*phi)
+            spin = unit(rng.normal(size=4)+1j*rng.normal(size=4))
+            psi = np.kron(spin, normal)
+            q = np.array([np.vdot(psi, t@psi) for t in color])
+            j = np.array([[np.vdot(psi, g@t@psi) for t in color] for g in gamma[:d]])
+            close(q, 0, &#39;normal pair phase permits zero SU3 density on every base spinor&#39;)
+            close(j, 0, &#39;normal pair phase permits every full base spatial current to vanish&#39;)
+            available = True
+            residual_norm = None
+        elif d &lt;= 6:
+            r = .9
+            z = r*unit(rng.normal(size=2)+1j*rng.normal(size=2))
+            w = np.exp(.4j)*epsilon2@z.conj()
+            normal = np.zeros(8, complex)
+            normal[[2, 1]] = z
+            normal[[6, 5]] = w
+            spin = unit(rng.normal(size=4)+1j*rng.normal(size=4))
+            psi = np.kron(spin, normal)
+            q = np.array([np.vdot(psi, t@psi) for t in residual])
+            j = np.array([[np.vdot(psi, g@t@psi).real for t in residual] for g in gamma[:d]])
+            close(q, 0, &#39;a residual SU2 density quotient exists in the actual exterior carrier&#39;)
+            close(j[:4], 0, &#39;base directions retain zero color current&#39;)
+            chirality = np.vdot(spin, parity4@spin).real
+            close(j[4]@j[4], chirality**2*r**4,
+                  &#39;added fifth spatial direction has an exact residual current obstruction&#39;)
+            if d == 6:
+                close(j[5]@j[5], chirality**2*r**4,
+                      &#39;sixth direction independently retains the residual current obstruction&#39;)
+            check(np.linalg.norm(j[4:])&gt;1e-4, &#39;zero density alone does not satisfy the full inactive source constraints&#39;)
+            available = False
+            residual_norm = float(np.sum(j[4:]**2))
+        else:
+            available = False
+            residual_norm = None
+        CASES.append({&#39;case&#39;: f&#39;actual-sector-phase-quotient-depth-{d}&#39;, &#39;real_depth&#39;: d,
+                      &#39;hodge_coefficient_active&#39;: active, &#39;normal_algebra_dimension&#39;: 8 if d&lt;=4 else 3 if d&lt;=6 else 0,
+                      &#39;normal_SU3_pair_reduction_retains_arbitrary_base_spinor&#39;: available,
+                      &#39;residual_added_direction_current_norm&#39;: residual_norm,
+                      &#39;all_particle_charges_or_occupations_selected&#39;: False})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--geometry-source&#39;, type=Path, required=True)
+    parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    spec = importlib.util.spec_from_file_location(&#39;gauss_geometry&#39;, args.geometry_source)
+    geometry = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(geometry)
+    rng = np.random.default_rng(2026101023)
+    quotient_controls(rng)
+    sector_current_controls(geometry, rng)
+    report = {&#39;title&#39;: &#39;A Dynamical Zero-Color Pair Phase and Its Actual Central Character&#39;,
+              &#39;sources&#39;: {&#39;experiments/color-phase-quotient-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/hodge-gated-gauss-checks.py&#39;: hashlib.sha256(args.geometry_source.read_bytes()).hexdigest()},
+              &#39;checks_passed&#39;: CHECKS, &#39;dependency_checks_passed&#39;: geometry.CHECKS,
+              &#39;case_count&#39;: len(CASES), &#39;occupied_depths&#39;: list(DEPTHS),
+              &#39;scope&#39;: &#39;explicit local commuting-amplitude zero-moment reduction and full spatial-current audit; not physical charge quantization or a particle identification&#39;,
+              &#39;cases&#39;: CASES}
+    args.report.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(f&#39;{CHECKS} quotient and current checks plus {geometry.CHECKS} geometry checks passed across {len(CASES)} cases&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

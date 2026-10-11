@@ -1,0 +1,131 @@
+{
+  "experiment_key": "hodge-reality-cancellation-20261009",
+  "created_utc": "2026-10-09T21:09:16.357832+00:00",
+  "sources": {
+    "experiments/hodge-reality-cancellation-checks.py": "42f0d3f5b4010588c2e94b063ef62956d8900f52c33897d81faca93fe8883c44"
+  },
+  "scope": "Middle-Hodge conjugation and explicit same-law kinetic current counterexample; no particle simulations.",
+  "summary": {
+    "checks_passed": 1915,
+    "case_count": 7,
+    "six_and_ten_have_naturally_conjugate_middle_channels": true,
+    "conjugate_reality_alone_forces_neutral_current": false
+  },
+  "cases": [
+    {
+      "name": "middle-hodge-reality",
+      "real_depth": 2,
+      "parameters": {
+        "middle_degree": 1,
+        "shadow_depth": 1
+      },
+      "measurements": {
+        "each_channel_rank": 1,
+        "star_squared": -1,
+        "chirality_exchanged_by_conjugation": true,
+        "eigenvalues": [
+          "i",
+          "-i"
+        ]
+      }
+    },
+    {
+      "name": "middle-hodge-reality",
+      "real_depth": 4,
+      "parameters": {
+        "middle_degree": 2,
+        "shadow_depth": 3
+      },
+      "measurements": {
+        "each_channel_rank": 3,
+        "star_squared": 1,
+        "chirality_exchanged_by_conjugation": false,
+        "eigenvalues": [
+          "1",
+          "-1"
+        ]
+      }
+    },
+    {
+      "name": "middle-hodge-reality",
+      "real_depth": 6,
+      "parameters": {
+        "middle_degree": 3,
+        "shadow_depth": 5
+      },
+      "measurements": {
+        "each_channel_rank": 10,
+        "star_squared": -1,
+        "chirality_exchanged_by_conjugation": true,
+        "eigenvalues": [
+          "i",
+          "-i"
+        ]
+      }
+    },
+    {
+      "name": "middle-hodge-reality",
+      "real_depth": 8,
+      "parameters": {
+        "middle_degree": 4,
+        "shadow_depth": 7
+      },
+      "measurements": {
+        "each_channel_rank": 35,
+        "star_squared": 1,
+        "chirality_exchanged_by_conjugation": false,
+        "eigenvalues": [
+          "1",
+          "-1"
+        ]
+      }
+    },
+    {
+      "name": "middle-hodge-reality",
+      "real_depth": 10,
+      "parameters": {
+        "middle_degree": 5,
+        "shadow_depth": 9
+      },
+      "measurements": {
+        "each_channel_rank": 126,
+        "star_squared": -1,
+        "chirality_exchanged_by_conjugation": true,
+        "eigenvalues": [
+          "i",
+          "-i"
+        ]
+      }
+    },
+    {
+      "name": "middle-hodge-reality",
+      "real_depth": 12,
+      "parameters": {
+        "middle_degree": 6,
+        "shadow_depth": 11
+      },
+      "measurements": {
+        "each_channel_rank": 462,
+        "star_squared": 1,
+        "chirality_exchanged_by_conjugation": false,
+        "eigenvalues": [
+          "1",
+          "-1"
+        ]
+      }
+    },
+    {
+      "name": "conjugate-reality-noether-control",
+      "parameters": {
+        "kinetics": "positive second-order norm",
+        "representations": "3 direct-sum conjugate3"
+      },
+      "measurements": {
+        "sum_algebraic_densities": "0",
+        "sum_noether_currents": "-2*omega",
+        "kinetic_norm": "2*omega**2",
+        "same-sign_first-order_kinetic_sum": "0"
+      }
+    }
+  ]
+}

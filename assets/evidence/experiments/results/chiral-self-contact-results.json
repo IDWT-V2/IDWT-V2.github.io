@@ -1,0 +1,156 @@
+{
+  "experiment": "chiral-self-contact",
+  "created_utc": "2026-10-09T23:39:39.573368+00:00",
+  "status": "passed",
+  "checks": 349,
+  "cases": [
+    {
+      "real_depth": 2,
+      "geometry": "chirality-weighted identical middle-current self-wedge",
+      "parameters": {
+        "even_carrier_depth": 2,
+        "middle_degree": 1,
+        "both_source_chiralities_retained": true,
+        "full_kinetic_field_retained": true
+      },
+      "measurements": {
+        "active": false,
+        "sample_energies": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "equals_previous_hodge_current_action": true,
+        "complete_strong_force_derived": false
+      }
+    },
+    {
+      "real_depth": 3,
+      "geometry": "chirality-weighted identical middle-current self-wedge",
+      "parameters": {
+        "even_carrier_depth": 4,
+        "middle_degree": 2,
+        "both_source_chiralities_retained": true,
+        "full_kinetic_field_retained": true
+      },
+      "measurements": {
+        "active": true,
+        "sample_energies": [
+          0.20783024370038577,
+          0.22748729676766377,
+          0.08885810973404032,
+          0.2259717830104969
+        ],
+        "equals_previous_hodge_current_action": true,
+        "complete_strong_force_derived": false
+      }
+    },
+    {
+      "real_depth": 4,
+      "geometry": "chirality-weighted identical middle-current self-wedge",
+      "parameters": {
+        "even_carrier_depth": 4,
+        "middle_degree": 2,
+        "both_source_chiralities_retained": true,
+        "full_kinetic_field_retained": true
+      },
+      "measurements": {
+        "active": true,
+        "sample_energies": [
+          0.19732268751784587,
+          0.19554646032396522,
+          0.12787187115155296,
+          0.21526250628487809
+        ],
+        "equals_previous_hodge_current_action": true,
+        "complete_strong_force_derived": false
+      }
+    },
+    {
+      "real_depth": 5,
+      "geometry": "chirality-weighted identical middle-current self-wedge",
+      "parameters": {
+        "even_carrier_depth": 6,
+        "middle_degree": 3,
+        "both_source_chiralities_retained": true,
+        "full_kinetic_field_retained": true
+      },
+      "measurements": {
+        "active": false,
+        "sample_energies": [
+          -4.336808689942018e-19,
+          8.673617379884035e-19,
+          -2.3852447794681098e-18,
+          -8.673617379884035e-19
+        ],
+        "equals_previous_hodge_current_action": true,
+        "complete_strong_force_derived": false
+      }
+    },
+    {
+      "real_depth": 6,
+      "geometry": "chirality-weighted identical middle-current self-wedge",
+      "parameters": {
+        "even_carrier_depth": 6,
+        "middle_degree": 3,
+        "both_source_chiralities_retained": true,
+        "full_kinetic_field_retained": true
+      },
+      "measurements": {
+        "active": false,
+        "sample_energies": [
+          -4.336808689942018e-19,
+          0.0,
+          -1.3010426069826053e-18,
+          -4.336808689942018e-19
+        ],
+        "equals_previous_hodge_current_action": true,
+        "complete_strong_force_derived": false
+      }
+    },
+    {
+      "real_depth": 10,
+      "geometry": "chirality-weighted identical middle-current self-wedge",
+      "parameters": {
+        "even_carrier_depth": 10,
+        "middle_degree": 5,
+        "both_source_chiralities_retained": true,
+        "full_kinetic_field_retained": true
+      },
+      "measurements": {
+        "active": false,
+        "sample_energies": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "equals_previous_hodge_current_action": true,
+        "complete_strong_force_derived": false
+      }
+    },
+    {
+      "real_depth": 4,
+      "geometry": "algebraic current versus a closed exact differential form",
+      "parameters": {
+        "trial_profile_is_particle_solution": false
+      },
+      "measurements": {
+        "algebraic_current_closed": false,
+        "gaussian_fourth_power_integral": "pi^2/4",
+        "bulk_amplitude_variation_at_one": "pi^2",
+        "actual_factorized_spinor_current_integrated_contact": "pi^2/6",
+        "actual_current_bulk_amplitude_variation": "2*pi^2/3",
+        "exact_closed_form_self_wedge_is_boundary_term": true
+      }
+    }
+  ],
+  "sources": {
+    "experiments/chiral-self-contact-checks.py": "bc7b8b83d84731f009f052cf41406f4ec7596eaccc52ff1dcb9d57a1de59e288",
+    "experiments/hodge-color-current-checks.py": "085653a3b0ec27ae8d18bb7d25fb9397706bc6d52ff15f98ec4bb0c74151d60f",
+    "experiments/normal-color-kinetics-checks.py": "15e50b931c5d5d468a43cbd65b3ea8e17f271e5ce6d69c7054000a84e5514a43",
+    "experiments/spinor-hodge-source-checks.py": "c1a9212b8dd1f0e9e525e36db80c322b9487986ca656aa028c2a4cbb8456b38e"
+  },
+  "scope": "A proposed orientation-even local self-wedge interaction equals the positive Hodge-current action at occupied sectors. Its selection, spatial dynamics and force law remain open."
+}

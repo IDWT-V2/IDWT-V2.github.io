@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>vacuum-connection-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/vacuum-connection-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="vacuum-connection-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/vacuum-connection-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="vacuum-connection-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>vacuum-connection-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/vacuum-connection-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Test a smooth vacuum-history ambiguity of the exact-zero dielectric action.&quot;&quot;&quot;
+from pathlib import Path
+import argparse
+import hashlib
+import importlib.util
+import json
+import math
+
+import numpy as np
+from scipy.integrate import solve_ivp, quad
+from scipy.special import ellipk
+
+
+DEPTHS = (2, 3, 4, 5, 6, 10)
+CHECKS = 0
+CASES = []
+
+
+def check(condition, message):
+    global CHECKS
+    CHECKS += 1
+    if not condition:
+        raise AssertionError(message)
+
+
+def close(actual, expected, message, atol=2e-8):
+    check(np.allclose(actual, expected, atol=atol, rtol=2e-8), message)
+
+
+def flat_step(s):
+    if s &lt;= 0:
+        return 0.
+    if s &gt;= 1:
+        return 1.
+    a = math.exp(-1/s)
+    b = math.exp(-1/(1-s))
+    return a/(a+b)
+
+
+def drive(time):
+    if not 2 &lt; time &lt; 3:
+        return 0.
+    s = time-2
+    return math.exp(4-1/(s*(1-s)))
+
+
+def magnetic_history(time, final):
+    return final*flat_step((time-.25)/1.25)
+
+
+def driven_response(active, magnetic, *, rtol=2e-11, atol=2e-12):
+    kappa = 1.2
+    omega = .9
+    coefficient = kappa*active*magnetic*magnetic
+    def equation(t, state):
+        u, speed, work = state
+        forcing = drive(t)
+        return [speed, forcing-omega*omega*u-2*coefficient*u**3, forcing*speed]
+    solution = solve_ivp(equation, (2., 12.), [0., 0., 0.], method=&#39;DOP853&#39;,
+                         rtol=rtol, atol=atol, max_step=.025, dense_output=True)
+    check(solution.success, &#39;smooth neutral-probe response integrates successfully&#39;)
+    times = np.linspace(2., 12., 401)
+    u, speed, work = solution.sol(times)
+    energy = (speed*speed+omega*omega*u*u+coefficient*u**4)/2
+    close(energy, work, &#39;complete scalar plus magnetic energy equals work of the identical specified drive&#39;)
+    check(np.max(np.abs(energy-work))&lt;2e-9, &#39;conserved post-drive energy is resolved&#39;)
+    return solution, times, u, speed, energy, work
+
+
+def duffing_clock(active, magnetic):
+    kappa = 1.2
+    omega = .9
+    initial_speed = .8
+    c = kappa*active*magnetic*magnetic
+    if c == 0:
+        amplitude_squared = initial_speed**2/omega**2
+        frequency_scale = omega
+        modulus = 0.
+    else:
+        amplitude_squared = 2*initial_speed**2/(omega*omega+math.sqrt(omega**4+4*c*initial_speed**2))
+        frequency_scale = math.sqrt(omega*omega+2*c*amplitude_squared)
+        modulus = c*amplitude_squared/frequency_scale**2
+    period = 4*ellipk(modulus)/frequency_scale
+    def equation(t, state):
+        u, speed = state
+        return [speed, -omega*omega*u-2*c*u**3]
+    def crossing(t, state):
+        return state[0]
+    crossing.direction = 1
+    solution = solve_ivp(equation, (0., 2.2*period), [0., initial_speed], method=&#39;DOP853&#39;,
+                         rtol=1e-11, atol=1e-12, max_step=period/150, events=crossing)
+    check(solution.success, &#39;homogeneous complete-energy clock integrates&#39;)
+    events = solution.t_events[0]
+    check(len(events)&gt;=3, &#39;clock has two complete post-initial cycles&#39;)
+    close(events[1], period, &#39;Jacobi elliptic period agrees with independent zero-crossing integration&#39;)
+    close(events[2]-events[1], period, &#39;second cycle independently retains the period&#39;)
+    amplitude = math.sqrt(amplitude_squared)
+    close((omega*omega*amplitude_squared+c*amplitude_squared**2)/2,
+          initial_speed*initial_speed/2, &#39;turning amplitude retains complete initial kinetic energy&#39;)
+    return period, amplitude
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--geometry-source&#39;, type=Path, required=True)
+    parser.add_argument(&#39;--report&#39;, type=Path, required=True)
+    args = parser.parse_args()
+    spec = importlib.util.spec_from_file_location(&#39;gauss_geometry&#39;, args.geometry_source)
+    geometry = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(geometry)
+    for time in (0., .1, .25):
+        close(magnetic_history(time, 3.), 0, &#39;all trial histories share the same initially flat raw connection&#39;)
+    for time in (1.5, 1.8, 2., 3., 8.):
+        close(magnetic_history(time, 3.), 3., &#39;curvature history settles before the common probe turns on&#39;)
+    # Before activation u=0, all dielectric and its scalar derivative vanish identically.
+    for value in (0., .1, 1., 3.):
+        close(value*0.**4, 0, &#39;arbitrary smooth vacuum curvature has zero connection energy&#39;)
+        close(value*0.**3, 0, &#39;arbitrary smooth vacuum curvature exerts no scalar force before activation&#39;)
+    for d in DEPTHS:
+        hodge = geometry.hodge(d if d % 2 == 0 else d+1)
+        active = int(np.linalg.norm(hodge)&gt;1e-10)
+        check(active == int(d in (3, 4)), &#39;vacuum test retains the occupied-sector Hodge rule&#39;)
+        if d == 10:
+            period, amplitude = duffing_clock(0, 0.)
+            CASES.append({&#39;case&#39;: &#39;vacuum-response-depth-10&#39;, &#39;real_depth&#39;: d,
+                          &#39;independent_normal_connection_exists&#39;: False, &#39;neutral_clock_period&#39;: period})
+            continue
+        responses = []
+        periods = []
+        for magnetic in (0., 1., 3.):
+            solution, times, u, speed, energy, work = driven_response(active, magnetic)
+            refined, _, u2, _, _, _ = driven_response(active, magnetic, rtol=3e-12, atol=3e-13)
+            close(u, u2, &#39;neutral response survives tighter independent integration tolerances&#39;)
+            period, amplitude = duffing_clock(active, magnetic)
+            periods.append(period)
+            responses.append(u)
+            pde_errors = []
+            for time in (.4, .8, 1.3, 1.8, 2.2, 2.5, 3.5, 6.):
+                delta = 1e-4
+                b = magnetic_history(time, magnetic)
+                b_dot = (magnetic_history(time+delta, magnetic)-magnetic_history(time-delta, magnetic))/(2*delta)
+                b_ddot = (magnetic_history(time+delta, magnetic)-2*b+magnetic_history(time-delta, magnetic))/delta**2
+                if time &lt; 2:
+                    amplitude = velocity = acceleration = 0.
+                else:
+                    amplitude, velocity, _ = solution.sol(time)
+                    acceleration = (solution.sol(time+delta)[1]-solution.sol(time-delta)[1])/(2*delta)
+                position_x = .73
+                electric = -b_dot*position_x
+                epsilon = 1.2*active*amplitude**4
+                epsilon_dot = 4*1.2*active*amplitude**3*velocity
+                gauge_residual = -position_x*(epsilon_dot*b_dot+epsilon*b_ddot)
+                scalar_residual = acceleration+.9**2*amplitude+2*1.2*active*amplitude**3*(b*b-electric*electric)-drive(time)
+                close(gauge_residual, 0, &#39;full connection equation holds before and after neutral activation&#39;)
+                close(scalar_residual, 0, &#39;independent solution derivative satisfies the full scalar PDE with electric and magnetic terms&#39;, atol=2e-6)
+                pde_errors.append(abs(float(scalar_residual)))
+            CASES.append({&#39;case&#39;: f&#39;vacuum-response-depth-{d}-B-{magnetic:g}&#39;, &#39;real_depth&#39;: d,
+                          &#39;hodge_coefficient_active&#39;: bool(active), &#39;settled_magnetic_curvature&#39;: magnetic,
+                          &#39;initial_raw_connection_and_curvature&#39;: &#39;0&#39;,
+                          &#39;initial_neutral_amplitude_and_velocity&#39;: &#39;0&#39;,
+                          &#39;identical_neutral_probe&#39;: &#39;smooth pulse supported in 2&lt;t&lt;3&#39;,
+                          &#39;response_at_t4&#39;: float(solution.sol(4.)[0]),
+                          &#39;maximum_energy_work_error&#39;: float(np.max(np.abs(energy-work))),
+                          &#39;maximum_independent_scalar_PDE_error&#39;: max(pde_errors),
+                          &#39;post_probe_complete_energy_density&#39;: float(energy[-1]),
+                          &#39;unforced_common_initial_velocity_period&#39;: period,
+                          &#39;unforced_turning_amplitude&#39;: amplitude,
+                          &#39;local_homogeneous_control&#39;: True, &#39;finite_total_energy_global_solution&#39;: False})
+        difference = float(np.max(np.abs(responses[0]-responses[-1])))
+        if active:
+            check(difference&gt;.05, &#39;different zero-energy vacuum histories produce different later neutral-probe responses&#39;)
+            check(periods[2]&lt;periods[1]&lt;periods[0], &#39;activated curvature changes the neutral clock at common initial scalar velocity&#39;)
+        else:
+            close(difference, 0, &#39;identically inactive coefficient leaves every later neutral response unchanged&#39;)
+            close(periods, [2*math.pi/.9]*3, &#39;inactive neutral clock remains harmonic independently of raw curvature&#39;)
+        # A positive floor forbids the freely varying vacuum history without an additional driving current.
+        s = .43
+        delta = 1e-4
+        second = (flat_step(s+delta)-2*flat_step(s)+flat_step(s-delta))/delta**2
+        check(abs(second)&gt;.1, &#39;the smooth history has nonzero acceleration in its vacuum transition&#39;)
+        for floor in (.1, .01):
+            check(abs(floor*second)&gt;.0001,
+                  &#39;positive-floor Maxwell equation rejects this vacuum history without a connection source&#39;)
+    report = {&#39;title&#39;: &#39;An Exact-Zero Dielectric Leaves a Vacuum-History Ambiguity&#39;,
+              &#39;sources&#39;: {&#39;experiments/vacuum-connection-checks.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/hodge-gated-gauss-checks.py&#39;: hashlib.sha256(args.geometry_source.read_bytes()).hexdigest()},
+              &#39;checks_passed&#39;: CHECKS, &#39;dependency_checks_passed&#39;: geometry.CHECKS,
+              &#39;case_count&#39;: len(CASES), &#39;occupied_depths&#39;: list(DEPTHS),
+              &#39;scope&#39;: &#39;exact local homogeneous driven classical solutions with smooth raw vacuum connection histories; energy-density controls, not finite-total-energy particles&#39;,
+              &#39;conclusion&#39;: &#39;In active sectors, different smooth zero-energy vacuum connection histories sharing identical initial raw data yield different responses to the same later neutral drive. A positive floor rejects those histories but removes the exact source constraints. A geometric vacuum-flatness or connection-reduction rule requires derivation. Inactive sectors keep their zero source and neutral harmonic controls.&#39;,
+              &#39;cases&#39;: CASES}
+    args.report.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(f&#39;{CHECKS} vacuum, energy and clock checks plus {geometry.CHECKS} geometry checks passed across {len(CASES)} cases&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

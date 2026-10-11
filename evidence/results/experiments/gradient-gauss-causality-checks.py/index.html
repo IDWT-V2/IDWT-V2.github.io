@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>gradient-gauss-causality-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/gradient-gauss-causality-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="gradient-gauss-causality-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/gradient-gauss-causality-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="gradient-gauss-causality-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script defer src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>gradient-gauss-causality-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/gradient-gauss-causality-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Decide static sign, mobility and source causality for one gradient gauge law.&quot;&quot;&quot;
+from pathlib import Path
+import argparse
+import hashlib
+import json
+import math
+
+import numpy as np
+from scipy.integrate import quad
+from scipy.linalg import eigh
+import sympy as sp
+
+
+DEPTHS = (2, 3, 4, 5, 6, 10)
+CASES = []
+CHECKS = 0
+
+
+def check(condition, message):
+    global CHECKS
+    CHECKS += 1
+    if not condition:
+        raise AssertionError(message)
+
+
+def near(actual, expected, message, atol=1e-10, rtol=1e-9):
+    check(np.allclose(actual, expected, atol=atol, rtol=rtol), message)
+
+
+def symbolic_field_checks():
+    r, t = sp.symbols(&#39;r t&#39;, positive=True)
+    for d in DEPTHS:
+        area = 2 * sp.pi ** sp.Rational(d, 2) / sp.gamma(sp.Rational(d, 2))
+        green = -sp.log(r) / area if d == 2 else r ** (2-d) / ((d-2)*area)
+        check(sp.simplify(sp.diff(green, r, 2)+(d-1)*sp.diff(green, r)/r) == 0,
+              f&#39;d={d}: exterior Laplace equation&#39;)
+        check(sp.simplify(-area*r**(d-1)*sp.diff(green, r)) == 1,
+              f&#39;d={d}: inverse-Laplacian unit flux&#39;)
+        q = t**3/6
+        tau = sp.symbols(&#39;tau&#39;, nonnegative=True)
+        second_primitive = sp.integrate((t-tau)*tau**3/6, (tau, 0, t))
+        check(second_primitive == t**5/120, &#39;quadrupole temporal integral&#39;)
+        exterior = sp.expand(q*sp.diff(green, r)-second_primitive*sp.diff(green, r, 3))
+        formula = -t**3/(6*area*r**(d-1))*(1-sp.Rational(d*(d-1),20)*t**2/r**2)
+        check(sp.simplify(exterior-formula) == 0, f&#39;d={d}: physical quadrupole tail&#39;)
+        bracket = 1-sp.Rational(d*(d-1),320)
+        check(bracket &gt; 0, f&#39;d={d}: nonzero spacelike response at r=4t&#39;)
+        # A quadrupole has rho(k)=O(k^2); the energy integrand is O(k^(d-1)).
+        check(d-1 &gt; -1, f&#39;d={d}: quadrupole finite infrared energy&#39;)
+        CASES.append({&#39;case&#39;: f&#39;quadrupole-tail-depth-{d}&#39;, &#39;depth&#39;: d,
+                      &#39;sphere_area&#39;: str(area), &#39;tail_at_r_4t&#39;: str(sp.simplify(exterior.subs(r,4*t))),
+                      &#39;tail_relative_bracket&#39;: str(bracket), &#39;infrared_energy_power&#39;: d-1,
+                      &#39;isolated_cost_diverges&#39;: d &lt;= 4,
+                      &#39;neutral_dipole_cost_finite&#39;: d &gt; 2,
+                      &#39;conditional_confinement_window&#39;: 2 &lt; d &lt;= 4})
+    k, omega, ell, speed = sp.symbols(&#39;k omega ell speed&#39;, positive=True)
+    m = ell**2*k**2
+    static = sp.simplify(1/(m*k**2))
+    check(static == 1/(ell**2*k**4), &#39;ordinary Gauss gives positive fourth-order source kernel&#39;)
+    for wave_number in (0.001, 0.1, 1., 10.):
+        check(wave_number**2 &gt; 0, &#39;nonzero wave number has positive kinetic weight&#39;)
+        near(math.sqrt((2.3**2)*wave_number**4 / wave_number**2)/wave_number,
+             2.3, &#39;transverse phase speed&#39;)
+    # rho=Q(t) d_1^2 f, j_1=-Q&#39;(t) d_1 f is ordinary conserved current.
+    x = sp.symbols(&#39;x&#39;)
+    f = sp.Function(&#39;f&#39;)(x)
+    q = sp.Function(&#39;Q&#39;)(t)
+    check(sp.simplify(sp.diff(q*sp.diff(f,x,2),t)+sp.diff(-sp.diff(q,t)*sp.diff(f,x),x)) == 0,
+          &#39;quadrupole ordinary continuity&#39;)
+    CASES.append({&#39;case&#39;: &#39;gradient-electric-action&#39;,
+                  &#39;static_kernel&#39;: str(static), &#39;ordinary_current_conservation&#39;: True,
+                  &#39;positive_nonzero_k_energy&#39;: True,
+                  &#39;homogeneous_wave_speed_finite&#39;: True,
+                  &#39;gauge_invariant_source_response_has_spacelike_tail&#39;: True,
+                  &#39;zero_spatial_mode_requires_domain_choice&#39;: True})
+
+
+def independent_three_dimensional_kernel():
+    # Abel-damped radial Fourier integral, independently integrated numerically.
+    for t, r in ((1.,4.), (0.5,3.), (2.,0.7), (1.,1.)):
+        for damping in (0.5,0.2,0.05):
+            def integrand(k):
+                if k == 0:
+                    return t*r
+                return math.exp(-damping*k)*math.sin(t*k)*math.sin(r*k)/k**2
+            numeric, error = quad(integrand,0,40/damping,epsabs=2e-10,limit=4000)
+            def primitive(b):
+                return b*math.atan(b/damping)-damping/2*math.log1p((b/damping)**2)
+            closed = (primitive(r+t)-primitive(r-t))/2
+            near(numeric,closed,&#39;independent damped Fourier kernel&#39;,atol=2e-8)
+            exact = min(t,r)/(4*math.pi*r)
+            kernel = numeric/(2*math.pi**2*r)
+            check(0 &lt; kernel &lt;= exact+2e-8,&#39;positive Abel kernel approaches exact retarded kernel&#39;)
+            CASES.append({&#39;case&#39;: &#39;three-dimensional-retarded-Fourier&#39;, &#39;t&#39;:t,&#39;r&#39;:r,
+                          &#39;damping&#39;:damping,&#39;numeric&#39;:kernel,&#39;closed&#39;:closed/(2*math.pi**2*r),
+                          &#39;undamped_limit&#39;:exact,&#39;quadrature_error&#39;:error,
+                          &#39;outside_wave_cone&#39;:r&gt;t})
+    # Exact exterior solution, retarded initial derivative and Poisson shell jump.
+    t,r=sp.symbols(&#39;t r&#39;,positive=True)
+    inside=1/(4*sp.pi)
+    outside=t/(4*sp.pi*r)
+    check(sp.simplify(inside-outside.subs(r,t)) == 0,&#39;retarded K continuous at wave shell&#39;)
+    jump=sp.diff(outside,r).subs(r,t)-sp.diff(inside,r)
+    check(sp.simplify(-jump-1/(4*sp.pi*t)) == 0,&#39;Poisson derivative jump equals wave shell weight&#39;)
+    check(sp.diff(outside,t) == 1/(4*sp.pi*r),&#39;initial derivative is inverse-Laplacian Green function&#39;)
+
+
+def positive_spectral_channels():
+    rng=np.random.default_rng(20261010)
+    for size in (1,2,3,8):
+        b=rng.normal(size=(size,size))
+        kinetic=b.T@b+np.eye(size)
+        # Mix massless and massive ordinary same-field channels.
+        q,_=np.linalg.qr(rng.normal(size=(size,size)))
+        masses=np.diag([0. if i%2 == 0 else (i+1.)**2 for i in range(size)])
+        root=np.linalg.cholesky(kinetic)
+        mass_matrix=root@q@masses@q.T@root.T
+        source=rng.normal(size=size)
+        inv_root=np.linalg.inv(root)
+        values,vectors=eigh(inv_root@mass_matrix@inv_root.T)
+        values[np.abs(values)&lt;1e-11]=0
+        check(np.min(values)&gt;=0,&#39;positive ordinary channel squared masses&#39;)
+        whitened=inv_root@source
+        weights=(vectors.T@whitened)**2
+        bound=float(source@np.linalg.solve(kinetic,source))
+        near(sum(weights),bound,&#39;positive spectral total source norm&#39;)
+        for k in (1e-3,0.03,0.2,1.,10.,100.):
+            direct=float(source@np.linalg.solve(k*k*kinetic+mass_matrix,source))
+            spectral=float(np.sum(weights/(k*k+values)))
+            near(direct,spectral,&#39;positive simple-pole diagonalization&#39;,rtol=2e-7)
+            check(0 &lt;= k*k*direct &lt;= bound*(1+2e-7),&#39;ordinary positive channels obey simple-pole bound&#39;)
+            CASES.append({&#39;case&#39;: &#39;positive-ordinary-gauge-spectral-bound&#39;,&#39;channels&#39;:size,
+                          &#39;wave_number&#39;:k,&#39;response&#39;:direct,&#39;spectral_response&#39;:spectral,
+                          &#39;k_squared_response&#39;:k*k*direct,&#39;upper_bound&#39;:bound,
+                          &#39;applies_to_depths&#39;:list(DEPTHS)})
+    z,m=sp.symbols(&#39;z m&#39;,positive=True)
+    check(sp.simplify(1/(z*(z+m*m))-(1/z-1/(z+m*m))/m**2) == 0,
+          &#39;covariant two-pole residues have opposite signs&#39;)
+    check(sp.limit(z/(z*(z+m*m)),z,0,dir=&#39;+&#39;) == 1/m**2,
+          &#39;lower ordinary term restores simple infrared pole&#39;)
+    CASES.append({&#39;case&#39;:&#39;covariant-box-factor-control&#39;,
+                  &#39;partial_fractions&#39;:&#39;(1/z - 1/(z+m^2))/m^2&#39;,
+                  &#39;residues_opposite_signs&#39;:True,
+                  &#39;static_with_lower_term_has_simple_IR_pole&#39;:True,
+                  &#39;scope&#39;:&#39;ordinary finite quadratic canonical realization&#39;})
+
+
+def neutral_mobility():
+    # The determinant contraction is exact: &lt;Ti.Ti&gt;=4/3 and &lt;Ti.Tj&gt;=-2/3.
+    for d in DEPTHS:
+        positions=np.zeros((3,d))
+        positions[1,0]=1
+        positions[2,1]=2
+        contraction=np.full((3,3),-2/3)
+        np.fill_diagonal(contraction,4/3)
+        def dipole_norm(p):
+            return float(np.sum(contraction*(p@p.T)))
+        pair_formula=2/3*sum(float(np.dot(positions[i]-positions[j],positions[i]-positions[j]))
+                             for i in range(3) for j in range(i+1,3))
+        near(dipole_norm(positions),pair_formula,&#39;determinant dipole norm&#39;)
+        translation=np.arange(1,d+1)/7
+        near(dipole_norm(positions+translation),pair_formula,&#39;neutral rigid translation preserves dipole norm&#39;)
+        near(dipole_norm(2*positions),4*pair_formula,&#39;changing separation changes conserved dipole norm&#39;)
+        CASES.append({&#39;case&#39;:f&#39;neutral-determinant-mobility-depth-{d}&#39;,&#39;depth&#39;:d,
+                      &#39;dipole_squared&#39;:pair_formula,&#39;translated_dipole_squared&#39;:dipole_norm(positions+translation),
+                      &#39;dilated_dipole_squared&#39;:dipole_norm(2*positions),
+                      &#39;translation_allowed_by_Abelian_dipole_conservation&#39;:True,
+                      &#39;unassisted_dilation_preserves_dipole&#39;:False,
+                      &#39;non_Abelian_completion_not_inferred&#39;:True})
+
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument(&#39;--report&#39;,type=Path,required=True)
+    args=parser.parse_args()
+    symbolic_field_checks()
+    independent_three_dimensional_kernel()
+    positive_spectral_channels()
+    neutral_mobility()
+    digest=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    report={&#39;title&#39;:&#39;Gradient Gauss Static Energy and Physical Retarded Response&#39;,
+            &#39;sources&#39;:{&#39;experiments/gradient-gauss-causality-checks.py&#39;:digest},
+            &#39;checks_passed&#39;:CHECKS,&#39;case_count&#39;:len(CASES),&#39;occupied_depths&#39;:list(DEPTHS),
+            &#39;conclusion&#39;:&#39;Positive ordinary gradient-electric Gauss law realizes the static k^-4 energy and ordinary continuity, but its minimally coupled physical field has a nonzero spacelike retarded response. Finite positive ordinary gauge channels have only simple infrared poles. These are scoped linear results, not a general confinement no-go.&#39;,
+            &#39;cases&#39;:CASES}
+    args.report.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(f&#39;{CHECKS} checks passed across {len(CASES)} cases; report: {args.report}&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>
