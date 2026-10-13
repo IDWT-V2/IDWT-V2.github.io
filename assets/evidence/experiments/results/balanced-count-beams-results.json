@@ -1,0 +1,483 @@
+{
+  "experiment_key": "balanced-monogenic-count-beams",
+  "created_utc": "2026-10-12T10:03:04.782065+00:00",
+  "sources": {
+    "experiments/balanced-count-beams.py": "5dc135a2da86d32000c4e73836526f2bfb01360da075cb0cb1985fe6914304c5",
+    "experiments/minimal-count-carrier.py": "c32f6a998a844bbccd3bc46483a551addf224b2b254f7b6d218a8fd0ca87ad2b",
+    "experiments/forward-count-action.py": "5f1dd9a03cf8e6b07a56d507791fed8ff859f10abf22bb755c60c3bd1ed6d909",
+    "experiments/inverse-current-radial.py": "52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80",
+    "experiments/excited-shell-orientation-current.py": "508484d445dbb86da9f88a31642268b5a1dba8264588e6f48ebb6cc00cf9c264"
+  },
+  "evaluations": 2114,
+  "conditions": {
+    "exact Clifford arithmetic makes each holomorphic beam monogenic": 110,
+    "exact Clifford arithmetic makes each conjugate beam monogenic": 110,
+    "independent scalar integration normalizes the classical beam energy": 14,
+    "independent energy integration gives the exact transverse width ratio": 14,
+    "independent tube integration checks inverse-beta concentration radii": 42,
+    "actual ambient jets verify complete beam monogenicity": 116,
+    "the full sphere Dirac operator gives the intended positive shell": 116,
+    "the bare balanced beam has zero scalar source": 116,
+    "the bare balanced beam has zero tangential current": 704,
+    "the massive beam retains its complete classical density": 116,
+    "the massive beam has the intended constant constitutive ratio": 116,
+    "the complete spatial field equation retains the count clock": 116,
+    "the complete pointwise energy retains spatial kinetic and contact terms": 116,
+    "the visible-plane control has extra full orbital angular momentum": 56,
+    "observer-invariant beams retain the full half-spin Casimir": 60,
+    "full observer rotation intertwines the actual massive beam and seed": 180,
+    "fully normal positive-level beams vanish on the observer equatorial sector": 6,
+    "the normal beam has a higher-order zero rather than a prescribed readout coefficient": 6
+  },
+  "maximum_errors": {
+    "independent scalar integration normalizes the classical beam energy": 2.7962077098209193e-12,
+    "independent energy integration gives the exact transverse width ratio": 3.213151966718897e-12,
+    "independent tube integration checks inverse-beta concentration radii": 2.1488699708527292e-11,
+    "actual ambient jets verify complete beam monogenicity": 0.0,
+    "the full sphere Dirac operator gives the intended positive shell": 4.703601774247206e-16,
+    "the bare balanced beam has zero scalar source": 1.4215084060167617e-16,
+    "the bare balanced beam has zero tangential current": 1.0645573456269063e-16,
+    "the massive beam retains its complete classical density": 4.847721518753754e-16,
+    "the massive beam has the intended constant constitutive ratio": 6.059651898442191e-16,
+    "the complete spatial field equation retains the count clock": 4.8212838461212735e-16,
+    "the complete pointwise energy retains spatial kinetic and contact terms": 6.051609005018294e-16,
+    "the visible-plane control has extra full orbital angular momentum": 3.838532505512573e-16,
+    "observer-invariant beams retain the full half-spin Casimir": 0.0,
+    "full observer rotation intertwines the actual massive beam and seed": 9.980290449522764e-17
+  },
+  "sectors": [
+    {
+      "depth": 2,
+      "minimal_columns": 2,
+      "observer_fixed_embedding_dimension": 0,
+      "fully_normal_spatial_dimension": 0,
+      "observer_invariant_circle_available": false,
+      "observer_invariant_fully_normal_circle_available": false,
+      "restriction_zero_not_unique_to_five": false
+    },
+    {
+      "depth": 3,
+      "minimal_columns": 2,
+      "observer_fixed_embedding_dimension": 1,
+      "fully_normal_spatial_dimension": 0,
+      "observer_invariant_circle_available": false,
+      "observer_invariant_fully_normal_circle_available": false,
+      "restriction_zero_not_unique_to_five": false
+    },
+    {
+      "depth": 4,
+      "minimal_columns": 4,
+      "observer_fixed_embedding_dimension": 2,
+      "fully_normal_spatial_dimension": 1,
+      "observer_invariant_circle_available": true,
+      "observer_invariant_fully_normal_circle_available": false,
+      "restriction_zero_not_unique_to_five": false
+    },
+    {
+      "depth": 5,
+      "minimal_columns": 1,
+      "observer_fixed_embedding_dimension": 3,
+      "fully_normal_spatial_dimension": 2,
+      "observer_invariant_circle_available": true,
+      "observer_invariant_fully_normal_circle_available": true,
+      "restriction_zero_not_unique_to_five": true
+    },
+    {
+      "depth": 6,
+      "minimal_columns": 1,
+      "observer_fixed_embedding_dimension": 4,
+      "fully_normal_spatial_dimension": 3,
+      "observer_invariant_circle_available": true,
+      "observer_invariant_fully_normal_circle_available": true,
+      "restriction_zero_not_unique_to_five": true
+    },
+    {
+      "depth": 10,
+      "minimal_columns": 1,
+      "observer_fixed_embedding_dimension": 8,
+      "fully_normal_spatial_dimension": 7,
+      "observer_invariant_circle_available": true,
+      "observer_invariant_fully_normal_circle_available": true,
+      "restriction_zero_not_unique_to_five": true
+    }
+  ],
+  "cases": [
+    {
+      "particle": "W",
+      "depth": 2,
+      "inferred_index": 76,
+      "shell_level": 75,
+      "count_exact": "2926",
+      "normalization_exact": "876046033140189202784178627860210838309859095/89202980794122492566142873090593446023921664",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "1/153",
+      "tube_half_angles_radians": {
+        "0.5": 0.05478466286253958,
+        "0.9": 0.13343574676375455,
+        "0.99": 0.20850710871827718
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ]
+      ],
+      "omega_in_radius_units_exact": "8778/955",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "Z",
+      "depth": 2,
+      "inferred_index": 81,
+      "shell_level": 80,
+      "count_exact": "3321",
+      "normalization_exact": "3704816314002803080565106087254467075600588347885/365375409332725729550921208179070754913983135744",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "1/163",
+      "tube_half_angles_radians": {
+        "0.5": 0.0530622840023047,
+        "0.9": 0.12925059611586387,
+        "0.99": 0.20199454819437704
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ]
+      ],
+      "omega_in_radius_units_exact": "9963/955",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "Higgs",
+      "depth": 2,
+      "inferred_index": 95,
+      "shell_level": 94,
+      "count_exact": "4560",
+      "normalization_exact": "134658766211783519618996336539828892549305383048473827125/12259964326927110866866776217202473468949912977468817408",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "1/191",
+      "tube_half_angles_radians": {
+        "0.5": 0.04898724193737156,
+        "0.9": 0.11934504189488575,
+        "0.99": 0.18657015671919458
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ]
+      ],
+      "omega_in_radius_units_exact": "2736/191",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "down",
+      "depth": 3,
+      "inferred_index": 1,
+      "shell_level": 0,
+      "count_exact": "1",
+      "normalization_exact": "1",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "1/2",
+      "tube_half_angles_radians": {
+        "0.5": 0.7853981633974483,
+        "0.9": 1.2490457723982544,
+        "0.99": 1.4706289056333368
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ]
+      ],
+      "omega_in_radius_units_exact": "9/370",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "strange",
+      "depth": 3,
+      "inferred_index": 4,
+      "shell_level": 3,
+      "count_exact": "20",
+      "normalization_exact": "4",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "1/5",
+      "tube_half_angles_radians": {
+        "0.5": 0.4102928689161818,
+        "0.9": 0.7228941737693222,
+        "0.99": 0.9735818126340953
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ]
+      ],
+      "omega_in_radius_units_exact": "18/37",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "up",
+      "depth": 4,
+      "inferred_index": 3,
+      "shell_level": 2,
+      "count_exact": "15",
+      "normalization_exact": "35/8",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "1/3",
+      "tube_half_angles_radians": {
+        "0.5": 0.5871951919849229,
+        "0.9": 0.9084770037310868,
+        "0.99": 1.1460925446747037
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          4
+        ]
+      ],
+      "omega_in_radius_units_exact": "18/264649",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "charm",
+      "depth": 4,
+      "inferred_index": 20,
+      "shell_level": 19,
+      "count_exact": "8855",
+      "normalization_exact": "2354878200675/34359738368",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "3/43",
+      "tube_half_angles_radians": {
+        "0.5": 0.24054781174081305,
+        "0.9": 0.387901164409961,
+        "0.99": 0.5171020535550901
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          4
+        ]
+      ],
+      "omega_in_radius_units_exact": "138/3437",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "top",
+      "depth": 4,
+      "inferred_index": 72,
+      "shell_level": 71,
+      "count_exact": "1215450",
+      "normalization_exact": "160973163581305498161827587383731531442775875/348449143727040986586495598010130648530944",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "1/49",
+      "tube_half_angles_radians": {
+        "0.5": 0.12778547577759383,
+        "0.9": 0.2072489495707565,
+        "0.99": 0.27837338267382183
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          4
+        ]
+      ],
+      "omega_in_radius_units_exact": "1458540/264649",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "nu1",
+      "depth": 5,
+      "inferred_index": 10,
+      "shell_level": 9,
+      "count_exact": "2002",
+      "normalization_exact": "55",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "1/6",
+      "tube_half_angles_radians": {
+        "0.5": 0.394839608183068,
+        "0.9": 0.5907631773910216,
+        "0.99": 0.7551959097197866
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "omega_in_radius_units_exact": "18018/412561",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "nu2",
+      "depth": 5,
+      "inferred_index": 15,
+      "shell_level": 14,
+      "count_exact": "11628",
+      "normalization_exact": "120",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "2/17",
+      "tube_half_angles_radians": {
+        "0.5": 0.326228917371871,
+        "0.9": 0.49082230646934855,
+        "0.99": 0.6318335997439686
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "omega_in_radius_units_exact": "104652/412561",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "nu3",
+      "depth": 5,
+      "inferred_index": 22,
+      "shell_level": 21,
+      "count_exact": "65780",
+      "normalization_exact": "253",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "1/12",
+      "tube_half_angles_radians": {
+        "0.5": 0.271474662928262,
+        "0.9": 0.409933757606079,
+        "0.99": 0.5301225903032346
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "omega_in_radius_units_exact": "592020/412561",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "electron",
+      "depth": 6,
+      "inferred_index": 13,
+      "shell_level": 12,
+      "count_exact": "18564",
+      "normalization_exact": "882230895/4194304",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "5/31",
+      "tube_half_angles_radians": {
+        "0.5": 0.3929228947545291,
+        "0.9": 0.5641795027453547,
+        "0.99": 0.7084922201912455
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "omega_in_radius_units_exact": "167076/18462575",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "muon",
+      "depth": 6,
+      "inferred_index": 35,
+      "shell_level": 34,
+      "count_exact": "3838380",
+      "normalization_exact": "169592931061097695629933/73786976294838206464",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "1/15",
+      "tube_half_angles_radians": {
+        "0.5": 0.24548184563365527,
+        "0.9": 0.3556286928309799,
+        "0.99": 0.4514290118293656
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "omega_in_radius_units_exact": "6909084/3692515",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    },
+    {
+      "particle": "tau",
+      "depth": 10,
+      "inferred_index": 23,
+      "shell_level": 22,
+      "count_exact": "64512240",
+      "normalization_exact": "77964493964569485/2199023255552",
+      "mean_transverse_squared_distance_over_radius_squared_exact": "9/55",
+      "tube_half_angles_radians": {
+        "0.5": 0.40525208440321225,
+        "0.9": 0.5320623259198908,
+        "0.99": 0.638892936518632
+      },
+      "planes_tested": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "omega_in_radius_units_exact": "12192813360/14943591113",
+      "classification": "exact classical count-compatible circle-concentrated field, not identified observed particle"
+    }
+  ],
+  "limits": [
+    "round sector spheres and effective count action remain conditional",
+    "tube concentration around a great circle is not a mobile localized object in unbounded space",
+    "energy integration is classical and does not introduce electron position probabilities",
+    "fully normal circles occur at five six and ten; no unique neutrino coupling suppression follows",
+    "an observer-invariant circle already exists at depth four using the center coordinate",
+    "pure beam nodes prevent transfer of the nodeless nonlinear persistence proof",
+    "half-spin field transformation does not identify a nonzero classical mean spin"
+  ]
+}

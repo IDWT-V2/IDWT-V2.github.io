@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>finite-amplitude-hessian-review.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/finite-amplitude-hessian-review.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="finite-amplitude-hessian-review.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/finite-amplitude-hessian-review.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="finite-amplitude-hessian-review.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>finite-amplitude-hessian-review.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/finite-amplitude-hessian-review.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Independent symbolic differentiation of the implemented radial Hessian.&quot;&quot;&quot;
+
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import json
+import sympy as sp
+
+
+def main():
+    a,c,p0,p1,w,M2=sp.symbols(&#39;a c p0 p1 omega M2&#39;,real=True)
+    A=1+p0*p0+p1*p1
+    B=1-w*w*c*c
+    R=sp.sqrt(A)*sp.sqrt(B)-1+M2*(a*a+c*c-1)**2/4+(c*c-c**4/4)/2
+    norm_delta=a*a+c*c-1
+    U=sp.Matrix([[M2*(norm_delta+2*a*a),2*M2*a*c],
+                 [2*M2*a*c,M2*(norm_delta+2*c*c)+1-3*c*c/2-w*w*sp.sqrt(A)/B**sp.Rational(3,2)]])
+    J=sp.Matrix([[0,0],[-w*w*c*p0/(sp.sqrt(A)*sp.sqrt(B)),-w*w*c*p1/(sp.sqrt(A)*sp.sqrt(B))]])
+    checks=[]
+    for i,u in enumerate((a,c)):
+        for j,v in enumerate((a,c)):
+            residual=sp.simplify(sp.diff(R,u,v)-U[i,j])
+            if residual!=0:raise AssertionError((&#39;amplitude potential Hessian&#39;,i,j,residual))
+            checks.append(f&#39;complete amplitude potential Hessian {i},{j}&#39;)
+        for j,p in enumerate((p0,p1)):
+            residual=sp.simplify(sp.diff(R,u,p)-J[i,j])
+            if residual!=0:raise AssertionError((&#39;mixed Hessian&#39;,i,j,residual))
+            checks.append(f&#39;complete mixed amplitude-gradient Hessian {i},{j}&#39;)
+    path=Path(__file__).resolve()
+    report={&#39;created_at&#39;:datetime.now(timezone.utc).isoformat(),
+            &#39;experiment&#39;:&#39;finite-amplitude-radial-hessian-symbolic-review&#39;,
+            &#39;sources&#39;:{&#39;experiments/finite-amplitude-hessian-review.py&#39;:sha256(path.read_bytes()).hexdigest()},
+            &#39;exact_checks&#39;:len(checks),&#39;checks&#39;:checks,
+            &#39;scope&#39;:&#39;Direct symbolic differentiation verifies the two-amplitude potential and mixed gradient Hessians used by the finite-element energy-form calculation. It does not certify its numerical spectrum or nonlinear stability.&#39;}
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output=path.with_name(&#39;finite-amplitude-hessian-review-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;exact_checks&#39;:len(checks),&#39;report&#39;:str(output)}))
+
+
+if __name__==&#39;__main__&#39;:main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

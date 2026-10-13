@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>finite-amplitude-refinement.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/finite-amplitude-refinement/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="finite-amplitude-refinement.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/finite-amplitude-refinement/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="finite-amplitude-refinement.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>finite-amplitude-refinement.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/finite-amplitude-refinement.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">created_at</th><td>2026-10-11T12:47:26.514984+00:00</td></tr><tr><th scope="row">experiment</th><td>finite-amplitude-stiff-spectrum-refinement</td></tr><tr><th scope="row">scope</th><td>Four selected radial energy-form controls refine the translation zero mode and negative radial index. Finite-domain mesh convergence is numerical evidence, not a certified continuum spectrum or physical growth frequency.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;created_at&quot;: &quot;2026-10-11T12:47:26.514984+00:00&quot;,
+  &quot;experiment&quot;: &quot;finite-amplitude-stiff-spectrum-refinement&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/finite-amplitude-refinement.py&quot;: &quot;a356a2ddee4580d232098cf65dce67d3fdd8a82105fc040db8d3bec6b1aaac6b&quot;,
+    &quot;experiments/finite-amplitude-stability.py&quot;: &quot;393002405a55a7a3f95bb0a4b134119608cc23b6b8eadde8822895d923d1b858&quot;,
+    &quot;experiments/finite-amplitude-checks.py&quot;: &quot;fd29191377d193d46358d66f52f0c79cf4cb39a853daed12c9690743d0f89c47&quot;,
+    &quot;experiments/rotating-determinant-checks.py&quot;: &quot;952e180d1a7eacd70de6f1b3fda842c19140bd24424473d7b2ff722b458379e4&quot;
+  },
+  &quot;cases&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;normal_rank&quot;: 4,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 51.32532380704836,
+      &quot;charge&quot;: 51.39890809910988,
+      &quot;energy_over_charge&quot;: 0.9985683685746859,
+      &quot;center_first_coefficient&quot;: 0.8444612116901135,
+      &quot;center_rotating_coefficient&quot;: 0.5356576572218072,
+      &quot;maximum_norm_squared_deviation&quot;: 4.386378948972869e-05,
+      &quot;minimum_first_coefficient&quot;: 0.8444612116901135,
+      &quot;minimum_rotating_coefficient&quot;: 4.2113230922786057e-13,
+      &quot;minimum_lapse&quot;: 0.7300283855908998,
+      &quot;minimum_momentum_margin&quot;: 0.7300283855908998,
+      &quot;relative_virial&quot;: -2.4183509600039383e-13,
+      &quot;max_bvp_residual&quot;: 9.837616292144852e-10,
+      &quot;collocation_nodes&quot;: 2266,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;coupled_amplitude_energy_form_spectra&quot;: {
+        &quot;2200&quot;: {
+          &quot;ell0&quot;: [
+            -0.27193979780435024,
+            0.059019535358515895,
+            0.06095731169915553,
+            0.06461568075252444
+          ],
+          &quot;ell1&quot;: [
+            6.426636105061334e-06,
+            0.06033643102441033,
+            0.06329485853217419,
+            0.0679997320565917
+          ]
+        },
+        &quot;4400&quot;: {
+          &quot;ell0&quot;: [
+            -0.27195924513432607,
+            0.05901939525472244,
+            0.06095724556769255,
+            0.06461567601911612
+          ],
+          &quot;ell1&quot;: [
+            1.5960368955347803e-06,
+            0.0603364451088737,
+            0.06329491689018595,
+            0.06799986880844243
+          ]
+        },
+        &quot;8800&quot;: {
+          &quot;ell0&quot;: [
+            -0.2719640850850738,
+            0.05901936123473206,
+            0.060957229825817194,
+            0.06461567571705017
+          ],
+          &quot;ell1&quot;: [
+            3.9833184928284027e-07,
+            0.06033644903027379,
+            0.06329493190014546,
+            0.06799990346326011
+          ]
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 408.3526895950818,
+      &quot;charge&quot;: 400.29449780049896,
+      &quot;energy_over_charge&quot;: 1.0201306583999037,
+      &quot;center_first_coefficient&quot;: 0.34670928220991737,
+      &quot;center_rotating_coefficient&quot;: 0.9399992481003945,
+      &quot;maximum_norm_squared_deviation&quot;: 0.003805912799823119,
+      &quot;minimum_first_coefficient&quot;: 0.34670928220991737,
+      &quot;minimum_rotating_coefficient&quot;: 6.572056471375823e-14,
+      &quot;minimum_lapse&quot;: 0.16862209002866513,
+      &quot;minimum_momentum_margin&quot;: 0.16862209002866513,
+      &quot;relative_virial&quot;: 2.169311394858349e-13,
+      &quot;max_bvp_residual&quot;: 9.958214778228029e-10,
+      &quot;collocation_nodes&quot;: 2610,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;coupled_amplitude_energy_form_spectra&quot;: {
+        &quot;2200&quot;: {
+          &quot;ell0&quot;: [
+            -0.503420254720453,
+            0.05911088178399383,
+            0.060899663500578065,
+            0.06440214567263071
+          ],
+          &quot;ell1&quot;: [
+            3.638414338524853e-05,
+            0.060771114080210964,
+            0.06405134450287166,
+            0.06899335214970391
+          ]
+        },
+        &quot;4400&quot;: {
+          &quot;ell0&quot;: [
+            -0.5036085235350357,
+            0.059107394124225714,
+            0.060897315485021856,
+            0.06439983005577689
+          ],
+          &quot;ell1&quot;: [
+            9.010499866235477e-06,
+            0.060771132149625366,
+            0.06405140719732573,
+            0.06899348338868093
+          ]
+        },
+        &quot;8800&quot;: {
+          &quot;ell0&quot;: [
+            -0.5036552859032782,
+            0.05910653182991155,
+            0.06089673761789526,
+            0.06439926032498987
+          ],
+          &quot;ell1&quot;: [
+            2.247242719022324e-06,
+            0.06077113860783357,
+            0.06405142466473988,
+            0.06899351803758692
+          ]
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 1189272.4745455226,
+      &quot;charge&quot;: 1189640.913352135,
+      &quot;energy_over_charge&quot;: 0.9996902941026344,
+      &quot;center_first_coefficient&quot;: 3.876608756114841e-06,
+      &quot;center_rotating_coefficient&quot;: 1.0046086431660843,
+      &quot;maximum_norm_squared_deviation&quot;: 0.009238525939028852,
+      &quot;minimum_first_coefficient&quot;: 3.876608756114841e-06,
+      &quot;minimum_rotating_coefficient&quot;: 1.041650896759345e-15,
+      &quot;minimum_lapse&quot;: 0.05040747095810749,
+      &quot;minimum_momentum_margin&quot;: 0.05040747095810749,
+      &quot;relative_virial&quot;: -3.5988883110633906e-11,
+      &quot;max_bvp_residual&quot;: 9.997092620534584e-10,
+      &quot;collocation_nodes&quot;: 3872,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;coupled_amplitude_energy_form_spectra&quot;: {
+        &quot;2200&quot;: {
+          &quot;ell0&quot;: [
+            -0.11018858113894228,
+            0.06128034362259881,
+            0.06496242136719844,
+            0.07029104513750893
+          ],
+          &quot;ell1&quot;: [
+            0.000515984924113866,
+            0.06246414198952267,
+            0.0669745176097365,
+            0.07310250571450183
+          ]
+        },
+        &quot;4400&quot;: {
+          &quot;ell0&quot;: [
+            -0.1106189387149925,
+            0.06128038327835838,
+            0.06496251654527897,
+            0.0702911876270491
+          ],
+          &quot;ell1&quot;: [
+            0.0001266438717948404,
+            0.062464186329748365,
+            0.06697463772059108,
+            0.07310273157656867
+          ]
+        },
+        &quot;8800&quot;: {
+          &quot;ell0&quot;: [
+            -0.11072432413629943,
+            0.06128039469558644,
+            0.06496254170588145,
+            0.0702912250430927
+          ],
+          &quot;ell1&quot;: [
+            3.151490864183871e-05,
+            0.06246419904937284,
+            0.06697466921150408,
+            0.07310278951854342
+          ]
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 1189423.9255594455,
+      &quot;charge&quot;: 1188995.1919949083,
+      &quot;energy_over_charge&quot;: 1.0003605847756356,
+      &quot;center_first_coefficient&quot;: 9.51457864784011e-06,
+      &quot;center_rotating_coefficient&quot;: 1.0010742347019628,
+      &quot;maximum_norm_squared_deviation&quot;: 0.002149623474647755,
+      &quot;minimum_first_coefficient&quot;: 9.51457864784011e-06,
+      &quot;minimum_rotating_coefficient&quot;: 1.072881998284734e-15,
+      &quot;minimum_lapse&quot;: 0.05707741935788113,
+      &quot;minimum_momentum_margin&quot;: 0.05707741935788113,
+      &quot;relative_virial&quot;: -3.635247623712059e-11,
+      &quot;max_bvp_residual&quot;: 9.971477058973473e-10,
+      &quot;collocation_nodes&quot;: 3857,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;coupled_amplitude_energy_form_spectra&quot;: {
+        &quot;2200&quot;: {
+          &quot;ell0&quot;: [
+            -0.10981076408540957,
+            0.061280364141481414,
+            0.0649626341827343,
+            0.07029197764501303
+          ],
+          &quot;ell1&quot;: [
+            0.0005191152311709858,
+            0.06246414330865945,
+            0.06697453911618824,
+            0.07310264109315769
+          ]
+        },
+        &quot;4400&quot;: {
+          &quot;ell0&quot;: [
+            -0.11025022736924937,
+            0.06128040357782538,
+            0.06496272821630102,
+            0.0702921156531602
+          ],
+          &quot;ell1&quot;: [
+            0.0001209472886216645,
+            0.06246418752118643,
+            0.06697465891636512,
+            0.07310286556264602
+          ]
+        },
+        &quot;8800&quot;: {
+          &quot;ell0&quot;: [
+            -0.11035175402366802,
+            0.06128041518104509,
+            0.06496275341532963,
+            0.07029215348165961
+          ],
+          &quot;ell1&quot;: [
+            2.9688269478356236e-05,
+            0.062464200708291166,
+            0.06697469051732695,
+            0.0731029237081202
+          ]
+        }
+      }
+    }
+  ],
+  &quot;scope&quot;: &quot;Four selected radial energy-form controls refine the translation zero mode and negative radial index. Finite-domain mesh convergence is numerical evidence, not a certified continuum spectrum or physical growth frequency.&quot;
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

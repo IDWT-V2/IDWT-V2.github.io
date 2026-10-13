@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>inverse-current-ground-proof.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/inverse-current-ground-proof.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="inverse-current-ground-proof.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/inverse-current-ground-proof.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="inverse-current-ground-proof.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>inverse-current-ground-proof.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/inverse-current-ground-proof.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact spatial ground-shell instability blocks, with rational certificates.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import numpy as np
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;radial&#39;, ROOT/&#39;inverse-current-radial.py&#39;)
+radial = module_from_spec(spec)
+spec.loader.exec_module(radial)
+CONDITIONS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    CONDITIONS[label] = CONDITIONS.get(label, 0)+1
+
+
+def exact_block(depth, harmonic, c, x):
+    h = sp.Rational(depth, 2)
+    first = sum(sp.Rational(1, j) for j in range(1, depth+1))
+    second = first**2-sum(sp.Rational(1, j*j) for j in range(1, depth+1))
+    eta = 1-(1-c*c)*first/(h*second)
+    vector = 1-c*c/(h*first)
+    u, v = sp.Rational(harmonic+depth-1, 2*harmonic+depth-1), sp.Rational(harmonic, 2*harmonic+depth-1)
+    aa, bb, ab = (1+c)/2, (1-c)/2, x/2
+    beta = sp.Matrix([[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]])
+    free = sp.diag(h+harmonic, -h-harmonic, -h-harmonic+1, h+harmonic-1)*c/h+x*beta-sp.eye(4)
+    # Similarity by diag(sqrt(u),sqrt(u),sqrt(v),sqrt(v)) removes
+    # square roots from all source dyads without changing the spectrum.
+    scalar = sp.Matrix([[u*bb, -u*ab, v*bb, -v*ab],
+                        [-u*ab, u*aa, -v*ab, v*aa],
+                        [u*bb, -u*ab, v*bb, -v*ab],
+                        [-u*ab, u*aa, -v*ab, v*aa]])
+    radial_source = sp.Matrix([[v*aa, -v*ab, -v*aa, v*ab],
+                               [-v*ab, v*bb, v*ab, -v*bb],
+                               [-u*aa, u*ab, u*aa, -u*ab],
+                               [u*ab, -u*bb, -u*ab, u*bb]])
+    transverse = sp.Matrix([[v*bb, -v*ab, -v*bb, v*ab],
+                            [-v*ab, v*aa, v*ab, -v*aa],
+                            [-u*bb, u*ab, u*bb, -u*ab],
+                            [u*ab, -u*aa, -u*ab, u*aa]])
+    lx = free+2*eta*scalar+(2*vector*transverse if depth == 2 else sp.zeros(4))
+    ly = free+2*vector*radial_source
+    return lx, ly
+
+
+def main():
+    z = sp.Symbol(&#39;z&#39;)
+    c, x = sp.symbols(&#39;c x&#39;, real=True)
+    cases = []
+    for depth in radial.DEPTHS:
+        lx, ly = exact_block(depth, 1, c, x)
+        raw = sp.Poly((ly*lx).charpoly(z).as_expr(), x)
+        reduced = sp.rem(raw, sp.Poly(x*x-1+c*c, x)).as_expr()
+        check(not reduced.has(x), &#39;exact harmonic polynomial depends on the physical mixing through c only&#39;)
+        reduced = sp.factor(reduced)
+        check(reduced.subs(z, 0) == 0, &#39;first spatial harmonic retains its zero symmetry frequency&#39;)
+        cubic = sp.Poly(sp.cancel(reduced/z), z)
+        discriminant = sp.factor(sp.discriminant(cubic.as_expr(), z))
+        tested = sp.Poly(cubic.as_expr().subs(c, sp.Rational(3, 5)), z)
+        disc = sp.discriminant(tested.as_expr(), z)
+        check(disc &lt; 0, &#39;one common rational mixing gives an exact complex spatial frequency pair at every occupied depth&#39;)
+        check(tested.count_roots(-sp.oo, sp.oo) == 1, &#39;Sturm root count independently certifies the nonreal squared-frequency pair&#39;)
+        check(tested.count_roots(-sp.oo, 0) == 0, &#39;the certified growing oscillation is distinct from a negative real squared frequency&#39;)
+        numerical_x, numerical_y = radial.ground_block(depth, 1, sp.Rational(3, 5))
+        numerical = np.poly(numerical_y@numerical_x)
+        expected = np.array(sp.Poly(reduced.subs(c, sp.Rational(3, 5)), z).all_coeffs(), float)
+        error = np.linalg.norm(numerical-expected)/np.linalg.norm(expected)
+        check(error &lt; 3e-13, &#39;exact certificate agrees with the independently normalized spatial harmonic block&#39;)
+        ERRORS[&#39;independent normalized characteristic polynomial&#39;] = max(ERRORS.get(&#39;independent normalized characteristic polynomial&#39;, 0.), float(error))
+        roots = np.linalg.eigvals(numerical_y@numerical_x)
+        growth = max(np.sqrt(-roots.astype(complex)).real)*depth/(2*.6)
+        numerator, denominator = sp.fraction(discriminant)
+        # The nonzero boundary roots delimit where the same exact
+        # harmonic changes its root type; no floating sign is used.
+        boundary = sp.Poly(numerator, c)
+        intervals = boundary.intervals(eps=sp.Rational(1, 10**10))
+        positive_intervals = [{&#39;lower&#39;: str(a), &#39;upper&#39;: str(b), &#39;multiplicity&#39;: mult}
+                              for (a, b), mult in intervals if b &gt; 0 and a &lt; 1]
+        cases.append({&#39;depth&#39;: depth, &#39;scalar_harmonic_degree&#39;: 1,
+                      &#39;c_exact&#39;: &#39;3/5&#39;, &#39;x_exact&#39;: &#39;4/5&#39;,
+                      &#39;squared_frequency_polynomial&#39;: str(reduced),
+                      &#39;cubic_discriminant&#39;: str(discriminant),
+                      &#39;cubic_discriminant_at_test&#39;: str(disc),
+                      &#39;real_cubic_roots&#39;: 1,
+                      &#39;discriminant_boundary_intervals_inside_physical_chart&#39;: positive_intervals,
+                      &#39;growth_in_inverse_radius_units&#39;: float(growth),
+                      &#39;classification&#39;: &#39;exact finite reducing spatial block, not a Galerkin truncation&#39;})
+        print(json.dumps(cases[-1]), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    result = {&#39;experiment_key&#39;: &#39;inverse-current-exact-ground-spatial-instability&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                          for p in [Path(__file__), ROOT/&#39;inverse-current-radial.py&#39;]},
+              &#39;conditions&#39;: CONDITIONS, &#39;evaluations&#39;: sum(CONDITIONS.values()),
+              &#39;maximum_errors&#39;: ERRORS, &#39;cases&#39;: cases,
+              &#39;limits&#39;: [&#39;supplied count action on a conditional ordinary sphere with its stipulated balanced matrix carrier&#39;,
+                         &#39;ground shells are controls, not the assigned excited electron, muon or tau&#39;,
+                         &#39;an exact reducing spatial growing mode disproves full linear stability of these controls&#39;,
+                         &#39;no observed decay, lifetime, nonlinear outcome or sector preference is established&#39;,
+                         &#39;restricted pair persistence remains valid inside its invariant family&#39;]}
+    output = ROOT/(&#39;inverse-current-ground-proof-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(result, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;report&#39;: str(output), &#39;evaluations&#39;: result[&#39;evaluations&#39;]}), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

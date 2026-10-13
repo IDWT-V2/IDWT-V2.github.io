@@ -1,0 +1,1034 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>full-coefficient-profiles.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/full-coefficient-profiles/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="full-coefficient-profiles.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/full-coefficient-profiles/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="full-coefficient-profiles.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>full-coefficient-profiles.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/full-coefficient-profiles.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">created_at</th><td>2026-10-11T12:30:06.523450+00:00</td></tr><tr><th scope="row">experiment</th><td>phase-complete-normal-coefficient-localization</td></tr><tr><th scope="row">scope</th><td>Changed fixed-norm complete-coefficient action with its combined phase/normal generator. Complete radial energy, stress and fixed-charge response are tested; unused coefficient polarizations have a separate analytic convex-form positivity proof. No observed particle identification, Lorentz Dirac kinetics or simplex frequency selection is claimed.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;created_at&quot;: &quot;2026-10-11T12:30:06.523450+00:00&quot;,
+  &quot;experiment&quot;: &quot;phase-complete-normal-coefficient-localization&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/full-coefficient-profiles.py&quot;: &quot;39363c5515e3360fd1a7516ae257aef1b00fd2c659f5e74b3a75209e82b68f66&quot;,
+    &quot;experiments/rotating-determinant-checks.py&quot;: &quot;952e180d1a7eacd70de6f1b3fda842c19140bd24424473d7b2ff722b458379e4&quot;
+  },
+  &quot;parameters&quot;: {
+    &quot;beta&quot;: 1,
+    &quot;T&quot;: 4,
+    &quot;kappa&quot;: 4,
+    &quot;m_squared&quot;: 1,
+    &quot;b&quot;: &quot;1/4&quot;
+  },
+  &quot;cases&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;normal_rank&quot;: 4,
+      &quot;omega&quot;: 0.95,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;center&quot;: 0.7546825876582242,
+      &quot;energy&quot;: 55.617125338846364,
+      &quot;charge&quot;: 55.87218377050599,
+      &quot;energy_over_charge&quot;: 0.9954349657656613,
+      &quot;energy_minus_rotation_charge&quot;: 2.538550756865675,
+      &quot;virial&quot;: -2.823671006246871e-09,
+      &quot;relative_virial&quot;: -5.0769812158462063e-11,
+      &quot;minimum_lapse&quot;: 0.5764533749935494,
+      &quot;minimum_momentum_margin&quot;: 0.5764533749935494,
+      &quot;maximum_principal_radial_speed&quot;: 1.0,
+      &quot;maximum_principal_tangential_speed&quot;: 1.0,
+      &quot;max_bvp_residual&quot;: 9.69837148820317e-09,
+      &quot;bvp_tolerance&quot;: 1e-08,
+      &quot;boundary_amplitude&quot;: 3.4104005069253455e-12,
+      &quot;radius&quot;: 80.0,
+      &quot;collocation_nodes&quot;: 1115,
+      &quot;half_center_radius&quot;: 3.099135257886614,
+      &quot;shooting_bracket&quot;: [
+        0.7546825881630095,
+        0.7546825881630131
+      ],
+      &quot;refined&quot;: {
+        &quot;depth&quot;: 2,
+        &quot;normal_rank&quot;: 4,
+        &quot;omega&quot;: 0.95,
+        &quot;status&quot;: &quot;collocation-converged&quot;,
+        &quot;center&quot;: 0.7546825880193114,
+        &quot;energy&quot;: 55.61712534540982,
+        &quot;charge&quot;: 55.87218377660084,
+        &quot;energy_over_charge&quot;: 0.9954349657745463,
+        &quot;energy_minus_rotation_charge&quot;: 2.5385507576390225,
+        &quot;virial&quot;: -8.470892803966463e-12,
+        &quot;relative_virial&quot;: -1.5230727498694035e-13,
+        &quot;minimum_lapse&quot;: 0.5764533746682831,
+        &quot;minimum_momentum_margin&quot;: 0.5764533746682831,
+        &quot;maximum_principal_radial_speed&quot;: 1.0,
+        &quot;maximum_principal_tangential_speed&quot;: 1.0,
+        &quot;max_bvp_residual&quot;: 1.9965896463398184e-10,
+        &quot;bvp_tolerance&quot;: 2e-10,
+        &quot;boundary_amplitude&quot;: 2.4887141941355423e-16,
+        &quot;radius&quot;: 110.0,
+        &quot;collocation_nodes&quot;: 2269,
+        &quot;half_center_radius&quot;: 3.0991352560269916,
+        &quot;shooting_bracket&quot;: [
+          0.7546825881630095,
+          0.7546825881630131
+        ],
+        &quot;convergence&quot;: {
+          &quot;energy&quot;: 1.1801138120156944e-10,
+          &quot;charge&quot;: 1.0908560278596723e-10,
+          &quot;center&quot;: 4.784624382844635e-10
+        },
+        &quot;dcharge_domega&quot;: -266.08629737616184,
+        &quot;denergy_domega&quot;: -252.7819825071463,
+        &quot;fixed_shape_charge_susceptibility&quot;: 74.68432069813727,
+        &quot;fixed_charge_rank_update_ratio&quot;: -3.5628133842395435,
+        &quot;family_identity_relative_error&quot;: 8.206678936330208e-13,
+        &quot;sensitivity_bvp_residual&quot;: 1.9933749218225698e-09,
+        &quot;radial_quadratic_spectra&quot;: {
+          &quot;1100&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.32914733751771974,
+              0.09669955639555813,
+              0.09898686698255485,
+              0.10251707038509997
+            ],
+            &quot;shape_l1&quot;: [
+              5.187413256852412e-05,
+              0.09872595094902442,
+              0.10163922304834,
+              0.10625500335165242
+            ]
+          },
+          &quot;2200&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.3292634495980923,
+              0.09669813739491992,
+              0.09898666483914673,
+              0.10251721874223355
+            ],
+            &quot;shape_l1&quot;: [
+              1.2975066086093116e-05,
+              0.09872604692792475,
+              0.10163962117399078,
+              0.10625592210007084
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.95,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;center&quot;: 1.422617598362658,
+      &quot;energy&quot;: 482.97490573551937,
+      &quot;charge&quot;: 478.2396991428687,
+      &quot;energy_over_charge&quot;: 1.0099013247982913,
+      &quot;energy_minus_rotation_charge&quot;: 28.647191549794115,
+      &quot;virial&quot;: 4.9532939116608205e-09,
+      &quot;relative_virial&quot;: 1.0255799737912845e-11,
+      &quot;minimum_lapse&quot;: 0.11717152441572687,
+      &quot;minimum_momentum_margin&quot;: 0.11717152441572687,
+      &quot;maximum_principal_radial_speed&quot;: 1.0,
+      &quot;maximum_principal_tangential_speed&quot;: 1.0,
+      &quot;max_bvp_residual&quot;: 9.90651225560048e-09,
+      &quot;bvp_tolerance&quot;: 1e-08,
+      &quot;boundary_amplitude&quot;: 6.883190025867041e-13,
+      &quot;radius&quot;: 80.0,
+      &quot;collocation_nodes&quot;: 1368,
+      &quot;half_center_radius&quot;: 2.2359968728326116,
+      &quot;shooting_bracket&quot;: [
+        1.4226175984764313,
+        1.4226175984764349
+      ],
+      &quot;refined&quot;: {
+        &quot;depth&quot;: 3,
+        &quot;normal_rank&quot;: 3,
+        &quot;omega&quot;: 0.95,
+        &quot;status&quot;: &quot;collocation-converged&quot;,
+        &quot;center&quot;: 1.422617598443824,
+        &quot;energy&quot;: 482.9749058554563,
+        &quot;charge&quot;: 478.2396992619338,
+        &quot;energy_over_charge&quot;: 1.0099013247976492,
+        &quot;energy_minus_rotation_charge&quot;: 28.64719155661919,
+        &quot;virial&quot;: 1.4602307526670736e-10,
+        &quot;relative_virial&quot;: 3.0234091563839723e-13,
+        &quot;minimum_lapse&quot;: 0.11717152439433443,
+        &quot;minimum_momentum_margin&quot;: 0.11717152439433443,
+        &quot;maximum_principal_radial_speed&quot;: 1.0,
+        &quot;maximum_principal_tangential_speed&quot;: 1.0,
+        &quot;max_bvp_residual&quot;: 1.9965014443145064e-10,
+        &quot;bvp_tolerance&quot;: 2e-10,
+        &quot;boundary_amplitude&quot;: 4.277941144238321e-17,
+        &quot;radius&quot;: 110.0,
+        &quot;collocation_nodes&quot;: 3116,
+        &quot;half_center_radius&quot;: 2.2359968728037014,
+        &quot;shooting_bracket&quot;: [
+          1.4226175984764313,
+          1.4226175984764349
+        ],
+        &quot;convergence&quot;: {
+          &quot;energy&quot;: 2.483295523256708e-10,
+          &quot;charge&quot;: 2.489653929280718e-10,
+          &quot;center&quot;: 5.705395668412721e-11
+        },
+        &quot;dcharge_domega&quot;: -6940.992798455813,
+        &quot;denergy_domega&quot;: -6593.943158533121,
+        &quot;fixed_shape_charge_susceptibility&quot;: 1146.3078951822224,
+        &quot;fixed_charge_rank_update_ratio&quot;: -6.055085922052766,
+        &quot;family_identity_relative_error&quot;: -1.5172168578001185e-14,
+        &quot;sensitivity_bvp_residual&quot;: 1.9974413919144234e-09,
+        &quot;radial_quadratic_spectra&quot;: {
+          &quot;1100&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.2337286040549718,
+              0.09829732391497113,
+              0.10069346630271912,
+              0.10469935403450677
+            ],
+            &quot;shape_l1&quot;: [
+              0.000124494528525641,
+              0.09916955122055676,
+              0.10244002991054646,
+              0.1073555348008946
+            ]
+          },
+          &quot;2200&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.23394518725835595,
+              0.09829728766868223,
+              0.10069335296426957,
+              0.10469920430280902
+            ],
+            &quot;shape_l1&quot;: [
+              3.117866497619988e-05,
+              0.09916967671429164,
+              0.10244049215924914,
+              0.10735655011990283
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.95,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;center&quot;: 1.5609744974259507,
+      &quot;energy&quot;: 6899.427740509718,
+      &quot;charge&quot;: 6921.396455698273,
+      &quot;energy_over_charge&quot;: 0.9968259706940399,
+      &quot;energy_minus_rotation_charge&quot;: 324.1011075963597,
+      &quot;virial&quot;: 1.360842089061605e-07,
+      &quot;relative_virial&quot;: 1.9723984948367157e-11,
+      &quot;minimum_lapse&quot;: 0.097587059870207,
+      &quot;minimum_momentum_margin&quot;: 0.097587059870207,
+      &quot;maximum_principal_radial_speed&quot;: 1.0,
+      &quot;maximum_principal_tangential_speed&quot;: 1.0,
+      &quot;max_bvp_residual&quot;: 9.99435853784994e-09,
+      &quot;bvp_tolerance&quot;: 1e-08,
+      &quot;boundary_amplitude&quot;: 2.2781445438113234e-13,
+      &quot;radius&quot;: 80.0,
+      &quot;collocation_nodes&quot;: 1504,
+      &quot;half_center_radius&quot;: 3.2804600866583074,
+      &quot;shooting_bracket&quot;: [
+        1.5609744974894317,
+        1.5609744974894324
+      ],
+      &quot;refined&quot;: {
+        &quot;depth&quot;: 4,
+        &quot;normal_rank&quot;: 3,
+        &quot;omega&quot;: 0.95,
+        &quot;status&quot;: &quot;collocation-converged&quot;,
+        &quot;center&quot;: 1.5609744974438873,
+        &quot;energy&quot;: 6899.427741636166,
+        &quot;charge&quot;: 6921.396456810274,
+        &quot;energy_over_charge&quot;: 0.996825970696637,
+        &quot;energy_minus_rotation_charge&quot;: 324.10110766640537,
+        &quot;virial&quot;: 1.2912376209005517e-09,
+        &quot;relative_virial&quot;: 1.8715140867528542e-13,
+        &quot;minimum_lapse&quot;: 0.09758705986988914,
+        &quot;minimum_momentum_margin&quot;: 0.09758705986988914,
+        &quot;maximum_principal_radial_speed&quot;: 1.0,
+        &quot;maximum_principal_tangential_speed&quot;: 1.0,
+        &quot;max_bvp_residual&quot;: 1.9987904467195278e-10,
+        &quot;bvp_tolerance&quot;: 2e-10,
+        &quot;boundary_amplitude&quot;: 1.2026955581253729e-17,
+        &quot;radius&quot;: 110.0,
+        &quot;collocation_nodes&quot;: 3892,
+        &quot;half_center_radius&quot;: 3.280460086675007,
+        &quot;shooting_bracket&quot;: [
+          1.5609744974894317,
+          1.5609744974894324
+        ],
+        &quot;convergence&quot;: {
+          &quot;energy&quot;: 1.632667851748694e-10,
+          &quot;charge&quot;: 1.6066136075562282e-10,
+          &quot;center&quot;: 1.1490604856524168e-11
+        },
+        &quot;dcharge_domega&quot;: -164067.60742011646,
+        &quot;denergy_domega&quot;: -155864.22704910242,
+        &quot;fixed_shape_charge_susceptibility&quot;: 28034.096238067646,
+        &quot;fixed_charge_rank_update_ratio&quot;: -5.8524307695472695,
+        &quot;family_identity_relative_error&quot;: 5.2656599555800174e-14,
+        &quot;sensitivity_bvp_residual&quot;: 1.995209768894405e-09,
+        &quot;radial_quadratic_spectra&quot;: {
+          &quot;1100&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.1264977711194636,
+              0.0987214470399061,
+              0.10161480589822164,
+              0.10618982001136207
+            ],
+            &quot;shape_l1&quot;: [
+              0.00029193230813126346,
+              0.0996797392707088,
+              0.10335722027430883,
+              0.1086688194986902
+            ]
+          },
+          &quot;2200&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.1268208963969758,
+              0.09872157843781869,
+              0.10161521377933705,
+              0.10619063580416295
+            ],
+            &quot;shape_l1&quot;: [
+              7.318069946898442e-05,
+              0.0996799090851157,
+              0.10335777485614234,
+              0.10866997830568487
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.95,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;center&quot;: 1.5699578033284038,
+      &quot;energy&quot;: 119572.61896073069,
+      &quot;charge&quot;: 121210.9383578844,
+      &quot;energy_over_charge&quot;: 0.9864837330743497,
+      &quot;energy_minus_rotation_charge&quot;: 4422.227520740518,
+      &quot;virial&quot;: 2.0507786598268614e-06,
+      &quot;relative_virial&quot;: 1.7150905262854246e-11,
+      &quot;minimum_lapse&quot;: 0.0975006345670989,
+      &quot;minimum_momentum_margin&quot;: 0.0975006345670989,
+      &quot;maximum_principal_radial_speed&quot;: 1.0,
+      &quot;maximum_principal_tangential_speed&quot;: 1.0,
+      &quot;max_bvp_residual&quot;: 9.992890492254653e-09,
+      &quot;bvp_tolerance&quot;: 1e-08,
+      &quot;boundary_amplitude&quot;: 9.931012518514611e-14,
+      &quot;radius&quot;: 80.0,
+      &quot;collocation_nodes&quot;: 1610,
+      &quot;half_center_radius&quot;: 4.54277422915528,
+      &quot;shooting_bracket&quot;: [
+        1.5699578033663615,
+        1.5699578033663617
+      ],
+      &quot;refined&quot;: {
+        &quot;depth&quot;: 5,
+        &quot;normal_rank&quot;: 2,
+        &quot;omega&quot;: 0.95,
+        &quot;status&quot;: &quot;collocation-converged&quot;,
+        &quot;center&quot;: 1.56995780335595,
+        &quot;energy&quot;: 119572.61898248341,
+        &quot;charge&quot;: 121210.93837965351,
+        &quot;energy_over_charge&quot;: 0.9864837330766419,
+        &quot;energy_minus_rotation_charge&quot;: 4422.227521812587,
+        &quot;virial&quot;: 3.371907462166112e-08,
+        &quot;relative_virial&quot;: 2.8199662187378147e-13,
+        &quot;minimum_lapse&quot;: 0.09750063456705726,
+        &quot;minimum_momentum_margin&quot;: 0.09750063456705726,
+        &quot;maximum_principal_radial_speed&quot;: 1.0,
+        &quot;maximum_principal_tangential_speed&quot;: 1.0,
+        &quot;max_bvp_residual&quot;: 1.9980849032618443e-10,
+        &quot;bvp_tolerance&quot;: 2e-10,
+        &quot;boundary_amplitude&quot;: 4.441735875849606e-18,
+        &quot;radius&quot;: 110.0,
+        &quot;collocation_nodes&quot;: 4006,
+        &quot;half_center_radius&quot;: 4.542774229212807,
+        &quot;shooting_bracket&quot;: [
+          1.5699578033663615,
+          1.5699578033663617
+        ],
+        &quot;convergence&quot;: {
+          &quot;energy&quot;: 1.8192063481939472e-10,
+          &quot;charge&quot;: 1.7959692829597217e-10,
+          &quot;center&quot;: 1.754581396665677e-11
+        },
+        &quot;dcharge_domega&quot;: -3680608.4083772385,
+        &quot;denergy_domega&quot;: -3496577.9879581174,
+        &quot;fixed_shape_charge_susceptibility&quot;: 590268.0228671017,
+        &quot;fixed_charge_rank_update_ratio&quot;: -6.235486703988239,
+        &quot;family_identity_relative_error&quot;: 7.404601774499425e-14,
+        &quot;sensitivity_bvp_residual&quot;: 1.998124208935937e-09,
+        &quot;radial_quadratic_spectra&quot;: {
+          &quot;1100&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.08980069483860388,
+              0.09917118898211581,
+              0.10245372195588844,
+              0.10740556840719022
+            ],
+            &quot;shape_l1&quot;: [
+              0.00037984297883855397,
+              0.10024502787128689,
+              0.10433652367369531,
+              0.11005427261024384
+            ]
+          },
+          &quot;2200&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.0901577624084985,
+              0.0991713894434224,
+              0.1024542982276827,
+              0.10740668383696543
+            ],
+            &quot;shape_l1&quot;: [
+              9.524518415718897e-05,
+              0.10024525225209752,
+              0.10433718820897275,
+              0.11005561027505989
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.95,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;center&quot;: 1.5707228168437155,
+      &quot;energy&quot;: 2328842.555858633,
+      &quot;charge&quot;: 2377312.652949209,
+      &quot;energy_over_charge&quot;: 0.9796113914463689,
+      &quot;energy_minus_rotation_charge&quot;: 70395.53555688448,
+      &quot;virial&quot;: 3.3398114393181974e-05,
+      &quot;relative_virial&quot;: 1.434107870846093e-11,
+      &quot;minimum_lapse&quot;: 0.09750000487685084,
+      &quot;minimum_momentum_margin&quot;: 0.09750000487685084,
+      &quot;maximum_principal_radial_speed&quot;: 1.0,
+      &quot;maximum_principal_tangential_speed&quot;: 1.0,
+      &quot;max_bvp_residual&quot;: 9.998809161672144e-09,
+      &quot;bvp_tolerance&quot;: 1e-08,
+      &quot;boundary_amplitude&quot;: 5.078318176491954e-14,
+      &quot;radius&quot;: 80.0,
+      &quot;collocation_nodes&quot;: 1630,
+      &quot;half_center_radius&quot;: 5.827293571175895,
+      &quot;shooting_bracket&quot;: [
+        1.570722816891688,
+        1.5707228168916882
+      ],
+      &quot;refined&quot;: {
+        &quot;depth&quot;: 6,
+        &quot;normal_rank&quot;: 2,
+        &quot;omega&quot;: 0.95,
+        &quot;status&quot;: &quot;collocation-converged&quot;,
+        &quot;center&quot;: 1.5707228168886993,
+        &quot;energy&quot;: 2328842.5563535155,
+        &quot;charge&quot;: 2377312.6534502497,
+        &quot;energy_over_charge&quot;: 0.9796113914480754,
+        &quot;energy_minus_rotation_charge&quot;: 70395.53557577822,
+        &quot;virial&quot;: 2.8634677726200304e-07,
+        &quot;relative_virial&quot;: 1.229566921476919e-13,
+        &quot;minimum_lapse&quot;: 0.09750000487684507,
+        &quot;minimum_momentum_margin&quot;: 0.09750000487684507,
+        &quot;maximum_principal_radial_speed&quot;: 1.0,
+        &quot;maximum_principal_tangential_speed&quot;: 1.0,
+        &quot;max_bvp_residual&quot;: 1.9977116465437134e-10,
+        &quot;bvp_tolerance&quot;: 2e-10,
+        &quot;boundary_amplitude&quot;: 1.91920601239317e-18,
+        &quot;radius&quot;: 110.0,
+        &quot;collocation_nodes&quot;: 4033,
+        &quot;half_center_radius&quot;: 5.827293571275601,
+        &quot;shooting_bracket&quot;: [
+          1.570722816891688,
+          1.5707228168916882
+        ],
+        &quot;convergence&quot;: {
+          &quot;energy&quot;: 2.1250146904896731e-10,
+          &quot;charge&quot;: 2.107593354228553e-10,
+          &quot;center&quot;: 2.863891323375657e-11
+        },
+        &quot;dcharge_domega&quot;: -87621957.76602164,
+        &quot;denergy_domega&quot;: -83240859.87771368,
+        &quot;fixed_shape_charge_susceptibility&quot;: 12707066.78211158,
+        &quot;fixed_charge_rank_update_ratio&quot;: -6.895529807820934,
+        &quot;family_identity_relative_error&quot;: 8.252479996549079e-14,
+        &quot;sensitivity_bvp_residual&quot;: 1.9967862660633447e-09,
+        &quot;radial_quadratic_spectra&quot;: {
+          &quot;1100&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.0699571695524191,
+              0.09968032356068351,
+              0.10336449113207921,
+              0.10870180815611868
+            ],
+            &quot;shape_l1&quot;: [
+              0.0004298115164355783,
+              0.10086381894108126,
+              0.10537366281157998,
+              0.1115010359105684
+            ]
+          },
+          &quot;2200&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.07033284994734816,
+              0.09968059213635329,
+              0.10336521227055423,
+              0.10870317299595801
+            ],
+            &quot;shape_l1&quot;: [
+              0.00010778965412900742,
+              0.1008641064832479,
+              0.10537444762045686,
+              0.1115025631343646
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;normal_rank&quot;: 4,
+      &quot;omega&quot;: 0.97,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;center&quot;: 0.5652729657333071,
+      &quot;energy&quot;: 51.32708119088967,
+      &quot;charge&quot;: 51.400702375001515,
+      &quot;energy_over_charge&quot;: 0.9985677008151614,
+      &quot;energy_minus_rotation_charge&quot;: 1.4683998871382045,
+      &quot;virial&quot;: -2.1999115767391896e-09,
+      &quot;relative_virial&quot;: -4.2860640537059494e-11,
+      &quot;minimum_lapse&quot;: 0.7300397934300769,
+      &quot;minimum_momentum_margin&quot;: 0.7300397934300769,
+      &quot;maximum_principal_radial_speed&quot;: 1.0,
+      &quot;maximum_principal_tangential_speed&quot;: 1.0,
+      &quot;max_bvp_residual&quot;: 9.948866712493603e-09,
+      &quot;bvp_tolerance&quot;: 1e-08,
+      &quot;boundary_amplitude&quot;: 7.248196993034422e-10,
+      &quot;radius&quot;: 80.0,
+      &quot;collocation_nodes&quot;: 1055,
+      &quot;half_center_radius&quot;: 3.9590066184507506,
+      &quot;shooting_bracket&quot;: [
+        0.5652729663271386,
+        0.5652729663271423
+      ],
+      &quot;refined&quot;: {
+        &quot;depth&quot;: 2,
+        &quot;normal_rank&quot;: 4,
+        &quot;omega&quot;: 0.97,
+        &quot;status&quot;: &quot;collocation-converged&quot;,
+        &quot;center&quot;: 0.5652729662092301,
+        &quot;energy&quot;: 51.32708119977498,
+        &quot;charge&quot;: 51.40070238376078,
+        &quot;energy_over_charge&quot;: 0.9985677008178577,
+        &quot;energy_minus_rotation_charge&quot;: 1.4683998875270277,
+        &quot;virial&quot;: -1.1472508607627976e-12,
+        &quot;relative_virial&quot;: -2.2351765071102995e-14,
+        &quot;minimum_lapse&quot;: 0.7300397930249806,
+        &quot;minimum_momentum_margin&quot;: 0.7300397930249806,
+        &quot;maximum_principal_radial_speed&quot;: 1.0,
+        &quot;maximum_principal_tangential_speed&quot;: 1.0,
+        &quot;max_bvp_residual&quot;: 1.9926942486845745e-10,
+        &quot;bvp_tolerance&quot;: 2e-10,
+        &quot;boundary_amplitude&quot;: 4.211478321396061e-13,
+        &quot;radius&quot;: 110.0,
+        &quot;collocation_nodes&quot;: 2115,
+        &quot;half_center_radius&quot;: 3.95900661477445,
+        &quot;shooting_bracket&quot;: [
+          0.5652729663271386,
+          0.5652729663271423
+        ],
+        &quot;convergence&quot;: {
+          &quot;energy&quot;: 1.7311150919311531e-10,
+          &quot;charge&quot;: 1.7041139336340053e-10,
+          &quot;center&quot;: 8.419347751470023e-10
+        },
+        &quot;dcharge_domega&quot;: -188.23928323383086,
+        &quot;denergy_domega&quot;: -182.59210473688094,
+        &quot;fixed_shape_charge_susceptibility&quot;: 60.51432173500674,
+        &quot;fixed_charge_rank_update_ratio&quot;: -3.1106567476395743,
+        &quot;family_identity_relative_error&quot;: -3.559871855412422e-13,
+        &quot;sensitivity_bvp_residual&quot;: 1.9993973285466878e-09,
+        &quot;radial_quadratic_spectra&quot;: {
+          &quot;1100&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.24726929142514756,
+              0.05891334451911869,
+              0.06088315693558601,
+              0.06452783068637138
+            ],
+            &quot;shape_l1&quot;: [
+              2.1890890276472703e-05,
+              0.06033534865815472,
+              0.06328907614597334,
+              0.06798426289215351
+            ]
+          },
+          &quot;2200&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.24733033940691598,
+              0.058912900923584435,
+              0.06088302605976667,
+              0.06452796047967488
+            ],
+            &quot;shape_l1&quot;: [
+              5.474530423759135e-06,
+              0.060335406075747264,
+              0.0632893158383559,
+              0.06798482581663767
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.97,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;center&quot;: 1.2094778866478306,
+      &quot;energy&quot;: 410.5581062979619,
+      &quot;charge&quot;: 402.5478601681991,
+      &quot;energy_over_charge&quot;: 1.0198988665010311,
+      &quot;energy_minus_rotation_charge&quot;: 20.08668193480878,
+      &quot;virial&quot;: 9.958576615580176e-09,
+      &quot;relative_virial&quot;: 2.4256192881873715e-11,
+      &quot;minimum_lapse&quot;: 0.17668220348801045,
+      &quot;minimum_momentum_margin&quot;: 0.17668220348801045,
+      &quot;maximum_principal_radial_speed&quot;: 1.0,
+      &quot;maximum_principal_tangential_speed&quot;: 1.0,
+      &quot;max_bvp_residual&quot;: 9.97155126374153e-09,
+      &quot;bvp_tolerance&quot;: 1e-08,
+      &quot;boundary_amplitude&quot;: 1.3367587987058648e-10,
+      &quot;radius&quot;: 80.0,
+      &quot;collocation_nodes&quot;: 1246,
+      &quot;half_center_radius&quot;: 2.2419771188950595,
+      &quot;shooting_bracket&quot;: [
+        1.2094778863814009,
+        1.2094778863814046
+      ],
+      &quot;refined&quot;: {
+        &quot;depth&quot;: 3,
+        &quot;normal_rank&quot;: 3,
+        &quot;omega&quot;: 0.97,
+        &quot;status&quot;: &quot;collocation-converged&quot;,
+        &quot;center&quot;: 1.2094778866451157,
+        &quot;energy&quot;: 410.55810646679754,
+        &quot;charge&quot;: 402.5478603358754,
+        &quot;energy_over_charge&quot;: 1.0198988664956228,
+        &quot;energy_minus_rotation_charge&quot;: 20.086681940998403,
+        &quot;virial&quot;: 1.5239190002058497e-10,
+        &quot;relative_virial&quot;: 3.7118229458930226e-13,
+        &quot;minimum_lapse&quot;: 0.17668220348969987,
+        &quot;minimum_momentum_margin&quot;: 0.17668220348969987,
+        &quot;maximum_principal_radial_speed&quot;: 1.0,
+        &quot;maximum_principal_tangential_speed&quot;: 1.0,
+        &quot;max_bvp_residual&quot;: 1.9956801166160528e-10,
+        &quot;bvp_tolerance&quot;: 2e-10,
+        &quot;boundary_amplitude&quot;: 6.612666965509291e-14,
+        &quot;radius&quot;: 110.0,
+        &quot;collocation_nodes&quot;: 2872,
+        &quot;half_center_radius&quot;: 2.241977118765971,
+        &quot;shooting_bracket&quot;: [
+          1.2094778863814009,
+          1.2094778863814046
+        ],
+        &quot;convergence&quot;: {
+          &quot;energy&quot;: 4.112344584602658e-10,
+          &quot;charge&quot;: 4.165374573556444e-10,
+          &quot;center&quot;: 2.2447201510638066e-12
+        },
+        &quot;dcharge_domega&quot;: 782.3608663875485,
+        &quot;denergy_domega&quot;: 758.8900403936915,
+        &quot;fixed_shape_charge_susceptibility&quot;: 646.8445832657361,
+        &quot;fixed_charge_rank_update_ratio&quot;: 1.20950362208744,
+        &quot;family_identity_relative_error&quot;: -2.9392081031146033e-12,
+        &quot;sensitivity_bvp_residual&quot;: 1.9990811864199998e-09,
+        &quot;radial_quadratic_spectra&quot;: {
+          &quot;1100&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.35913125918898625,
+              0.058811701831529714,
+              0.060726988556579806,
+              0.06420362646190625
+            ],
+            &quot;shape_l1&quot;: [
+              7.458347310810737e-05,
+              0.06077062673675912,
+              0.06404786061609391,
+              0.06898143291689604
+            ]
+          },
+          &quot;2200&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.35941132135248743,
+              0.0587994237999515,
+              0.06072185086358481,
+              0.06419836021747215
+            ],
+            &quot;shape_l1&quot;: [
+              1.867101552415655e-05,
+              0.060770701984243974,
+              0.06404813581817531,
+              0.0689820378433047
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.97,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;center&quot;: 1.565037751565016,
+      &quot;energy&quot;: 4555.54139168689,
+      &quot;charge&quot;: 4477.217428688677,
+      &quot;energy_over_charge&quot;: 1.0174938930810769,
+      &quot;energy_minus_rotation_charge&quot;: 212.64048585887394,
+      &quot;virial&quot;: 1.1014114985068376e-07,
+      &quot;relative_virial&quot;: 2.4177400747949113e-11,
+      &quot;minimum_lapse&quot;: 0.05913120101753755,
+      &quot;minimum_momentum_margin&quot;: 0.05913120101753755,
+      &quot;maximum_principal_radial_speed&quot;: 1.0,
+      &quot;maximum_principal_tangential_speed&quot;: 1.0,
+      &quot;max_bvp_residual&quot;: 9.987957919820283e-09,
+      &quot;bvp_tolerance&quot;: 1e-08,
+      &quot;boundary_amplitude&quot;: 2.9089615445192962e-11,
+      &quot;radius&quot;: 80.0,
+      &quot;collocation_nodes&quot;: 1575,
+      &quot;half_center_radius&quot;: 2.751000984053387,
+      &quot;shooting_bracket&quot;: [
+        1.5650377516012088,
+        1.5650377516012095
+      ],
+      &quot;refined&quot;: {
+        &quot;depth&quot;: 4,
+        &quot;normal_rank&quot;: 3,
+        &quot;omega&quot;: 0.97,
+        &quot;status&quot;: &quot;collocation-converged&quot;,
+        &quot;center&quot;: 1.565037751574829,
+        &quot;energy&quot;: 4555.541392184982,
+        &quot;charge&quot;: 4477.217429156595,
+        &quot;energy_over_charge&quot;: 1.0174938930859878,
+        &quot;energy_minus_rotation_charge&quot;: 212.6404859030854,
+        &quot;virial&quot;: 7.240640054746933e-10,
+        &quot;relative_virial&quot;: 1.5894137340444826e-13,
+        &quot;minimum_lapse&quot;: 0.05913120101743119,
+        &quot;minimum_momentum_margin&quot;: 0.05913120101743119,
+        &quot;maximum_principal_radial_speed&quot;: 1.0,
+        &quot;maximum_principal_tangential_speed&quot;: 1.0,
+        &quot;max_bvp_residual&quot;: 1.9961155158805828e-10,
+        &quot;bvp_tolerance&quot;: 2e-10,
+        &quot;boundary_amplitude&quot;: 1.2210186360125462e-14,
+        &quot;radius&quot;: 110.0,
+        &quot;collocation_nodes&quot;: 3990,
+        &quot;half_center_radius&quot;: 2.751000984018909,
+        &quot;shooting_bracket&quot;: [
+          1.5650377516012088,
+          1.5650377516012095
+        ],
+        &quot;convergence&quot;: {
+          &quot;energy&quot;: 1.0933761906719446e-10,
+          &quot;charge&quot;: 1.0451104074382307e-10,
+          &quot;center&quot;: 6.2701613812078346e-12
+        },
+        &quot;dcharge_domega&quot;: -87493.86144886872,
+        &quot;denergy_domega&quot;: -84869.04560539762,
+        &quot;fixed_shape_charge_susceptibility&quot;: 22386.01244404522,
+        &quot;fixed_charge_rank_update_ratio&quot;: -3.9084165466075436,
+        &quot;family_identity_relative_error&quot;: 5.932625532782839e-14,
+        &quot;sensitivity_bvp_residual&quot;: 1.9998840569648363e-09,
+        &quot;radial_quadratic_spectra&quot;: {
+          &quot;1100&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.16208551985542852,
+              0.06031802505857323,
+              0.06319514322196204,
+              0.06773425390685867
+            ],
+            &quot;shape_l1&quot;: [
+              0.00044154205820737464,
+              0.06127982865453597,
+              0.06495745085618682,
+              0.07026877456168651
+            ]
+          },
+          &quot;2200&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.16260794176873578,
+              0.060318082795508834,
+              0.06319526587664069,
+              0.06773439938300042
+            ],
+            &quot;shape_l1&quot;: [
+              0.00011087312857890967,
+              0.06127993117136298,
+              0.06495777897407257,
+              0.070269439567827
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.97,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;center&quot;: 1.5705432053459156,
+      &quot;energy&quot;: 69314.33019611341,
+      &quot;charge&quot;: 68793.81801023635,
+      &quot;energy_over_charge&quot;: 1.0075662639599332,
+      &quot;energy_minus_rotation_charge&quot;: 2584.326726184154,
+      &quot;virial&quot;: 1.3725703650763627e-06,
+      &quot;relative_virial&quot;: 1.980211539508356e-11,
+      &quot;minimum_lapse&quot;: 0.05910006028390202,
+      &quot;minimum_momentum_margin&quot;: 0.05910006028390202,
+      &quot;maximum_principal_radial_speed&quot;: 1.0,
+      &quot;maximum_principal_tangential_speed&quot;: 1.0,
+      &quot;max_bvp_residual&quot;: 9.946692439727085e-09,
+      &quot;bvp_tolerance&quot;: 1e-08,
+      &quot;boundary_amplitude&quot;: 9.4278624117588e-12,
+      &quot;radius&quot;: 80.0,
+      &quot;collocation_nodes&quot;: 1616,
+      &quot;half_center_radius&quot;: 3.8675768143345612,
+      &quot;shooting_bracket&quot;: [
+        1.5705432053769286,
+        1.5705432053769288
+      ],
+      &quot;refined&quot;: {
+        &quot;depth&quot;: 5,
+        &quot;normal_rank&quot;: 2,
+        &quot;omega&quot;: 0.97,
+        &quot;status&quot;: &quot;collocation-converged&quot;,
+        &quot;center&quot;: 1.5705432053719666,
+        &quot;energy&quot;: 69314.33020396315,
+        &quot;charge&quot;: 68793.81801773755,
+        &quot;energy_over_charge&quot;: 1.0075662639641747,
+        &quot;energy_minus_rotation_charge&quot;: 2584.326726757732,
+        &quot;virial&quot;: 6.310384230129877e-09,
+        &quot;relative_virial&quot;: 9.104010976606206e-14,
+        &quot;minimum_lapse&quot;: 0.0591000602838897,
+        &quot;minimum_momentum_margin&quot;: 0.0591000602838897,
+        &quot;maximum_principal_radial_speed&quot;: 1.0,
+        &quot;maximum_principal_tangential_speed&quot;: 1.0,
+        &quot;max_bvp_residual&quot;: 1.9999894950020156e-10,
+        &quot;bvp_tolerance&quot;: 2e-10,
+        &quot;boundary_amplitude&quot;: 3.3465924267346682e-15,
+        &quot;radius&quot;: 110.0,
+        &quot;collocation_nodes&quot;: 4320,
+        &quot;half_center_radius&quot;: 3.867576814344956,
+        &quot;shooting_bracket&quot;: [
+          1.5705432053769286,
+          1.5705432053769288
+        ],
+        &quot;convergence&quot;: {
+          &quot;energy&quot;: 1.1324843807246529e-10,
+          &quot;charge&quot;: 1.0903875339720217e-10,
+          &quot;center&quot;: 1.6587215871880176e-11
+        },
+        &quot;dcharge_domega&quot;: -1792511.4193228988,
+        &quot;denergy_domega&quot;: -1738736.0767429967,
+        &quot;fixed_shape_charge_susceptibility&quot;: 468129.9595405012,
+        &quot;fixed_charge_rank_update_ratio&quot;: -3.8290893005061264,
+        &quot;family_identity_relative_error&quot;: 1.2373097769913863e-13,
+        &quot;sensitivity_bvp_residual&quot;: 1.9997215667532263e-09,
+        &quot;radial_quadratic_spectra&quot;: {
+          &quot;1100&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.11196228207895921,
+              0.0607703931129938,
+              0.06404697466394178,
+              0.06898122342497458
+            ],
+            &quot;shape_l1&quot;: [
+              0.0006434445996083701,
+              0.061845131154433824,
+              0.06593667650535684,
+              0.0716537918448191
+            ]
+          },
+          &quot;2200&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.1125682270530322,
+              0.0607705096185181,
+              0.06404728338316827,
+              0.06898175586008838
+            ],
+            &quot;shape_l1&quot;: [
+              0.00016167621441361935,
+              0.06184526878592299,
+              0.06593708467056675,
+              0.07165460838419138
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.97,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;center&quot;: 1.570784228215483,
+      &quot;energy&quot;: 1190540.332496688,
+      &quot;charge&quot;: 1189894.9829045613,
+      &quot;energy_over_charge&quot;: 1.0005423584445674,
+      &quot;energy_minus_rotation_charge&quot;: 36342.19907926349,
+      &quot;virial&quot;: 1.6775745339223623e-05,
+      &quot;relative_virial&quot;: 1.4090866878943214e-11,
+      &quot;minimum_lapse&quot;: 0.05910000013772487,
+      &quot;minimum_momentum_margin&quot;: 0.05910000013772487,
+      &quot;maximum_principal_radial_speed&quot;: 1.0,
+      &quot;maximum_principal_tangential_speed&quot;: 1.0,
+      &quot;max_bvp_residual&quot;: 9.944921390004431e-09,
+      &quot;bvp_tolerance&quot;: 1e-08,
+      &quot;boundary_amplitude&quot;: 3.618830674990151e-12,
+      &quot;radius&quot;: 80.0,
+      &quot;collocation_nodes&quot;: 1637,
+      &quot;half_center_radius&quot;: 4.9981218834298105,
+      &quot;shooting_bracket&quot;: [
+        1.5707842282554767,
+        1.570784228255477
+      ],
+      &quot;refined&quot;: {
+        &quot;depth&quot;: 6,
+        &quot;normal_rank&quot;: 2,
+        &quot;omega&quot;: 0.97,
+        &quot;status&quot;: &quot;collocation-converged&quot;,
+        &quot;center&quot;: 1.5707842282531246,
+        &quot;energy&quot;: 1190540.3326707892,
+        &quot;charge&quot;: 1189894.983074952,
+        &quot;energy_over_charge&quot;: 1.000542358447608,
+        &quot;energy_minus_rotation_charge&quot;: 36342.19908808591,
+        &quot;virial&quot;: -2.2432668120124832e-06,
+        &quot;relative_virial&quot;: -1.8842426001478407e-12,
+        &quot;minimum_lapse&quot;: 0.059100000137723985,
+        &quot;minimum_momentum_margin&quot;: 0.059100000137723985,
+        &quot;maximum_principal_radial_speed&quot;: 1.0,
+        &quot;maximum_principal_tangential_speed&quot;: 1.0,
+        &quot;max_bvp_residual&quot;: 1.9993357966788916e-10,
+        &quot;bvp_tolerance&quot;: 2e-10,
+        &quot;boundary_amplitude&quot;: 1.0827107467082292e-15,
+        &quot;radius&quot;: 110.0,
+        &quot;collocation_nodes&quot;: 4389,
+        &quot;half_center_radius&quot;: 4.998121883475169,
+        &quot;shooting_bracket&quot;: [
+          1.5707842282554767,
+          1.570784228255477
+        ],
+        &quot;convergence&quot;: {
+          &quot;energy&quot;: 1.4623713660956395e-10,
+          &quot;charge&quot;: 1.4319800463376626e-10,
+          &quot;center&quot;: 2.3963614405886627e-11
+        },
+        &quot;dcharge_domega&quot;: -38289115.88207075,
+        &quot;denergy_domega&quot;: -37140442.405603476,
+        &quot;fixed_shape_charge_susceptibility&quot;: 9312122.466745244,
+        &quot;fixed_charge_rank_update_ratio&quot;: -4.111749605828959,
+        &quot;family_identity_relative_error&quot;: 1.386184670675226e-13,
+        &quot;sensitivity_bvp_residual&quot;: 1.9988708224005212e-09,
+        &quot;radial_quadratic_spectra&quot;: {
+          &quot;1100&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.0862073233288747,
+              0.06128012403815132,
+              0.06496136299020865,
+              0.07028724835230148
+            ],
+            &quot;shape_l1&quot;: [
+              0.000751980177448333,
+              0.06246395721632956,
+              0.06697390690830737,
+              0.07310075958090066
+            ]
+          },
+          &quot;2200&quot;: {
+            &quot;shape_l0&quot;: [
+              -0.08685699087596983,
+              0.0612802868170125,
+              0.06496179078705079,
+              0.07028802289384077
+            ],
+            &quot;shape_l1&quot;: [
+              0.00018899995875924175,
+              0.06246413475200783,
+              0.06697439677883463,
+              0.07310172025093517
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;normal_rank&quot;: 0,
+      &quot;status&quot;: &quot;no-active-normal-generator&quot;
+    }
+  ],
+  &quot;scope&quot;: &quot;Changed fixed-norm complete-coefficient action with its combined phase/normal generator. Complete radial energy, stress and fixed-charge response are tested; unused coefficient polarizations have a separate analytic convex-form positivity proof. No observed particle identification, Lorentz Dirac kinetics or simplex frequency selection is claimed.&quot;
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

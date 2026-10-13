@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>breathing-orbit-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/breathing-orbit-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="breathing-orbit-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/breathing-orbit-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="breathing-orbit-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>breathing-orbit-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/breathing-orbit-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Check breathing projections of the existing autonomous Coulomb petals.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import json
+import sys
+
+import numpy as np
+from scipy.linalg import expm
+import sympy as sp
+
+import completed_coulomb_petals_checks as completed
+
+ROOT = Path(__file__).resolve().parent
+DEPTHS = (2, 3, 4, 5, 6, 10)
+ACTIVE = (0, 1, 3, 4)
+conditions = {}
+errors = {}
+
+
+def check(value, name):
+    if not bool(value):
+        raise AssertionError(name)
+    conditions[name] = conditions.get(name, 0) + 1
+
+
+def close(actual, expected, name, tolerance=2e-9):
+    error = float(np.max(np.abs(np.asarray(actual) - np.asarray(expected))))
+    errors[name] = max(errors.get(name, 0.0), error)
+    check(error &lt; tolerance, name)
+
+
+def symbolic_checks():
+    theta, level, chi = sp.symbols(&#39;theta level chi&#39;, real=True)
+    q = sp.Matrix([sp.cos(level*theta)*sp.cos(theta),
+                   sp.cos(level*theta)*sp.sin(theta),
+                   sp.sin(level*theta)*sp.cos(theta),
+                   sp.sin(level*theta)*sp.sin(theta)])
+    transform = sp.Matrix([[1, 0, 0, 1], [0, 1, -1, 0],
+                           [1, 0, 0, -1], [0, 1, 1, 0]]) / sp.sqrt(2)
+    close(np.array(transform.T*transform, float), np.eye(4),
+          &#39;eigenplane change is orthogonal&#39;)
+    expected = sp.Matrix([sp.cos((1-level)*theta), sp.sin((1-level)*theta),
+                          sp.cos((1+level)*theta), sp.sin((1+level)*theta)]) / sp.sqrt(2)
+    for entry in transform*q - expected:
+        check(sp.trigsimp(sp.expand_trig(entry)) == 0,
+              &#39;two physical circular eigenplanes&#39;)
+    projection = sp.Matrix([[sp.cos(chi), 0, sp.sin(chi), 0],
+                            [0, sp.cos(chi), 0, sp.sin(chi)],
+                            [-sp.sin(chi), 0, sp.cos(chi), 0]])
+    for entry in projection*projection.T-sp.eye(3):
+        check(sp.trigsimp(entry) == 0, &#39;three orthonormal observed axes&#39;)
+    observed = projection*expected
+    radius_squared = (1 + sp.sin(2*chi)*sp.cos(2*level*theta))/2
+    check(sp.trigsimp(sp.expand_trig(observed[0]**2+observed[1]**2-radius_squared)) == 0,
+          &#39;exact projected breathing law&#39;)
+    for i in (0, 1):
+        check(sp.trigsimp(sp.expand_trig(observed[i].subs(chi, sp.pi/4)-q[i])) == 0,
+              &#39;aligned observer recovers signed petals&#39;)
+    return transform
+
+
+def wedge(q, p):
+    return np.outer(q, p)-np.outer(p, q)
+
+
+def field(q, p, source):
+    coupling = completed.LAM
+    velocity = p-coupling*source@q
+    force = -q/(q@q)**1.5-coupling*source@p+coupling**2*source@source@q
+    gradient = coupling*wedge(q, p)-coupling**2*wedge(q, source@q)
+    return velocity, force, source@gradient-gradient@source
+
+
+def energy(q, p, source):
+    v = p-completed.LAM*source@q
+    return float(v@v/2-1/np.linalg.norm(q)-np.trace(source@source)/4)
+
+
+def projection_matrix(depth, chi, transform):
+    p = np.zeros((3, depth))
+    p[:, :4] = np.array([[np.cos(chi), 0, np.sin(chi), 0],
+                         [0, np.cos(chi), 0, np.sin(chi)],
+                         [-np.sin(chi), 0, np.cos(chi), 0]]) @ transform
+    return p
+
+
+def main():
+    transform = np.array(symbolic_checks(), float)
+    rng = np.random.default_rng(610111539)
+    cases = []
+    for level in (np.sqrt(2), 1.5, 2.0, 4.0):
+        state, generator6, rate, solved = completed.solve_equilibrium(1, level)
+        q6, p6, source6 = completed.base.unpack(state, 1)
+        for depth in DEPTHS:
+            if depth &lt; 4:
+                cases.append(dict(depth=depth, level=float(level),
+                                  branch_available=False,
+                                  reason=&#39;Two independent rotation planes need four spatial dimensions.&#39;))
+                continue
+            q0, p0 = np.zeros(depth), np.zeros(depth)
+            q0[:4], p0[:4] = q6[0, ACTIVE], p6[0, ACTIVE]
+            source0, generator = np.zeros((depth, depth)), np.zeros((depth, depth))
+            source0[:4, :4] = source6[np.ix_(ACTIVE, ACTIVE)]
+            generator[:4, :4] = generator6[np.ix_(ACTIVE, ACTIVE)]
+            v, force, source_dot = field(q0, p0, source0)
+            residual = max(np.linalg.norm(v-generator@q0),
+                           np.linalg.norm(force-generator@p0),
+                           np.linalg.norm(source_dot-(generator@source0-source0@generator)))
+            close(residual, 0, &#39;autonomous relative equilibrium after cross-depth embedding&#39;, 2e-9)
+            initial_energy = energy(q0, p0, source0)
+            total_angular = wedge(q0, p0)+source0
+            for theta in (0.0, .137, .428, .991, 2.771, 5.103):
+                rotation = expm(generator*theta/rate)
+                q, p = rotation@q0, rotation@p0
+                source = rotation@source0@rotation.T
+                q_formula = np.array([np.cos(level*theta)*np.cos(theta),
+                                      np.cos(level*theta)*np.sin(theta),
+                                      np.sin(level*theta)*np.cos(theta),
+                                      np.sin(level*theta)*np.sin(theta)])
+                close(q[:4], q_formula, &#39;exact existing autonomous orbit&#39;, 2e-9)
+                close(q@q, 1, &#39;full physical radius stays fixed&#39;)
+                close(energy(q, p, source), initial_energy, &#39;full energy conserved&#39;)
+                close(wedge(q, p)+source, total_angular, &#39;complete angular charge conserved&#39;)
+                for chi in (0.0, np.pi/12, np.pi/8, np.pi/4):
+                    observer = projection_matrix(depth, chi, transform)
+                    displayed = observer@q
+                    predicted = (1+np.sin(2*chi)*np.cos(2*level*theta))/2
+                    close(displayed[:2]@displayed[:2], predicted,
+                          &#39;projected breathing at every supported depth&#39;)
+                    close(observer@observer.T, np.eye(3), &#39;observer is an ordinary orthogonal projection&#39;)
+                    matrix, _ = np.linalg.qr(rng.normal(size=(depth, depth)))
+                    close((observer@matrix.T)@(matrix@q), displayed,
+                          &#39;common physical rotation leaves projection unchanged&#39;)
+            period = 4*np.pi if level == 1.5 else 2*np.pi
+            rotation = expm(generator*period/rate)
+            recurrence = float(np.linalg.norm(rotation@q0-q0))
+            if level != np.sqrt(2):
+                close(recurrence, 0, &#39;commensurate full trajectory recurrence&#39;, 3e-9)
+            else:
+                check(recurrence &gt; .1, &#39;irrational ratio fails a single clock-turn recurrence&#39;)
+            cases.append(dict(depth=depth, level=float(level), branch_available=True,
+                              clock_rate=float(rate), equilibrium_residual=float(residual),
+                              linear_trajectory_span=4, recurrence_error_at_tested_turn=recurrence,
+                              stability=&#39;Not newly tested; observer changes cannot alter an unchanged full-state flow.&#39;))
+
+    # A tilted ordinary three-dimensional circle is a lower-depth breathing control.
+    control = []
+    theta = np.linspace(0, 2*np.pi, 1001)
+    for depth in DEPTHS:
+        if depth == 2:
+            radius_squared = np.cos(theta)**2+np.sin(theta)**2
+            close(radius_squared, np.ones_like(theta), &#39;depth-two full plane circle has no projected breathing&#39;)
+            control.append(dict(depth=depth, tilted_circle_available=False))
+            continue
+        inclination = np.pi/3
+        q = np.zeros((depth, len(theta)))
+        q[0], q[1], q[2] = np.cos(theta), np.cos(inclination)*np.sin(theta), np.sin(inclination)*np.sin(theta)
+        close(np.sum(q*q, axis=0), 1, &#39;tilted circle full radius fixed&#39;)
+        radius_squared = q[0]**2+q[1]**2
+        close(radius_squared, np.cos(theta)**2+np.cos(inclination)**2*np.sin(theta)**2,
+              &#39;lower-depth tilted circle breathes in projection&#39;)
+        control.append(dict(depth=depth, tilted_circle_available=True,
+                            projected_radius_min=float(np.min(np.sqrt(radius_squared))),
+                            projected_radius_max=float(np.max(np.sqrt(radius_squared)))))
+
+    # A radial dwell-time histogram does not establish azimuthally complete rings.
+    chi = np.pi/12
+    rmin2, rmax2 = (1-np.sin(2*chi))/2, (1+np.sin(2*chi))/2
+    sample_theta = (np.arange(20000)+.5)*2*np.pi/20000
+    samples = (1+np.sin(2*chi)*np.cos(4*sample_theta))/2
+    for fraction in (.1, .3, .5, .7, .9):
+        boundary = rmin2+fraction*(rmax2-rmin2)
+        predicted = 1-np.arccos(2*fraction-1)/np.pi
+        close(np.mean(samples &lt;= boundary), predicted, &#39;deterministic radial dwell-time CDF&#39;, 3e-4)
+    report = dict(created_at=datetime.now(timezone.utc).isoformat(),
+                  sources={f&#39;experiments/{name}&#39;: sha256((ROOT/name).read_bytes()).hexdigest()
+                           for name in (&#39;breathing-orbit-checks.py&#39;,
+                                        &#39;completed_coulomb_petals_checks.py&#39;,
+                                        &#39;coulomb_angular_response_checks.py&#39;)},
+                  conditions=conditions, max_errors=errors, cases=cases, lower_depth_controls=control,
+                  scope=&#39;Existing conditional classical central-source model and ordinary spatial projections.&#39;,
+                  conclusions=[&#39;Annular breathing and petal projections can share one unchanged full trajectory.&#39;,
+                               &#39;This branch occupies a four-dimensional linear span even when embedded in six.&#39;,
+                               &#39;Radial breathing alone is not specific to depth six.&#39;,
+                               &#39;Noninteger frequency-ratio relative equilibria also exist; no integer selection follows.&#39;,
+                               &#39;Finite commensurate traces are not azimuthally complete concentric rings.&#39;,
+                               &#39;No new source induction, physical detector law, or particle mass derivation.&#39;])
+    destination = ROOT/(&#39;breathing-orbit-results-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)+&#39;.json&#39;)
+    destination.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(destination), checks=sum(conditions.values()),
+                          conditions=len(conditions), available_cases=sum(c[&#39;branch_available&#39;] for c in cases),
+                          max_equilibrium_residual=max(c.get(&#39;equilibrium_residual&#39;, 0) for c in cases)), indent=2))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

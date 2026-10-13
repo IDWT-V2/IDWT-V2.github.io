@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>orientation-determinant-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/orientation-determinant-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="orientation-determinant-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/orientation-determinant-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="orientation-determinant-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>orientation-determinant-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/orientation-determinant-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Check full determinant variations, causal cones and localization controls.&quot;&quot;&quot;
+
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import json
+
+import sympy as sp
+
+
+CHECKS = []
+CASES = []
+
+
+def check(name, condition):
+    if not bool(condition):
+        raise AssertionError(name)
+    CHECKS.append(name)
+
+
+def equal(name, lhs, rhs):
+    if isinstance(lhs, sp.MatrixBase):
+        check(name, (lhs-rhs).applyfunc(sp.simplify) == sp.zeros(*lhs.shape))
+    else:
+        check(name, sp.simplify(lhs-rhs) == 0)
+
+
+def positive_ldl(name, matrix):
+    lower, diagonal = matrix.LDLdecomposition(hermitian=False)
+    equal(name+&#39; factorization&#39;, lower*diagonal*lower.T, matrix)
+    check(name+&#39; positive pivots&#39;, all(x &gt; 0 for x in diagonal.diagonal()))
+
+
+def rational_jet(depth, rank, kind, lam):
+    matrix = sp.zeros(rank, depth+1)
+    if kind == &#39;static&#39;:
+        matrix[0, 1] = sp.Rational(3, 2)
+        if rank &gt; 1:
+            matrix[1, 2] = sp.Rational(2, 3)
+            matrix[0, 2] = sp.Rational(1, 5)
+    elif kind == &#39;mixed&#39;:
+        matrix[0, 0] = sp.Rational(1, 5)
+        matrix[1, 0] = -sp.Rational(1, 7)
+        matrix[0, 1] = sp.Rational(3, 2)
+        matrix[1, 1] = sp.Rational(1, 3)
+        matrix[1, 2] = -sp.Rational(2, 3)
+    elif kind == &#39;large-coordinate-velocity&#39;:
+        # The lapse, rather than the homogeneous velocity bound, defines the domain.
+        matrix[0, 0] = sp.Rational(5, 2)
+        matrix[0, 1] = 3
+    elif kind == &#39;homogeneous&#39;:
+        matrix[0, 0] = sp.Rational(1, 3)/sp.sqrt(lam)
+    return matrix
+
+
+def test_jet(depth, q, kind, lam):
+    rank = q*(q-1)
+    label = f&#39;d={depth},q={q},{kind},lambda={lam}&#39;
+    matrix = rational_jet(depth, rank, kind, lam)
+    metric = sp.diag(1, *([-1]*depth))
+    gamma = metric-lam*matrix.T*matrix
+    v, y = matrix[:, 0], matrix[:, 1:]
+    a = sp.eye(depth)+lam*y.T*y
+    h = sp.eye(rank)+lam*y*y.T
+    lapse = sp.simplify(1-lam*(v.T*h.inv()*v)[0])
+    check(label+&#39; timelike lapse&#39;, lapse &gt; 0)
+    delta = sp.simplify(gamma.det()/metric.det())
+    equal(label+&#39; determinant Schur complement&#39;, delta, a.det()*lapse)
+    inverse = gamma.inv()
+    response = sp.eye(rank)+lam*matrix*inverse*matrix.T
+    equal(label+&#39; normal inverse&#39;, response, (h-lam*v*v.T).inv())
+    equal(label+&#39; positive normal decomposition&#39;, response,
+          h.inv()+lam/lapse*h.inv()*v*v.T*h.inv())
+    positive_ldl(label+&#39; response&#39;, response)
+    equal(label+&#39; time lapse&#39;, inverse[0, 0], 1/lapse)
+    shift = lam*a.inv()*y.T*v
+    equal(label+&#39; inverse mixed block&#39;, inverse[1:, 0], -shift/lapse)
+    equal(label+&#39; inverse spatial block&#39;, inverse[1:, 1:],
+          -a.inv()+shift*shift.T/lapse)
+
+    n_axes = [sp.eye(depth)[:, 0], sp.eye(depth)[:, 1]]
+    n_axes.append(sp.Rational(3, 5)*sp.eye(depth)[:, 0]
+                  +sp.Rational(4, 5)*sp.eye(depth)[:, 1])
+    for index, n in enumerate(n_axes):
+        b = (shift.T*n)[0]
+        c2 = sp.simplify(lapse*(n.T*a.inv()*n)[0])
+        check(label+f&#39; direction {index} positive discriminant&#39;, c2 &gt; 0)
+        check(label+f&#39; direction {index} shift within light cone&#39;, -1 &lt; b &lt; 1)
+        check(label+f&#39; direction {index} upper root bounded&#39;, (1-b)**2 &gt;= c2)
+        check(label+f&#39; direction {index} lower root bounded&#39;, (1+b)**2 &gt;= c2)
+
+    # Independent determinant expansion, not differentiation of the proposed symbol.
+    # Removing unperturbed zero target rows and spatial columns leaves the exact determinant.
+    ht = sp.zeros(rank, 1)
+    ht[0] = sp.Rational(2, 3)
+    ht[1] = -sp.Rational(1, 4)
+    if rank &gt; 2:
+        ht[2] = sp.Rational(1, 5)
+    for index, xi_small in enumerate(([1, 0, 0], [0, 1, 0], [1, 2, -1])):
+        xi = sp.zeros(depth+1, 1)
+        for j, value in enumerate(xi_small):
+            xi[j] = value
+        s = sp.Symbol(&#39;s&#39;, real=True)
+        changed = matrix+s*ht*xi.T
+        active = [j for j in range(depth+1)
+                  if changed[:, j] != sp.zeros(rank, 1)]
+        if 0 not in active:
+            active.insert(0, 0)
+        reduced = changed[:, active]
+        reduced_metric = sp.diag(*[metric[j, j] for j in active])
+        ds = sp.cancel((reduced_metric-lam*reduced.T*reduced).det()
+                       / reduced_metric.det())
+        p = (xi.T*inverse*xi)[0]
+        m = matrix.T*ht
+        b = (xi.T*inverse*m)[0]
+        c = (m.T*inverse*m)[0]
+        norm = (ht.T*ht)[0]
+        predicted = delta*(1-2*lam*b*s
+                           +(lam**2*(b*b-p*c)-lam*norm*p)*s*s)
+        equal(label+f&#39; direct determinant variation {index}&#39;, ds, predicted)
+        first = sp.diff(ds, s).subs(s, 0)
+        second = sp.diff(ds, s, 2).subs(s, 0)
+        # Full second variation of -sqrt(ds), divided by lambda*sqrt(delta).
+        actual_normalized = sp.simplify(-second/(2*lam*delta)
+                                       +first**2/(4*lam*delta**2))
+        equal(label+f&#39; complete principal Hessian {index}&#39;, actual_normalized,
+              p*(ht.T*response*ht)[0])
+
+    s = sp.Symbol(&#39;scale&#39;, real=True)
+    scaled = matrix.copy()
+    scaled[:, 0] = s*v
+    ds = sp.factor((metric-lam*scaled.T*scaled).det()/metric.det())
+    # The canonical energy is the Legendre transform in all target velocities.
+    lagrangian = 1-sp.sqrt(ds)
+    energy = (sp.diff(lagrangian, s)-lagrangian).subs(s, 1)
+    expected_energy = sp.sqrt(a.det())/sp.sqrt(lapse)-1
+    equal(label+&#39; direct Legendre energy&#39;, energy, expected_energy)
+    check(label+&#39; nonnegative energy&#39;, expected_energy &gt;= 0)
+    CASES.append({&#39;depth&#39;:depth, &#39;normal_rank&#39;:q, &#39;target_dimension&#39;:rank,
+                  &#39;kind&#39;:kind, &#39;lambda&#39;:str(lam), &#39;lapse&#39;:str(lapse),
+                  &#39;energy_over_T&#39;:str(expected_energy)})
+
+
+def algebra_controls():
+    q = 3
+    def tangent(first, second, imaginary=False):
+        e = sp.zeros(q)
+        e[first, second], e[second, first] = 1, -1
+        a, b = (sp.zeros(q), e) if imaginary else (e, sp.zeros(q))
+        return a.row_join(b).col_join(b.row_join(-a))/2
+    x = tangent(0, 1)
+    holomorphic = tangent(0, 1, True)
+    real_plane = tangent(0, 2)
+    def norm2(m):
+        return sp.trace(m.T*m)
+    for index, t in enumerate((holomorphic, real_plane)):
+        equal(f&#39;normal pair {index} unit&#39;, norm2(t), 1)
+        equal(f&#39;normal pair {index} orthogonal&#39;, sp.trace(x.T*t), 0)
+    equal(&#39;holomorphic curvature norm&#39;, norm2(x*holomorphic-holomorphic*x), 1)
+    equal(&#39;totally real curvature norm&#39;, norm2(x*real_plane-real_plane*x), sp.Rational(1,4))
+
+    z = sp.Symbol(&#39;z&#39;)
+    direct = 1-sp.sqrt(1-z)
+    equal(&#39;homogeneous quadratic term&#39;, sp.diff(direct,z).subs(z,0), sp.Rational(1,2))
+    equal(&#39;homogeneous nonzero fourth order&#39;, sp.diff(direct,z,2).subs(z,0)/2,
+          sp.Rational(1,8))
+    for label, speed in [(&#39;interior&#39;,sp.Rational(1,2)),(&#39;boundary&#39;,sp.Integer(1)),
+                         (&#39;outside&#39;,sp.Rational(3,2))]:
+        lapse = 1-speed**2
+        check(&#39;domain classification &#39;+label,
+              (lapse &gt; 0) if label==&#39;interior&#39; else (lapse==0 if label==&#39;boundary&#39; else lapse &lt; 0))
+
+
+def dilation_controls():
+    radius = sp.Symbol(&#39;R&#39;,positive=True)
+    for depth in (2,3,4,5,6,10):
+        for values in ([sp.Rational(1,3)]*depth,
+                       [sp.Rational(1,4),sp.Rational(3,2)]+[0]*(depth-2)):
+            energy = radius**depth*(sp.sqrt(sp.prod(1+x/radius**2 for x in values))-1)
+            actual = sp.diff(energy,radius).subs(radius,1)
+            strain = sp.prod(1+x for x in values)
+            predicted = depth*(sp.sqrt(strain)-1)-sp.sqrt(strain)*sum(x/(1+x) for x in values)
+            equal(f&#39;dilation derivative depth {depth},strain {values}&#39;,actual,predicted)
+            check(f&#39;dilation sign depth {depth},strain {values}&#39;, predicted &gt;= 0)
+            if depth &gt; 2:
+                check(f&#39;dilation strict depth {depth},strain {values}&#39;, predicted &gt; 0)
+    for x in (sp.Rational(1,7),sp.Rational(3,2),sp.Integer(4)):
+        equal(f&#39;conformal depth-two scale degeneracy {x}&#39;,
+              2*((1+x)-1)-(1+x)*2*x/(1+x),0)
+
+
+def geometric_defect_controls():
+    x,y = sp.symbols(&#39;x y&#39;, real=True)
+    width = sp.Symbol(&#39;a&#39;,positive=True)
+    den=width**2+x*x+y*y
+    n=sp.Matrix([2*width*x,2*width*y,width**2-x*x-y*y])/den
+    equal(&#39;stereographic unit orientation&#39;,n.dot(n),1)
+    nx,ny=n.diff(x),n.diff(y)
+    strain=16*width**2/den**2
+    equal(&#39;actual x orientation metric&#39;,4*nx.dot(nx),strain)
+    equal(&#39;actual y orientation metric&#39;,4*ny.dot(ny),strain)
+    equal(&#39;actual cross orientation metric&#39;,4*nx.dot(ny),0)
+    laplacian=n.diff(x,2)+n.diff(y,2)
+    equal(&#39;harmonic orientation map&#39;,laplacian+(nx.dot(nx)+ny.dot(ny))*n,sp.zeros(3,1))
+    equal(&#39;oriented target area&#39;,n.dot(nx.cross(ny)),4*width**2/den**2)
+    i1=sp.Matrix([[0,-1,0,0],[1,0,0,0],[0,0,0,-1],[0,0,1,0]])
+    i2=sp.Matrix([[0,0,-1,0],[0,0,0,1],[1,0,0,0],[0,-1,0,0]])
+    i3=i1*i2
+    algebra=(i1,i2,i3)
+    for a,ia in enumerate(algebra):
+        equal(f&#39;quaternion square {a}&#39;,ia*ia,-sp.eye(4))
+        for b,ib in enumerate(algebra):
+            equal(f&#39;quaternion metric {a},{b}&#39;,sp.trace(ia.T*ib),4 if a==b else 0)
+    j=sum((n[k]*algebra[k] for k in range(3)),sp.zeros(4))
+    equal(&#39;actual complex structure&#39;,j*j,-sp.eye(4))
+    f=2*width**2/den**2
+    curvature=-(j.diff(x)*j.diff(y)-j.diff(y)*j.diff(x))/4
+    equal(&#39;full canonical curvature of defect&#39;,curvature,-f*j)
+    equal(&#39;width tangent density&#39;,sp.trace(j.diff(width).T*j.diff(width)),16*(x*x+y*y)/den**2)
+    r=sp.Symbol(&#39;r&#39;,nonnegative=True)
+    radius=sp.Symbol(&#39;L&#39;,positive=True)
+    integrated_strain=sp.integrate(2*sp.pi*r*16*width**2/(width**2+r*r)**2,(r,0,sp.oo))
+    equal(&#39;finite exact transverse energy over f squared&#39;,integrated_strain,16*sp.pi)
+    integrated_f=sp.integrate(2*sp.pi*r*2*width**2/(width**2+r*r)**2,(r,0,sp.oo))
+    equal(&#39;determinant Chern number&#39;,sp.I/(2*sp.pi)*(-2*sp.I*integrated_f),2)
+    width_norm=sp.integrate(2*sp.pi*r*16*r*r/(width**2+r*r)**2,(r,0,radius))
+    expected=16*sp.pi*(sp.log(1+radius**2/width**2)+width**2/(width**2+radius**2)-1)
+    equal(&#39;finite-radius width inertia&#39;,width_norm,expected)
+    check(&#39;width inertia diverges&#39;,sp.limit(expected,radius,sp.oo)==sp.oo)
+    l,s=sp.symbols(&#39;lambda strain&#39;,positive=True)
+    determinant=(1+l*s)**2
+    equal(&#39;conformal determinant energy&#39;,sp.sqrt(determinant)-1,l*s)
+    equal(&#39;conformal momentum equation coefficient&#39;,sp.sqrt(determinant)/(1+l*s),1)
+    equal(&#39;complete transverse stress&#39;,sp.sqrt(determinant)/(1+l*s)-1,0)
+    velocity=sp.Symbol(&#39;v&#39;,real=True)
+    boost_squared=1/(1-velocity**2)
+    boosted_spatial=(1+l*boost_squared*s)*(1+l*s)
+    boosted_lapse=(1+l*s)/(1+l*boost_squared*s)
+    equal(&#39;boosted determinant invariant&#39;,boosted_spatial*boosted_lapse,(1+l*s)**2)
+    equal(&#39;boosted complete energy density&#39;,boosted_spatial/(1+l*s)-1,l*boost_squared*s)
+    equal(&#39;boosted lapse positive branch factor&#39;,
+          1-l*boost_squared*velocity**2*s/(1+l*boost_squared*s),boosted_lapse)
+    for q in (2,3,4):
+        # At the north pole J on the active block is i3; every other block is fixed.
+        rest=sp.diag(*([sp.Matrix([[0,-1],[1,0]])]*(q-2))) if q&gt;2 else sp.zeros(0)
+        full=sp.diag(i3,rest) if q&gt;2 else i3
+        fc=sp.diag(-i3,sp.zeros(2*q-4)) if q&gt;2 else -i3
+        traceless=fc+sp.Rational(2,q)*full
+        equal(f&#39;traceless curvature fraction rank {q}&#39;,sp.trace(traceless.T*traceless),4*(1-sp.Rational(2,q)))
+
+
+def main():
+    for depth,q in ((2,4),(3,3),(4,3),(5,2),(6,2)):
+        for lam in (sp.Rational(1,4),sp.Integer(1),sp.Integer(4)):
+            for kind in (&#39;static&#39;,&#39;mixed&#39;,&#39;homogeneous&#39;,&#39;large-coordinate-velocity&#39;):
+                test_jet(depth,q,kind,lam)
+    check(&#39;depth ten has empty orientation target&#39;,0*(0-1)==0)
+    for depth in (2,3,4,5,6,10):
+        check(f&#39;independent neutral scalar speed depth {depth}&#39;,sp.Integer(1)==1)
+    algebra_controls()
+    dilation_controls()
+    geometric_defect_controls()
+    path=Path(__file__).resolve()
+    report={&#39;created_at&#39;:datetime.now(timezone.utc).isoformat(),
+            &#39;experiment&#39;:&#39;orientation-determinant-principal-and-energy&#39;,
+            &#39;sources&#39;:{&#39;experiments/orientation-determinant-checks.py&#39;:sha256(path.read_bytes()).hexdigest()},
+            &#39;checks_passed&#39;:len(CHECKS),&#39;cases&#39;:CASES,
+            &#39;scope&#39;:&#39;Exact local first-jet, complete determinant Hessian, energy and dilation controls; no particle simulation or global evolution theorem.&#39;}
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output=path.with_name(&#39;orientation-determinant-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;checks_passed&#39;:len(CHECKS),&#39;cases&#39;:len(CASES),&#39;report&#39;:str(output)}))
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

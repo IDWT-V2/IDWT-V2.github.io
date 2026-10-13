@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>scalar-current-band-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/scalar-current-band-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="scalar-current-band-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/scalar-current-band-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="scalar-current-band-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>scalar-current-band-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/scalar-current-band-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">experiment_key</th><td>signed-scalar-current-spatial-band-source</td></tr><tr><th scope="row">created_utc</th><td>2026-10-11T17:12:55.143422+00:00</td></tr><tr><th scope="row">classification</th><td>actual spatial signed-current and complete source comparison on a declared graded Dirac carrier</td></tr><tr><th scope="row">condition_count</th><td>24</td></tr><tr><th scope="row">evaluation_count</th><td>796</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;experiment_key&quot;: &quot;signed-scalar-current-spatial-band-source&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-11T17:12:55.143422+00:00&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/scalar-current-band-checks.py&quot;: &quot;a9f5e37f9cc31816aa1000fbb41893b627ed343f0f5cd56dfaeabb7f0ef347b1&quot;,
+    &quot;experiments/spatial-source-saturation-checks.py&quot;: &quot;56bd144519dbd066da32c8950845465d3b461fb12306f8d13476535cef542f2e&quot;,
+    &quot;experiments/spatial-band-curvature-checks.py&quot;: &quot;1adbe50fbe865da9b237fe8d3dd424ee43dcb951fc8f8c01a31a3e4b9330f657&quot;
+  },
+  &quot;classification&quot;: &quot;actual spatial signed-current and complete source comparison on a declared graded Dirac carrier&quot;,
+  &quot;assumptions&quot;: [
+    &quot;ordinary round sphere as a spatial control with undetermined physical radius&quot;,
+    &quot;parallel Hermitian scalar grading beta anticommutes with the full spatial Dirac operator&quot;,
+    &quot;odd spatial depths use the full graded double of the intrinsic spinor carrier&quot;,
+    &quot;common local scalar-current quartic with positive unit-norm bright trial fields&quot;,
+    &quot;radial complete-source calculations use beta-at-pole eigenpolarization, not every polarization&quot;
+  ],
+  &quot;limits&quot;: [
+    &quot;trial fields are not nonlinear stationary solutions or localized particles&quot;,
+    &quot;zero scalar current is not zero electric charge, absence of all coupling or a particle identification&quot;,
+    &quot;other polarizations retain the explicitly calculated angular-current dependence&quot;,
+    &quot;no stability, physical lifetime, selected mass clock or favorable sector preference is established&quot;
+  ],
+  &quot;conditions&quot;: {
+    &quot;physical scalar grading anticommutes with every spatial Clifford direction&quot;: 30,
+    &quot;physical spatial Clifford direction squares to identity&quot;: 30,
+    &quot;physical scalar grading is a Hermitian involution&quot;: 6,
+    &quot;physical scalar grading is Hermitian&quot;: 6,
+    &quot;parallel scalar grading acquires its exact spatial Killing-frame dependence&quot;: 24,
+    &quot;spatial scalar grading stays an involution&quot;: 24,
+    &quot;general signed scalar current retains scalar and directional polarization moments&quot;: 24,
+    &quot;physical scalar grading maps every tested positive spatial shell into its opposite sign&quot;: 144,
+    &quot;complete pure polarization has unit scalar-vector length at depths two and four&quot;: 2,
+    &quot;even Clifford family has an exact Hermitian chirality&quot;: 2,
+    &quot;explicit pure polarization has identically zero signed scalar current&quot;: 4,
+    &quot;zero signed scalar current survives distinct bare spatial mode phases&quot;: 48,
+    &quot;scalar-source trial field retains canonical unit spatial norm&quot;: 34,
+    &quot;a pure positive spatial band has zero integrated signed scalar current&quot;: 34,
+    &quot;complete signed cubic source obeys both-sign Parseval&quot;: 34,
+    &quot;scalar quartic action derivative equals the complete source component along its trial field&quot;: 34,
+    &quot;highest positive polynomial allowance vanishes relative to complete source norm&quot;: 34,
+    &quot;ground signed scalar quartic is the exact inverse ambient dimension&quot;: 8,
+    &quot;ground source retains its exact selected-shell coefficient&quot;: 8,
+    &quot;ground signed source generates the first opposite Dirac shell&quot;: 8,
+    &quot;ground signed source has an exact nonzero omitted fraction&quot;: 8,
+    &quot;both signed-current polarization coefficients are positive&quot;: 34,
+    &quot;signed scalar quartic obeys the pointwise positive-intensity bound&quot;: 34,
+    &quot;independent signed-source quadrature refinement&quot;: 182
+  },
+  &quot;maximum_errors&quot;: {
+    &quot;physical scalar grading anticommutes with every spatial Clifford direction&quot;: 0.0,
+    &quot;physical spatial Clifford direction squares to identity&quot;: 0.0,
+    &quot;physical scalar grading is a Hermitian involution&quot;: 0.0,
+    &quot;physical scalar grading is Hermitian&quot;: 0.0,
+    &quot;parallel scalar grading acquires its exact spatial Killing-frame dependence&quot;: 3.3306690783892144e-16,
+    &quot;spatial scalar grading stays an involution&quot;: 4.440961884308452e-16,
+    &quot;general signed scalar current retains scalar and directional polarization moments&quot;: 4.6847232401391546e-15,
+    &quot;physical scalar grading maps every tested positive spatial shell into its opposite sign&quot;: 3.6682069453890403e-16,
+    &quot;even Clifford family has an exact Hermitian chirality&quot;: 0.0,
+    &quot;explicit pure polarization has identically zero signed scalar current&quot;: 3.3306690738754696e-16,
+    &quot;zero signed scalar current survives distinct bare spatial mode phases&quot;: 2.955481596820445e-16,
+    &quot;scalar-source trial field retains canonical unit spatial norm&quot;: 3.3163582990880514e-11,
+    &quot;a pure positive spatial band has zero integrated signed scalar current&quot;: 2.588576575313084e-11,
+    &quot;complete signed cubic source obeys both-sign Parseval&quot;: 1.5469900469637354e-10,
+    &quot;scalar quartic action derivative equals the complete source component along its trial field&quot;: 3.8420252746856493e-16,
+    &quot;highest positive polynomial allowance vanishes relative to complete source norm&quot;: 2.9492207732557183e-12,
+    &quot;ground signed scalar quartic is the exact inverse ambient dimension&quot;: 8.326672684688674e-16,
+    &quot;ground source retains its exact selected-shell coefficient&quot;: 7.771561172376096e-16,
+    &quot;ground signed source generates the first opposite Dirac shell&quot;: 1.4432899320127035e-15,
+    &quot;ground signed source has an exact nonzero omitted fraction&quot;: 6.661338147750939e-16,
+    &quot;independent signed-source quadrature refinement&quot;: 2.4023380867115515e-10
+  },
+  &quot;condition_count&quot;: 24,
+  &quot;evaluation_count&quot;: 796,
+  &quot;polarization&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;physical_graded_spinor_rank&quot;: 2,
+      &quot;explicit_zero_scalar_current_polarization&quot;: false,
+      &quot;universal_unit_scalar_vector_length_proved&quot;: true,
+      &quot;odd_depth_graded_doubling&quot;: false
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;physical_graded_spinor_rank&quot;: 4,
+      &quot;explicit_zero_scalar_current_polarization&quot;: true,
+      &quot;universal_unit_scalar_vector_length_proved&quot;: false,
+      &quot;odd_depth_graded_doubling&quot;: true
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;physical_graded_spinor_rank&quot;: 4,
+      &quot;explicit_zero_scalar_current_polarization&quot;: false,
+      &quot;universal_unit_scalar_vector_length_proved&quot;: true,
+      &quot;odd_depth_graded_doubling&quot;: false
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;physical_graded_spinor_rank&quot;: 8,
+      &quot;explicit_zero_scalar_current_polarization&quot;: true,
+      &quot;universal_unit_scalar_vector_length_proved&quot;: false,
+      &quot;odd_depth_graded_doubling&quot;: true
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;physical_graded_spinor_rank&quot;: 8,
+      &quot;explicit_zero_scalar_current_polarization&quot;: true,
+      &quot;universal_unit_scalar_vector_length_proved&quot;: false,
+      &quot;odd_depth_graded_doubling&quot;: false
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;physical_graded_spinor_rank&quot;: 32,
+      &quot;explicit_zero_scalar_current_polarization&quot;: true,
+      &quot;universal_unit_scalar_vector_length_proved&quot;: false,
+      &quot;odd_depth_graded_doubling&quot;: false
+    }
+  ],
+  &quot;cases&quot;: [
+    {
+      &quot;name&quot;: &quot;W&quot;,
+      &quot;depth&quot;: 2,
+      &quot;mode_index&quot;: 76,
+      &quot;cutoff&quot;: 75,
+      &quot;simplex_count&quot;: 2926,
+      &quot;scalar_quartic_coefficient&quot;: 521.4262043281046,
+      &quot;scalar_quartic_per_count&quot;: 0.17820444440468375,
+      &quot;directional_quartic_coefficient&quot;: 394.3276739954514,
+      &quot;directional_quartic_per_count&quot;: 0.13476680587677764,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 394.3276739954514,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 521.4262043281046,
+      &quot;source_squared_norm&quot;: 1147553.9704346207,
+      &quot;selected_positive_fraction&quot;: 0.24038607283116561,
+      &quot;omitted_positive_fraction&quot;: 0.07489924428571505,
+      &quot;negative_Dirac_fraction&quot;: 0.6847146827921142,
+      &quot;total_omitted_fraction&quot;: 0.7596139271688344,
+      &quot;along_trial_source_fraction&quot;: 0.2369259255467012
+    },
+    {
+      &quot;name&quot;: &quot;Z&quot;,
+      &quot;depth&quot;: 2,
+      &quot;mode_index&quot;: 81,
+      &quot;cutoff&quot;: 80,
+      &quot;simplex_count&quot;: 3321,
+      &quot;scalar_quartic_coefficient&quot;: 591.8068185062514,
+      &quot;scalar_quartic_per_count&quot;: 0.178201390697456,
+      &quot;directional_quartic_coefficient&quot;: 447.54752340926393,
+      &quot;directional_quartic_per_count&quot;: 0.13476287967758624,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 447.54752340926393,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 591.8068185062514,
+      &quot;source_squared_norm&quot;: 1478276.401714285,
+      &quot;selected_positive_fraction&quot;: 0.24038168911705704,
+      &quot;omitted_positive_fraction&quot;: 0.07490182542109187,
+      &quot;negative_Dirac_fraction&quot;: 0.6847164856165501,
+      &quot;total_omitted_fraction&quot;: 0.759618310882943,
+      &quot;along_trial_source_fraction&quot;: 0.23692139712461105
+    },
+    {
+      &quot;name&quot;: &quot;Higgs&quot;,
+      &quot;depth&quot;: 2,
+      &quot;mode_index&quot;: 95,
+      &quot;cutoff&quot;: 94,
+      &quot;simplex_count&quot;: 4560,
+      &quot;scalar_quartic_coefficient&quot;: 812.5703204433522,
+      &quot;scalar_quartic_per_count&quot;: 0.17819524571126144,
+      &quot;directional_quartic_coefficient&quot;: 614.4827009439528,
+      &quot;directional_quartic_per_count&quot;: 0.1347549782771826,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 614.4827009439528,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 812.5703204433522,
+      &quot;source_squared_norm&quot;: 2786983.0560037196,
+      &quot;selected_positive_fraction&quot;: 0.2403728682185584,
+      &quot;omitted_positive_fraction&quot;: 0.07490701834097394,
+      &quot;negative_Dirac_fraction&quot;: 0.6847201134561582,
+      &quot;total_omitted_fraction&quot;: 0.7596271317814416,
+      &quot;along_trial_source_fraction&quot;: 0.23691228557814772
+    },
+    {
+      &quot;name&quot;: &quot;down&quot;,
+      &quot;depth&quot;: 3,
+      &quot;mode_index&quot;: 1,
+      &quot;cutoff&quot;: 0,
+      &quot;simplex_count&quot;: 1,
+      &quot;scalar_quartic_coefficient&quot;: 0.25000000000000017,
+      &quot;scalar_quartic_per_count&quot;: 0.25000000000000017,
+      &quot;directional_quartic_coefficient&quot;: 0.24999999999999997,
+      &quot;directional_quartic_per_count&quot;: 0.24999999999999997,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 0.0,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 0.25000000000000017,
+      &quot;source_squared_norm&quot;: 0.25000000000000017,
+      &quot;selected_positive_fraction&quot;: 0.25000000000000006,
+      &quot;omitted_positive_fraction&quot;: 1.849431976486126e-30,
+      &quot;negative_Dirac_fraction&quot;: 0.7500000000000006,
+      &quot;total_omitted_fraction&quot;: 0.75,
+      &quot;along_trial_source_fraction&quot;: 0.25000000000000017
+    },
+    {
+      &quot;name&quot;: &quot;strange&quot;,
+      &quot;depth&quot;: 3,
+      &quot;mode_index&quot;: 4,
+      &quot;cutoff&quot;: 3,
+      &quot;simplex_count&quot;: 20,
+      &quot;scalar_quartic_coefficient&quot;: 2.3425000000001353,
+      &quot;scalar_quartic_per_count&quot;: 0.11712500000000677,
+      &quot;directional_quartic_coefficient&quot;: 1.5366666666666815,
+      &quot;directional_quartic_per_count&quot;: 0.07683333333333407,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 0.0,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 2.3425000000001353,
+      &quot;source_squared_norm&quot;: 32.031250000002494,
+      &quot;selected_positive_fraction&quot;: 0.1744978211382177,
+      &quot;omitted_positive_fraction&quot;: 0.07914633442439843,
+      &quot;negative_Dirac_fraction&quot;: 0.7463558444374621,
+      &quot;total_omitted_fraction&quot;: 0.8255021788617822,
+      &quot;along_trial_source_fraction&quot;: 0.17131102439025034
+    },
+    {
+      &quot;name&quot;: &quot;up&quot;,
+      &quot;depth&quot;: 4,
+      &quot;mode_index&quot;: 3,
+      &quot;cutoff&quot;: 2,
+      &quot;simplex_count&quot;: 15,
+      &quot;scalar_quartic_coefficient&quot;: 1.2884913604913755,
+      &quot;scalar_quartic_per_count&quot;: 0.08589942403275837,
+      &quot;directional_quartic_coefficient&quot;: 0.7849853849853878,
+      &quot;directional_quartic_per_count&quot;: 0.05233235899902586,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 0.7849853849853878,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 1.2884913604913755,
+      &quot;source_squared_norm&quot;: 11.99428869053987,
+      &quot;selected_positive_fraction&quot;: 0.1406798886863718,
+      &quot;omitted_positive_fraction&quot;: 0.07469661107315911,
+      &quot;negative_Dirac_fraction&quot;: 0.784623500240486,
+      &quot;total_omitted_fraction&quot;: 0.8593201113136282,
+      &quot;along_trial_source_fraction&quot;: 0.13841671056078178
+    },
+    {
+      &quot;name&quot;: &quot;charm&quot;,
+      &quot;depth&quot;: 4,
+      &quot;mode_index&quot;: 20,
+      &quot;cutoff&quot;: 19,
+      &quot;simplex_count&quot;: 8855,
+      &quot;scalar_quartic_coefficient&quot;: 634.288374197231,
+      &quot;scalar_quartic_per_count&quot;: 0.0716305335061808,
+      &quot;directional_quartic_coefficient&quot;: 329.36462133324983,
+      &quot;directional_quartic_per_count&quot;: 0.03719532708450026,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 329.36462133324983,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 634.288374197231,
+      &quot;source_squared_norm&quot;: 3419605.7291122475,
+      &quot;selected_positive_fraction&quot;: 0.12150623581948829,
+      &quot;omitted_positive_fraction&quot;: 0.0974233287334589,
+      &quot;negative_Dirac_fraction&quot;: 0.7810704354463363,
+      &quot;total_omitted_fraction&quot;: 0.8784937641805117,
+      &quot;along_trial_source_fraction&quot;: 0.117651499474535
+    },
+    {
+      &quot;name&quot;: &quot;top&quot;,
+      &quot;depth&quot;: 4,
+      &quot;mode_index&quot;: 72,
+      &quot;cutoff&quot;: 71,
+      &quot;simplex_count&quot;: 1215450,
+      &quot;scalar_quartic_coefficient&quot;: 86580.7321871327,
+      &quot;scalar_quartic_per_count&quot;: 0.07123347911237213,
+      &quot;directional_quartic_coefficient&quot;: 44670.53042876139,
+      &quot;directional_quartic_per_count&quot;: 0.03675225671871438,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 44670.53042876139,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 86580.7321871327,
+      &quot;source_squared_norm&quot;: 63966787711.04443,
+      &quot;selected_positive_fraction&quot;: 0.12105279612323146,
+      &quot;omitted_positive_fraction&quot;: 0.09808971334919289,
+      &quot;negative_Dirac_fraction&quot;: 0.7808574904685229,
+      &quot;total_omitted_fraction&quot;: 0.8789472038767685,
+      &quot;along_trial_source_fraction&quot;: 0.1171893017345579
+    },
+    {
+      &quot;name&quot;: &quot;nu1&quot;,
+      &quot;depth&quot;: 5,
+      &quot;mode_index&quot;: 10,
+      &quot;cutoff&quot;: 9,
+      &quot;simplex_count&quot;: 2002,
+      &quot;scalar_quartic_coefficient&quot;: 100.44044720679588,
+      &quot;scalar_quartic_per_count&quot;: 0.05017005354984809,
+      &quot;directional_quartic_coefficient&quot;: 46.2695259369316,
+      &quot;directional_quartic_per_count&quot;: 0.02311165131714865,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 0.0,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 100.44044720679588,
+      &quot;source_squared_norm&quot;: 108318.17410308836,
+      &quot;selected_positive_fraction&quot;: 0.09675095365450628,
+      &quot;omitted_positive_fraction&quot;: 0.1005036606127022,
+      &quot;negative_Dirac_fraction&quot;: 0.8027453857326482,
+      &quot;total_omitted_fraction&quot;: 0.9032490463454937,
+      &quot;along_trial_source_fraction&quot;: 0.09313564892166618
+    },
+    {
+      &quot;name&quot;: &quot;nu2&quot;,
+      &quot;depth&quot;: 5,
+      &quot;mode_index&quot;: 15,
+      &quot;cutoff&quot;: 14,
+      &quot;simplex_count&quot;: 11628,
+      &quot;scalar_quartic_coefficient&quot;: 573.2100031952074,
+      &quot;scalar_quartic_per_count&quot;: 0.04929566590946056,
+      &quot;directional_quartic_coefficient&quot;: 259.09390566628196,
+      &quot;directional_quartic_per_count&quot;: 0.022281897632119192,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 0.0,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 573.2100031952074,
+      &quot;source_squared_norm&quot;: 3566774.887529683,
+      &quot;selected_positive_fraction&quot;: 0.09576781517134478,
+      &quot;omitted_positive_fraction&quot;: 0.10243090089765806,
+      &quot;negative_Dirac_fraction&quot;: 0.8018012839310015,
+      &quot;total_omitted_fraction&quot;: 0.9042321848286552,
+      &quot;along_trial_source_fraction&quot;: 0.09211955285202038
+    },
+    {
+      &quot;name&quot;: &quot;nu3&quot;,
+      &quot;depth&quot;: 5,
+      &quot;mode_index&quot;: 22,
+      &quot;cutoff&quot;: 21,
+      &quot;simplex_count&quot;: 65780,
+      &quot;scalar_quartic_coefficient&quot;: 3215.7414198208958,
+      &quot;scalar_quartic_per_count&quot;: 0.04888630920980383,
+      &quot;directional_quartic_coefficient&quot;: 1440.0788667765933,
+      &quot;directional_quartic_per_count&quot;: 0.021892351273587615,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 0.0,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 3215.7414198208958,
+      &quot;source_squared_norm&quot;: 112810343.20925453,
+      &quot;selected_positive_fraction&quot;: 0.09532323701669734,
+      &quot;omitted_positive_fraction&quot;: 0.10334646267444188,
+      &quot;negative_Dirac_fraction&quot;: 0.8013303003094837,
+      &quot;total_omitted_fraction&quot;: 0.9046767629833027,
+      &quot;along_trial_source_fraction&quot;: 0.09166706336465942
+    },
+    {
+      &quot;name&quot;: &quot;electron&quot;,
+      &quot;depth&quot;: 6,
+      &quot;mode_index&quot;: 13,
+      &quot;cutoff&quot;: 12,
+      &quot;simplex_count&quot;: 18564,
+      &quot;scalar_quartic_coefficient&quot;: 648.9141254994672,
+      &quot;scalar_quartic_per_count&quot;: 0.034955512039402455,
+      &quot;directional_quartic_coefficient&quot;: 260.8998643644563,
+      &quot;directional_quartic_per_count&quot;: 0.014054075865355327,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 0.0,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 648.9141254994672,
+      &quot;source_squared_norm&quot;: 5621155.81238431,
+      &quot;selected_positive_fraction&quot;: 0.07829409327339734,
+      &quot;omitted_positive_fraction&quot;: 0.1056986523392029,
+      &quot;negative_Dirac_fraction&quot;: 0.8160072543874225,
+      &quot;total_omitted_fraction&quot;: 0.9217059067266027,
+      &quot;along_trial_source_fraction&quot;: 0.07491155846365445
+    },
+    {
+      &quot;name&quot;: &quot;muon&quot;,
+      &quot;depth&quot;: 6,
+      &quot;mode_index&quot;: 35,
+      &quot;cutoff&quot;: 34,
+      &quot;simplex_count&quot;: 3838380,
+      &quot;scalar_quartic_coefficient&quot;: 130640.45973561578,
+      &quot;scalar_quartic_per_count&quot;: 0.03403531170327476,
+      &quot;directional_quartic_coefficient&quot;: 51080.98090097648,
+      &quot;directional_quartic_per_count&quot;: 0.013307953068996941,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 0.0,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 130640.45973561578,
+      &quot;source_squared_norm&quot;: 230941524831.25006,
+      &quot;selected_positive_fraction&quot;: 0.07729211014955026,
+      &quot;omitted_positive_fraction&quot;: 0.10837203188822604,
+      &quot;negative_Dirac_fraction&quot;: 0.8143358579637149,
+      &quot;total_omitted_fraction&quot;: 0.9227078898504497,
+      &quot;along_trial_source_fraction&quot;: 0.07390152001639343
+    },
+    {
+      &quot;name&quot;: &quot;tau&quot;,
+      &quot;depth&quot;: 10,
+      &quot;mode_index&quot;: 23,
+      &quot;cutoff&quot;: 22,
+      &quot;simplex_count&quot;: 64512240,
+      &quot;scalar_quartic_coefficient&quot;: 614877.0539924765,
+      &quot;scalar_quartic_per_count&quot;: 0.009531168875743217,
+      &quot;directional_quartic_coefficient&quot;: 164101.12013878144,
+      &quot;directional_quartic_per_count&quot;: 0.0025437206976347657,
+      &quot;minimum_scalar_quartic_over_pure_polarizations&quot;: 0.0,
+      &quot;maximum_scalar_quartic_over_pure_polarizations&quot;: 614877.0539924765,
+      &quot;source_squared_norm&quot;: 9828511111344.68,
+      &quot;selected_positive_fraction&quot;: 0.04084236572665584,
+      &quot;omitted_positive_fraction&quot;: 0.11759541183361594,
+      &quot;negative_Dirac_fraction&quot;: 0.8415622224400221,
+      &quot;total_omitted_fraction&quot;: 0.9591576342733441,
+      &quot;along_trial_source_fraction&quot;: 0.03846704625383906
+    }
+  ],
+  &quot;family_ratios&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;low&quot;: &quot;W&quot;,
+      &quot;high&quot;: &quot;Higgs&quot;,
+      &quot;relative_scalar_quartic_ratio_drift_from_count&quot;: -5.16187654748812e-05
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;low&quot;: &quot;down&quot;,
+      &quot;high&quot;: &quot;strange&quot;,
+      &quot;relative_scalar_quartic_ratio_drift_from_count&quot;: -0.5314999999999732
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;low&quot;: &quot;up&quot;,
+      &quot;high&quot;: &quot;top&quot;,
+      &quot;relative_scalar_quartic_ratio_drift_from_count&quot;: -0.17073391452302722
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;low&quot;: &quot;nu1&quot;,
+      &quot;high&quot;: &quot;nu3&quot;,
+      &quot;relative_scalar_quartic_ratio_drift_from_count&quot;: -0.025587860670085893
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;low&quot;: &quot;electron&quot;,
+      &quot;high&quot;: &quot;muon&quot;,
+      &quot;relative_scalar_quartic_ratio_drift_from_count&quot;: -0.026324899348933117
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

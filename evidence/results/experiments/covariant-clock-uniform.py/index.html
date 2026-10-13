@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>covariant-clock-uniform.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-uniform.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="covariant-clock-uniform.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-uniform.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="covariant-clock-uniform.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>covariant-clock-uniform.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/covariant-clock-uniform.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Seek exact all-harmonic certificates at one common small clock load.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import argparse
+import json
+
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;angular&#39;, ROOT/&#39;covariant-clock-angular.py&#39;)
+angular = module_from_spec(spec)
+spec.loader.exec_module(angular)
+L, Z = angular.L, angular.Z
+T = sp.Symbol(&#39;t&#39;)
+LOAD = sp.Rational(1, 100)
+
+
+def certificate(expression):
+    numerator, denominator = map(sp.expand, sp.fraction(sp.cancel(expression)))
+    num = sp.Poly(numerator.subs(L, T+2), T)
+    den = sp.Poly(denominator.subs(L, T+2), T)
+    passed = all(a &gt;= 0 for a in num.all_coeffs()) and num.TC() &gt; 0 and all(a &gt;= 0 for a in den.all_coeffs()) and den.TC() &gt; 0
+    roots = None
+    exact_positive = bool(passed)
+    if not passed:
+        roots = [int(num.count_roots(0, sp.oo)), int(den.count_roots(0, sp.oo))]
+        exact_positive = roots == [0, 0] and num.TC() &gt; 0 and den.TC() &gt; 0
+    return dict(positive_coefficients=bool(passed), certified_positive=bool(exact_positive),
+                shifted_nonnegative_sturm_roots=roots, expression=str(sp.factor(expression)),
+                numerator_coefficients=list(map(str, num.all_coeffs())),
+                denominator_coefficients=list(map(str, den.all_coeffs())))
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&#39;--depths&#39;, type=int, nargs=&#39;+&#39;, default=[2, 3, 4, 5, 6, 10])
+    args = parser.parse_args()
+    cases = []
+    for depth in args.depths:
+        for family in ([&#39;scalar&#39;] if depth == 2 else [&#39;scalar&#39;, &#39;coexact-vector&#39;]):
+            print(json.dumps(dict(depth=depth, family=family, status=&#39;calculating&#39;)), flush=True)
+            real, imaginary = angular.form_blocks(depth, L, family, LOAD)
+            # A constant field-block similarity keeps every entry rational
+            # before the exact characteristic polynomial is calculated.
+            scale = sp.sqrt(LOAD/5)
+            for block in [real, imaginary]:
+                block[:4, 4:] = (block[:4, 4:]/scale).applyfunc(sp.simplify)
+                block[4:, :4] = (scale*block[4:, :4]).applyfunc(sp.simplify)
+            expression = sp.factor((imaginary*real).charpoly(Z).as_expr())
+            factors = sp.factor_list(expression, Z)[1]
+            coupled = max((sp.Poly(f, Z).monic() for f, m in factors), key=lambda p: p.degree())
+            n = coupled.degree()
+            coefficients = coupled.all_coeffs()
+            sums = [sp.Integer(n)]
+            for k in range(1, 2*n-1):
+                if k &lt;= n:
+                    value = -sum(coefficients[j]*sums[k-j] for j in range(1, k))-k*coefficients[k]
+                else:
+                    value = -sum(coefficients[j]*sums[k-j] for j in range(1, n+1))
+                sums.append(sp.cancel(value))
+            hermite = sp.Matrix(n, n, lambda i, j: sums[i+j])
+            minors = []
+            for order in range(1, n+1):
+                domain_matrix = hermite[:order, :order].to_DM()
+                determinant = domain_matrix.domain.to_sympy(domain_matrix.det())
+                proof = certificate(determinant)
+                minors.append(proof)
+                print(json.dumps(dict(depth=depth, family=family, minor=order,
+                                      positive_certificate=proof[&#39;certified_positive&#39;])), flush=True)
+            elementary = [certificate((-1)**j*a) for j, a in enumerate(coefficients[1:], 1)]
+            companion = sp.zeros(n)
+            for j in range(n-1):
+                companion[j+1, j] = 1
+            for j in range(n):
+                companion[j, n-1] = -coefficients[n-j]
+            assert (hermite*companion-companion.T*hermite).applyfunc(sp.cancel) == sp.zeros(n)
+            first = sp.Poly(expression.subs(L, 1), Z)
+            zero = 0
+            while first.eval(0) == 0:
+                first = sp.Poly(sp.cancel(first.as_expr()/Z), Z)
+                zero += 1
+            exact_first = int(first.count_roots(0, sp.oo))
+            passed = all(p[&#39;certified_positive&#39;] for p in minors+elementary) and exact_first == first.degree()
+            cases.append(dict(depth=depth, family=family, c_exact=&#39;3/5&#39;, load_exact=str(LOAD),
+                              polynomial=str(expression), coupled_degree=n,
+                              hermite_leading_minor_certificates=minors,
+                              elementary_symmetric_certificates=elementary,
+                              first_harmonic_zero_multiplicity=zero,
+                              first_harmonic_nonzero_real_nonnegative_roots=exact_first,
+                              certified_all_harmonics=bool(passed)))
+            print(json.dumps(dict(depth=depth, family=family, certified_all_harmonics=bool(passed))), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output = ROOT/(&#39;covariant-clock-uniform-results-&#39;+stamp+&#39;.json&#39;)
+    report = dict(experiment_key=&#39;covariant-clock-all-harmonic-small-load&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                           for p in [Path(__file__), ROOT/&#39;covariant-clock-angular.py&#39;, ROOT/&#39;covariant-clock-ground.py&#39;]},
+                  cases=cases, limits=[&#39;ground-shell controls with an explicit physically uncalibrated density ratio&#39;,
+                                      &#39;failure of a positive coefficient certificate is not instability&#39;,
+                                      &#39;zero-frequency Jordan blocks are not bounded by a real-root certificate&#39;,
+                                      &#39;no assigned excited-state or nonlinear persistence claim&#39;])
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output))), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>positive-count-contact.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/positive-count-contact.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="positive-count-contact.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/positive-count-contact.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="positive-count-contact.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>positive-count-contact.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/positive-count-contact.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Fully varied smooth count source and pair energy of its positive wave action.&quot;&quot;&quot;
+from bisect import bisect_right
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import mpmath as mp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;wave&#39;, ROOT/&#39;positive-count-wave.py&#39;)
+wave = module_from_spec(spec)
+spec.loader.exec_module(wave)
+COUNTS, ERRORS = {}, {}
+
+
+def check(condition, label):
+    if not bool(condition):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def close(actual, expected, label, tolerance=mp.mpf(&#39;1e-55&#39;)):
+    error = abs(actual-expected)/max(1, abs(expected))
+    ERRORS[label] = max(ERRORS.get(label, mp.mpf(0)), error)
+    check(error&lt;tolerance, label)
+
+
+def real_inner(one, two):
+    return mp.re(sum(mp.conj(a)*b for a,b in zip(one,two)))
+
+
+def norm2(value):
+    return real_inner(value,value)
+
+
+def smooth_data(candidates):
+    lines = sorted(candidates, key=lambda c:c[&#39;m&#39;])
+    boundaries = [(a[&#39;eta&#39;]-b[&#39;eta&#39;])/(b[&#39;m&#39;]-a[&#39;m&#39;]) for a,b in zip(lines,lines[1:])]
+    margins = []
+    for i,line in enumerate(lines):
+        margins.extend([line[&#39;x&#39;]-boundaries[i-1]] if i else [])
+        margins.extend([boundaries[i]-line[&#39;x&#39;]] if i&lt;len(boundaries) else [])
+    sigma = min(margins)/4
+    check(sigma&gt;0, &#39;all eligible count states determine one common smoothing width&#39;)
+    check(all(b-a&gt;8*sigma for a,b in zip(boundaries,boundaries[1:])),
+          &#39;the complete smoothing bands are disjoint&#39;)
+    def evaluate(x):
+        index = bisect_right(boundaries,x)
+        nearby = index if index&lt;len(boundaries) and boundaries[index]-x&lt;sigma else index-1
+        if 0&lt;=nearby&lt;len(boundaries) and abs(x-boundaries[nearby])&lt;sigma:
+            u = (x-boundaries[nearby])/sigma
+            cdf = mp.mpf(1)/2+mp.mpf(15)/16*(u-2*u**3/3+u**5/5)
+            moment = mp.mpf(15)/16*(u*u/2-u**4/2+u**6/6-mp.mpf(1)/6)
+            hinge = sigma*(u*cdf-moment)
+            jump = lines[nearby+1][&#39;m&#39;]-lines[nearby][&#39;m&#39;]
+            f = lines[nearby][&#39;m&#39;]*x+lines[nearby][&#39;eta&#39;]+jump*hinge
+            first = lines[nearby][&#39;m&#39;]+jump*cdf
+            second = jump*mp.mpf(15)/16*(1-u*u)**2/sigma
+            return f,first,second
+        line = lines[index]
+        return line[&#39;m&#39;]*x+line[&#39;eta&#39;],line[&#39;m&#39;],mp.mpf(0)
+    return lines,boundaries,sigma,evaluate
+
+
+def full_variation(depth, boundaries, sigma, evaluate):
+    # A finite Hermitian carrier checks the full real source algebra, not
+    # the actual spatial Dirac domain, which is treated analytically.
+    beta = mp.matrix([[1,0],[0,-1]])
+    h0 = mp.matrix([[mp.mpf(&#39;.7&#39;),mp.mpc(&#39;.2&#39;,&#39;.3&#39;)],
+                    [mp.mpc(&#39;.2&#39;,&#39;-.3&#39;),mp.mpf(&#39;-.4&#39;)]])
+    def unpack(values):
+        return mp.matrix([mp.mpc(values[0],values[1]),mp.mpc(values[2],values[3])])
+    def source(values):
+        phi = unpack(values)
+        rho = norm2(phi)
+        scalar = real_inner(phi,beta*phi)
+        x = scalar/rho
+        f,m,curvature = evaluate(x)
+        eta = f-x*m
+        return (h0+m*beta+eta*mp.eye(2))*phi
+    def generating(values):
+        phi = unpack(values)
+        rho = norm2(phi)
+        x = real_inner(phi,beta*phi)/rho
+        return real_inner(phi,h0*phi)+rho*evaluate(x)[0]
+    def squared(values):
+        return norm2(source(values))
+    boundary = boundaries[len(boundaries)//2]
+    for fraction in [mp.mpf(&#39;-.6&#39;),mp.mpf(&#39;0&#39;),mp.mpf(&#39;.5&#39;)]:
+        x = boundary+fraction*sigma
+        phi = mp.matrix([mp.sqrt((1+x)/2)*mp.exp(mp.j*mp.mpf(&#39;.3&#39;)),
+                         mp.sqrt((1-x)/2)*mp.exp(-mp.j*mp.mpf(&#39;.7&#39;))])
+        values = [mp.re(phi[0]),mp.im(phi[0]),mp.re(phi[1]),mp.im(phi[1])]
+        f,m,curvature = evaluate(x)
+        eta = f-x*m
+        vec = (beta-x*mp.eye(2))*phi
+        base = h0+m*beta+eta*mp.eye(2)
+        def derivative(u):
+            return base*u+2*curvature/norm2(phi)*vec*real_inner(vec,u)
+        ff = source(values)
+        for i in range(4):
+            direction = mp.matrix([0,0])
+            direction[i//2] = 1 if i%2==0 else mp.j
+            def changed(t):
+                updated = values.copy(); updated[i]+=t
+                return updated
+            first = mp.diff(lambda t:generating(changed(t)),0)
+            close(first,2*real_inner(ff,direction),
+                  &#39;independent real differentiation retains the complete complex count gradient&#39;)
+            numeric = mp.matrix([mp.diff(lambda t:source(changed(t))[j],0) for j in range(2)])
+            close(mp.norm(numeric-derivative(direction)),0,
+                  &#39;independent source differentiation verifies the full real Hessian&#39;,mp.mpf(&#39;1e-45&#39;))
+            gradient = mp.diff(lambda t:squared(changed(t)),0)
+            close(gradient,2*real_inner(derivative(ff),direction),
+                  &#39;variation of the actual positive square equals twice the full adjoint source&#39;,mp.mpf(&#39;1e-45&#39;))
+        uu=mp.matrix([mp.mpc(&#39;.13&#39;,&#39;.21&#39;),mp.mpc(&#39;-.17&#39;,&#39;.04&#39;)])
+        vv=mp.matrix([mp.mpc(&#39;.09&#39;,&#39;-.11&#39;),mp.mpc(&#39;.07&#39;,&#39;.19&#39;)])
+        close(real_inner(uu,derivative(vv)),real_inner(derivative(uu),vv),
+              &#39;the complete current-ratio Hessian is real self-adjoint&#39;)
+        close(mp.norm(derivative(phi)-ff),0,
+              &#39;the full smoothed source retains the Euler homogeneity identity&#39;)
+
+
+def row_delta(own,mass,eta):
+    dm,de = mass-own[&#39;m&#39;],eta-own[&#39;eta&#39;]
+    gap = -dm*own[&#39;x&#39;]-de
+    mismatch = dm*dm+de*de+2*dm*de*own[&#39;x&#39;]
+    return mismatch-2*own[&#39;omega&#39;]*gap
+
+
+def aligned_pair(depth, levels, candidates, data, normalization):
+    lines,boundaries,sigma,evaluate = data
+    one,two = [next(c for c in candidates if c[&#39;level&#39;]==level) for level in levels]
+    power = levels[1]-levels[0]
+    bb = mp.mpf(depth-1)/2
+    norms = [mp.mpf(1),mp.mpf(1)] if normalization==&#39;unit-norm&#39; else [1/(2*c[&#39;omega&#39;]) for c in [one,two]]
+    coefficients = [norm*mp.rf(mp.mpf(depth+1)/2,level)/mp.factorial(level)
+                    for norm,level in zip(norms,levels)]
+    ratio_coefficient = coefficients[1]/coefficients[0]
+    def x_at(t):
+        ratio=ratio_coefficient*t**power
+        return (one[&#39;x&#39;]+ratio*two[&#39;x&#39;])/(1+ratio)
+    def t_at(x):
+        ratio=(one[&#39;x&#39;]-x)/(x-two[&#39;x&#39;])
+        return (ratio/ratio_coefficient)**(mp.mpf(1)/power)
+    points = [mp.mpf(0),mp.mpf(1)]
+    for boundary in boundaries:
+        if x_at(1)&lt;boundary&lt;one[&#39;x&#39;]:
+            points.append(t_at(boundary))
+    points.sort()
+    unsmoothed = mp.mpf(0)
+    for low,high in zip(points,points[1:]):
+        x = x_at((low+high)/2)
+        winner = max(candidates,key=lambda c:c[&#39;m&#39;]*x+c[&#39;eta&#39;])
+        for own,level,norm in zip([one,two],levels,norms):
+            fraction = mp.betainc(level+1,bb,low,high,regularized=True)
+            unsmoothed += norm*row_delta(own,winner[&#39;m&#39;],winner[&#39;eta&#39;])*fraction
+    correction = mp.mpf(0)
+    for boundary in boundaries:
+        low=max(boundary-sigma,x_at(1)); high=min(boundary+sigma,one[&#39;x&#39;])
+        if low&gt;=high:
+            continue
+        def integrand(u):
+            x=boundary+sigma*u
+            t=t_at(x)
+            f,mass,curvature=evaluate(x)
+            eta=f-x*mass
+            winner=lines[bisect_right(boundaries,x)]
+            rho=[coefficient*t**level for coefficient,level in zip(coefficients,levels)]
+            change=sum(density*(row_delta(own,mass,eta)-row_delta(own,winner[&#39;m&#39;],winner[&#39;eta&#39;]))
+                       for own,density in zip([one,two],rho))
+            jacobian=sigma*t*(one[&#39;x&#39;]-two[&#39;x&#39;])/(power*(one[&#39;x&#39;]-x)*(x-two[&#39;x&#39;]))
+            return change*bb*(1-t)**(bb-1)*jacobian
+        u0,u1=(low-boundary)/sigma,(high-boundary)/sigma
+        splits=[u0]+([mp.mpf(0)] if u0&lt;0&lt;u1 else [])+[u1]
+        correction += mp.quad(integrand,splits)
+    delta = unsmoothed+correction
+    isolated = sum(2*c[&#39;omega&#39;]**2*norm for c,norm in zip([one,two],norms))
+    complete = isolated+delta
+    check(complete&gt;0,&#39;the recalculated smooth pair has positive complete wave energy&#39;)
+    # Independently check the source-mismatch formula on all traversed charts.
+    for selected in candidates:
+        if levels[0]&lt;=selected[&#39;level&#39;]&lt;=levels[1]:
+            for own in [one,two]:
+                a,b=mp.sqrt((1+own[&#39;c&#39;])/2),mp.sqrt((1-own[&#39;c&#39;])/2)
+                uu=own[&#39;h&#39;]*a+selected[&#39;m&#39;]*b+selected[&#39;eta&#39;]*a
+                vv=-own[&#39;h&#39;]*b+selected[&#39;m&#39;]*a+selected[&#39;eta&#39;]*b
+                direct=uu*uu+vv*vv-own[&#39;omega&#39;]**2
+                close(direct,row_delta(own,selected[&#39;m&#39;],selected[&#39;eta&#39;]),
+                      &#39;independent full two-component source norm verifies the changed pair energy&#39;)
+    return dict(depth=depth,shell_levels=levels,normalization=normalization,
+        norms=[str(n) for n in norms], isolated_complete_energy=str(isolated),
+        unsmoothed_contact_energy_difference=str(unsmoothed), smoothing_correction=str(correction),
+        smooth_contact_energy_difference=str(delta), complete_energy=str(complete),
+        contact_over_isolated_energy=str(delta/isolated),
+        aligned_contact_sign=&#39;positive&#39; if delta&gt;0 else &#39;negative&#39; if delta&lt;0 else &#39;zero&#39;,
+        second_is_unassigned_adjacent_shell_control=depth==10,
+        classification=&#39;actual smooth positive-action aligned pair preparation; no radial force inferred&#39;)
+
+
+def main():
+    mp.mp.dps=100
+    levels={2:(75,80),3:(0,3),4:(2,19),5:(9,14),6:(12,34),10:(22,23)}
+    cases=[]
+    for depth in wave.envelope.forward.radial.DEPTHS:
+        epsilon,candidates,_=wave.envelope.depth_carrier(depth)
+        data=smooth_data(candidates)
+        full_variation(depth,data[1],data[2],data[3])
+        for normalization in [&#39;unit-norm&#39;,&#39;equal-phase-action&#39;]:
+            case=aligned_pair(depth,levels[depth],candidates,data,normalization)
+            cases.append(case)
+            print(json.dumps(dict(depth=depth,normalization=normalization,
+                relative_contact=case[&#39;contact_over_isolated_energy&#39;])),flush=True)
+        for own in candidates:
+            if own[&#39;level&#39;] in [n-1 for _,d,n in wave.envelope.forward.radial.ASSIGNMENTS if d==depth]:
+                f,m,curvature=data[3](own[&#39;x&#39;])
+                close(row_delta(own,m,f-own[&#39;x&#39;]*m),0,
+                      &#39;all maintained same-branch orthogonal-column pairs retain exactly zero contact&#39;)
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    names=[&#39;positive-count-contact.py&#39;,&#39;positive-count-wave.py&#39;,&#39;convex-count-envelope.py&#39;,
+           &#39;forward-count-action.py&#39;,&#39;inverse-current-radial.py&#39;,&#39;excited-shell-orientation-current.py&#39;]
+    report=dict(experiment_key=&#39;positive-count-full-variation-and-beam-contact&#39;,
+        created_utc=datetime.now(timezone.utc).isoformat(),
+        sources={&#39;experiments/&#39;+name:sha256((ROOT/name).read_bytes()).hexdigest() for name in names},
+        evaluations=sum(COUNTS.values()),conditions=COUNTS,maximum_errors={k:str(v) for k,v in ERRORS.items()},cases=cases,
+        limits=[&#39;the action and its normalization differ from the first-order contact law&#39;,
+                &#39;aligned prepared energy is not a physical radial force or encounter trajectory&#39;,
+                &#39;orthogonal field columns eliminate relative-phase dependence in this preparation&#39;,
+                &#39;the depth-ten second branch is an unassigned mathematical control&#39;,
+                &#39;the source-variation check is finite algebra; the spatial domain proof remains analytical&#39;,
+                &#39;no confinement, color law or short-range repulsion is inferred from an energy difference alone&#39;])
+    path=ROOT/(&#39;positive-count-contact-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path),evaluations=report[&#39;evaluations&#39;])),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

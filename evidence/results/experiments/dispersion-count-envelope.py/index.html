@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>dispersion-count-envelope.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/dispersion-count-envelope.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="dispersion-count-envelope.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/dispersion-count-envelope.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="dispersion-count-envelope.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>dispersion-count-envelope.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/dispersion-count-envelope.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;A convex dispersion envelope and its unique local count constitutive source.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from fractions import Fraction
+from hashlib import sha256
+from math import comb
+from pathlib import Path
+import json
+import mpmath as mp
+
+ROOT = Path(__file__).resolve().parent
+ASSIGNMENTS = {2:[(&#39;W&#39;,76),(&#39;Z&#39;,81),(&#39;Higgs&#39;,95)],3:[(&#39;down&#39;,1),(&#39;strange&#39;,4)],
+               4:[(&#39;up&#39;,3),(&#39;charm&#39;,20),(&#39;top&#39;,72)],
+               5:[(&#39;nu1-comparison&#39;,10),(&#39;nu2-comparison&#39;,15),(&#39;nu3-comparison&#39;,22)],
+               6:[(&#39;electron&#39;,13),(&#39;muon&#39;,35)],10:[(&#39;tau&#39;,23)]}
+COUNTS = {}
+ERRORS = {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0) + 1
+
+
+def number(value):
+    if isinstance(value, Fraction):
+        return mp.mpf(value.numerator)/value.denominator
+    return mp.mpf(value)
+
+
+def close(actual, expected, label, tolerance=mp.mpf(&#39;1e-65&#39;)):
+    error = abs(actual-expected)/max(mp.mpf(1),abs(expected))
+    ERRORS[label] = max(ERRORS.get(label, mp.mpf(0)), error)
+    check(error &lt; tolerance, label)
+
+
+def data(depth, level, epsilon):
+    count = Fraction(comb(level+depth, depth))
+    reciprocal = [Fraction(1,level+j) for j in range(1,depth+1)]
+    first = count*sum(reciprocal)
+    second = count*(sum(reciprocal)**2-sum(v*v for v in reciprocal))
+    h = Fraction(2*level+depth,2)
+    c = epsilon*first
+    return dict(level=level,h=h,c=c,clock=epsilon*count,
+                mass2=h*h*(1-c*c)/(c*c),
+                eta=epsilon*count-h/c,
+                convex_margin=h*epsilon*second-c*(1-c*c))
+
+
+def eligible_data(depth, epsilon):
+    values = []
+    for level in range(10000):
+        value = data(depth,level,epsilon)
+        if value[&#39;c&#39;] &gt;= 1:
+            break
+        if value[&#39;convex_margin&#39;] &gt; 0:
+            values.append(value)
+    else:
+        raise AssertionError(&#39;eligible-label enumeration exceeded its diagnostic limit&#39;)
+    check(bool(values), &#39;every occupied depth has eligible dispersion curves&#39;)
+    check([v[&#39;level&#39;] for v in values] == list(range(values[0][&#39;level&#39;],values[-1][&#39;level&#39;]+1)),
+          &#39;the chosen convex count domain gives one contiguous finite label set&#39;)
+    return values
+
+
+def arc(value, chi):
+    mass2 = number(value[&#39;mass2&#39;])
+    lam = mp.sqrt(chi*chi+mass2)
+    return (lam+number(value[&#39;eta&#39;]),chi/lam,
+            mass2/lam**3,-3*mass2*chi/lam**5)
+
+
+def smooth_max(a, b, width):
+    difference = [x-y for x,y in zip(a,b)]
+    z = difference[0]
+    if z &gt;= width:
+        return a
+    if z &lt;= -width:
+        return b
+    u = z/width
+    absolute = width*(5+15*u*u-5*u**4+u**6)/16
+    first = (15*u-10*u**3+3*u**5)/8
+    second = 15*(1-u*u)**2/(8*width)
+    third = -15*u*(1-u*u)/(2*width**2)
+    d1,d2,d3 = difference[1:]
+    return ((a[0]+b[0]+absolute)/2,
+            (a[1]+b[1]+first*d1)/2,
+            (a[2]+b[2]+first*d2+second*d1*d1)/2,
+            (a[3]+b[3]+first*d3+3*second*d1*d2+third*d1**3)/2)
+
+
+def envelope(values, width, chi):
+    result = arc(values[0],chi)
+    for value in values[1:]:
+        result = smooth_max(result,arc(value,chi),width)
+    return result
+
+
+def sector(depth):
+    epsilon = Fraction(3,10)/max(
+        data(depth,n-1,Fraction(1))[&#39;c&#39;] for _,n in ASSIGNMENTS[depth])
+    values = eligible_data(depth,epsilon)
+    minimum = None
+    for own in values:
+        for other in values:
+            if own[&#39;level&#39;] == other[&#39;level&#39;]:
+                continue
+            aa = own[&#39;clock&#39;]-other[&#39;eta&#39;]
+            remainder = aa*aa-own[&#39;h&#39;]**2-other[&#39;mass2&#39;]
+            check(aa&gt;0 and remainder&gt;0,
+                  &#39;exact rational squared comparison proves the unique winner at every eligible node&#39;)
+            lower = remainder/(2*aa)
+            minimum = lower if minimum is None else min(minimum,lower)
+    width_exact = minimum/(8*len(values))
+    width = number(width_exact)
+    check(width&gt;mp.mpf(&#39;1e-60&#39;),&#39;the 100-digit evaluation resolves the exact common energy smoothing width&#39;)
+    crossings = []
+    for left,right in zip(values[:-1],values[1:]):
+        delta = right[&#39;eta&#39;]-left[&#39;eta&#39;]
+        mass_delta = left[&#39;mass2&#39;]-right[&#39;mass2&#39;]
+        check(delta&gt;0 and mass_delta&gt;delta*delta,
+              &#39;ordered adjacent dispersion curves have one positive crossing&#39;)
+        lambda_right = (mass_delta-delta*delta)/(2*delta)
+        chi2 = lambda_right**2-right[&#39;mass2&#39;]
+        check(left[&#39;h&#39;]**2 &lt; chi2 &lt; right[&#39;h&#39;]**2,
+              &#39;each exact squared crossing lies strictly between its adjacent spatial shells&#39;)
+        value_at_cross = lambda_right+right[&#39;eta&#39;]
+        chi = mp.sqrt(number(chi2))
+        smooth = envelope(values,width,chi)
+        raw = arc(left,chi)
+        close(raw[0],arc(right,chi)[0],
+              &#39;independent massive dispersion curves agree at the rational squared crossing&#39;)
+        check(smooth[2]&gt;0,
+              &#39;the actual common smoothed envelope retains strict positive label curvature in every joining band&#39;)
+        check(0&lt;smooth[1]&lt;1,
+              &#39;the joining-band response lies inside the physical grading-ratio domain&#39;)
+        crossings.append(dict(left_level=left[&#39;level&#39;],right_level=right[&#39;level&#39;],
+                              chi_squared_exact=str(chi2),energy_at_cross_exact=str(value_at_cross),
+                              left_derivative_squared_exact=str(chi2/(lambda_right+delta)**2),
+                              right_derivative_squared_exact=str(chi2/lambda_right**2),
+                              smoothed_second_derivative=str(smooth[2])))
+    lower_chi = values[0][&#39;h&#39;]-Fraction(1,2)
+    upper_chi = values[-1][&#39;h&#39;]+Fraction(1,2)
+    check(lower_chi&gt;0, &#39;the common half-spacing constitutive window stays at positive spatial label&#39;)
+    cases = []
+    for name,mode_index in ASSIGNMENTS[depth]:
+        own = next(v for v in values if v[&#39;level&#39;]==mode_index-1)
+        hh,cc = number(own[&#39;h&#39;]),number(own[&#39;c&#39;])
+        xx = mp.sqrt(1-cc*cc)
+        actual = envelope(values,width,hh)
+        close(actual[0],number(own[&#39;clock&#39;]),
+              &#39;smoothing retains each assigned count energy exactly in its open winning arc&#39;)
+        close(actual[1],cc,
+              &#39;smoothing retains each assigned geometric grading balance&#39;)
+        close(actual[2],cc*(1-cc*cc)/hh,
+              &#39;the retained massive arc has precisely zero eliminated scalar source curvature&#39;)
+        root = mp.findroot(lambda chi:envelope(values,width,chi)[1]-cc,
+                           (hh-mp.mpf(&#39;.01&#39;),hh+mp.mpf(&#39;.01&#39;)),tol=mp.mpf(&#39;1e-80&#39;))
+        close(root,hh,&#39;independent convex auxiliary elimination returns the actual spatial shell&#39;)
+        def source(x):
+            c = mp.sqrt(1-x*x)
+            chi = mp.findroot(lambda z:envelope(values,width,z)[1]-c,
+                              (hh-mp.mpf(&#39;.001&#39;),hh+mp.mpf(&#39;.001&#39;)),tol=mp.mpf(&#39;1e-85&#39;))
+            return envelope(values,width,chi)[0]-chi*c
+        expected_f = number(own[&#39;clock&#39;])-hh*cc
+        expected_slope = hh*xx/cc
+        close(source(xx),expected_f,
+              &#39;independently eliminated constitutive value retains complete source and clock&#39;)
+        close(mp.diff(source,xx),expected_slope,
+              &#39;independent scalar differentiation retains the exact source coefficient&#39;)
+        close(mp.diff(source,xx,2),mp.mpf(0),
+              &#39;independent scalar differentiation confirms the open affine source chart&#39;,mp.mpf(&#39;1e-55&#39;))
+        lam = hh/cc
+        # Exact nonzero H spectrum decides the positive-wave persistence argument.
+        target2 = own[&#39;h&#39;]**2-2*(own[&#39;h&#39;]/own[&#39;c&#39;])*own[&#39;clock&#39;]+own[&#39;clock&#39;]**2
+        if target2 &lt; Fraction(depth*depth,4):
+            candidates = [0]
+        else:
+            near = int(mp.floor(mp.sqrt(number(target2))-number(Fraction(depth,2))))
+            check(Fraction(2*near+depth,2)**2 &lt;= target2 &lt;
+                  Fraction(2*(near+1)+depth,2)**2,
+                  &#39;exact rational inequalities certify the proposed adjacent spatial shells&#39;)
+            candidates = sorted(set([max(0,near),max(0,near+1)]))
+        check(all(Fraction(2*k+depth,2)**2!=target2 for k in candidates),
+              &#39;exact rational adjacent-shell test excludes a zero of the entire spatial H spectrum&#39;)
+        cases.append(dict(particle=name,depth=depth,index=mode_index,
+                          count_clock_exact=str(own[&#39;clock&#39;]),polarization_exact=str(own[&#39;c&#39;]),
+                          source_mass_squared_exact=str(own[&#39;mass2&#39;]),source_eta_exact=str(own[&#39;eta&#39;]),
+                          eliminated_label=str(root),source_value=str(source(xx)),
+                          scalar_source_curvature=&#39;zero on an open affine chart&#39;,
+                          full_spatial_nonzero_H_spectrum=True,
+                          positive_wave_persistence=&#39;conditional nonlinear chart-local theorem applies&#39;))
+        print(json.dumps(dict(particle=name,depth=depth,frequency_preserved=True,
+                              unique_label=True,affine_source=True)),flush=True)
+    # A finite label window is substantive: an unrestricted last arc would admit extra shells.
+    higher_h = values[-1][&#39;h&#39;]+1
+    higher_energy = arc(values[-1],number(higher_h))[0]
+    higher_count = data(depth,values[-1][&#39;level&#39;]+1,epsilon)[&#39;clock&#39;]
+    aa = higher_count-values[-1][&#39;eta&#39;]
+    check(aa&gt;0 and aa*aa-higher_h*higher_h-values[-1][&#39;mass2&#39;]&gt;0,
+          &#39;exact rational comparison proves the unrestricted higher-shell clock differs from its count target&#39;)
+    check(higher_h&gt;upper_chi,
+          &#39;the first omitted integer shell is outside the explicit constitutive label window&#39;)
+    return dict(depth=depth,epsilon_exact=str(epsilon),eligible_level_range=[values[0][&#39;level&#39;],values[-1][&#39;level&#39;]],
+                number_of_curves=len(values),constitutive_chi_window_exact=[str(lower_chi),str(upper_chi)],
+                exact_node_gap_lower=str(minimum),exact_common_smooth_max_width=str(width_exact),
+                crossings=crossings,cases=cases,
+                unrestricted_last_arc_control=dict(first_extra_shell_h_exact=str(higher_h),
+                                                     extra_clock=str(higher_energy),
+                                                     target_count_clock_exact=str(higher_count),
+                                                     extra_branch_prevented_by_stated_label_window=True))
+
+
+def main():
+    mp.mp.dps = 100
+    # Check the smooth maximum&#39;s kernel-derived algebra independently.
+    import sympy as s
+    z=s.symbols(&#39;z&#39;,real=True)
+    absolute=(5+15*z*z-5*z**4+z**6)/16
+    check(s.simplify(s.diff(absolute,z,2)-s.Rational(15,8)*(1-z*z)**2)==0,
+          &#39;the compact smooth absolute has the independently derived nonnegative second derivative&#39;)
+    for boundary in (-1,1):
+        for order in range(4):
+            expected=1 if order==0 else boundary if order==1 else 0
+            check(s.diff(absolute,z,order).subs(z,boundary)==expected,
+                  &#39;the compact smoothing joins absolute value through three derivatives&#39;)
+    sectors = [sector(depth) for depth in ASSIGNMENTS]
+    report = dict(experiment_key=&#39;convex-dispersion-envelope-count-action&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+Path(__file__).name:sha256(Path(__file__).read_bytes()).hexdigest()},
+                  evaluations=sum(COUNTS.values()),conditions=COUNTS,
+                  maximum_errors={key:str(value) for key,value in ERRORS.items()},
+                  decimal_precision=100,sectors=sectors,
+                  limits=[&#39;the count tangency data and ordinary sphere remain explicit effective premises&#39;,
+                          &#39;the common smooth maximum is folded in increasing shell order&#39;,
+                          &#39;the finite constitutive label window is part of the law, not automatic from a finite envelope&#39;,
+                          &#39;the source is locally smooth on its open scalar-ratio domain; pure-grading endpoints are not included&#39;,
+                          &#39;the nonlinear persistence result uses nodeless fields and exact affine neighborhoods&#39;,
+                          &#39;proper-current and responding-clock dynamics are not replaced by preferred-time source results&#39;,
+                          &#39;the single-shell selection theorem does not classify all nonlinear mixed-shell fields&#39;,
+                          &#39;no sparse observed occupation, containing-space localization or boost inertia is derived&#39;,
+                          &#39;no new preference for depth five or the occupied sector assignments is established&#39;])
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    target=ROOT/(&#39;dispersion-count-envelope-results-&#39;+stamp+&#39;.json&#39;)
+    target.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(target),evaluations=report[&#39;evaluations&#39;],
+                          maximum_errors=report[&#39;maximum_errors&#39;])),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

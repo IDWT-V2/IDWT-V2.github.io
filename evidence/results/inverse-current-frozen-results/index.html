@@ -1,0 +1,1384 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>inverse-current-frozen-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/inverse-current-frozen-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="inverse-current-frozen-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/inverse-current-frozen-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="inverse-current-frozen-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>inverse-current-frozen-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/inverse-current-frozen-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">experiment_key</th><td>inverse-current-complete-frozen-local-symbol</td></tr><tr><th scope="row">created_utc</th><td>2026-10-11T23:14:00.359894+00:00</td></tr><tr><th scope="row">classification</th><td>complete local coefficient-frozen dispersion diagnostic, not a full spatial eigenvalue calculation</td></tr><tr><th scope="row">condition_count</th><td>13</td></tr><tr><th scope="row">evaluation_count</th><td>450</td></tr><tr><th scope="row">floating_complex_root_resolution_over_lambda</th><td>3e-7</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;experiment_key&quot;: &quot;inverse-current-complete-frozen-local-symbol&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-11T23:14:00.359894+00:00&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/inverse-current-frozen-symbol.py&quot;: &quot;a357e063e9bd378c7cab4fc77ec1f72028f6d12bfab6f2ea6631fc64334c2996&quot;,
+    &quot;experiments/inverse-current-ratio-checks.py&quot;: &quot;187311466f3614b0babad95f5b0b68adf84b05f0f0cdad3037577f196b7c9d96&quot;,
+    &quot;experiments/local-current-ratio-checks.py&quot;: &quot;f8d7e4df969ac84185848b1d9b1663dbfd876fc80461beb6228cfe4b1ba68040&quot;,
+    &quot;experiments/scalar-current-band-checks.py&quot;: &quot;a9f5e37f9cc31816aa1000fbb41893b627ed343f0f5cd56dfaeabb7f0ef347b1&quot;,
+    &quot;experiments/spatial-source-saturation-checks.py&quot;: &quot;56bd144519dbd066da32c8950845465d3b461fb12306f8d13476535cef542f2e&quot;,
+    &quot;experiments/spatial-band-curvature-checks.py&quot;: &quot;1adbe50fbe865da9b237fe8d3dd424ee43dcb951fc8f8c01a31a3e4b9330f657&quot;
+  },
+  &quot;classification&quot;: &quot;complete local coefficient-frozen dispersion diagnostic, not a full spatial eigenvalue calculation&quot;,
+  &quot;limits&quot;: [
+    &quot;actual spatial background and spin-connection derivatives are not part of the frozen symbol&quot;,
+    &quot;complex frozen frequencies do not by themselves prove a global spatial exponential eigenmode or decay&quot;,
+    &quot;the exact zero-wavevector growth is of the same scale as omitted spatial geometry and cannot be transferred to the actual sphere solution&quot;,
+    &quot;floating roots below 3e-7 in lambda units are unresolved; exact zero-wavevector formulas are reported separately&quot;,
+    &quot;the coupled matrix range is complete for this frozen symbol; its complement is self-adjoint and uncoupled&quot;
+  ],
+  &quot;condition_count&quot;: 13,
+  &quot;evaluation_count&quot;: 450,
+  &quot;floating_complex_root_resolution_over_lambda&quot;: 3e-07,
+  &quot;conditions&quot;: {
+    &quot;exact zero-wavevector squared-frequency trace retains the full current variation&quot;: 1,
+    &quot;exact zero-wavevector squared-frequency determinant has its stated negative sign&quot;: 1,
+    &quot;depth-two overlapping vector currents have their separate exact channel polynomial&quot;: 1,
+    &quot;retained real matrix range is exactly invariant under the frozen Dirac symbol&quot;: 20,
+    &quot;retained matrix range is exactly invariant under physical grading&quot;: 20,
+    &quot;every full local-current feedback source lies in the retained range&quot;: 111,
+    &quot;full current Hessian retains its Hermitian complex-linear part&quot;: 20,
+    &quot;full current Hessian retains its symmetric conjugate-linear part&quot;: 20,
+    &quot;complete frozen symbol retains the independently derived zero-wavevector current block&quot;: 20,
+    &quot;both Fourier wavevectors give the complete Hamiltonian frozen Hessian&quot;: 160,
+    &quot;exact frozen zero-wavevector current channel has a positive growth square&quot;: 14,
+    &quot;floating full frozen symbol agrees with the exact low-wavevector channel within its resolved precision&quot;: 14,
+    &quot;common physical rotation preserves the frozen growth spectrum&quot;: 48
+  },
+  &quot;maximum_errors&quot;: {
+    &quot;retained real matrix range is exactly invariant under the frozen Dirac symbol&quot;: 6.685907507982089e-16,
+    &quot;retained matrix range is exactly invariant under physical grading&quot;: 6.923749123596109e-16,
+    &quot;every full local-current feedback source lies in the retained range&quot;: 1.165104724258359e-15,
+    &quot;full current Hessian retains its Hermitian complex-linear part&quot;: 6.31651289747672e-17,
+    &quot;full current Hessian retains its symmetric conjugate-linear part&quot;: 6.463902996119502e-17,
+    &quot;complete frozen symbol retains the independently derived zero-wavevector current block&quot;: 9.463152066775577e-16,
+    &quot;both Fourier wavevectors give the complete Hamiltonian frozen Hessian&quot;: 1.3298655731920178e-16,
+    &quot;floating full frozen symbol agrees with the exact low-wavevector channel within its resolved precision&quot;: 2.941432548011578e-09,
+    &quot;common physical rotation preserves the frozen growth spectrum&quot;: 1.1858731245332393e-07
+  },
+  &quot;cases&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 4,
+      &quot;retained_complex_dimension&quot;: 4,
+      &quot;signed_shell_occupation&quot;: 1.7811544239521027e-08,
+      &quot;scalar_feedback_factor&quot;: -0.0065789473684205735,
+      &quot;vector_feedback_factor&quot;: 0.9999999999999999,
+      &quot;lambda_over_inverse_radius&quot;: 4266895614.3267975,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.7811544239521023e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.006568162179816,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.006617997275553,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.007016588966594,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.011539478976981,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.050460736372302,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4198217429148325,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 4.166601793139778,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 11.053487011746004,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 1.7811544239521023e-08,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 75.99999999999999,
+      &quot;name&quot;: &quot;W&quot;,
+      &quot;mode_index&quot;: 76,
+      &quot;spatial_shell_level&quot;: 75
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 4,
+      &quot;retained_complex_dimension&quot;: 4,
+      &quot;signed_shell_occupation&quot;: 1.8975697457790375e-08,
+      &quot;scalar_feedback_factor&quot;: -0.006172839506172423,
+      &quot;vector_feedback_factor&quot;: 0.9999999999999998,
+      &quot;lambda_over_inverse_radius&quot;: 4268617803.386503,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.897569745779037e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0061633428075303,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0062131879588843,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.006611860040944,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0111356578083504,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0500644026396606,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4194759807350947,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 4.1663351926230465,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 11.05326439807625,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 1.897569745779037e-08,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 80.99999999999999,
+      &quot;name&quot;: &quot;Z&quot;,
+      &quot;mode_index&quot;: 81,
+      &quot;spatial_shell_level&quot;: 80
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 4,
+      &quot;retained_complex_dimension&quot;: 4,
+      &quot;signed_shell_occupation&quot;: 2.223532646894455e-08,
+      &quot;scalar_feedback_factor&quot;: -0.005263157894736414,
+      &quot;vector_feedback_factor&quot;: 0.9999999999999998,
+      &quot;lambda_over_inverse_radius&quot;: 4272480556.2303667,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.2235326468944546e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0052562508514837,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0053061185495236,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0057049708841244,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0102308040122647,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0491763364006306,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4187012725105723,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 4.165737854457404,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.0,
+          &quot;maximum_frequency_over_lambda&quot;: 11.05276559502758,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 2.2235326468944543e-08,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 94.99999999999997,
+      &quot;name&quot;: &quot;Higgs&quot;,
+      &quot;mode_index&quot;: 95,
+      &quot;spatial_shell_level&quot;: 94
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 16,
+      &quot;retained_complex_dimension&quot;: 12,
+      &quot;signed_shell_occupation&quot;: 4.268561800320943e-10,
+      &quot;scalar_feedback_factor&quot;: 0.38888888888888895,
+      &quot;vector_feedback_factor&quot;: 1.0,
+      &quot;lambda_over_inverse_radius&quot;: 3514064151.2727275,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 3.246037007929885e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 1.2924311494356854e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000499987500673,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 3.932332159000455e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000449898795545,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 9.06519257512823e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.004987562112091,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 1.9569284462644558e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0440306508910604,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.6595960422880073e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4142135623731025,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 3.805378254807781e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 4.1622776601683995,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 7.620991749983635e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120899,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 3.046044599183071e-10,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 1.0703996129167133,
+      &quot;name&quot;: &quot;down&quot;,
+      &quot;mode_index&quot;: 1,
+      &quot;spatial_shell_level&quot;: 0
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 16,
+      &quot;retained_complex_dimension&quot;: 12,
+      &quot;signed_shell_occupation&quot;: 2.8715779383977256e-09,
+      &quot;scalar_feedback_factor&quot;: 0.45185185185185184,
+      &quot;vector_feedback_factor&quot;: 1.0,
+      &quot;lambda_over_inverse_radius&quot;: 1567082662.054054,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.2014470930751433e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000000000000018,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 1.5894239347719916e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000499987500646,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 9.721711111032546e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000449898795541,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 5.780351221685162e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0049875621120905,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 1.2009092213824575e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0440306508910586,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 9.495538525233048e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4142135623730936,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.9544870050468575e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 4.1622776601683915,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 4.749417661783403e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 11.04987562112091,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 2.0546020402003774e-09,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 3.219731234618898,
+      &quot;name&quot;: &quot;strange&quot;,
+      &quot;mode_index&quot;: 4,
+      &quot;spatial_shell_level&quot;: 3
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 16,
+      &quot;retained_complex_dimension&quot;: 16,
+      &quot;signed_shell_occupation&quot;: 3.3178366720676422e-09,
+      &quot;scalar_feedback_factor&quot;: 0.6407563025210083,
+      &quot;vector_feedback_factor&quot;: 1.0,
+      &quot;lambda_over_inverse_radius&quot;: 1205604855.0175438,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 4.079997437115199e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000000000000001,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 9.250583063393848e-12,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000049998750067,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 3.1357000656066195e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0004498987955417,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 7.125224438670632e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.00498756211209,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 5.085656596668796e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0440306508910604,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 5.8959049742212825e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4142135623731042,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 4.878699925721264e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162277660168403,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 3.450480071254703e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120943,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 2.577965786224199e-09,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 3.1080080679410136,
+      &quot;name&quot;: &quot;up&quot;,
+      &quot;mode_index&quot;: 3,
+      &quot;spatial_shell_level&quot;: 2
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 16,
+      &quot;retained_complex_dimension&quot;: 16,
+      &quot;signed_shell_occupation&quot;: 3.846168207625548e-07,
+      &quot;scalar_feedback_factor&quot;: 0.6593459469677945,
+      &quot;vector_feedback_factor&quot;: 0.9999999999999623,
+      &quot;lambda_over_inverse_radius&quot;: 54599796.12530898,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 3.017596198556608e-07,
+          &quot;maximum_frequency_over_lambda&quot;: 1.9999999999999327,
+          &quot;resolved_complex_root_count&quot;: 8
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 1.0264472487646619e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000499987499927,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 7.399503516102994e-13,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0004498987954706,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 8.378897300040446e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.004987562112021,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 2.38814550427048e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0440306508909902,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 5.145706855754397e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.41421356237305,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 9.361851294187318e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162277660168368,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.530821675925804e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120913,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 3.009510861751135e-07,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 16.431867948851494,
+      &quot;name&quot;: &quot;charm&quot;,
+      &quot;mode_index&quot;: 20,
+      &quot;spatial_shell_level&quot;: 19
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 16,
+      &quot;retained_complex_dimension&quot;: 16,
+      &quot;signed_shell_occupation&quot;: 1.5404599253088236e-05,
+      &quot;scalar_feedback_factor&quot;: 0.6644353368057457,
+      &quot;vector_feedback_factor&quot;: 0.9999999999402821,
+      &quot;lambda_over_inverse_radius&quot;: 4738844.471099456,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.2092471233195166e-05,
+          &quot;maximum_frequency_over_lambda&quot;: 1.999999999881352,
+          &quot;resolved_complex_root_count&quot;: 8
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 1.5559871869152099e-18,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000499986314213,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 1.2910745833374167e-17,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0004498986769494,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 4.37723711110278e-16,
+          &quot;maximum_frequency_over_lambda&quot;: 2.004987561994032,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 1.9139492508229994e-12,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0440306507774118,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.0843390444370176e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4142135622892007,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 5.182094692943967e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162277660130867,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 6.088621402247347e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621109097,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 1.2092455342953783e-05,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 57.30426514397361,
+      &quot;name&quot;: &quot;top&quot;,
+      &quot;mode_index&quot;: 72,
+      &quot;spatial_shell_level&quot;: 71
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 64,
+      &quot;retained_complex_dimension&quot;: 20,
+      &quot;signed_shell_occupation&quot;: 1.9698248555262883e-07,
+      &quot;scalar_feedback_factor&quot;: 0.7418662598525398,
+      &quot;vector_feedback_factor&quot;: 0.999999999999992,
+      &quot;lambda_over_inverse_radius&quot;: 58380824.913123995,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.6217158339626727e-07,
+          &quot;maximum_frequency_over_lambda&quot;: 1.9999999999999862,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 6.854384227499047e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000049998750048,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 5.025946401967909e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0004498987955226,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 1.072640131257645e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0049875621120754,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 7.546650249157238e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0440306508910413,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.9451580341177674e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4142135623730874,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 7.1180684777648466e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162277660168382,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.7553132968287816e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120957,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 1.6121711754527201e-07,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 9.411988312409054,
+      &quot;name&quot;: &quot;nu1&quot;,
+      &quot;mode_index&quot;: 10,
+      &quot;spatial_shell_level&quot;: 9
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 64,
+      &quot;retained_complex_dimension&quot;: 20,
+      &quot;signed_shell_occupation&quot;: 8.018570952117443e-07,
+      &quot;scalar_feedback_factor&quot;: 0.743765635898793,
+      &quot;vector_feedback_factor&quot;: 0.9999999999998684,
+      &quot;lambda_over_inverse_radius&quot;: 20577232.649719074,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 6.567868248214589e-07,
+          &quot;maximum_frequency_over_lambda&quot;: 1.9999999999996823,
+          &quot;resolved_complex_root_count&quot;: 10
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 2.825441978258761e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000499987497458,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 1.9889427018288753e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000449898795218,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 1.5454046759242976e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.004987562111774,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 1.8465400359594956e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0440306508907566,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 5.548755092788258e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4142135623728826,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.0514297578835169e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162277660168292,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 4.149971311149554e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120888,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 6.56959913008039e-07,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 13.518416971505621,
+      &quot;name&quot;: &quot;nu2&quot;,
+      &quot;mode_index&quot;: 15,
+      &quot;spatial_shell_level&quot;: 14
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 64,
+      &quot;retained_complex_dimension&quot;: 20,
+      &quot;signed_shell_occupation&quot;: 3.20189477254947e-06,
+      &quot;scalar_feedback_factor&quot;: 0.7453468634484688,
+      &quot;vector_feedback_factor&quot;: 0.9999999999979132,
+      &quot;lambda_over_inverse_radius&quot;: 7339404.218236819,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.6259254928076644e-06,
+          &quot;maximum_frequency_over_lambda&quot;: 1.9999999999948763,
+          &quot;resolved_complex_root_count&quot;: 10
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 3.9331537289408146e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000049998744945,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 3.380429677854332e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0004498987904182,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 5.814526225951522e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0049875621069937,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 8.200118362111652e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.044030650886151,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.935562821131498e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4142135623694805,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 3.914056856402226e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 4.1622776601667795,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 8.067559130014298e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120416,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 2.6259382579180832e-06,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 19.272822326993424,
+      &quot;name&quot;: &quot;nu3&quot;,
+      &quot;mode_index&quot;: 22,
+      &quot;spatial_shell_level&quot;: 21
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 64,
+      &quot;retained_complex_dimension&quot;: 24,
+      &quot;signed_shell_occupation&quot;: 1.6938856181999048e-06,
+      &quot;scalar_feedback_factor&quot;: 0.7953544521597425,
+      &quot;vector_feedback_factor&quot;: 0.999999999999512,
+      &quot;lambda_over_inverse_radius&quot;: 8855379.512543784,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.4333512540935782e-06,
+          &quot;maximum_frequency_over_lambda&quot;: 1.9999999999985683,
+          &quot;resolved_complex_root_count&quot;: 12
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 5.5273375414596e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000049998748632,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 8.343149949696009e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0004498987941086,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 5.6643062791995446e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0049875621106676,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 9.095772014970484e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.044030650889684,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.5837633813032394e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.414213562372088,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 4.120776636584722e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162277660167938,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 3.1179695909341874e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120794,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 1.433378634929582e-06,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 12.693111797473398,
+      &quot;name&quot;: &quot;electron&quot;,
+      &quot;mode_index&quot;: 13,
+      &quot;spatial_shell_level&quot;: 12
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 64,
+      &quot;retained_complex_dimension&quot;: 24,
+      &quot;signed_shell_occupation&quot;: 0.00014328844069192806,
+      &quot;scalar_feedback_factor&quot;: 0.7976340332235963,
+      &quot;vector_feedback_factor&quot;: 0.9999999965390324,
+      &quot;lambda_over_inverse_radius&quot;: 258220.41067185916,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.00012142925556662675,
+          &quot;maximum_frequency_over_lambda&quot;: 1.9999999897342158,
+          &quot;resolved_complex_root_count&quot;: 12
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 3.2004389098739683e-13,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000499884847907,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 3.811275980251009e-13,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0004498885343733,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 4.773126338619704e-13,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0049875518972526,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 9.092449015923876e-13,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0440306410582214,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.0341522785959953e-12,
+          &quot;maximum_frequency_over_lambda&quot;: 2.414213555114091,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 8.266979208942574e-12,
+          &quot;maximum_frequency_over_lambda&quot;: 4.1622776569220745,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.523972739453025e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875620099453,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 0.00012142925446291246,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 31.35551195499094,
+      &quot;name&quot;: &quot;muon&quot;,
+      &quot;mode_index&quot;: 35,
+      &quot;spatial_shell_level&quot;: 34
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;axis&quot;: 0,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 1024,
+      &quot;retained_complex_dimension&quot;: 40,
+      &quot;signed_shell_occupation&quot;: 0.005522739583079422,
+      &quot;scalar_feedback_factor&quot;: 0.8879405039813169,
+      &quot;vector_feedback_factor&quot;: 0.9999969276332138,
+      &quot;lambda_over_inverse_radius&quot;: 4888.8779914089455,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.0049968702551946844,
+          &quot;maximum_frequency_over_lambda&quot;: 1.9999847495574672,
+          &quot;resolved_complex_root_count&quot;: 22
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 2.4596345150009877e-14,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000034749070008,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 1.6461215003534023e-14,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000434655211177,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 4.321846699961718e-14,
+          &quot;maximum_frequency_over_lambda&quot;: 2.004972387355749,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 3.698992833013926e-14,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0440160436255383,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 7.101135272250675e-14,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4142027787228826,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.4119204395056373e-13,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162272837588131,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.2997432990990987e-12,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049874103656693,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ],
+      &quot;exact_zero_wavevector_growth_over_lambda&quot;: 0.0049968702551451746,
+      &quot;exact_zero_wavevector_growth_in_inverse_radius_units&quot;: 24.429089016305245,
+      &quot;name&quot;: &quot;tau&quot;,
+      &quot;mode_index&quot;: 23,
+      &quot;spatial_shell_level&quot;: 22
+    }
+  ],
+  &quot;axis_covariance&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;axis&quot;: 1,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 4,
+      &quot;retained_complex_dimension&quot;: 4,
+      &quot;signed_shell_occupation&quot;: 1.7811544239521027e-08,
+      &quot;scalar_feedback_factor&quot;: -0.0065789473684205735,
+      &quot;vector_feedback_factor&quot;: 0.9999999999999999,
+      &quot;lambda_over_inverse_radius&quot;: 4266895614.3267975,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.7811544239521023e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.006568162179816,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 3.0876335406304186e-17,
+          &quot;maximum_frequency_over_lambda&quot;: 2.006617997275554,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 5.2965429271957027e-17,
+          &quot;maximum_frequency_over_lambda&quot;: 2.007016588966593,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 4.758810697278151e-24,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0115394789769825,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 2.7755576149082006e-17,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0504607363722993,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.2806103899335184e-16,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4198217429148343,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 8.817471394281151e-17,
+          &quot;maximum_frequency_over_lambda&quot;: 4.16660179313978,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 6.657204762322228e-20,
+          &quot;maximum_frequency_over_lambda&quot;: 11.053487011746013,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ]
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;axis&quot;: 2,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 16,
+      &quot;retained_complex_dimension&quot;: 12,
+      &quot;signed_shell_occupation&quot;: 4.268561800320943e-10,
+      &quot;scalar_feedback_factor&quot;: 0.38888888888888895,
+      &quot;vector_feedback_factor&quot;: 1.0,
+      &quot;lambda_over_inverse_radius&quot;: 3514064151.2727275,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 9.57826492720181e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000000000000018,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 2.165463073951742e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000499987500677,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 1.8153116591727702e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0004498987955395,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 1.263246562703403e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0049875621120967,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 1.826481753949144e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.044030650891064,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.6558427725513368e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.414213562373099,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 3.369813901458834e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162277660168388,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 9.304203807403155e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120913,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ]
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;axis&quot;: 3,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 16,
+      &quot;retained_complex_dimension&quot;: 16,
+      &quot;signed_shell_occupation&quot;: 3.3178366720676422e-09,
+      &quot;scalar_feedback_factor&quot;: 0.6407563025210083,
+      &quot;vector_feedback_factor&quot;: 1.0,
+      &quot;lambda_over_inverse_radius&quot;: 1205604855.0175438,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 5.3618758250404094e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000000000000027,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 4.083170324715423e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000499987500695,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 1.2170359624322547e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000449898795539,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 9.19270460638307e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.004987562112093,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 4.416092979582781e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.044030650891058,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.0896858136357395e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4142135623731025,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 5.233895807884777e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162277660168382,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.5309211316587096e-07,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120911,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ]
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;axis&quot;: 4,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 64,
+      &quot;retained_complex_dimension&quot;: 20,
+      &quot;signed_shell_occupation&quot;: 1.9698248555262883e-07,
+      &quot;scalar_feedback_factor&quot;: 0.7418662598525398,
+      &quot;vector_feedback_factor&quot;: 0.999999999999992,
+      &quot;lambda_over_inverse_radius&quot;: 58380824.913123995,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.6172338816038024e-07,
+          &quot;maximum_frequency_over_lambda&quot;: 1.9999999999999838,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 6.031133293997152e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000049998750046,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 6.572639496094314e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0004498987955217,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 5.466422604679307e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0049875621120754,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 1.0212166112744114e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0440306508910395,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.8948326926474457e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 2.414213562373087,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 6.308456184517253e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162277660168391,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.3494536939647898e-08,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120936,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ]
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;axis&quot;: 5,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 64,
+      &quot;retained_complex_dimension&quot;: 24,
+      &quot;signed_shell_occupation&quot;: 1.6938856181999048e-06,
+      &quot;scalar_feedback_factor&quot;: 0.7953544521597425,
+      &quot;vector_feedback_factor&quot;: 0.999999999999512,
+      &quot;lambda_over_inverse_radius&quot;: 8855379.512543784,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.4333933057426383e-06,
+          &quot;maximum_frequency_over_lambda&quot;: 1.9999999999985674,
+          &quot;resolved_complex_root_count&quot;: 12
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 9.109920108576744e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0000499987486333,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 4.744550349849928e-11,
+          &quot;maximum_frequency_over_lambda&quot;: 2.0004498987941046,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 1.0037215613671806e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.004987562110666,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 2.4452081312051553e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.044030650889691,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.1270580211025157e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 2.414213562372088,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 4.5785513255596444e-10,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162277660167953,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 4.2241054819441535e-09,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049875621120778,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ]
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;axis&quot;: 9,
+      &quot;full_spinor_matrix_complex_dimension&quot;: 1024,
+      &quot;retained_complex_dimension&quot;: 40,
+      &quot;signed_shell_occupation&quot;: 0.005522739583079422,
+      &quot;scalar_feedback_factor&quot;: 0.8879405039813169,
+      &quot;vector_feedback_factor&quot;: 0.9999969276332138,
+      &quot;lambda_over_inverse_radius&quot;: 4888.8779914089455,
+      &quot;probes&quot;: [
+        {
+          &quot;dimensionless_wave_number&quot;: 0.0,
+          &quot;maximum_growth_over_lambda&quot;: 0.004996870255220217,
+          &quot;maximum_frequency_over_lambda&quot;: 1.9999847495574665,
+          &quot;resolved_complex_root_count&quot;: 22
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.01,
+          &quot;maximum_growth_over_lambda&quot;: 4.0354137823093486e-14,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000034749070008,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.03,
+          &quot;maximum_growth_over_lambda&quot;: 2.7390506632206352e-14,
+          &quot;maximum_frequency_over_lambda&quot;: 2.000434655211188,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.1,
+          &quot;maximum_growth_over_lambda&quot;: 6.502360717968469e-14,
+          &quot;maximum_frequency_over_lambda&quot;: 2.004972387355754,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 0.3,
+          &quot;maximum_growth_over_lambda&quot;: 4.8944138672513127e-14,
+          &quot;maximum_frequency_over_lambda&quot;: 2.044016043625534,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 1.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.38522006365438e-13,
+          &quot;maximum_frequency_over_lambda&quot;: 2.4142027787228932,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 3.0,
+          &quot;maximum_growth_over_lambda&quot;: 2.7347742126426766e-13,
+          &quot;maximum_frequency_over_lambda&quot;: 4.162272837588118,
+          &quot;resolved_complex_root_count&quot;: 0
+        },
+        {
+          &quot;dimensionless_wave_number&quot;: 10.0,
+          &quot;maximum_growth_over_lambda&quot;: 1.2995160503237457e-12,
+          &quot;maximum_frequency_over_lambda&quot;: 11.049874103656663,
+          &quot;resolved_complex_root_count&quot;: 0
+        }
+      ]
+    }
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ground-harmonic-repair.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/ground-harmonic-repair.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="ground-harmonic-repair.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/ground-harmonic-repair.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ground-harmonic-repair.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>ground-harmonic-repair.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/ground-harmonic-repair.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact necessary spatial stability conditions for an unrestricted current blend.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;ground&#39;, ROOT/&#39;inverse-current-ground-proof.py&#39;)
+ground = module_from_spec(spec)
+spec.loader.exec_module(ground)
+K, Z, X = sp.symbols(&#39;kappa z x&#39;)
+
+
+def polynomial(depth, degree, c):
+    real, imaginary = ground.exact_block(depth, degree, c, X)
+    if depth != 2:
+        u = sp.Rational(degree+depth-1, 2*degree+depth-1)
+        v = sp.Rational(degree, 2*degree+depth-1)
+        aa, bb, ab = (1+c)/2, (1-c)/2, X/2
+        tensor = sp.Matrix([[v*bb, -v*ab, -v*bb, v*ab],
+                            [-v*ab, v*aa, v*ab, -v*aa],
+                            [-u*bb, u*ab, u*bb, -u*ab],
+                            [u*ab, -u*aa, -u*ab, u*aa]])
+        harmonic_number = sum(sp.Rational(1, j) for j in range(1, depth+1))
+        vector = 1-c*c/(sp.Rational(depth, 2)*harmonic_number)
+        real += 2*K*vector*tensor
+    raw = sp.Poly((imaginary*real).charpoly(Z).as_expr(), X)
+    reduced = sp.factor(sp.rem(raw, sp.Poly(X*X-1+c*c, X)).as_expr())
+    assert not reduced.has(X)
+    if degree == 1:
+        assert reduced.subs(Z, 0) == 0
+        reduced = sp.cancel(reduced/Z)
+    return sp.Poly(reduced, Z)
+
+
+def necessary_conditions(poly):
+    coefficients = poly.all_coeffs()
+    signs = [sp.factor((-1)**j*a) &gt;= 0 for j, a in enumerate(coefficients[1:], 1)]
+    discriminant = sp.factor(sp.discriminant(poly.as_expr(), Z))
+    return signs+[discriminant &gt;= 0], discriminant
+
+
+def main():
+    cases = []
+    for c in [sp.Rational(3, 10), sp.Rational(3, 5)]:
+        for depth in ground.radial.DEPTHS:
+            conditions, harmonics = [], []
+            for degree in range(1, 7):
+                poly = polynomial(depth, degree, c)
+                added, discriminant = necessary_conditions(poly)
+                conditions.extend(added)
+                allowed = sp.reduce_inequalities(conditions, K)
+                harmonics.append({&#39;scalar_harmonic_degree&#39;: degree,
+                                  &#39;characteristic_polynomial&#39;: str(poly.as_expr()),
+                                  &#39;discriminant&#39;: str(discriminant),
+                                  &#39;remaining_necessary_blend_set&#39;: str(allowed)})
+                print(json.dumps({&#39;depth&#39;: depth, &#39;c&#39;: str(c), &#39;harmonic&#39;: degree,
+                                  &#39;empty&#39;: allowed == sp.false}), flush=True)
+                if allowed == sp.false:
+                    break
+            cases.append({&#39;depth&#39;: depth, &#39;c_exact&#39;: str(c), &#39;harmonics&#39;: harmonics,
+                          &#39;all_real_blends_excluded&#39;: allowed == sp.false,
+                          &#39;classification&#39;: &#39;exact necessary root inequalities; nonempty sets do not establish stability&#39;})
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = {&#39;experiment_key&#39;: &#39;ground-current-repair-harmonic-intersection&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                          for p in [Path(__file__), ROOT/&#39;inverse-current-ground-proof.py&#39;, ROOT/&#39;inverse-current-radial.py&#39;]},
+              &#39;cases&#39;: cases,
+              &#39;limits&#39;: [&#39;unrestricted real blend coefficient in the stated two-action family&#39;,
+                         &#39;exact ground-shell reducing harmonic blocks, not assigned excited electron states&#39;,
+                         &#39;no theorem for every local Lorentz scalar potential is assumed&#39;,
+                         &#39;nonempty necessary sets do not prove real-rootedness of quartics or full spatial stability&#39;]}
+    output = ROOT/(&#39;ground-harmonic-repair-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;report&#39;: str(output)}), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

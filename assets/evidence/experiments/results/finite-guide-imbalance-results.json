@@ -1,0 +1,946 @@
+{
+  "experiment_key": "finite-guide-imbalance-competing-ranges",
+  "created_utc": "2026-10-12T12:06:27.781557+00:00",
+  "sources": {
+    "experiments/finite-guide-imbalance.py": "55aa7f4089e27d0c211bf9cd91a549b95d0851f7280b72e2a6ad5df38fada34c"
+  },
+  "evaluations": 368,
+  "conditions": {
+    "actual frame norm retains both shape channels": 1,
+    "actual frame Gram area has the exact shape deficit": 1,
+    "frame kinetic metric is the common canonical identity": 9,
+    "shape polarization rotates twice the ordinary spatial angle": 1,
+    "both physical shape directions transform together": 1,
+    "shape has zero first dielectric source variation": 1,
+    "complete dielectric quadratic coefficient is derived": 1,
+    "fixed-flux variation retains the complete electric quadratic cost": 1,
+    "both shape operators have the derived positive-gap potential": 1,
+    "exact finite bridge solves its Euler equation": 1,
+    "exact bridge retains the first endpoint": 1,
+    "exact bridge retains the second endpoint": 1,
+    "integration by parts gives the complete bridge energy": 1,
+    "sum and mismatch shapes diagonalize the boundary energy": 1,
+    "longitudinal shape stress is conserved": 1,
+    "moving-end energy and independent stress give identical force": 1,
+    "reciprocal shape torque follows from the same energy": 1,
+    "opposite endpoint shapes have negative angular curvature": 1,
+    "actual mixed-frame guide moments fix tension per deformation norm": 2,
+    "exact derivative is negative throughout the stated physical interval zero to one": 2,
+    "one common upper bound controls the formal equilibrium in guide-width units": 2,
+    "independent vector boundary solver converges": 9,
+    "independent integrated field energy matches the operator formula": 9,
+    "independent field stress is constant and agrees with force": 63,
+    "direct moving-end energy difference agrees with force": 9,
+    "common rotation preserves the entire pair energy and force": 9,
+    "nonpositive endpoint overlap makes inward force increase": 63,
+    "mismatched inward force approaches tension from below": 63,
+    "gap controls the complete spectral outward response": 21,
+    "small-length estimate bounds the gap envelope": 21,
+    "independent lengths verify increasing inward response": 54,
+    "formal radial balance remains an angular saddle": 3,
+    "same middle-Hodge rule retains precisely the existing active guides": 6,
+    "ungated geometric-degree profile control remains obstructed": 4,
+    "geometric profile identity allows the active guide": 2
+  },
+  "maximum_errors": {
+    "independent integrated field energy matches the operator formula": 1.2961853812498703e-14,
+    "independent field stress is constant and agrees with force": 1.3448877428379191e-14,
+    "direct moving-end energy difference agrees with force": 1.0306681480498625e-09,
+    "common rotation preserves the entire pair energy and force": 5.551115123125783e-17
+  },
+  "exact_equations": {
+    "frame_norm": "u^2+v^2+w^2",
+    "frame_area": "(u^2-v^2-w^2)^2/4",
+    "shape_operator": "-Delta_y+mu^2+(kappa4 E0^2/2)u0^2",
+    "on_shell_energy": "T L+<g+,K tanh(K L/2)g+>+<g-,K coth(K L/2)g->"
+  },
+  "boundary_controls": [
+    {
+      "matrix_dimension": 1,
+      "length": 0.4,
+      "shape_energy": 0.005904964972729655,
+      "shape_inward_force": 0.001359281299989412,
+      "quadrature_error": 6.55582807232705e-17,
+      "interpretation": "positive-operator identity control, not a physical transverse spectrum"
+    },
+    {
+      "matrix_dimension": 1,
+      "length": 1.7,
+      "shape_energy": 0.005486481090076625,
+      "shape_inward_force": -0.0009562602790783723,
+      "quadrature_error": 6.091217630373733e-17,
+      "interpretation": "positive-operator identity control, not a physical transverse spectrum"
+    },
+    {
+      "matrix_dimension": 1,
+      "length": 4.0,
+      "shape_energy": 0.007065697884595416,
+      "shape_inward_force": 0.0003073045412997356,
+      "quadrature_error": 7.844500476510886e-17,
+      "interpretation": "positive-operator identity control, not a physical transverse spectrum"
+    },
+    {
+      "matrix_dimension": 2,
+      "length": 0.4,
+      "shape_energy": 0.01911257151844095,
+      "shape_inward_force": -0.034310590850499124,
+      "quadrature_error": 2.1219216959568444e-16,
+      "interpretation": "positive-operator identity control, not a physical transverse spectrum"
+    },
+    {
+      "matrix_dimension": 2,
+      "length": 1.7,
+      "shape_energy": 0.03082056807040013,
+      "shape_inward_force": -0.00040567649614012616,
+      "quadrature_error": 3.4217704303784597e-16,
+      "interpretation": "positive-operator identity control, not a physical transverse spectrum"
+    },
+    {
+      "matrix_dimension": 2,
+      "length": 4.0,
+      "shape_energy": 0.006777564550377592,
+      "shape_inward_force": -0.00012810535074573104,
+      "quadrature_error": 7.524608214702577e-17,
+      "interpretation": "positive-operator identity control, not a physical transverse spectrum"
+    },
+    {
+      "matrix_dimension": 4,
+      "length": 0.4,
+      "shape_energy": 0.04393212248226665,
+      "shape_inward_force": -0.09637844902495074,
+      "quadrature_error": 4.877445390046669e-16,
+      "interpretation": "positive-operator identity control, not a physical transverse spectrum"
+    },
+    {
+      "matrix_dimension": 4,
+      "length": 1.7,
+      "shape_energy": 0.010493765124181514,
+      "shape_inward_force": -0.003364118725130918,
+      "quadrature_error": 1.1650419655874941e-16,
+      "interpretation": "positive-operator identity control, not a physical transverse spectrum"
+    },
+    {
+      "matrix_dimension": 4,
+      "length": 4.0,
+      "shape_energy": 0.016895624589859572,
+      "shape_inward_force": -0.00038889016613552946,
+      "quadrature_error": 6.355194554068129e-16,
+      "interpretation": "positive-operator identity control, not a physical transverse spectrum"
+    }
+  ],
+  "force_controls": [
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -1.0,
+      "length": 0.33333333333333337,
+      "inward_force": -16.88720433853373,
+      "inward_force_slope": 107.99613294174321
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -1.0,
+      "length": 0.6666666666666667,
+      "inward_force": -3.38910846394319,
+      "inward_force_slope": 13.492499475173975
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -1.0,
+      "length": 1.6666666666666667,
+      "inward_force": 0.37904123693701197,
+      "inward_force_slope": 0.8487294528518565
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -1.0,
+      "length": 3.3333333333333335,
+      "inward_force": 0.8909907311615067,
+      "inward_force_slope": 0.09162266782816084
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -1.0,
+      "length": 6.666666666666667,
+      "inward_force": 0.9877274426118914,
+      "inward_force_slope": 0.006470741594691043
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -1.0,
+      "length": 13.333333333333334,
+      "inward_force": 0.9992830504235131,
+      "inward_force_slope": 0.0002639321457123813
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -1.0,
+      "length": 26.666666666666668,
+      "inward_force": 0.9999917678597268,
+      "inward_force_slope": 2.6165084157448846e-06
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -0.5,
+      "length": 0.33333333333333337,
+      "inward_force": -12.332710633210056,
+      "inward_force_slope": 80.98306542121956
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -0.5,
+      "length": 0.6666666666666667,
+      "inward_force": -2.2157300355914753,
+      "inward_force_slope": 10.094620944488057
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -0.5,
+      "length": 1.6666666666666667,
+      "inward_force": 0.5805113496300127,
+      "inward_force_slope": 0.6076100620822499
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -0.5,
+      "length": 3.3333333333333335,
+      "inward_force": 0.9332228081926448,
+      "inward_force_slope": 0.0587528171034625
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -0.5,
+      "length": 6.666666666666667,
+      "inward_force": 0.9931467717294586,
+      "inward_force_slope": 0.0037632350887702847
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -0.5,
+      "length": 13.333333333333334,
+      "inward_force": 0.9996332930714832,
+      "inward_force_slope": 0.00013719908968768042
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": -0.5,
+      "length": 26.666666666666668,
+      "inward_force": 0.9999958816537716,
+      "inward_force_slope": 1.309628484566304e-06
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.0,
+      "length": 0.33333333333333337,
+      "inward_force": -7.7782169278863815,
+      "inward_force_slope": 53.969997900695915
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.0,
+      "length": 0.6666666666666667,
+      "inward_force": -1.0423516072397603,
+      "inward_force_slope": 6.696742413802134
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.0,
+      "length": 1.6666666666666667,
+      "inward_force": 0.7819814623230135,
+      "inward_force_slope": 0.36649067131264335
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.0,
+      "length": 3.3333333333333335,
+      "inward_force": 0.9754548852237828,
+      "inward_force_slope": 0.02588296637876417
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.0,
+      "length": 6.666666666666667,
+      "inward_force": 0.998566100847026,
+      "inward_force_slope": 0.0010557285828495257
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.0,
+      "length": 13.333333333333334,
+      "inward_force": 0.9999835357194534,
+      "inward_force_slope": 1.0466033662979511e-05
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.0,
+      "length": 26.666666666666668,
+      "inward_force": 0.9999999954478165,
+      "inward_force_slope": 2.748553387723032e-09
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.5,
+      "length": 0.33333333333333337,
+      "inward_force": -3.2237232225627066,
+      "inward_force_slope": 26.956930380172267
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.5,
+      "length": 0.6666666666666667,
+      "inward_force": 0.1310268211119544,
+      "inward_force_slope": 3.298863883116214
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.5,
+      "length": 1.6666666666666667,
+      "inward_force": 0.9834515750160143,
+      "inward_force_slope": 0.12537128054303676
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.5,
+      "length": 3.3333333333333335,
+      "inward_force": 1.0176869622549207,
+      "inward_force_slope": -0.006986884345934162
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.5,
+      "length": 6.666666666666667,
+      "inward_force": 1.0039854299645934,
+      "inward_force_slope": -0.0016517779230712328
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.5,
+      "length": 13.333333333333334,
+      "inward_force": 1.0003337783674238,
+      "inward_force_slope": -0.00011626702236172138
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 0.5,
+      "length": 26.666666666666668,
+      "inward_force": 1.0000041092418614,
+      "inward_force_slope": -1.3041313777908579e-06
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 1.0,
+      "length": 0.33333333333333337,
+      "inward_force": 1.3307704827609683,
+      "inward_force_slope": -0.05613714035137798
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 1.0,
+      "length": 0.6666666666666667,
+      "inward_force": 1.3044052494636693,
+      "inward_force_slope": -0.09901464756970765
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 1.0,
+      "length": 1.6666666666666667,
+      "inward_force": 1.1849216877090152,
+      "inward_force_slope": -0.11574811022656982
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 1.0,
+      "length": 3.3333333333333335,
+      "inward_force": 1.0599190392860587,
+      "inward_force_slope": -0.0398567350706325
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 1.0,
+      "length": 6.666666666666667,
+      "inward_force": 1.0094047590821607,
+      "inward_force_slope": -0.004359284428991991
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 1.0,
+      "length": 13.333333333333334,
+      "inward_force": 1.0006840210153938,
+      "inward_force_slope": -0.00024300007838642227
+    },
+    {
+      "mu": 0.3,
+      "endpoint_cosine": 1.0,
+      "length": 26.666666666666668,
+      "inward_force": 1.0000082230359062,
+      "inward_force_slope": -2.6110113089694385e-06
+    },
+    {
+      "mu": 0.3,
+      "radial_equilibrium": 1.34616647203096,
+      "angular_curvature": -0.6174056577715479,
+      "interpretation": "formal quadratic endpoint control, not a bound hadron"
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -1.0,
+      "length": 0.1,
+      "inward_force": -197.746714872597,
+      "inward_force_slope": 3999.856775620119
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -1.0,
+      "length": 0.2,
+      "inward_force": -47.767871821591,
+      "inward_force_slope": 499.72220278422145
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -1.0,
+      "length": 0.5,
+      "inward_force": -5.899541811810979,
+      "inward_force_slope": 31.434424179698397
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -1.0,
+      "length": 1.0,
+      "inward_force": -0.2112140982054802,
+      "inward_force_slope": 3.3934321417837356
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -1.0,
+      "length": 2.0,
+      "inward_force": 0.8636382512432375,
+      "inward_force_slope": 0.2396570960996683
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -1.0,
+      "length": 4.0,
+      "inward_force": 0.992033893594589,
+      "inward_force_slope": 0.009775264656014124
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -1.0,
+      "length": 8.0,
+      "inward_force": 0.9999085317747414,
+      "inward_force_slope": 9.690771910166242e-05
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -0.5,
+      "length": 0.1,
+      "inward_force": -147.1412292578895,
+      "inward_force_slope": 2999.372793378503
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -0.5,
+      "length": 0.2,
+      "inward_force": -34.73033372879417,
+      "inward_force_slope": 373.87484979585395
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -0.5,
+      "length": 0.5,
+      "inward_force": -3.6609850041109695,
+      "inward_force_slope": 22.504076373416673
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -0.5,
+      "length": 1.0,
+      "inward_force": 0.25803120214049724,
+      "inward_force_slope": 2.1760302630912047
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -0.5,
+      "length": 2.0,
+      "inward_force": 0.9238530192162078,
+      "inward_force_slope": 0.1393790773618624
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -0.5,
+      "length": 4.0,
+      "inward_force": 0.9959254785720358,
+      "inward_force_slope": 0.005081447766210387
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": -0.5,
+      "length": 8.0,
+      "inward_force": 0.9999542405974624,
+      "inward_force_slope": 4.850475868764089e-05
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.0,
+      "length": 0.1,
+      "inward_force": -96.53574364318202,
+      "inward_force_slope": 1998.8888111368858
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.0,
+      "length": 0.2,
+      "inward_force": -21.692795635997335,
+      "inward_force_slope": 248.0274968074865
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.0,
+      "length": 0.5,
+      "inward_force": -1.4224281964109604,
+      "inward_force_slope": 13.573728567134943
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.0,
+      "length": 1.0,
+      "inward_force": 0.7272765024864749,
+      "inward_force_slope": 0.9586283843986734
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.0,
+      "length": 2.0,
+      "inward_force": 0.9840677871891781,
+      "inward_force_slope": 0.039101058624056516
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.0,
+      "length": 4.0,
+      "inward_force": 0.9998170635494826,
+      "inward_force_slope": 0.00038763087640664856
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.0,
+      "length": 8.0,
+      "inward_force": 0.9999999494201833,
+      "inward_force_slope": 1.0179827361937157e-07
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.5,
+      "length": 0.1,
+      "inward_force": -45.93025802847451,
+      "inward_force_slope": 998.4048288952695
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.5,
+      "length": 0.2,
+      "inward_force": -8.655257543200506,
+      "inward_force_slope": 122.18014381911905
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.5,
+      "length": 0.5,
+      "inward_force": 0.8161286112890487,
+      "inward_force_slope": 4.643380760853216
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.5,
+      "length": 1.0,
+      "inward_force": 1.1965218028324525,
+      "inward_force_slope": -0.2587734942938578
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.5,
+      "length": 2.0,
+      "inward_force": 1.0442825551621484,
+      "inward_force_slope": -0.061176960113749373
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.5,
+      "length": 4.0,
+      "inward_force": 1.0037086485269295,
+      "inward_force_slope": -0.004306186013397088
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 0.5,
+      "length": 8.0,
+      "inward_force": 1.0000456582429045,
+      "inward_force_slope": -4.8301162140402156e-05
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 1.0,
+      "length": 0.1,
+      "inward_force": 4.67522758623298,
+      "inward_force_slope": -2.0791533463473324
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 1.0,
+      "length": 0.2,
+      "inward_force": 4.382280549596326,
+      "inward_force_slope": -3.667209169248432
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 1.0,
+      "length": 0.5,
+      "inward_force": 3.0546854189890578,
+      "inward_force_slope": -4.286967045428513
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 1.0,
+      "length": 1.0,
+      "inward_force": 1.66576710317843,
+      "inward_force_slope": -1.476175372986389
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 1.0,
+      "length": 2.0,
+      "inward_force": 1.1044973231351185,
+      "inward_force_slope": -0.16145497885155527
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 1.0,
+      "length": 4.0,
+      "inward_force": 1.0076002335043763,
+      "inward_force_slope": -0.009000002903200827
+    },
+    {
+      "mu": 1.0,
+      "endpoint_cosine": 1.0,
+      "length": 8.0,
+      "inward_force": 1.0000913670656255,
+      "inward_force_slope": -9.670412255442367e-05
+    },
+    {
+      "mu": 1.0,
+      "radial_equilibrium": 1.0699285751441125,
+      "angular_curvature": -0.39377932007744015,
+      "interpretation": "formal quadratic endpoint control, not a bound hadron"
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -1.0,
+      "length": 0.05,
+      "inward_force": -793.986859490388,
+      "inward_force_slope": 31998.854204960953
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -1.0,
+      "length": 0.1,
+      "inward_force": -194.071487286364,
+      "inward_force_slope": 3997.7776222737716
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -1.0,
+      "length": 0.25,
+      "inward_force": -26.598167247243914,
+      "inward_force_slope": 251.47539343758717
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -1.0,
+      "length": 0.5,
+      "inward_force": -3.844856392821921,
+      "inward_force_slope": 27.147457134269885
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -1.0,
+      "length": 1.0,
+      "inward_force": 0.4545530049729498,
+      "inward_force_slope": 1.9172567687973463
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -1.0,
+      "length": 2.0,
+      "inward_force": 0.9681355743783561,
+      "inward_force_slope": 0.07820211724811299
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -1.0,
+      "length": 4.0,
+      "inward_force": 0.9996341270989654,
+      "inward_force_slope": 0.0007752617528132994
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -0.5,
+      "length": 0.05,
+      "inward_force": -591.564917031558,
+      "inward_force_slope": 23994.982347028024
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -0.5,
+      "length": 0.1,
+      "inward_force": -141.9213349151767,
+      "inward_force_slope": 2990.9987983668316
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -0.5,
+      "length": 0.25,
+      "inward_force": -17.643940016443878,
+      "inward_force_slope": 180.03261098733338
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -0.5,
+      "length": 0.5,
+      "inward_force": -1.967875191438011,
+      "inward_force_slope": 17.408242104729638
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -0.5,
+      "length": 1.0,
+      "inward_force": 0.6954120768648311,
+      "inward_force_slope": 1.1150326188948991
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -0.5,
+      "length": 2.0,
+      "inward_force": 0.9837019142881434,
+      "inward_force_slope": 0.040651582129683096
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": -0.5,
+      "length": 4.0,
+      "inward_force": 0.9998169623898494,
+      "inward_force_slope": 0.00038803806950112713
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.0,
+      "length": 0.05,
+      "inward_force": -389.14297457272806,
+      "inward_force_slope": 15991.110489095086
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.0,
+      "length": 0.1,
+      "inward_force": -89.77118254398934,
+      "inward_force_slope": 1984.219974459892
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.0,
+      "length": 0.25,
+      "inward_force": -8.689712785643842,
+      "inward_force_slope": 108.58982853707954
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.0,
+      "length": 0.5,
+      "inward_force": -0.09089399005410059,
+      "inward_force_slope": 7.669027075189387
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.0,
+      "length": 1.0,
+      "inward_force": 0.9362711487567121,
+      "inward_force_slope": 0.3128084689924521
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.0,
+      "length": 2.0,
+      "inward_force": 0.9992682541979306,
+      "inward_force_slope": 0.0031010470112531885
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.0,
+      "length": 4.0,
+      "inward_force": 0.9999997976807335,
+      "inward_force_slope": 8.143861889549725e-07
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.5,
+      "length": 0.05,
+      "inward_force": -186.72103211389805,
+      "inward_force_slope": 7987.238631162156
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.5,
+      "length": 0.1,
+      "inward_force": -37.62103017280202,
+      "inward_force_slope": 977.4411505529524
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.5,
+      "length": 0.25,
+      "inward_force": 0.2645144451561945,
+      "inward_force_slope": 37.147046086825725
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.5,
+      "length": 0.5,
+      "inward_force": 1.7860872113298099,
+      "inward_force_slope": -2.0701879543508626
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.5,
+      "length": 1.0,
+      "inward_force": 1.1771302206485932,
+      "inward_force_slope": -0.489415680909995
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.5,
+      "length": 2.0,
+      "inward_force": 1.014834594107718,
+      "inward_force_slope": -0.034449488107176705
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 0.5,
+      "length": 4.0,
+      "inward_force": 1.0001826329716177,
+      "inward_force_slope": -0.00038640929712321724
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 1.0,
+      "length": 0.05,
+      "inward_force": 15.70091034493192,
+      "inward_force_slope": -16.63322677077866
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 1.0,
+      "length": 0.1,
+      "inward_force": 14.529122198385306,
+      "inward_force_slope": -29.337673353987455
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 1.0,
+      "length": 0.25,
+      "inward_force": 9.218741675956231,
+      "inward_force_slope": -34.295736363428105
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 1.0,
+      "length": 0.5,
+      "inward_force": 3.66306841271372,
+      "inward_force_slope": -11.809402983891111
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 1.0,
+      "length": 1.0,
+      "inward_force": 1.4179892925404745,
+      "inward_force_slope": -1.2916398308124422
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 1.0,
+      "length": 2.0,
+      "inward_force": 1.0304009340175053,
+      "inward_force_slope": -0.07200002322560661
+    },
+    {
+      "mu": 2.0,
+      "endpoint_cosine": 1.0,
+      "length": 4.0,
+      "inward_force": 1.0003654682625016,
+      "inward_force_slope": -0.0007736329804353894
+    },
+    {
+      "mu": 2.0,
+      "radial_equilibrium": 0.837378359674915,
+      "angular_curvature": -0.27229437662928746,
+      "interpretation": "formal quadratic endpoint control, not a bound hadron"
+    }
+  ],
+  "sectors": [
+    {
+      "depth": 2,
+      "even_carrier": 2,
+      "hodge_gate": 0,
+      "normal_complex_rank": 4,
+      "guide_available_under_existing_premises": false,
+      "new_independent_color_selection": false
+    },
+    {
+      "depth": 3,
+      "even_carrier": 4,
+      "hodge_gate": 1,
+      "normal_complex_rank": 3,
+      "guide_available_under_existing_premises": true,
+      "new_independent_color_selection": false
+    },
+    {
+      "depth": 4,
+      "even_carrier": 4,
+      "hodge_gate": 1,
+      "normal_complex_rank": 3,
+      "guide_available_under_existing_premises": true,
+      "new_independent_color_selection": false
+    },
+    {
+      "depth": 5,
+      "even_carrier": 6,
+      "hodge_gate": 0,
+      "normal_complex_rank": 2,
+      "guide_available_under_existing_premises": false,
+      "new_independent_color_selection": false
+    },
+    {
+      "depth": 6,
+      "even_carrier": 6,
+      "hodge_gate": 0,
+      "normal_complex_rank": 2,
+      "guide_available_under_existing_premises": false,
+      "new_independent_color_selection": false
+    },
+    {
+      "depth": 10,
+      "even_carrier": 10,
+      "hodge_gate": 0,
+      "normal_complex_rank": 0,
+      "guide_available_under_existing_premises": false,
+      "new_independent_color_selection": false
+    }
+  ],
+  "limits": [
+    "guide is conditional on the independently varied commuting connection action",
+    "endpoint deformations are prescribed slow shapes, not frozen unequal carrier clocks",
+    "positive matrix controls are not a discretization claim for the actual transverse spectrum",
+    "the full transverse continuum is retained by the analytic spectral proof",
+    "free endpoint orientation makes opposite shapes an angular saddle",
+    "small length can invalidate the quadratic end-core approximation",
+    "three/four restriction is inherited, not independently derived by this response",
+    "full non-Abelian confinement, physical units and the master-field reduction remain open"
+  ]
+}

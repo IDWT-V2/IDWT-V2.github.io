@@ -1,0 +1,366 @@
+{
+  "created_at": "2026-10-11T16:01:30.159622+00:00",
+  "sources": {
+    "experiments/spatial-source-saturation-checks.py": "56bd144519dbd066da32c8950845465d3b461fb12306f8d13476535cef542f2e",
+    "experiments/spatial-band-curvature-checks.py": "1adbe50fbe865da9b237fe8d3dd424ee43dcb951fc8f8c01a31a3e4b9330f657"
+  },
+  "conditions": {
+    "ground-plus-first-shell exact overlap deficit": 1,
+    "equal ground polarization leaves a strict first-shell separation": 1,
+    "zonal kernel is ambient monogenic scalar component": 18,
+    "zonal kernel is ambient monogenic vector component": 18,
+    "positive zonal shells have physical orthogonal norms": 6,
+    "negative zonal shells have physical orthogonal norms": 6,
+    "both Dirac signs are explicitly retained": 6,
+    "kernel agrees with independently projected polynomial modes": 18,
+    "all spatial polarization overlap singular values agree": 18,
+    "two-point contact nonzero eigenvalues from independent frames": 18,
+    "distinct points cannot saturate an excited cumulative band": 12,
+    "ground-plus-first-shell overlap bounds every larger band": 12,
+    "bright spatial field has canonical unit norm": 28,
+    "complete cubic source Parseval identity across both Dirac signs": 28,
+    "full source leakage fraction is admissible": 28,
+    "smooth bright self-density strictly misses full contact saturation": 26,
+    "independent quadrature refinement": 56,
+    "two-point width correction agrees with existing spatial quantum metric": 14
+  },
+  "max_relative_errors": {
+    "positive zonal shells have physical orthogonal norms": 3.552713678800501e-15,
+    "negative zonal shells have physical orthogonal norms": 3.907985046680551e-15,
+    "both Dirac signs are explicitly retained": 8.526512829121202e-14,
+    "kernel agrees with independently projected polynomial modes": 5.169511351229718e-16,
+    "all spatial polarization overlap singular values agree": 4.440892098500626e-16,
+    "two-point contact nonzero eigenvalues from independent frames": 1.4509034919170382e-15,
+    "bright spatial field has canonical unit norm": 1.2361356382939448e-10,
+    "complete cubic source Parseval identity across both Dirac signs": 3.46965969635089e-10,
+    "independent quadrature refinement": 3.373000610241917e-10,
+    "two-point width correction agrees with existing spatial quantum metric": 8.815436955550327e-05
+  },
+  "cases": [
+    {
+      "particle": "W",
+      "depth": 2,
+      "mode_index": 76,
+      "cutoff": 75,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 2926,
+      "quartic_overlap": 1310.0815523254842,
+      "self_density_fraction_of_point_contact": 0.44773805616045254,
+      "cubic_source_squared_norm": 2554105.0581011903,
+      "selected_positive_fraction": 0.6821763933222745,
+      "omitted_positive_fraction": 0.22019374936912844,
+      "negative_Dirac_fraction": 0.09762985727436965,
+      "total_omitted_fraction": 0.31782360667772547,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9997969139376797,
+        "0.01": 0.9800728454472061,
+        "0.05": 0.6801880661341423
+      }
+    },
+    {
+      "particle": "Z",
+      "depth": 2,
+      "mode_index": 81,
+      "cutoff": 80,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 3321,
+      "quartic_overlap": 1486.9018651913127,
+      "self_density_fraction_of_point_contact": 0.44772715001243985,
+      "cubic_source_squared_norm": 3290145.6952746753,
+      "selected_positive_fraction": 0.6821634730951367,
+      "omitted_positive_fraction": 0.22020185745112442,
+      "negative_Dirac_fraction": 0.09763466940002419,
+      "total_omitted_fraction": 0.3178365269048633,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9997694946091416,
+        "0.01": 0.9774402007585354,
+        "0.05": 0.6576635112216415
+      }
+    },
+    {
+      "particle": "Higgs",
+      "depth": 2,
+      "mode_index": 95,
+      "cutoff": 94,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 4560,
+      "quartic_overlap": 2041.535722817917,
+      "self_density_fraction_of_point_contact": 0.44770520237235023,
+      "cubic_source_squared_norm": 6202709.385836016,
+      "selected_positive_fraction": 0.6821374734119294,
+      "omitted_positive_fraction": 0.22021817210559178,
+      "negative_Dirac_fraction": 0.09764435482944464,
+      "total_omitted_fraction": 0.31786252658807057,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9996834973713702,
+        "0.01": 0.9692709975690454,
+        "0.05": 0.6052886001672205
+      }
+    },
+    {
+      "particle": "down",
+      "depth": 3,
+      "mode_index": 1,
+      "cutoff": 0,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 1,
+      "quartic_overlap": 1.0,
+      "self_density_fraction_of_point_contact": 1.0,
+      "cubic_source_squared_norm": 1.0,
+      "selected_positive_fraction": 1.0,
+      "omitted_positive_fraction": 3.611118645726068e-35,
+      "negative_Dirac_fraction": 1.1674846890483646e-31,
+      "total_omitted_fraction": 0.0,
+      "two_equal_point_contact_fractions": {
+        "0.001": 1.0,
+        "0.01": 1.0,
+        "0.05": 1.0
+      }
+    },
+    {
+      "particle": "strange",
+      "depth": 3,
+      "mode_index": 4,
+      "cutoff": 3,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 20,
+      "quartic_overlap": 6.952499999999982,
+      "self_density_fraction_of_point_contact": 0.3476249999999991,
+      "cubic_source_squared_norm": 78.9702499999997,
+      "selected_positive_fraction": 0.6255530827537367,
+      "omitted_positive_fraction": 0.2846785480748878,
+      "negative_Dirac_fraction": 0.08976836917137117,
+      "total_omitted_fraction": 0.37444691724626333,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9999992781254103,
+        "0.01": 0.9999278166029212,
+        "0.05": 0.9981978752351715
+      }
+    },
+    {
+      "particle": "up",
+      "depth": 4,
+      "mode_index": 3,
+      "cutoff": 2,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 15,
+      "quartic_overlap": 4.428432900432895,
+      "self_density_fraction_of_point_contact": 0.2952288600288597,
+      "cubic_source_squared_norm": 32.962520284653564,
+      "selected_positive_fraction": 0.608795889047766,
+      "omitted_positive_fraction": 0.31154632819639877,
+      "negative_Dirac_fraction": 0.07965778275583354,
+      "total_omitted_fraction": 0.39120411095223395,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9999995566668016,
+        "0.01": 0.999955668015095,
+        "0.05": 0.998892509192007
+      }
+    },
+    {
+      "particle": "charm",
+      "depth": 4,
+      "mode_index": 20,
+      "cutoff": 19,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 8855,
+      "quartic_overlap": 1951.746859531468,
+      "self_density_fraction_of_point_contact": 0.22041184184432164,
+      "cubic_source_squared_norm": 7972132.661612558,
+      "selected_positive_fraction": 0.4934863056542193,
+      "omitted_positive_fraction": 0.39749390545728314,
+      "negative_Dirac_fraction": 0.10901978888883179,
+      "total_omitted_fraction": 0.5065136943457806,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9999855601746906,
+        "0.01": 0.9985577457687791,
+        "0.05": 0.9649740928506677
+      }
+    },
+    {
+      "particle": "top",
+      "depth": 4,
+      "mode_index": 72,
+      "cutoff": 71,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 1215450,
+      "quartic_overlap": 265262.853906256,
+      "self_density_fraction_of_point_contact": 0.21824250599058453,
+      "cubic_source_squared_norm": 148266920633.68872,
+      "selected_positive_fraction": 0.4900968762132015,
+      "omitted_positive_fraction": 0.399776032459644,
+      "negative_Dirac_fraction": 0.11012709130968638,
+      "total_omitted_fraction": 0.5099031237867985,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9998291512548554,
+        "0.01": 0.9831566438057853,
+        "0.05": 0.6998804325934291
+      }
+    },
+    {
+      "particle": "nu1",
+      "depth": 5,
+      "mode_index": 10,
+      "cutoff": 9,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 2002,
+      "quartic_overlap": 331.7880768914639,
+      "self_density_fraction_of_point_contact": 0.16572831013559636,
+      "cubic_source_squared_norm": 259572.79466996263,
+      "selected_positive_fraction": 0.44090757767724426,
+      "omitted_positive_fraction": 0.4512463375300027,
+      "negative_Dirac_fraction": 0.10784608479272204,
+      "total_omitted_fraction": 0.5590924223227558,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9999961160837976,
+        "0.01": 0.9996117308101568,
+        "0.05": 0.9903671517759394
+      }
+    },
+    {
+      "particle": "nu2",
+      "depth": 5,
+      "mode_index": 15,
+      "cutoff": 14,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 11628,
+      "quartic_overlap": 1868.6795315266263,
+      "self_density_fraction_of_point_contact": 0.1607051540700573,
+      "cubic_source_squared_norm": 8409189.52853332,
+      "selected_positive_fraction": 0.4317232478630023,
+      "omitted_positive_fraction": 0.45761297234432885,
+      "negative_Dirac_fraction": 0.11066377979264037,
+      "total_omitted_fraction": 0.5682767521369977,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9999919444983487,
+        "0.01": 0.9991949832893181,
+        "0.05": 0.9801949318663742
+      }
+    },
+    {
+      "particle": "nu3",
+      "depth": 5,
+      "mode_index": 22,
+      "cutoff": 21,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 65780,
+      "quartic_overlap": 10416.13575370159,
+      "self_density_fraction_of_point_contact": 0.15834806557770736,
+      "cubic_source_squared_norm": 263888777.05357283,
+      "selected_positive_fraction": 0.4274105941393106,
+      "omitted_positive_fraction": 0.46055181441993576,
+      "negative_Dirac_fraction": 0.11203759144101878,
+      "total_omitted_fraction": 0.5725894058606894,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9999836877223854,
+        "0.01": 0.9983709721881746,
+        "0.05": 0.9605827409684775
+      }
+    },
+    {
+      "particle": "electron",
+      "depth": 6,
+      "mode_index": 13,
+      "cutoff": 12,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 18564,
+      "quartic_overlap": 2214.31331168614,
+      "self_density_fraction_of_point_contact": 0.11927996723153092,
+      "cubic_source_squared_norm": 13396151.099999508,
+      "selected_positive_fraction": 0.3826520185341803,
+      "omitted_positive_fraction": 0.5062050345958045,
+      "negative_Dirac_fraction": 0.11114294687002452,
+      "total_omitted_fraction": 0.6173479814658197,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.999994038294824,
+        "0.01": 0.9994041216271873,
+        "0.05": 0.9852788864584776
+      }
+    },
+    {
+      "particle": "muon",
+      "depth": 6,
+      "mode_index": 35,
+      "cutoff": 34,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 3838380,
+      "quartic_overlap": 437126.3451415625,
+      "self_density_fraction_of_point_contact": 0.1138830301172793,
+      "cubic_source_squared_norm": 538217998831.5305,
+      "selected_positive_fraction": 0.37105539422161204,
+      "omitted_positive_fraction": 0.5140889098772072,
+      "negative_Dirac_fraction": 0.11485569590157954,
+      "total_omitted_fraction": 0.628944605778388,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9999635508649409,
+        "0.01": 0.9963661556798735,
+        "0.05": 0.9155793366793281
+      }
+    },
+    {
+      "particle": "tau",
+      "depth": 10,
+      "mode_index": 23,
+      "cutoff": 22,
+      "sphere_radius": "R; all angles dimensionless, physical separation R times angle",
+      "count": 64512240,
+      "quartic_overlap": 2255888.2553801234,
+      "self_density_fraction_of_point_contact": 0.03496837585208828,
+      "cubic_source_squared_norm": 23177789570731.688,
+      "selected_positive_fraction": 0.23306367315365809,
+      "omitted_positive_fraction": 0.6501953181393176,
+      "negative_Dirac_fraction": 0.11674100870694523,
+      "total_omitted_fraction": 0.7669363268463419,
+      "two_equal_point_contact_fractions": {
+        "0.001": 0.9999863751608966,
+        "0.01": 0.9986391078642012,
+        "0.05": 0.966925952896859
+      }
+    }
+  ],
+  "family_comparisons": [
+    {
+      "depth": 2,
+      "low": "W",
+      "high": "Higgs",
+      "within_sector_ratio_available": true,
+      "quartic_ratio_relative_to_simplex": -7.33772518335396e-05
+    },
+    {
+      "depth": 3,
+      "low": "down",
+      "high": "strange",
+      "within_sector_ratio_available": true,
+      "quartic_ratio_relative_to_simplex": -0.6523750000000009
+    },
+    {
+      "depth": 4,
+      "low": "up",
+      "high": "top",
+      "within_sector_ratio_available": true,
+      "quartic_ratio_relative_to_simplex": -0.26076838839790073
+    },
+    {
+      "depth": 5,
+      "low": "nu1",
+      "high": "nu3",
+      "within_sector_ratio_available": true,
+      "quartic_ratio_relative_to_simplex": -0.044532189774037834
+    },
+    {
+      "depth": 6,
+      "low": "electron",
+      "high": "muon",
+      "within_sector_ratio_available": true,
+      "quartic_ratio_relative_to_simplex": -0.04524596409199011
+    },
+    {
+      "depth": 10,
+      "low": "tau",
+      "high": "tau",
+      "within_sector_ratio_available": false,
+      "quartic_ratio_relative_to_simplex": 0.0
+    }
+  ],
+  "scope": "Actual positive spherical Dirac bands; density self-contact is a classical comparison, not electron position probability or a Lorentz-scalar master derivation."
+}

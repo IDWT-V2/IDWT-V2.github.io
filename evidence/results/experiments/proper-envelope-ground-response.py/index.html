@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>proper-envelope-ground-response.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/proper-envelope-ground-response.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="proper-envelope-ground-response.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/proper-envelope-ground-response.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="proper-envelope-ground-response.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>proper-envelope-ground-response.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/proper-envelope-ground-response.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Full current response of a unique quadratic count chart, without a clock block.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import numpy as np
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;discrete&#39;, ROOT/&#39;discrete-count-ground-response.py&#39;)
+discrete = module_from_spec(spec)
+spec.loader.exec_module(discrete)
+CHECKS, ERRORS = {}, {}
+
+
+def close(actual, expected, label):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    assert error &lt; 3e-10, (label, error)
+    CHECKS[label] = CHECKS.get(label, 0)+1
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+
+
+def main():
+    z = sp.Symbol(&#39;z&#39;)
+    cases = []
+    for depth in [2, 3, 4, 5, 6, 10]:
+        for harmonic in [1, 2, 3, 5, 10]:
+            real, imaginary, epsilon = discrete.exact_blocks(depth, harmonic)
+            upper, lower, divisor = harmonic+depth-1, harmonic, 2*harmonic+depth-1
+            scalar = sp.Matrix([-1, 2, -1, 2])*sp.Matrix([[-upper, 2*upper, -lower, 2*lower]])/(5*divisor)
+            real -= 2*scalar
+            physical_r, physical_i = discrete.physical_blocks(depth, harmonic)
+            u, v = np.sqrt(upper/divisor), np.sqrt(lower/divisor)
+            scalar_vector = np.array([-u, 2*u, -v, 2*v])/np.sqrt(5)
+            physical_r -= 2*np.outer(scalar_vector, scalar_vector)
+            scaling = np.diag([np.sqrt(upper)]*2+[np.sqrt(lower)]*2)
+            close(np.linalg.solve(scaling, physical_r@scaling), np.array(real, float),
+                  &#39;independent physical source blocks have exactly zero scalar-ratio curvature in the affine chart&#39;)
+            close(np.linalg.solve(scaling, physical_i@scaling), np.array(imaginary, float),
+                  &#39;the complete proper-current Hessian survives the affine count chart&#39;)
+            polynomial = sp.Poly((imaginary*real).charpoly(z).as_expr(), z)
+            close(np.poly(physical_i@physical_r), np.array(polynomial.all_coeffs(), float),
+                  &#39;the exact squared-frequency polynomial matches the physical normalized linearization&#39;)
+            nonzero, zeros = polynomial, 0
+            while nonzero.eval(0) == 0:
+                nonzero = sp.div(nonzero, sp.Poly(z, z))[0]
+                zeros += 1
+            negatives = int(nonzero.count_roots(-sp.oo, 0))
+            nonreal = nonzero.degree()-int(nonzero.count_roots(-sp.oo, sp.oo))
+            first_order = sp.BlockMatrix([[sp.zeros(4), imaginary], [-real, sp.zeros(4)]]).as_explicit()
+            nullities = [8-(first_order**k).rank() for k in [1, 2, 3]] if zeros else []
+            cases.append(dict(depth=depth, angular_harmonic=harmonic, ground_c_exact=&#39;3/5&#39;,
+                              diagnostic_epsilon_exact=str(epsilon), scalar_hessian_factor_exact=&#39;0&#39;,
+                              polynomial_exact=str(sp.factor(polynomial.as_expr())),
+                              zero_squared_frequency_multiplicity=zeros, negative_real_squared_frequencies=negatives,
+                              nonreal_squared_frequency_roots=nonreal, zero_generator_power_nullities=nullities,
+                              classification=&#39;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&#39;))
+        print(json.dumps(dict(depth=depth, first=cases[-5], last=cases[-1])), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    sources = [Path(__file__), ROOT/&#39;discrete-count-ground-response.py&#39;, ROOT/&#39;inverse-current-radial.py&#39;]
+    report = dict(experiment_key=&#39;proper-current-count-envelope-ground-response&#39;, created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest() for p in sources},
+                  evaluations=sum(CHECKS.values()), conditions=CHECKS, maximum_errors=ERRORS, cases=cases,
+                  limits=[&#39;the Lorentz-scalar proper-current chart is V=m*s+eta*sqrt(j_mu*j^mu)&#39;,
+                          &#39;the preferred-time envelope nonlinear unitary theorem does not transfer&#39;,
+                          &#39;these full-matrix ground controls are not the assigned excited particles or minimum-column Hessians&#39;,
+                          &#39;nonnegative real squared frequencies in this family would not establish full angular or nonlinear persistence&#39;])
+    path = ROOT/(&#39;proper-envelope-ground-response-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

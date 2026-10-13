@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ground-harmonic-uniform.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/ground-harmonic-uniform.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="ground-harmonic-uniform.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/ground-harmonic-uniform.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ground-harmonic-uniform.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>ground-harmonic-uniform.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/ground-harmonic-uniform.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Certify real nonnegative squared frequencies for every scalar harmonic.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;repair&#39;, ROOT/&#39;ground-harmonic-repair.py&#39;)
+repair = module_from_spec(spec)
+spec.loader.exec_module(repair)
+L, T, Z, X = sp.symbols(&#39;L t z x&#39;)
+C, KAPPA = sp.Rational(3, 10), sp.Rational(11, 10)
+
+
+def symbolic_blocks(depth):
+    h = sp.Rational(depth, 2)
+    first = sum(sp.Rational(1, j) for j in range(1, depth+1))
+    second = first**2-sum(sp.Rational(1, j*j) for j in range(1, depth+1))
+    eta = 1-(1-C*C)*first/(h*second)
+    vector = 1-C*C/(h*first)
+    u, v = (L+depth-1)/(2*L+depth-1), L/(2*L+depth-1)
+    aa, bb, ab = (1+C)/2, (1-C)/2, X/2
+    beta = sp.Matrix([[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]])
+    free = sp.diag(h+L, -h-L, -h-L+1, h+L-1)*C/h+X*beta-sp.eye(4)
+    scalar = sp.Matrix([[u*bb, -u*ab, v*bb, -v*ab],
+                        [-u*ab, u*aa, -v*ab, v*aa],
+                        [u*bb, -u*ab, v*bb, -v*ab],
+                        [-u*ab, u*aa, -v*ab, v*aa]])
+    radial = sp.Matrix([[v*aa, -v*ab, -v*aa, v*ab],
+                        [-v*ab, v*bb, v*ab, -v*bb],
+                        [-u*aa, u*ab, u*aa, -u*ab],
+                        [u*ab, -u*bb, -u*ab, u*bb]])
+    tensor = sp.Matrix([[v*bb, -v*ab, -v*bb, v*ab],
+                        [-v*ab, v*aa, v*ab, -v*aa],
+                        [-u*bb, u*ab, u*bb, -u*ab],
+                        [u*ab, -u*aa, -u*ab, u*aa]])
+    return free+2*eta*scalar+2*KAPPA*vector*tensor, free+2*vector*radial
+
+
+def positive_certificate(expression):
+    numerator, denominator = map(sp.factor, sp.fraction(sp.cancel(expression)))
+    num = sp.Poly(sp.expand(numerator.subs(L, T+2)), T)
+    den = sp.Poly(sp.expand(denominator.subs(L, T+2)), T)
+    assert all(a &gt;= 0 for a in num.all_coeffs()) and num.TC() &gt; 0
+    assert all(a &gt;= 0 for a in den.all_coeffs()) and den.TC() &gt; 0
+    return {&#39;expression&#39;: str(sp.factor(expression)),
+            &#39;shifted_numerator_coefficients&#39;: list(map(str, num.all_coeffs())),
+            &#39;shifted_denominator_coefficients&#39;: list(map(str, den.all_coeffs()))}
+
+
+def main():
+    cases = []
+    for depth in [3, 4]:
+        real, imaginary = symbolic_blocks(depth)
+        raw = sp.Poly((imaginary*real).charpoly(Z).as_expr(), X)
+        expression = sp.factor(sp.rem(raw, sp.Poly(X*X-1+C*C, X)).as_expr())
+        assert not expression.has(X)
+        polynomial = sp.Poly(expression, Z)
+        assert polynomial.LC() == 1 and polynomial.degree() == 4
+        for degree in range(2, 7):
+            expected = repair.polynomial(depth, degree, C).as_expr().subs(repair.K, KAPPA)
+            assert sp.cancel(expression.subs(L, degree)-expected) == 0
+        coefficients = polynomial.all_coeffs()
+        elementary = [positive_certificate((-1)**j*a) for j, a in enumerate(coefficients[1:], 1)]
+        sums = [sp.Integer(4)]
+        for k in range(1, 7):
+            if k &lt;= 4:
+                value = -sum(coefficients[j]*sums[k-j] for j in range(1, k))-k*coefficients[k]
+            else:
+                value = -sum(coefficients[j]*sums[k-j] for j in range(1, 5))
+            sums.append(sp.factor(value))
+        hermite = sp.Matrix(4, 4, lambda i, j: sums[i+j])
+        companion = sp.Matrix([[0, 0, 0, -coefficients[4]],
+                               [1, 0, 0, -coefficients[3]],
+                               [0, 1, 0, -coefficients[2]],
+                               [0, 0, 1, -coefficients[1]]])
+        assert (hermite*companion-companion.T*hermite).applyfunc(sp.cancel) == sp.zeros(4)
+        minors = [positive_certificate(hermite[:j, :j].det()) for j in range(1, 5)]
+        first = sp.Poly(sp.cancel(expression.subs(L, 1)/Z), Z)
+        assert first.degree() == 3 and first.count_roots(0, sp.oo) == 3
+        xr = sp.sqrt(1-C*C)
+        xx, yy = real.subs({L: 1, X: xr}), imaginary.subs({L: 1, X: xr})
+        generator = sp.BlockMatrix([[sp.zeros(4), yy], [-xx, sp.zeros(4)]]).as_explicit()
+        nullities = [8-(generator**j).rank() for j in [1, 2, 3]]
+        cases.append({&#39;depth&#39;: depth, &#39;c_exact&#39;: str(C), &#39;kappa_exact&#39;: str(KAPPA),
+                      &#39;polynomial&#39;: str(expression), &#39;first_harmonic_cubic&#39;: str(first.as_expr()),
+                      &#39;elementary_symmetric_positive_certificates&#39;: elementary,
+                      &#39;hermite_leading_minor_positive_certificates&#39;: minors,
+                      &#39;positive_trace_metric_symmetrizes_companion&#39;: True,
+                      &#39;first_harmonic_generator_power_nullities&#39;: nullities,
+                      &#39;classification&#39;: &#39;all integer harmonics L&gt;=1 have no exponentially growing eigenvalue in this reducing family&#39;})
+        print(json.dumps({&#39;depth&#39;: depth, &#39;certified_all_harmonics&#39;: True, &#39;nullities&#39;: nullities}), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output = ROOT/(&#39;ground-harmonic-uniform-results-&#39;+stamp+&#39;.json&#39;)
+    report = {&#39;experiment_key&#39;: &#39;uniform-ground-harmonic-no-growth-window&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                          for p in [Path(__file__), ROOT/&#39;ground-harmonic-repair.py&#39;, ROOT/&#39;inverse-current-ground-proof.py&#39;, ROOT/&#39;inverse-current-radial.py&#39;]},
+              &#39;cases&#39;: cases,
+              &#39;limits&#39;: [&#39;ground states and exactly reducing rotational spatial family only&#39;,
+                         &#39;no assigned excited electron or full angular stability follows&#39;,
+                         &#39;kappa=11/10 changes the potential and lies outside positive blends&#39;,
+                         &#39;zero-frequency Jordan structure is reported separately from exponential spectral growth&#39;,
+                         &#39;no color selection or observed decay claim is made&#39;]}
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;report&#39;: str(output)}), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

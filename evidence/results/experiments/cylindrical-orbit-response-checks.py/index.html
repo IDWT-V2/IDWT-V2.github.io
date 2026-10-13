@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>cylindrical-orbit-response-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/cylindrical-orbit-response-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="cylindrical-orbit-response-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/cylindrical-orbit-response-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="cylindrical-orbit-response-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>cylindrical-orbit-response-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/cylindrical-orbit-response-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Test actual relative equilibria with a frozen lower-depth nuclear support.&quot;&quot;&quot;
+
+import hashlib
+import importlib.util
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+import numpy as np
+from scipy.integrate import solve_ivp
+import sympy as sp
+
+
+ROOT = Path(__file__).parent
+SPEC = importlib.util.spec_from_file_location(&#39;canonical_orbit&#39;, ROOT/&#39;canonical-orbit-response-checks.py&#39;)
+BASE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(BASE)
+CHECKS = []
+
+
+def zero(name, expression):
+    values = list(expression) if isinstance(expression, sp.MatrixBase) else [expression]
+    if any(sp.simplify(value) != 0 for value in values):
+        raise AssertionError((name, expression))
+    CHECKS.append(name)
+
+
+def symbolic():
+    w, n, M, g = sp.symbols(&#39;w n M g&#39;, positive=True)
+    A = sp.diag(sp.Matrix([[0, -w], [w, 0]]), sp.Matrix([[0, -n], [n, 0]]))
+    q = sp.Matrix([1, 0, 1, 0])
+    v = A*q
+    D = 1-M*(w*w+n*n)
+    denominator = (1-M*(w+n)**2)*(1-M*(w-n)**2)
+    c = g*n*(-1+M*(3*w*w+n*n))/denominator
+    d = g*w*(1-M*(w*w+3*n*n))/denominator
+    B = sp.Matrix([[0, -g*w, 0, c], [g*w, 0, d, 0],
+                   [0, -d, 0, -g*n], [-c, 0, g*n, 0]])
+    zero(&#39;complete rotating source response&#39;, B+M*(A*(A*B-B*A)-(A*B-B*A)*A)+g*(q*v.T-v*q.T))
+    F = (-(w*w+n*n)+M*(w**4+n**4+6*w*w*n*n))/denominator
+    zero(&#39;mixed response contraction&#39;, n*c-w*d-g*F)
+    force = (A*A+g*(A*B+B*A))*q
+    zero(&#39;visible force balance&#39;, force[0]-(-w*w*(1+2*g*g)+g*g*F))
+    zero(&#39;unsupported force balance&#39;, force[2]-(-n*n*(1+2*g*g)+g*g*F))
+    zero(&#39;equal rotation cannot bind unsupported circle&#39;, F.subs(n, w)+2*w*w)
+    L, y = sp.symbols(&#39;L y&#39;, positive=True)
+    f = (-(L*L+1)+y*(L**4+6*L*L+1))/((1-y*(L+1)**2)*(1-y*(L-1)**2))
+    zero(&#39;response as sum and difference clocks&#39;, F.subs({w: L*n, M: y/n**2})-n**2*f)
+    C = 2+1/g**2
+    polynomial = C*(L*L-1)**2*y*y-(2*C*(L*L+1)+L**4+6*L*L+1)*y+C+L*L+1
+    zero(&#39;equal-radius source equation&#39;, (C-f)*(1-y*(L+1)**2)*(1-y*(L-1)**2)-polynomial)
+    q5 = sp.Matrix(sp.symbols(&#39;Q0:5&#39;))
+    support = sp.diag(1, 1, 1, 0, 0)
+    radius = sp.sqrt(q5.dot(support*q5))
+    force = -support*q5/radius**3
+    potential = -1/radius
+    zero(&#39;supported-space potential gradient&#39;, force+sp.Matrix([sp.diff(potential, z) for z in q5]))
+    torque = q5*force.T-force*q5.T
+    zero(&#39;supported rotational charge&#39;, torque[:3, :3])
+    zero(&#39;unsupported rotational charge&#39;, torque[3:, 3:])
+    return {&#39;ratio_polynomial&#39;: str(polynomial), &#39;response&#39;: str(F),
+            &#39;source_resonances&#39;: &#39;M*(w+n)**2=1 or M*(w-n)**2=1&#39;}
+
+
+def rhs(time, state, depth, coupling, inertia, A):
+    q, p, B, P = BASE.unpack(state, depth)
+    support = np.zeros_like(q)
+    support[:min(3, depth)] = q[:min(3, depth)]
+    v = p-coupling*B@q
+    qd = v-A@q
+    pd = -coupling*B@v-support/(support@support)**1.5-A@p
+    Bd = P/inertia-A@B+B@A
+    Pd = -B-coupling*(np.outer(q, v)-np.outer(v, q))-A@P+P@A
+    return np.concatenate([qd, pd, BASE.upper(Bd), BASE.upper(Pd)])
+
+
+def equilibrium(depth, ratio, high, coupling=1.0):
+    C = 2+1/coupling**2
+    qa = C*(ratio**2-1)**2
+    qb = -(2*C*(ratio**2+1)+ratio**4+6*ratio**2+1)
+    qc = C+ratio**2+1
+    discriminant = qb*qb-4*qa*qc
+    y = (-qb+np.sqrt(discriminant))/(2*qa) if high else 2*qc/(-qb+np.sqrt(discriminant))
+    nu = np.sqrt(1/((1+2*coupling**2)*(ratio**2-1)))
+    omega = ratio*nu
+    inertia = y/(nu*nu)
+    A = np.zeros((depth, depth))
+    A[0, 1], A[1, 0], A[3, 4], A[4, 3] = -omega, omega, -nu, nu
+    q = np.zeros(depth)
+    q[0], q[3] = 1, 1
+    v = A@q
+    basis = []
+    for i, j in BASE.pairs(depth):
+        E = np.zeros((depth, depth));E[i, j], E[j, i] = 1, -1
+        basis.append(E)
+    operator = np.column_stack([BASE.upper(E+inertia*(A@(A@E-E@A)-(A@E-E@A)@A)) for E in basis])
+    b = np.linalg.solve(operator, -coupling*BASE.upper(np.outer(q, v)-np.outer(v, q)))
+    B = BASE.skew(b, depth)
+    P = inertia*(A@B-B@A)
+    p = (A+coupling*B)@q
+    state = np.concatenate([q, p, BASE.upper(B), BASE.upper(P)])
+    return state, A, inertia, operator, omega, nu
+
+
+def energy(state, depth, coupling, inertia):
+    q, p, B, P = BASE.unpack(state, depth)
+    v = p-coupling*B@q
+    radius = np.linalg.norm(q[:min(3, depth)])
+    return v@v/2+np.sum(BASE.upper(P)**2)/(2*inertia)+np.sum(BASE.upper(B)**2)/2-1/radius
+
+
+if __name__ == &#39;__main__&#39;:
+    symbols = symbolic()
+    print(json.dumps(symbols, indent=2), flush=True)
+    cases = []
+    structural = [{&#39;depth&#39;: d, &#39;nuclear_support_rank&#39;: min(3, d),
+                   &#39;unsupported_rotation_planes&#39;: (d-min(3, d))//2,
+                   &#39;two-plane_branch_available&#39;: d &gt;= 5} for d in (2, 3, 4, 5, 6, 10)]
+    growth_runs = []
+    conservation = []
+    for depth in (2, 3, 4, 5, 6, 10):
+        rng = np.random.default_rng(20261011+depth)
+        size = depth*(depth-1)//2
+        state = rng.normal(size=2*depth+2*size)*0.1
+        state[0] += 1
+        derivative = rhs(0, state, depth, 0.7, 1.3, np.zeros((depth, depth)))
+        step = 2e-6
+        high, low = state+step*derivative, state-step*derivative
+        energy_defect = abs((energy(high, depth, 0.7, 1.3)-energy(low, depth, 0.7, 1.3))/(2*step))
+        def charge(y):
+            q, p, B, P = BASE.unpack(y, depth)
+            return np.outer(q, p)-np.outer(p, q)-(B@P-P@B)
+        torque = (charge(high)-charge(low))/(2*step)
+        rank = min(3, depth)
+        allowed_defect = max(np.linalg.norm(torque[:rank, :rank]), np.linalg.norm(torque[rank:, rank:]))
+        if max(energy_defect, allowed_defect) &gt; 2e-8:
+            raise AssertionError((&#39;energy or applicable rotational charge&#39;, depth, energy_defect, allowed_defect))
+        conservation.append({&#39;depth&#39;: depth, &#39;energy_derivative_defect&#39;: energy_defect,
+                             &#39;applicable_charge_derivative_defect&#39;: allowed_defect,
+                             &#39;full_charge_derivative_norm&#39;: float(np.linalg.norm(torque))})
+    for ratio in (1.5, 2.0, 2.5, 3.0, 4.0):
+        for high in (False, True):
+            for depth in (5, 6, 10):
+                state, A, inertia, operator, omega, nu = equilibrium(depth, ratio, high)
+                residual = np.max(np.abs(rhs(0, state, depth, 1.0, inertia, A)))
+                if residual &gt; 2e-10:
+                    raise AssertionError((&#39;equilibrium&#39;, ratio, high, depth, residual))
+                jac = np.column_stack([np.imag(rhs(0, state.astype(complex)+1e-25j*np.eye(len(state))[i],
+                                                  depth, 1.0, inertia, A))/1e-25 for i in range(len(state))])
+                direction = np.random.default_rng(20261011+depth).normal(size=len(state))
+                direction /= np.linalg.norm(direction)
+                step = 1e-6
+                finite = (rhs(0, state+step*direction, depth, 1.0, inertia, A)-
+                          rhs(0, state-step*direction, depth, 1.0, inertia, A))/(2*step)
+                jacobian_defect = np.max(np.abs(finite-jac@direction))
+                if jacobian_defect &gt; 2e-8:
+                    raise AssertionError((&#39;independent Jacobian&#39;, ratio, high, depth, jacobian_defect))
+                values, vectors = np.linalg.eig(jac)
+                growth = float(max(values.real))
+                cases.append({&#39;depth&#39;: depth, &#39;ratio&#39;: ratio, &#39;branch&#39;: &#39;high-inertia&#39; if high else &#39;low-inertia&#39;,
+                              &#39;source_inertia&#39;: inertia, &#39;orbit_clock&#39;: omega, &#39;unsupported_clock&#39;: nu,
+                              &#39;source_operator_condition&#39;: float(np.linalg.cond(operator)),
+                              &#39;equilibrium_residual&#39;: residual, &#39;max_real_eigenvalue&#39;: growth,
+                              &#39;independent_jacobian_defect&#39;: jacobian_defect,
+                              &#39;phase_space_dimension&#39;: len(state),
+                              &#39;eigenvalues&#39;: [[float(z.real), float(z.imag)] for z in values]})
+                if ratio == 2 and depth == 6 and growth &gt; 1e-5:
+                    idx = int(np.argmax(values.real))
+                    mode = vectors[:, idx]
+                    initial = mode.real/np.linalg.norm(mode.real)
+                    duration = 4/growth
+                    amplitude = 1e-8
+                    solution = solve_ivp(lambda t, y: rhs(t, y, depth, 1.0, inertia, A),
+                                         (0, duration), state+amplitude*initial, method=&#39;DOP853&#39;,
+                                         rtol=1e-12, atol=1e-13)
+                    if not solution.success:
+                        raise AssertionError(solution.message)
+                    # Compare with the complete real linear flow, including any imaginary frequency.
+                    from scipy.linalg import expm
+                    expected = expm(jac*duration)@initial
+                    actual = (solution.y[:, -1]-state)/amplitude
+                    relative = np.linalg.norm(actual-expected)/np.linalg.norm(expected)
+                    if relative &gt; 2e-3:
+                        raise AssertionError((&#39;nonlinear unstable mode&#39;, high, relative))
+                    growth_runs.append({&#39;branch&#39;: &#39;high-inertia&#39; if high else &#39;low-inertia&#39;,
+                                        &#39;depth&#39;: depth, &#39;ratio&#39;: ratio, &#39;duration&#39;: duration,
+                                        &#39;linear_amplification&#39;: float(np.linalg.norm(expected)),
+                                        &#39;relative_growth_error&#39;: float(relative),
+                                        &#39;energy_error&#39;: abs(energy(solution.y[:, -1], depth, 1, inertia)-
+                                                            energy(solution.y[:, 0], depth, 1, inertia)),
+                                        &#39;rhs_evaluations&#39;: solution.nfev})
+    path = Path(__file__)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = {&#39;created_utc&#39;: stamp, &#39;sources&#39;: {
+        &#39;experiments/cylindrical-orbit-response-checks.py&#39;: hashlib.sha256(path.read_bytes()).hexdigest(),
+        &#39;experiments/canonical-orbit-response-checks.py&#39;: hashlib.sha256((ROOT/&#39;canonical-orbit-response-checks.py&#39;).read_bytes()).hexdigest()},
+        &#39;exact_checks&#39;: CHECKS, &#39;symbolic&#39;: symbols, &#39;structural_controls&#39;: structural,
+        &#39;equilibria&#39;: cases, &#39;nonlinear_growth&#39;: growth_runs, &#39;conservation&#39;: conservation}
+    destination = path.with_name(&#39;cylindrical-orbit-response-results-&#39;+stamp+&#39;.json&#39;)
+    destination.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;report&#39;: str(destination), &#39;exact_checks&#39;: len(CHECKS), &#39;structural_controls&#39;: structural,
+                      &#39;cases&#39;: len(cases), &#39;resolved_unstable_cases&#39;: sum(c[&#39;max_real_eigenvalue&#39;] &gt; 1e-5 for c in cases),
+                      &#39;max_equilibrium_residual&#39;: max(c[&#39;equilibrium_residual&#39;] for c in cases),
+                      &#39;max_independent_jacobian_defect&#39;: max(c[&#39;independent_jacobian_defect&#39;] for c in cases),
+                      &#39;nonlinear_growth&#39;: growth_runs}, indent=2), flush=True)
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

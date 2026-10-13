@@ -1,0 +1,122 @@
+{
+  "created_at": "2026-10-11T12:27:41.501490+00:00",
+  "experiment": "phase-complete-normal-coefficient-polarization",
+  "sources": {
+    "experiments/full-coefficient-checks.py": "9b84eebf80aaaf804c57b2a518f1ee43998581c7ac8e0cc01c6b982fd44806fe"
+  },
+  "exact_checks": 36,
+  "checks": [
+    "complete radial momentum equation",
+    "weight zero positive solution",
+    "weight one positive solution",
+    "all weights convex form",
+    "full coefficient time metric",
+    "full coefficient radial metric",
+    "full coefficient Killing norm",
+    "complete determinant quadratic metric variation",
+    "complete rotating-frame transverse energy",
+    "active rotating phase radial determinant",
+    "active stationary phase radial determinant",
+    "d2 actual Spin shift ()",
+    "d2 actual Spin shift (0, 1)",
+    "d2 actual Spin shift (0, 2)",
+    "d2 actual Spin shift (0, 3)",
+    "d2 actual Spin shift (1, 2)",
+    "d2 actual Spin shift (1, 3)",
+    "d2 actual Spin shift (2, 3)",
+    "d2 actual Spin shift (0, 1, 2, 3)",
+    "d2 full chiral coefficient count",
+    "d3 actual Spin shift ()",
+    "d3 actual Spin shift (0, 1)",
+    "d3 actual Spin shift (0, 2)",
+    "d3 actual Spin shift (1, 2)",
+    "d3 full chiral coefficient count",
+    "d4 actual Spin shift ()",
+    "d4 actual Spin shift (0, 1)",
+    "d4 actual Spin shift (0, 2)",
+    "d4 actual Spin shift (1, 2)",
+    "d4 full chiral coefficient count",
+    "d5 actual Spin shift ()",
+    "d5 actual Spin shift (0, 1)",
+    "d5 full chiral coefficient count",
+    "d6 actual Spin shift ()",
+    "d6 actual Spin shift (0, 1)",
+    "d6 full chiral coefficient count"
+  ],
+  "cases": [
+    {
+      "depth": 2,
+      "normal_rank": 4,
+      "weights": [
+        "0",
+        "1",
+        "1/2",
+        "1/2",
+        "1/2",
+        "1/2",
+        "0",
+        "1"
+      ],
+      "zero_weight_complex_count": 2,
+      "half_weight_complex_count": 4,
+      "unit_weight_complex_count": 2
+    },
+    {
+      "depth": 3,
+      "normal_rank": 3,
+      "weights": [
+        "0",
+        "1",
+        "1/2",
+        "1/2"
+      ],
+      "zero_weight_complex_count": 1,
+      "half_weight_complex_count": 2,
+      "unit_weight_complex_count": 1
+    },
+    {
+      "depth": 4,
+      "normal_rank": 3,
+      "weights": [
+        "0",
+        "1",
+        "1/2",
+        "1/2"
+      ],
+      "zero_weight_complex_count": 1,
+      "half_weight_complex_count": 2,
+      "unit_weight_complex_count": 1
+    },
+    {
+      "depth": 5,
+      "normal_rank": 2,
+      "weights": [
+        "0",
+        "1"
+      ],
+      "zero_weight_complex_count": 1,
+      "half_weight_complex_count": 0,
+      "unit_weight_complex_count": 1
+    },
+    {
+      "depth": 6,
+      "normal_rank": 2,
+      "weights": [
+        "0",
+        "1"
+      ],
+      "zero_weight_complex_count": 1,
+      "half_weight_complex_count": 0,
+      "unit_weight_complex_count": 1
+    },
+    {
+      "depth": 10,
+      "normal_rank": 0,
+      "weights": [
+        "0"
+      ],
+      "status": "no-active-normal-generator"
+    }
+  ],
+  "scope": "A fixed-norm normal-spinor-valued positive wave field with a selected combined phase/normal generator. The exact polarization positivity is conditional on a smooth monotone localized radial branch. No Lorentz Dirac kinetic law, observed spin, electric charge or discrete frequency selection is derived."
+}

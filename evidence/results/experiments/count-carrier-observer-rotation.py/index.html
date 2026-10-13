@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>count-carrier-observer-rotation.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/count-carrier-observer-rotation.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="count-carrier-observer-rotation.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/count-carrier-observer-rotation.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="count-carrier-observer-rotation.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>count-carrier-observer-rotation.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/count-carrier-observer-rotation.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Full spinorial Lie derivatives of the actual zonal count fields.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from itertools import combinations
+from math import comb
+from pathlib import Path
+import json
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;carrier&#39;, ROOT/&#39;minimal-count-carrier.py&#39;)
+carrier = module_from_spec(spec)
+spec.loader.exec_module(carrier)
+COUNTS, ERRORS = {}, {}
+
+
+def close(actual, expected, label, tolerance=2e-10):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    if error &gt;= tolerance:
+        raise AssertionError((label, error))
+    COUNTS[label] = COUNTS.get(label, 0)+1
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+
+
+def main():
+    rng = np.random.default_rng(202610120905)
+    prepared = {d: carrier.preparation(d) for d in [2, 3, 4, 5, 6, 10]}
+    cases = []
+    for name, depth, index in carrier.forward.radial.ASSIGNMENTS:
+        alpha, beta, ambient, seed, phi = prepared[depth]
+        eye = np.eye(len(beta))
+        level = index-1
+        h = level+depth/2
+        first = carrier.forward.radial.polynomial(depth, level)[1]
+        largest = max(carrier.forward.radial.polynomial(depth, n-1)[1]
+                      for _, d, n in carrier.forward.radial.ASSIGNMENTS if d == depth)
+        c = float(.3*first/largest)
+        mixing = np.sqrt((1+c)/2)*eye+np.sqrt((1-c)/2)*beta
+        normal = np.sqrt(comb(level+depth-1, depth-1))
+        observer = list(combinations(range(3 if depth &gt;= 3 else 2), 2))
+        generators = [-.5j*alpha[a]@alpha[b] for a, b in observer]
+        casimir = sum((g@g for g in generators), np.zeros_like(eye, dtype=complex))
+        close(casimir, (.75 if depth &gt;= 3 else .25)*eye,
+              &#39;the center-fixing observer rotation Casimir is three quarters for matter depths and one quarter for the depth-two circle&#39;)
+        for generator in generators:
+            close(np.vdot(seed, generator@seed), 0.,
+                  &#39;balanced seed has zero mean observer generator despite a nonzero representation Casimir&#39;)
+        for sample in range(5):
+            position = rng.normal(size=depth+1)
+            position /= np.linalg.norm(position)
+            t = position[0]
+            sine = np.linalg.norm(position[1:])
+            direction = position[1:]/sine
+            frame_rotation = np.eye(depth+1)
+            frame_rotation[0, 0] = t
+            frame_rotation[0, 1:] = -sine*direction
+            frame_rotation[1:, 0] = sine*direction
+            frame_rotation[1:, 1:] += (t-1)*np.outer(direction, direction)
+            frame = frame_rotation[:, 1:]
+            close(frame_rotation[:, 0], position, &#39;the physical radial frame matches its sphere position&#39;)
+            killing = np.sqrt((1+t)/2)*eye+1j*np.sqrt((1-t)/2)*sum(ui*al for ui, al in zip(direction, alpha))
+            close(killing.conj().T@beta@killing,
+                  sum(xi*ga for xi, ga in zip(position, ambient)),
+                  &#39;the actual Killing frame maps its grading direction to the sphere normal&#39;)
+            v = frame[0, :]
+            av = sum(vi*al for vi, al in zip(v, alpha))
+            aa, bb, ap, bp = carrier.forward.orientation.polynomials(depth, level, np.array(t))
+            matrix = aa*eye-1j*bb*av
+            bare = matrix@killing@seed/normal
+            jets = [(ap*v[i]*eye-1j*(bp*v[i]*av-t*bb*al)+.5j*matrix@al)@killing@seed/normal
+                    for i, al in enumerate(alpha)]
+            close(-1j*sum(al@jet for al, jet in zip(alpha, jets)), h*bare,
+                  &#39;the actual globally related Killing value and covariant jets remain in the intended shell&#39;)
+            for (a, b), generator in zip(observer, generators):
+                rotation = np.zeros((depth+1, depth+1))
+                rotation[b+1, a+1] = 1
+                rotation[a+1, b+1] = -1
+                velocity = frame.T@rotation@position
+                gradient = frame.T@rotation@frame
+                covariant_transport = sum(vi*jet for vi, jet in zip(velocity, jets))
+                spin_term = sum(gradient[j, i]*alpha[i]@alpha[j] for i in range(depth) for j in range(depth))/4
+                full_rotation = 1j*(-covariant_transport-spin_term@bare)
+                right_rotation = matrix@killing@generator@seed/normal
+                close(full_rotation, right_rotation,
+                      &#39;the full spinorial Lie derivative including orbital transport intertwines exactly with the seed rotation&#39;)
+                close(mixing@full_rotation, mixing@right_rotation,
+                      &#39;the same full observer rotation intertwining survives the massive count map&#39;)
+                close(np.linalg.norm(covariant_transport+spin_term@bare), np.linalg.norm(right_rotation),
+                      &#39;orbital and spin connection terms are both retained in the total rotation&#39;)
+        cases.append(dict(particle=name, depth=depth, inferred_index=index,
+                          observer_group=&#39;center-fixing Spin(3)&#39; if depth &gt;= 3 else &#39;center-fixing Spin(2)&#39;,
+                          observer_casimir=&#39;3/4&#39; if depth &gt;= 3 else &#39;1/4&#39;,
+                          mean_noether_rotation=&#39;0 under the balanced seed&#39;,
+                          classification=&#39;exact full geometric transformation law, not a derived observed classical spin charge&#39;))
+        print(json.dumps(dict(completed=name, depth=depth)), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    sources = [Path(__file__), ROOT/&#39;minimal-count-carrier.py&#39;, ROOT/&#39;forward-count-action.py&#39;,
+               ROOT/&#39;inverse-current-radial.py&#39;, ROOT/&#39;excited-shell-orientation-current.py&#39;]
+    report = dict(experiment_key=&#39;count-carrier-observer-rotation&#39;, created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest() for p in sources},
+                  evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS, cases=cases,
+                  limits=[&#39;the observer rotates three tangent directions about the zonal kernel center at matter depths&#39;,
+                          &#39;spinor columns transform as scalar-labelled spinors; another column lift changes the representation premise&#39;,
+                          &#39;Casimir three quarters is an exact transformation property, not a nonzero classical spin Noether charge&#39;,
+                          &#39;depth two has only a center-fixing rotation circle, so this does not derive photon or massive boson spin&#39;,
+                          &#39;literal deterministic electron orbit motion is not replaced by this internal field transformation&#39;])
+    path = ROOT/(&#39;count-carrier-observer-rotation-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

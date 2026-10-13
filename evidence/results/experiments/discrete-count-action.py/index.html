@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>discrete-count-action.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/discrete-count-action.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="discrete-count-action.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/discrete-count-action.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="discrete-count-action.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>discrete-count-action.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/discrete-count-action.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;A forward constitutive rule built only from integer spatial counts.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from fractions import Fraction
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from math import comb
+from pathlib import Path
+import json
+
+import mpmath as mp
+import numpy as np
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;forward&#39;, ROOT/&#39;forward-count-action.py&#39;)
+forward = module_from_spec(spec)
+spec.loader.exec_module(forward)
+COUNTS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def high(value):
+    return mp.mpf(value.numerator)/value.denominator
+
+
+def close(actual, expected, label, tolerance=3e-7):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    check(error &lt; tolerance, label)
+
+
+def selector(c, epsilon, depth):
+    # Forward adjacent differences are strictly increasing at every occupied depth.
+    level = 0
+    while epsilon*comb(level+depth, depth-1) &lt; c:
+        level += 1
+    return level
+
+
+def field_potential(field, epsilon, alpha, beta, depth):
+    _, _, _, norm, support = forward.bilinears(field, alpha, beta)
+    level = selector(support/norm, epsilon, depth)
+    h = level+depth/2
+    return epsilon*norm*comb(level+depth, depth)-h*support, level
+
+
+def main():
+    mp.mp.dps = 90
+    rng = np.random.default_rng(202610120801)
+    cases = []
+    for name, depth, index in forward.radial.ASSIGNMENTS:
+        level, hhq = index-1, Fraction(2*(index-1)+depth, 2)
+        count, first, _ = forward.count_data(depth, level)
+        epsq = Fraction(3, 10)/max(forward.count_data(depth, n-1)[1]
+                                 for _, d, n in forward.radial.ASSIGNMENTS if d == depth)
+        original_c = epsq*first
+        lower = epsq*comb(level+depth-1, depth-1) if level else Fraction(0)
+        upper = epsq*comb(level+depth, depth-1)
+        check(lower &lt; original_c &lt; upper,
+              &#39;every reconstructed polarization lies strictly inside the corresponding integer-count selection interval&#39;)
+        check(selector(original_c, epsq, depth) == level,
+              &#39;a forward search using only integer counts independently selects the inferred shell&#39;)
+        # The adjacent-difference theorem certifies the global minimum on all nonnegative labels.
+        last_allowed = selector(Fraction(1), epsq, depth)
+        last = max(level+5, last_allowed+5)
+        costs = [epsq*comb(k+depth, depth)-Fraction(2*k+depth, 2)*original_c for k in range(last+1)]
+        check(min(range(len(costs)), key=costs.__getitem__) == level,
+              &#39;an independent exhaustive finite comparison agrees with the all-label convex-difference theorem&#39;)
+        for k in range(last):
+            check(costs[k+1]-costs[k] == epsq*comb(k+depth, depth-1)-original_c,
+                  &#39;exact adjacent count differences certify the minimum and its increasing tail&#39;)
+        selected_intervals = []
+        # The branch contains a family, rather than one retuned polarization.
+        for weight in [Fraction(1, 4), Fraction(1, 2), Fraction(3, 4)]:
+            cq = lower+(min(upper, Fraction(1))-lower)*weight
+            c, hh, epsilon = high(cq), high(hhq), high(epsq)
+            check(selector(cq, epsq, depth) == level,
+                  &#39;three independent polarizations occupy the same geometric branch under the identical action&#39;)
+            x = mp.sqrt(1-c*c)
+            a, b = mp.sqrt((1+c)/2), mp.sqrt((1-c)/2)
+            mass = hh*x/c
+            omega = epsilon*high(count)
+            eta = omega-hh/c
+            pair = mp.matrix([a, b])
+            equation = mp.matrix([[hh+eta, mass], [mass, -hh+eta]])
+            check(mp.norm(equation*pair-omega*pair)/omega &lt; mp.mpf(&#39;1e-70&#39;),
+                  &#39;the selected integer-count action gives the exact same clock across the whole tested polarization family&#39;)
+            energy = hh*c+epsilon*high(count)-hh*c
+            check(abs(energy-omega)/omega &lt; mp.mpf(&#39;1e-75&#39;),
+                  &#39;the complete family energy retains spatial kinetics and the exact count frequency&#39;)
+            selected_intervals.append(str(cq))
+        generators = forward.radial.gammas(depth+1)
+        alpha, beta = generators[:depth], generators[depth]
+        rank = len(beta)
+        for sample in range(3):
+            field = rng.normal(size=(rank, rank))+1j*rng.normal(size=(rank, rank))
+            field /= np.linalg.norm(field)
+            variation = rng.normal(size=field.shape)+1j*rng.normal(size=field.shape)
+            variation /= np.linalg.norm(variation)
+            epsilon = float(epsq)
+            value, chosen = field_potential(field, epsilon, alpha, beta, depth)
+            step = 2e-6
+            plus, chosen_plus = field_potential(field+step*variation, epsilon, alpha, beta, depth)
+            minus, chosen_minus = field_potential(field-step*variation, epsilon, alpha, beta, depth)
+            check(chosen == chosen_plus == chosen_minus,
+                  &#39;the arbitrary full matrix source check remains in one smooth selected-label chart&#39;)
+            hchosen = chosen+depth/2
+            source = forward.source(field, hchosen, epsilon, alpha, beta, depth)
+            close((plus-minus)/(2*step*max(1, hchosen)),
+                  2*np.vdot(variation, source).real/max(1, hchosen),
+                  &#39;independent variation of the actual minimum-over-counts potential verifies its full field source&#39;)
+        for sample in range(40):
+            bloch = rng.normal(size=3); bloch /= np.linalg.norm(bloch)
+            bx, by, bc = bloch
+            radius = np.hypot(by, bc)
+            chosen = selector(radius, float(epsq), depth)
+            hchosen = chosen+depth/2
+            energy = float(hhq)*bc+float(epsq)*comb(chosen+depth, depth)-hchosen*radius
+            deficit = float(epsq*count)-energy
+            distance = max(float(lower)-radius, radius-float(upper), 0.)
+            lower_bound = float(hhq)*(radius-bc)+distance
+            check(deficit &gt;= lower_bound-2e-11*max(1., abs(energy)),
+                  &#39;the full Bloch-sphere energy deficit controls phase mismatch and distance to the stationary-family interval&#39;)
+            check(by*by &lt;= 2*deficit/float(hhq)+2e-11*max(1., deficit),
+                  &#39;the complete pair energy gives the quantitative transverse phase-persistence bound&#39;)
+        cases.append(dict(particle=name, depth=depth, inferred_index=index,
+                          count_exact=str(count), epsilon_exact=str(epsq),
+                          selected_c_interval_exact=[str(lower), str(min(upper, Fraction(1)))],
+                          original_polarization_exact=str(original_c),
+                          original_polarization_margin_exact=str(min(original_c-lower, upper-original_c)),
+                          same_clock_test_polarizations_exact=selected_intervals,
+                          maximum_available_shell_at_c_one=last_allowed,
+                          classification=&#39;conditional integer-count action with a geometric local label selector&#39;))
+        print(json.dumps(dict(completed=name, depth=depth, selected_shell=level)), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = dict(experiment_key=&#39;forward-discrete-spatial-count-action&#39;, created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest() for p in
+                           [Path(__file__), ROOT/&#39;forward-count-action.py&#39;, ROOT/&#39;inverse-current-radial.py&#39;,
+                            ROOT/&#39;excited-shell-orientation-current.py&#39;]},
+                  evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS, cases=cases,
+                  limits=[&#39;the minimum of count-contact cost minus spatial support is an explicit new constitutive premise&#39;,
+                          &#39;the discrete geometric rule does not select the sparse list of observed particles&#39;,
+                          &#39;the proof uses smooth open winner charts; action derivatives at ties and vacuum need a specified global evolution&#39;,
+                          &#39;the polarization family has a zero reduced shape curvature and potential secular drift&#39;,
+                          &#39;proper-current full spatial persistence is not inherited from other actions&#39;,
+                          &#39;no spatial localization, complete boost inertia or assigned-depth preference is established&#39;])
+    output = ROOT/(&#39;discrete-count-action-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

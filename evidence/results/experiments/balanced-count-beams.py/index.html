@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>balanced-count-beams.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/balanced-count-beams.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="balanced-count-beams.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/balanced-count-beams.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="balanced-count-beams.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>balanced-count-beams.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/balanced-count-beams.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact balanced monogenic beams, count clocks and observer rotation controls.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from fractions import Fraction
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from math import comb, factorial
+from pathlib import Path
+import json
+
+import numpy as np
+from scipy.integrate import quad
+from scipy.special import betainc, betaincinv, beta as beta_function
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;minimal&#39;, ROOT/&#39;minimal-count-carrier.py&#39;)
+minimal = module_from_spec(spec)
+spec.loader.exec_module(minimal)
+forward = minimal.forward
+COUNTS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def close(actual, expected, label, scale=None, tolerance=2e-10):
+    actual, expected = np.asarray(actual), np.asarray(expected)
+    if scale is None:
+        scale = max(1., np.linalg.norm(expected))
+    error = float(np.linalg.norm(actual-expected)/scale)
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    check(error &lt; tolerance, label)
+
+
+def normalization(depth, level):
+    answer = Fraction(1)
+    for k in range(1, level+1):
+        answer *= Fraction(2*k+depth-1, 2*k)
+    return answer
+
+
+def beam_jets(position, ambient, seed, level, plane, normal):
+    left, right = plane
+    rank, dim = len(ambient[0]), len(ambient)
+    eye = np.eye(rank)
+    involution = 1j*ambient[left]@ambient[right]
+    pminus, pplus = (eye-involution)/2, (eye+involution)/2
+    w = position[left]+1j*position[right]
+    dw = np.zeros(dim, complex); dw[left] = 1; dw[right] = 1j
+    field = normal*(w**level*pminus+np.conj(w)**level*pplus)@seed
+    gradient = np.zeros((dim,)+field.shape, complex)
+    hessian = np.zeros((dim, dim)+field.shape, complex)
+    if level:
+        for i in range(dim):
+            gradient[i] = normal*level*(w**(level-1)*dw[i]*pminus
+                +np.conj(w)**(level-1)*np.conj(dw[i])*pplus)@seed
+    if level &gt;= 2:
+        for i in range(dim):
+            for j in range(dim):
+                hessian[i, j] = normal*level*(level-1)*(w**(level-2)*dw[i]*dw[j]*pminus
+                    +np.conj(w)**(level-2)*np.conj(dw[i]*dw[j])*pplus)@seed
+    return field, gradient, hessian
+
+
+def mass_jets(position, ambient, jets, aa, bb):
+    bare, grad, hess = jets
+    gx = sum(x*g for x, g in zip(position, ambient))
+    mix = aa*np.eye(len(gx))+bb*gx
+    field = mix@bare
+    gradient = np.array([mix@g+bb*gamma@bare for gamma, g in zip(ambient, grad)])
+    hessian = np.array([[mix@hess[i, j]+bb*(ambient[i]@grad[j]+ambient[j]@grad[i])
+                         for j in range(len(ambient))] for i in range(len(ambient))])
+    return field, gradient, hessian
+
+
+def sphere_dirac(position, ambient, field, gradient):
+    gx = sum(x*g for x, g in zip(position, ambient))
+    euler = sum(x*g for x, g in zip(position, gradient))
+    return -gx@sum(g@jet for g, jet in zip(ambient, gradient))+euler+(len(ambient)-1)/2*field
+
+
+def rotation(position, ambient, jets, pair, squared=False):
+    field, grad, hess = jets
+    left, right = pair
+    tangent = np.zeros(len(position)); tangent[left] = -position[right]; tangent[right] = position[left]
+    first = sum(v*g for v, g in zip(tangent, grad))
+    spin = -.5j*ambient[left]@ambient[right]
+    if not squared:
+        return -1j*first+spin@field
+    acceleration = np.zeros(len(position)); acceleration[left] = -position[left]; acceleration[right] = -position[right]
+    second = sum(acc*g for acc, g in zip(acceleration, grad))
+    second += sum(tangent[i]*tangent[j]*hess[i, j] for i in range(len(position)) for j in range(len(position)))
+    return -second-2j*spin@first+spin@spin@field
+
+
+def main():
+    rng = np.random.default_rng(202610121006)
+    cases, sectors = [], []
+    prepared = {d: minimal.preparation(d) for d in forward.radial.DEPTHS}
+    for depth, (_, _, ambient, seed, _) in prepared.items():
+        eye = np.eye(len(ambient[0]))
+        for left in range(depth+1):
+            for right in range(left+1, depth+1):
+                jj = 1j*ambient[left]@ambient[right]
+                check(np.array_equal((ambient[left]+1j*ambient[right])@(eye-jj), np.zeros_like(eye)),
+                      &#39;exact Clifford arithmetic makes each holomorphic beam monogenic&#39;)
+                check(np.array_equal((ambient[left]-1j*ambient[right])@(eye+jj), np.zeros_like(eye)),
+                      &#39;exact Clifford arithmetic makes each conjugate beam monogenic&#39;)
+        sectors.append(dict(depth=depth, minimal_columns=seed.shape[1],
+            observer_fixed_embedding_dimension=max(0, depth-2),
+            fully_normal_spatial_dimension=max(0, depth-3),
+            observer_invariant_circle_available=depth&gt;=4,
+            observer_invariant_fully_normal_circle_available=depth&gt;=5,
+            restriction_zero_not_unique_to_five=depth&gt;=5))
+    for name, depth, index in forward.radial.ASSIGNMENTS:
+        _, _, ambient, seed, _ = prepared[depth]
+        level, h = index-1, index-1+depth/2
+        count, first, _ = forward.count_data(depth, level)
+        epsilon = Fraction(3, 10)/max(forward.count_data(depth, n-1)[1]
+                    for _, d, n in forward.radial.ASSIGNMENTS if d == depth)
+        cc = float(epsilon*first); xx = np.sqrt(1-cc*cc)
+        aa, bb = np.sqrt((1+cc)/2), np.sqrt((1-cc)/2)
+        mass, lam, omega = h*xx/cc, h/cc, float(epsilon*count)
+        eta = omega-lam
+        nq = normalization(depth, level); normal = np.sqrt(float(nq))
+        transverse_mean = Fraction(depth-1, 2*level+depth+1)
+        beta_a, beta_b = level+1, (depth-1)/2
+        density_t = lambda t: t**level*(1-t)**(beta_b-1)/beta_function(beta_a, beta_b)
+        integrated = quad(density_t, 0, 1, epsabs=2e-10, epsrel=2e-10)[0]
+        close(integrated, 1., &#39;independent scalar integration normalizes the classical beam energy&#39;)
+        close(quad(lambda t: (1-t)*density_t(t), 0, 1, epsabs=2e-10)[0], float(transverse_mean),
+              &#39;independent energy integration gives the exact transverse width ratio&#39;)
+        tube_angles = {}
+        for fraction in [.5, .9, .99]:
+            boundary = betaincinv(beta_a, beta_b, 1-fraction)
+            angle = np.arccos(np.sqrt(boundary))
+            close(quad(density_t, boundary, 1, epsabs=2e-10, epsrel=2e-10)[0], fraction,
+                  &#39;independent tube integration checks inverse-beta concentration radii&#39;)
+            tube_angles[str(fraction)] = float(angle)
+        planes = [(1, 2)]
+        if depth&gt;=4:
+            planes.append((0, 4))
+        if depth&gt;=5:
+            planes.append((4, 5))
+        for plane in planes:
+            for sample in range(4):
+                position = rng.normal(size=depth+1)
+                position[list(plane)] *= 4
+                position /= np.linalg.norm(position)
+                bare_jets = beam_jets(position, ambient, seed, level, plane, normal)
+                bare, gradient, _ = bare_jets
+                scale = np.linalg.norm(bare)
+                gx = sum(v*g for v, g in zip(position, ambient))
+                rho = np.vdot(bare, bare).real
+                close(sum(g@jet for g, jet in zip(ambient, gradient)), np.zeros_like(bare),
+                      &#39;actual ambient jets verify complete beam monogenicity&#39;, scale=scale*max(1, level))
+                close(sphere_dirac(position, ambient, bare, gradient), h*bare,
+                      &#39;the full sphere Dirac operator gives the intended positive shell&#39;, scale=h*scale)
+                close(np.vdot(bare, gx@bare), 0., &#39;the bare balanced beam has zero scalar source&#39;, scale=rho)
+                for i in range(depth+1):
+                    alpha = 1j*(ambient[i]@gx-position[i]*np.eye(len(gx)))
+                    close(np.vdot(bare, alpha@bare), 0., &#39;the bare balanced beam has zero tangential current&#39;, scale=rho)
+                jets = mass_jets(position, ambient, bare_jets, aa, bb)
+                field, grad, _ = jets
+                density, scalar = np.vdot(field, field).real, np.vdot(field, gx@field).real
+                close(density, rho, &#39;the massive beam retains its complete classical density&#39;, scale=rho)
+                close(scalar, xx*rho, &#39;the massive beam has the intended constant constitutive ratio&#39;, scale=rho)
+                df = sphere_dirac(position, ambient, field, grad)
+                source = mass*gx@field+eta*field
+                close((df+source)/lam, omega*field/lam,
+                      &#39;the complete spatial field equation retains the count clock&#39;, scale=scale, tolerance=5e-10)
+                energy = np.vdot(field, df).real+mass*scalar+eta*density
+                close(energy/lam, omega*density/lam,
+                      &#39;the complete pointwise energy retains spatial kinetic and contact terms&#39;, scale=rho, tolerance=5e-10)
+                if plane == (1, 2):
+                    close(rotation(position, ambient, jets, plane, True), (level+.5)**2*field,
+                          &#39;the visible-plane control has extra full orbital angular momentum&#39;, scale=(level+.5)**2*scale)
+                else:
+                    observer_pairs = [(1, 2), (2, 3), (3, 1)]
+                    casimir = sum(rotation(position, ambient, jets, pair, True) for pair in observer_pairs)
+                    close(casimir, .75*field,
+                          &#39;observer-invariant beams retain the full half-spin Casimir&#39;, scale=scale)
+                    for pair in observer_pairs:
+                        spin = -.5j*ambient[pair[0]]@ambient[pair[1]]
+                        seed_jets = beam_jets(position, ambient, spin@seed, level, plane, normal)
+                        expected = mass_jets(position, ambient, seed_jets, aa, bb)[0]
+                        close(rotation(position, ambient, jets, pair), expected,
+                              &#39;full observer rotation intertwines the actual massive beam and seed&#39;, scale=scale)
+            if plane == (4, 5):
+                position = np.zeros(depth+1); position[:4] = rng.normal(size=4); position /= np.linalg.norm(position)
+                restricted = mass_jets(position, ambient,
+                    beam_jets(position, ambient, seed, level, plane, normal), aa, bb)
+                check(np.count_nonzero(restricted[0]) == 0,
+                      &#39;fully normal positive-level beams vanish on the observer equatorial sector&#39;)
+                if level&gt;=2:
+                    check(np.count_nonzero(restricted[1]) == 0,
+                          &#39;the normal beam has a higher-order zero rather than a prescribed readout coefficient&#39;)
+        cases.append(dict(particle=name, depth=depth, inferred_index=index,
+            shell_level=level, count_exact=str(count), normalization_exact=str(nq),
+            mean_transverse_squared_distance_over_radius_squared_exact=str(transverse_mean),
+            tube_half_angles_radians=tube_angles, planes_tested=[list(p) for p in planes],
+            omega_in_radius_units_exact=str(epsilon*count),
+            classification=&#39;exact classical count-compatible circle-concentrated field, not identified observed particle&#39;))
+        print(json.dumps(dict(completed=name, depth=depth, transverse_width_exact=str(transverse_mean))), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    sources = [Path(__file__), ROOT/&#39;minimal-count-carrier.py&#39;, ROOT/&#39;forward-count-action.py&#39;,
+               ROOT/&#39;inverse-current-radial.py&#39;, ROOT/&#39;excited-shell-orientation-current.py&#39;]
+    report = dict(experiment_key=&#39;balanced-monogenic-count-beams&#39;, created_utc=datetime.now(timezone.utc).isoformat(),
+        sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest() for p in sources},
+        evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS, sectors=sectors, cases=cases,
+        limits=[&#39;round sector spheres and effective count action remain conditional&#39;,
+                &#39;tube concentration around a great circle is not a mobile localized object in unbounded space&#39;,
+                &#39;energy integration is classical and does not introduce electron position probabilities&#39;,
+                &#39;fully normal circles occur at five six and ten; no unique neutrino coupling suppression follows&#39;,
+                &#39;an observer-invariant circle already exists at depth four using the center coordinate&#39;,
+                &#39;pure beam nodes prevent transfer of the nodeless nonlinear persistence proof&#39;,
+                &#39;half-spin field transformation does not identify a nonzero classical mean spin&#39;])
+    output = ROOT/(&#39;balanced-count-beams-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

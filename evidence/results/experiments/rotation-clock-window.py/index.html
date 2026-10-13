@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>rotation-clock-window.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/rotation-clock-window.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="rotation-clock-window.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/rotation-clock-window.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="rotation-clock-window.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>rotation-clock-window.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/rotation-clock-window.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Bound the available rotation clocks without identifying energy with amplitude.&quot;&quot;&quot;
+
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import json
+import sympy as sp
+
+
+def main():
+    z=sp.symbols(&#39;z&#39;,positive=True)
+    rows=[]
+    for beta,name in ((sp.Rational(1,4),&#39;orientation-only&#39;),(sp.Rational(1),&#39;phase-complete-fixed-norm&#39;)):
+        y=sp.symbols(&#39;y&#39;,positive=True)
+        h=1-y/4-beta*y*(1-y/4)**2/4
+        derivative=sp.factor(sp.diff(h,y))
+        at_one=sp.factor(h.subs(y,1))
+        rows.append({&#39;action&#39;:name,&#39;minimum_omega_squared&#39;:str(at_one),
+                     &#39;threshold_derivative&#39;:str(derivative),&#39;maximum_clock_ratio&#39;:str(1/sp.sqrt(at_one)),
+                     &#39;maximum_clock_ratio_numeric&#39;:float(1/sp.sqrt(at_one))})
+    for stiffness in (400,1600):
+        v=sp.Rational(stiffness,4)*(z-1)**2+z/2-z*z/8
+        h=(2*v-v*v)/z
+        numerator=sp.factor(sp.together(sp.diff(h,z))).as_numer_denom()[0]
+        candidates=[]
+        for root in sp.nroots(numerator,n=50,maxsteps=200):
+            if abs(sp.im(root))&gt;1e-10:continue
+            value=float(sp.re(root))
+            if value&gt;=1 and float(v.subs(z,value))&lt;1:
+                candidates.append((float(h.subs(z,value)),value))
+        minimum,argmin=min(candidates)
+        rows.append({&#39;action&#39;:&#39;finite-amplitude&#39;,&#39;norm_stiffness&#39;:stiffness,
+                     &#39;threshold_stationary_polynomial&#39;:str(numerator),
+                     &#39;minimum_omega_squared&#39;:minimum,&#39;minimizing_squared_coefficient&#39;:argmin,
+                     &#39;maximum_clock_ratio_numeric&#39;:minimum**-0.5})
+    stiffness=sp.symbols(&#39;M2&#39;,positive=True)
+    v=stiffness*(z-1)**2/4+z/2-z*z/8
+    certificate=(stiffness-sp.Rational(2,3))*(z-1)**2/4+(z-2)**2/24
+    assert sp.expand(v-z/3-certificate)==0
+    ratio=sp.Rational(3838380,18564)
+    path=Path(__file__).resolve()
+    report={&#39;created_at&#39;:datetime.now(timezone.utc).isoformat(),
+            &#39;experiment&#39;:&#39;localized-rotation-clock-window&#39;,
+            &#39;sources&#39;:{&#39;experiments/rotation-clock-window.py&#39;:sha256(path.read_bytes()).hexdigest()},
+            &#39;cases&#39;:rows,&#39;finite_amplitude_exact_bound&#39;:{
+                &#39;condition&#39;:&#39;M_squared &gt;= 2/3, m_squared=1, b=1/4, beta=1&#39;,
+                &#39;large_norm_potential_certificate&#39;:str(certificate),
+                &#39;minimum_omega_squared_strict_lower_bound&#39;:&#39;1/3&#39;,
+                &#39;maximum_clock_ratio_strict_upper_bound&#39;:&#39;sqrt(3)&#39;},
+            &#39;maintained_muon_electron_frequency_ratio&#39;:str(ratio),
+            &#39;maintained_muon_electron_frequency_ratio_numeric&#39;:float(ratio),
+            &#39;scope&#39;:&#39;Necessary negative-Routhian and decaying-tail conditions bound the common radial rotation frequency window. If this rotation is identified with the assigned particle mass-frequency, these simple branches cannot reproduce electron and muon together. This does not exclude a different same-field spectral mechanism or identify their complete energies with their rotation clock.&#39;}
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output=path.with_name(&#39;rotation-clock-window-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(report,indent=2))
+    print(str(output))
+
+
+if __name__==&#39;__main__&#39;:main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

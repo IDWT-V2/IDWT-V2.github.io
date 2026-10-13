@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>excited-shell-shape-family.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/excited-shell-shape-family.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="excited-shell-shape-family.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/excited-shell-shape-family.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="excited-shell-shape-family.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>excited-shell-shape-family.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/excited-shell-shape-family.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact stationary shape freedom in the responding-clock shell action.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from math import comb
+from pathlib import Path
+import json
+
+import numpy as np
+from scipy.special import eval_gegenbauer, roots_jacobi
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;orientation&#39;, ROOT/&#39;excited-shell-orientation-current.py&#39;)
+orientation = module_from_spec(spec)
+spec.loader.exec_module(orientation)
+radial = orientation.radial
+COUNTS, ERRORS = {}, {}
+
+
+def close(actual, expected, label, tolerance=3e-9):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    if error &gt;= tolerance:
+        raise AssertionError((label, error))
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def exact_density_identity():
+    t, w, d, l, a, b, bp = sp.symbols(&#39;t w d l A B Bprime&#39;)
+    ss, k = 1-t*t, l/d
+    ap = (l+d-1)*b
+    tt = ap+t*bp+b
+    zz = t*(ap+b)-ss*bp
+    scalar = a*(b*t-bp*w*w-k*a)-b*((1+k)*b-tt*w*w)*ss+b*t*w*w*zz
+    target = (b*ap-a*bp+b*b)*(w*w-ss/d)
+    # The positive-shell scalar Dirac equation supplies this relation.
+    residual = sp.expand((scalar-target).subs(a, (d*t*b-ss*bp)/l))
+    assert sp.factor(residual) == 0
+    COUNTS[&#39;generic dimension density tangent follows from the exact shell equations&#39;] = 1
+
+
+def integrated_profiles(depth, level, extra):
+    t, weights = roots_jacobi(2*level+12+extra, (depth-2)/2, (depth-2)/2)
+    weights /= sum(weights)
+    a, b, ap, bp = orientation.polynomials(depth, level, t)
+    ss = 1-t*t
+    k = level/depth
+    normal = comb(level+depth-1, depth-1)
+    # Conditional moments of w on the sphere at fixed t.
+    w2, w4 = ss/depth, 3*ss*ss/(depth*(depth+2))
+    tt = ap+t*bp+b
+    zz = t*(ap+b)-ss*bp
+    f0, f2 = b*t-k*a, -bp
+    v0, v2 = (1+k)*b, -tt
+    norm = f0*f0+2*f0*f2*w2+f2*f2*w4
+    norm += ss*(v0*v0+2*v0*v2*w2+v2*v2*w4)
+    norm += zz*zz*(w2-w4)-2*t*zz*(v0*w2+v2*w4)
+    norm += tt*tt*(ss*w2-w4)
+    gram = np.dot(weights, norm/normal)
+    cross = np.dot(weights, (a*(f0+f2*w2)-b*(ss*(v0+v2*w2)-t*zz*w2))/normal)
+    expected = level*(depth-1)*(level+depth)/depth**2
+    close(gram, expected, &#39;independent scalar moment integration verifies the full matrix norm of the shape generator&#39;)
+    close(cross, 0., &#39;the shape generator has zero integrated real overlap&#39;)
+    return dict(generator_norm_squared=float(gram), real_overlap=float(cross))
+
+
+def main():
+    exact_density_identity()
+    rng = np.random.default_rng(202610120710)
+    epsilon = {}
+    for depth in radial.DEPTHS:
+        epsilon[depth] = .3/max(float(radial.polynomial(depth, index-1)[1])
+                               for _, d, index in radial.ASSIGNMENTS if d == depth)
+    cases = []
+    for name, depth, index in radial.ASSIGNMENTS:
+        level = index-1
+        h = level+depth/2
+        normal = comb(level+depth-1, depth-1)
+        metric = level*(depth-1)*(level+depth)/depth**2
+        generators = radial.gammas(depth+1)
+        alpha, beta = generators[:depth], generators[depth]
+        rank = len(beta)
+        eye = np.eye(rank)
+        pcount, derivative, _ = radial.polynomial(depth, level)
+        c = epsilon[depth]*float(derivative)
+        x = np.sqrt(1-c*c)
+        mixing_a, mixing_b = np.sqrt((1+c)/2), np.sqrt((1-c)/2)
+        source_m, lam = h*x/c, h/c
+        omega = epsilon[depth]*float(pcount)
+        eta = omega-lam
+        for sample in range(3):
+            position = rng.normal(size=depth+1); position /= np.linalg.norm(position)
+            frame, _ = np.linalg.qr(np.column_stack([position, rng.normal(size=(depth+1, depth))]))
+            tangent = frame[:, 1:]
+            t, w = position[0], position[1]
+            v, z = tangent[0], tangent[1]
+            vv = sum(vi*al for vi, al in zip(v, alpha))
+            zz = sum(zi*al for zi, al in zip(z, alpha))
+            qa = t*zz-w*vv-.5j*(vv@zz-zz@vv)
+            close(qa@qa, eye, &#39;the transported right generator is pointwise Hermitian unitary&#39;)
+            a, b, ap, bp = orientation.polynomials(depth, level, np.array(t))
+            app = (level+depth-1)*bp
+            bpp = (depth+1)*(depth+3)*eval_gegenbauer(level-3, (depth+5)/2, t) if level &gt;= 3 else 0.
+            matrix = a*eye-1j*b*vv
+            da = ap*w*eye-1j*(bp*w*vv+b*zz)
+            field = 1j*da@qa-level/depth*matrix
+            tt, zc = ap+t*bp+b, t*(ap+b)-(1-t*t)*bp
+            expanded = ((b*t-bp*w*w-level/depth*a)*eye
+                        +1j*((1+level/depth)*b-tt*w*w)*vv
+                        +1j*w*zc*zz+w*tt*.5*(vv@zz-zz@vv))
+            close(field, expanded, &#39;direct Clifford multiplication agrees with the scalar and quaternion expansion&#39;)
+            cross = matrix@field.conj().T+field@matrix.conj().T
+            shape_tangent = 2*(b*ap-a*bp+b*b)*(w*w-(1-t*t)/depth)/normal
+            close(cross/normal, shape_tangent*eye, &#39;actual full matrices verify the quadrupolar density tangent&#39;)
+            close(field@field.conj().T, np.trace(field@field.conj().T).real/rank*eye,
+                  &#39;the complete shape generator has scalar pointwise left density&#39;)
+            dm, df = [], []
+            for axis, al in enumerate(alpha):
+                mk = ap*v[axis]*eye-1j*(bp*v[axis]*vv-t*b*al)
+                dak = (app*v[axis]*w+ap*z[axis])*eye-1j*((bpp*v[axis]*w+bp*z[axis])*vv
+                        -bp*w*t*al+bp*v[axis]*zz-b*w*al)
+                qak = .5j*(al@qa-qa@al)
+                fk = 1j*(dak@qa+da@qak)-level/depth*mk
+                dm.append(mk+.5j*matrix@al)
+                df.append(fk+.5j*field@al)
+            dirac_m = -1j*sum(al@jet for al, jet in zip(alpha, dm))
+            dirac_f = -1j*sum(al@jet for al, jet in zip(alpha, df))
+            close(dirac_m, h*matrix, &#39;the actual covariant spatial jet verifies the base positive Dirac shell&#39;)
+            close(dirac_f, h*field, &#39;the actual covariant spatial jet verifies the polarized shape in the same positive shell&#39;)
+            for angle in [-.19, 0., .27]:
+                scale = np.sin(angle)/np.sqrt(metric) if metric else 0.
+                base = np.cos(angle) if metric else 1.
+                total = (base*matrix+scale*field)/np.sqrt(rank*normal)
+                dirac_total = (base*dirac_m+scale*dirac_f)/np.sqrt(rank*normal)
+                density = np.vdot(total, total).real
+                close(total@total.conj().T, density/rank*eye,
+                      &#39;finite real shape combinations remain exactly pointwise balanced&#39;)
+                massive = (mixing_a*eye+mixing_b*beta)@total
+                dirac_massive = (mixing_a*eye-mixing_b*beta)@dirac_total
+                current = np.array([np.vdot(massive, al@massive).real for al in alpha])
+                scalar = np.vdot(massive, beta@massive).real
+                close(current, np.zeros(depth), &#39;the finite massive shape family has exactly zero spatial particle current&#39;)
+                close(scalar, x*density, &#39;the finite massive shape family remains in the same constitutive ratio&#39;)
+                close((dirac_massive+source_m*beta@massive+eta*massive)/max(1., lam),
+                      omega*massive/max(1., lam), &#39;the complete nonlinear particle equation retains the same inferred clock&#39;)
+                background = eye/np.sqrt(rank)
+                close(eta*sum(al@background*ji for al, ji in zip(alpha, current))/max(1., abs(eta)),
+                      np.zeros_like(background), &#39;the retained background equation has no induced source on the exact family&#39;)
+                energy = np.vdot(massive, dirac_massive).real+source_m*scalar+eta*density
+                close(energy/max(1., lam), omega*density/max(1., lam),
+                      &#39;the local complete stationary particle energy equals its clock times canonical density&#39;)
+        first, second = integrated_profiles(depth, level, 0), integrated_profiles(depth, level, 20)
+        close(first[&#39;generator_norm_squared&#39;], second[&#39;generator_norm_squared&#39;],
+              &#39;independent radial quadratures agree on the exact shape-family charge normalization&#39;)
+        cases.append(dict(particle=name, depth=depth, inferred_index=index,
+                          generator_norm_squared_exact=str(sp.Rational(level*(depth-1)*(level+depth), depth**2)),
+                          normalization=second, nontrivial_family=bool(level), source_m=source_m,
+                          clock=omega, eta=eta, c=c,
+                          classification=&#39;exact conditional stationary shape family, not a persistence theorem&#39;))
+        print(json.dumps(dict(completed=name, depth=depth, nontrivial_family=bool(level))), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = dict(experiment_key=&#39;inferred-shell-exact-stationary-shape-family&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                           for p in [Path(__file__), ROOT/&#39;inverse-current-radial.py&#39;, ROOT/&#39;excited-shell-orientation-current.py&#39;]},
+                  evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS, cases=cases,
+                  limits=[&#39;full matrix charge uses exact horizontality and pointwise scalar Gram matrices&#39;,
+                          &#39;small shape angles remain in the open nodeless constitutive chart by continuity&#39;,
+                          &#39;finite angles are pointwise equation checks, not a global nodeless theorem&#39;,
+                          &#39;no Euclidean localization, translational inertia, nonlinear persistence or particle identification follows&#39;,
+                          &#39;the ordinary sphere, inverse plateau action and equivariant field-block split remain conditional premises&#39;])
+    output = ROOT/(&#39;excited-shell-shape-family-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

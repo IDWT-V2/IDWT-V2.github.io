@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>continuous-count-wave-ground.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/continuous-count-wave-ground.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="continuous-count-wave-ground.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/continuous-count-wave-ground.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="continuous-count-wave-ground.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>continuous-count-wave-ground.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/continuous-count-wave-ground.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Ground harmonic reduction of the original continuous count wave action.&quot;&quot;&quot;
+from datetime import datetime,timezone
+from fractions import Fraction
+from hashlib import sha256
+from importlib.util import spec_from_file_location,module_from_spec
+from pathlib import Path
+import json
+
+import mpmath as mp
+import numpy as np
+from scipy.linalg import cholesky,eigvals
+
+ROOT=Path(__file__).resolve().parent
+spec=spec_from_file_location(&#39;wave&#39;,ROOT/&#39;positive-count-wave.py&#39;)
+wave=module_from_spec(spec)
+spec.loader.exec_module(wave)
+COUNTS={}
+
+
+def check(value,label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label]=COUNTS.get(label,0)+1
+
+
+def harmonic_block(depth,cc,degree):
+    h=depth/2
+    hd=sum(Fraction(1,j) for j in range(1,depth+1))
+    second=hd*hd-sum(Fraction(1,j*j) for j in range(1,depth+1))
+    epsilon=cc/float(hd)
+    xx=np.sqrt(1-cc*cc)
+    omega=epsilon
+    mass=h*xx/cc
+    eta=omega-h/cc
+    curvature_q=2*h/cc-2*xx*xx/(epsilon*float(second))
+    aa,bb=np.sqrt((1+cc)/2),np.sqrt((1-cc)/2)
+    ll=degree
+    dd=np.array([[h+ll,0,0,0],[0,-h-ll,0,0],
+                 [0,1,h+ll-1,0],[-1,0,0,-h-ll+1]],float)
+    beta=np.array([[0,1,0,0],[1,0,0,0],[0,0,0,1],[0,0,1,0]],float)
+    gram=np.array([[1,0,0,ll],[0,1,ll,0],
+                   [0,ll,ll*(2*ll+depth-1),0],
+                   [ll,0,0,ll*(2*ll+depth-1)]],float)
+    ham=dd+mass*beta+eta*np.eye(4)
+    pp=np.array([-bb,aa,0,0]); rr=gram@pp
+    br=ham+curvature_q*np.outer(pp,rr)
+    check(np.linalg.norm(gram@ham-ham.T@gram)&lt;1e-10*max(1,np.linalg.norm(gram@ham)),
+          &#39;the derived scalar harmonic Dirac block is self-adjoint in its physical Gram metric&#39;)
+    check(np.linalg.norm(gram@br-br.T@gram)&lt;1e-10*max(1,np.linalg.norm(gram@br)),
+          &#39;the complete continuous scalar source derivative is real self-adjoint&#39;)
+    change=cholesky(gram,lower=False)
+    inverse=np.linalg.inv(change)
+    ham=change@ham@inverse
+    br=change@br@inverse
+    eye=np.eye(4); zero=np.zeros((4,4))
+    real_stiffness=br@br-omega*omega*eye
+    imaginary_stiffness=ham@ham-omega*omega*eye
+    generator=np.block([[zero,zero,eye,zero],[zero,zero,zero,eye],
+                        [-real_stiffness,zero,zero,-2*omega*eye],
+                        [zero,-imaginary_stiffness,2*omega*eye,zero]])
+    spectrum=eigvals(generator)
+    growth=float(max(np.real(spectrum)))
+    # A near-zero root may be a symmetry mode; report its numerical scale.
+    values=np.linalg.eigvalsh(real_stiffness)
+    secular=1+curvature_q*float(rr@np.linalg.solve(dd+mass*beta+(eta+omega)*np.eye(4),pp))
+    return dict(depth=depth,ground_polarization_c=cc,scalar_harmonic_degree=degree,
+        curvature_coefficient_q=curvature_q,maximum_numerical_growth=growth,
+        minimum_real_rotating_stiffness=float(values[0]),
+        secular_value_at_negative_count_frequency=secular,
+        numerical_frequency_generator_eigenvalues=[[float(v.real),float(v.imag)] for v in spectrum])
+
+
+def main():
+    mp.mp.dps=100
+    pairs=[];cases=[]
+    for name,depth,index in wave.envelope.forward.radial.ASSIGNMENTS:
+        epsilon,candidates,_=wave.envelope.depth_carrier(depth)
+        count,first,second=wave.envelope.forward.count_data(depth,index-1)
+        condition=epsilon*epsilon*(first*first+count*second)
+        check(condition&lt;1,&#39;every maintained continuous count pair passes the exact positive-wave pair criterion&#39;)
+        pairs.append(dict(particle=name,depth=depth,index=index,
+                          exact_pair_criterion_left_side=str(condition),positive_pair_margin_exact=str(1-condition)))
+    for depth in wave.envelope.forward.radial.DEPTHS:
+        for cc in [.3,.6]:
+            for degree in [1,2,3,5,10,30,100]:
+                case=harmonic_block(depth,cc,degree)
+                cases.append(case)
+            print(json.dumps(dict(depth=depth,ground_c=cc,
+                first_harmonic=cases[-7][&#39;maximum_numerical_growth&#39;],
+                minimum_secular=min(c[&#39;secular_value_at_negative_count_frequency&#39;] for c in cases[-7:]))),flush=True)
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    names=[&#39;continuous-count-wave-ground.py&#39;,&#39;positive-count-wave.py&#39;,&#39;convex-count-envelope.py&#39;,
+           &#39;forward-count-action.py&#39;,&#39;inverse-current-radial.py&#39;,&#39;excited-shell-orientation-current.py&#39;]
+    report=dict(experiment_key=&#39;continuous-count-positive-wave-ground-harmonics&#39;,
+        created_utc=datetime.now(timezone.utc).isoformat(),
+        sources={&#39;experiments/&#39;+n:sha256((ROOT/n).read_bytes()).hexdigest() for n in names},
+        evaluations=sum(COUNTS.values()),conditions=COUNTS,assigned_pair_criteria=pairs,cases=cases,
+        limits=[&#39;ground spatial controls are distinct from assigned excited-field persistence&#39;,
+                &#39;the four-field closure and full harmonic coverage require analytical verification&#39;,
+                &#39;numerical roots near zero do not prove growth or exclude secular symmetry modes&#39;,
+                &#39;the raw continuous count law has no envelope convolution in this calculation&#39;,
+                &#39;finite harmonic degrees are illustrations until an all-degree criterion is established&#39;])
+    path=ROOT/(&#39;continuous-count-wave-ground-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path),evaluations=report[&#39;evaluations&#39;])),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>second-order-contact-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/second-order-contact-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="second-order-contact-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/second-order-contact-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="second-order-contact-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>second-order-contact-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/second-order-contact-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Complete second-order spectrum of the actual rotating spatial count projector.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import module_from_spec, spec_from_file_location
+from math import comb, pi, sqrt
+from pathlib import Path
+import json
+
+import numpy as np
+from scipy.integrate import solve_ivp
+from scipy.linalg import eig, eigvals, eigvalsh
+from scipy.optimize import brentq, root
+
+ROOT = Path(__file__).resolve().parent
+HELPER = ROOT/&#39;moving-contact-checks.py&#39;
+spec = spec_from_file_location(&#39;spatial_rotation_weights&#39;, HELPER)
+spatial = module_from_spec(spec)
+spec.loader.exec_module(spatial)
+DEPTHS, ASSIGNMENTS = spatial.DEPTHS, spatial.ASSIGNMENTS
+CONDITIONS, ERRORS = {}, {}
+GRID = (0., .25, .5, .75, .99, 1.1, 1.3, 1.5, 1.6, 1.75, 1.9, 2.1, 2.4, 3., 4., 6.)
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    CONDITIONS[label] = CONDITIONS.get(label, 0)+1
+
+
+def close(actual, expected, label, tolerance=3e-9):
+    actual, expected = np.asarray(actual), np.asarray(expected)
+    error = float(np.max(np.abs(actual-expected))/max(1.0, float(np.max(np.abs(expected)))))
+    ERRORS[label] = max(ERRORS.get(label, 0.0), error)
+    check(error &lt; tolerance, label)
+
+
+def data(depth, cutoff, sigma=1):
+    rotations, weights = spatial.compressed(*spatial.joint_weights(depth, cutoff, sigma)[1:])
+    b = np.sqrt(weights)
+    potential = 4*np.eye(len(b))-3*np.outer(b, b)
+    return rotations.astype(float), weights, b, potential
+
+
+def frequency_matrix(rotations, potential, speed):
+    transport = np.diag(speed*rotations)
+    return np.block([[transport, np.eye(len(rotations))], [potential, transport]])
+
+
+def energy_threshold(rotations, weights, cutoff):
+    if not cutoff:
+        return None
+    def deficit(g):
+        return float(1-3*np.sum(weights/(4-(g*rotations/cutoff)**2)))
+    threshold = brentq(deficit, 1, 2-1e-11, xtol=3e-13, rtol=3e-14)
+    check(1 &lt; threshold &lt; 2, &#39;positive rotating energy threshold lies between universal bounds&#39;)
+    _, _, _, potential = data_for_energy(rotations, weights)
+    minimum = eigvalsh(potential-np.diag((threshold*rotations/cutoff)**2))[0]
+    close(minimum, 0, &#39;secular energy threshold matches complete stiffness matrix&#39;)
+    return threshold
+
+
+def data_for_energy(rotations, weights):
+    b = np.sqrt(weights)
+    return rotations, weights, b, 4*np.eye(len(b))-3*np.outer(b, b)
+
+
+def bright_state(rotations, weights, potential, speed):
+    def secular(z):
+        return float(1-3*np.sum(weights/(4-(z-speed*rotations)**2)))
+    z = brentq(secular, .5, 1.5, xtol=2e-14, rtol=1e-14)
+    vector = np.sqrt(weights)/(4-(z-speed*rotations)**2)
+    vector /= np.linalg.norm(vector)
+    covariant_frequency = z-speed*rotations
+    residual = potential@vector-covariant_frequency**2*vector
+    close(residual, np.zeros_like(vector), &#39;bright frequency solves complete quadratic pencil&#39;)
+    charge = 2*float(np.dot(covariant_frequency, vector**2))
+    angular_charge = -2*float(np.dot(rotations*covariant_frequency, vector**2))
+    energy = 2*float(np.dot(covariant_frequency**2, vector**2))
+    close(energy-speed*angular_charge, z*charge,
+          &#39;second-order rotating energy retains signed phase and rotation charges&#39;)
+    check(charge &gt; 0, &#39;continued slow bright branch has positive signed phase charge&#39;)
+    return z, vector, charge, angular_charge, energy
+
+
+def slow_checks(depth, cutoff, rotations, weights, potential):
+    if not cutoff:
+        z, _, charge, _, energy = bright_state(rotations, weights, potential, 1)
+        close(z, 1, &#39;ground clock is unchanged by any source angle speed&#39;)
+        close(energy/charge, 1, &#39;ground field energy per positive charge equals its clock&#39;)
+        return
+    h = .001/cutoff
+    def coefficient(step):
+        plus = bright_state(rotations, weights, potential, step)
+        minus = bright_state(rotations, weights, potential, -step)
+        zp, zm = plus[0], minus[0]
+        field = (plus[4]/plus[2]+minus[4]/minus[2]-2)/(2*step*step)
+        return (zp+zm-2)/(2*step*step), (zp-zm)/(2*step), field
+    full, first, full_field = coefficient(h)
+    half, _, half_field = coefficient(h/2)
+    estimate = (4*half-full)/3
+    metric = float(spatial.geometry(depth, cutoff))
+    close(estimate, -7*metric/6, &#39;finite-inertia second-order shift reuses the spatial metric&#39;, 7e-5)
+    close(first, cutoff/(depth+1), &#39;slow bright linear shift is the geometric rotation mean&#39;, 5e-6)
+    close((4*half_field-full_field)/3, 7*metric/6,
+          &#39;field energy per signed charge retains the opposite quadratic shift&#39;, 7e-5)
+
+
+def augmented_energy_checks(rotations, weights, potential, speed, count):
+    z, u, phase, _, _ = bright_state(rotations, weights, potential, speed)
+    shifted = z-speed*rotations
+    stiffness = potential-np.diag(shifted**2)
+    spectrum = eigvalsh(stiffness)
+    close(spectrum[0], 0, &#39;relative-equilibrium augmented field form has its exact bright zero mode&#39;)
+    gap = float(spectrum[1]) if len(spectrum) &gt; 1 else None
+    if gap is not None:
+        check(gap &gt; 0, &#39;continued relative equilibrium minimizes complete augmented energy transverse to symmetry&#39;)
+    rng = np.random.default_rng(671)
+    q = rng.normal(size=len(u))+1j*rng.normal(size=len(u))
+    momentum = rng.normal(size=len(u))+1j*rng.normal(size=len(u))
+    source_p = .83
+    charge = -2*np.vdot(q, momentum).imag
+    angular = source_p+2*np.vdot(q, rotations*momentum).imag
+    energy = source_p**2/(2*count)+np.vdot(momentum, momentum).real+np.vdot(q, potential@q).real
+    augmented = energy-speed*angular-z*charge+count*speed**2/2
+    squares = (source_p-count*speed)**2/(2*count)
+    squares += np.vdot(momentum+1j*shifted*q, momentum+1j*shifted*q).real
+    squares += np.vdot(q, stiffness@q).real
+    close(augmented, squares, &#39;complete autonomous augmented energy is the sum of rotor momentum and field forms&#39;)
+    q = u/sqrt(phase)
+    momentum = -1j*shifted*q
+    source_p = count*speed
+    close(-2*np.vdot(q, momentum).imag, 1, &#39;relative-equilibrium action normalizer is its signed phase charge&#39;)
+    check(z+abs(speed)*max(abs(rotations)) &lt; 2,
+          &#39;continued branch has a positive diagonal secular factor at every retained rotation&#39;)
+    return {&#39;transverse_augmented_stiffness_gap&#39;: gap,
+            &#39;positive_diagonal_margin&#39;: float(2-max(abs(shifted))),
+            &#39;conditional_autonomous_orbital_stability&#39;: True}
+
+
+def onset_checks():
+    cases = []
+    for depth in DEPTHS:
+        cutoff = 2
+        rotations, weights, b, potential = data(depth, cutoff)
+        low, high = 1.2, 1.6
+        def growth(g):
+            return float(np.max(eigvals(frequency_matrix(rotations, potential, g/cutoff)).imag))
+        check(growth(low) &lt; 1e-8 and growth(high) &gt; .1,
+              &#39;all depths have a resolved stable/unstable control bracket&#39;)
+        for _ in range(34):
+            middle = (low+high)/2
+            if growth(middle) &gt; 1e-6:
+                high = middle
+            else:
+                low = middle
+        zlist = eigvals(frequency_matrix(rotations, potential, high/cutoff))
+        starting_z = float(zlist[np.argmax(zlist.imag)].real)
+        def equations(x):
+            z, g = x
+            shifted = z-g*rotations/cutoff
+            den = 4-shifted**2
+            return [1-3*np.sum(weights/den), -6*np.sum(weights*shifted/den**2)]
+        solution = root(equations, [starting_z, high], tol=1e-11)
+        close(equations(solution.x), [0, 0], &#39;instability onset solves secular equation and its frequency derivative&#39;)
+        z, g = map(float, solution.x)
+        check(abs(g-high) &lt; 2e-7, &#39;independent double-root onset agrees with spectral bisection&#39;)
+        vector = b/(4-(z-g*rotations/cutoff)**2)
+        vector /= np.linalg.norm(vector)
+        signed_charge = 2*float(np.dot(z-g*rotations/cutoff, vector**2))
+        close(signed_charge, 0, &#39;colliding frequency branches have zero limiting signed phase charge&#39;)
+        threshold = energy_threshold(rotations, weights, cutoff)
+        check(g &gt; threshold+1e-4, &#39;loss of positive rotating energy precedes this instability onset&#39;)
+        cases.append({&#39;depth&#39;: depth, &#39;cutoff&#39;: cutoff, &#39;energy_threshold_g&#39;: threshold,
+                      &#39;first_control_instability_g&#39;: g, &#39;double_root_frequency_over_lambda&#39;: z,
+                      &#39;bisection_bracket&#39;: [low, high], &#39;double_root_signed_phase_charge&#39;: signed_charge})
+    return cases
+
+
+def growth_checks():
+    cases = []
+    for depth in DEPTHS:
+        rotations, weights, b, potential = data(depth, 2)
+        speed = .8
+        values, vectors = eig(frequency_matrix(rotations, potential, speed))
+        selected = int(np.argmax(values.imag))
+        z = values[selected]
+        q = vectors[:len(b), selected]
+        q /= np.linalg.norm(q)
+        momentum = -1j*(z-speed*rotations)*q
+        check(z.imag &gt; .1, &#39;direct growth test uses a resolved unstable frequency&#39;)
+        def rhs(time, y):
+            position, velocity = y[:len(b)], y[len(b):2*len(b)]
+            moving = b*np.exp(1j*rotations*speed*time)
+            overlap = np.vdot(moving, position)
+            mixed = np.vdot(moving, rotations*position)
+            force = -4*position+3*moving*overlap
+            work = -6*speed*np.imag(np.conj(overlap)*mixed)
+            return np.concatenate((velocity, force, [work]))
+        endpoint = 2/float(z.imag)
+        times = np.linspace(0, endpoint, 25)
+        initial = np.concatenate((q, momentum, [0j]))
+        solution = solve_ivp(rhs, [0, endpoint], initial, t_eval=times,
+                             method=&#39;DOP853&#39;, rtol=2e-11, atol=2e-12)
+        check(solution.success, &#39;direct second-order moving-source integration completed&#39;)
+        expected = np.array([np.exp(1j*rotations*speed*t)*q*np.exp(-1j*z*t) for t in times]).T
+        close(solution.y[:len(b)], expected, &#39;direct laboratory growth agrees with complete quadratic pencil&#39;, 5e-9)
+        energies = []
+        for time, y in zip(times, solution.y.T):
+            position, velocity = y[:len(b)], y[len(b):2*len(b)]
+            moving = b*np.exp(1j*rotations*speed*time)
+            energies.append(float(np.vdot(velocity, velocity).real+4*np.vdot(position, position).real-
+                                  3*abs(np.vdot(moving, position))**2))
+        close(np.array(energies)/energies[0], np.exp(2*z.imag*times),
+              &#39;unstable mode energy grows at twice its amplitude growth rate&#39;, 5e-9)
+        close(np.array(energies)-energies[0], solution.y[-1].real,
+              &#39;prescribed source work accounts for the growing field energy&#39;, 5e-9)
+        cases.append({&#39;depth&#39;: depth, &#39;cutoff&#39;: 2, &#39;rotation_g&#39;: 1.6,
+                      &#39;amplitude_growth_over_lambda&#39;: float(z.imag),
+                      &#39;amplitude_efolding_in_target_clock_cycles&#39;: 1/(2*pi*float(z.imag)),
+                      &#39;time_in_lambda_units&#39;: endpoint, &#39;integration_evaluations&#39;: solution.nfev})
+    return cases
+
+
+def reciprocal_checks():
+    cases = []
+    for name, depth, cutoff in [(&#39;control&#39;, d, 2) for d in DEPTHS]+[(&#39;electron&#39;, 6, 12), (&#39;muon&#39;, 6, 34)]:
+        rotations, weights, b, potential = data(depth, cutoff)
+        count = comb(cutoff+depth, depth)
+        q = b+(.07+.03j)*(rotations-np.dot(rotations, weights))*b/(cutoff+1)
+        q /= sqrt(2)*np.linalg.norm(q)
+        momentum = -1j*q
+        n = len(b)
+        initial = np.concatenate(([.17, .83], q.real, q.imag, momentum.real, momentum.imag))
+        def unpack(y):
+            return y[0], y[1], y[2:2+n]+1j*y[2+n:2+2*n], y[2+2*n:2+3*n]+1j*y[2+3*n:]
+        def rhs(time, y):
+            theta, source_p, position, velocity = unpack(y)
+            moving = b*np.exp(1j*rotations*theta)
+            overlap = np.vdot(moving, position)
+            mixed = np.vdot(moving, rotations*position)
+            force = -4*position+3*moving*overlap
+            torque = 6*np.imag(np.conj(overlap)*mixed)
+            return np.concatenate(([source_p/count, torque], velocity.real, velocity.imag, force.real, force.imag))
+        solution = solve_ivp(rhs, [0, 6], initial, t_eval=np.linspace(0, 6, 31),
+                             method=&#39;DOP853&#39;, rtol=2e-11, atol=2e-12)
+        check(solution.success, &#39;autonomous second-order source integration completed&#39;)
+        energies, phases, angular, norms, source_momenta = [], [], [], [], []
+        for y in solution.y.T:
+            theta, source_p, position, velocity = unpack(y)
+            moving = b*np.exp(1j*rotations*theta)
+            energy = source_p**2/(2*count)+np.vdot(velocity, velocity).real
+            energy += 4*np.vdot(position, position).real-3*abs(np.vdot(moving, position))**2
+            energies.append(float(energy))
+            phases.append(-2*np.vdot(position, velocity).imag)
+            angular.append(source_p+2*np.vdot(position, rotations*velocity).imag)
+            norms.append(float(np.vdot(position, position).real))
+            source_momenta.append(source_p)
+        close(energies, np.full(len(energies), energies[0]), &#39;complete second-order field/source energy conserved&#39;, 5e-9)
+        close(phases, np.ones(len(phases)), &#39;signed phase charge is conserved with both oscillator branches&#39;, 5e-9)
+        close(angular, np.full(len(angular), angular[0]), &#39;complete second-order source/field rotation charge conserved&#39;, 5e-9)
+        check(np.ptp(norms) &gt; 1e-7, &#39;configuration norm is not substituted for the signed phase charge&#39;)
+        check(np.ptp(source_momenta) &gt; 1e-7, &#39;second-order source backreaction is retained&#39;)
+        cases.append({&#39;name&#39;: name, &#39;depth&#39;: depth, &#39;cutoff&#39;: cutoff, &#39;simplex_count&#39;: count,
+                      &#39;interval_in_lambda_units&#39;: 6, &#39;source_momentum_range&#39;: float(np.ptp(source_momenta)),
+                      &#39;configuration_norm_range&#39;: float(np.ptp(norms)),
+                      &#39;relative_energy_drift&#39;: float(np.max(np.abs(np.array(energies)/energies[0]-1))),
+                      &#39;signed_phase_charge_drift&#39;: float(np.max(np.abs(np.array(phases)-1))),
+                      &#39;combined_rotation_charge_drift&#39;: float(np.max(np.abs(np.array(angular)-angular[0])))})
+    return cases
+
+
+def convective_checks():
+    for depth in DEPTHS:
+        rotations, weights, b, potential = data(depth, 2)
+        speed, theta, inertia = .73, .37, 1.3
+        phase = np.exp(1j*rotations*theta)
+        q = b+(.07+.03j)*(rotations-np.dot(rotations, weights))*b
+        qdot = (.11-.31j)*q+.07*rotations*q
+        velocity = qdot-1j*speed*rotations*q
+        chi = np.conj(phase)*q
+        chidot = np.conj(phase)*velocity
+        moving = b*phase
+        energy = 4*np.vdot(q, q).real-3*abs(np.vdot(moving, q))**2
+        original_l = np.vdot(velocity, velocity).real-energy+inertia*speed**2/2
+        reduced_l = np.vdot(chidot, chidot).real-np.vdot(chi, potential@chi).real+inertia*speed**2/2
+        close(original_l, reduced_l, &#39;full convective second-order kinetic action rotates without omitted terms&#39;)
+        j = 2*np.vdot(q, rotations*velocity).imag
+        canonical_p = inertia*speed-j
+        complete_h = (canonical_p+j)**2/(2*inertia)+np.vdot(velocity, velocity).real+energy
+        close(complete_h, inertia*speed**2/2+np.vdot(chidot, chidot).real+
+              np.vdot(chi, potential@chi).real,
+              &#39;convective source momentum shift retains positive complete Hamiltonian&#39;)
+        close(potential@b, b, &#39;inverse bright frequency square remains one in the full convective action&#39;)
+
+
+def main():
+    assignments, scans = [], []
+    for name, depth, index in ASSIGNMENTS:
+        cutoff, count = index-1, comb(index-1+depth, depth)
+        rotations, weights, b, potential = data(depth, cutoff)
+        threshold = energy_threshold(rotations, weights, cutoff)
+        slow_checks(depth, cutoff, rotations, weights, potential)
+        for ratio in (.1, 1., 10.):
+            speed = ratio/count
+            matrix = frequency_matrix(rotations, potential, speed)
+            values = eigvals(matrix)
+            growth = float(np.max(values.imag))
+            if cutoff == 0 or ratio*cutoff/count &lt; threshold:
+                check(growth &lt; 2e-8, &#39;maintained state is spectrally stable whenever rotating energy is positive&#39;)
+            record = {&#39;name&#39;: name, &#39;depth&#39;: depth, &#39;mode_index&#39;: index, &#39;cutoff&#39;: cutoff,
+                      &#39;simplex_count&#39;: count, &#39;source_omega_over_sector_mu&#39;: ratio,
+                      &#39;source_omega_over_target_lambda&#39;: speed, &#39;rotation_g&#39;: speed*cutoff,
+                      &#39;energy_threshold_g&#39;: threshold, &#39;amplitude_growth_over_lambda&#39;: growth,
+                      &#39;amplitude_efolding_in_target_clock_cycles&#39;: 1/(2*pi*growth) if growth &gt; 2e-8 else None,
+                      &#39;resolved_growing_mode&#39;: growth &gt; 2e-8, &#39;oscillator_frequency_count&#39;: len(values)}
+            if speed*cutoff &lt; .25:
+                z, vector, charge, j, energy = bright_state(rotations, weights, potential, speed)
+                record.update(rotating_bright_frequency_over_lambda=z, field_energy_per_signed_charge_over_lambda=energy/charge,
+                              field_rotation_charge_per_signed_charge=j/charge,
+                              complete_energy_per_unit_signed_charge_over_lambda=energy/charge+ratio*ratio/(2*count))
+                record.update(augmented_energy_checks(rotations, weights, potential, speed, count))
+            assignments.append(record)
+        for g in GRID:
+            speed = g/max(1, cutoff)
+            values = eigvals(frequency_matrix(rotations, potential, speed))
+            growth = float(np.max(values.imag))
+            if not cutoff or g &lt; threshold:
+                check(growth &lt; 2e-8, &#39;all sampled positive-energy spectra retain both real frequency branches&#39;)
+            scans.append({&#39;name&#39;: name, &#39;depth&#39;: depth, &#39;cutoff&#39;: cutoff, &#39;rotation_g&#39;: g,
+                          &#39;source_omega_over_target_lambda&#39;: speed, &#39;amplitude_growth_over_lambda&#39;: growth,
+                          &#39;amplitude_efolding_in_target_clock_cycles&#39;: 1/(2*pi*growth) if growth &gt; 2e-8 else None})
+        other = data(depth, cutoff, -1)[3]
+        reversal = np.eye(len(b))[::-1]
+        transform = np.block([[reversal, np.zeros_like(reversal)], [np.zeros_like(reversal), -reversal]])
+        plus = frequency_matrix(rotations, potential, .37/max(1, cutoff))
+        minus = frequency_matrix(rotations, other, .37/max(1, cutoff))
+        close(transform@plus@transform, -minus, &#39;complete opposite-polarization frequency spectra are exact mirrors&#39;)
+    for depth in DEPTHS:
+        rotations, weights, _, _ = data(depth, 1)
+        threshold = energy_threshold(rotations, weights, 1)
+        close(threshold, 2*sqrt((depth+1)/(4*depth+1)), &#39;first-cutoff positive energy threshold has the exact common formula&#39;)
+    onset = onset_checks()
+    growth = growth_checks()
+    reciprocal = reciprocal_checks()
+    convective_checks()
+    report = {&#39;experiment_key&#39;: &#39;actual-spatial-second-order-moving-contact&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/second-order-contact-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest(),
+                          &#39;experiments/moving-contact-checks.py&#39;: sha256(HELPER.read_bytes()).hexdigest()},
+              &#39;classification&#39;: &#39;conditional full finite-inertia count-projector and collective-source comparison&#39;,
+              &#39;assumptions&#39;: [&#39;same positive sphere-band spatial evaluation kernel and actual rotation weights&#39;,
+                              &#39;inverse restoring square lambda^2(4I-3P), lambda=mu_d S_N is stipulated&#39;,
+                              &#39;positive complex second-order canonical kinetic action with both oscillator branches&#39;,
+                              &#39;bare spatial Dirac dispersion is not included in this isolated inverse-restoring control&#39;,
+                              &#39;source path is a prescribed great circle or a new positive reciprocal collective rotor&#39;,
+                              &#39;comparison source inertia I mu_d=1, never inferred as observed particle inertia&#39;],
+              &#39;limits&#39;: [&#39;finite scans are not an exhaustive stability chart&#39;,
+                         &#39;a growing internal mode is not an established outgoing decay channel or observed lifetime&#39;,
+                         &#39;electron persistence is assessed separately; short-lived particles need not be infinitely stable&#39;,
+                         &#39;no local master source, selected indices, full spatial support or relativistic particle is derived&#39;,
+                         &#39;no special depth-five selection or new favorable sector-assignment evidence&#39;],
+              &#39;condition_count&#39;: len(CONDITIONS), &#39;evaluation_count&#39;: sum(CONDITIONS.values()),
+              &#39;conditions&#39;: CONDITIONS, &#39;maximum_errors&#39;: ERRORS,
+              &#39;assignments&#39;: assignments, &#39;rotation_scans&#39;: scans, &#39;low_cutoff_instability_onsets&#39;: onset,
+              &#39;direct_growth&#39;: growth, &#39;reciprocal_source&#39;: reciprocal}
+    destination = ROOT/(&#39;second-order-contact-results-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)+&#39;.json&#39;)
+    destination.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;report&#39;: str(destination), &#39;conditions&#39;: report[&#39;condition_count&#39;],
+                      &#39;evaluations&#39;: report[&#39;evaluation_count&#39;], &#39;assignment_cases&#39;: len(assignments),
+                      &#39;scan_cases&#39;: len(scans), &#39;maximum_errors&#39;: ERRORS}, indent=2), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

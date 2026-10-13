@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>covariant-clock-variation.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-variation.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="covariant-clock-variation.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-variation.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="covariant-clock-variation.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>covariant-clock-variation.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/covariant-clock-variation.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Independent full matrix variations of a responding same-field clock.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;radial&#39;, ROOT/&#39;inverse-current-radial.py&#39;)
+radial = module_from_spec(spec)
+spec.loader.exec_module(radial)
+COUNTS, ERRORS = {}, {}
+
+
+def close(actual, expected, label, tolerance=3e-8):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    if error &gt;= tolerance:
+        raise AssertionError((label, error))
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def current(field, alpha):
+    return np.array([np.vdot(field, field).real]+[np.vdot(field, a@field).real for a in alpha])
+
+
+def action_source(particle, background, alpha, beta, mass, source):
+    jp, jb = current(particle, alpha), current(background, alpha)
+    proper = np.sqrt(jb[0]**2-np.dot(jb[1:], jb[1:]))
+    flow = jb/proper
+    q = flow[0]*jp[0]-np.dot(flow[1:], jp[1:])
+    signed = np.vdot(particle, beta@particle).real
+    potential = mass*signed+source*q
+    slash_time = flow[0]*np.eye(len(beta))-sum(u*a for u, a in zip(flow[1:], alpha))
+    first = (mass*beta+source*slash_time)@particle
+    transverse = source*(jp-q*flow)/proper
+    second = (transverse[0]*np.eye(len(beta))-sum(t*a for t, a in zip(transverse[1:], alpha)))@background
+    return potential, first, second
+
+
+def main():
+    rng = np.random.default_rng(202610120523)
+    cases = []
+    for depth in radial.DEPTHS:
+        matrices = radial.gammas(depth+1)
+        alpha, beta = matrices[:depth], matrices[depth]
+        rank = len(beta)
+        eye = np.eye(rank)
+        c, x, load = .6, .8, .2
+        a, b = np.sqrt((1+c)/2), np.sqrt((1-c)/2)
+        h = depth/2
+        first_harmonic = sum(1/j for j in range(1, depth+1))
+        omega, lam, mass = c/first_harmonic, h/c, h*x/c
+        source = omega-lam
+        p0 = np.sqrt(load/rank)*(a*eye+b*beta)
+        b0 = eye/np.sqrt(rank)
+        for sample in range(4):
+            p = p0+.03*(rng.normal(size=p0.shape)+1j*rng.normal(size=p0.shape))/rank
+            bg = b0+.03*(rng.normal(size=b0.shape)+1j*rng.normal(size=b0.shape))/rank
+            dp = rng.normal(size=p0.shape)+1j*rng.normal(size=p0.shape)
+            db = rng.normal(size=p0.shape)+1j*rng.normal(size=p0.shape)
+            dp /= np.linalg.norm(dp)
+            db /= np.linalg.norm(db)
+            value, gp, gb = action_source(p, bg, alpha, beta, mass, source)
+            step = 2e-6
+            finite = (action_source(p+step*dp, bg+step*db, alpha, beta, mass, source)[0]
+                      -action_source(p-step*dp, bg-step*db, alpha, beta, mass, source)[0])/(2*step)
+            close(finite, 2*np.real(np.vdot(gp, dp)+np.vdot(gb, db)), &#39;joint action variation retains both responding sources&#39;)
+            close(np.vdot(p, gp).real, value, &#39;particle Euler contraction includes the complete interaction&#39;)
+            close(np.vdot(bg, gb), 0., &#39;background Euler contraction vanishes without freezing its source&#39;)
+            rapidity = .57
+            boost = np.cosh(rapidity/2)*eye+np.sinh(rapidity/2)*alpha[0]
+            boosted = action_source(boost@p, boost@bg, alpha, beta, mass, source)
+            close(boosted[0], value, &#39;full action is invariant under a simultaneous actual Lorentz boost&#39;)
+            close(boost.conj().T@boosted[1], gp, &#39;particle source has the complete contragredient boost law&#39;)
+            close(boost.conj().T@boosted[2], gb, &#39;responding background source has the complete contragredient boost law&#39;)
+            base = action_source(p0, b0, alpha, beta, mass, source)
+            close(base[1], (mass*beta+source*eye)@p0, &#39;balanced clock preserves the stationary particle source&#39;)
+            close(base[2], np.zeros_like(b0), &#39;balanced free background is an actual stationary solution&#39;)
+            djp = np.array([2*np.vdot(p0, al@dp).real for al in alpha])
+            djb = np.array([2*np.vdot(b0, al@db).real for al in alpha])
+            linear_p = (mass*beta+source*eye)@dp-source*sum(j*al@p0 for j, al in zip(djb, alpha))
+            linear_b = source*sum((-p+load*b)*al@b0 for p, b, al in zip(djp, djb, alpha))
+            plus = action_source(p0+step*dp, b0+step*db, alpha, beta, mass, source)
+            minus = action_source(p0-step*dp, b0-step*db, alpha, beta, mass, source)
+            close((plus[1]-minus[1])/(2*step), linear_p, &#39;independent complete particle Hessian matches all vector current derivatives&#39;)
+            close((plus[2]-minus[2])/(2*step), linear_b, &#39;independent complete background Hessian includes reciprocal response and its self term&#39;)
+            # The coefficient of t squared is half the ordinary real Hessian.
+            # Use a larger step to separate this second difference from roundoff.
+            curvature_step = 3e-4
+            vp = action_source(p0+curvature_step*dp, b0+curvature_step*db, alpha, beta, mass, source)[0]
+            vm = action_source(p0-curvature_step*dp, b0-curvature_step*db, alpha, beta, mass, source)[0]
+            finite_curvature = (vp+vm-2*base[0])/(2*curvature_step**2)
+            predicted = np.vdot(dp, (mass*beta+source*eye)@dp).real-source*np.dot(djb, djp)+source*load*np.dot(djb, djb)/2
+            close(finite_curvature, predicted, &#39;joint second action variation verifies the entire quadratic current energy&#39;, 5e-7)
+        cases.append(dict(depth=depth, spinor_rank=rank, c_exact=&#39;3/5&#39;, load_exact=&#39;1/5&#39;,
+                          classification=&#39;independent full complex matrix action and Hessian variations&#39;))
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = dict(experiment_key=&#39;covariant-clock-full-matrix-variation&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                           for p in [Path(__file__), ROOT/&#39;inverse-current-radial.py&#39;]},
+                  conditions=COUNTS, evaluations=sum(COUNTS.values()), maximum_errors=ERRORS, cases=cases,
+                  limits=[&#39;affine shell plateau and retained two-block same-field ansatz&#39;,
+                          &#39;local checks do not establish spatial spectral completeness or nonlinear persistence&#39;,
+                          &#39;uncalibrated particle/background density ratio is an explicit control&#39;])
+    output = ROOT/(&#39;covariant-clock-variation-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

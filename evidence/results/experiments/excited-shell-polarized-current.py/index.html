@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>excited-shell-polarized-current.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/excited-shell-polarized-current.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="excited-shell-polarized-current.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/excited-shell-polarized-current.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="excited-shell-polarized-current.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>excited-shell-polarized-current.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/excited-shell-polarized-current.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;A bounded polarized zero-shell current map beyond orientation alone.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from itertools import combinations
+from pathlib import Path
+import json
+
+import numpy as np
+from scipy.special import roots_jacobi
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;orientation&#39;, ROOT/&#39;excited-shell-orientation-current.py&#39;)
+orientation = module_from_spec(spec)
+spec.loader.exec_module(orientation)
+radial = orientation.radial
+GAMMA = np.asarray(radial.gammas(4)[:3])
+LABELS = [axis+&#39; &#39;+matrix+&#39; &#39;+phase for axis in [&#39;a&#39;, &#39;b&#39;]
+          for matrix in [&#39;I&#39;, &#39;alpha_a&#39;, &#39;alpha_b&#39;, &#39;i alpha_a alpha_b&#39;]
+          for phase in [&#39;real&#39;, &#39;imaginary&#39;]]
+COUNTS, ERRORS = {}, {}
+
+
+def close(actual, expected, label, tolerance=3e-8):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    if error &gt;= tolerance:
+        raise AssertionError((label, error))
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def rule(order, exponent):
+    values, weights = roots_jacobi(order, exponent, exponent)
+    return values, weights/sum(weights)
+
+
+def calculate(depth, level, angular_order, extra):
+    from math import comb
+    tv, tw = rule(2*level+12+extra, (depth-2)/2)
+    uv, uw = rule(angular_order, (depth-3)/2)
+    if depth == 2:
+        xv, xw = np.array([-1., 1.]), np.array([.5, .5])
+    else:
+        xv, xw = rule(angular_order, (depth-4)/2)
+    aa, bb, ap, bp = orientation.polynomials(depth, level, tv)
+    normal = comb(level+depth-1, depth-1)
+    gram = np.zeros((16, 16), complex)
+    currents = np.zeros((16, 16))
+    first = np.zeros((3, 16))
+    maximum_algebra_error = 0.
+    maximum_profile_error = 0.
+    for t, wt, a, b, a_prime, b_prime in zip(tv, tw, aa, bb, ap, bp):
+        u, xi = np.meshgrid(uv, xv, indexing=&#39;ij&#39;)
+        angle_weights = np.outer(uw, xw).ravel()
+        coords = np.column_stack([np.full(u.size, t), np.sqrt(1-t*t)*u.ravel(),
+                                 np.sqrt(1-t*t)*np.sqrt(1-u*u).ravel()*xi.ravel()])
+        metric = np.eye(3)[None, :, :]-np.einsum(&#39;na,nb-&gt;nab&#39;, coords, coords)
+        values, vectors = np.linalg.eigh(metric)
+        root = np.sqrt(np.maximum(values, 0.))[:, :, None]*vectors.transpose(0, 2, 1)
+        clifford = np.einsum(&#39;nka,kij-&gt;naij&#39;, root, GAMMA)
+        av, az, ay = [clifford[:, i] for i in range(3)]
+        w, y = coords[:, 1], coords[:, 2]
+        qa = t*az-w[:, None, None]*av-.5j*(av@az-az@av)
+        qb = t*ay-y[:, None, None]*av-.5j*(av@ay-ay@av)
+        eye = np.broadcast_to(np.eye(4), av.shape)
+        maximum_algebra_error = max(maximum_algebra_error, float(np.max(abs(qa@qa-eye))),
+                                    float(np.max(abs(qb@qb-eye))), float(np.max(abs(qa@qb+qb@qa))))
+        matrix = a*eye-1j*b*av
+        da = a_prime*w[:, None, None]*eye-1j*(b_prime*w[:, None, None]*av+b*az)
+        db = a_prime*y[:, None, None]*eye-1j*(b_prime*y[:, None, None]*av+b*ay)
+        wa = da+1j*level/depth*matrix@qa
+        wb = db+1j*level/depth*matrix@qb
+        fields = []
+        for derivative in [wa, wb]:
+            for right in [eye, qa, qb, 1j*qa@qb]:
+                field = derivative@right
+                fields.extend([field, 1j*field])
+        fields = np.stack(fields, axis=1)
+        local_gram = np.einsum(&#39;naij,nbij-&gt;nab&#39;, fields.conj(), fields)/(4*normal)
+        current = []
+        for gamma in GAMMA:
+            vertex = np.einsum(&#39;ij,najk-&gt;naik&#39;, gamma, fields)
+            current.append(2*np.einsum(&#39;nij,naij-&gt;na&#39;, matrix.conj(), vertex).real/(4*normal))
+        current = np.stack(current, axis=2)
+        phi = 2*b*(a+t*b)/normal
+        prime = 2*(b_prime*(a+t*b)+b*(a_prime+b+t*b_prime))/normal
+        expected = ((phi-(t*prime+depth*phi)*w*w)[:, None]*root[:, :, 0]
+                    +((- (1-t*t)*prime+depth*t*phi)*w)[:, None]*root[:, :, 1])
+        maximum_profile_error = max(maximum_profile_error, float(np.linalg.norm(current[:, 2]-expected)/max(1., np.linalg.norm(expected))))
+        gram += wt*np.einsum(&#39;n,nab-&gt;ab&#39;, angle_weights, local_gram)
+        currents += wt*np.einsum(&#39;n,nak,nbk-&gt;ab&#39;, angle_weights, current, current)
+        for row, (i, j) in enumerate(combinations(range(3), 2)):
+            killing = coords[:, i, None]*root[:, :, j]-coords[:, j, None]*root[:, :, i]
+            first[row] += wt*np.einsum(&#39;n,nak,nk-&gt;a&#39;, angle_weights, current, killing)
+    close(maximum_algebra_error, 0., &#39;transported right Clifford directions satisfy their exact pointwise algebra&#39;)
+    close(maximum_profile_error, 0., &#39;the actual right-polarized shape current equals the exact closed two-form profile&#39;)
+    close(currents[[0, 8]], np.zeros((2, 16)), &#39;both real orientation tangents remain in the complete polarized current kernel&#39;)
+    close(np.diag(gram.real), np.full(16, level*(depth-1)*(level+depth)/depth**2),
+          &#39;every unitary right-polarized derivative has the exact horizontal canonical norm&#39;)
+    first_power = (depth+1)/2*first.T@first
+    metric = gram.real
+    eigenvalues, eigenvectors = np.linalg.eigh(metric)
+    threshold = 1e-9*max(1., max(eigenvalues))
+    active = eigenvalues &gt; threshold
+    transform = eigenvectors[:, active]/np.sqrt(eigenvalues[active])
+    if not np.any(active):
+        return dict(field_labels=LABELS, gram=metric.tolist(), symplectic=(2*gram.imag).tolist(),
+                    current_gram=currents.tolist(), first_harmonic_moments=first.tolist(),
+                    physical_real_rank=0, higher_current_shape_maximum=0., shape_witness=None)
+    omega = transform.T@(2*gram.imag)@transform
+    close(omega@omega, -4*np.eye(sum(active)), &#39;complete complex polarized span has a nondegenerate canonical symplectic form&#39;)
+    # Remove first-harmonic current and both orientation/conjugate pairs.
+    restrictions = np.vstack([first@transform, metric[[0, 1, 8, 9]]@transform])
+    _, singular, vh = np.linalg.svd(restrictions, full_matrices=True)
+    rank = sum(singular &gt; 1e-9*max(1., max(singular)))
+    null = vh[rank:].T
+    shape_transform = transform@null
+    reduced = shape_transform.T@currents@shape_transform
+    values, vectors = np.linalg.eigh(reduced)
+    maximum = float(max(values)) if len(values) else 0.
+    witness = shape_transform@vectors[:, -1] if len(values) else np.zeros(16)
+    if maximum &gt; 1e-8:
+        close(witness@metric@witness, 1., &#39;the higher-current shape witness has unit canonical norm&#39;)
+        close(first@witness, np.zeros(3), &#39;the shape witness has zero current in every first coexact harmonic&#39;)
+        close(metric[[0, 1, 8, 9]]@witness, np.zeros(4), &#39;the shape witness is orthogonal to both orientation and conjugate directions&#39;)
+    return dict(field_labels=LABELS, gram=metric.tolist(), symplectic=(2*gram.imag).tolist(),
+                current_gram=currents.tolist(), first_harmonic_moments=first.tolist(),
+                first_harmonic_power=first_power.tolist(), physical_real_rank=int(sum(active)),
+                higher_current_shape_maximum=maximum, shape_witness=witness.tolist(),
+                current_rank=int(sum(np.linalg.eigvalsh(transform.T@currents@transform)&gt;1e-8)))
+
+
+def certify_shape_profile():
+    t, w, d, n = sp.symbols(&#39;t w d n&#39;)
+    phi = sp.Function(&#39;phi&#39;)(t)
+    vector = [phi-(t*sp.diff(phi, t)+d*phi)*w*w,
+              (-(1-t*t)*sp.diff(phi, t)+d*t*phi)*w]
+    coordinates = [t, w]
+    def laplace(f):
+        return sum(((1 if i == j else 0)-x*y)*sp.diff(f, x, y)
+                   for i, x in enumerate(coordinates) for j, y in enumerate(coordinates))-d*sum(x*sp.diff(f, x) for x in coordinates)
+    divergence = sum(((1 if i == j else 0)-x*y)*sp.diff(vector[i], y)
+                     for i, x in enumerate(coordinates) for j, y in enumerate(coordinates))-d*sum(x*f for x, f in zip(coordinates, vector))
+    assert sp.simplify(divergence) == 0
+    assert sp.simplify(d*phi+(1-t*t)*(-t*sp.diff(phi, t)-d*phi)-t*(-(1-t*t)*sp.diff(phi, t)+d*t*phi)) == 0
+    ode = ((d+4)*t*sp.diff(phi, t)-n*(n+d+3)*phi)/(1-t*t)
+    third = sp.diff(ode, t).subs(sp.diff(phi, t, 2), ode)
+    eigenvalue = (n+3)*(n+d)
+    for k, x in enumerate(coordinates):
+        actual = -laplace(vector[k])+d*vector[k]+2*sum(y*sp.diff(f, x) for y, f in zip(coordinates, vector))
+        residual = (actual-eigenvalue*vector[k]).subs(sp.diff(phi, t, 3), third).subs(sp.diff(phi, t, 2), ode)
+        assert sp.simplify(residual) == 0
+
+
+def exact_shape(depth, level):
+    from math import comb
+    t = sp.Symbol(&#39;t&#39;)
+    aa = sp.Poly(sp.Rational(level+depth-1, depth-1)*sp.gegenbauer(level, sp.Rational(depth-1, 2), t), t, domain=sp.QQ)
+    bb = sp.Poly(sp.gegenbauer(level-1, sp.Rational(depth+1, 2), t) if level else 0, t, domain=sp.QQ)
+    remaining = sp.Rational(2, comb(level+depth-1, depth-1))*bb*(aa+sp.Poly(t, t, domain=sp.QQ)*bb)
+    modes, norm, response = [], sp.S.Zero, sp.S.Zero
+    for harmonic in range(2*level+1, 2, -2):
+        basis = sp.Poly(sp.gegenbauer(harmonic-2, sp.Rational(depth+3, 2), t), t, domain=sp.QQ)
+        coefficient = remaining.nth(harmonic-2)/basis.LC()
+        remaining -= coefficient*basis
+        vn = sp.Rational((harmonic+1)*(harmonic+depth-2)*(depth-1)*comb(harmonic+depth, depth+2), (depth+1)*(2*harmonic+depth-1))
+        power = coefficient**2*vn
+        norm += power
+        response -= sp.Rational(2, (harmonic-1)*(harmonic+depth))*power
+        modes.append(dict(harmonic=harmonic, coefficient_exact=str(coefficient), current_norm_squared_exact=str(power)))
+    assert remaining.is_zero
+    assert (response &lt; 0) if level else (response == 0)
+    return dict(current_norm_squared_exact=str(norm), static_response_form_exact=str(response),
+                harmonic_powers_exact=list(reversed(modes))), norm
+
+
+def main():
+    certify_shape_profile()
+    cases = []
+    for name, depth, index in radial.ASSIGNMENTS:
+        first = calculate(depth, index-1, 6, 0)
+        second = calculate(depth, index-1, 8, 8)
+        for key in [&#39;gram&#39;, &#39;symplectic&#39;, &#39;current_gram&#39;, &#39;first_harmonic_moments&#39;]:
+            close(first[key], second[key], &#39;independent exact-degree angular and radial rules agree on &#39;+key, 3e-7)
+        close(first[&#39;higher_current_shape_maximum&#39;], second[&#39;higher_current_shape_maximum&#39;],
+              &#39;independent cubature verifies the higher-current shape direction&#39;, 3e-7)
+        exact, exact_norm = exact_shape(depth, index-1)
+        close(second[&#39;current_gram&#39;][2][2], float(exact_norm), &#39;exact rational shape harmonics verify the actual polarized current norm&#39;, 3e-7)
+        cases.append(dict(particle=name, depth=depth, inferred_index=index, response=second, exact_shape=exact,
+                          classification=&#39;finite polarized selected-shell current map, with no dynamics or stability conclusion&#39;))
+        print(json.dumps(dict(completed=name, depth=depth, physical_real_rank=second[&#39;physical_real_rank&#39;],
+                              higher_current_shape_maximum=second[&#39;higher_current_shape_maximum&#39;])), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = dict(experiment_key=&#39;inferred-shell-polarized-current-map&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                           for p in [Path(__file__), ROOT/&#39;inverse-current-radial.py&#39;, ROOT/&#39;excited-shell-orientation-current.py&#39;]},
+                  evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS, cases=cases,
+                  limits=[&#39;a finite complex current span is not the full degenerate zero shell&#39;,
+                          &#39;the finite-span ranks and optimal witnesses are numerical; the explicit right-polarized shape profile and its signed response are exact&#39;,
+                          &#39;the full reciprocal frequency-dependent background and off-shell modes remain retained&#39;,
+                          &#39;a nonzero higher current with zero first harmonic has negative leading static response, not automatically growing dynamics&#39;,
+                          &#39;the massive current factor c_l and physical amplitudes remain explicit&#39;])
+    output = ROOT/(&#39;excited-shell-polarized-current-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

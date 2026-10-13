@@ -1,0 +1,559 @@
+{
+  "experiment_key": "minimal-carrier-exact-low-harmonic-curvature",
+  "created_utc": "2026-10-12T09:39:43.780820+00:00",
+  "sources": {
+    "experiments/minimal-carrier-exact-curvature.py": "2558def020c2d3aeb27bbb5227ad839d15b6a8addeb962c26d53011864725179",
+    "experiments/minimal-count-carrier.py": "c32f6a998a844bbccd3bc46483a551addf224b2b254f7b6d218a8fd0ca87ad2b",
+    "experiments/forward-count-action.py": "5f1dd9a03cf8e6b07a56d507791fed8ff859f10abf22bb755c60c3bd1ed6d909",
+    "experiments/inverse-current-radial.py": "52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80",
+    "experiments/excited-shell-orientation-current.py": "508484d445dbb86da9f88a31642268b5a1dba8264588e6f48ebb6cc00cf9c264",
+    "experiments/minimal-carrier-ground-response.py": "be27aa03a9b7957c3ec8e6201bbff9977653d9a649e22d085ffc89c0d7c39bfd"
+  },
+  "cases": [
+    {
+      "depth": 2,
+      "exact_rank": 8,
+      "exact_closure": true,
+      "real_generator_matrix": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1/3",
+          "4/3",
+          "76/75",
+          "-152/75"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "4/3",
+          "-11/3",
+          "-38/75",
+          "76/75"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "-4/25",
+          "8/25"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "8/25",
+          "-16/25"
+        ],
+        [
+          "-2*scalar_curvature/3 - 1/3",
+          "4*scalar_curvature/3 - 4/3",
+          "4*scalar_curvature/3 - 76/75",
+          "38/75 - 2*scalar_curvature/3",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "4*scalar_curvature/3 - 4/3",
+          "11/3 - 8*scalar_curvature/3",
+          "152/75 - 8*scalar_curvature/3",
+          "4*scalar_curvature/3 - 76/75",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "-1",
+          "-34/25",
+          "-8/25",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "-8/25",
+          "54/25",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "time_characteristic_polynomial": "-time_eigenvalue**2*(62500*scalar_curvature*time_eigenvalue**4 + 222300*scalar_curvature*time_eigenvalue**2 + 187600*scalar_curvature - 5625*time_eigenvalue**6 - 103954*time_eigenvalue**4 - 322137*time_eigenvalue**2 - 285100)/5625",
+      "nonzero_squared_frequency_cubic": "(62500*scalar_curvature*z**2 - 222300*scalar_curvature*z + 187600*scalar_curvature + 5625*z**3 - 103954*z**2 + 322137*z - 285100)/5625",
+      "elementary_symmetric_coefficients": [
+        "-2*(31250*scalar_curvature - 51977)/5625",
+        "-(24700*scalar_curvature - 35793)/625",
+        "-4*(1876*scalar_curvature - 2851)/225"
+      ],
+      "cubic_discriminant": "16*(614572753906250000*scalar_curvature**4 - 1610652276171875000*scalar_curvature**3 + 535047313465430625*scalar_curvature**2 + 1355082255708111400*scalar_curvature - 913350619402931056)/1001129150390625",
+      "all_real_scalar_curvature_allowed_set": "scalar_curvature <= CRootOf(614572753906250000*x**4 - 1610652276171875000*x**3 + 535047313465430625*x**2 + 1355082255708111400*x - 913350619402931056, 0)",
+      "exact_root_certificates": {
+        "discriminant_real_root_count": 2,
+        "necessary_sum_bound": "51977/31250",
+        "discriminant_roots_at_or_below_sum_bound": 2,
+        "discriminant_at_zero_sign": -1
+      },
+      "independent_pointwise_source_maximum_error": 7.828241759158203e-16,
+      "flat_nonreal_squared_frequency_roots": 2,
+      "flat_negative_squared_frequency_roots": 0,
+      "classification": "exact closed spatial family for every real scalar curvature; not a full persistence theorem"
+    },
+    {
+      "depth": 3,
+      "exact_rank": 8,
+      "exact_closure": true,
+      "real_generator_matrix": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "2",
+          "478/275",
+          "-956/275"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "2",
+          "-5",
+          "-239/275",
+          "478/275"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "-36/275",
+          "72/275"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "72/275",
+          "-144/275"
+        ],
+        [
+          "-scalar_curvature",
+          "2*scalar_curvature - 2",
+          "2*scalar_curvature",
+          "-scalar_curvature",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "2*scalar_curvature - 2",
+          "5 - 4*scalar_curvature",
+          "-4*scalar_curvature",
+          "2*scalar_curvature",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "-1",
+          "1",
+          "-2",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "-2",
+          "4",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "time_characteristic_polynomial": "-time_eigenvalue**2*(6875*scalar_curvature*time_eigenvalue**4 + 51700*scalar_curvature*time_eigenvalue**2 + 79475*scalar_curvature - 275*time_eigenvalue**6 - 10692*time_eigenvalue**4 - 66843*time_eigenvalue**2 - 110000)/275",
+      "nonzero_squared_frequency_cubic": "(6875*scalar_curvature*z**2 - 51700*scalar_curvature*z + 79475*scalar_curvature + 275*z**3 - 10692*z**2 + 66843*z - 110000)/275",
+      "elementary_symmetric_coefficients": [
+        "-(625*scalar_curvature - 972)/25",
+        "-(51700*scalar_curvature - 66843)/275",
+        "400 - 289*scalar_curvature"
+      ],
+      "cubic_discriminant": "12*(174498779296875*scalar_curvature**4 - 625094696875000*scalar_curvature**3 + 799321776123750*scalar_curvature**2 - 419352594823800*scalar_curvature + 67309415720523)/519921875",
+      "all_real_scalar_curvature_allowed_set": "scalar_curvature <= CRootOf(174498779296875*x**4 - 625094696875000*x**3 + 799321776123750*x**2 - 419352594823800*x + 67309415720523, 0)",
+      "exact_root_certificates": {
+        "discriminant_real_root_count": 2,
+        "necessary_sum_bound": "972/625",
+        "discriminant_roots_at_or_below_sum_bound": 2,
+        "discriminant_at_zero_sign": 1
+      },
+      "independent_pointwise_source_maximum_error": 4.34773165252997e-16,
+      "flat_nonreal_squared_frequency_roots": 0,
+      "flat_negative_squared_frequency_roots": 0,
+      "classification": "exact closed spatial family for every real scalar curvature; not a full persistence theorem"
+    },
+    {
+      "depth": 4,
+      "exact_rank": 8,
+      "exact_closure": true,
+      "real_generator_matrix": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1/3",
+          "8/3",
+          "4568/1875",
+          "-9136/1875"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "8/3",
+          "-19/3",
+          "-2284/1875",
+          "4568/1875"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "-72/625",
+          "144/625"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "144/625",
+          "-288/625"
+        ],
+        [
+          "1/3 - 4*scalar_curvature/3",
+          "8*scalar_curvature/3 - 8/3",
+          "8*scalar_curvature/3",
+          "-4*scalar_curvature/3",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "8*scalar_curvature/3 - 8/3",
+          "19/3 - 16*scalar_curvature/3",
+          "-16*scalar_curvature/3",
+          "8*scalar_curvature/3",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "-1",
+          "4/3",
+          "-8/3",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "-8/3",
+          "16/3",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "time_characteristic_polynomial": "-time_eigenvalue**2*(250000*scalar_curvature*time_eigenvalue**4 + 2283600*scalar_curvature*time_eigenvalue**2 + 4800000*scalar_curvature - 5625*time_eigenvalue**6 - 348406*time_eigenvalue**4 - 2789805*time_eigenvalue**2 - 6250000)/5625",
+      "nonzero_squared_frequency_cubic": "(250000*scalar_curvature*z**2 - 2283600*scalar_curvature*z + 4800000*scalar_curvature + 5625*z**3 - 348406*z**2 + 2789805*z - 6250000)/5625",
+      "elementary_symmetric_coefficients": [
+        "-2*(125000*scalar_curvature - 174203)/5625",
+        "-(152240*scalar_curvature - 185987)/375",
+        "-80*(96*scalar_curvature - 125)/9"
+      ],
+      "cubic_discriminant": "16*(64817025000000000000*scalar_curvature**4 - 173540899437800000000*scalar_curvature**3 + 107899668492309776400*scalar_curvature**2 + 48140394018853560360*scalar_curvature - 48433834993112616559)/40045166015625",
+      "all_real_scalar_curvature_allowed_set": "scalar_curvature <= CRootOf(64817025000000000000*x**4 - 173540899437800000000*x**3 + 107899668492309776400*x**2 + 48140394018853560360*x - 48433834993112616559, 0)",
+      "exact_root_certificates": {
+        "discriminant_real_root_count": 2,
+        "necessary_sum_bound": "174203/125000",
+        "discriminant_roots_at_or_below_sum_bound": 2,
+        "discriminant_at_zero_sign": -1
+      },
+      "independent_pointwise_source_maximum_error": 4.378687137894101e-16,
+      "flat_nonreal_squared_frequency_roots": 2,
+      "flat_negative_squared_frequency_roots": 0,
+      "classification": "exact closed spatial family for every real scalar curvature; not a full persistence theorem"
+    },
+    {
+      "depth": 5,
+      "exact_rank": 8,
+      "exact_closure": false,
+      "nonzero_residual_coefficients": 64,
+      "first_residual": "-12836/2055",
+      "classification": "the fixed-label family is not exactly closed; no projected eigenvalue claim"
+    },
+    {
+      "depth": 6,
+      "exact_rank": 8,
+      "exact_closure": true,
+      "real_generator_matrix": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "4",
+          "932/245",
+          "-1864/245"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "4",
+          "-9",
+          "-466/245",
+          "932/245"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "-24/245",
+          "48/245"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "48/245",
+          "-96/245"
+        ],
+        [
+          "1 - 2*scalar_curvature",
+          "4*scalar_curvature - 4",
+          "4*scalar_curvature - 932/245",
+          "466/245 - 2*scalar_curvature",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "4*scalar_curvature - 4",
+          "9 - 8*scalar_curvature",
+          "1864/245 - 8*scalar_curvature",
+          "4*scalar_curvature - 932/245",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "-1",
+          "-1374/245",
+          "-48/245",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "-48/245",
+          "1494/245",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "time_characteristic_polynomial": "-time_eigenvalue**2*(6002500*scalar_curvature*time_eigenvalue**4 + 33680060*scalar_curvature*time_eigenvalue**2 + 89536720*scalar_curvature - 60025*time_eigenvalue**6 - 6957906*time_eigenvalue**4 - 39659577*time_eigenvalue**2 - 106427020)/60025",
+      "nonzero_squared_frequency_cubic": "(6002500*scalar_curvature*z**2 - 33680060*scalar_curvature*z + 89536720*scalar_curvature + 60025*z**3 - 6957906*z**2 + 39659577*z - 106427020)/60025",
+      "elementary_symmetric_coefficients": [
+        "-2*(3001250*scalar_curvature - 3478953)/60025",
+        "-(33680060*scalar_curvature - 39659577)/60025",
+        "-4*(91364*scalar_curvature - 108599)/245"
+      ],
+      "cubic_discriminant": "-144*(254069143431090812343750000*scalar_curvature**4 - 1111346598774212257912525000*scalar_curvature**3 + 1818733926052143164641205975*scalar_curvature**2 - 1319786979018934334450048760*scalar_curvature + 358338237200175864448960944)/12981613503750390625",
+      "all_real_scalar_curvature_allowed_set": "False",
+      "exact_root_certificates": {
+        "discriminant_real_root_count": 2,
+        "necessary_sum_bound": "3478953/3001250",
+        "discriminant_roots_at_or_below_sum_bound": 0,
+        "discriminant_at_zero_sign": -1
+      },
+      "independent_pointwise_source_maximum_error": 9.272664540626479e-16,
+      "flat_nonreal_squared_frequency_roots": 2,
+      "flat_negative_squared_frequency_roots": 0,
+      "classification": "exact closed spatial family for every real scalar curvature; not a full persistence theorem"
+    },
+    {
+      "depth": 10,
+      "exact_rank": 8,
+      "exact_closure": true,
+      "real_generator_matrix": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-7/3",
+          "20/3",
+          "719956/110715",
+          "-1439912/110715"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "20/3",
+          "-43/3",
+          "-359978/110715",
+          "719956/110715"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "-3024/36905",
+          "6048/36905"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "6048/36905",
+          "-12096/36905"
+        ],
+        [
+          "7/3 - 10*scalar_curvature/3",
+          "20*scalar_curvature/3 - 20/3",
+          "20*scalar_curvature/3 - 719956/110715",
+          "359978/110715 - 10*scalar_curvature/3",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "20*scalar_curvature/3 - 20/3",
+          "43/3 - 40*scalar_curvature/3",
+          "1439912/110715 - 40*scalar_curvature/3",
+          "20*scalar_curvature/3 - 719956/110715",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "-1",
+          "-356954/36905",
+          "-6048/36905",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "-6048/36905",
+          "372074/36905",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "time_characteristic_polynomial": "-time_eigenvalue**2*(3404947562500*scalar_curvature*time_eigenvalue**4 + 26276440323500*scalar_curvature*time_eigenvalue**2 + 130649796706000*scalar_curvature - 12257811225*time_eigenvalue**6 - 3706068422794*time_eigenvalue**4 - 29349873517409*time_eigenvalue**2 - 144970394453500)/12257811225",
+      "nonzero_squared_frequency_cubic": "(3404947562500*scalar_curvature*z**2 - 26276440323500*scalar_curvature*z + 130649796706000*scalar_curvature + 12257811225*z**3 - 3706068422794*z**2 + 29349873517409*z - 144970394453500)/12257811225",
+      "elementary_symmetric_coefficients": [
+        "-2*(1702473781250*scalar_curvature - 1853034211397)/12257811225",
+        "-(26276440323500*scalar_curvature - 29349873517409)/12257811225",
+        "-20*(35401652*scalar_curvature - 39282047)/66429"
+      ],
+      "cubic_discriminant": "-16*(3247215549860787225450729408516227844238281250000*scalar_curvature**4 - 13697867769653231906661533022928560570173046875000*scalar_curvature**3 + 21648783098825199853447600052711064974996489953125*scalar_curvature**2 - 15192890617847501680863617297568018883710606376000*scalar_curvature + 3994769699780294712005358439551273990636917931968)/92906359225625442495385620290823046875",
+      "all_real_scalar_curvature_allowed_set": "False",
+      "exact_root_certificates": {
+        "discriminant_real_root_count": 0,
+        "necessary_sum_bound": "1853034211397/1702473781250",
+        "discriminant_roots_at_or_below_sum_bound": 0,
+        "discriminant_at_zero_sign": -1
+      },
+      "independent_pointwise_source_maximum_error": 1.2066547949414795e-15,
+      "flat_nonreal_squared_frequency_roots": 2,
+      "flat_negative_squared_frequency_roots": 0,
+      "classification": "exact closed spatial family for every real scalar curvature; not a full persistence theorem"
+    }
+  ],
+  "limits": [
+    "one common c3/5 ground preparation and the fixed ambient-label low spatial family",
+    "scalar_curvature=f_double_prime*c_squared/lambda varies the local action Hessian while retaining the background",
+    "all polynomial coefficients are reduced exactly modulo sphere norm squared equal to one",
+    "failed closure prevents any projected spectral claim",
+    "allowed coefficients in one low family do not prove all-angular or assigned excited persistence"
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "experiment_key": "convex-count-quadratic-envelope",
+  "created_utc": "2026-10-12T08:20:24.787811+00:00",
+  "sources": {
+    "experiments/convex-count-envelope.py": "6650f29a11b56cf16794e50c809fb92cf6a25829453698095912b357307ad8d0",
+    "experiments/forward-count-action.py": "5f1dd9a03cf8e6b07a56d507791fed8ff859f10abf22bb755c60c3bd1ed6d909",
+    "experiments/inverse-current-radial.py": "52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80",
+    "experiments/excited-shell-orientation-current.py": "508484d445dbb86da9f88a31642268b5a1dba8264588e6f48ebb6cc00cf9c264"
+  },
+  "evaluations": 257,
+  "conditions": {
+    "exact ground count derivatives start the all-shell strict-convexity proof at each maintained depth above two": 5,
+    "every maintained assignment belongs to the common strictly convex count chart": 14,
+    "the maximum over every admissible geometric tangent uniquely selects the maintained branch": 14,
+    "the selected envelope tangent preserves the complete stationary interaction value": 14,
+    "the finite geometric envelope has a strict open winner gap at each maintained state": 14,
+    "all competing tangent inequalities give a nonempty exact local scalar-ratio winner interval": 14,
+    "finite ratio displacements remain inside the exact affine winner chart": 28,
+    "independent variation of the actual envelope gives the complete preferred-time source": 14,
+    "every retained complete spatial block has an exactly Hermitian generator": 70,
+    "independent massive spatial block diagonalization agrees with the full linear spectrum": 70
+  },
+  "maximum_errors": {
+    "independent massive spatial block diagonalization agrees with the full linear spectrum": 2.3044629267895138e-16
+  },
+  "cases": [
+    {
+      "particle": "W",
+      "depth": 2,
+      "inferred_index": 76,
+      "epsilon_exact": "3/955",
+      "candidate_count": 281,
+      "first_eligible_level": 36,
+      "first_ineligible_c_one_level": 317,
+      "canonical_c_exact": "459/1910",
+      "count_exact": "2926",
+      "unique_winner_gap": "0.00008390731585444180665420360715021986731251189202144489081276032643723858074234196405476544137518028979",
+      "scalar_ratio": "0.9706951715024549470192639219246464997318976818052829663366351103194374475178022485802782966498234116",
+      "scalar_ratio_winner_interval": [
+        "0.9703033026213976992865760487102916708164109345939189152736903162962520488238442590360651993785703235",
+        "0.9710809968555680038182426096502562937536545393111487516089041410272909605540983049601627081942494992"
+      ],
+      "scalar_ratio_margin": "0.0003858253531130567989786877256097940217568575058657852722690307078535130362960563798844115444260875798",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "Z",
+      "depth": 2,
+      "inferred_index": 81,
+      "epsilon_exact": "3/955",
+      "candidate_count": 281,
+      "first_eligible_level": 36,
+      "first_ineligible_c_one_level": 317,
+      "canonical_c_exact": "489/1910",
+      "count_exact": "3321",
+      "unique_winner_gap": "0.00009830272464156541235671553245435884749352909855757402313186775804788591544210562400916416184594397648",
+      "scalar_ratio": "0.9666712352440857263521011543606793603827795952267062019819632511479238863455797280008589512597885559",
+      "scalar_ratio_winner_interval": [
+        "0.9662522517712686991203614451507468604036189310314896681352367804010717029704562194607956757402806415",
+        "0.9670842292375148820984416476449537612107199883708754834131201378673770183286514816041600473485580622"
+      ],
+      "scalar_ratio_margin": "0.0004129939934291557463404932842744008279403931441692814311568867194531319830717536033010960887695062511",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "Higgs",
+      "depth": 2,
+      "inferred_index": 95,
+      "epsilon_exact": "3/955",
+      "candidate_count": 281,
+      "first_eligible_level": 36,
+      "first_ineligible_c_one_level": 317,
+      "canonical_c_exact": "3/10",
+      "count_exact": "4560",
+      "unique_winner_gap": "0.0001444385486743101421066109483440093461899028290288262801396826368055922544844635943118580116348126936",
+      "scalar_ratio": "0.9539392014169456491526215860232265402546234252505457539081518529103625523056507218277821764491220698",
+      "scalar_ratio_winner_interval": [
+        "0.9534422431342806339986159935427858612010044281036998022318481930796625222930186794370706915537887318",
+        "0.9544301562689092926393023185639600487210106969774808842901913238733107065284891908191529197637690315"
+      ],
+      "scalar_ratio_margin": "0.0004909548519636434866807325407335084663872717269351303820394709629481542228384689913707433146469616777",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "down",
+      "depth": 3,
+      "inferred_index": 1,
+      "epsilon_exact": "9/370",
+      "candidate_count": 8,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 8,
+      "canonical_c_exact": "33/740",
+      "count_exact": "1",
+      "unique_winner_gap": "0.01572387777232115255280943712132543416900350337200786232608890739691438047796305603226097362549125328",
+      "scalar_ratio": "0.9990051662193463124280096977106335493468930300120708209324731899473069544820654521566045019009048713",
+      "scalar_ratio_winner_interval": [
+        "0.9974354590460978019622345168082708936424012479166753765972598181963337082438264152059363023278798501",
+        "1.0"
+      ],
+      "scalar_ratio_margin": "0.0009948337806536875719903022893664506531069699879291790675268100526930455179345478433954980990951286934",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "strange",
+      "depth": 3,
+      "inferred_index": 4,
+      "epsilon_exact": "9/370",
+      "candidate_count": 8,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 8,
+      "canonical_c_exact": "3/10",
+      "count_exact": "20",
+      "unique_winner_gap": "0.06035246163023095534530523799272296884817480510329902352829890077538426554832775576029161249599043398",
+      "scalar_ratio": "0.9539392014169456491526215860232265402546234252505457539081518529103625523056507218277821764491220698",
+      "scalar_ratio_winner_interval": [
+        "0.93093837668114303841033462980364884391877805971946416356176494605030546842495178024681085970262975",
+        "0.9701491348155383821807049326957799611989157518742712789707066822547931724435504670549133396229260262"
+      ],
+      "scalar_ratio_margin": "0.0162099333985927330280833466725534209442923266237255250625548293444306201378997452271311631738039564",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "up",
+      "depth": 4,
+      "inferred_index": 3,
+      "epsilon_exact": "6/1323245",
+      "candidate_count": 108,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 108,
+      "canonical_c_exact": "171/2646490",
+      "count_exact": "15",
+      "unique_winner_gap": "0.00003879154785298446541265607116986429487199777627815286378134165570094321025267827868278345520653530483",
+      "scalar_ratio": "0.9999999979125229429653393247513389650767014748051827098052069078257630470067305317938610247156825254",
+      "scalar_ratio_winner_interval": [
+        "0.9999999960133192515852403181142791824856853159241568488293946231923227435290657464447990822957551478",
+        "0.9999999990233429977899926934811031594860034244884208731866057498204764336829975925931252829038143866"
+      ],
+      "scalar_ratio_margin": "0.000000001110820054824653368729764194409301949683238163381398841994713386676267060799264258188131861200762746",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "charm",
+      "depth": 4,
+      "inferred_index": 20,
+      "epsilon_exact": "6/1323245",
+      "candidate_count": 108,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 108,
+      "canonical_c_exact": "19823/2646490",
+      "count_exact": "8855",
+      "unique_winner_gap": "0.001000467568382127192193094463932918161046492453578698779205971773282798227757410015451326773488763881",
+      "scalar_ratio": "0.9999719473209327287640162496317903779517520829644351041069397476214566161284260416663720328357972415",
+      "scalar_ratio_winner_interval": [
+        "0.9999678060364252965321573512561976262029082292720282791542979860249813520778895682912943997427495046",
+        "0.9999756604335254981465957464766721119407765104626052348332045984002096690760073638911710393193269106"
+      ],
+      "scalar_ratio_margin": "0.000003713112592769382579496844881733989024427498170130726264850778753052947581322224799006483529669188172",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "top",
+      "depth": 4,
+      "inferred_index": 72,
+      "epsilon_exact": "6/1323245",
+      "candidate_count": 108,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 108,
+      "canonical_c_exact": "3/10",
+      "count_exact": "1215450",
+      "unique_winner_gap": "0.01390676483907396435030514842471717207922428140788665537654868887776897290793177660999118810096715147",
+      "scalar_ratio": "0.9539392014169456491526215860232265402546234252505457539081518529103625523056507218277821764491220698",
+      "scalar_ratio_winner_interval": [
+        "0.9519773091631427723062731761462743518176197348767910148645105632494668592811001853273571367977341155",
+        "0.9558297978169155516084868475980541323509093950523157228793261922313975558873650981412381213339743015"
+      ],
+      "scalar_ratio_margin": "0.001890596399969902455865261574827592096285969801769968971174339321035003581714376313455944884852231673",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "nu1",
+      "depth": 5,
+      "inferred_index": 10,
+      "epsilon_exact": "9/412561",
+      "candidate_count": 30,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 30,
+      "canonical_c_exact": "76143/4125610",
+      "count_exact": "2002",
+      "unique_winner_gap": "0.008787688628867705001091504439620698993814974604241606803326576134720184820250477661259681628350609278",
+      "scalar_ratio": "0.9998296702072283966713328560549188622032802426786140073579144624860153425982580619772689599553587888",
+      "scalar_ratio_winner_interval": [
+        "0.9997635805216421628733198015215748174557089273595189875738811467010146666379031973665571597225244138",
+        "0.999879577430808120976946719844135803944661517994392245986093141910913909123764745921535717808774707"
+      ],
+      "scalar_ratio_margin": "0.0000499072235797243056138637892169417413812753157782386281786794248985665255066839442667578534159182864",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "nu2",
+      "depth": 5,
+      "inferred_index": 15,
+      "epsilon_exact": "9/412561",
+      "candidate_count": 30,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 30,
+      "canonical_c_exact": "619911/8251220",
+      "count_exact": "11628",
+      "unique_winner_gap": "0.02568482689162149709773439609410497975749005368703094768127028603562803068290298238734138351646574854",
+      "scalar_ratio": "0.9971737765404694600438646715423786305144608879960413097948619871179435920457961913490890425355738684",
+      "scalar_ratio_winner_interval": [
+        "0.9964338743159011975284946911086245323000562463048199903611752167240105671434642138123254505329487765",
+        "0.9977801472629974595269696298647193563124502385692933412918369941765675964623673451556456188830897199"
+      ],
+      "scalar_ratio_margin": "0.0006063707225279994831049583223407257979893505732520314969750070586240044165711538065565763475158515051",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "nu3",
+      "depth": 5,
+      "inferred_index": 22,
+      "epsilon_exact": "9/412561",
+      "candidate_count": 30,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 30,
+      "canonical_c_exact": "3/10",
+      "count_exact": "65780",
+      "unique_winner_gap": "0.08270820653288993567270777460598869233026008650941185612741678297742418695154086667909153478485818248",
+      "scalar_ratio": "0.9539392014169456491526215860232265402546234252505457539081518529103625523056507218277821764491220698",
+      "scalar_ratio_winner_interval": [
+        "0.9453854919541519306565094178250935912214187919036519715588091751295336933683571449147947459606556958",
+        "0.9612309056664974815839651888515113270374643184823226119601503180737775902106950272014163830561160132"
+      ],
+      "scalar_ratio_margin": "0.007291704249551832431343602828284786782840893231776858051998465163415037905044305373634206606993943423",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "electron",
+      "depth": 6,
+      "inferred_index": 13,
+      "epsilon_exact": "9/18462575",
+      "candidate_count": 45,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 45,
+      "canonical_c_exact": "1309533/369251500",
+      "count_exact": "18564",
+      "unique_winner_gap": "0.002217478074434675597499416026733090767605257590264089442024362906269186569072931950858868434241522304",
+      "scalar_ratio": "0.999993711316649348601436271101489255185316090307242116799843176006219453422883320684598098666945529",
+      "scalar_ratio_winner_interval": [
+        "0.9999913491829172917780206099681884260493338917157175112150775894147862948621570099068332140427084699",
+        "0.9999954929311401048064388074823719536924787044806311465475596603292290178148027754773226777935914444"
+      ],
+      "scalar_ratio_margin": "0.000001781614490756205002536380882698507162614173389029747716484323009564391919454792724579126645915369254",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "muon",
+      "depth": 6,
+      "inferred_index": 35,
+      "epsilon_exact": "9/18462575",
+      "candidate_count": 45,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 45,
+      "canonical_c_exact": "3/10",
+      "count_exact": "3838380",
+      "unique_winner_gap": "0.08827984870982655770153631629856032529271722349505899762322328498975337821278805480591879483121618644",
+      "scalar_ratio": "0.9539392014169456491526215860232265402546234252505457539081518529103625523056507218277821764491220698",
+      "scalar_ratio_winner_interval": [
+        "0.9472033533548141088572602811351766333534738030097046007863617125402082474030121747651911618110178744",
+        "0.9598468951663589817846488797588702030659905687218880396519567953858796981582449378029205940453839633"
+      ],
+      "scalar_ratio_margin": "0.005907693749413332632027293735643662811367143471342285743804942475517145852594215975138417596261893516",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    },
+    {
+      "particle": "tau",
+      "depth": 10,
+      "inferred_index": 23,
+      "epsilon_exact": "189/14943591113",
+      "candidate_count": 26,
+      "first_eligible_level": 0,
+      "first_ineligible_c_one_level": 26,
+      "canonical_c_exact": "3/10",
+      "count_exact": "64512240",
+      "unique_winner_gap": "0.4332120149211391067290898054937642199105382647117523138761368597741470190068882354875045606732806427",
+      "scalar_ratio": "0.9539392014169456491526215860232265402546234252505457539081518529103625523056507218277821764491220698",
+      "scalar_ratio_winner_interval": [
+        "0.935258156709662343589505961735506066209187418925682041943953945344636661605224530493709423147015079",
+        "0.9671874272528454736410636637067028370655892088611970481922200064504564427965529356621517113874170092"
+      ],
+      "scalar_ratio_margin": "0.01324822583589982448844207768347629681096578361065129428406815354009389049090221383436953493829493943",
+      "classification": "explicit finite envelope with an open exact quadratic field chart"
+    }
+  ],
+  "limits": [
+    "the envelope is a specified effective constitutive action derived from geometric count tangents",
+    "the preferred-time realization has exact local quadratic dynamics and its existing Sobolev persistence argument applies",
+    "proper-current and responding-clock choices retain their current response and require separate persistence analysis",
+    "the strict convexity chart excludes the low depth-two tangents; every maintained massive depth-two assignment remains included",
+    "the global evolution at tied charts is unassigned; small-persistence neighborhoods stay inside their unique winner chart",
+    "no new sector-depth preference, localized particle, complete boost inertia or physical contact-source origin follows"
+  ]
+}

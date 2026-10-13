@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>balanced-beam-persistence.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/balanced-beam-persistence.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="balanced-beam-persistence.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/balanced-beam-persistence.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="balanced-beam-persistence.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>balanced-beam-persistence.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/balanced-beam-persistence.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Real balanced shell sections and nodeless additions to count beams.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from itertools import combinations
+from math import comb
+from pathlib import Path
+import json
+
+import numpy as np
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;beams&#39;, ROOT/&#39;balanced-count-beams.py&#39;)
+beams = module_from_spec(spec)
+spec.loader.exec_module(beams)
+COUNTS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def close(actual, expected, label, scale=1., tolerance=2e-10):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/scale)
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    check(error&lt;tolerance, label)
+
+
+def zonal_jets(position, ambient, seed, level):
+    depth, t = len(ambient)-1, position[0]
+    aa, bb, ap, bp = beams.forward.orientation.polynomials(depth, level, np.array(t))
+    gx = sum(x*g for x, g in zip(position, ambient))
+    eye = np.eye(len(gx))
+    matrix = (aa-t*bb)*eye+bb*ambient[0]@gx
+    g = comb(level+depth-1, depth-1)
+    field = matrix@seed/np.sqrt(g)
+    grad = np.array([((int(i==0)*((ap-bb-t*bp)*eye+bp*ambient[0]@gx)
+                       +bb*ambient[0]@gamma)@seed)/np.sqrt(g)
+                     for i, gamma in enumerate(ambient)])
+    return field, grad, float((aa*aa+bb*bb*(1-t*t))/g), matrix/np.sqrt(g)
+
+
+def exact_real_structure(depth, ambient):
+    for g in ambient:
+        check(np.array_equal(g.real, np.rint(g.real)) and np.array_equal(g.imag, np.rint(g.imag)),
+              &#39;the Clifford entries are exactly Gaussian integers before symbolic conversion&#39;)
+    matrices = [sp.Matrix(g.shape[0], g.shape[1], lambda i, j:
+                 sp.Integer(int(g[i, j].real))+sp.I*sp.Integer(int(g[i, j].imag))) for g in ambient]
+    bb = sp.eye(8)
+    for ix in ([0, 2, 4] if depth==5 else [0, 2, 4, 6]):
+        bb *= matrices[ix]
+    check(bb*bb.conjugate()==sp.eye(8), &#39;the balanced real structure is an exact involution&#39;)
+    for gamma in matrices:
+        check(bb*gamma.conjugate()==-gamma*bb,
+              &#39;every Hermitian vector has odd antiunitary parity and zero expectation on real spinors&#39;)
+    for a, b in combinations(matrices, 2):
+        hh = sp.I*a*b
+        check(bb*hh.conjugate()==-hh*bb,
+              &#39;every Hermitian bivector also has odd antiunitary parity&#39;)
+    # Realification of B conjugation; its fixed-space dimension is exactly eight.
+    real_map = bb.applyfunc(sp.re); imag_map = bb.applyfunc(sp.im)
+    involution = real_map.row_join(imag_map).col_join(imag_map.row_join(-real_map))
+    check((involution-sp.eye(16)).rank()==8,
+          &#39;the invariant real balanced seed space has exactly eight real dimensions&#39;)
+    return np.array(bb, complex)
+
+
+def main():
+    rng = np.random.default_rng(202610121012)
+    cases = []
+    for depth in beams.forward.radial.DEPTHS:
+        _, _, ambient, seed, _ = beams.minimal.preparation(depth)
+        real_structure = exact_real_structure(depth, ambient) if depth in [5, 6] else None
+        real_seed = seed*np.exp(-.25j*np.pi) if depth==5 else seed
+        if real_structure is not None:
+            close(real_structure@real_seed.conj(), real_seed,
+                  &#39;the beam seed has a real-structure phase choice&#39;)
+        for name, dd, index in beams.forward.radial.ASSIGNMENTS:
+            if dd!=depth:
+                continue
+            level, h = index-1, index-1+depth/2
+            plane = (4, 5) if depth&gt;=5 else ((0, 4) if depth==4 else (1, 2))
+            normal = np.sqrt(float(beams.normalization(depth, level)))
+            for sample in range(8):
+                position = rng.normal(size=depth+1); position /= np.linalg.norm(position)
+                # First verify a concrete direct sum that has no zeros at any depth.
+                beam, bg, _ = beams.beam_jets(position, ambient, seed, level, plane, normal)
+                zonal, zg, density, matrix = zonal_jets(position, ambient, seed, level)
+                close(matrix.conj().T@matrix, density*np.eye(len(matrix)),
+                      &#39;the actual global zonal map is invertible with a scalar positive norm&#39;, scale=max(1., density))
+                check(density&gt;0, &#39;the zonal background is nonzero at every evaluated position&#39;)
+                delta = .1
+                field = np.concatenate([np.sqrt(1-delta*delta)*beam, delta*zonal], axis=1)
+                grad = np.concatenate([np.sqrt(1-delta*delta)*bg, delta*zg], axis=2)
+                scale = np.linalg.norm(field)
+                close(beams.sphere_dirac(position, ambient, field, grad), h*field,
+                      &#39;the concrete nodeless direct sum retains the exact positive shell&#39;, scale=h*scale)
+                rho = np.vdot(field, field).real
+                close(rho, (1-delta*delta)*np.vdot(beam, beam).real+delta*delta*density,
+                      &#39;the direct-sum density has its rigorous zonal floor&#39;, scale=rho)
+                gx = sum(x*g for x, g in zip(position, ambient))
+                close(np.vdot(field, gx@field), 0., &#39;nodeless direct sums preserve scalar balance&#39;, scale=rho)
+                for i, gamma in enumerate(ambient):
+                    alpha = 1j*(gamma@gx-position[i]*np.eye(len(gx)))
+                    close(np.vdot(field, alpha@field), 0., &#39;nodeless direct sums preserve current balance&#39;, scale=rho)
+                if real_structure is not None:
+                    raw = rng.normal(size=(8, 1))+1j*rng.normal(size=(8, 1))
+                    v = raw+real_structure@raw.conj(); v /= np.linalg.norm(v)
+                    close(real_structure@v.conj(), v, &#39;independent real seeds remain in the balanced space&#39;)
+                    bz, bj, _ = beams.beam_jets(position, ambient, real_seed, level, plane, normal)
+                    zz, zj, _, zm = zonal_jets(position, ambient, v, level)
+                    coherent = np.sqrt(1-delta*delta)*bz+delta*zz
+                    cj = np.sqrt(1-delta*delta)*bj+delta*zj
+                    rr = np.vdot(coherent, coherent).real
+                    close(real_structure@coherent.conj(), coherent,
+                          &#39;a coherent beam plus zonal mode remains a real balanced section&#39;, scale=np.sqrt(rr))
+                    close(beams.sphere_dirac(position, ambient, coherent, cj), h*coherent,
+                          &#39;coherent real beam additions retain the full spatial eigenvalue&#39;, scale=h*np.sqrt(rr))
+                    low = ambient+[1j*a@b for a, b in combinations(ambient, 2)]
+                    for moment in low:
+                        close(np.vdot(coherent, moment@coherent), 0.,
+                              &#39;arbitrary coherent real sections annihilate all local low Clifford moments&#39;, scale=rr)
+                    inverse = zm.conj().T/density
+                    bad_seed = -np.sqrt(1-delta*delta)/delta*inverse@bz
+                    close(coherent, delta*zm@(v-bad_seed),
+                          &#39;the exact bad-seed map identifies every possible coherent zero&#39;, scale=np.sqrt(rr))
+                    close(rr, delta*delta*density*np.linalg.norm(v-bad_seed)**2,
+                          &#39;distance from the compact bad-seed image gives an exact density bound&#39;, scale=rr)
+                    close(real_structure@bad_seed.conj(), bad_seed,
+                          &#39;the entire bad-seed map belongs to the same real eight-dimensional space&#39;,
+                          scale=max(1., np.linalg.norm(bad_seed)))
+            cases.append(dict(particle=name, depth=depth, inferred_index=index,
+                direct_sum_columns=2*seed.shape[1], zonal_energy_fraction_exact=&#39;1/100&#39;,
+                coherent_pure_nodeless_existence_by_dimension=depth in [5, 6],
+                bad_seed_image_dimension_bound=depth if depth in [5, 6] else None,
+                unit_real_seed_sphere_dimension=7 if depth in [5, 6] else None,
+                classification=&#39;constructive direct-sum persistence; generic pure existence at five and six&#39;))
+            print(json.dumps(dict(completed=name, depth=depth, direct_sum_columns=2*seed.shape[1])), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    source_names = [&#39;balanced-beam-persistence.py&#39;, &#39;balanced-count-beams.py&#39;, &#39;minimal-count-carrier.py&#39;,
+                    &#39;forward-count-action.py&#39;, &#39;inverse-current-radial.py&#39;, &#39;excited-shell-orientation-current.py&#39;]
+    report = dict(experiment_key=&#39;balanced-beam-nodeless-persistence&#39;,
+        created_utc=datetime.now(timezone.utc).isoformat(),
+        sources={&#39;experiments/&#39;+name: sha256((ROOT/name).read_bytes()).hexdigest() for name in source_names},
+        evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS, cases=cases,
+        proof_dependencies=[&#39;nonzero Gegenbauer polynomial and derivative cannot share a root&#39;,
+            &#39;a smooth image of a compact d-manifold has Hausdorff dimension at most d&#39;,
+            &#39;for d five or six this image cannot cover the unit seven-sphere of real seeds&#39;,
+            &#39;the preferred-time convex-envelope graph-norm proof applies to a positive density floor&#39;],
+        limits=[&#39;generic pure existence is analytic, not certified by finite spatial samples&#39;,
+            &#39;no specific random seed is asserted globally nodeless by the checker&#39;,
+            &#39;the direct sum is globally nodeless by its exact positive density sum&#39;,
+            &#39;no covariant proper-current or responding-clock stability theorem is transferred&#39;,
+            &#39;no full containing-space localization or translational inertia theorem follows&#39;])
+    path = ROOT/(&#39;balanced-beam-persistence-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,34 +1,48 @@
+import {word_matches} from './word-index.js';
+
 const toc=document.querySelector('.page-toc');
 if(toc && window.matchMedia('(max-width:760px)').matches)toc.open=false;
 const form=document.querySelector('#library-search');
 if(form){
   const query=document.querySelector('#query'),category=document.querySelector('#category'),topic=document.querySelector('#topic');
-  const results=document.querySelector('#search-results'),status=document.querySelector('#search-status');
-  let indexPromise,sequence=0;
-  async function search(event){
-    event?.preventDefault();const current=++sequence;
-    const phrase=query.value.trim().toLowerCase();const words=phrase.split(/\s+/).filter(Boolean);
-    const address=new URL(location.href);if(phrase)address.searchParams.set('q',query.value.trim());else address.searchParams.delete('q');history.replaceState(null,'',address);
-    if(!words.length&&!category.value&&!topic.value){results.replaceChildren();status.textContent='Enter a phrase to search the theory and research record.';return;}
-    status.textContent='Searching the library…';
-    try{
-      indexPromise??=fetch(form.dataset.index).then(response=>{if(!response.ok)throw new Error('Search index unavailable');return response.json();});
-      const index=await indexPromise;if(current!==sequence)return;
-      const found=index.filter(item=>(!category.value||item.category===category.value)&&(!topic.value||item.topic===topic.value)).map(item=>{
-        const title=item.title.toLowerCase(),text=(item.title+' '+item.summary+' '+item.text).toLowerCase();
-        return {...item,score:words.every(word=>text.includes(word))?words.reduce((sum,word)=>sum+(title.includes(word)?10:1),0): -1};
-      }).filter(item=>item.score>=0).sort((a,b)=>b.score-a.score||a.title.localeCompare(b.title));
-      results.replaceChildren();
-      for(const item of found.slice(0,50)){
-        const li=document.createElement('li'),label=document.createElement('span'),link=document.createElement('a'),summary=document.createElement('p');
-        label.className='result-category';label.textContent=item.category+(item.topic?' / '+item.topic:'');
-        link.href=item.url;link.textContent=item.title;summary.textContent=item.summary;
-        li.append(label,link,summary);results.append(li);
+  const status=document.querySelector('#search-status');
+  const letters=document.querySelector('.WordIndexLetters');
+  const pages=JSON.parse(document.querySelector('#word-index-pages').textContent);
+  const groups=[...document.querySelectorAll('.WordIndexGroup')].map(group=>({element:group,entries:[...group.querySelectorAll('.WordIndexEntry')]}));
+  let had_filters=false;
+  function search(event){
+    event?.preventDefault();
+    const phrase=query.value.trim();
+    const address=new URL(location.href);
+    if(phrase)address.searchParams.set('q',phrase);else address.searchParams.delete('q');
+    history.replaceState(null,'',address);
+    const filtered=Boolean(category.value||topic.value);
+    letters.hidden=Boolean(phrase||filtered);
+    const allowed=pages.map(page=>(!category.value||page.category===category.value)&&(!topic.value||page.topic===topic.value));
+    let word_count=0;
+    for(const group of groups){
+      let group_count=0;
+      for(const entry of group.entries){
+        let visible=word_matches(entry.dataset.word,phrase);
+        if(visible&&(filtered||had_filters)){
+          const links=entry.querySelectorAll('a');
+          visible=false;
+          for(const link of links){link.hidden=!allowed[Number(link.dataset.page)];if(!link.hidden)visible=true;}
+        }
+        entry.hidden=!visible;
+        if(visible){word_count++;group_count++;}
       }
-      status.textContent=found.length?`${found.length} result${found.length===1?'':'s'}${found.length>50?' · showing the first 50':''}.`:'No matching pages. Try a broader phrase or another topic.';
-    }catch(error){indexPromise=undefined;status.textContent='Search could not load. Please try again, or use the Theory and Research indexes.';}
+      group.element.hidden=group_count===0;
+    }
+    // Hidden entries may still contain filtered links when a query changes.
+    if(filtered)had_filters=true;
+    status.textContent=word_count?`${word_count.toLocaleString()} matching word${word_count===1?'':'s'}.${phrase||filtered?'':' Showing the complete index.'}`:'No matching words. Try another word or part of a word.';
   }
   form.addEventListener('submit',search);category.addEventListener('change',search);topic.addEventListener('change',search);
-  let timer;query.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(search,180);});
+  let timer;query.addEventListener('input',()=>{
+    clearTimeout(timer);
+    if(!query.value.trim()){category.value='';topic.value='';}
+    timer=setTimeout(search,180);
+  });
   query.value=new URL(location.href).searchParams.get('q')??'';if(query.value)search();
 }

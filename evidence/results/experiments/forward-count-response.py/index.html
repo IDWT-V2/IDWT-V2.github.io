@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>forward-count-response.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/forward-count-response.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="forward-count-response.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/forward-count-response.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="forward-count-response.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>forward-count-response.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/forward-count-response.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;An explicit count-energy curvature law preserving every stationary shell.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from fractions import Fraction
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import mpmath as mp
+import numpy as np
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;forward&#39;, ROOT/&#39;forward-count-action.py&#39;)
+forward = module_from_spec(spec)
+spec.loader.exec_module(forward)
+COUNTS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def tiny(error, scale, label):
+    relative = abs(error)/max(mp.mpf(1), abs(scale))
+    ERRORS[label] = max(ERRORS.get(label, mp.mpf(0)), relative)
+    check(relative &lt; mp.mpf(&#39;1e-65&#39;), label)
+
+
+def high(value):
+    return mp.mpf(value.numerator)/value.denominator
+
+
+def symbolic_schur():
+    x, c, h, density = sp.symbols(&#39;x c h density&#39;, positive=True)
+    curvature = x*x*c/h
+    hessian = h/(density*c**3)*sp.Matrix([[x*x, -x], [-x, 1]])
+    coupling = sp.Matrix([-x*x/c, x/c])
+    reduced = hessian-coupling*coupling.T/(density*curvature)
+    check(reduced.applyfunc(sp.simplify) == sp.zeros(2),
+          &#39;generic density and scalar Schur Hessian vanishes at the explicit target count curvature&#39;)
+
+
+def main():
+    mp.mp.dps = 110
+    symbolic_schur()
+    cases = []
+    for name, depth, index in forward.radial.ASSIGNMENTS:
+        level = index-1
+        hh = mp.mpf(level)+mp.mpf(depth)/2
+        count, first, second = forward.count_data(depth, level)
+        epsq = Fraction(3, 10)/max(forward.count_data(depth, n-1)[1]
+                                 for _, d, n in forward.radial.ASSIGNMENTS if d == depth)
+        epsilon, c = high(epsq), high(epsq*first)
+        x = mp.sqrt(1-c*c)
+        target = c*x*x/hh
+        def original(label):
+            return epsilon*mp.fprod(label+j-mp.mpf(depth)/2 for j in range(1, depth+1))/mp.factorial(depth)
+        def correction(label):
+            slope = mp.diff(original, label)
+            return slope*(1-slope*slope)/label-mp.diff(original, label, 2)
+        def changed(label):
+            return original(label)+correction(label)*mp.sin(mp.pi*(label-mp.mpf(depth)/2))**2/(2*mp.pi**2)
+        ff, fp, fpp = changed(hh), mp.diff(changed, hh), mp.diff(changed, hh, 2)
+        tiny(ff-original(hh), original(hh), &#39;the explicit forward response law preserves every count frequency&#39;)
+        tiny(fp-c, c, &#39;the explicit forward response law preserves every stationary polarization and source&#39;)
+        tiny(fpp-target, target, &#39;the explicit forward response law gives the required algebraic curvature&#39;)
+        check(fpp &gt; 0, &#39;positive auxiliary curvature gives a valid local elimination chart at every assignment&#39;)
+        def potential(q, scalar, label):
+            return q*changed(label)-label*mp.sqrt(q*q-scalar*scalar)
+        # Independent derivatives of the actual three-variable potential.
+        hessian = mp.matrix(3)
+        args = (mp.mpf(1), x, hh)
+        for i in range(3):
+            for j in range(3):
+                order = tuple(int(k == i)+int(k == j) for k in range(3))
+                hessian[i, j] = mp.diff(potential, args, order)
+        schur = hessian[:2, :2]-hessian[:2, 2:3]*hessian[2:3, :2]/hessian[2, 2]
+        tiny(mp.norm(schur), mp.norm(hessian),
+             &#39;independent derivatives of the complete potential verify its vanishing eliminated invariant Hessian&#39;)
+        curvature_of_f = hh/c**3-x*x/(c*c*fpp)
+        tiny(curvature_of_f, hh/c**3,
+             &#39;the eliminated constitutive scalar curvature vanishes without an implicit inverse patch&#39;)
+        mass, lam, eta = hh*x/c, hh/c, original(hh)-hh/c
+        # A direct massive shell diagonalization tests the full spectral formula.
+        for harmonic in [0, 1, level, level+1, level+3, 1000]:
+            bare = mp.mpf(harmonic)+mp.mpf(depth)/2
+            operator = mp.matrix([[bare-lam, mass], [mass, -bare-lam]])
+            values = mp.eigsy(operator, eigvals_only=True)
+            root = mp.sqrt(bare*bare+mass*mass)
+            tiny(values[0]-(-root-lam), root+lam,
+                 &#39;independent massive Dirac pair diagonalization matches the complete self-adjoint spectral formula&#39;)
+            tiny(values[1]-(root-lam), root+lam,
+                 &#39;independent massive Dirac pair diagonalization matches the complete self-adjoint spectral formula&#39;)
+        pair_shape = 2*mp.sqrt(x*x*hh/(c*fpp))
+        tiny(pair_shape-2*lam, 2*lam,
+             &#39;the reduced shape disturbance clock agrees with the retained massive pair gap&#39;)
+        # Show that the analytic replacement is not an exactly affine patch.
+        chi_s = -x/(c*fpp)
+        third = 3*hh*x/c**5+3*chi_s/c**3+mp.diff(changed, hh, 3)*chi_s**3
+        check(abs(third) &gt; mp.mpf(&#39;1e-30&#39;),
+              &#39;a retained nonzero cubic derivative prevents transferring the nonlinear flat-patch theorem&#39;)
+        cases.append(dict(particle=name, depth=depth, inferred_index=index,
+                          epsilon_exact=str(epsq), polarization_exact=str(epsq*first),
+                          target_count_curvature_exact=str((epsq*first)*(1-(epsq*first)**2)/Fraction(2*level+depth, 2)),
+                          clock_in_radius_units_exact=str(epsq*count),
+                          eliminated_hessian_relative_residual=str(mp.norm(schur)/max(1, mp.norm(hessian))),
+                          scalar_cubic_derivative=str(third),
+                          shape_disturbance_frequency_in_radius_units=str(pair_shape),
+                          classification=&#39;explicit analytic forward law with unchanged count clocks and scalar source Hessian&#39;))
+        print(json.dumps(dict(completed=name, depth=depth)), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = dict(experiment_key=&#39;forward-count-energy-response&#39;, created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest() for p in
+                           [Path(__file__), ROOT/&#39;forward-count-action.py&#39;, ROOT/&#39;inverse-current-radial.py&#39;,
+                            ROOT/&#39;excited-shell-orientation-current.py&#39;]},
+                  evaluations=sum(COUNTS.values()), conditions=COUNTS,
+                  maximum_errors={key: str(value) for key, value in ERRORS.items()}, cases=cases,
+                  limits=[&#39;the periodic count-energy correction is an explicit constitutive choice&#39;,
+                          &#39;local convex elimination is established at each shell, not on the whole continuous label interval&#39;,
+                          &#39;complete linear unitary persistence applies to the preferred-time density realization&#39;,
+                          &#39;proper-current and responding-background realizations retain their additional current Hessians&#39;,
+                          &#39;a nonzero cubic response excludes transfer of the nonlinear affine-patch proof&#39;,
+                          &#39;no new sector preference, localization, complete inertia or observed-particle identification follows&#39;])
+    output = ROOT/(&#39;forward-count-response-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output), evaluations=report[&#39;evaluations&#39;], maximum_errors=report[&#39;maximum_errors&#39;])), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

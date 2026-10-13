@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>covariant-clock-current-kernel.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-current-kernel.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="covariant-clock-current-kernel.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-current-kernel.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="covariant-clock-current-kernel.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>covariant-clock-current-kernel.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/covariant-clock-current-kernel.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;The exact dynamical background current response, including its zero shell.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import numpy as np
+from scipy.integrate import solve_ivp
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;radial&#39;, ROOT/&#39;inverse-current-radial.py&#39;)
+radial = module_from_spec(spec)
+spec.loader.exec_module(radial)
+COUNTS, ERRORS = {}, {}
+
+
+def close(actual, expected, label, tolerance=2e-9):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    if error &gt;= tolerance:
+        raise AssertionError((label, error))
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def main():
+    degree, z = sp.symbols(&#39;L z&#39;)
+    cases = []
+    for depth in radial.DEPTHS:
+        eigenvalue = (degree+1)*(degree+depth-2)
+        block = sp.Matrix([[1-depth, 1], [eigenvalue, -2]])
+        exact = sp.factor((block*(block*block-z*sp.eye(2)).inv())[0, 0])
+        delta = (degree-1)*(degree+depth)
+        expected = (2*delta+(depth-1)*z)/(((degree-1)**2-z)*((degree+depth)**2-z))
+        assert sp.cancel(exact-expected) == 0
+        first = sp.factor(exact.subs(degree, 1))
+        assert sp.cancel(first-(depth-1)/(z-(depth+1)**2)) == 0
+        static = sp.factor(first.subs(z, 0))
+        physical = np.array([[1-depth, np.sqrt(2*(depth-1))],
+                             [np.sqrt(2*(depth-1)), -2.]])
+        source = np.array([1., 0.])
+        eigenvalues, vectors = np.linalg.eigh(physical)
+        zero_vector = vectors[:, np.argmin(abs(eigenvalues))]
+        negative = vectors[:, np.argmin(eigenvalues)]
+        projector = np.outer(zero_vector, zero_vector)
+        pseudoinverse = -np.outer(negative, negative)/(depth+1)
+        close(physical@zero_vector, np.zeros(2), &#39;actual first coexact block retains its background zero mode&#39;)
+        close(source@pseudoinverse@source, float(static), &#39;charge-fixed zero-frequency current response equals the negative-branch pseudoinverse&#39;)
+        # A real current source drives u. The measured vector current is 2v_1.
+        # The zero mode of u is an actual right-unitary tangent, while its
+        # conjugate v coordinate is the conserved matrix-charge variation.
+        times = np.linspace(0., 4., 241)
+        for forcing in [&#39;constant&#39;, &#39;cosine&#39;]:
+            nu = .7
+            def force(t):
+                return 1. if forcing == &#39;constant&#39; else np.cos(nu*t)
+            def rhs(t, state):
+                u, v = state[:2], state[2:]
+                return np.concatenate([physical@v-source*force(t), -physical@u])
+            solution = solve_ivp(rhs, [0., times[-1]], np.zeros(4), t_eval=times,
+                                 rtol=2e-12, atol=2e-13)
+            assert solution.success
+            u, v = solution.y[:2], solution.y[2:]
+            close(zero_vector@v, np.zeros(len(times)), &#39;the conserved zero-shell charge coordinate has no driven current response&#39;)
+            integral = times if forcing == &#39;constant&#39; else np.sin(nu*times)/nu
+            close(zero_vector@u, -np.dot(zero_vector, source)*integral,
+                  &#39;the complete zero-shell field response is retained as a right-unitary drift&#39;)
+            amp = -(depth-1)/(depth+1)**2
+            if forcing == &#39;constant&#39;:
+                predicted = 2*amp*(1-np.cos((depth+1)*times))
+            else:
+                response = (depth-1)/(nu*nu-(depth+1)**2)
+                predicted = 2*response*(np.cos(nu*times)-np.cos((depth+1)*times))
+            close(2*v[0], predicted, &#39;independent complete time evolution verifies the causal first-harmonic current response&#39;, 2e-8)
+        eta = sp.Rational(3, 5)/sum(sp.Rational(1, j) for j in range(1, depth+1))-sp.Rational(5*depth, 6)
+        dressed = []
+        for load in [sp.Rational(1, 100), sp.Rational(1, 5)]:
+            susceptibility = sp.factor(first/(1+2*eta*load*first))
+            frequency_squared = (depth+1)**2-2*eta*load*(depth-1)
+            assert sp.cancel(susceptibility-(depth-1)/(z-frequency_squared)) == 0
+            def rhs_dressed(t, state):
+                u, v = state[:2], state[2:]
+                return np.concatenate([physical@v-source+2*float(eta*load)*source*v[0], -physical@u])
+            solution = solve_ivp(rhs_dressed, [0., times[-1]], np.zeros(4), t_eval=times,
+                                 rtol=2e-12, atol=2e-13)
+            assert solution.success
+            u, v = solution.y[:2], solution.y[2:]
+            close(zero_vector@v, np.zeros(len(times)), &#39;retained background self-current feedback still conserves the zero-shell charge coordinate&#39;)
+            frequency = np.sqrt(float(frequency_squared))
+            predicted = -2*(depth-1)/float(frequency_squared)*(1-np.cos(frequency*times))
+            close(2*v[0], predicted, &#39;full background self-current dynamics verifies the resummed first-harmonic susceptibility&#39;, 2e-8)
+            close(physical@projector, np.zeros((2, 2)), &#39;background self-current feedback does not remove the retained free zero-shell field direction&#39;)
+            dressed.append(dict(load_exact=str(load), ground_eta_exact=str(eta),
+                                squared_response_frequency_exact=str(frequency_squared),
+                                susceptibility=str(susceptibility)))
+        cases.append(dict(depth=depth, all_harmonic_current_susceptibility=str(exact),
+                          first_harmonic_current_susceptibility=str(first),
+                          first_harmonic_static_response_exact=str(static),
+                          absolute_static_response=float(-static),
+                          ground_self_current_responses=dressed,
+                          classification=&#39;retained zero field mode and finite charge-fixed current response&#39;))
+    d = sp.Symbol(&#39;d&#39;, positive=True)
+    difference = sp.factor(sp.Rational(1, 8)-(d-1)/(d+1)**2)
+    assert sp.cancel(difference-(d-3)**2/(8*(d+1)**2)) == 0
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = dict(experiment_key=&#39;covariant-clock-dynamical-current-kernel&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                           for p in [Path(__file__), ROOT/&#39;inverse-current-radial.py&#39;]},
+                  evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS, cases=cases,
+                  response_bound_difference=str(difference),
+                  limits=[&#39;free positive Killing background and first-order current response&#39;,
+                          &#39;a fixed full matrix-charge variation removes the conjugate zero-current preparation&#39;,
+                          &#39;the secular field response is retained rather than discarded&#39;,
+                          &#39;a dimension-dependent response maximum is not a color, charge or force derivation&#39;,
+                          &#39;coupled excited-state current dynamics and persistence remain open&#39;])
+    output = ROOT/(&#39;covariant-clock-current-kernel-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

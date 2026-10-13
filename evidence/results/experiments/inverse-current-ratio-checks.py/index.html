@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>inverse-current-ratio-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/inverse-current-ratio-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="inverse-current-ratio-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/inverse-current-ratio-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="inverse-current-ratio-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>inverse-current-ratio-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/inverse-current-ratio-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Inverse constitutive count clocks on actual spatial spinor shell pairs.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from fractions import Fraction
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from math import comb, factorial
+from pathlib import Path
+import json
+
+import mpmath as mp
+import numpy as np
+import sympy as sp
+
+mp.mp.dps = 80
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;ratio&#39;, ROOT/&#39;local-current-ratio-checks.py&#39;)
+ratio = module_from_spec(spec)
+spec.loader.exec_module(ratio)
+EPSILON = mp.mpf(1)/2**32
+CONDITIONS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    CONDITIONS[label] = CONDITIONS.get(label, 0)+1
+
+
+def close(actual, expected, label, tolerance=mp.mpf(&#39;1e-35&#39;)):
+    error = abs(actual-expected)/max(1, abs(expected))
+    ERRORS[label] = max(ERRORS.get(label, 0.), float(error))
+    check(error &lt; tolerance, label)
+
+
+def polynomial(depth, h):
+    level = h-mp.mpf(depth)/2
+    factors = [level+j for j in range(1, depth+1)]
+    value = mp.fprod(factors)/factorial(depth)
+    logarithmic = mp.fsum(1/a for a in factors)
+    return value, value*logarithmic, value*(logarithmic**2-mp.fsum(1/a**2 for a in factors))
+
+
+def constitutive(depth, x, seed):
+    c = mp.sqrt(1-x*x)
+    # A half-shell extension keeps the physical ground level inside the open chart.
+    h = mp.findroot(lambda z: EPSILON*polynomial(depth, z)[1]-c,
+                    (seed, seed+mp.mpf(&#39;.01&#39;)), solver=&#39;secant&#39;, tol=mp.mpf(&#39;1e-70&#39;))
+    check(h &gt; mp.mpf(depth-1)/2 and 0 &lt; c &lt; 1,
+          &#39;constitutive inversion remains inside its explicit open half-shell extension&#39;)
+    value, first, second = polynomial(depth, h)
+    dc = EPSILON*second
+    f = EPSILON*value-h*c
+    fp = h*x/c
+    fpp = h/c**3-x*x/(c*c*dc)
+    return f, fp, fpp, h
+
+
+def dagger(a):
+    return a.transpose_conj()
+
+
+def inner(a, b):
+    return mp.fsum(mp.conj(a[i, j])*b[i, j] for i in range(a.rows) for j in range(a.cols))
+
+
+def norm(a):
+    return mp.sqrt(inner(a, a).real)
+
+
+def convert(a):
+    return mp.matrix([[mp.mpc(float(z.real), float(z.imag)) for z in row] for row in a])
+
+
+def local(field, alpha, beta, depth, seed):
+    rho = inner(field, field).real
+    vector = [inner(field, a*field).real for a in alpha]
+    signed = inner(field, beta*field).real
+    proper = mp.sqrt(rho*rho-mp.fsum(j*j for j in vector))
+    x = signed/proper
+    check(proper &gt; 0 and 0 &lt; x &lt; 1, &#39;tested inverse-current field stays in the specified open ratio chart&#39;)
+    f, fp, _, _ = constitutive(depth, x, seed)
+    operator = fp*beta+(f-x*fp)/proper*(rho*mp.eye(beta.rows)-sum((j*a for j, a in zip(vector, alpha)),
+                                                                mp.zeros(beta.rows)))
+    return proper*f, operator*field, rho, vector, signed, x
+
+
+def pair_linearization(depth, h, a, b, x, f, fp, fpp, omega, frequency):
+    sx, sz = mp.matrix([[0, 1], [1, 0]]), mp.diag([1, -1])
+    field = mp.matrix([a, b])
+    operator = h*sz+fp*sx+(f-x*fp)*mp.eye(2)
+    basis = [mp.matrix([1, 0]), mp.matrix([0, 1]), mp.matrix([1j, 0]), mp.matrix([0, 1j])]
+    analytic = mp.zeros(4)
+    numerical = mp.zeros(4)
+    def rhs(z):
+        scalar = (dagger(z)*sx*z)[0].real/(dagger(z)*z)[0].real
+        value, first, _, _ = constitutive(depth, scalar, h)
+        return -1j*(h*sz+first*sx+(value-scalar*first-omega)*mp.eye(2))*z
+    step = mp.mpf(&#39;1e-25&#39;)
+    for j, variation in enumerate(basis):
+        dx = 2*(dagger(variation)*(sx-x*mp.eye(2))*field)[0].real
+        response = -1j*((operator-omega*mp.eye(2))*variation+
+                         fpp*dx*(sx-x*mp.eye(2))*field)
+        finite = (rhs(field+step*variation)-rhs(field-step*variation))/(2*step)
+        for i in range(2):
+            analytic[i, j], analytic[i+2, j] = response[i].real, response[i].imag
+            numerical[i, j], numerical[i+2, j] = finite[i].real, finite[i].imag
+    close(norm(analytic-numerical)/norm(analytic), 0,
+          &#39;complete four-real pair Jacobian agrees with independent nonlinear source differences&#39;, mp.mpf(&#39;1e-22&#39;))
+    eigenvalues = mp.eig(analytic, left=False, right=False)
+    for actual, expected in zip(sorted(eigenvalues, key=lambda z: z.imag), [-1j*frequency, 0, 0, 1j*frequency]):
+        close(abs(actual-expected)/frequency, 0,
+              &#39;complete pair spectrum retains its elliptic shape and both zero directions&#39;, mp.mpf(&#39;1e-25&#39;))
+
+
+def actual_spatial_fields():
+    cases = []
+    rng = np.random.default_rng(1734)
+    for name, depth, index in ratio.scalar.sphere.ASSIGNMENTS:
+        level = index-1
+        h = mp.mpf(level)+mp.mpf(depth)/2
+        value, first, second = polynomial(depth, h)
+        count = comb(level+depth, depth)
+        close(value, count, &#39;the continuous polynomial is the exact maintained binomial count&#39;)
+        c = EPSILON*first
+        dc = EPSILON*second
+        check(0 &lt; c &lt; 1 and dc &gt; 0, &#39;one common epsilon admits the convex count branch at every maintained assignment&#39;)
+        x = mp.sqrt(1-c*c)
+        f, fp, fpp, recovered = constitutive(depth, x, h)
+        close(recovered, h, &#39;the same constitutive inversion recovers each actual bare shell frequency&#39;)
+        close(f, EPSILON*value-h*c, &#39;inverse local energy retains the count Legendre relation&#39;)
+        close(h-fp*c/x, 0, &#39;complete constrained shape derivative vanishes&#39;)
+        close(fpp*c*c/(x*x)-fp/(x**3), -1/dc,
+              &#39;full pair curvature equals minus the reciprocal count curvature&#39;, mp.mpf(&#39;1e-25&#39;))
+        check(f &lt; 0, &#39;an attractive local contribution is required on every tested count branch&#39;)
+        a, b = mp.sqrt((1+c)/2), mp.sqrt((1-c)/2)
+        omega = EPSILON*value
+        close(h*c+f, omega, &#39;complete pair energy per norm is the exact target count clock&#39;)
+        frequency = 2*mp.sqrt((1-c*c)*h/(c*dc))
+        check(frequency &gt; 0, &#39;both fixed-norm pair curvatures give an elliptic internal shape mode&#39;)
+        pair_linearization(depth, h, a, b, x, f, fp, fpp, omega, frequency)
+        aa, beta0, _ = ratio.scalar.clifford(depth)
+        alpha0 = [convert(z) for z in aa]
+        beta0 = convert(beta0)
+        rank = beta0.rows
+        for theta in (mp.mpf(&#39;.41&#39;), mp.mpf(&#39;1.39&#39;)):
+            t, s = mp.cos(theta), mp.sin(theta)
+            gamma = alpha0[0]
+            frame = mp.cos(theta/2)*mp.eye(rank)-1j*mp.sin(theta/2)*gamma
+            beta = dagger(frame)*beta0*frame
+            alpha = [dagger(frame)*z*frame for z in alpha0]
+            al = (mp.mpf(level+depth-1)/(depth-1))*mp.gegenbauer(level, mp.mpf(depth-1)/2, t)
+            bl = mp.gegenbauer(level-1, mp.mpf(depth+1)/2, t) if level else mp.mpf(0)
+            positive = (al*mp.eye(rank)-1j*s*bl*gamma)/mp.sqrt(rank*comb(level+depth-1, depth-1))
+            negative = beta*positive
+            field = a*positive+b*negative
+            kinetic = h*(a*positive-b*negative)
+            potential, gradient, rho, vector, signed, current_ratio = local(field, alpha, beta, depth, h)
+            close(max(abs(j)/rho for j in vector), 0, &#39;actual balanced shell multiplet retains zero spatial current&#39;)
+            close(current_ratio, x, &#39;actual scalar/proper current selects the inverse constitutive ratio&#39;)
+            close(norm(kinetic+gradient-omega*field)/(omega*norm(field)), 0,
+                  &#39;full pointwise nonlinear spatial residual vanishes relative to its selected count clock&#39;, mp.mpf(&#39;1e-45&#39;))
+            if theta == mp.mpf(&#39;.41&#39;):
+                variation = convert(rng.normal(size=(rank, rank))+1j*rng.normal(size=(rank, rank)))
+                variation /= norm(variation)
+                step = mp.mpf(&#39;1e-35&#39;)*norm(field)
+                pp = local(field+step*variation, alpha, beta, depth, h)[0]
+                pm = local(field-step*variation, alpha, beta, depth, h)[0]
+                close((pp-pm)/(2*step), 2*inner(gradient, variation).real,
+                      &#39;arbitrary complex spatial-field variation retains all inverse current derivatives&#39;, mp.mpf(&#39;1e-25&#39;))
+        cases.append({&#39;name&#39;: name, &#39;depth&#39;: depth, &#39;mode_index&#39;: index, &#39;spatial_shell_level&#39;: level,
+                      &#39;count_exact&#39;: str(count), &#39;epsilon_exact&#39;: &#39;1/4294967296&#39;,
+                      &#39;selected_frequency_exact&#39;: str(Fraction(count, 2**32)),
+                      &#39;bare_shell_frequency&#39;: float(h), &#39;signed_shell_occupation&#39;: float(c),
+                      &#39;one_minus_scalar_ratio&#39;: float(1-x), &#39;potential_per_norm&#39;: float(f),
+                      &#39;retained_shape_frequency&#39;: float(frequency),
+                      &#39;retained_shape_over_particle_frequency&#39;: float(frequency/omega),
+                      &#39;full_spatial_stability_tested&#39;: False})
+    return cases
+
+
+def exact_identities():
+    x, c, dc, h = sp.symbols(&#39;x c dc h&#39;, positive=True)
+    fp = h*x/c
+    fpp = h/c**3-x*x/(c*c*dc)
+    cc = sp.simplify((fpp*c*c/x**2-fp/x**3+1/dc).subs(x*x, 1-c*c))
+    check(cc == 0, &#39;exact inverse-pair Hessian equals minus inverse clock convexity&#39;)
+    n, e = sp.symbols(&#39;n e&#39;, positive=True)
+    for depth in ratio.scalar.sphere.DEPTHS:
+        p = sp.prod(n+j for j in range(1, depth+1))/factorial(depth)
+        first, second = sp.diff(p, n), sp.diff(p, n, 2)
+        offset = sp.Rational(depth, 2)
+        attractive = p-(n+offset)*first
+        check(sp.simplify(sp.diff(attractive, n)+(n+offset)*second) == 0,
+              &#39;inverse potential decreases from its strictly negative ground value&#39;)
+        check(attractive.subs(n, 0) &lt; 0,
+              &#39;every occupied depth requires negative inverse potential already at its ground shell&#39;)
+        check(all(z &gt; 0 for z in sp.Poly(second, n).all_coeffs()),
+              &#39;count curvature is strictly positive on every nonnegative shell level&#39;)
+    check(Fraction(22, 3838380-18564) == Fraction(11, 1909908),
+          &#39;general connected-pair slope bound gives the exact electron-muon epsilon ceiling&#39;)
+
+
+def main():
+    exact_identities()
+    cases = actual_spatial_fields()
+    domain = []
+    for depth in ratio.scalar.sphere.DEPTHS:
+        upper = mp.findroot(lambda n: EPSILON*polynomial(depth, n+mp.mpf(depth)/2)[1]-1,
+                            (mp.mpf((factorial(depth-1)*2**32)**(1/(depth-1)))-depth,
+                             mp.mpf((factorial(depth-1)*2**32)**(1/(depth-1)))+depth))
+        check(upper &gt; 0, &#39;the finite inverse ratio chart has a positive upper shell limit&#39;)
+        domain.append({&#39;depth&#39;: depth, &#39;largest_continuous_shell_level_at_slope_one&#39;: float(upper)})
+    files = [&#39;inverse-current-ratio-checks.py&#39;,&#39;local-current-ratio-checks.py&#39;,&#39;scalar-current-band-checks.py&#39;,
+             &#39;spatial-source-saturation-checks.py&#39;,&#39;spatial-band-curvature-checks.py&#39;]
+    report = {&#39;experiment_key&#39;: &#39;inverse-local-current-count-spatial-branch&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/&#39;+f: sha256((ROOT/f).read_bytes()).hexdigest() for f in files},
+              &#39;classification&#39;: &#39;inverse constitutive benchmark with target count polynomial supplied&#39;,
+              &#39;assumptions&#39;: [&#39;actual round-sphere spatial shell pair with complete balanced spinor columns&#39;,
+                              &#39;one common dimensionless diagnostic epsilon=mu_d R_d=1/4294967296&#39;,
+                              &#39;dimension-dependent constitutive function is reconstructed by one Legendre formula from the supplied count polynomial&#39;,
+                              &#39;the constitutive action is only specified on its open inverse-current ratio chart with h&gt;(d-1)/2&#39;,
+                              &#39;the test map equates actual shell degree l with cumulative cutoff N&#39;],
+              &#39;limits&#39;: [&#39;counts are encoded in the inverse action and have not been independently derived&#39;,
+                         &#39;negative local potential and unrestricted Dirac energy do not establish a globally positive action&#39;,
+                         &#39;elliptic pair persistence is not full spatial stability, localization, decay or observed spin&#39;,
+                         &#39;the constitutive chart cannot support an unlimited convex count ladder at one radius&#39;,
+                         &#39;a single parent law for the dimension-dependent constitutive functions and physical scales is unestablished&#39;],
+              &#39;precision_digits&#39;: mp.mp.dps, &#39;condition_count&#39;: len(CONDITIONS),
+              &#39;evaluation_count&#39;: sum(CONDITIONS.values()), &#39;conditions&#39;: CONDITIONS,
+              &#39;maximum_errors&#39;: ERRORS, &#39;cases&#39;: cases, &#39;finite_chart_limits&#39;: domain}
+    path = ROOT/(&#39;inverse-current-ratio-results-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)+&#39;.json&#39;)
+    path.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;report&#39;: str(path), &#39;condition_count&#39;: len(CONDITIONS),
+                      &#39;evaluation_count&#39;: sum(CONDITIONS.values()), &#39;maximum_errors&#39;: ERRORS,
+                      &#39;finite_chart_limits&#39;: domain}, indent=2), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>count-curvature-response.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/count-curvature-response.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="count-curvature-response.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/count-curvature-response.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="count-curvature-response.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>count-curvature-response.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/count-curvature-response.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Common source-curvature interpolation with unchanged assigned count clocks.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from fractions import Fraction
+from hashlib import sha256
+from pathlib import Path
+import importlib.util
+import json
+
+ROOT = Path(__file__).resolve().parent
+DEPENDENCY = ROOT / &#39;continuous-count-source-index.py&#39;
+spec = importlib.util.spec_from_file_location(&#39;source_index&#39;, DEPENDENCY)
+index = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(index)
+
+
+def main():
+    index.mp.mp.dps = 100
+    index.mp.iv.dps = 85
+    gammas = [Fraction(1,16), Fraction(1,8), Fraction(1,4),
+              Fraction(1,2), Fraction(3,4), Fraction(1)]
+    controls = []
+    for depth, assignments in index.ASSIGNMENTS.items():
+        for name, mode_index in assignments:
+            pars = index.parameters(depth, mode_index-1)
+            q = pars[&#39;q&#39;]
+            pair_limit = 2*(pars[&#39;lam&#39;]-pars[&#39;omega&#39;])/q
+            index.check(pair_limit &gt; 1,
+                        &#39;the restricted polarization pair remains non-growing throughout the common interpolation&#39;)
+            second = pars[&#39;epsilon&#39;]*index.count_data(depth, mode_index-1)[2]
+            x2 = 1-pars[&#39;c&#39;]**2
+            for gamma in [Fraction(0), *gammas]:
+                adjusted = 1/(gamma/second+(1-gamma)*pars[&#39;lam&#39;]/x2)
+                curvature = pars[&#39;lam&#39;]/pars[&#39;c&#39;]**2-x2/(pars[&#39;c&#39;]**2*adjusted)
+                index.check(adjusted &gt; 0,
+                            &#39;the explicit forward correction has positive eliminated-label curvature at every node&#39;)
+                index.check(2*pars[&#39;c&#39;]**2*curvature == gamma*q,
+                            &#39;independent rational elimination gives the same scaled scalar source derivative&#39;)
+            controls.append(dict(particle=name, depth=depth, index=mode_index,
+                                 epsilon_exact=str(pars[&#39;epsilon&#39;]),
+                                 count_clock_exact=str(pars[&#39;omega&#39;]),
+                                 source_norm_at_gamma_one_exact=str(q),
+                                 restricted_pair_curvature_limit_exact=str(pair_limit),
+                                 all_clocks_unchanged=True,
+                                 pair_no_growth_for_zero_through_one=True,
+                                 complete_spatial_persistence_established=False))
+    certificates = []
+    for depth, level, degree in ((3,3,12), (4,2,6)):
+        for gamma in gammas:
+            result = index.source_certificate(depth, level, degree, gamma, require_growth=False)
+            result[&#39;curvature_fraction_exact&#39;] = str(gamma)
+            certificates.append(result)
+            print(json.dumps(dict(depth=depth, level=level, gamma=str(gamma),
+                                  real_index_upper=result[&#39;real_nonpositive_index_upper_excluding_selected_phase&#39;],
+                                  imaginary_index=result[&#39;imaginary_negative_index&#39;],
+                                  full_growth=result[&#39;full_spatial_real_growth_established&#39;])), flush=True)
+    bounds = []
+    for depth, level in ((3,3), (4,2)):
+        passing = [Fraction(x[&#39;curvature_fraction_exact&#39;]) for x in certificates
+                   if x[&#39;depth&#39;]==depth and x[&#39;full_spatial_real_growth_established&#39;]]
+        bounds.append(dict(depth=depth, level=level,
+                           sufficient_continuous_curvature_fraction_for_growth=str(min(passing)),
+                           growth_proved_through_gamma_one=True,
+                           smaller_gamma_status=&#39;not decided by failure of this sufficient lower-source test&#39;))
+    sources = {&#39;experiments/&#39;+path.name: sha256(path.read_bytes()).hexdigest()
+               for path in (Path(__file__), DEPENDENCY)}
+    report = dict(experiment_key=&#39;count-preserving-common-source-curvature&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources=sources, evaluations=sum(index.COUNTS.values()),
+                  conditions=index.COUNTS, occupied_assignment_controls=controls,
+                  certificates=certificates, sufficient_growth_intervals=bounds,
+                  interval_decimal_precision=85,
+                  limits=[&#39;f_gamma=(1-gamma)f_envelope+gamma f_continuous is one local common source interpolation&#39;,
+                          &#39;count values and first derivatives agree at every eligible node; only curvature changes&#39;,
+                          &#39;the zero endpoint inherits the separate envelope persistence theorem&#39;,
+                          &#39;failure of the sufficient index test does not establish stability&#39;,
+                          &#39;growth intervals use Schur monotonicity and the negative-gap bound at gamma one&#39;,
+                          &#39;the full-matrix carrier differs from minimum-column particle candidates&#39;,
+                          &#39;no observed lifetime or new depth preference follows&#39;])
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    target = ROOT / (&#39;count-curvature-response-results-&#39;+stamp+&#39;.json&#39;)
+    target.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(target),evaluations=report[&#39;evaluations&#39;])),flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

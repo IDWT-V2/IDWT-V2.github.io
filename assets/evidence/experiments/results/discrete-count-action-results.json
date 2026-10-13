@@ -1,0 +1,317 @@
+{
+  "experiment_key": "forward-discrete-spatial-count-action",
+  "created_utc": "2026-10-12T07:58:35.807950+00:00",
+  "sources": {
+    "experiments/discrete-count-action.py": "35225ced6c2cc915645f780f1d61f86bb9d7fd4ff5d0eaf83aa604cc2846abcd",
+    "experiments/forward-count-action.py": "5f1dd9a03cf8e6b07a56d507791fed8ff859f10abf22bb755c60c3bd1ed6d909",
+    "experiments/inverse-current-radial.py": "52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80",
+    "experiments/excited-shell-orientation-current.py": "508484d445dbb86da9f88a31642268b5a1dba8264588e6f48ebb6cc00cf9c264"
+  },
+  "evaluations": 2929,
+  "conditions": {
+    "every reconstructed polarization lies strictly inside the corresponding integer-count selection interval": 14,
+    "a forward search using only integer counts independently selects the inferred shell": 14,
+    "an independent exhaustive finite comparison agrees with the all-label convex-difference theorem": 14,
+    "exact adjacent count differences certify the minimum and its increasing tail": 1557,
+    "three independent polarizations occupy the same geometric branch under the identical action": 42,
+    "the selected integer-count action gives the exact same clock across the whole tested polarization family": 42,
+    "the complete family energy retains spatial kinetics and the exact count frequency": 42,
+    "the arbitrary full matrix source check remains in one smooth selected-label chart": 42,
+    "independent variation of the actual minimum-over-counts potential verifies its full field source": 42,
+    "the full Bloch-sphere energy deficit controls phase mismatch and distance to the stationary-family interval": 560,
+    "the complete pair energy gives the quantitative transverse phase-persistence bound": 560
+  },
+  "maximum_errors": {
+    "independent variation of the actual minimum-over-counts potential verifies its full field source": 1.2701628637756812e-10
+  },
+  "cases": [
+    {
+      "particle": "W",
+      "depth": 2,
+      "inferred_index": 76,
+      "count_exact": "2926",
+      "epsilon_exact": "3/955",
+      "selected_c_interval_exact": [
+        "228/955",
+        "231/955"
+      ],
+      "original_polarization_exact": "459/1910",
+      "original_polarization_margin_exact": "3/1910",
+      "same_clock_test_polarizations_exact": [
+        "183/764",
+        "459/1910",
+        "921/3820"
+      ],
+      "maximum_available_shell_at_c_one": 317,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "Z",
+      "depth": 2,
+      "inferred_index": 81,
+      "count_exact": "3321",
+      "epsilon_exact": "3/955",
+      "selected_c_interval_exact": [
+        "243/955",
+        "246/955"
+      ],
+      "original_polarization_exact": "489/1910",
+      "original_polarization_margin_exact": "3/1910",
+      "same_clock_test_polarizations_exact": [
+        "195/764",
+        "489/1910",
+        "981/3820"
+      ],
+      "maximum_available_shell_at_c_one": 317,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "Higgs",
+      "depth": 2,
+      "inferred_index": 95,
+      "count_exact": "4560",
+      "epsilon_exact": "3/955",
+      "selected_c_interval_exact": [
+        "57/191",
+        "288/955"
+      ],
+      "original_polarization_exact": "3/10",
+      "original_polarization_margin_exact": "3/1910",
+      "same_clock_test_polarizations_exact": [
+        "1143/3820",
+        "3/10",
+        "1149/3820"
+      ],
+      "maximum_available_shell_at_c_one": 317,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "down",
+      "depth": 3,
+      "inferred_index": 1,
+      "count_exact": "1",
+      "epsilon_exact": "9/370",
+      "selected_c_interval_exact": [
+        "0",
+        "27/370"
+      ],
+      "original_polarization_exact": "33/740",
+      "original_polarization_margin_exact": "21/740",
+      "same_clock_test_polarizations_exact": [
+        "27/1480",
+        "27/740",
+        "81/1480"
+      ],
+      "maximum_available_shell_at_c_one": 7,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "strange",
+      "depth": 3,
+      "inferred_index": 4,
+      "count_exact": "20",
+      "epsilon_exact": "9/370",
+      "selected_c_interval_exact": [
+        "9/37",
+        "27/74"
+      ],
+      "original_polarization_exact": "3/10",
+      "original_polarization_margin_exact": "21/370",
+      "same_clock_test_polarizations_exact": [
+        "81/296",
+        "45/148",
+        "99/296"
+      ],
+      "maximum_available_shell_at_c_one": 7,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "up",
+      "depth": 4,
+      "inferred_index": 3,
+      "count_exact": "15",
+      "epsilon_exact": "6/1323245",
+      "selected_c_interval_exact": [
+        "12/264649",
+        "24/264649"
+      ],
+      "original_polarization_exact": "171/2646490",
+      "original_polarization_margin_exact": "51/2646490",
+      "same_clock_test_polarizations_exact": [
+        "15/264649",
+        "18/264649",
+        "3/37807"
+      ],
+      "maximum_available_shell_at_c_one": 107,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "charm",
+      "depth": 4,
+      "inferred_index": 20,
+      "count_exact": "8855",
+      "epsilon_exact": "6/1323245",
+      "selected_c_interval_exact": [
+        "24/3437",
+        "138/17185"
+      ],
+      "original_polarization_exact": "19823/2646490",
+      "original_polarization_margin_exact": "1343/2646490",
+      "same_clock_test_polarizations_exact": [
+        "249/34370",
+        "129/17185",
+        "267/34370"
+      ],
+      "maximum_available_shell_at_c_one": 107,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "top",
+      "depth": 4,
+      "inferred_index": 72,
+      "count_exact": "1215450",
+      "epsilon_exact": "6/1323245",
+      "selected_c_interval_exact": [
+        "388944/1323245",
+        "81030/264649"
+      ],
+      "original_polarization_exact": "3/10",
+      "original_polarization_margin_exact": "16059/2646490",
+      "same_clock_test_polarizations_exact": [
+        "785991/2646490",
+        "8103/27005",
+        "72927/240590"
+      ],
+      "maximum_available_shell_at_c_one": 107,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "nu1",
+      "depth": 5,
+      "inferred_index": 10,
+      "count_exact": "2002",
+      "epsilon_exact": "9/412561",
+      "selected_c_interval_exact": [
+        "6435/412561",
+        "9009/412561"
+      ],
+      "original_polarization_exact": "76143/4125610",
+      "original_polarization_margin_exact": "11793/4125610",
+      "same_clock_test_polarizations_exact": [
+        "14157/825122",
+        "7722/412561",
+        "16731/825122"
+      ],
+      "maximum_available_shell_at_c_one": 29,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "nu2",
+      "depth": 5,
+      "inferred_index": 15,
+      "count_exact": "11628",
+      "epsilon_exact": "9/412561",
+      "selected_c_interval_exact": [
+        "27540/412561",
+        "34884/412561"
+      ],
+      "original_polarization_exact": "619911/8251220",
+      "original_polarization_margin_exact": "69111/8251220",
+      "same_clock_test_polarizations_exact": [
+        "29376/412561",
+        "31212/412561",
+        "33048/412561"
+      ],
+      "maximum_available_shell_at_c_one": 29,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "nu3",
+      "depth": 5,
+      "inferred_index": 22,
+      "count_exact": "65780",
+      "epsilon_exact": "9/412561",
+      "selected_c_interval_exact": [
+        "113850/412561",
+        "134550/412561"
+      ],
+      "original_polarization_exact": "3/10",
+      "original_polarization_margin_exact": "99183/4125610",
+      "same_clock_test_polarizations_exact": [
+        "119025/412561",
+        "124200/412561",
+        "129375/412561"
+      ],
+      "maximum_available_shell_at_c_one": 29,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "electron",
+      "depth": 6,
+      "inferred_index": 13,
+      "count_exact": "18564",
+      "epsilon_exact": "9/18462575",
+      "selected_c_interval_exact": [
+        "55692/18462575",
+        "77112/18462575"
+      ],
+      "original_polarization_exact": "1309533/369251500",
+      "original_polarization_margin_exact": "195693/369251500",
+      "same_clock_test_polarizations_exact": [
+        "61047/18462575",
+        "66402/18462575",
+        "71757/18462575"
+      ],
+      "maximum_available_shell_at_c_one": 44,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "muon",
+      "depth": 6,
+      "inferred_index": 35,
+      "count_exact": "3838380",
+      "epsilon_exact": "9/18462575",
+      "selected_c_interval_exact": [
+        "5181813/18462575",
+        "5922072/18462575"
+      ],
+      "original_polarization_exact": "3/10",
+      "original_polarization_margin_exact": "713919/36925150",
+      "same_clock_test_polarizations_exact": [
+        "21467511/73850300",
+        "2220777/7385030",
+        "22948029/73850300"
+      ],
+      "maximum_available_shell_at_c_one": 44,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    },
+    {
+      "particle": "tau",
+      "depth": 10,
+      "inferred_index": 23,
+      "count_exact": "64512240",
+      "epsilon_exact": "189/14943591113",
+      "selected_c_interval_exact": [
+        "3810254175/14943591113",
+        "5301223200/14943591113"
+      ],
+      "original_polarization_exact": "3/10",
+      "original_polarization_margin_exact": "6728231589/149435911130",
+      "same_clock_test_polarizations_exact": [
+        "16731985725/59774364452",
+        "828316125/2717016566",
+        "19713923775/59774364452"
+      ],
+      "maximum_available_shell_at_c_one": 26,
+      "classification": "conditional integer-count action with a geometric local label selector"
+    }
+  ],
+  "limits": [
+    "the minimum of count-contact cost minus spatial support is an explicit new constitutive premise",
+    "the discrete geometric rule does not select the sparse list of observed particles",
+    "the proof uses smooth open winner charts; action derivatives at ties and vacuum need a specified global evolution",
+    "the polarization family has a zero reduced shape curvature and potential secular drift",
+    "proper-current full spatial persistence is not inherited from other actions",
+    "no spatial localization, complete boost inertia or assigned-depth preference is established"
+  ]
+}

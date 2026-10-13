@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>proper-envelope-ground-response-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/proper-envelope-ground-response-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="proper-envelope-ground-response-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/proper-envelope-ground-response-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="proper-envelope-ground-response-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>proper-envelope-ground-response-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/proper-envelope-ground-response-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">experiment_key</th><td>proper-current-count-envelope-ground-response</td></tr><tr><th scope="row">created_utc</th><td>2026-10-12T09:15:59.772366+00:00</td></tr><tr><th scope="row">evaluations</th><td>90</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;experiment_key&quot;: &quot;proper-current-count-envelope-ground-response&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-12T09:15:59.772366+00:00&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/proper-envelope-ground-response.py&quot;: &quot;e1cfb54cb451a306a3afce7141f687cc1430479d3f8f2b87a3d36eb36fb3070f&quot;,
+    &quot;experiments/discrete-count-ground-response.py&quot;: &quot;0ffdb3995d4c0781b8baafb69a4227a94e3aeba68aa41471206380475d0d94a0&quot;,
+    &quot;experiments/inverse-current-radial.py&quot;: &quot;52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80&quot;
+  },
+  &quot;evaluations&quot;: 90,
+  &quot;conditions&quot;: {
+    &quot;independent physical source blocks have exactly zero scalar-ratio curvature in the affine chart&quot;: 30,
+    &quot;the complete proper-current Hessian survives the affine count chart&quot;: 30,
+    &quot;the exact squared-frequency polynomial matches the physical normalized linearization&quot;: 30
+  },
+  &quot;maximum_errors&quot;: {
+    &quot;independent physical source blocks have exactly zero scalar-ratio curvature in the affine chart&quot;: 2.101855898694716e-16,
+    &quot;the complete proper-current Hessian survives the affine count chart&quot;: 2.613246212344773e-16,
+    &quot;the exact squared-frequency polynomial matches the physical normalized linearization&quot;: 3.1254394664840602e-15
+  },
+  &quot;cases&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;2/5&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;z*(390625*z**3 - 2598850*z**2 + 2899233*z - 923724)/390625&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 1,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [
+        1,
+        2,
+        2
+      ],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;2/5&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(9765625*z**4 - 121221250*z**3 + 416738025*z**2 - 510072876*z + 166281984)/9765625&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 0,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;2/5&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(1953125*z**4 - 41119250*z**3 + 277749765*z**2 - 732314196*z + 615999168)/1953125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 0,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;2/5&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(1953125*z**4 - 91744250*z**3 + 1517056245*z**2 - 10518486012*z + 25660333440)/1953125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 0,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;2/5&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(1953125*z**4 - 316744250*z**3 + 18932085045*z**2 - 494495886204*z + 4760237496960)/1953125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 0,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;18/55&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;z*(171875*z**3 - 1069200*z**2 + 1069488*z - 281600)/171875&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 1,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 0,
+      &quot;zero_generator_power_nullities&quot;: [
+        2,
+        2,
+        2
+      ],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;18/55&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(859375*z**4 - 8096000*z**3 + 17861040*z**2 - 12223104*z + 901120)/859375&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;18/55&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(859375*z**4 - 11946000*z**3 + 46468080*z**2 - 62514688*z + 18247680)/859375&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;18/55&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(859375*z**4 - 22946000*z**3 + 199482480*z**2 - 675474432*z + 706478080)/859375&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;18/55&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(859375*z**4 - 69696000*z**3 + 2027893680*z**2 - 25110903424*z + 111018885120)/859375&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/125&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;z*(1250000*z**3 - 6968120*z**2 + 5021649*z - 1012500)/1250000&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 1,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [
+        2,
+        2,
+        2
+      ],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/125&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(31250000*z**4 - 241703000*z**3 + 380505465*z**2 - 183730518*z + 7381125)/31250000&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/125&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(156250000*z**4 - 1658515000*z**3 + 4452788925*z**2 - 3989677518*z + 651015225)/156250000&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/125&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(31250000*z**4 - 579203000*z**3 + 3295576665*z**2 - 7026838452*z + 4251528000)/31250000&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/125&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(31250000*z**4 - 1591703000*z**3 + 28443290265*z**2 - 212069240694*z + 550107865125)/31250000&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/137&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;z*(267578125*z**3 - 1394965000*z**2 + 777902544*z - 127837440)/267578125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 1,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [
+        2,
+        2,
+        2
+      ],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/137&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(20904541015625*z**4 - 142696484375000*z**3 + 173902106250000*z**2 - 64801557792000*z + 1623637757952)/20904541015625&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/137&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(20904541015625*z**4 - 186044140625000*z**3 + 379276796250000*z**2 - 251773891488000*z + 25978204127232)/20904541015625&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/137&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(33447265625*z**4 - 482620625000*z**3 + 2010437658000*z**2 - 3035737232640*z + 1192876720128)/33447265625&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/137&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(33447265625*z**4 - 1214714375000*z**3 + 15093428778000*z**2 - 76649724990720*z + 131514658394112)/33447265625&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;12/49&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;z*(153125*z**3 - 763200*z**2 + 344991*z - 48020)/153125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 1,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [
+        2,
+        2,
+        2
+      ],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;12/49&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(19140625*z**4 - 119900000*z**3 + 118879875*z**2 - 36068580*z + 614656)/19140625&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;12/49&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(19140625*z**4 - 150525000*z**3 + 246649875*z**2 - 129350380*z + 9144576)/19140625&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;12/49&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(153125*z**4 - 1841200*z**3 + 6006735*z**2 - 6906564*z + 1897280)/153125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;12/49&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(153125*z**4 - 4291200*z**3 + 40042335*z**2 - 149587412*z + 182891520)/153125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;1512/7381&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;z*(14416015625*z**3 - 65673432500*z**2 + 16520916303*z - 1446823620)/14416015625&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 1,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [
+        2,
+        2,
+        2
+      ],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;1512/7381&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(1126251220703125*z**4 - 5909201757812500*z**3 + 3321706819921875*z**2 - 579769324258500*z + 3375150140736)/1126251220703125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;1512/7381&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(1126251220703125*z**4 - 6817410742187500*z**3 + 6201268924921875*z**2 - 1746589137781500*z + 42426474083136)/1126251220703125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;1512/7381&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(1802001953125*z**4 - 14436897812500*z**3 + 24770095207875*z**2 - 13900108986180*z + 1366796337984)/1802001953125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;1512/7381&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;0&quot;,
+      &quot;polynomial_exact&quot;: &quot;(1802001953125*z**4 - 26892335312500*z**3 + 118606797547875*z**2 - 194331515454180*z + 90626965349184)/1802001953125&quot;,
+      &quot;zero_squared_frequency_multiplicity&quot;: 0,
+      &quot;negative_real_squared_frequencies&quot;: 0,
+      &quot;nonreal_squared_frequency_roots&quot;: 2,
+      &quot;zero_generator_power_nullities&quot;: [],
+      &quot;classification&quot;: &quot;ground full-matrix reducing spatial family; not an assigned excited or reduced-column state&quot;
+    }
+  ],
+  &quot;limits&quot;: [
+    &quot;the Lorentz-scalar proper-current chart is V=m*s+eta*sqrt(j_mu*j^mu)&quot;,
+    &quot;the preferred-time envelope nonlinear unitary theorem does not transfer&quot;,
+    &quot;these full-matrix ground controls are not the assigned excited particles or minimum-column Hessians&quot;,
+    &quot;nonnegative real squared frequencies in this family would not establish full angular or nonlinear persistence&quot;
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

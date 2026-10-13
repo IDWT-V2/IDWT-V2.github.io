@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>rotation-clock-window.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/rotation-clock-window/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="rotation-clock-window.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/rotation-clock-window/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="rotation-clock-window.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>rotation-clock-window.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/rotation-clock-window.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">created_at</th><td>2026-10-11T12:49:47.838596+00:00</td></tr><tr><th scope="row">experiment</th><td>localized-rotation-clock-window</td></tr><tr><th scope="row">maintained_muon_electron_frequency_ratio</th><td>3515/17</td></tr><tr><th scope="row">maintained_muon_electron_frequency_ratio_numeric</th><td>206.76470588235293</td></tr><tr><th scope="row">scope</th><td>Necessary negative-Routhian and decaying-tail conditions bound the common radial rotation frequency window. If this rotation is identified with the assigned particle mass-frequency, these simple branches cannot reproduce electron and muon together. This does not exclude a different same-field spectral mechanism or identify their complete energies with their rotation clock.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;created_at&quot;: &quot;2026-10-11T12:49:47.838596+00:00&quot;,
+  &quot;experiment&quot;: &quot;localized-rotation-clock-window&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/rotation-clock-window.py&quot;: &quot;f848c5c7127a83dcd1f1b1eba0a4e9c03962d21db4b6f8b06e4f3bc264fa7366&quot;
+  },
+  &quot;cases&quot;: [
+    {
+      &quot;action&quot;: &quot;orientation-only&quot;,
+      &quot;minimum_omega_squared&quot;: &quot;183/256&quot;,
+      &quot;threshold_derivative&quot;: &quot;-(3*y**2 - 16*y + 80)/256&quot;,
+      &quot;maximum_clock_ratio&quot;: &quot;16*sqrt(183)/183&quot;,
+      &quot;maximum_clock_ratio_numeric&quot;: 1.1827540335273166
+    },
+    {
+      &quot;action&quot;: &quot;phase-complete-fixed-norm&quot;,
+      &quot;minimum_omega_squared&quot;: &quot;39/64&quot;,
+      &quot;threshold_derivative&quot;: &quot;-(3*y**2 - 16*y + 32)/64&quot;,
+      &quot;maximum_clock_ratio&quot;: &quot;8*sqrt(39)/39&quot;,
+      &quot;maximum_clock_ratio_numeric&quot;: 1.281025230440697
+    },
+    {
+      &quot;action&quot;: &quot;finite-amplitude&quot;,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;threshold_stationary_polynomial&quot;: &quot;-1915203*z**4 + 5100816*z**3 - 3812832*z**2 + 627200&quot;,
+      &quot;minimum_omega_squared&quot;: 0.609198527324687,
+      &quot;minimizing_squared_coefficient&quot;: 1.0011899941364217,
+      &quot;maximum_clock_ratio_numeric&quot;: 1.2812107607482164
+    },
+    {
+      &quot;action&quot;: &quot;finite-amplitude&quot;,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;threshold_stationary_polynomial&quot;: &quot;-30700803*z**4 + 81843216*z**3 - 61331232*z**2 + 10188800&quot;,
+      &quot;minimum_omega_squared&quot;: 0.6093309199384616,
+      &quot;minimizing_squared_coefficient&quot;: 1.0002970305520125,
+      &quot;maximum_clock_ratio_numeric&quot;: 1.2810715654024862
+    }
+  ],
+  &quot;finite_amplitude_exact_bound&quot;: {
+    &quot;condition&quot;: &quot;M_squared &gt;= 2/3, m_squared=1, b=1/4, beta=1&quot;,
+    &quot;large_norm_potential_certificate&quot;: &quot;(M2 - 2/3)*(z - 1)**2/4 + (z - 2)**2/24&quot;,
+    &quot;minimum_omega_squared_strict_lower_bound&quot;: &quot;1/3&quot;,
+    &quot;maximum_clock_ratio_strict_upper_bound&quot;: &quot;sqrt(3)&quot;
+  },
+  &quot;maintained_muon_electron_frequency_ratio&quot;: &quot;3515/17&quot;,
+  &quot;maintained_muon_electron_frequency_ratio_numeric&quot;: 206.76470588235293,
+  &quot;scope&quot;: &quot;Necessary negative-Routhian and decaying-tail conditions bound the common radial rotation frequency window. If this rotation is identified with the assigned particle mass-frequency, these simple branches cannot reproduce electron and muon together. This does not exclude a different same-field spectral mechanism or identify their complete energies with their rotation clock.&quot;
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

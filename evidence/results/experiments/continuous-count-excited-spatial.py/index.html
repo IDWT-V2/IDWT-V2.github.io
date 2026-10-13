@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>continuous-count-excited-spatial.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/continuous-count-excited-spatial.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="continuous-count-excited-spatial.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/continuous-count-excited-spatial.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="continuous-count-excited-spatial.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>continuous-count-excited-spatial.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/continuous-count-excited-spatial.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Actual zonal count-wave Galerkin pencils with exact projected squared source.&quot;&quot;&quot;
+from datetime import datetime,timezone
+from fractions import Fraction
+from hashlib import sha256
+from math import comb,sqrt
+from pathlib import Path
+import json
+import argparse
+
+import numpy as np
+from scipy.linalg import solve_triangular,eigvalsh
+from scipy.optimize import brentq
+from scipy.special import roots_jacobi,eval_gegenbauer
+
+ROOT=Path(__file__).resolve().parent
+COUNTS,ERRORS={},{}
+ASSIGNMENTS={2:[(&#39;W&#39;,76),(&#39;Z&#39;,81),(&#39;Higgs&#39;,95)],3:[(&#39;down&#39;,1),(&#39;strange&#39;,4)],
+             4:[(&#39;up&#39;,3),(&#39;charm&#39;,20),(&#39;top&#39;,72)],
+             5:[(&#39;nu1-comparison&#39;,10),(&#39;nu2-comparison&#39;,15),(&#39;nu3-comparison&#39;,22)],
+             6:[(&#39;electron&#39;,13),(&#39;muon&#39;,35)],10:[(&#39;tau&#39;,23)]}
+
+
+def check(value,label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label]=COUNTS.get(label,0)+1
+
+
+def close(actual,expected,label,tolerance=2e-9):
+    error=float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1,np.linalg.norm(expected)))
+    ERRORS[label]=max(ERRORS.get(label,0),error)
+    check(error&lt;tolerance,label)
+
+
+def count_data(depth,level):
+    count=Fraction(comb(level+depth,depth))
+    rec=[Fraction(1,level+j) for j in range(1,depth+1)]
+    first=count*sum(rec)
+    second=count*(sum(rec)**2-sum(v*v for v in rec))
+    return count,first,second
+
+
+def beta(field,t):
+    out=np.zeros_like(field)
+    out[:,0]=field[:,1]+2*t*field[:,2]
+    out[:,1]=field[:,0]+2*t*field[:,3]
+    out[:,2]=-field[:,3]
+    out[:,3]=-field[:,2]
+    return out
+
+
+def right_gamma(field,t):
+    out=np.zeros_like(field)
+    out[:,0]=2*t*field[:,1]+field[:,2]
+    out[:,1]=-field[:,3]
+    out[:,2]=field[:,0]+2*t*field[:,3]
+    out[:,3]=-field[:,1]
+    return out
+
+
+def gram_apply(field,t):
+    out=field.copy()
+    out[:,0]+=t*field[:,3]
+    out[:,3]+=t*field[:,0]
+    out[:,1]+=t*field[:,2]
+    out[:,2]+=t*field[:,1]
+    return out
+
+
+def weighted_field(field,t,weights):
+    # Explicit positive trace-Gram square root, without a near-endpoint Cholesky.
+    plus=np.sqrt((1+t)/2)*np.sqrt(weights)
+    minus=np.sqrt((1-t)/2)*np.sqrt(weights)
+    out=np.empty_like(field)
+    out[:,0,:]=plus[:,None]*(field[:,0,:]+field[:,3,:])
+    out[:,3,:]=minus[:,None]*(field[:,0,:]-field[:,3,:])
+    out[:,1,:]=plus[:,None]*(field[:,1,:]+field[:,2,:])
+    out[:,2,:]=minus[:,None]*(field[:,1,:]-field[:,2,:])
+    return out.reshape(-1,field.shape[-1])
+
+
+def zonal(depth,level,t):
+    aa=(level+depth-1)/(depth-1)*eval_gegenbauer(level,(depth-1)/2,t)
+    bb=np.zeros_like(t) if level==0 else eval_gegenbauer(level-1,(depth+1)/2,t)
+    norm=sqrt(comb(level+depth-1,depth-1))
+    out=np.zeros((len(t),4))
+    out[:,0]=(aa-t*bb)/norm;out[:,3]=bb/norm
+    return out
+
+
+def zonal_derivative(depth,level,t):
+    bb=np.zeros_like(t) if level==0 else eval_gegenbauer(level-1,(depth+1)/2,t)
+    bp=np.zeros_like(t) if level&lt;2 else (depth+1)*eval_gegenbauer(level-2,(depth+3)/2,t)
+    ap=(level+depth-1)*bb
+    norm=sqrt(comb(level+depth-1,depth-1))
+    out=np.zeros((len(t),4));out[:,0]=(ap-bb-t*bp)/norm;out[:,3]=bp/norm
+    return out
+
+
+def beta_derivative(field,derivative,t):
+    out=beta(derivative,t);out[:,0]+=2*field[:,2];out[:,1]+=2*field[:,3]
+    return out
+
+
+def right_derivative(field,derivative,t):
+    out=right_gamma(derivative,t);out[:,0]+=2*field[:,1];out[:,2]+=2*field[:,3]
+    return out
+
+
+def dirac(field,derivative,t,depth):
+    h=depth/2
+    out=np.empty_like(field)
+    out[:,0]=h*field[:,0]-t*derivative[:,0]+2*(depth-1)*t*field[:,3]-derivative[:,3]
+    out[:,1]=-h*field[:,1]-t*derivative[:,1]-derivative[:,2]
+    out[:,2]=derivative[:,1]+h*field[:,2]+t*derivative[:,2]
+    out[:,3]=derivative[:,0]+(2-h)*field[:,3]+t*derivative[:,3]
+    return out
+
+
+def gram_derivative(field):
+    return field[:,[3,2,1,0]]
+
+
+def preparation(depth,level,epsilon,indices,nodes):
+    t,weights=roots_jacobi(nodes,(depth-2)/2,(depth-2)/2)
+    weights/=weights.sum()
+    count,first,second=count_data(depth,level)
+    h=Fraction(2*level+depth,2);c=epsilon*first
+    omega=epsilon*count;lam=h/c
+    mass2=h*h*(1-c*c)/(c*c)
+    q=2*lam-2*(1-c*c)/(epsilon*second)
+    check(q&gt;0,&#39;every displayed background has the positive continuous source curvature&#39;)
+    cc,ww,ll=float(c),float(omega),float(lam)
+    aa,bb=sqrt((1+cc)/2),sqrt((1-cc)/2)
+    zl=zonal(depth,level,t);bzl=beta(zl,t)
+    zlp=zonal_derivative(depth,level,t);bzlp=beta_derivative(zl,zlp,t)
+    background=aa*zl+bb*bzl
+    direction=-bb*zl+aa*bzl
+    directionp=-bb*zlp+aa*bzlp
+    rho=np.sum(zl*gram_apply(zl,t),axis=1)
+    rhop=2*np.sum(zlp*gram_apply(zl,t),axis=1)+np.sum(zl*gram_derivative(zl),axis=1)
+    check(rho.min()&gt;0,&#39;actual zonal background has positive density on all integration nodes&#39;)
+    close(np.sum(direction*gram_apply(direction,t),axis=1),rho,
+          &#39;actual normalized source direction has the same density as its zonal field&#39;)
+    fields=[];derivatives=[];scores=[];ham=[];ai=[];labels=[];low=[];high=[]
+    for kk in indices:
+        hh=Fraction(2*kk+depth,2)
+        lk=sqrt(float(hh*hh+mass2))
+        ck=cc if kk==level else float(hh)/lk
+        ak,bk=sqrt((1+ck)/2),sqrt((1-ck)/2)
+        zk=zonal(depth,kk,t);bzk=beta(zk,t)
+        zkp=zonal_derivative(depth,kk,t);bzkp=beta_derivative(zk,zkp,t)
+        close(dirac(zk,zkp,t,depth),float(hh)*zk,
+              &#39;actual four-function spatial Dirac formula gives each zonal shell eigenvalue&#39;,2e-8)
+        positive=ak*zk+bk*bzk;negative=-bk*zk+ak*bzk
+        positivep=ak*zkp+bk*bzkp;negativep=-bk*zkp+ak*bzkp
+        overlap=np.sum(zl*gram_apply(zk,t),axis=1)
+        crossed=np.sum(zl*gram_apply(beta(right_gamma(zk,t),t),t),axis=1)
+        cosine=aa*ak+bb*bk
+        sine=(cc-ck)/(2*(aa*bk+bb*ak))
+        cosine_sum=(cc+ck)/(2*cosine)
+        sine_sum=aa*bk+bb*ak
+        delta2=hh*hh-h*h
+        delta=float(delta2)/(lk+ll)
+        plus_value=ww+delta
+        plus_ai=delta*float(delta2+4*omega*(lam-omega))/(lk+ll-2*ww)
+        minus_value=ww-ll-lk
+        minus_ai=(ll+lk)*(ll+lk-2*ww)
+        for seed in (0,1):
+            for sign in (1,-1):
+                field=positive if sign==1 else negative
+                derivative=positivep if sign==1 else negativep
+                if seed:
+                    derivative=right_derivative(field,derivative,t)
+                    field=right_gamma(field,t)
+                if not seed:
+                    score=sine*overlap if sign==1 else cosine*overlap
+                else:
+                    score=cosine_sum*crossed if sign==1 else -sine_sum*crossed
+                measured=np.sum(direction*gram_apply(field,t),axis=1)
+                source_metric=np.sqrt(weights/rho)
+                close(source_metric*measured,source_metric*score,
+                      &#39;stable polarization factors reproduce the independent physical source projection&#39;)
+                (low if sign==1 else high).append(len(fields))
+                fields.append(field);derivatives.append(derivative);scores.append(score)
+                ham.append(plus_value if sign==1 else minus_value)
+                ai.append(plus_ai if sign==1 else minus_ai)
+                labels.append(dict(level=kk,dirac_polarity=sign,right_seed=seed))
+    fields=np.stack(fields,axis=-1);derivatives=np.stack(derivatives,axis=-1);scores=np.stack(scores,axis=-1)
+    ham=np.array(ham);ai=np.array(ai)
+    physical=weighted_field(fields,t,weights)
+    close(physical.T@physical,np.eye(len(ham)),
+          &#39;actual spatial shell fields are orthonormal in the normalized sphere measure&#39;,2e-8)
+    nmat=float(q)*(scores.T@(weights[:,None]*scores/rho[:,None]))
+    bfields=fields*ham[None,None,:]+float(q)*direction[:,:,None]*scores[:,None,:]/rho[:,None,None]
+    factor=weighted_field(bfields,t,weights)
+    expected=np.diag(ham*ham)+(ham[:,None]+ham[None,:]+float(q))*nmat
+    close(factor.T@factor,expected,
+          &#39;direct squared full source agrees with H squared plus HN plus NH plus qN&#39;,2e-8)
+    low=np.array(low);high=np.array(high)
+    qh,rh=np.linalg.qr(factor[:,high],mode=&#39;reduced&#39;)
+    projected=qh.T@factor[:,low]
+    response=solve_triangular(rh,projected)
+    remainder=factor[:,low]-qh@projected
+    gram=rh.T@rh
+    check(eigvalsh(gram,subset_by_index=[0,0])[0]&gt;ww*ww,
+          &#39;eliminated negative-Dirac block has strictly positive rotating stiffness&#39;)
+    residual_gram=remainder.T@remainder
+    def reduced(ratio):
+        sigma2=(ww*ratio)**2
+        diagonal=sigma2-ww*ww+4*ww*ww*sigma2/(ai+sigma2)
+        dd=diagonal[high]
+        correction=dd[:,None]*response
+        correction-=dd[:,None]*np.linalg.solve(gram+np.diag(dd),correction)
+        value=residual_gram+np.diag(diagonal[low])+response.T@correction
+        return (value+value.T)/(2*ww*ww)
+    def field_residual(ratio):
+        values,vectors=np.linalg.eigh(reduced(ratio))
+        ul=vectors[:,np.argmin(abs(values))]
+        sigma=ww*ratio;sigma2=sigma*sigma
+        diagonal=sigma2-ww*ww+4*ww*ww*sigma2/(ai+sigma2)
+        leading=response@ul
+        uh=-leading+np.linalg.solve(gram+np.diag(diagonal[high]),diagonal[high]*leading)
+        real=np.zeros(len(ham));real[low]=ul;real[high]=uh
+        imag=2*ww*sigma*real/(ai+sigma2)
+        norm=sqrt(real@real+imag@imag);real/=norm;imag/=norm
+        variation=fields@real;variationp=derivatives@real
+        score=scores@real
+        scorep=(np.sum(directionp*gram_apply(variation,t),axis=1)+
+                np.sum(direction*gram_apply(variationp,t),axis=1)+
+                np.sum(direction*gram_derivative(variation),axis=1))
+        source=float(q)*direction*score[:,None]/rho[:,None]
+        sourcep=float(q)*(directionp*score[:,None]/rho[:,None]+
+                         direction*(scorep/rho-score*rhop/(rho*rho))[:,None])
+        hsource=dirac(source,sourcep,t,depth)+sqrt(float(mass2))*beta(source,t)+(ww-ll)*source
+        second_score=scores@(ham*real)
+        nh=float(q)*direction*second_score[:,None]/rho[:,None]
+        mixed=hsource+nh+float(q)*source
+        weighted_mixed=weighted_field(mixed[:,:,None],t,weights)[:,0]
+        outside=weighted_mixed-physical@(physical.T@weighted_mixed)
+        full=weighted_mixed+physical@((ai+sigma2)*real+2*ww*sigma*imag)
+        return dict(full_spatial_residual_over_clock_squared=float(np.linalg.norm(full)/(ww*ww)),
+                    omitted_spatial_residual_over_clock_squared=float(np.linalg.norm(outside)/(ww*ww)),
+                    normalized_real_variation_norm=float(np.linalg.norm(real)),
+                    normalized_imaginary_variation_norm=float(np.linalg.norm(imag)))
+    return dict(reduced=reduced,ai=ai,omega=ww,epsilon=epsilon,c=c,q=q,
+                field_residual=field_residual,
+                nodes=nodes,indices=indices,labels=labels,
+                minimum_sampled_density=float(rho.min()),
+                factor_residual_relative=float(np.linalg.norm(qh.T@remainder)/max(1,np.linalg.norm(remainder))))
+
+
+def pencil_roots(prepared,maximum_only=False):
+    ww=prepared[&#39;omega&#39;];ai=prepared[&#39;ai&#39;];fun=prepared[&#39;reduced&#39;]
+    poles=sorted(set(sqrt(-value)/ww for value in ai if value&lt;0))
+    start=1e-4
+    poles=[p for p in poles if start&lt;p&lt;1.000001]
+    boundaries=[start,*poles,1.001]
+    initial=eigvalsh(fun(start))
+    remaining=sum(1 for value in ai if value&lt;-(ww*start)**2)
+    initial_negative=int(np.sum(initial&lt;0))
+    roots=[]
+    intervals=range(len(boundaries)-1)
+    if maximum_only:
+        intervals=reversed(list(intervals))
+    for i in intervals:
+        left,right=boundaries[i:i+2]
+        margin=(right-left)*1e-5
+        left+=margin if i&gt;0 else 0
+        right-=margin if i&lt;len(boundaries)-2 else 0
+        locations=np.linspace(left,right,7)
+        for first,second in zip(locations[:-1],locations[1:]):
+            va,vb=eigvalsh(fun(first)),eigvalsh(fun(second))
+            na,nb=int(np.sum(va&lt;0)),int(np.sum(vb&lt;0))
+            if nb&gt;na:
+                for index in range(na,nb):
+                    root=brentq(lambda rr:float(eigvalsh(fun(rr),subset_by_index=[index,index])[0]),
+                                first,second,xtol=1e-12)
+                    residual=float(min(abs(eigvalsh(fun(root)))))
+                    roots.append(dict(growth_over_count_clock=root,
+                                      dimensional_growth=ww*root,reduced_pencil_residual=residual,
+                                      **prepared[&#39;field_residual&#39;](root)))
+        if maximum_only and roots:
+            break
+    return dict(real_growing_roots=roots,
+                initial_reduced_negative_index=initial_negative,
+                remaining_negative_imaginary_stiffness_poles=remaining,
+                initial_inertia_margin=float(min(abs(initial))),
+                inertia_count_forces_real_growth=remaining&gt;initial_negative,
+                positive_growth_detected=bool(roots),
+                maximum_growth_over_count_clock=max([v[&#39;growth_over_count_clock&#39;] for v in roots],default=0),
+                pole_ratios=poles)
+
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument(&#39;--full-offset&#39;,type=int)
+    parser.add_argument(&#39;--full-factor&#39;,type=int,default=1)
+    parser.add_argument(&#39;--quadrature-multiplier&#39;,type=int,default=4)
+    parser.add_argument(&#39;--only&#39;,nargs=&#39;*&#39;)
+    args=parser.parse_args()
+    cases=[]
+    for depth,assignments in ASSIGNMENTS.items():
+        epsilon=Fraction(3,10)/max(count_data(depth,index-1)[1] for _,index in assignments)
+        jobs=[(name,index-1,epsilon) for name,index in assignments]
+        jobs.append((&#39;common-ground-control&#39;,0,Fraction(3,5)/count_data(depth,0)[1]))
+        for name,level,eps in jobs:
+            if args.only and name not in args.only:
+                continue
+            indices=(list(range(args.full_factor*level+args.full_offset+1)) if args.full_offset is not None else
+                     sorted(set(range(min(level+5,13)))|set(range(max(0,level-3),level+5))))
+            nodes=max(128,args.quadrature_multiplier*(max(indices)+level+depth+5))
+            prepared=preparation(depth,level,eps,indices,nodes)
+            outcome=pencil_roots(prepared,maximum_only=args.full_offset is not None)
+            case=dict(particle=name,depth=depth,background_level=level,
+                      epsilon_exact=str(eps),polarization_exact=str(prepared[&#39;c&#39;]),
+                      source_norm_q_exact=str(prepared[&#39;q&#39;]),count_clock=prepared[&#39;omega&#39;],
+                      shell_indices=indices,quadrature_nodes=nodes,
+                      minimum_sampled_density=prepared[&#39;minimum_sampled_density&#39;],
+                      qr_orthogonality_relative=prepared[&#39;factor_residual_relative&#39;],**outcome)
+            cases.append(case)
+            print(json.dumps(dict(particle=name,depth=depth,growth_ratio=outcome[&#39;maximum_growth_over_count_clock&#39;],
+                                  finite_inertia_count=outcome[&#39;inertia_count_forces_real_growth&#39;])),flush=True)
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report=dict(experiment_key=&#39;continuous-count-assigned-zonal-spatial-pencils&#39;,
+                created_utc=datetime.now(timezone.utc).isoformat(),
+                sources={&#39;experiments/&#39;+Path(__file__).name:sha256(Path(__file__).read_bytes()).hexdigest()},
+                evaluations=sum(COUNTS.values()),conditions=COUNTS,maximum_errors=ERRORS,cases=cases,
+                comparison_options=vars(args),
+                limits=[&#39;finite true Galerkin pencils are not full infinite-spectrum proofs&#39;,
+                        &#39;the full matrix zonal carrier differs from minimum-column particle candidates&#39;,
+                        &#39;pointwise squared source is projected before forming the finite wave stiffness&#39;,
+                        &#39;rationalized signed eigenvalues and QR elimination avoid heavy/light cancellation&#39;,
+                        &#39;cutoff, quadrature and precision refinement remain required for detected growth&#39;,
+                        &#39;no particle lifetime or observed decay channel follows from a linear growth rate&#39;,
+                        &#39;the smoothed envelope law is a different action with its own persistence theorem&#39;])
+    path=ROOT/(&#39;continuous-count-excited-spatial-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path),evaluations=report[&#39;evaluations&#39;],maximum_errors=ERRORS)),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

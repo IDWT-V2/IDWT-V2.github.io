@@ -1,0 +1,1568 @@
+{
+  "experiment_key": "phase-resolved-coherent-positive-count-beams",
+  "created_utc": "2026-10-12T11:10:49.808487+00:00",
+  "sources": {
+    "experiments/coherent-positive-count-contact.py": "9cec3a58c9baff1e9f6a7bc0ca14d49c876c0a6eaa5c44794cb29a4d492054dc",
+    "experiments/positive-count-contact.py": "ace032e592c4e37fd921faacee4376b0181965e9cfc29db3ad9d8b00808f10f6",
+    "experiments/positive-count-wave.py": "80cb47fd98590a2a54a8287f8fa24fcbe0b2a9edb48869402aa98a5166e487dc",
+    "experiments/convex-count-envelope.py": "6650f29a11b56cf16794e50c809fb92cf6a25829453698095912b357307ad8d0",
+    "experiments/forward-count-action.py": "5f1dd9a03cf8e6b07a56d507791fed8ff859f10abf22bb755c60c3bd1ed6d909",
+    "experiments/inverse-current-radial.py": "52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80",
+    "experiments/excited-shell-orientation-current.py": "508484d445dbb86da9f88a31642268b5a1dba8264588e6f48ebb6cc00cf9c264"
+  },
+  "evaluations": 504,
+  "conditions": {
+    "actual full-matrix spinor traces verify the coherent bare overlap": 18,
+    "actual Clifford traces retain the exceptional depth-two cross grading": 18,
+    "direct physical matrix fields verify coherent intensity with relative phase": 18,
+    "direct physical matrix fields verify coherent scalar density with relative phase": 18,
+    "different-shell coherent matrix preparations have positive sampled density": 108,
+    "coherent scalar-to-intensity ratios obey the physical grading bound": 108,
+    "the reconstructed complete coherent source norm is nonnegative": 108,
+    "azimuthal integration removes the full distinct-shell kinetic cross term": 108
+  },
+  "maximum_errors": {
+    "actual full-matrix spinor traces verify the coherent bare overlap": 3.552713678800501e-15,
+    "actual Clifford traces retain the exceptional depth-two cross grading": 2.7200464103316335e-15,
+    "direct physical matrix fields verify coherent intensity with relative phase": 1.99234187814763e-15,
+    "direct physical matrix fields verify coherent scalar density with relative phase": 2.215373056329421e-15,
+    "azimuthal integration removes the full distinct-shell kinetic cross term": 3.7845936203469096e-11
+  },
+  "cases": [
+    {
+      "depth": 2,
+      "shell_levels": [
+        75,
+        80
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 386.6692838576254,
+          "contact_energy": 0.02494187138597681,
+          "relative_contact": 6.450856427342855e-05,
+          "minimum_sampled_log_density": -655.1123840168436,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 386.6883253552879,
+          "contact_energy": 0.043983369048476106,
+          "relative_contact": 0.00011375666024886888,
+          "minimum_sampled_log_density": -758.8864792185763,
+          "zero_underflow_energy_weight_nodes": 1
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 386.7052386147819,
+          "contact_energy": 0.0608966285424799,
+          "relative_contact": 0.00015750037419310587,
+          "minimum_sampled_log_density": -862.7602304892271,
+          "zero_underflow_energy_weight_nodes": 1
+        }
+      ],
+      "finest_relative_change": 0.016913259494003796,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 2,
+      "shell_levels": [
+        75,
+        80
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 386.77695648613917,
+          "contact_energy": 0.13261449989977336,
+          "relative_contact": 0.0003429883370813508,
+          "minimum_sampled_log_density": -655.1123840168343,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 386.7768601457611,
+          "contact_energy": 0.13251815952168045,
+          "relative_contact": 0.00034273916654494,
+          "minimum_sampled_log_density": -758.8864792185759,
+          "zero_underflow_energy_weight_nodes": 1
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 386.7769458418914,
+          "contact_energy": 0.1326038556520075,
+          "relative_contact": 0.00034296080726490196,
+          "minimum_sampled_log_density": -862.7602304892271,
+          "zero_underflow_energy_weight_nodes": 1
+        }
+      ],
+      "finest_relative_change": 8.569613032705092e-05,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 2,
+      "shell_levels": [
+        75,
+        80
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 386.85925743865573,
+          "contact_energy": 0.21491545241633503,
+          "relative_contact": 0.0005558479177848252,
+          "minimum_sampled_log_density": -655.1123840168243,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 386.85966549288713,
+          "contact_energy": 0.21532350664773503,
+          "relative_contact": 0.0005569032913855451,
+          "minimum_sampled_log_density": -758.8864792185757,
+          "zero_underflow_energy_weight_nodes": 1
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 386.8598094070402,
+          "contact_energy": 0.21546742080079184,
+          "relative_contact": 0.0005572755046508874,
+          "minimum_sampled_log_density": -862.7602304892271,
+          "zero_underflow_energy_weight_nodes": 1
+        }
+      ],
+      "finest_relative_change": 0.0001439141530568122,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 2,
+      "shell_levels": [
+        75,
+        80
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 19.625033745540392,
+          "contact_energy": 0.0009499759068845037,
+          "relative_contact": 4.840867568831445e-05,
+          "minimum_sampled_log_density": -658.0238237271332,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 19.625033755133845,
+          "contact_energy": 0.0009499855003376467,
+          "relative_contact": 4.8409164549514575e-05,
+          "minimum_sampled_log_density": -761.7979189289025,
+          "zero_underflow_energy_weight_nodes": 1
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 19.62503374777387,
+          "contact_energy": 0.0009499781403619068,
+          "relative_contact": 4.840878950139379e-05,
+          "minimum_sampled_log_density": -865.6716701995545,
+          "zero_underflow_energy_weight_nodes": 1
+        }
+      ],
+      "finest_relative_change": 7.359975739973379e-09,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 2,
+      "shell_levels": [
+        75,
+        80
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 19.63074020462081,
+          "contact_energy": 0.006656434987302617,
+          "relative_contact": 0.00033919723669355957,
+          "minimum_sampled_log_density": -658.0238237271243,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 19.630746854808198,
+          "contact_energy": 0.006663085174690053,
+          "relative_contact": 0.0003395361155663519,
+          "minimum_sampled_log_density": -761.7979189289022,
+          "zero_underflow_energy_weight_nodes": 1
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 19.63074836012784,
+          "contact_energy": 0.006664590494331435,
+          "relative_contact": 0.0003396128233331477,
+          "minimum_sampled_log_density": -865.6716701995545,
+          "zero_underflow_energy_weight_nodes": 1
+        }
+      ],
+      "finest_relative_change": 1.505319641381675e-06,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 2,
+      "shell_levels": [
+        75,
+        80
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 19.634931367585374,
+          "contact_energy": 0.01084759795186585,
+          "relative_contact": 0.0005527696517812224,
+          "minimum_sampled_log_density": -658.023823727115,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 19.634953220722537,
+          "contact_energy": 0.010869451089028814,
+          "relative_contact": 0.0005538832394227905,
+          "minimum_sampled_log_density": -761.7979189289019,
+          "zero_underflow_energy_weight_nodes": 1
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 19.634942357340798,
+          "contact_energy": 0.010858587707289757,
+          "relative_contact": 0.0005533296654640478,
+          "minimum_sampled_log_density": -865.6716701995545,
+          "zero_underflow_energy_weight_nodes": 1
+        }
+      ],
+      "finest_relative_change": 1.0863381739056877e-05,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 3,
+      "shell_levels": [
+        0,
+        3
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 1.4957467999986007,
+          "contact_energy": 1.021225251422998,
+          "relative_contact": 2.1521156509930175,
+          "minimum_sampled_log_density": -4.015899260411217,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 1.49711136611289,
+          "contact_energy": 1.0225898175372874,
+          "relative_contact": 2.1549913183223213,
+          "minimum_sampled_log_density": -4.069420569778401,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 1.4981683598748012,
+          "contact_energy": 1.0236468112991985,
+          "relative_contact": 2.1572188120264193,
+          "minimum_sampled_log_density": -4.081279739478571,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0010325766174855068,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 3,
+      "shell_levels": [
+        0,
+        3
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 1.4802518528836828,
+          "contact_energy": 1.00573030430808,
+          "relative_contact": 2.119461818598198,
+          "minimum_sampled_log_density": -0.6752054980124801,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 1.4803788719967748,
+          "contact_energy": 1.005857323421172,
+          "relative_contact": 2.119729496880614,
+          "minimum_sampled_log_density": -0.6761994488689328,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 1.4801552906498163,
+          "contact_energy": 1.0056337420742136,
+          "relative_contact": 2.1192583247122907,
+          "minimum_sampled_log_density": -0.6764011146099256,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0002223288038220329,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 3,
+      "shell_levels": [
+        0,
+        3
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 1.485833146761213,
+          "contact_energy": 1.0113115981856102,
+          "relative_contact": 2.1312237583758202,
+          "minimum_sampled_log_density": 1.4967138639464652e-11,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 1.4858553922287574,
+          "contact_energy": 1.0113338436531547,
+          "relative_contact": 2.1312706381594912,
+          "minimum_sampled_log_density": 2.375877272697553e-13,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 1.4863605933697401,
+          "contact_energy": 1.0118390447941374,
+          "relative_contact": 2.1323352918986083,
+          "minimum_sampled_log_density": 3.774758283725525e-15,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0004992900240230612,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 3,
+      "shell_levels": [
+        0,
+        3
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 12.795018381375673,
+          "contact_energy": 12.284207570564861,
+          "relative_contact": 24.048448683116394,
+          "minimum_sampled_log_density": 1.86385461397017,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 12.794888882061677,
+          "contact_energy": 12.284078071250866,
+          "relative_contact": 24.048195165940847,
+          "minimum_sampled_log_density": 1.8624481578587617,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 12.794880065461573,
+          "contact_energy": 12.284069254650761,
+          "relative_contact": 24.04817790593006,
+          "minimum_sampled_log_density": 1.8620957369370288,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 7.177263430742361e-07,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 3,
+      "shell_levels": [
+        0,
+        3
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 12.793280448529577,
+          "contact_energy": 12.282469637718766,
+          "relative_contact": 24.045046380719278,
+          "minimum_sampled_log_density": 2.4667383497954543,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 12.793271965870137,
+          "contact_energy": 12.282461155059325,
+          "relative_contact": 24.045029774454765,
+          "minimum_sampled_log_density": 2.466229997530661,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 12.793272133932447,
+          "contact_energy": 12.282461323121636,
+          "relative_contact": 24.045030103465635,
+          "minimum_sampled_log_density": 2.466102732690042,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 1.3683113369008875e-08,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 3,
+      "shell_levels": [
+        0,
+        3
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 12.65276251408879,
+          "contact_energy": 12.141951703277979,
+          "relative_contact": 23.76995836091456,
+          "minimum_sampled_log_density": 3.0231312477428536,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 12.652811581564208,
+          "contact_energy": 12.142000770753397,
+          "relative_contact": 23.77005441893522,
+          "minimum_sampled_log_density": 3.023131247742117,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 12.652814865380476,
+          "contact_energy": 12.142004054569664,
+          "relative_contact": 23.770060847570242,
+          "minimum_sampled_log_density": 3.0231312477421053,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 2.704509282847998e-07,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 4,
+      "shell_levels": [
+        2,
+        19
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 43.81962710301889,
+          "contact_energy": 43.81640284082931,
+          "relative_contact": 13589.59050616942,
+          "minimum_sampled_log_density": -16.075401481487265,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 43.68102234094284,
+          "contact_energy": 43.67779807875326,
+          "relative_contact": 13546.602450630926,
+          "minimum_sampled_log_density": -18.83237584616637,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 43.64330778134676,
+          "contact_energy": 43.64008351915719,
+          "relative_contact": 13534.905337499731,
+          "minimum_sampled_log_density": -21.5971546149522,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0008642183184530229,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 4,
+      "shell_levels": [
+        2,
+        19
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 39.93134869636586,
+          "contact_energy": 39.92812443417628,
+          "relative_contact": 12383.646889292733,
+          "minimum_sampled_log_density": -16.075401481487265,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 40.45805675144058,
+          "contact_energy": 40.454832489251004,
+          "relative_contact": 12547.004589165272,
+          "minimum_sampled_log_density": -18.83237584616637,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 40.24218328632939,
+          "contact_energy": 40.23895902413982,
+          "relative_contact": 12480.051763241478,
+          "minimum_sampled_log_density": -21.5971546149522,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.005364787518029036,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 4,
+      "shell_levels": [
+        2,
+        19
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 40.538388972982304,
+          "contact_energy": 40.53516471079273,
+          "relative_contact": 12571.919505142483,
+          "minimum_sampled_log_density": -16.075401481487265,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 40.77417000575765,
+          "contact_energy": 40.77094574356807,
+          "relative_contact": 12645.046632811504,
+          "minimum_sampled_log_density": -18.83237584616637,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 40.316212242621866,
+          "contact_energy": 40.31298798043229,
+          "relative_contact": 12503.011731116256,
+          "minimum_sampled_log_density": -21.5971546149522,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.011360055061115069,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 4,
+      "shell_levels": [
+        2,
+        19
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 152429.78054993803,
+          "contact_energy": 152429.74033062867,
+          "relative_contact": 3789964.144002306,
+          "minimum_sampled_log_density": -7.172760721239857,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 151695.18691153734,
+          "contact_energy": 151695.14669222798,
+          "relative_contact": 3771699.4435317023,
+          "minimum_sampled_log_density": -9.929735085918963,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 151543.41894219874,
+          "contact_energy": 151543.37872288938,
+          "relative_contact": 3767925.933449262,
+          "minimum_sampled_log_density": -12.694513854704791,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.001001482021963645,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 4,
+      "shell_levels": [
+        2,
+        19
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 148568.80849740817,
+          "contact_energy": 148568.7682780988,
+          "relative_contact": 3693966.1739976103,
+          "minimum_sampled_log_density": -7.172760721239857,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 148379.78097087523,
+          "contact_energy": 148379.74075156587,
+          "relative_contact": 3689266.2542428738,
+          "minimum_sampled_log_density": -9.929735085918963,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 148424.5112980123,
+          "contact_energy": 148424.47107870295,
+          "relative_contact": 3690378.414741418,
+          "minimum_sampled_log_density": -12.694513854704791,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.00030136760341465535,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 4,
+      "shell_levels": [
+        2,
+        19
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 147509.10695839737,
+          "contact_energy": 147509.066739088,
+          "relative_contact": 3667618.0950237596,
+          "minimum_sampled_log_density": -7.172760721239857,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 146047.48702773417,
+          "contact_energy": 146047.4468084248,
+          "relative_contact": 3631276.846148329,
+          "minimum_sampled_log_density": -9.929735085918963,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 146286.5759850623,
+          "contact_energy": 146286.53576575295,
+          "relative_contact": 3637221.4772520433,
+          "minimum_sampled_log_density": -12.694513854704791,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0016343879911887187,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 5,
+      "shell_levels": [
+        9,
+        14
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 38.408351955085784,
+          "contact_energy": 38.275846037714814,
+          "relative_contact": 288.8614093403575,
+          "minimum_sampled_log_density": -75.01982262382515,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 38.454608816165425,
+          "contact_energy": 38.322102898794455,
+          "relative_contact": 289.21050213558823,
+          "minimum_sampled_log_density": -87.40322301952712,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 38.42675810584346,
+          "contact_energy": 38.29425218847249,
+          "relative_contact": 289.0003174821437,
+          "minimum_sampled_log_density": -99.83312260514042,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0007272817389119194,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 5,
+      "shell_levels": [
+        9,
+        14
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 50.53987858740257,
+          "contact_energy": 50.4073726700316,
+          "relative_contact": 380.41601213106117,
+          "minimum_sampled_log_density": -75.01982262357215,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 50.556091207510775,
+          "contact_energy": 50.423585290139805,
+          "relative_contact": 380.5383660638506,
+          "minimum_sampled_log_density": -87.403223019519,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 50.546106468644524,
+          "contact_energy": 50.413600551273554,
+          "relative_contact": 380.46301290933224,
+          "minimum_sampled_log_density": -99.83312260514016,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.00019805645216901352,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 5,
+      "shell_levels": [
+        9,
+        14
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 58.933829557020616,
+          "contact_energy": 58.801323639649645,
+          "relative_contact": 443.76375641419423,
+          "minimum_sampled_log_density": -75.01982262296137,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 59.18501316792259,
+          "contact_energy": 59.05250725055162,
+          "relative_contact": 445.65939712130887,
+          "minimum_sampled_log_density": -87.4032230194994,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 59.23564766688719,
+          "contact_energy": 59.10314174951622,
+          "relative_contact": 446.0415272176037,
+          "minimum_sampled_log_density": -99.83312260513954,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0008567141689216989,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 5,
+      "shell_levels": [
+        9,
+        14
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 579.305231251652,
+          "contact_energy": 579.0078934034308,
+          "relative_contact": 1947.3063952915365,
+          "minimum_sampled_log_density": -72.58195698847935,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 579.0789754802432,
+          "contact_energy": 578.781637632022,
+          "relative_contact": 1946.5454569422402,
+          "minimum_sampled_log_density": -84.96535738467047,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 578.8944785391045,
+          "contact_energy": 578.5971406908833,
+          "relative_contact": 1945.9249609568067,
+          "minimum_sampled_log_density": -97.39525697029947,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.00031886943118733134,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 5,
+      "shell_levels": [
+        9,
+        14
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 547.7713858620625,
+          "contact_energy": 547.4740480138413,
+          "relative_contact": 1841.2524718565123,
+          "minimum_sampled_log_density": -72.58195698837437,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 547.6312555141872,
+          "contact_energy": 547.3339176659659,
+          "relative_contact": 1840.7811886051077,
+          "minimum_sampled_log_density": -84.9653573846671,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 547.9146242052308,
+          "contact_energy": 547.6172863570096,
+          "relative_contact": 1841.7342078481634,
+          "minimum_sampled_log_density": -97.39525697029936,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0005174575348574418,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 5,
+      "shell_levels": [
+        9,
+        14
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 537.3363157130416,
+          "contact_energy": 537.0389778648204,
+          "relative_contact": 1806.1574773529644,
+          "minimum_sampled_log_density": -72.58195698812094,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 538.1178087892176,
+          "contact_energy": 537.8204709409964,
+          "relative_contact": 1808.7857773855742,
+          "minimum_sampled_log_density": -84.96535738465897,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 536.6448775330108,
+          "contact_energy": 536.3475396847896,
+          "relative_contact": 1803.832047932636,
+          "minimum_sampled_log_density": -97.3952569702991,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.00274622543635135,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 6,
+      "shell_levels": [
+        12,
+        34
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 353.1224749995038,
+          "contact_energy": 346.1202419114011,
+          "relative_contact": 49.42998005871606,
+          "minimum_sampled_log_density": -100.08219220108677,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 354.86884671951935,
+          "contact_energy": 347.8666136314166,
+          "relative_contact": 49.6793821705913,
+          "minimum_sampled_log_density": -116.56298250214982,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 354.2976183017278,
+          "contact_energy": 347.2953852136251,
+          "relative_contact": 49.5978041353268,
+          "minimum_sampled_log_density": -133.1207687187937,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0016447912702328656,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 6,
+      "shell_levels": [
+        12,
+        34
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 385.34524741299333,
+          "contact_energy": 378.3430143248906,
+          "relative_contact": 54.03176523325389,
+          "minimum_sampled_log_density": -100.08219220108677,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 386.889299719163,
+          "contact_energy": 379.88706663106024,
+          "relative_contact": 54.2522737891306,
+          "minimum_sampled_log_density": -116.56298250214982,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 386.44261560568066,
+          "contact_energy": 379.4403825175779,
+          "relative_contact": 54.188482123263135,
+          "minimum_sampled_log_density": -133.1207687187937,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0011772181719789058,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 6,
+      "shell_levels": [
+        12,
+        34
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 425.1149859777975,
+          "contact_energy": 418.1127528896948,
+          "relative_contact": 59.71134459949571,
+          "minimum_sampled_log_density": -100.08219220108677,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 436.0996185759832,
+          "contact_energy": 429.09738548788044,
+          "relative_contact": 61.280077382306,
+          "minimum_sampled_log_density": -116.56298250214982,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 432.2153148135823,
+          "contact_energy": 425.2130817254796,
+          "relative_contact": 60.725353808621975,
+          "minimum_sampled_log_density": -133.1207687187937,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.009134958281712966,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 6,
+      "shell_levels": [
+        12,
+        34
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 20427.089667502656,
+          "contact_energy": 20425.209512865506,
+          "relative_contact": 10863.579574398593,
+          "minimum_sampled_log_density": -96.07028719124206,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 20274.174490992147,
+          "contact_energy": 20272.294336354997,
+          "relative_contact": 10782.248404350681,
+          "minimum_sampled_log_density": -112.55107749230511,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 20248.33219203655,
+          "contact_energy": 20246.4520373994,
+          "relative_contact": 10768.503631210766,
+          "minimum_sampled_log_density": -129.108863708949,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.0012763865445591302,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 6,
+      "shell_levels": [
+        12,
+        34
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 19669.583773610208,
+          "contact_energy": 19667.703618973057,
+          "relative_contact": 10460.684047124169,
+          "minimum_sampled_log_density": -96.07028719124206,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 19545.03370953139,
+          "contact_energy": 19543.15355489424,
+          "relative_contact": 10394.439461908805,
+          "minimum_sampled_log_density": -112.55107749230511,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 19569.405792224683,
+          "contact_energy": 19567.525637587532,
+          "relative_contact": 10407.402269441605,
+          "minimum_sampled_log_density": -129.108863708949,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.00124553728175394,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 6,
+      "shell_levels": [
+        12,
+        34
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 19176.944220123893,
+          "contact_energy": 19175.064065486742,
+          "relative_contact": 10198.663283644422,
+          "minimum_sampled_log_density": -96.07028719124206,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 18880.49926325377,
+          "contact_energy": 18878.619108616618,
+          "relative_contact": 10040.992764947456,
+          "minimum_sampled_log_density": -112.55107749230511,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 19039.446457511644,
+          "contact_energy": 19037.566302874493,
+          "relative_contact": 10125.53219118248,
+          "minimum_sampled_log_density": -129.108863708949,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.008349134113527697,
+      "second_is_unassigned_mathematical_control": false
+    },
+    {
+      "depth": 10,
+      "shell_levels": [
+        22,
+        23
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 54.52149763631235,
+          "contact_energy": 50.44909470807587,
+          "relative_contact": 12.388041064964666,
+          "minimum_sampled_log_density": -183.2853364411134,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 54.530006344189395,
+          "contact_energy": 50.45760341595292,
+          "relative_contact": 12.39013042302353,
+          "minimum_sampled_log_density": -213.26799939011843,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 54.52908765811956,
+          "contact_energy": 50.45668472988308,
+          "relative_contact": 12.389904834817738,
+          "minimum_sampled_log_density": -243.50524683571822,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 1.8207420379597598e-05,
+      "second_is_unassigned_mathematical_control": true
+    },
+    {
+      "depth": 10,
+      "shell_levels": [
+        22,
+        23
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 57.50176464524294,
+          "contact_energy": 53.429361717006465,
+          "relative_contact": 13.119861334581547,
+          "minimum_sampled_log_density": -183.2773344745711,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 57.5063119461616,
+          "contact_energy": 53.433909017925124,
+          "relative_contact": 13.12097794828574,
+          "minimum_sampled_log_density": -213.26399641562838,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 57.507272948310295,
+          "contact_energy": 53.43487002007382,
+          "relative_contact": 13.121213927427691,
+          "minimum_sampled_log_density": -243.50324507652707,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 1.7984551068077535e-05,
+      "second_is_unassigned_mathematical_control": true
+    },
+    {
+      "depth": 10,
+      "shell_levels": [
+        22,
+        23
+      ],
+      "normalization": "unit-norm",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 57.50176464524294,
+          "contact_energy": 53.429361717006465,
+          "relative_contact": 13.119861334581547,
+          "minimum_sampled_log_density": -183.25827587979722,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 57.502801778530326,
+          "contact_energy": 53.43039885029385,
+          "relative_contact": 13.120116008125805,
+          "minimum_sampled_log_density": -213.25439791037778,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 57.50326920187888,
+          "contact_energy": 53.4308662736424,
+          "relative_contact": 13.120230786392296,
+          "minimum_sampled_log_density": -243.49842885268635,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 8.748189598110239e-06,
+      "second_is_unassigned_mathematical_control": true
+    },
+    {
+      "depth": 10,
+      "shell_levels": [
+        22,
+        23
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 41.649265862423704,
+          "contact_energy": 39.662671763621425,
+          "relative_contact": 19.965161372186746,
+          "minimum_sampled_log_density": -183.77058340345698,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 41.64461875494582,
+          "contact_energy": 39.65802465614354,
+          "relative_contact": 19.962822138681176,
+          "minimum_sampled_log_density": -213.7554656855533,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 41.651375218701496,
+          "contact_energy": 39.66478111989922,
+          "relative_contact": 19.966223167487087,
+          "minimum_sampled_log_density": -243.9938325179764,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.00017033911608524912,
+      "second_is_unassigned_mathematical_control": true
+    },
+    {
+      "depth": 10,
+      "shell_levels": [
+        22,
+        23
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 0.7853981633974483,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 41.34473659561573,
+          "contact_energy": 39.35814249681345,
+          "relative_contact": 19.811869229120592,
+          "minimum_sampled_log_density": -183.7639282568495,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 41.33920299518539,
+          "contact_energy": 39.35260889638311,
+          "relative_contact": 19.809083758030308,
+          "minimum_sampled_log_density": -213.75213019451726,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 41.33753883877098,
+          "contact_energy": 39.3509447399687,
+          "relative_contact": 19.808246064806813,
+          "minimum_sampled_log_density": -243.9921629578751,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 4.22901260796508e-05,
+      "second_is_unassigned_mathematical_control": true
+    },
+    {
+      "depth": 10,
+      "shell_levels": [
+        22,
+        23
+      ],
+      "normalization": "equal-phase-action",
+      "relative_complex_phase_radians": 1.5707963267948966,
+      "quadrature": [
+        {
+          "order": 96,
+          "spatial_nodes": 9216,
+          "complete_energy": 41.371965647843,
+          "contact_energy": 39.38537154904072,
+          "relative_contact": 19.825575628552507,
+          "minimum_sampled_log_density": -183.74804152228307,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 192,
+          "spatial_nodes": 36864,
+          "complete_energy": 41.15530007587688,
+          "contact_energy": 39.1687059770746,
+          "relative_contact": 19.716511793068072,
+          "minimum_sampled_log_density": -213.7441231635712,
+          "zero_underflow_energy_weight_nodes": 0
+        },
+        {
+          "order": 384,
+          "spatial_nodes": 147456,
+          "complete_energy": 41.249298503605125,
+          "contact_energy": 39.26270440480285,
+          "relative_contact": 19.763828166244114,
+          "minimum_sampled_log_density": -243.98814373400276,
+          "zero_underflow_energy_weight_nodes": 0
+        }
+      ],
+      "finest_relative_change": 0.002394089483982321,
+      "second_is_unassigned_mathematical_control": true
+    }
+  ],
+  "local_chart_diagnostics": [
+    {
+      "particle": "W",
+      "depth": 2,
+      "minimum_other_unsmoothed_chart_source_energy_change": "0.001188864519837039886747665664852513928549950623237449273352335253631752167693228395291557785640801495",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "Z",
+      "depth": 2,
+      "minimum_other_unsmoothed_chart_source_energy_change": "0.001662526762806632298585646064317141775172242321998606412727297239100576894469702608769236614636493135",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "Higgs",
+      "depth": 2,
+      "minimum_other_unsmoothed_chart_source_energy_change": "0.003651757699333995510070053507647101222328425056054147105530657626862709597435857594194916235652384639",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "down",
+      "depth": 3,
+      "minimum_other_unsmoothed_chart_source_energy_change": "0.1990298784358011493755530332342368211362297768628027126996298628327662727819162198339228754101068938",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "strange",
+      "depth": 3,
+      "minimum_other_unsmoothed_chart_source_energy_change": "0.6889188321443244521343065763307348316960618574727839018221698486189440071248340583275116092971103339",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "up",
+      "depth": 4,
+      "minimum_other_unsmoothed_chart_source_energy_change": "1.741738019508817798098454432504127094996496832485930876425380478907031132893171176067908058511019651",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "charm",
+      "depth": 4,
+      "minimum_other_unsmoothed_chart_source_energy_change": "3.274338832282279419145460687730324734948352105043027097553147466050482861531618889120547981426445086",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "top",
+      "depth": 4,
+      "minimum_other_unsmoothed_chart_source_energy_change": "4.403937688122092660788954740855748761455419727176299293343048553538017946128956608671439103813480286",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "nu1",
+      "depth": 5,
+      "minimum_other_unsmoothed_chart_source_energy_change": "6.021653859725143127504202008833914979459360956078715741714169424600264728871200354902061576648130656",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "nu2",
+      "depth": 5,
+      "minimum_other_unsmoothed_chart_source_energy_change": "6.789477836569374837325287975021366796994032860856065338721530776729540553141291769343715760330981386",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "nu3",
+      "depth": 5,
+      "minimum_other_unsmoothed_chart_source_energy_change": "8.520566138121543610305000274944191967277843035186260973200808641135011100466172118844489614853726599",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "electron",
+      "depth": 6,
+      "minimum_other_unsmoothed_chart_source_energy_change": "11.08400424725245104508551100401825736577542745572953414613045338506697862747607900462595344701572043",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "muon",
+      "depth": 6,
+      "minimum_other_unsmoothed_chart_source_energy_change": "15.67021900155601849518314736479566633191877105516005318808819118284764605170559892725303190850022597",
+      "negative_other_chart_count": 0
+    },
+    {
+      "particle": "tau",
+      "depth": 10,
+      "minimum_other_unsmoothed_chart_source_energy_change": "53.35740414886933755156749644053862381764774739431138495134755080781046075406559967604419116964912694",
+      "negative_other_chart_count": 0
+    }
+  ],
+  "limits": [
+    "full matrix columns are a declared coherent carrier, not the minimum one-column branch",
+    "finite quadrature resolution is reported explicitly; positive node density is not a global theorem",
+    "the very narrow smoothing bands may require adaptive integration beyond these illustrations",
+    "each prepared component retains its own isolated clock; no locking is imposed",
+    "phase-dependent prepared energy does not establish a physical radial force or trajectory",
+    "depth two retains its exceptional cross-grading trace",
+    "depth ten includes an unassigned adjacent-shell control"
+  ]
+}

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>covariant-clock-excited-shell.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-excited-shell.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="covariant-clock-excited-shell.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-excited-shell.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="covariant-clock-excited-shell.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>covariant-clock-excited-shell.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/covariant-clock-excited-shell.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact-shell geometry and current response for all inferred assignments.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+from math import comb
+import json
+
+import numpy as np
+from scipy.special import eval_gegenbauer
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;radial&#39;, ROOT/&#39;inverse-current-radial.py&#39;)
+radial = module_from_spec(spec)
+spec.loader.exec_module(radial)
+COUNTS, ERRORS = {}, {}
+
+
+def close(actual, expected, label, tolerance=3e-10):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    if error &gt;= tolerance:
+        raise AssertionError((label, error))
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def shell_jets(depth, level, position, anchor, tangent, alpha, column):
+    rank = len(alpha[0])
+    t = np.dot(position, anchor)
+    vector = tangent.T@anchor
+    signed = sum(v*a for v, a in zip(vector, alpha))
+    aa = (level+depth-1)/(depth-1)*eval_gegenbauer(level, (depth-1)/2, t)
+    bb = eval_gegenbauer(level-1, (depth+1)/2, t) if level else 0.
+    ap = (level+depth-1)*bb
+    bp = (depth+1)*eval_gegenbauer(level-2, (depth+3)/2, t) if level &gt;= 2 else 0.
+    factor = np.sqrt(rank*comb(level+depth-1, depth-1))
+    matrix = aa*np.eye(rank)-1j*bb*signed
+    derivatives = [ap*v*np.eye(rank)-1j*(bp*v*signed-t*bb*a) for v, a in zip(vector, alpha)]
+    field = matrix@column/factor
+    covariant = [(dm+.5j*matrix@a)@column/factor for dm, a in zip(derivatives, alpha)]
+    kinetic = -1j*sum(a@dm for a, dm in zip(alpha, covariant))
+    close(kinetic, (level+depth/2)*field, &#39;actual arbitrary-center spatial kernel satisfies its positive Dirac shell&#39;)
+    return field, covariant, kinetic
+
+
+def main():
+    rng = np.random.default_rng(202610120600)
+    cases = []
+    for name, depth, index in radial.ASSIGNMENTS:
+        matrices = radial.gammas(depth+1)
+        alpha, beta = matrices[:depth], matrices[depth]
+        rank, level, h = len(beta), index-1, index-1+depth/2
+        largest = max(n for _, d, n in radial.ASSIGNMENTS if d == depth)
+        p, derivative, _ = radial.polynomial(depth, level)
+        epsilon = .3/float(radial.polynomial(depth, largest-1)[1])
+        c = epsilon*float(derivative)
+        x = np.sqrt(1-c*c)
+        a, b = np.sqrt((1+c)/2), np.sqrt((1-c)/2)
+        mass, lam = h*x/c, h/c
+        mixing = a*np.eye(rank)+b*beta
+        for sample in range(3):
+            position = rng.normal(size=depth+1)
+            position /= np.linalg.norm(position)
+            frame, _ = np.linalg.qr(np.column_stack([position, rng.normal(size=(depth+1, depth))]))
+            tangent = frame[:, 1:]
+            anchors = []
+            for _ in range(2):
+                anchor = rng.normal(size=depth+1)
+                anchors.append(anchor/np.linalg.norm(anchor))
+            column = rng.normal(size=(rank, rank))+1j*rng.normal(size=(rank, rank))
+            column /= np.linalg.norm(column)
+            first, first_derivative, first_kinetic = shell_jets(depth, level, position, anchors[0], tangent, alpha, np.eye(rank))
+            second, second_derivative, second_kinetic = shell_jets(depth, level, position, anchors[1], tangent, alpha, column)
+            base, disturbance = mixing@first, mixing@second
+            base_derivative = [mixing@v for v in first_derivative]
+            disturbance_derivative = [mixing@v for v in second_derivative]
+            # beta is parallel and anticommutes with the spatial Dirac operator.
+            kinetic = a*second_kinetic-b*beta@second_kinetic
+            close((kinetic+mass*beta@disturbance)/lam, disturbance,
+                  &#39;arbitrary positive-shell variations lie in the actual massive co-rotating zero shell&#39;)
+            actual = np.array([2*np.vdot(base, al@disturbance).real for al in alpha])
+            bare = np.array([2*np.vdot(first, al@second).real for al in alpha])
+            close(actual, c*bare, &#39;selected-shell vector vertex is the bare spatial vertex times c&#39;)
+            divergence = 2*sum(np.vdot(db, al@disturbance)+np.vdot(base, al@dv)
+                               for db, dv, al in zip(base_derivative, disturbance_derivative, alpha)).real
+            scale = max(1., sum(np.linalg.norm(v) for v in base_derivative)*np.linalg.norm(disturbance),
+                        sum(np.linalg.norm(v) for v in disturbance_derivative)*np.linalg.norm(base))
+            close(divergence/scale, 0., &#39;every selected-shell linear current is divergence free in the actual spatial geometry&#39;)
+        cases.append(dict(particle=name, depth=depth, inferred_index=index, spatial_level=level,
+                          diagnostic_c=c, epsilon=epsilon,
+                          classification=&#39;actual two-center spatial shell currents; no persistence or particle-property identification&#39;))
+    degree = sp.Symbol(&#39;L&#39;, integer=True, positive=True)
+    static = []
+    for depth in radial.DEPTHS:
+        eigenvalue = (degree+1)*(degree+depth-2)
+        block = sp.Matrix([[1-depth, 1], [eigenvalue, -2]])
+        response = sp.factor(block.inv()[0, 0])
+        assert sp.cancel(response-2/((degree-1)*(degree+depth))) == 0
+        static.append(dict(depth=depth, background_coexact_static_response=str(response),
+                           first_harmonic_determinant=str(block.det().subs(degree, 1)),
+                           classification=&#39;positive static response for every integer L&gt;=2; L=1 remains resonant&#39;))
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output = ROOT/(&#39;covariant-clock-excited-shell-results-&#39;+stamp+&#39;.json&#39;)
+    report = dict(experiment_key=&#39;covariant-clock-assigned-shell-current-geometry&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                           for p in [Path(__file__), ROOT/&#39;inverse-current-radial.py&#39;]},
+                  evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS,
+                  cases=cases, static_background_cases=static,
+                  limits=[&#39;measured masses precede the inferred assignments being tested&#39;,
+                          &#39;epsilon is one diagnostic sector value, not an independently fitted particle amplitude&#39;,
+                          &#39;zero-shell current geometry does not establish full spatial persistence&#39;,
+                          &#39;the first background coexact harmonic has a pole and must remain dynamically retained&#39;,
+                          &#39;static elimination on a compatibility subspace does not prove that subspace is dynamically invariant&#39;])
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>full-coefficient-profiles.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/full-coefficient-profiles.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="full-coefficient-profiles.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/full-coefficient-profiles.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="full-coefficient-profiles.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>full-coefficient-profiles.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/full-coefficient-profiles.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Reuse the audited radial solver for the changed complete-coefficient action.&quot;&quot;&quot;
+
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import importlib.util
+import json
+import sympy as sp
+
+
+ROOT=Path(__file__).resolve().parent
+SOLVER=ROOT/&#39;rotating-determinant-checks.py&#39;
+spec=importlib.util.spec_from_file_location(&#39;radial_solver&#39;,SOLVER)
+radial=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(radial)
+radial.BETA=1.0
+radial.TENSION=4.0
+
+
+def differential_functions():
+    f,p,w,slope=sp.symbols(&#39;F P omega slope&#39;,real=True)
+    beta=sp.Rational(1)
+    tension=sp.Rational(4)
+    kappa=tension*beta
+    y=sp.sin(f)**2
+    bb=1-beta*w*w*y
+    margin=bb-beta*p*p
+    g=sp.Matrix([p/sp.sqrt(margin),sp.sin(f)*sp.cos(f)*(1-y/2)-w*w*sp.sin(f)*sp.cos(f)/sp.sqrt(margin)])
+    jac=[[sp.lambdify((f,p,w),sp.diff(g[i],v),&#39;numpy&#39;) for v in (f,p)] for i in range(2)]
+    src=[sp.lambdify((f,p,w),sp.diff(g[i],w),&#39;numpy&#39;) for i in range(2)]
+    charge=kappa*w*y/sp.sqrt(margin)
+    energy=tension*(1/sp.sqrt(margin)-1)+kappa*(y-y*y/4)/2
+    qdiff=[sp.lambdify((f,p,w),sp.diff(charge,v),&#39;numpy&#39;) for v in (f,p,w)]
+    ediff=[sp.lambdify((f,p,w),sp.diff(energy,v),&#39;numpy&#39;) for v in (f,p,w)]
+    aa=1+beta*slope*slope
+    # The shared spectrum routine uses coefficients divided by kappa.
+    routh=(sp.sqrt(aa)*sp.sqrt(bb)-1)/beta+(y-y*y/4)/2
+    rfp=sp.diff(routh,f,slope)
+    hessian=[sp.lambdify((f,slope,w),expr,&#39;numpy&#39;) for expr in
+             (sp.diff(routh,f,2),rfp,sp.diff(rfp,f),sp.diff(rfp,slope))]
+    return jac,src,qdiff,ediff,hessian
+
+
+def main():
+    functions=differential_functions()
+    cases=[]
+    for omega in (0.95,0.97):
+        for depth in (2,3,4,5,6):
+            base=radial.solve_depth(depth,omega)
+            refined=radial.solve_depth(depth,omega,radius=110.0,tolerance=2e-10)
+            if refined[&#39;status&#39;]==&#39;collocation-converged&#39; and base[&#39;status&#39;]==&#39;collocation-converged&#39;:
+                refined[&#39;convergence&#39;]={key:abs(refined[key]-base[key])/abs(refined[key]) for key in (&#39;energy&#39;,&#39;charge&#39;,&#39;center&#39;)}
+                if max(refined[&#39;convergence&#39;].values())&gt;1e-6:raise AssertionError((&#39;boundary convergence&#39;,refined))
+                solution=radial.PROFILES[(depth,omega,110.0,2e-10)]
+                response=radial.sensitivity(solution,depth,omega,110.0,functions)
+                # The reused integral has unit kappa; restore the common kappa=4.
+                response[&#39;fixed_shape_charge_susceptibility&#39;]*=4
+                response[&#39;fixed_charge_rank_update_ratio&#39;]/=4
+                refined.update(response)
+                spectra={}
+                for intervals in (1100,2200):
+                    spectra[str(intervals)]={
+                        &#39;shape_l&#39;+str(ell):radial.radial_spectrum(solution,depth,omega,110.0,intervals,functions,&#39;shape&#39;,ell)
+                        for ell in (0,1)}
+                refined[&#39;radial_quadratic_spectra&#39;]=spectra
+                base[&#39;refined&#39;]=refined
+            cases.append(base)
+            print(json.dumps({key:base[key] for key in (&#39;depth&#39;,&#39;omega&#39;,&#39;status&#39;)}),flush=True)
+    cases.append({&#39;depth&#39;:10,&#39;normal_rank&#39;:0,&#39;status&#39;:&#39;no-active-normal-generator&#39;})
+    path=Path(__file__).resolve()
+    report={&#39;created_at&#39;:datetime.now(timezone.utc).isoformat(),
+            &#39;experiment&#39;:&#39;phase-complete-normal-coefficient-localization&#39;,
+            &#39;sources&#39;:{&#39;experiments/full-coefficient-profiles.py&#39;:sha256(path.read_bytes()).hexdigest(),
+                       &#39;experiments/rotating-determinant-checks.py&#39;:sha256(SOLVER.read_bytes()).hexdigest()},
+            &#39;parameters&#39;:{&#39;beta&#39;:1,&#39;T&#39;:4,&#39;kappa&#39;:4,&#39;m_squared&#39;:1,&#39;b&#39;:&#39;1/4&#39;},
+            &#39;cases&#39;:cases,
+            &#39;scope&#39;:&#39;Changed fixed-norm complete-coefficient action with its combined phase/normal generator. Complete radial energy, stress and fixed-charge response are tested; unused coefficient polarizations have a separate analytic convex-form positivity proof. No observed particle identification, Lorentz Dirac kinetics or simplex frequency selection is claimed.&#39;}
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output=path.with_name(&#39;full-coefficient-profiles-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;cases&#39;:len(cases),&#39;report&#39;:str(output)}),flush=True)
+
+
+if __name__==&#39;__main__&#39;:main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

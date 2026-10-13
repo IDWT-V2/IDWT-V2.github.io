@@ -1,0 +1,181 @@
+"""Minimal balanced carriers and their induced local spatial rotation forms."""
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from itertools import combinations
+from math import comb
+from pathlib import Path
+import json
+
+import mpmath as mp
+import numpy as np
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location('forward', ROOT/'forward-count-action.py')
+forward = module_from_spec(spec)
+spec.loader.exec_module(forward)
+COUNTS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def close(actual, expected, label, tolerance=3e-8):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    check(error < tolerance, label)
+
+
+def preparation(depth):
+    generators = forward.radial.gammas(depth+1)
+    alpha, beta = generators[:depth], generators[depth]
+    rank, eye = len(beta), np.eye(len(beta))
+    ambient = [beta]+[-1j*a@beta for a in alpha]
+    low = ambient+[1j*ambient[i]@ambient[j] for i, j in combinations(range(depth+1), 2)]
+    if depth in [2, 4]:
+        raw = eye.copy()
+    elif depth == 3:
+        chirality = np.eye(rank, dtype=complex)
+        for gamma in ambient:
+            chirality = chirality@gamma
+        check(np.array_equal(chirality, chirality.conj().T), 'the depth-three ambient chirality is Hermitian')
+        check(np.array_equal(chirality@chirality, eye), 'the depth-three ambient chirality squares to identity')
+        columns = sp.Matrix(eye+chirality).columnspace()
+        raw = np.array(sp.Matrix.hstack(*columns), complex)
+        complement = [chirality]+[1j*chirality@gamma for gamma in ambient]
+        full = [eye]+low+complement
+        close(np.array([[np.trace(a@b) for b in full] for a in full]), rank*np.eye(rank*rank),
+              'depth-three low moments and five complementary Clifford matrices exhaust the Hermitian density space')
+        for i, a in enumerate(complement):
+            for j, b in enumerate(complement):
+                close(a@b+b@a, 2*eye if i == j else np.zeros_like(eye),
+                      'the depth-three density complement is a five-generator Clifford system with doubly degenerate eigenvalues')
+    else:
+        raw = np.zeros((rank, 1), complex)
+        raw[0, 0] = raw[-1, 0] = 1
+    norm = np.vdot(raw, raw).real
+    for gamma in low:
+        check(np.vdot(raw, gamma@raw) == 0,
+              'exact Gaussian-integer seed arithmetic annihilates every ambient vector and bivector moment')
+    seed = raw/np.sqrt(norm)
+    minimal = {2: 2, 3: 2, 4: 4, 5: 1, 6: 1, 10: 1}[depth]
+    check(np.linalg.matrix_rank(raw) == minimal and raw.shape[1] == minimal,
+          'the explicit carrier attains its proved minimal column rank')
+    if depth in [2, 4]:
+        full = [eye]+ambient if depth == 2 else [eye]+low
+        close(np.array([[np.trace(a@b) for b in full] for a in full]), rank*np.eye(rank*rank),
+              'low Clifford moments exhaust the Hermitian density space at depths two and four')
+    phi = np.zeros((depth+1,)*3)
+    for i, j, k in combinations(range(depth+1), 3):
+        value = np.vdot(raw, 1j*ambient[i]@ambient[j]@ambient[k]@raw).real/norm
+        for order in [(i, j, k), (j, k, i), (k, i, j)]:
+            phi[order] = value
+        for order in [(j, i, k), (i, k, j), (k, j, i)]:
+            phi[order] = -value
+    return alpha, beta, ambient, seed, phi
+
+
+def rotation_form(field, alpha, scale):
+    result = np.zeros((len(alpha), len(alpha)))
+    for i, j in combinations(range(len(alpha)), 2):
+        result[i, j] = np.vdot(field, 1j*alpha[i]@alpha[j]@field).real/scale
+        result[j, i] = -result[i, j]
+    return result
+
+
+def main():
+    mp.mp.dps = 90
+    rng = np.random.default_rng(202610120843)
+    prepared = {depth: preparation(depth) for depth in forward.radial.DEPTHS}
+    sectors, cases = [], []
+    for depth, (alpha, beta, ambient, seed, phi) in prepared.items():
+        sectors.append(dict(depth=depth, spinor_rank=len(beta), minimal_column_rank=seed.shape[1],
+                            nonzero_three_form_entries=[dict(indices=list(ix), value=float(phi[ix]))
+                                                      for ix in combinations(range(depth+1), 3) if phi[ix] != 0]))
+    for name, depth, index in forward.radial.ASSIGNMENTS:
+        alpha, beta, ambient, seed, phi = prepared[depth]
+        rank, eye = len(beta), np.eye(len(beta))
+        level, h = index-1, index-1+depth/2
+        count, first, _ = forward.count_data(depth, level)
+        eps = mp.mpf(3)/10/max(forward.radial.polynomial(depth, n-1)[1]
+                              for _, d, n in forward.radial.ASSIGNMENTS if d == depth)
+        c = float(eps*mp.mpf(first.numerator)/first.denominator)
+        x = np.sqrt(1-c*c)
+        a, b = np.sqrt((1+c)/2), np.sqrt((1-c)/2)
+        mass, lam, omega = h*x/c, h/c, float(eps*count.numerator/count.denominator)
+        eta = omega-lam
+        local_forms = []
+        for sample in range(5):
+            position = rng.normal(size=depth+1); position /= np.linalg.norm(position)
+            frame, _ = np.linalg.qr(np.column_stack([position, rng.normal(size=(depth+1, depth))]))
+            t, v = position[0], frame[0, 1:]
+            av = sum(vi*al for vi, al in zip(v, alpha))
+            aa, bb, ap, bp = forward.orientation.polynomials(depth, level, np.array(t))
+            matrix = aa*eye-1j*bb*av
+            # Any actual Killing-frame value is an ambient Spin rotor. Test several values.
+            killing = eye.astype(complex)
+            for turn in range(3):
+                i, j = rng.choice(depth+1, 2, replace=False)
+                angle = rng.normal()
+                killing = (np.cos(angle/2)*eye+np.sin(angle/2)*ambient[i]@ambient[j])@killing
+            normal = np.sqrt(comb(level+depth-1, depth-1))
+            bare = matrix@killing@seed/normal
+            bare_density = np.vdot(bare, bare).real
+            close(np.vdot(bare, beta@bare).real, 0., 'the actual reduced spatial kernel has zero bare scalar current')
+            close([np.vdot(bare, al@bare).real for al in alpha], np.zeros(depth),
+                  'the actual reduced spatial kernel has zero bare spatial vector current')
+            jets = [(ap*v[i]*eye-1j*(bp*v[i]*av-t*bb*al)+.5j*matrix@al)@killing@seed/normal
+                    for i, al in enumerate(alpha)]
+            dbare = -1j*sum(al@jet for al, jet in zip(alpha, jets))
+            close(dbare, h*bare, 'actual full Clifford spatial jets preserve the positive shell after carrier reduction')
+            field = (a*eye+b*beta)@bare
+            dfield = (a*eye-b*beta)@dbare
+            rho, scalar, current, proper, support = forward.bilinears(field, alpha, beta)
+            close(rho, bare_density, 'the reduced massive field retains the complete bare density')
+            close(scalar, x*rho, 'the reduced massive field retains the same local constitutive ratio')
+            close(current, np.zeros(depth), 'the reduced massive field retains exactly zero summed spatial current')
+            close((dfield+forward.source(field, h, float(eps), alpha, beta, depth))/lam,
+                  omega*field/lam, 'the complete proper-current field equation preserves every count clock on the minimal carrier', 3e-6)
+            form = rotation_form(field, alpha, x*rho)
+            squares = np.linalg.eigvalsh(-form@form)
+            if depth in [2, 6]:
+                close(squares, np.ones(depth), 'the normalized induced rotation form has equal strength in every spatial plane at depth two or six')
+            elif depth == 5:
+                close(squares, [0, 1, 1, 1, 1], 'the normalized depth-five rotation form has two equal planes and one kernel direction')
+            elif depth in [3, 4]:
+                close(squares, np.zeros(depth), 'the canonical lower-depth balanced matrix seed has vanishing local spin form')
+            else:
+                rotor = matrix@killing/np.sqrt(aa*aa+bb*bb*np.dot(v, v))
+                effective_normal = rotor.conj().T@beta@rotor
+                axial = np.trace(beta@effective_normal).real/rank
+                close(squares, sorted([1., 1.]+[axial*axial]*8),
+                      'the depth-ten induced rotation form has one unit plane and four axis-dependent planes')
+            local_forms.append(dict(squared_singular_values=squares.tolist()))
+        cases.append(dict(particle=name, depth=depth, inferred_index=index,
+                          minimal_columns=seed.shape[1], local_rotation_form_samples=local_forms,
+                          classification='exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin'))
+        print(json.dumps(dict(completed=name, depth=depth, minimal_columns=seed.shape[1])), flush=True)
+    stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')
+    report = dict(experiment_key='minimal-balanced-count-carrier', created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={'experiments/'+p.name: sha256(p.read_bytes()).hexdigest() for p in
+                           [Path(__file__), ROOT/'forward-count-action.py', ROOT/'inverse-current-radial.py',
+                            ROOT/'excited-shell-orientation-current.py']},
+                  evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS,
+                  sectors=sectors, cases=cases,
+                  limits=['the rank theorem assumes vanishing ambient Clifford vector and bivector seed moments',
+                          'the local spin-density form omits orbital angular momentum and does not derive observed total spin',
+                          'the same exact stationary equations survive; the full-matrix background persistence theorem is not transferred',
+                          'a local kernel direction is not an established fixed encounter axis',
+                          'depth-ten rotor-dependent rank is not a demonstrated decay or instability',
+                          'ordinary sphere geometry, count constitutive law and sector scales remain conditional'])
+    output = ROOT/('minimal-count-carrier-results-'+stamp+'.json')
+    output.write_text(json.dumps(report, indent=2)+'\n')
+    print(json.dumps(dict(report=str(output), evaluations=report['evaluations'], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == '__main__':
+    main()

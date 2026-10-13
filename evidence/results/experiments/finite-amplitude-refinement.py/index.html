@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>finite-amplitude-refinement.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/finite-amplitude-refinement.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="finite-amplitude-refinement.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/finite-amplitude-refinement.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="finite-amplitude-refinement.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>finite-amplitude-refinement.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/finite-amplitude-refinement.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Resolve the stiffest low-spectrum and translation-mode mesh controls.&quot;&quot;&quot;
+
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import importlib.util
+import json
+
+
+ROOT=Path(__file__).resolve().parent
+PARENT=ROOT/&#39;finite-amplitude-stability.py&#39;
+spec=importlib.util.spec_from_file_location(&#39;stability&#39;,PARENT)
+stability=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(stability)
+
+
+def main():
+    cases=[]
+    for depth,stiffness in ((2,1600),(3,400),(6,400),(6,1600)):
+        omega=0.97
+        radial=stability.finite.radial
+        seed_case=radial.solve_depth(depth,omega,radius=110.0,tolerance=2e-9)
+        if seed_case[&#39;status&#39;]!=&#39;collocation-converged&#39;:raise AssertionError(seed_case)
+        seed=radial.PROFILES[(depth,omega,110.0,2e-9)]
+        result,solution=stability.finite.solve_amplitudes(depth,omega,stiffness,110.0,1e-9,seed)
+        if result[&#39;status&#39;]!=&#39;collocation-converged&#39;:raise AssertionError(result)
+        result[&#39;coupled_amplitude_energy_form_spectra&#39;]={str(n):{
+            &#39;ell&#39;+str(ell):stability.spectrum(solution,depth,omega,stiffness,n,ell)
+            for ell in (0,1)} for n in (2200,4400,8800)}
+        cases.append(result)
+        print(json.dumps({&#39;depth&#39;:depth,&#39;stiffness&#39;:stiffness,&#39;spectra&#39;:result[&#39;coupled_amplitude_energy_form_spectra&#39;]}),flush=True)
+    path=Path(__file__).resolve()
+    sources={&#39;experiments/&#39;+p.name:sha256(p.read_bytes()).hexdigest() for p in
+             (path,PARENT,stability.PARENT,stability.finite.PARENT)}
+    report={&#39;created_at&#39;:datetime.now(timezone.utc).isoformat(),
+            &#39;experiment&#39;:&#39;finite-amplitude-stiff-spectrum-refinement&#39;,&#39;sources&#39;:sources,&#39;cases&#39;:cases,
+            &#39;scope&#39;:&#39;Four selected radial energy-form controls refine the translation zero mode and negative radial index. Finite-domain mesh convergence is numerical evidence, not a certified continuum spectrum or physical growth frequency.&#39;}
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output=path.with_name(&#39;finite-amplitude-refinement-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;cases&#39;:len(cases),&#39;report&#39;:str(output)}),flush=True)
+
+
+if __name__==&#39;__main__&#39;:main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

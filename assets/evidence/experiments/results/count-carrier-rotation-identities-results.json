@@ -1,0 +1,61 @@
+{
+  "experiment_key": "count-carrier-exact-rotation-identities",
+  "created_utc": "2026-10-12T08:54:52.276911+00:00",
+  "sources": {
+    "experiments/count-carrier-rotation-identities.py": "c057f28644c15aaf5756d0b2c32de1fdf47df3ef16664e4ae2d3d76d1f85e3bb",
+    "experiments/minimal-count-carrier.py": "c32f6a998a844bbccd3bc46483a551addf224b2b254f7b6d218a8fd0ca87ad2b",
+    "experiments/forward-count-action.py": "5f1dd9a03cf8e6b07a56d507791fed8ff859f10abf22bb755c60c3bd1ed6d909",
+    "experiments/inverse-current-radial.py": "52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80",
+    "experiments/excited-shell-orientation-current.py": "508484d445dbb86da9f88a31642268b5a1dba8264588e6f48ebb6cc00cf9c264"
+  },
+  "evaluations": 1908,
+  "conditions": {
+    "every three-form coefficient is verified directly in exact rational Clifford arithmetic": 235,
+    "every seed balance moment is independently verified in exact rational arithmetic": 146,
+    "the spinor real structure is an exact antiunitary involution": 2,
+    "the real structure anticommutes with every Clifford vector and commutes with every real rotation": 13,
+    "the balanced pure seed belongs to the invariant eight-dimensional real spinor space after one phase choice": 2,
+    "six-generator chirality is an exact Hermitian involution": 1,
+    "depth-five seed defines an exact orthogonal complex structure on its Clifford vector space": 1,
+    "exact diagonal coefficients of the normal-contraction identity": 13,
+    "exact mixed coefficients prove the contraction identity for every normal, not only sampled normals": 36,
+    "the depth-five contraction annihilates the pattern-defined complex normal direction": 36,
+    "exact real infinitesimal seed stabilizer dimension": 6,
+    "every exact stabilizer basis element annihilates the actual seed": 81,
+    "depth-ten seed defines five equal planes perpendicular to its distinguished three-form axis": 1,
+    "the depth-ten three-form is exactly the axis one-form wedged with its perpendicular two-form": 1331,
+    "the depth-ten three-form determines its axis by a simple isolated metric eigenvalue": 1,
+    "the normal is always in the contraction kernel": 1,
+    "exact depth-ten rotation trace fixes one full-strength pair and four axial pairs": 1,
+    "exact depth-ten contraction minimal polynomial holds for every normal": 1
+  },
+  "sectors": [
+    {
+      "depth": 5,
+      "stabilizer_dimensions": {
+        "ambient": 8,
+        "physical": 3
+      }
+    },
+    {
+      "depth": 6,
+      "stabilizer_dimensions": {
+        "ambient": 14,
+        "physical": 8
+      }
+    },
+    {
+      "depth": 10,
+      "stabilizer_dimensions": {
+        "ambient": 24,
+        "physical": 24
+      }
+    }
+  ],
+  "limits": [
+    "the normal-contraction identities describe local spin density, not total particle spin",
+    "the Clifford vector space includes the grading direction, not an extra physical spatial depth",
+    "the depth-five kernel axis is local; fixed encounter-axis dynamics is not derived",
+    "the seed preparation and sphere geometry remain conditional"
+  ]
+}

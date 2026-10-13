@@ -1,0 +1,973 @@
+{
+  "created_at": "2026-10-11T12:30:06.523450+00:00",
+  "experiment": "phase-complete-normal-coefficient-localization",
+  "sources": {
+    "experiments/full-coefficient-profiles.py": "39363c5515e3360fd1a7516ae257aef1b00fd2c659f5e74b3a75209e82b68f66",
+    "experiments/rotating-determinant-checks.py": "952e180d1a7eacd70de6f1b3fda842c19140bd24424473d7b2ff722b458379e4"
+  },
+  "parameters": {
+    "beta": 1,
+    "T": 4,
+    "kappa": 4,
+    "m_squared": 1,
+    "b": "1/4"
+  },
+  "cases": [
+    {
+      "depth": 2,
+      "normal_rank": 4,
+      "omega": 0.95,
+      "status": "collocation-converged",
+      "center": 0.7546825876582242,
+      "energy": 55.617125338846364,
+      "charge": 55.87218377050599,
+      "energy_over_charge": 0.9954349657656613,
+      "energy_minus_rotation_charge": 2.538550756865675,
+      "virial": -2.823671006246871e-09,
+      "relative_virial": -5.0769812158462063e-11,
+      "minimum_lapse": 0.5764533749935494,
+      "minimum_momentum_margin": 0.5764533749935494,
+      "maximum_principal_radial_speed": 1.0,
+      "maximum_principal_tangential_speed": 1.0,
+      "max_bvp_residual": 9.69837148820317e-09,
+      "bvp_tolerance": 1e-08,
+      "boundary_amplitude": 3.4104005069253455e-12,
+      "radius": 80.0,
+      "collocation_nodes": 1115,
+      "half_center_radius": 3.099135257886614,
+      "shooting_bracket": [
+        0.7546825881630095,
+        0.7546825881630131
+      ],
+      "refined": {
+        "depth": 2,
+        "normal_rank": 4,
+        "omega": 0.95,
+        "status": "collocation-converged",
+        "center": 0.7546825880193114,
+        "energy": 55.61712534540982,
+        "charge": 55.87218377660084,
+        "energy_over_charge": 0.9954349657745463,
+        "energy_minus_rotation_charge": 2.5385507576390225,
+        "virial": -8.470892803966463e-12,
+        "relative_virial": -1.5230727498694035e-13,
+        "minimum_lapse": 0.5764533746682831,
+        "minimum_momentum_margin": 0.5764533746682831,
+        "maximum_principal_radial_speed": 1.0,
+        "maximum_principal_tangential_speed": 1.0,
+        "max_bvp_residual": 1.9965896463398184e-10,
+        "bvp_tolerance": 2e-10,
+        "boundary_amplitude": 2.4887141941355423e-16,
+        "radius": 110.0,
+        "collocation_nodes": 2269,
+        "half_center_radius": 3.0991352560269916,
+        "shooting_bracket": [
+          0.7546825881630095,
+          0.7546825881630131
+        ],
+        "convergence": {
+          "energy": 1.1801138120156944e-10,
+          "charge": 1.0908560278596723e-10,
+          "center": 4.784624382844635e-10
+        },
+        "dcharge_domega": -266.08629737616184,
+        "denergy_domega": -252.7819825071463,
+        "fixed_shape_charge_susceptibility": 74.68432069813727,
+        "fixed_charge_rank_update_ratio": -3.5628133842395435,
+        "family_identity_relative_error": 8.206678936330208e-13,
+        "sensitivity_bvp_residual": 1.9933749218225698e-09,
+        "radial_quadratic_spectra": {
+          "1100": {
+            "shape_l0": [
+              -0.32914733751771974,
+              0.09669955639555813,
+              0.09898686698255485,
+              0.10251707038509997
+            ],
+            "shape_l1": [
+              5.187413256852412e-05,
+              0.09872595094902442,
+              0.10163922304834,
+              0.10625500335165242
+            ]
+          },
+          "2200": {
+            "shape_l0": [
+              -0.3292634495980923,
+              0.09669813739491992,
+              0.09898666483914673,
+              0.10251721874223355
+            ],
+            "shape_l1": [
+              1.2975066086093116e-05,
+              0.09872604692792475,
+              0.10163962117399078,
+              0.10625592210007084
+            ]
+          }
+        }
+      }
+    },
+    {
+      "depth": 3,
+      "normal_rank": 3,
+      "omega": 0.95,
+      "status": "collocation-converged",
+      "center": 1.422617598362658,
+      "energy": 482.97490573551937,
+      "charge": 478.2396991428687,
+      "energy_over_charge": 1.0099013247982913,
+      "energy_minus_rotation_charge": 28.647191549794115,
+      "virial": 4.9532939116608205e-09,
+      "relative_virial": 1.0255799737912845e-11,
+      "minimum_lapse": 0.11717152441572687,
+      "minimum_momentum_margin": 0.11717152441572687,
+      "maximum_principal_radial_speed": 1.0,
+      "maximum_principal_tangential_speed": 1.0,
+      "max_bvp_residual": 9.90651225560048e-09,
+      "bvp_tolerance": 1e-08,
+      "boundary_amplitude": 6.883190025867041e-13,
+      "radius": 80.0,
+      "collocation_nodes": 1368,
+      "half_center_radius": 2.2359968728326116,
+      "shooting_bracket": [
+        1.4226175984764313,
+        1.4226175984764349
+      ],
+      "refined": {
+        "depth": 3,
+        "normal_rank": 3,
+        "omega": 0.95,
+        "status": "collocation-converged",
+        "center": 1.422617598443824,
+        "energy": 482.9749058554563,
+        "charge": 478.2396992619338,
+        "energy_over_charge": 1.0099013247976492,
+        "energy_minus_rotation_charge": 28.64719155661919,
+        "virial": 1.4602307526670736e-10,
+        "relative_virial": 3.0234091563839723e-13,
+        "minimum_lapse": 0.11717152439433443,
+        "minimum_momentum_margin": 0.11717152439433443,
+        "maximum_principal_radial_speed": 1.0,
+        "maximum_principal_tangential_speed": 1.0,
+        "max_bvp_residual": 1.9965014443145064e-10,
+        "bvp_tolerance": 2e-10,
+        "boundary_amplitude": 4.277941144238321e-17,
+        "radius": 110.0,
+        "collocation_nodes": 3116,
+        "half_center_radius": 2.2359968728037014,
+        "shooting_bracket": [
+          1.4226175984764313,
+          1.4226175984764349
+        ],
+        "convergence": {
+          "energy": 2.483295523256708e-10,
+          "charge": 2.489653929280718e-10,
+          "center": 5.705395668412721e-11
+        },
+        "dcharge_domega": -6940.992798455813,
+        "denergy_domega": -6593.943158533121,
+        "fixed_shape_charge_susceptibility": 1146.3078951822224,
+        "fixed_charge_rank_update_ratio": -6.055085922052766,
+        "family_identity_relative_error": -1.5172168578001185e-14,
+        "sensitivity_bvp_residual": 1.9974413919144234e-09,
+        "radial_quadratic_spectra": {
+          "1100": {
+            "shape_l0": [
+              -0.2337286040549718,
+              0.09829732391497113,
+              0.10069346630271912,
+              0.10469935403450677
+            ],
+            "shape_l1": [
+              0.000124494528525641,
+              0.09916955122055676,
+              0.10244002991054646,
+              0.1073555348008946
+            ]
+          },
+          "2200": {
+            "shape_l0": [
+              -0.23394518725835595,
+              0.09829728766868223,
+              0.10069335296426957,
+              0.10469920430280902
+            ],
+            "shape_l1": [
+              3.117866497619988e-05,
+              0.09916967671429164,
+              0.10244049215924914,
+              0.10735655011990283
+            ]
+          }
+        }
+      }
+    },
+    {
+      "depth": 4,
+      "normal_rank": 3,
+      "omega": 0.95,
+      "status": "collocation-converged",
+      "center": 1.5609744974259507,
+      "energy": 6899.427740509718,
+      "charge": 6921.396455698273,
+      "energy_over_charge": 0.9968259706940399,
+      "energy_minus_rotation_charge": 324.1011075963597,
+      "virial": 1.360842089061605e-07,
+      "relative_virial": 1.9723984948367157e-11,
+      "minimum_lapse": 0.097587059870207,
+      "minimum_momentum_margin": 0.097587059870207,
+      "maximum_principal_radial_speed": 1.0,
+      "maximum_principal_tangential_speed": 1.0,
+      "max_bvp_residual": 9.99435853784994e-09,
+      "bvp_tolerance": 1e-08,
+      "boundary_amplitude": 2.2781445438113234e-13,
+      "radius": 80.0,
+      "collocation_nodes": 1504,
+      "half_center_radius": 3.2804600866583074,
+      "shooting_bracket": [
+        1.5609744974894317,
+        1.5609744974894324
+      ],
+      "refined": {
+        "depth": 4,
+        "normal_rank": 3,
+        "omega": 0.95,
+        "status": "collocation-converged",
+        "center": 1.5609744974438873,
+        "energy": 6899.427741636166,
+        "charge": 6921.396456810274,
+        "energy_over_charge": 0.996825970696637,
+        "energy_minus_rotation_charge": 324.10110766640537,
+        "virial": 1.2912376209005517e-09,
+        "relative_virial": 1.8715140867528542e-13,
+        "minimum_lapse": 0.09758705986988914,
+        "minimum_momentum_margin": 0.09758705986988914,
+        "maximum_principal_radial_speed": 1.0,
+        "maximum_principal_tangential_speed": 1.0,
+        "max_bvp_residual": 1.9987904467195278e-10,
+        "bvp_tolerance": 2e-10,
+        "boundary_amplitude": 1.2026955581253729e-17,
+        "radius": 110.0,
+        "collocation_nodes": 3892,
+        "half_center_radius": 3.280460086675007,
+        "shooting_bracket": [
+          1.5609744974894317,
+          1.5609744974894324
+        ],
+        "convergence": {
+          "energy": 1.632667851748694e-10,
+          "charge": 1.6066136075562282e-10,
+          "center": 1.1490604856524168e-11
+        },
+        "dcharge_domega": -164067.60742011646,
+        "denergy_domega": -155864.22704910242,
+        "fixed_shape_charge_susceptibility": 28034.096238067646,
+        "fixed_charge_rank_update_ratio": -5.8524307695472695,
+        "family_identity_relative_error": 5.2656599555800174e-14,
+        "sensitivity_bvp_residual": 1.995209768894405e-09,
+        "radial_quadratic_spectra": {
+          "1100": {
+            "shape_l0": [
+              -0.1264977711194636,
+              0.0987214470399061,
+              0.10161480589822164,
+              0.10618982001136207
+            ],
+            "shape_l1": [
+              0.00029193230813126346,
+              0.0996797392707088,
+              0.10335722027430883,
+              0.1086688194986902
+            ]
+          },
+          "2200": {
+            "shape_l0": [
+              -0.1268208963969758,
+              0.09872157843781869,
+              0.10161521377933705,
+              0.10619063580416295
+            ],
+            "shape_l1": [
+              7.318069946898442e-05,
+              0.0996799090851157,
+              0.10335777485614234,
+              0.10866997830568487
+            ]
+          }
+        }
+      }
+    },
+    {
+      "depth": 5,
+      "normal_rank": 2,
+      "omega": 0.95,
+      "status": "collocation-converged",
+      "center": 1.5699578033284038,
+      "energy": 119572.61896073069,
+      "charge": 121210.9383578844,
+      "energy_over_charge": 0.9864837330743497,
+      "energy_minus_rotation_charge": 4422.227520740518,
+      "virial": 2.0507786598268614e-06,
+      "relative_virial": 1.7150905262854246e-11,
+      "minimum_lapse": 0.0975006345670989,
+      "minimum_momentum_margin": 0.0975006345670989,
+      "maximum_principal_radial_speed": 1.0,
+      "maximum_principal_tangential_speed": 1.0,
+      "max_bvp_residual": 9.992890492254653e-09,
+      "bvp_tolerance": 1e-08,
+      "boundary_amplitude": 9.931012518514611e-14,
+      "radius": 80.0,
+      "collocation_nodes": 1610,
+      "half_center_radius": 4.54277422915528,
+      "shooting_bracket": [
+        1.5699578033663615,
+        1.5699578033663617
+      ],
+      "refined": {
+        "depth": 5,
+        "normal_rank": 2,
+        "omega": 0.95,
+        "status": "collocation-converged",
+        "center": 1.56995780335595,
+        "energy": 119572.61898248341,
+        "charge": 121210.93837965351,
+        "energy_over_charge": 0.9864837330766419,
+        "energy_minus_rotation_charge": 4422.227521812587,
+        "virial": 3.371907462166112e-08,
+        "relative_virial": 2.8199662187378147e-13,
+        "minimum_lapse": 0.09750063456705726,
+        "minimum_momentum_margin": 0.09750063456705726,
+        "maximum_principal_radial_speed": 1.0,
+        "maximum_principal_tangential_speed": 1.0,
+        "max_bvp_residual": 1.9980849032618443e-10,
+        "bvp_tolerance": 2e-10,
+        "boundary_amplitude": 4.441735875849606e-18,
+        "radius": 110.0,
+        "collocation_nodes": 4006,
+        "half_center_radius": 4.542774229212807,
+        "shooting_bracket": [
+          1.5699578033663615,
+          1.5699578033663617
+        ],
+        "convergence": {
+          "energy": 1.8192063481939472e-10,
+          "charge": 1.7959692829597217e-10,
+          "center": 1.754581396665677e-11
+        },
+        "dcharge_domega": -3680608.4083772385,
+        "denergy_domega": -3496577.9879581174,
+        "fixed_shape_charge_susceptibility": 590268.0228671017,
+        "fixed_charge_rank_update_ratio": -6.235486703988239,
+        "family_identity_relative_error": 7.404601774499425e-14,
+        "sensitivity_bvp_residual": 1.998124208935937e-09,
+        "radial_quadratic_spectra": {
+          "1100": {
+            "shape_l0": [
+              -0.08980069483860388,
+              0.09917118898211581,
+              0.10245372195588844,
+              0.10740556840719022
+            ],
+            "shape_l1": [
+              0.00037984297883855397,
+              0.10024502787128689,
+              0.10433652367369531,
+              0.11005427261024384
+            ]
+          },
+          "2200": {
+            "shape_l0": [
+              -0.0901577624084985,
+              0.0991713894434224,
+              0.1024542982276827,
+              0.10740668383696543
+            ],
+            "shape_l1": [
+              9.524518415718897e-05,
+              0.10024525225209752,
+              0.10433718820897275,
+              0.11005561027505989
+            ]
+          }
+        }
+      }
+    },
+    {
+      "depth": 6,
+      "normal_rank": 2,
+      "omega": 0.95,
+      "status": "collocation-converged",
+      "center": 1.5707228168437155,
+      "energy": 2328842.555858633,
+      "charge": 2377312.652949209,
+      "energy_over_charge": 0.9796113914463689,
+      "energy_minus_rotation_charge": 70395.53555688448,
+      "virial": 3.3398114393181974e-05,
+      "relative_virial": 1.434107870846093e-11,
+      "minimum_lapse": 0.09750000487685084,
+      "minimum_momentum_margin": 0.09750000487685084,
+      "maximum_principal_radial_speed": 1.0,
+      "maximum_principal_tangential_speed": 1.0,
+      "max_bvp_residual": 9.998809161672144e-09,
+      "bvp_tolerance": 1e-08,
+      "boundary_amplitude": 5.078318176491954e-14,
+      "radius": 80.0,
+      "collocation_nodes": 1630,
+      "half_center_radius": 5.827293571175895,
+      "shooting_bracket": [
+        1.570722816891688,
+        1.5707228168916882
+      ],
+      "refined": {
+        "depth": 6,
+        "normal_rank": 2,
+        "omega": 0.95,
+        "status": "collocation-converged",
+        "center": 1.5707228168886993,
+        "energy": 2328842.5563535155,
+        "charge": 2377312.6534502497,
+        "energy_over_charge": 0.9796113914480754,
+        "energy_minus_rotation_charge": 70395.53557577822,
+        "virial": 2.8634677726200304e-07,
+        "relative_virial": 1.229566921476919e-13,
+        "minimum_lapse": 0.09750000487684507,
+        "minimum_momentum_margin": 0.09750000487684507,
+        "maximum_principal_radial_speed": 1.0,
+        "maximum_principal_tangential_speed": 1.0,
+        "max_bvp_residual": 1.9977116465437134e-10,
+        "bvp_tolerance": 2e-10,
+        "boundary_amplitude": 1.91920601239317e-18,
+        "radius": 110.0,
+        "collocation_nodes": 4033,
+        "half_center_radius": 5.827293571275601,
+        "shooting_bracket": [
+          1.570722816891688,
+          1.5707228168916882
+        ],
+        "convergence": {
+          "energy": 2.1250146904896731e-10,
+          "charge": 2.107593354228553e-10,
+          "center": 2.863891323375657e-11
+        },
+        "dcharge_domega": -87621957.76602164,
+        "denergy_domega": -83240859.87771368,
+        "fixed_shape_charge_susceptibility": 12707066.78211158,
+        "fixed_charge_rank_update_ratio": -6.895529807820934,
+        "family_identity_relative_error": 8.252479996549079e-14,
+        "sensitivity_bvp_residual": 1.9967862660633447e-09,
+        "radial_quadratic_spectra": {
+          "1100": {
+            "shape_l0": [
+              -0.0699571695524191,
+              0.09968032356068351,
+              0.10336449113207921,
+              0.10870180815611868
+            ],
+            "shape_l1": [
+              0.0004298115164355783,
+              0.10086381894108126,
+              0.10537366281157998,
+              0.1115010359105684
+            ]
+          },
+          "2200": {
+            "shape_l0": [
+              -0.07033284994734816,
+              0.09968059213635329,
+              0.10336521227055423,
+              0.10870317299595801
+            ],
+            "shape_l1": [
+              0.00010778965412900742,
+              0.1008641064832479,
+              0.10537444762045686,
+              0.1115025631343646
+            ]
+          }
+        }
+      }
+    },
+    {
+      "depth": 2,
+      "normal_rank": 4,
+      "omega": 0.97,
+      "status": "collocation-converged",
+      "center": 0.5652729657333071,
+      "energy": 51.32708119088967,
+      "charge": 51.400702375001515,
+      "energy_over_charge": 0.9985677008151614,
+      "energy_minus_rotation_charge": 1.4683998871382045,
+      "virial": -2.1999115767391896e-09,
+      "relative_virial": -4.2860640537059494e-11,
+      "minimum_lapse": 0.7300397934300769,
+      "minimum_momentum_margin": 0.7300397934300769,
+      "maximum_principal_radial_speed": 1.0,
+      "maximum_principal_tangential_speed": 1.0,
+      "max_bvp_residual": 9.948866712493603e-09,
+      "bvp_tolerance": 1e-08,
+      "boundary_amplitude": 7.248196993034422e-10,
+      "radius": 80.0,
+      "collocation_nodes": 1055,
+      "half_center_radius": 3.9590066184507506,
+      "shooting_bracket": [
+        0.5652729663271386,
+        0.5652729663271423
+      ],
+      "refined": {
+        "depth": 2,
+        "normal_rank": 4,
+        "omega": 0.97,
+        "status": "collocation-converged",
+        "center": 0.5652729662092301,
+        "energy": 51.32708119977498,
+        "charge": 51.40070238376078,
+        "energy_over_charge": 0.9985677008178577,
+        "energy_minus_rotation_charge": 1.4683998875270277,
+        "virial": -1.1472508607627976e-12,
+        "relative_virial": -2.2351765071102995e-14,
+        "minimum_lapse": 0.7300397930249806,
+        "minimum_momentum_margin": 0.7300397930249806,
+        "maximum_principal_radial_speed": 1.0,
+        "maximum_principal_tangential_speed": 1.0,
+        "max_bvp_residual": 1.9926942486845745e-10,
+        "bvp_tolerance": 2e-10,
+        "boundary_amplitude": 4.211478321396061e-13,
+        "radius": 110.0,
+        "collocation_nodes": 2115,
+        "half_center_radius": 3.95900661477445,
+        "shooting_bracket": [
+          0.5652729663271386,
+          0.5652729663271423
+        ],
+        "convergence": {
+          "energy": 1.7311150919311531e-10,
+          "charge": 1.7041139336340053e-10,
+          "center": 8.419347751470023e-10
+        },
+        "dcharge_domega": -188.23928323383086,
+        "denergy_domega": -182.59210473688094,
+        "fixed_shape_charge_susceptibility": 60.51432173500674,
+        "fixed_charge_rank_update_ratio": -3.1106567476395743,
+        "family_identity_relative_error": -3.559871855412422e-13,
+        "sensitivity_bvp_residual": 1.9993973285466878e-09,
+        "radial_quadratic_spectra": {
+          "1100": {
+            "shape_l0": [
+              -0.24726929142514756,
+              0.05891334451911869,
+              0.06088315693558601,
+              0.06452783068637138
+            ],
+            "shape_l1": [
+              2.1890890276472703e-05,
+              0.06033534865815472,
+              0.06328907614597334,
+              0.06798426289215351
+            ]
+          },
+          "2200": {
+            "shape_l0": [
+              -0.24733033940691598,
+              0.058912900923584435,
+              0.06088302605976667,
+              0.06452796047967488
+            ],
+            "shape_l1": [
+              5.474530423759135e-06,
+              0.060335406075747264,
+              0.0632893158383559,
+              0.06798482581663767
+            ]
+          }
+        }
+      }
+    },
+    {
+      "depth": 3,
+      "normal_rank": 3,
+      "omega": 0.97,
+      "status": "collocation-converged",
+      "center": 1.2094778866478306,
+      "energy": 410.5581062979619,
+      "charge": 402.5478601681991,
+      "energy_over_charge": 1.0198988665010311,
+      "energy_minus_rotation_charge": 20.08668193480878,
+      "virial": 9.958576615580176e-09,
+      "relative_virial": 2.4256192881873715e-11,
+      "minimum_lapse": 0.17668220348801045,
+      "minimum_momentum_margin": 0.17668220348801045,
+      "maximum_principal_radial_speed": 1.0,
+      "maximum_principal_tangential_speed": 1.0,
+      "max_bvp_residual": 9.97155126374153e-09,
+      "bvp_tolerance": 1e-08,
+      "boundary_amplitude": 1.3367587987058648e-10,
+      "radius": 80.0,
+      "collocation_nodes": 1246,
+      "half_center_radius": 2.2419771188950595,
+      "shooting_bracket": [
+        1.2094778863814009,
+        1.2094778863814046
+      ],
+      "refined": {
+        "depth": 3,
+        "normal_rank": 3,
+        "omega": 0.97,
+        "status": "collocation-converged",
+        "center": 1.2094778866451157,
+        "energy": 410.55810646679754,
+        "charge": 402.5478603358754,
+        "energy_over_charge": 1.0198988664956228,
+        "energy_minus_rotation_charge": 20.086681940998403,
+        "virial": 1.5239190002058497e-10,
+        "relative_virial": 3.7118229458930226e-13,
+        "minimum_lapse": 0.17668220348969987,
+        "minimum_momentum_margin": 0.17668220348969987,
+        "maximum_principal_radial_speed": 1.0,
+        "maximum_principal_tangential_speed": 1.0,
+        "max_bvp_residual": 1.9956801166160528e-10,
+        "bvp_tolerance": 2e-10,
+        "boundary_amplitude": 6.612666965509291e-14,
+        "radius": 110.0,
+        "collocation_nodes": 2872,
+        "half_center_radius": 2.241977118765971,
+        "shooting_bracket": [
+          1.2094778863814009,
+          1.2094778863814046
+        ],
+        "convergence": {
+          "energy": 4.112344584602658e-10,
+          "charge": 4.165374573556444e-10,
+          "center": 2.2447201510638066e-12
+        },
+        "dcharge_domega": 782.3608663875485,
+        "denergy_domega": 758.8900403936915,
+        "fixed_shape_charge_susceptibility": 646.8445832657361,
+        "fixed_charge_rank_update_ratio": 1.20950362208744,
+        "family_identity_relative_error": -2.9392081031146033e-12,
+        "sensitivity_bvp_residual": 1.9990811864199998e-09,
+        "radial_quadratic_spectra": {
+          "1100": {
+            "shape_l0": [
+              -0.35913125918898625,
+              0.058811701831529714,
+              0.060726988556579806,
+              0.06420362646190625
+            ],
+            "shape_l1": [
+              7.458347310810737e-05,
+              0.06077062673675912,
+              0.06404786061609391,
+              0.06898143291689604
+            ]
+          },
+          "2200": {
+            "shape_l0": [
+              -0.35941132135248743,
+              0.0587994237999515,
+              0.06072185086358481,
+              0.06419836021747215
+            ],
+            "shape_l1": [
+              1.867101552415655e-05,
+              0.060770701984243974,
+              0.06404813581817531,
+              0.0689820378433047
+            ]
+          }
+        }
+      }
+    },
+    {
+      "depth": 4,
+      "normal_rank": 3,
+      "omega": 0.97,
+      "status": "collocation-converged",
+      "center": 1.565037751565016,
+      "energy": 4555.54139168689,
+      "charge": 4477.217428688677,
+      "energy_over_charge": 1.0174938930810769,
+      "energy_minus_rotation_charge": 212.64048585887394,
+      "virial": 1.1014114985068376e-07,
+      "relative_virial": 2.4177400747949113e-11,
+      "minimum_lapse": 0.05913120101753755,
+      "minimum_momentum_margin": 0.05913120101753755,
+      "maximum_principal_radial_speed": 1.0,
+      "maximum_principal_tangential_speed": 1.0,
+      "max_bvp_residual": 9.987957919820283e-09,
+      "bvp_tolerance": 1e-08,
+      "boundary_amplitude": 2.9089615445192962e-11,
+      "radius": 80.0,
+      "collocation_nodes": 1575,
+      "half_center_radius": 2.751000984053387,
+      "shooting_bracket": [
+        1.5650377516012088,
+        1.5650377516012095
+      ],
+      "refined": {
+        "depth": 4,
+        "normal_rank": 3,
+        "omega": 0.97,
+        "status": "collocation-converged",
+        "center": 1.565037751574829,
+        "energy": 4555.541392184982,
+        "charge": 4477.217429156595,
+        "energy_over_charge": 1.0174938930859878,
+        "energy_minus_rotation_charge": 212.6404859030854,
+        "virial": 7.240640054746933e-10,
+        "relative_virial": 1.5894137340444826e-13,
+        "minimum_lapse": 0.05913120101743119,
+        "minimum_momentum_margin": 0.05913120101743119,
+        "maximum_principal_radial_speed": 1.0,
+        "maximum_principal_tangential_speed": 1.0,
+        "max_bvp_residual": 1.9961155158805828e-10,
+        "bvp_tolerance": 2e-10,
+        "boundary_amplitude": 1.2210186360125462e-14,
+        "radius": 110.0,
+        "collocation_nodes": 3990,
+        "half_center_radius": 2.751000984018909,
+        "shooting_bracket": [
+          1.5650377516012088,
+          1.5650377516012095
+        ],
+        "convergence": {
+          "energy": 1.0933761906719446e-10,
+          "charge": 1.0451104074382307e-10,
+          "center": 6.2701613812078346e-12
+        },
+        "dcharge_domega": -87493.86144886872,
+        "denergy_domega": -84869.04560539762,
+        "fixed_shape_charge_susceptibility": 22386.01244404522,
+        "fixed_charge_rank_update_ratio": -3.9084165466075436,
+        "family_identity_relative_error": 5.932625532782839e-14,
+        "sensitivity_bvp_residual": 1.9998840569648363e-09,
+        "radial_quadratic_spectra": {
+          "1100": {
+            "shape_l0": [
+              -0.16208551985542852,
+              0.06031802505857323,
+              0.06319514322196204,
+              0.06773425390685867
+            ],
+            "shape_l1": [
+              0.00044154205820737464,
+              0.06127982865453597,
+              0.06495745085618682,
+              0.07026877456168651
+            ]
+          },
+          "2200": {
+            "shape_l0": [
+              -0.16260794176873578,
+              0.060318082795508834,
+              0.06319526587664069,
+              0.06773439938300042
+            ],
+            "shape_l1": [
+              0.00011087312857890967,
+              0.06127993117136298,
+              0.06495777897407257,
+              0.070269439567827
+            ]
+          }
+        }
+      }
+    },
+    {
+      "depth": 5,
+      "normal_rank": 2,
+      "omega": 0.97,
+      "status": "collocation-converged",
+      "center": 1.5705432053459156,
+      "energy": 69314.33019611341,
+      "charge": 68793.81801023635,
+      "energy_over_charge": 1.0075662639599332,
+      "energy_minus_rotation_charge": 2584.326726184154,
+      "virial": 1.3725703650763627e-06,
+      "relative_virial": 1.980211539508356e-11,
+      "minimum_lapse": 0.05910006028390202,
+      "minimum_momentum_margin": 0.05910006028390202,
+      "maximum_principal_radial_speed": 1.0,
+      "maximum_principal_tangential_speed": 1.0,
+      "max_bvp_residual": 9.946692439727085e-09,
+      "bvp_tolerance": 1e-08,
+      "boundary_amplitude": 9.4278624117588e-12,
+      "radius": 80.0,
+      "collocation_nodes": 1616,
+      "half_center_radius": 3.8675768143345612,
+      "shooting_bracket": [
+        1.5705432053769286,
+        1.5705432053769288
+      ],
+      "refined": {
+        "depth": 5,
+        "normal_rank": 2,
+        "omega": 0.97,
+        "status": "collocation-converged",
+        "center": 1.5705432053719666,
+        "energy": 69314.33020396315,
+        "charge": 68793.81801773755,
+        "energy_over_charge": 1.0075662639641747,
+        "energy_minus_rotation_charge": 2584.326726757732,
+        "virial": 6.310384230129877e-09,
+        "relative_virial": 9.104010976606206e-14,
+        "minimum_lapse": 0.0591000602838897,
+        "minimum_momentum_margin": 0.0591000602838897,
+        "maximum_principal_radial_speed": 1.0,
+        "maximum_principal_tangential_speed": 1.0,
+        "max_bvp_residual": 1.9999894950020156e-10,
+        "bvp_tolerance": 2e-10,
+        "boundary_amplitude": 3.3465924267346682e-15,
+        "radius": 110.0,
+        "collocation_nodes": 4320,
+        "half_center_radius": 3.867576814344956,
+        "shooting_bracket": [
+          1.5705432053769286,
+          1.5705432053769288
+        ],
+        "convergence": {
+          "energy": 1.1324843807246529e-10,
+          "charge": 1.0903875339720217e-10,
+          "center": 1.6587215871880176e-11
+        },
+        "dcharge_domega": -1792511.4193228988,
+        "denergy_domega": -1738736.0767429967,
+        "fixed_shape_charge_susceptibility": 468129.9595405012,
+        "fixed_charge_rank_update_ratio": -3.8290893005061264,
+        "family_identity_relative_error": 1.2373097769913863e-13,
+        "sensitivity_bvp_residual": 1.9997215667532263e-09,
+        "radial_quadratic_spectra": {
+          "1100": {
+            "shape_l0": [
+              -0.11196228207895921,
+              0.0607703931129938,
+              0.06404697466394178,
+              0.06898122342497458
+            ],
+            "shape_l1": [
+              0.0006434445996083701,
+              0.061845131154433824,
+              0.06593667650535684,
+              0.0716537918448191
+            ]
+          },
+          "2200": {
+            "shape_l0": [
+              -0.1125682270530322,
+              0.0607705096185181,
+              0.06404728338316827,
+              0.06898175586008838
+            ],
+            "shape_l1": [
+              0.00016167621441361935,
+              0.06184526878592299,
+              0.06593708467056675,
+              0.07165460838419138
+            ]
+          }
+        }
+      }
+    },
+    {
+      "depth": 6,
+      "normal_rank": 2,
+      "omega": 0.97,
+      "status": "collocation-converged",
+      "center": 1.570784228215483,
+      "energy": 1190540.332496688,
+      "charge": 1189894.9829045613,
+      "energy_over_charge": 1.0005423584445674,
+      "energy_minus_rotation_charge": 36342.19907926349,
+      "virial": 1.6775745339223623e-05,
+      "relative_virial": 1.4090866878943214e-11,
+      "minimum_lapse": 0.05910000013772487,
+      "minimum_momentum_margin": 0.05910000013772487,
+      "maximum_principal_radial_speed": 1.0,
+      "maximum_principal_tangential_speed": 1.0,
+      "max_bvp_residual": 9.944921390004431e-09,
+      "bvp_tolerance": 1e-08,
+      "boundary_amplitude": 3.618830674990151e-12,
+      "radius": 80.0,
+      "collocation_nodes": 1637,
+      "half_center_radius": 4.9981218834298105,
+      "shooting_bracket": [
+        1.5707842282554767,
+        1.570784228255477
+      ],
+      "refined": {
+        "depth": 6,
+        "normal_rank": 2,
+        "omega": 0.97,
+        "status": "collocation-converged",
+        "center": 1.5707842282531246,
+        "energy": 1190540.3326707892,
+        "charge": 1189894.983074952,
+        "energy_over_charge": 1.000542358447608,
+        "energy_minus_rotation_charge": 36342.19908808591,
+        "virial": -2.2432668120124832e-06,
+        "relative_virial": -1.8842426001478407e-12,
+        "minimum_lapse": 0.059100000137723985,
+        "minimum_momentum_margin": 0.059100000137723985,
+        "maximum_principal_radial_speed": 1.0,
+        "maximum_principal_tangential_speed": 1.0,
+        "max_bvp_residual": 1.9993357966788916e-10,
+        "bvp_tolerance": 2e-10,
+        "boundary_amplitude": 1.0827107467082292e-15,
+        "radius": 110.0,
+        "collocation_nodes": 4389,
+        "half_center_radius": 4.998121883475169,
+        "shooting_bracket": [
+          1.5707842282554767,
+          1.570784228255477
+        ],
+        "convergence": {
+          "energy": 1.4623713660956395e-10,
+          "charge": 1.4319800463376626e-10,
+          "center": 2.3963614405886627e-11
+        },
+        "dcharge_domega": -38289115.88207075,
+        "denergy_domega": -37140442.405603476,
+        "fixed_shape_charge_susceptibility": 9312122.466745244,
+        "fixed_charge_rank_update_ratio": -4.111749605828959,
+        "family_identity_relative_error": 1.386184670675226e-13,
+        "sensitivity_bvp_residual": 1.9988708224005212e-09,
+        "radial_quadratic_spectra": {
+          "1100": {
+            "shape_l0": [
+              -0.0862073233288747,
+              0.06128012403815132,
+              0.06496136299020865,
+              0.07028724835230148
+            ],
+            "shape_l1": [
+              0.000751980177448333,
+              0.06246395721632956,
+              0.06697390690830737,
+              0.07310075958090066
+            ]
+          },
+          "2200": {
+            "shape_l0": [
+              -0.08685699087596983,
+              0.0612802868170125,
+              0.06496179078705079,
+              0.07028802289384077
+            ],
+            "shape_l1": [
+              0.00018899995875924175,
+              0.06246413475200783,
+              0.06697439677883463,
+              0.07310172025093517
+            ]
+          }
+        }
+      }
+    },
+    {
+      "depth": 10,
+      "normal_rank": 0,
+      "status": "no-active-normal-generator"
+    }
+  ],
+  "scope": "Changed fixed-norm complete-coefficient action with its combined phase/normal generator. Complete radial energy, stress and fixed-charge response are tested; unused coefficient polarizations have a separate analytic convex-form positivity proof. No observed particle identification, Lorentz Dirac kinetics or simplex frequency selection is claimed."
+}

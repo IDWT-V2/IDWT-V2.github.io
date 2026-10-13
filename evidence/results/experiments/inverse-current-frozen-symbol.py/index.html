@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>inverse-current-frozen-symbol.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/inverse-current-frozen-symbol.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="inverse-current-frozen-symbol.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/inverse-current-frozen-symbol.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="inverse-current-frozen-symbol.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>inverse-current-frozen-symbol.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/inverse-current-frozen-symbol.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Complete frozen local spinor-current symbol, separate from spatial stability.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+from importlib.util import spec_from_file_location, module_from_spec
+import json
+
+import numpy as np
+from scipy.linalg import eigvals, svd
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;inverse&#39;, ROOT/&#39;inverse-current-ratio-checks.py&#39;)
+inverse = module_from_spec(spec)
+spec.loader.exec_module(inverse)
+CONDITIONS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    CONDITIONS[label] = CONDITIONS.get(label, 0)+1
+
+
+def close(a, b, label, tolerance=2e-10):
+    error = np.linalg.norm(a-b)/max(1., np.linalg.norm(b))
+    ERRORS[label] = max(ERRORS.get(label, 0.), float(error))
+    check(error &lt; tolerance, label)
+
+
+def vector(a):
+    return a.reshape(-1, order=&#39;F&#39;)
+
+
+def reduced_symbol(depth, c, dc, h, omega, axis):
+    alpha, beta, _ = inverse.ratio.scalar.clifford(depth)
+    rank = len(beta)
+    x = np.sqrt(1-c*c)
+    a, b = np.sqrt((1+c)/2), np.sqrt((1-c)/2)
+    plus, minus = (np.eye(rank)+beta)/2, (np.eye(rank)-beta)/2
+    background = ((a+b)*plus+c/(a+b)*minus)/np.sqrt(rank)
+    tangent = (c*(a+b)/(1+x)*plus-(1+x)/(a+b)*minus)/np.sqrt(rank)
+    scalar_factor = 1-x*x*c/(h*dc)
+    vector_factor = 1-omega*c/h
+    # Endpoint column projectors avoid a singular-value basis polluted by tiny c.
+    seeds = [plus, minus]+[g@p for g in alpha for p in (plus, minus)]
+    seeds += [alpha[axis]@z for z in list(seeds)]
+    real_columns = np.column_stack([z for s in seeds for z in (vector(s).real, vector(s).imag)])
+    u, values, _ = svd(real_columns, full_matrices=False)
+    basis = u[:, values &gt; 1e-11*values[0]]
+    def apply(matrix, columns):
+        return np.column_stack([vector(matrix@column.reshape((rank, rank), order=&#39;F&#39;)) for column in columns.T])
+    kinetic = basis.T@apply(alpha[axis], basis)
+    grading = basis.T@apply(beta, basis)
+    close(apply(alpha[axis], basis), basis@kinetic, &#39;retained real matrix range is exactly invariant under the frozen Dirac symbol&#39;)
+    close(apply(beta, basis), basis@grading, &#39;retained matrix range is exactly invariant under physical grading&#39;)
+    sources = [vector(tangent)]+[vector(g@background) for g in alpha]
+    for source in sources:
+        close(source, basis@(basis.T@source), &#39;every full local-current feedback source lies in the retained range&#39;)
+    sources = [basis.T@z for z in sources]
+    coefficients = [scalar_factor]+[vector_factor]*depth
+    hermitian = sum((q*np.outer(z, z.conj()) for q, z in zip(coefficients, sources)),
+                    np.zeros_like(grading, dtype=complex))
+    anomalous = sum((q*np.outer(z, z) for q, z in zip(coefficients, sources)),
+                    np.zeros_like(grading, dtype=complex))
+    close(hermitian, hermitian.conj().T, &#39;full current Hessian retains its Hermitian complex-linear part&#39;)
+    close(anomalous, anomalous.T, &#39;full current Hessian retains its symmetric conjugate-linear part&#39;)
+    base = x*grading-np.eye(len(grading))+hermitian
+    cases = []
+    for wave_number in (0., .01, .03, .1, .3, 1., 3., 10.):
+        ap = base+wave_number*kinetic
+        am = base-wave_number*kinetic
+        generator = np.block([[ap, anomalous], [-anomalous.conj(), -am.conj()]])
+        if wave_number == 0:
+            columns = np.column_stack([basis.T@vector(alpha[axis]@p)/np.sqrt(rank/2)
+                                       for p in (plus, minus)])
+            lift = np.block([[columns, np.zeros_like(columns)],
+                             [np.zeros_like(columns), columns.conj()]])
+            if depth == 2:
+                ca = -(1-vector_factor)*np.diag([1+x, 1-x])
+                cb = vector_factor*c*np.array([[0, 1], [1, 0]])
+            else:
+                v = np.array([(a+b)/np.sqrt(2), c/(np.sqrt(2)*(a+b))])
+                ca = np.diag([-1-x, -1+x])+vector_factor*np.outer(v, v)
+                cb = vector_factor*np.outer(v, v)
+            exact_block = np.block([[ca, cb], [-cb, -ca]])
+            close(generator@lift, lift@exact_block,
+                  &#39;complete frozen symbol retains the independently derived zero-wavevector current block&#39;)
+        signature = np.diag([1.]*len(grading)+[-1.]*len(grading))
+        energy = signature@generator
+        close(energy, energy.conj().T, &#39;both Fourier wavevectors give the complete Hamiltonian frozen Hessian&#39;)
+        roots = eigvals(generator)
+        cases.append({&#39;dimensionless_wave_number&#39;: wave_number,
+                      &#39;maximum_growth_over_lambda&#39;: float(np.max(roots.imag)),
+                      &#39;maximum_frequency_over_lambda&#39;: float(np.max(abs(roots.real))),
+                      &#39;resolved_complex_root_count&#39;: int(np.sum(abs(roots.imag)&gt;3e-7))})
+    return {&#39;depth&#39;: depth, &#39;axis&#39;: axis, &#39;full_spinor_matrix_complex_dimension&#39;: rank*rank,
+            &#39;retained_complex_dimension&#39;: len(grading), &#39;signed_shell_occupation&#39;: c,
+            &#39;scalar_feedback_factor&#39;: scalar_factor, &#39;vector_feedback_factor&#39;: vector_factor,
+            &#39;lambda_over_inverse_radius&#39;: h/c, &#39;probes&#39;: cases}
+
+
+def main():
+    sp = inverse.sp
+    rr, xx = sp.symbols(&#39;r x&#39;, real=True)
+    cc = sp.sqrt(1-xx*xx)
+    ll = sp.diag(-1-xx, -1+xx)
+    hh = sp.Matrix([[-rr*(1+xx), (1-rr)*cc], [(1-rr)*cc, -rr*(1-xx)]])
+    product = ll*hh
+    check(sp.simplify(sp.trace(product)-2*rr*(1+xx*xx)) == 0,
+          &#39;exact zero-wavevector squared-frequency trace retains the full current variation&#39;)
+    check(sp.simplify(product.det()-(1-xx*xx)**2*(2*rr-1)) == 0,
+          &#39;exact zero-wavevector squared-frequency determinant has its stated negative sign&#39;)
+    z = sp.symbols(&#39;z&#39;)
+    two = sp.Matrix([[-rr*(1+xx),(1-rr)*cc],[-(1-rr)*cc,rr*(1-xx)]])
+    check(sp.simplify(two.charpoly(z).as_expr()-(z*z+2*rr*xx*z+(1-xx*xx)*(1-2*rr))) == 0,
+          &#39;depth-two overlapping vector currents have their separate exact channel polynomial&#39;)
+    cases = []
+    for name, depth, index in inverse.ratio.scalar.sphere.ASSIGNMENTS:
+        h = inverse.mp.mpf(index-1)+inverse.mp.mpf(depth)/2
+        p, first, second = inverse.polynomial(depth, h)
+        c, dc = inverse.EPSILON*first, inverse.EPSILON*second
+        result = reduced_symbol(depth, float(c), float(dc), float(h), float(inverse.EPSILON*p), 0)
+        rr = inverse.EPSILON*p*c/h
+        xx = inverse.mp.sqrt(1-c*c)
+        if depth == 2:
+            growth_squared = (1-rr)**2*c*c-rr*rr
+        else:
+            trace = 2*rr*(1+xx*xx)
+            determinant = c**4*(2*rr-1)
+            growth_squared = -2*determinant/(inverse.mp.sqrt(trace*trace-4*determinant)+trace)
+        check(growth_squared &gt; 0, &#39;exact frozen zero-wavevector current channel has a positive growth square&#39;)
+        growth = inverse.mp.sqrt(growth_squared)
+        result[&#39;exact_zero_wavevector_growth_over_lambda&#39;] = float(growth)
+        result[&#39;exact_zero_wavevector_growth_in_inverse_radius_units&#39;] = float(growth*h/c)
+        close(result[&#39;probes&#39;][0][&#39;maximum_growth_over_lambda&#39;], float(growth),
+              &#39;floating full frozen symbol agrees with the exact low-wavevector channel within its resolved precision&#39;, 3e-7)
+        result.update(name=name, mode_index=index, spatial_shell_level=index-1)
+        cases.append(result)
+    covariance = []
+    for depth in inverse.ratio.scalar.sphere.DEPTHS:
+        record = next(a for a in cases if a[&#39;depth&#39;]==depth)
+        name, _, index = next(a for a in inverse.ratio.scalar.sphere.ASSIGNMENTS if a[1]==depth)
+        h = inverse.mp.mpf(index-1)+inverse.mp.mpf(depth)/2
+        p, first, second = inverse.polynomial(depth, h)
+        control = reduced_symbol(depth, float(inverse.EPSILON*first), float(inverse.EPSILON*second),
+                                 float(h), float(inverse.EPSILON*p), depth-1)
+        for a, b in zip(record[&#39;probes&#39;], control[&#39;probes&#39;]):
+            close(a[&#39;maximum_growth_over_lambda&#39;], b[&#39;maximum_growth_over_lambda&#39;],
+                  &#39;common physical rotation preserves the frozen growth spectrum&#39;, 3e-7)
+        covariance.append(control)
+    files = [&#39;inverse-current-frozen-symbol.py&#39;,&#39;inverse-current-ratio-checks.py&#39;,&#39;local-current-ratio-checks.py&#39;,
+             &#39;scalar-current-band-checks.py&#39;,&#39;spatial-source-saturation-checks.py&#39;,&#39;spatial-band-curvature-checks.py&#39;]
+    report = {&#39;experiment_key&#39;: &#39;inverse-current-complete-frozen-local-symbol&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/&#39;+f:sha256((ROOT/f).read_bytes()).hexdigest() for f in files},
+              &#39;classification&#39;: &#39;complete local coefficient-frozen dispersion diagnostic, not a full spatial eigenvalue calculation&#39;,
+              &#39;limits&#39;: [&#39;actual spatial background and spin-connection derivatives are not part of the frozen symbol&#39;,
+                         &#39;complex frozen frequencies do not by themselves prove a global spatial exponential eigenmode or decay&#39;,
+                         &#39;the exact zero-wavevector growth is of the same scale as omitted spatial geometry and cannot be transferred to the actual sphere solution&#39;,
+                         &#39;floating roots below 3e-7 in lambda units are unresolved; exact zero-wavevector formulas are reported separately&#39;,
+                         &#39;the coupled matrix range is complete for this frozen symbol; its complement is self-adjoint and uncoupled&#39;],
+              &#39;condition_count&#39;:len(CONDITIONS),&#39;evaluation_count&#39;:sum(CONDITIONS.values()),
+              &#39;floating_complex_root_resolution_over_lambda&#39;: 3e-7,
+              &#39;conditions&#39;:CONDITIONS,&#39;maximum_errors&#39;:ERRORS,&#39;cases&#39;:cases,&#39;axis_covariance&#39;:covariance}
+    path=ROOT/(&#39;inverse-current-frozen-results-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;report&#39;:str(path),&#39;conditions&#39;:len(CONDITIONS),&#39;evaluations&#39;:sum(CONDITIONS.values()),
+                      &#39;growth_at_wave_number_one&#39;:[{k:c[k] for k in (&#39;name&#39;,&#39;depth&#39;,&#39;retained_complex_dimension&#39;)}|
+                         {&#39;growth_over_lambda&#39;:next(p[&#39;maximum_growth_over_lambda&#39;] for p in c[&#39;probes&#39;] if p[&#39;dimensionless_wave_number&#39;]==1.)}
+                         for c in cases]},indent=2),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

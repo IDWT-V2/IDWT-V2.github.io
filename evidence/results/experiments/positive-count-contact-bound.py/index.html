@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>positive-count-contact-bound.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/positive-count-contact-bound.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="positive-count-contact-bound.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/positive-count-contact-bound.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="positive-count-contact-bound.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>positive-count-contact-bound.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/positive-count-contact-bound.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Interval Bernstein certificates for all maintained orthogonal-column pair energies.&quot;&quot;&quot;
+from datetime import datetime,timezone
+from fractions import Fraction
+from hashlib import sha256
+from importlib.util import spec_from_file_location,module_from_spec
+from itertools import combinations
+from math import comb
+from pathlib import Path
+import json
+
+import mpmath as mp
+
+ROOT=Path(__file__).resolve().parent
+spec=spec_from_file_location(&#39;envelope&#39;,ROOT/&#39;convex-count-envelope.py&#39;)
+envelope=module_from_spec(spec); spec.loader.exec_module(envelope)
+spec=spec_from_file_location(&#39;contact&#39;,ROOT/&#39;positive-count-contact.py&#39;)
+contact=module_from_spec(spec); spec.loader.exec_module(contact)
+CHECKS=0
+
+
+def interval(value):
+    if isinstance(value,Fraction):
+        return mp.iv.mpf(value.numerator)/value.denominator
+    return mp.iv.mpf(value)
+
+
+def low(value):
+    return mp.mpf(value.a)
+
+
+def high(value):
+    return mp.mpf(value.b)
+
+
+def add(one,two):
+    return [(one[i] if i&lt;len(one) else interval(0))+(two[i] if i&lt;len(two) else interval(0))
+            for i in range(max(len(one),len(two)))]
+
+
+def scale(one,factor):
+    return [x*factor for x in one]
+
+
+def multiply(one,two):
+    result=[interval(0) for _ in range(len(one)+len(two)-1)]
+    for i,a in enumerate(one):
+        for j,b in enumerate(two): result[i+j]+=a*b
+    return result
+
+
+def row_polynomial(own,mass,eta):
+    dm=add(mass,[-own[&#39;m&#39;]]); de=add(eta,[-own[&#39;eta&#39;]])
+    mismatch=add(add(multiply(dm,dm),multiply(de,de)),scale(multiply(dm,de),2*own[&#39;x&#39;]))
+    return add(mismatch,scale(add(scale(dm,own[&#39;x&#39;]),de),2*own[&#39;omega&#39;]))
+
+
+def bernstein(power):
+    nn=len(power)-1
+    return [sum((power[k]*interval(Fraction(comb(j,k),comb(nn,k))) for k in range(j+1)),interval(0))
+            for j in range(nn+1)]
+
+
+def subdivide(coefficients):
+    rows=[coefficients]
+    while len(rows[-1])&gt;1:
+        rows.append([(a+b)/2 for a,b in zip(rows[-1],rows[-1][1:])])
+    return [row[0] for row in rows],[row[-1] for row in rows[::-1]]
+
+
+def certify(coefficients,depth=0):
+    global CHECKS
+    CHECKS+=1
+    if min(low(v) for v in coefficients)&gt;0:
+        return True,min(low(v) for v in coefficients),depth
+    if depth&gt;=10:
+        return False,min(low(v) for v in coefficients),depth
+    left,right=subdivide(coefficients)
+    a=certify(left,depth+1); b=certify(right,depth+1)
+    return a[0] and b[0],min(a[1],b[1]),max(a[2],b[2])
+
+
+def sector(depth):
+    epsilon=Fraction(3,10)/max(envelope.forward.count_data(depth,n-1)[1]
+        for _,dd,n in envelope.forward.radial.ASSIGNMENTS if dd==depth)
+    values=[];level=0
+    while True:
+        count,first,second=envelope.forward.count_data(depth,level)
+        cc=epsilon*first; hh=Fraction(2*level+depth,2)
+        if cc&gt;=1: break
+        if hh*epsilon*second-cc*(1-cc*cc)&gt;0:
+            xx=mp.iv.sqrt(1-interval(cc)**2)
+            values.append(dict(level=level,x=xx,m=interval(hh)*xx/interval(cc),
+                eta=interval(epsilon*count-hh/cc),omega=interval(epsilon*count)))
+        level+=1
+    lines=values[::-1]
+    edges=[(a[&#39;eta&#39;]-b[&#39;eta&#39;])/(b[&#39;m&#39;]-a[&#39;m&#39;]) for a,b in zip(lines,lines[1:])]
+    margins=[]
+    for i,line in enumerate(lines):
+        if i: margins.append(line[&#39;x&#39;]-edges[i-1])
+        if i&lt;len(edges): margins.append(edges[i]-line[&#39;x&#39;])
+    minimum=mp.iv.mpf([min(low(v) for v in margins),min(high(v) for v in margins)])
+    sigma=minimum/4
+    assert low(sigma)&gt;0
+    return values,lines,edges,sigma
+
+
+def main():
+    global CHECKS
+    mp.mp.dps=100; mp.iv.dps=80
+    cases=[]
+    for depth in envelope.forward.radial.DEPTHS:
+        values,lines,edges,sigma=sector(depth)
+        _,reference_nodes,_=envelope.depth_carrier(depth)
+        _,reference_edges,reference_width,reference_source=contact.smooth_data(reference_nodes)
+        assert low(sigma)&lt;=reference_width&lt;=high(sigma)
+        CHECKS+=1
+        maintained=sorted(n-1 for _,dd,n in envelope.forward.radial.ASSIGNMENTS if dd==depth)
+        pairs=list(combinations(maintained,2))
+        if depth==10: pairs.append((22,23))
+        for first,second in pairs:
+            one,two=[next(c for c in values if c[&#39;level&#39;]==level) for level in [first,second]]
+            direct=[]
+            for own in [one,two]:
+                for selected in values:
+                    if selected[&#39;level&#39;]==own[&#39;level&#39;]: continue
+                    change=row_polynomial(own,[selected[&#39;m&#39;]],[selected[&#39;eta&#39;]])[0]
+                    direct.append(low(change))
+            assert min(direct)&gt;0
+            bands=[]
+            for i,edge in enumerate(edges):
+                # Count nodes stay at least four widths from the band edges.
+                if high(edge)&lt;=low(two[&#39;x&#39;]) or low(edge)&gt;=high(one[&#39;x&#39;]): continue
+                assert low(edge-sigma)&gt;high(two[&#39;x&#39;]) and high(edge+sigma)&lt;low(one[&#39;x&#39;])
+                jump=lines[i+1][&#39;m&#39;]-lines[i][&#39;m&#39;]
+                cdf=list(map(interval,[0,0,0,10,-15,6]))
+                moment=list(map(interval,[0,0,0,-10,30,-30,10]))
+                mass=add([lines[i][&#39;m&#39;]],scale(cdf,jump))
+                eta=add([lines[i][&#39;eta&#39;]],scale(add(scale(cdf,edge),scale(moment,sigma)),-jump))
+                w1=[(edge-sigma-two[&#39;x&#39;])/(one[&#39;x&#39;]-two[&#39;x&#39;]),2*sigma/(one[&#39;x&#39;]-two[&#39;x&#39;])]
+                w2=add([interval(1)],scale(w1,-1))
+                polynomial=add(multiply(w1,row_polynomial(one,mass,eta)),
+                               multiply(w2,row_polynomial(two,mass,eta)))
+                certificate=bernstein(polynomial)
+                result=certify(certificate)
+                own1,own2=[next(c for c in reference_nodes if c[&#39;level&#39;]==level) for level in [first,second]]
+                for fraction in [Fraction(0),Fraction(1,4),Fraction(1,2),Fraction(3,4),Fraction(1)]:
+                    tt=mp.mpf(fraction.numerator)/fraction.denominator
+                    xx=reference_edges[i]+reference_width*(2*tt-1)
+                    ff,mm,_=reference_source(xx); ee=ff-xx*mm
+                    weight=(xx-own2[&#39;x&#39;])/(own1[&#39;x&#39;]-own2[&#39;x&#39;])
+                    direct_value=weight*contact.row_delta(own1,mm,ee)+(1-weight)*contact.row_delta(own2,mm,ee)
+                    evaluated=interval(0)
+                    for coefficient in polynomial[::-1]: evaluated=evaluated*interval(fraction)+coefficient
+                    assert low(evaluated)&lt;=direct_value&lt;=high(evaluated)
+                    CHECKS+=1
+                bands.append(dict(lower_level=lines[i+1][&#39;level&#39;],upper_level=lines[i][&#39;level&#39;],
+                    strict_positive_certificate=result[0],normalized_contact_lower_bound=str(result[1]),
+                    subdivision_depth=result[2],bernstein_coefficient_intervals=[str(v) for v in certificate]))
+            success=all(b[&#39;strict_positive_certificate&#39;] for b in bands)
+            case=dict(depth=depth,shell_levels=[first,second],
+                other_unsmoothed_chart_minimum_source_cost_lower_bound=str(min(direct)),
+                common_smoothing_width_interval=str(sigma),smoothing_bands=bands,
+                pointwise_nonnegative_pair_energy_certified=success,
+                second_is_unassigned_mathematical_control=depth==10)
+            cases.append(case)
+            print(json.dumps(dict(depth=depth,levels=[first,second],certified=success,
+                                  bands=len(bands),max_subdivision=max([b[&#39;subdivision_depth&#39;] for b in bands],default=0))),flush=True)
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    names=[&#39;positive-count-contact-bound.py&#39;,&#39;positive-count-contact.py&#39;,&#39;positive-count-wave.py&#39;,&#39;convex-count-envelope.py&#39;,&#39;forward-count-action.py&#39;,
+           &#39;inverse-current-radial.py&#39;,&#39;excited-shell-orientation-current.py&#39;]
+    report=dict(experiment_key=&#39;interval-positive-count-pair-contact-bound&#39;,
+        created_utc=datetime.now(timezone.utc).isoformat(),interval_decimal_precision=80,
+        sources={&#39;experiments/&#39;+n:sha256((ROOT/n).read_bytes()).hexdigest() for n in names},
+        evaluations=CHECKS,cases=cases,
+        limits=[&#39;certificates concern orthogonal column blocks with their isolated initial clocks&#39;,
+                &#39;all maintained distinct pairs are checked; depth ten adds one unassigned adjacent control&#39;,
+                &#39;a pointwise energy inequality is not a physical radial force calculation&#39;,
+                &#39;coherent fields and time-evolved encounters are not covered&#39;,
+                &#39;the diagnostic geometric scales and stated compact smoothing remain premises&#39;])
+    path=ROOT/(&#39;positive-count-contact-bound-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path),evaluations=CHECKS,
+                         certified_pairs=sum(c[&#39;pointwise_nonnegative_pair_energy_certified&#39;] for c in cases))),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

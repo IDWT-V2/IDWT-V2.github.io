@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>relaxed-frame-twist.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/relaxed-frame-twist.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="relaxed-frame-twist.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/relaxed-frame-twist.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="relaxed-frame-twist.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>relaxed-frame-twist.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/relaxed-frame-twist.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact frame bulk equations and relaxed guide force/stiffness comparisons.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from math import sqrt
+from pathlib import Path
+import json
+
+import numpy as np
+import sympy as s
+from scipy.optimize import brentq
+
+ROOT=Path(__file__).resolve().parent
+COUNTS,ERRORS={},{}
+
+
+def check(value,label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label]=COUNTS.get(label,0)+1
+
+
+def exact(value,label):
+    check(s.simplify(value)==0,label)
+
+
+def close(actual,expected,label,tolerance=2e-7):
+    error=float(abs(actual-expected)/max(1,abs(expected)))
+    ERRORS[label]=max(ERRORS.get(label,0),error)
+    check(error&lt;tolerance,label)
+
+
+def symbolic():
+    time,x,u,omega,k=s.symbols(&#39;time x u omega k&#39;,real=True)
+    phase=omega*time+k*x
+    rot=s.Matrix([[s.cos(phase),-s.sin(phase)],[s.sin(phase),s.cos(phase)]])
+    frame=u*rot/s.sqrt(2)
+    for entry in frame.diff(time,2)-frame.diff(x,2)-(k*k-omega*omega)*frame:
+        exact(entry,&#39;full frame bulk wave equation has one common shifted restoring scale&#39;)
+    exact(s.trace(frame.diff(time).T*frame.diff(time))-u*u*omega*omega,
+          &#39;both rotating vectors retain the complete time kinetic energy&#39;)
+    exact(s.trace(frame.diff(x).T*frame.diff(x))-u*u*k*k,
+          &#39;both twisted vectors retain the complete longitudinal gradient energy&#39;)
+    exact(s.det(frame.T*frame)-u**4/4,&#39;exact uniform twists retain the area dielectric&#39;)
+    e0,k2,k4=s.symbols(&#39;E kappa2 kappa4&#39;,positive=True)
+    aa=s.Matrix(s.symbols(&#39;a0:2&#39;,real=True));bb=s.Matrix(s.symbols(&#39;b0:2&#39;,real=True))
+    eps=k2*(aa.dot(aa)+bb.dot(bb))+k4*(aa.dot(aa)*bb.dot(bb)-aa.dot(bb)**2)
+    source=s.Matrix([s.diff(eps,a)*e0*e0/2 for a in aa])
+    expected=e0*e0*(k2*aa+k4*(bb.dot(bb)*aa-aa.dot(bb)*bb))
+    for entry in source-expected:
+        exact(entry,&#39;full electric variation retains the actual spatial vector source&#39;)
+    replacement={aa[i]:frame[i,0] for i in range(2)}
+    replacement.update({bb[i]:frame[i,1] for i in range(2)})
+    for entry in (source.subs(replacement,simultaneous=True)-
+                  e0*e0*(k2+k4*u*u/2)*frame[:,0]):
+        exact(s.trigsimp(entry),&#39;balanced rotating frame satisfies the same scalar profile equation&#39;)
+
+    length,angle,base=s.symbols(&#39;L Theta Omega&#39;,positive=True)
+    ss=s.symbols(&#39;sigma&#39;,positive=True)
+    tau=s.Function(&#39;tau&#39;)
+    scale=base*base+angle*angle/length**2
+    energy=length*tau(scale)
+    mass=2*s.diff(tau(ss),ss)
+    force=tau(scale)-(angle/length)**2*mass.subs(ss,scale)
+    exact(s.diff(energy,length)-force,&#39;complete relaxed bulk energy gives tension minus shape-gradient stress&#39;)
+    exact(s.diff(energy,angle)-(angle/length)*mass.subs(ss,scale),
+          &#39;endpoint torque follows from the same relaxed energy&#39;)
+    stiffness=(mass+2*(angle/length)**2*s.diff(mass,ss)).subs(ss,scale)
+    exact(s.diff(force,length)-(angle/length)**2*stiffness/length,
+          &#39;force separation slope equals longitudinal phase stiffness exactly&#39;)
+    t=s.symbols(&#39;t&#39;,real=True)
+    for n in (2,3):
+        coeff=(3+(1-n)*t)/(4-n)
+        exact(coeff-1-(n-1)*(1-t)/(4-n),
+              &#39;actual guide moment coefficient is strictly above one on zero to one&#39;)
+        a=s.Rational(4-n,6)
+        power=ss**a
+        mass_power=2*s.diff(power,ss)
+        phase_speed=(mass_power+2*k*k*s.diff(mass_power,ss))/mass_power
+        exact(phase_speed.subs(ss,base*base+k*k)-
+              (base*base+(2*a-1)*k*k)/(base*base+k*k),
+              &#39;pure quartic phase stiffness has the exact twist threshold&#39;)
+        rotating_speed=mass_power/(mass_power-2*omega*omega*s.diff(mass_power,ss))
+        exact(rotating_speed.subs(ss,base*base-omega*omega)-
+              (base*base-omega*omega)/(base*base+(1-2*a)*omega*omega),
+              &#39;homogeneous rotation has positive subluminal reduced phase speed&#39;)
+
+
+def full_frame_controls():
+    z,zt,zx,om,k=s.symbols(&#39;z zt zx omega k&#39;,real=True)
+    # A normalized actual spatial tilt retains Gram data exactly.
+    theta=s.symbols(&#39;theta&#39;,real=True)
+    unit=s.Matrix([s.sqrt(1-z*z)*s.cos(theta),s.sqrt(1-z*z)*s.sin(theta),z,0])
+    other=s.Matrix([-s.sin(theta),s.cos(theta),0,0])
+    exact(unit.dot(unit)-1,&#39;finite full-frame tilt preserves its actual vector norm&#39;)
+    exact(unit.dot(other),&#39;finite full-frame tilt preserves relative orthogonality&#39;)
+    for derivative,rate in ((zt,om),(zx,k)):
+        velocity=unit.diff(z)*derivative+unit.diff(theta)*rate
+        expected=derivative**2/(1-z*z)+(1-z*z)*rate*rate
+        exact(s.trigsimp(velocity.dot(velocity)-expected),
+              &#39;exact tilted-vector kinetic metric retains orientation and tilt together&#39;)
+    quadratic=(zt*zt-zx*zx+(k*k-om*om)*z*z)/4
+    exact(s.diff(quadratic,z)-(k*k-om*om)*z/2,
+          &#39;full-frame quadratic tilt has the exact rotation-versus-twist restoring term&#39;)
+    uu,electric,kappa2,kappa4,base,zztt,zzxx=s.symbols(
+        &#39;u E kappa2 kappa4 Omega ztt zxx&#39;,real=True)
+    profile_laplacian=(base*base+k*k-om*om-kappa2*electric*electric)*uu-kappa4*electric*electric*uu**3/2
+    direct_tilt=uu*(zztt-zzxx)-profile_laplacian*z+(
+        base*base-kappa2*electric*electric-kappa4*electric*electric*uu*uu/2)*uu*z
+    exact(direct_tilt-uu*(zztt-zzxx+(om*om-k*k)*z),
+          &#39;original vector equation independently gives the exact spatial tilt frequency&#39;)
+    aa=s.Matrix(s.symbols(&#39;a0:4&#39;,real=True))
+    pp=s.Matrix(s.symbols(&#39;p0:4&#39;,real=True))
+    generator=s.Matrix([[0,-1,0,0],[1,0,0,0],[0,0,0,0],[0,0,0,0]])
+    base=s.symbols(&#39;Omega&#39;,positive=True)
+    angular=pp.dot(generator*aa)
+    hamiltonian=(pp.dot(pp)+base*base*aa.dot(aa))/2
+    shifted=pp-om*generator*aa
+    decomposition=(shifted.dot(shifted)+(base*base-om*om)*aa.dot(aa)+
+                   om*om*(aa.dot(aa)-(generator*aa).dot(generator*aa)))/2
+    exact(hamiltonian-om*angular-decomposition,
+          &#39;complete rotation Routhian is the claimed positive-square decomposition&#39;)
+    exact(aa.dot(aa)-(generator*aa).dot(generator*aa)-aa[2]**2-aa[3]**2,
+          &#39;all unused spatial frame directions have a nonnegative rotation norm deficit&#39;)
+    tau,mass=s.symbols(&#39;tau M&#39;,positive=True)
+    speed,clock=s.symbols(&#39;speed clock&#39;,real=True)
+    gamma=1/s.sqrt(1-speed*speed)
+    boosted_omega,boosted_k=gamma*clock,-gamma*speed*clock
+    exact(boosted_omega**2-boosted_k**2-clock**2,
+          &#39;boosted uniform frame retains the same supported transverse restoring coefficient&#39;)
+    momentum=-mass*boosted_omega*boosted_k
+    exact(s.diff(momentum,speed).subs(speed,0)-mass*clock*clock,
+          &#39;complete bulk longitudinal momentum has positive motion-supplied linear response&#39;)
+    controls=[]
+    for angle in (0.2,1.0,2.8,3.4):
+        for rotation in (0.0,0.5,1.5):
+            length=2.0;kvalue=angle/length
+            frequency2=(np.pi/length)**2+rotation**2-kvalue**2
+            if rotation==0 and angle&lt;np.pi:
+                check(frequency2&gt;0,&#39;finite shortest-angle static segment retains a positive lowest tilt frequency&#39;)
+            if rotation&gt;=kvalue:
+                check(frequency2&gt;0,&#39;timelike frame rotation removes this exact tilt growth channel&#39;)
+            controls.append(dict(endpoint_angle=angle,length=length,frame_rotation=rotation,
+                                 lowest_dirichlet_tilt_frequency_squared=frequency2))
+    return controls
+
+
+def mixed_profile(n,scale,q_at_one=10.0):
+    # The inherited approximate ground moments set units, not a fitted force.
+    moment={2:11.70089652,3:18.89725130}[n]
+    restoring=sqrt(scale)
+    flux=q_at_one*moment/(2*(4-n))
+    q=q_at_one*restoring**(n-1)
+    if n==2:
+        t=(2/q)**(2/3)
+    else:
+        fold=(9-sqrt(33))/4
+        t=brentq(lambda tt:(2-tt)/(sqrt(1-tt)*tt**1.5)-q,1e-12,fold,xtol=1e-14)
+    gap2=scale*(1-t)
+    amplitude2=(1-t)/(2*t)
+    mass=amplitude2*gap2**(-n/2)*moment
+    grad=n*gap2*mass/(4-n)
+    quartic=4*amplitude2*mass/(4-n)
+    integral=mass+quartic
+    electric=sqrt(scale*t)
+    tension=flux*electric/2+(grad+scale*mass)/2
+    log_q_t=-(1-n/2)/(1-t)-3/(2*t)+(2-n)/(2+(2-n)*t)
+    t_scale=(n-1)/(2*scale*log_q_t)
+    mass_scale=mass*(-n/(2*scale)+(-(1-n/2)/(1-t)-1/t)*t_scale)
+    return dict(n=n,scale=scale,flux=flux,t=t,gap_squared=gap2,
+                mass=mass,mass_scale=mass_scale,tension=tension,
+                recovered_flux=electric*integral,
+                direct_stress=flux*electric/2+(grad+(2-scale)*mass)/2)
+
+
+def mixed_controls():
+    rows=[]
+    for n in (2,3):
+        for q in (6.0,10.0,25.0):
+            for k in (0.0,0.2,0.8,1.5,3.0,10.0):
+                scale=1+k*k
+                profile=mixed_profile(n,scale,q)
+                mass,ms,tension=profile[&#39;mass&#39;],profile[&#39;mass_scale&#39;],profile[&#39;tension&#39;]
+                close(profile[&#39;recovered_flux&#39;],profile[&#39;flux&#39;],&#39;independent complete moments recover the prescribed fixed flux&#39;)
+                close(tension/mass,scale*(3+(1-n)*profile[&#39;t&#39;])/(4-n),
+                      &#39;complete guide energy gives the exact tension-to-norm relation&#39;)
+                check(ms&lt;0,&#39;globally bound mixed guide has decreasing profile norm with restoring scale&#39;)
+                force=tension-k*k*mass
+                check(force&gt;0,&#39;relaxed mixed uniform twist has positive net inward force&#39;)
+                close(force,profile[&#39;direct_stress&#39;],&#39;direct full neutral and electric stress agrees with relaxed force&#39;)
+                step=1e-4*scale
+                lower=mixed_profile(n,scale-step,q)
+                upper=mixed_profile(n,scale+step,q)
+                close((upper[&#39;tension&#39;]-lower[&#39;tension&#39;])/(2*step),mass/2,
+                      &#39;independent branch differences verify the fixed-flux envelope derivative&#39;)
+                close((upper[&#39;mass&#39;]-lower[&#39;mass&#39;])/(2*step),ms,
+                      &#39;independent branch differences verify the complete profile norm response&#39;)
+                stiffness=mass+2*k*k*ms
+                if k&gt;0:
+                    length=1/k
+                    step_l=length*1e-4
+                    def energy_force(ell):
+                        kk=1/ell; pp=mixed_profile(n,1+kk*kk,q)
+                        return ell*pp[&#39;tension&#39;],pp[&#39;tension&#39;]-kk*kk*pp[&#39;mass&#39;]
+                    ep,fp=energy_force(length+step_l)
+                    em,fm=energy_force(length-step_l)
+                    close((ep-em)/(2*step_l),force,&#39;direct finite-separation energy derivative gives the force&#39;)
+                    close((fp-fm)/(2*step_l),k*k*stiffness/length,
+                          &#39;independent mixed-profile force differences give the phase stiffness identity&#39;)
+                if stiffness&gt;0:
+                    check(0&lt;stiffness/mass&lt;=1,&#39;positive static phase stiffness gives subluminal reduced response&#39;)
+                profile.update(twist_rate=k,inward_force=force,phase_stiffness=stiffness,
+                               reduced_phase_speed_squared=stiffness/mass)
+                rows.append(profile)
+            root=brentq(lambda kk:((lambda pp:pp[&#39;mass&#39;]+2*kk*kk*pp[&#39;mass_scale&#39;])
+                                  (mixed_profile(n,1+kk*kk,q))),0.01,20.0,xtol=1e-12)
+            pp=mixed_profile(n,1+root*root,q)
+            check(pp[&#39;tension&#39;]-root*root*pp[&#39;mass&#39;]&gt;0,
+                  &#39;mixed force minimum remains strictly inward when phase stiffness changes sign&#39;)
+            rows.append(dict(n=n,reference_scaled_flux=q,phase_stiffness_zero_twist=root,
+                             inward_force_at_threshold=pp[&#39;tension&#39;]-root*root*pp[&#39;mass&#39;]))
+    return rows
+
+
+def pure_controls():
+    rows=[]
+    for depth in (3,4):
+        n=depth-1;a=(4-n)/6
+        for rate in (0,0.1,0.5,1,2,5,20):
+            y=rate*rate
+            force=(1+y)**(a-1)*(1+(1-2*a)*y)
+            speed=(1-(1-2*a)*y)/(1+y)
+            check(force&gt;0,&#39;exact pure-quartic relaxed twist remains inward at all control gradients&#39;)
+            rows.append(dict(depth=depth,power_exact=str(s.Rational(4-n,6)),
+                             twist_over_restoring=rate,inward_force_over_tension=force,
+                             reduced_phase_speed_squared=speed))
+    return rows
+
+
+def main():
+    symbolic()
+    tilts=full_frame_controls()
+    mixed=mixed_controls()
+    pure=pure_controls()
+    sectors=[]
+    for depth,carrier in ((2,2),(3,4),(4,4),(5,6),(6,6),(10,10)):
+        gate=int((-1)**((carrier//2)**2)==1)
+        check(bool(gate)==(depth in (3,4)), &#39;occupied-sector gate remains the same without a twist-specific coefficient&#39;)
+        sectors.append(dict(depth=depth,hodge_gate=gate,twisted_guide_available=bool(gate),
+                            independently_new_dimensional_selection=False))
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report=dict(experiment_key=&#39;relaxed-frame-twist-force-and-longitudinal-stiffness&#39;,
+                created_utc=datetime.now(timezone.utc).isoformat(),
+                sources={&#39;experiments/&#39;+Path(__file__).name:sha256(Path(__file__).read_bytes()).hexdigest()},
+                evaluations=sum(COUNTS.values()),conditions=COUNTS,maximum_errors=ERRORS,
+                mixed_controls=mixed,pure_quartic_controls=pure,full_frame_tilt_controls=tilts,sectors=sectors,
+                exact_equations={&#39;shifted_restoring&#39;:&#39;s=Omega^2+k^2-varpi^2&#39;,
+                                 &#39;force&#39;:&#39;tau-k^2 M&#39;,&#39;phase_stiffness&#39;:&#39;G=M+2k^2 partial_s M&#39;,
+                                 &#39;force_slope&#39;:&#39;partial_L F_in=(k^2/L)G&#39;},
+                limits=[&#39;uniform bulk frame and supported transverse profile are exact within the retained action&#39;,
+                        &#39;finite end caps and general dynamic sources are not solved&#39;,
+                        &#39;effective modulated phase action is a leading long-wavelength reduction&#39;,
+                        &#39;phase-channel stiffness does not prove full orientation and connection stability&#39;,
+                        &#39;rotating global energetic bound does not settle the degenerate vacuum Cauchy problem&#39;,
+                        &#39;bulk longitudinal inertia is a response per length with tension, not particle rest mass&#39;,
+                        &#39;frame rotation frequency is not identified with the particle mass clock&#39;,
+                        &#39;ground moment inputs are inherited decimal approximations, not exact rational constants&#39;,
+                        &#39;three/four restriction is inherited from the guide action, not an independent new selection&#39;,
+                        &#39;master-field reduction, non-Abelian confinement and physical normalization remain open&#39;])
+    path=ROOT/(&#39;relaxed-frame-twist-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path),evaluations=report[&#39;evaluations&#39;],maximum_errors=ERRORS)),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

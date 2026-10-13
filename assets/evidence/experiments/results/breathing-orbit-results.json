@@ -1,0 +1,300 @@
+{
+  "created_at": "2026-10-11T15:44:11.300146+00:00",
+  "sources": {
+    "experiments/breathing-orbit-checks.py": "961bea221e53710eedae8543fbb4e468f0e65b1e9faf0ef24b7e4da1703ef19b",
+    "experiments/completed_coulomb_petals_checks.py": "d14515836ac7a9535cc1b00abc80e59c29b644d6b4dc3b316e14fbaa4d9acf2d",
+    "experiments/coulomb_angular_response_checks.py": "d4af39011e2fbb32fc5d12f21467cf361de9b690a066e7ae19e7e32f7510448e"
+  },
+  "conditions": {
+    "eigenplane change is orthogonal": 1,
+    "two physical circular eigenplanes": 4,
+    "three orthonormal observed axes": 9,
+    "exact projected breathing law": 1,
+    "aligned observer recovers signed petals": 2,
+    "autonomous relative equilibrium after cross-depth embedding": 16,
+    "exact existing autonomous orbit": 96,
+    "full physical radius stays fixed": 96,
+    "full energy conserved": 96,
+    "complete angular charge conserved": 96,
+    "projected breathing at every supported depth": 384,
+    "observer is an ordinary orthogonal projection": 384,
+    "common physical rotation leaves projection unchanged": 384,
+    "irrational ratio fails a single clock-turn recurrence": 4,
+    "commensurate full trajectory recurrence": 12,
+    "depth-two full plane circle has no projected breathing": 1,
+    "tilted circle full radius fixed": 5,
+    "lower-depth tilted circle breathes in projection": 5,
+    "deterministic radial dwell-time CDF": 5
+  },
+  "max_errors": {
+    "eigenplane change is orthogonal": 0.0,
+    "autonomous relative equilibrium after cross-depth embedding": 7.598631116421869e-14,
+    "exact existing autonomous orbit": 6.389333506717776e-14,
+    "full physical radius stays fixed": 1.4055423491754482e-13,
+    "full energy conserved": 1.4157564010019996e-12,
+    "complete angular charge conserved": 3.6060043839825084e-13,
+    "projected breathing at every supported depth": 7.571721027943568e-14,
+    "observer is an ordinary orthogonal projection": 2.220446049250313e-16,
+    "common physical rotation leaves projection unchanged": 7.771561172376096e-16,
+    "commensurate full trajectory recurrence": 2.27320022979203e-13,
+    "depth-two full plane circle has no projected breathing": 2.220446049250313e-16,
+    "tilted circle full radius fixed": 2.220446049250313e-16,
+    "lower-depth tilted circle breathes in projection": 1.1102230246251565e-16,
+    "deterministic radial dwell-time CDF": 0.00018988043445455904
+  },
+  "cases": [
+    {
+      "depth": 2,
+      "level": 1.4142135623730951,
+      "branch_available": false,
+      "reason": "Two independent rotation planes need four spatial dimensions."
+    },
+    {
+      "depth": 3,
+      "level": 1.4142135623730951,
+      "branch_available": false,
+      "reason": "Two independent rotation planes need four spatial dimensions."
+    },
+    {
+      "depth": 4,
+      "level": 1.4142135623730951,
+      "branch_available": true,
+      "clock_rate": 0.782614079919144,
+      "equilibrium_residual": 2.7684430159004343e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 1.9278050656998074,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 5,
+      "level": 1.4142135623730951,
+      "branch_available": true,
+      "clock_rate": 0.782614079919144,
+      "equilibrium_residual": 2.7684430159004343e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 1.9278050656998074,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 6,
+      "level": 1.4142135623730951,
+      "branch_available": true,
+      "clock_rate": 0.782614079919144,
+      "equilibrium_residual": 2.7684430159004343e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 1.9278050656998074,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 10,
+      "level": 1.4142135623730951,
+      "branch_available": true,
+      "clock_rate": 0.782614079919144,
+      "equilibrium_residual": 2.7684430159004343e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 1.9278050656998074,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 2,
+      "level": 1.5,
+      "branch_available": false,
+      "reason": "Two independent rotation planes need four spatial dimensions."
+    },
+    {
+      "depth": 3,
+      "level": 1.5,
+      "branch_available": false,
+      "reason": "Two independent rotation planes need four spatial dimensions."
+    },
+    {
+      "depth": 4,
+      "level": 1.5,
+      "branch_available": true,
+      "clock_rate": 0.6996771388244368,
+      "equilibrium_residual": 7.598631116421869e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 2.2694412268625004e-13,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 5,
+      "level": 1.5,
+      "branch_available": true,
+      "clock_rate": 0.6996771388244368,
+      "equilibrium_residual": 7.598631116421869e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 2.2694412268625004e-13,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 6,
+      "level": 1.5,
+      "branch_available": true,
+      "clock_rate": 0.6996771388244368,
+      "equilibrium_residual": 7.598631116421869e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 2.2694412268625004e-13,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 10,
+      "level": 1.5,
+      "branch_available": true,
+      "clock_rate": 0.6996771388244368,
+      "equilibrium_residual": 7.598631116421869e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 2.2694412268625004e-13,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 2,
+      "level": 2.0,
+      "branch_available": false,
+      "reason": "Two independent rotation planes need four spatial dimensions."
+    },
+    {
+      "depth": 3,
+      "level": 2.0,
+      "branch_available": false,
+      "reason": "Two independent rotation planes need four spatial dimensions."
+    },
+    {
+      "depth": 4,
+      "level": 2.0,
+      "branch_available": true,
+      "clock_rate": 0.4537304660879467,
+      "equilibrium_residual": 4.328232619239915e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 1.0379972471676925e-14,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 5,
+      "level": 2.0,
+      "branch_available": true,
+      "clock_rate": 0.4537304660879467,
+      "equilibrium_residual": 4.328232619239915e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 1.0379972471676925e-14,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 6,
+      "level": 2.0,
+      "branch_available": true,
+      "clock_rate": 0.4537304660879467,
+      "equilibrium_residual": 4.328232619239915e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 1.0379972471676925e-14,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 10,
+      "level": 2.0,
+      "branch_available": true,
+      "clock_rate": 0.4537304660879467,
+      "equilibrium_residual": 4.328232619239915e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 1.0379972471676925e-14,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 2,
+      "level": 4.0,
+      "branch_available": false,
+      "reason": "Two independent rotation planes need four spatial dimensions."
+    },
+    {
+      "depth": 3,
+      "level": 4.0,
+      "branch_available": false,
+      "reason": "Two independent rotation planes need four spatial dimensions."
+    },
+    {
+      "depth": 4,
+      "level": 4.0,
+      "branch_available": true,
+      "clock_rate": 0.2235799608264174,
+      "equilibrium_residual": 7.106695760930266e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 2.27320022979203e-13,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 5,
+      "level": 4.0,
+      "branch_available": true,
+      "clock_rate": 0.2235799608264174,
+      "equilibrium_residual": 7.106695760930266e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 2.27320022979203e-13,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 6,
+      "level": 4.0,
+      "branch_available": true,
+      "clock_rate": 0.2235799608264174,
+      "equilibrium_residual": 7.106695760930266e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 2.27320022979203e-13,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    },
+    {
+      "depth": 10,
+      "level": 4.0,
+      "branch_available": true,
+      "clock_rate": 0.2235799608264174,
+      "equilibrium_residual": 7.106695760930266e-14,
+      "linear_trajectory_span": 4,
+      "recurrence_error_at_tested_turn": 2.27320022979203e-13,
+      "stability": "Not newly tested; observer changes cannot alter an unchanged full-state flow."
+    }
+  ],
+  "lower_depth_controls": [
+    {
+      "depth": 2,
+      "tilted_circle_available": false
+    },
+    {
+      "depth": 3,
+      "tilted_circle_available": true,
+      "projected_radius_min": 0.5000000000000001,
+      "projected_radius_max": 1.0
+    },
+    {
+      "depth": 4,
+      "tilted_circle_available": true,
+      "projected_radius_min": 0.5000000000000001,
+      "projected_radius_max": 1.0
+    },
+    {
+      "depth": 5,
+      "tilted_circle_available": true,
+      "projected_radius_min": 0.5000000000000001,
+      "projected_radius_max": 1.0
+    },
+    {
+      "depth": 6,
+      "tilted_circle_available": true,
+      "projected_radius_min": 0.5000000000000001,
+      "projected_radius_max": 1.0
+    },
+    {
+      "depth": 10,
+      "tilted_circle_available": true,
+      "projected_radius_min": 0.5000000000000001,
+      "projected_radius_max": 1.0
+    }
+  ],
+  "scope": "Existing conditional classical central-source model and ordinary spatial projections.",
+  "conclusions": [
+    "Annular breathing and petal projections can share one unchanged full trajectory.",
+    "This branch occupies a four-dimensional linear span even when embedded in six.",
+    "Radial breathing alone is not specific to depth six.",
+    "Noninteger frequency-ratio relative equilibria also exist; no integer selection follows.",
+    "Finite commensurate traces are not azimuthally complete concentric rings.",
+    "No new source induction, physical detector law, or particle mass derivation."
+  ]
+}

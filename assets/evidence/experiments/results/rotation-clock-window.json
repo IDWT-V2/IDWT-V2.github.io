@@ -1,0 +1,48 @@
+{
+  "created_at": "2026-10-11T12:49:47.838596+00:00",
+  "experiment": "localized-rotation-clock-window",
+  "sources": {
+    "experiments/rotation-clock-window.py": "f848c5c7127a83dcd1f1b1eba0a4e9c03962d21db4b6f8b06e4f3bc264fa7366"
+  },
+  "cases": [
+    {
+      "action": "orientation-only",
+      "minimum_omega_squared": "183/256",
+      "threshold_derivative": "-(3*y**2 - 16*y + 80)/256",
+      "maximum_clock_ratio": "16*sqrt(183)/183",
+      "maximum_clock_ratio_numeric": 1.1827540335273166
+    },
+    {
+      "action": "phase-complete-fixed-norm",
+      "minimum_omega_squared": "39/64",
+      "threshold_derivative": "-(3*y**2 - 16*y + 32)/64",
+      "maximum_clock_ratio": "8*sqrt(39)/39",
+      "maximum_clock_ratio_numeric": 1.281025230440697
+    },
+    {
+      "action": "finite-amplitude",
+      "norm_stiffness": 400,
+      "threshold_stationary_polynomial": "-1915203*z**4 + 5100816*z**3 - 3812832*z**2 + 627200",
+      "minimum_omega_squared": 0.609198527324687,
+      "minimizing_squared_coefficient": 1.0011899941364217,
+      "maximum_clock_ratio_numeric": 1.2812107607482164
+    },
+    {
+      "action": "finite-amplitude",
+      "norm_stiffness": 1600,
+      "threshold_stationary_polynomial": "-30700803*z**4 + 81843216*z**3 - 61331232*z**2 + 10188800",
+      "minimum_omega_squared": 0.6093309199384616,
+      "minimizing_squared_coefficient": 1.0002970305520125,
+      "maximum_clock_ratio_numeric": 1.2810715654024862
+    }
+  ],
+  "finite_amplitude_exact_bound": {
+    "condition": "M_squared >= 2/3, m_squared=1, b=1/4, beta=1",
+    "large_norm_potential_certificate": "(M2 - 2/3)*(z - 1)**2/4 + (z - 2)**2/24",
+    "minimum_omega_squared_strict_lower_bound": "1/3",
+    "maximum_clock_ratio_strict_upper_bound": "sqrt(3)"
+  },
+  "maintained_muon_electron_frequency_ratio": "3515/17",
+  "maintained_muon_electron_frequency_ratio_numeric": 206.76470588235293,
+  "scope": "Necessary negative-Routhian and decaying-tail conditions bound the common radial rotation frequency window. If this rotation is identified with the assigned particle mass-frequency, these simple branches cannot reproduce electron and muon together. This does not exclude a different same-field spectral mechanism or identify their complete energies with their rotation clock."
+}

@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>finite-amplitude-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/finite-amplitude-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="finite-amplitude-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/finite-amplitude-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="finite-amplitude-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>finite-amplitude-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/finite-amplitude-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">created_at</th><td>2026-10-11T12:39:24.099899+00:00</td></tr><tr><th scope="row">experiment</th><td>finite-amplitude-complete-coefficient-localization</td></tr><tr><th scope="row">exact_checks</th><td>12</td></tr><tr><th scope="row">scope</th><td>Unconstrained complex positive wave field with a common polynomial norm stiffness. All unused polarizations have conditional positive comparison solutions when both active radial coefficients are positive. Coupled two-amplitude radial stability, Dirac kinetics and simplex frequency selection remain unresolved.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;created_at&quot;: &quot;2026-10-11T12:39:24.099899+00:00&quot;,
+  &quot;experiment&quot;: &quot;finite-amplitude-complete-coefficient-localization&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/finite-amplitude-checks.py&quot;: &quot;fd29191377d193d46358d66f52f0c79cf4cb39a853daed12c9690743d0f89c47&quot;,
+    &quot;experiments/rotating-determinant-checks.py&quot;: &quot;952e180d1a7eacd70de6f1b3fda842c19140bd24424473d7b2ff722b458379e4&quot;
+  },
+  &quot;exact_checks&quot;: 12,
+  &quot;checks&quot;: [
+    &quot;first radial amplitude force&quot;,
+    &quot;second radial amplitude force&quot;,
+    &quot;first radial momentum&quot;,
+    &quot;second radial momentum&quot;,
+    &quot;complete charge&quot;,
+    &quot;complete energy&quot;,
+    &quot;finite amplitude convex polarization identity&quot;,
+    &quot;large norm polynomial&quot;,
+    &quot;large norm derivative at one&quot;,
+    &quot;large norm minimum&quot;,
+    &quot;core maximum derivative&quot;,
+    &quot;global sufficient bound exceeds quartic threshold&quot;
+  ],
+  &quot;parameters&quot;: {
+    &quot;beta&quot;: 1,
+    &quot;T&quot;: 4,
+    &quot;kappa&quot;: 4,
+    &quot;m_squared&quot;: 1,
+    &quot;quartic_b&quot;: &quot;1/4&quot;
+  },
+  &quot;core_diagnostics&quot;: [
+    {
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 25,
+      &quot;core_maximum&quot;: -2.15761925951195
+    },
+    {
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 100,
+      &quot;core_maximum&quot;: 2.7863007138713414
+    },
+    {
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;core_maximum&quot;: 30.208237976492796
+    },
+    {
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;core_maximum&quot;: 151.94029224498604
+    },
+    {
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 25,
+      &quot;core_maximum&quot;: -3.3397241220121536
+    },
+    {
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 100,
+      &quot;core_maximum&quot;: -1.8315588836007777
+    },
+    {
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;core_maximum&quot;: 11.954302265616889
+    },
+    {
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;core_maximum&quot;: 79.31050731040318
+    }
+  ],
+  &quot;cases&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;normal_rank&quot;: 4,
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 55.61135674162288,
+      &quot;charge&quot;: 55.866205490636275,
+      &quot;energy_over_charge&quot;: 0.9954382305586136,
+      &quot;center_first_coefficient&quot;: 0.7285337856261216,
+      &quot;center_rotating_coefficient&quot;: 0.6851004796103963,
+      &quot;maximum_norm_squared_deviation&quot;: 0.00012414396112264692,
+      &quot;minimum_first_coefficient&quot;: 0.7285337856261216,
+      &quot;minimum_rotating_coefficient&quot;: 2.488422831375081e-16,
+      &quot;minimum_lapse&quot;: 0.5764001928859384,
+      &quot;minimum_momentum_margin&quot;: 0.5764001928859384,
+      &quot;relative_virial&quot;: -2.529127544459446e-13,
+      &quot;max_bvp_residual&quot;: 9.967551242601482e-10,
+      &quot;collocation_nodes&quot;: 2440,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 2.6197714205873047e-10,
+        &quot;charge&quot;: 2.6844161555681985e-10,
+        &quot;center_rotating_coefficient&quot;: 6.154772247413121e-10
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.00010371989487252199,
+        &quot;charge&quot;: -0.00010699930066945377
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;normal_rank&quot;: 4,
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 55.594068500432705,
+      &quot;charge&quot;: 55.848288859347136,
+      &quot;energy_over_charge&quot;: 0.9954480188362677,
+      &quot;center_first_coefficient&quot;: 0.7286679972865893,
+      &quot;center_rotating_coefficient&quot;: 0.6852293173466703,
+      &quot;maximum_norm_squared_deviation&quot;: 0.0004962676210324979,
+      &quot;minimum_first_coefficient&quot;: 0.7286679972865893,
+      &quot;minimum_rotating_coefficient&quot;: 2.487549893647906e-16,
+      &quot;minimum_lapse&quot;: 0.5762408563403763,
+      &quot;minimum_momentum_margin&quot;: 0.5762408563403763,
+      &quot;relative_virial&quot;: -8.578729786707414e-13,
+      &quot;max_bvp_residual&quot;: 9.893951973883917e-10,
+      &quot;collocation_nodes&quot;: 2230,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 8.146568072734581e-10,
+        &quot;charge&quot;: 8.421721214548107e-10,
+        &quot;center_rotating_coefficient&quot;: 1.0927893034917702e-09
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.0004145637416775664,
+        &quot;charge&quot;: -0.0004276710567836947
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 482.39311722079003,
+      &quot;charge&quot;: 477.64553345309224,
+      &quot;energy_over_charge&quot;: 1.0099395544084242,
+      &quot;center_first_coefficient&quot;: 0.1458818265633559,
+      &quot;center_rotating_coefficient&quot;: 0.9899649643204125,
+      &quot;maximum_norm_squared_deviation&quot;: 0.0013121379033765868,
+      &quot;minimum_first_coefficient&quot;: 0.1458818265633559,
+      &quot;minimum_rotating_coefficient&quot;: 4.268923681615306e-17,
+      &quot;minimum_lapse&quot;: 0.11552235589982118,
+      &quot;minimum_momentum_margin&quot;: 0.11552235589982118,
+      &quot;relative_virial&quot;: 7.017901775618483e-14,
+      &quot;max_bvp_residual&quot;: 9.945591980989926e-10,
+      &quot;collocation_nodes&quot;: 2990,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 6.582076337109066e-10,
+        &quot;charge&quot;: 6.846089501401742e-10,
+        &quot;center_rotating_coefficient&quot;: 1.4853829277683417e-10
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.0012045938826122959,
+        &quot;charge&quot;: -0.001242401649717259
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 480.6430473622393,
+      &quot;charge&quot;: 475.8591218906874,
+      &quot;energy_over_charge&quot;: 1.0100532389765786,
+      &quot;center_first_coefficient&quot;: 0.14033208580677325,
+      &quot;center_rotating_coefficient&quot;: 0.9928336301988178,
+      &quot;maximum_norm_squared_deviation&quot;: 0.005411711560642574,
+      &quot;minimum_first_coefficient&quot;: 0.14033208580677325,
+      &quot;minimum_rotating_coefficient&quot;: 4.241196306513107e-17,
+      &quot;minimum_lapse&quot;: 0.11038894792847909,
+      &quot;minimum_momentum_margin&quot;: 0.11038894792847909,
+      &quot;relative_virial&quot;: 4.72953550566451e-13,
+      &quot;max_bvp_residual&quot;: 9.974217520597347e-10,
+      &quot;collocation_nodes&quot;: 2878,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 1.6966360311047441e-09,
+        &quot;charge&quot;: 1.7681487092189721e-09,
+        &quot;center_rotating_coefficient&quot;: 2.1438095743064878e-10
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.00482811518236775,
+        &quot;charge&quot;: -0.0049777911734797875
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 6891.23763419367,
+      &quot;charge&quot;: 6913.440506145171,
+      &quot;energy_over_charge&quot;: 0.9967884482506553,
+      &quot;center_first_coefficient&quot;: 0.009461551447169092,
+      &quot;center_rotating_coefficient&quot;: 1.0007080962109132,
+      &quot;maximum_norm_squared_deviation&quot;: 0.0015062147778576174,
+      &quot;minimum_first_coefficient&quot;: 0.009461551447169092,
+      &quot;minimum_rotating_coefficient&quot;: 1.1984046528558076e-17,
+      &quot;minimum_lapse&quot;: 0.09622143382558157,
+      &quot;minimum_momentum_margin&quot;: 0.09622143382558157,
+      &quot;relative_virial&quot;: -2.497546595357655e-13,
+      &quot;max_bvp_residual&quot;: 9.986328403338161e-10,
+      &quot;collocation_nodes&quot;: 3486,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 9.715140523806311e-10,
+        &quot;charge&quot;: 1.007780502481843e-09,
+        &quot;center_rotating_coefficient&quot;: 1.1263008852102934e-12
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.0011870705203419138,
+        &quot;charge&quot;: -0.0011494718667713916
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 6867.97865723776,
+      &quot;charge&quot;: 6891.000238826373,
+      &quot;energy_over_charge&quot;: 0.9966591814263913,
+      &quot;center_first_coefficient&quot;: 0.008376370546188228,
+      &quot;center_rotating_coefficient&quot;: 1.0030587593806635,
+      &quot;maximum_norm_squared_deviation&quot;: 0.006197038353802808,
+      &quot;minimum_first_coefficient&quot;: 0.008376370546188228,
+      &quot;minimum_rotating_coefficient&quot;: 1.1852592892463756e-17,
+      &quot;minimum_lapse&quot;: 0.09197049551982628,
+      &quot;minimum_momentum_margin&quot;: 0.09197049551982628,
+      &quot;relative_virial&quot;: -2.8367955629977554e-13,
+      &quot;max_bvp_residual&quot;: 9.99697527166049e-10,
+      &quot;collocation_nodes&quot;: 3433,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 2.2695193181087836e-09,
+        &quot;charge&quot;: 2.3502811249804275e-09,
+        &quot;center_rotating_coefficient&quot;: 1.334181892503956e-12
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.0045582163352475575,
+        &quot;charge&quot;: -0.004391630795152773
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 119356.44023560666,
+      &quot;charge&quot;: 120998.38232712583,
+      &quot;energy_over_charge&quot;: 0.9864300492292526,
+      &quot;center_first_coefficient&quot;: 0.0007906749628765475,
+      &quot;center_rotating_coefficient&quot;: 1.0007529760600564,
+      &quot;maximum_norm_squared_deviation&quot;: 0.0015071442599567941,
+      &quot;minimum_first_coefficient&quot;: 0.0007906749628765475,
+      &quot;minimum_rotating_coefficient&quot;: 4.419718429775243e-18,
+      &quot;minimum_lapse&quot;: 0.09614036651851343,
+      &quot;minimum_momentum_margin&quot;: 0.09614036651851343,
+      &quot;relative_virial&quot;: -1.6246976641131476e-12,
+      &quot;max_bvp_residual&quot;: 9.989821583366669e-10,
+      &quot;collocation_nodes&quot;: 3554,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 1.1088486561859316e-09,
+        &quot;charge&quot;: 1.1381339754896203e-09,
+        &quot;center_rotating_coefficient&quot;: 1.2425142041301852e-14
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.0018079284918409854,
+        &quot;charge&quot;: -0.0017536045283333044
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 118735.34818995904,
+      &quot;charge&quot;: 120390.59217953403,
+      &quot;energy_over_charge&quot;: 0.9862510520165348,
+      &quot;center_first_coefficient&quot;: 0.0006526638864750023,
+      &quot;center_rotating_coefficient&quot;: 1.0030951171539089,
+      &quot;maximum_norm_squared_deviation&quot;: 0.0062002400281628844,
+      &quot;minimum_first_coefficient&quot;: 0.0006526638864750023,
+      &quot;minimum_rotating_coefficient&quot;: 4.352444191700534e-18,
+      &quot;minimum_lapse&quot;: 0.09190466781264217,
+      &quot;minimum_momentum_margin&quot;: 0.09190466781264217,
+      &quot;relative_virial&quot;: -2.7050647116825497e-12,
+      &quot;max_bvp_residual&quot;: 9.985137533050387e-10,
+      &quot;collocation_nodes&quot;: 3551,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 2.2860341616102747e-09,
+        &quot;charge&quot;: 2.353772978970046e-09,
+        &quot;center_rotating_coefficient&quot;: 1.195341145710308e-14
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.007002194963079824,
+        &quot;charge&quot;: -0.006767922177608962
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 2322585.257722177,
+      &quot;charge&quot;: 2371057.751621305,
+      &quot;energy_over_charge&quot;: 0.9795565949981678,
+      &quot;center_first_coefficient&quot;: 6.786348493215133e-05,
+      &quot;center_rotating_coefficient&quot;: 1.000753289351191,
+      &quot;maximum_norm_squared_deviation&quot;: 0.0015071507526813743,
+      &quot;minimum_first_coefficient&quot;: 6.786348493215133e-05,
+      &quot;minimum_rotating_coefficient&quot;: 1.9070111936095014e-18,
+      &quot;minimum_lapse&quot;: 0.09613980060212624,
+      &quot;minimum_momentum_margin&quot;: 0.09613980060212624,
+      &quot;relative_virial&quot;: -8.428613887578771e-12,
+      &quot;max_bvp_residual&quot;: 9.974861523828454e-10,
+      &quot;collocation_nodes&quot;: 3653,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 1.5028291933587094e-09,
+        &quot;charge&quot;: 1.5427143728848356e-09,
+        &quot;center_rotating_coefficient&quot;: 0.0
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.002686870595120941,
+        &quot;charge&quot;: -0.002631080844451758
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.95,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 2304327.996381273,
+      &quot;charge&quot;: 2352854.440929928,
+      &quot;energy_over_charge&quot;: 0.9793755007940587,
+      &quot;center_first_coefficient&quot;: 5.227159998888453e-05,
+      &quot;center_rotating_coefficient&quot;: 1.003095337812262,
+      &quot;maximum_norm_squared_deviation&quot;: 0.0062002594730161675,
+      &quot;minimum_first_coefficient&quot;: 5.227159998888453e-05,
+      &quot;minimum_rotating_coefficient&quot;: 1.8698515959221363e-18,
+      &quot;minimum_lapse&quot;: 0.09190426829152176,
+      &quot;minimum_momentum_margin&quot;: 0.09190426829152176,
+      &quot;relative_virial&quot;: -8.890908200693688e-12,
+      &quot;max_bvp_residual&quot;: 9.98830068730162e-10,
+      &quot;collocation_nodes&quot;: 3643,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 2.400063037106282e-09,
+        &quot;charge&quot;: 2.461702957720543e-09,
+        &quot;center_rotating_coefficient&quot;: 2.2135942273374305e-16
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.010526499466319849,
+        &quot;charge&quot;: -0.01028817662665992
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;normal_rank&quot;: 4,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 51.32532380704836,
+      &quot;charge&quot;: 51.39890809910988,
+      &quot;energy_over_charge&quot;: 0.9985683685746859,
+      &quot;center_first_coefficient&quot;: 0.8444612116901135,
+      &quot;center_rotating_coefficient&quot;: 0.5356576572218072,
+      &quot;maximum_norm_squared_deviation&quot;: 4.386378948972869e-05,
+      &quot;minimum_first_coefficient&quot;: 0.8444612116901135,
+      &quot;minimum_rotating_coefficient&quot;: 4.2113230922786057e-13,
+      &quot;minimum_lapse&quot;: 0.7300283855908998,
+      &quot;minimum_momentum_margin&quot;: 0.7300283855908998,
+      &quot;relative_virial&quot;: -2.4183509600039383e-13,
+      &quot;max_bvp_residual&quot;: 9.837616292144852e-10,
+      &quot;collocation_nodes&quot;: 2266,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 7.280863674419284e-10,
+        &quot;charge&quot;: 7.507950336790314e-10,
+        &quot;center_rotating_coefficient&quot;: 4.868285774506376e-10
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -3.423905558232413e-05,
+        &quot;charge&quot;: -3.4907747602080444e-05
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;normal_rank&quot;: 4,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 51.32005632177559,
+      &quot;charge&quot;: 51.39353004501668,
+      &quot;energy_over_charge&quot;: 0.998570370177399,
+      &quot;center_first_coefficient&quot;: 0.8445175428094556,
+      &quot;center_rotating_coefficient&quot;: 0.5356915565799263,
+      &quot;maximum_norm_squared_deviation&quot;: 0.00017532390394497943,
+      &quot;minimum_first_coefficient&quot;: 0.8445175428094556,
+      &quot;minimum_rotating_coefficient&quot;: 4.210857905525475e-13,
+      &quot;minimum_lapse&quot;: 0.7299942139370252,
+      &quot;minimum_momentum_margin&quot;: 0.7299942139370252,
+      &quot;relative_virial&quot;: -1.2500883514547159e-12,
+      &quot;max_bvp_residual&quot;: 9.911417597019546e-10,
+      &quot;collocation_nodes&quot;: 2079,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 5.766184072192964e-09,
+        &quot;charge&quot;: 5.933976045984559e-09,
+        &quot;center_rotating_coefficient&quot;: 1.7739021362928042e-09
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.0001368649043515507,
+        &quot;charge&quot;: -0.00013953772042319253
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 410.0195070579421,
+      &quot;charge&quot;: 401.9976184442222,
+      &quot;energy_over_charge&quot;: 1.0199550650194535,
+      &quot;center_first_coefficient&quot;: 0.3518934714655234,
+      &quot;center_rotating_coefficient&quot;: 0.9365339037379824,
+      &quot;maximum_norm_squared_deviation&quot;: 0.0009247681107615868,
+      &quot;minimum_first_coefficient&quot;: 0.3518934714655234,
+      &quot;minimum_rotating_coefficient&quot;: 6.602783326323827e-14,
+      &quot;minimum_lapse&quot;: 0.1747406061427722,
+      &quot;minimum_momentum_margin&quot;: 0.1747406061427722,
+      &quot;relative_virial&quot;: -1.4185849382120266e-13,
+      &quot;max_bvp_residual&quot;: 9.967634179165818e-10,
+      &quot;collocation_nodes&quot;: 2903,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 2.530714971827179e-10,
+        &quot;charge&quot;: 2.574558329718986e-10,
+        &quot;center_rotating_coefficient&quot;: 2.1866497501576987e-10
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.0013118712644685467,
+        &quot;charge&quot;: -0.0013668979999396644
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 408.3526895963273,
+      &quot;charge&quot;: 400.2944978017047,
+      &quot;energy_over_charge&quot;: 1.0201306583999423,
+      &quot;center_first_coefficient&quot;: 0.34670928221198205,
+      &quot;center_rotating_coefficient&quot;: 0.9399992480996179,
+      &quot;maximum_norm_squared_deviation&quot;: 0.0038059127997948083,
+      &quot;minimum_first_coefficient&quot;: 0.34670928221198205,
+      &quot;minimum_rotating_coefficient&quot;: 6.5720564691105e-14,
+      &quot;minimum_lapse&quot;: 0.16862209003003892,
+      &quot;minimum_momentum_margin&quot;: 0.16862209003003892,
+      &quot;relative_virial&quot;: -2.401023194112468e-13,
+      &quot;max_bvp_residual&quot;: 9.958222132469545e-10,
+      &quot;collocation_nodes&quot;: 2692,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 1.0889643428433823e-09,
+        &quot;charge&quot;: 1.1177366108897557e-09,
+        &quot;center_rotating_coefficient&quot;: 5.797126112483397e-10
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.005371753253079804,
+        &quot;charge&quot;: -0.005597750552996678
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 4555.072258078924,
+      &quot;charge&quot;: 4477.297221660371,
+      &quot;energy_over_charge&quot;: 1.0173709790903072,
+      &quot;center_first_coefficient&quot;: 0.005169694502454192,
+      &quot;center_rotating_coefficient&quot;: 1.0010605756573008,
+      &quot;maximum_norm_squared_deviation&quot;: 0.002149001876575074,
+      &quot;minimum_first_coefficient&quot;: 0.005169694502454192,
+      &quot;minimum_rotating_coefficient&quot;: 1.2149297273823526e-14,
+      &quot;minimum_lapse&quot;: 0.057103150384271384,
+      &quot;minimum_momentum_margin&quot;: 0.057103150384271384,
+      &quot;relative_virial&quot;: -2.5140039292210746e-12,
+      &quot;max_bvp_residual&quot;: 9.983142729904217e-10,
+      &quot;collocation_nodes&quot;: 3741,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 6.375171199703257e-10,
+        &quot;charge&quot;: 6.604849567970738e-10,
+        &quot;center_rotating_coefficient&quot;: 9.43133395820039e-13
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.00010298095896095353,
+        &quot;charge&quot;: 1.7821913791041347e-05
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;normal_rank&quot;: 3,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 4561.672484738172,
+      &quot;charge&quot;: 4485.911817522304,
+      &quot;energy_over_charge&quot;: 1.0168885770157008,
+      &quot;center_first_coefficient&quot;: 0.003461735171714553,
+      &quot;center_rotating_coefficient&quot;: 1.0046019567624345,
+      &quot;maximum_norm_squared_deviation&quot;: 0.009237075141311335,
+      &quot;minimum_first_coefficient&quot;: 0.003461735171714553,
+      &quot;minimum_rotating_coefficient&quot;: 1.1954275078445347e-14,
+      &quot;minimum_lapse&quot;: 0.050420111378564725,
+      &quot;minimum_momentum_margin&quot;: 0.050420111378564725,
+      &quot;relative_virial&quot;: -2.466090535784671e-12,
+      &quot;max_bvp_residual&quot;: 9.987739769452044e-10,
+      &quot;collocation_nodes&quot;: 3589,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 1.078681737287133e-09,
+        &quot;charge&quot;: 1.113523996907709e-09,
+        &quot;center_rotating_coefficient&quot;: 6.639664483079736e-13
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: 0.0013458537878143484,
+        &quot;charge&quot;: 0.0019419178502503964
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 69309.23858268962,
+      &quot;charge&quot;: 68801.01204701344,
+      &quot;energy_over_charge&quot;: 1.0073869049386788,
+      &quot;center_first_coefficient&quot;: 0.00021252293124884858,
+      &quot;center_rotating_coefficient&quot;: 1.0010742116645674,
+      &quot;maximum_norm_squared_deviation&quot;: 0.002149622425831499,
+      &quot;minimum_first_coefficient&quot;: 0.00021252293124884858,
+      &quot;minimum_rotating_coefficient&quot;: 3.323119995958992e-15,
+      &quot;minimum_lapse&quot;: 0.057077462756221053,
+      &quot;minimum_momentum_margin&quot;: 0.057077462756221053,
+      &quot;relative_virial&quot;: -1.143082236297489e-11,
+      &quot;max_bvp_residual&quot;: 9.978636522846834e-10,
+      &quot;collocation_nodes&quot;: 3724,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 7.625507802786886e-10,
+        &quot;charge&quot;: 7.837099971435131e-10,
+        &quot;center_rotating_coefficient&quot;: 3.1052887315731325e-15
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -7.34569657163915e-05,
+        &quot;charge&quot;: 0.00010457378732874422
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 69467.60647391411,
+      &quot;charge&quot;: 69004.15014609463,
+      &quot;energy_over_charge&quot;: 1.0067163544053257,
+      &quot;center_first_coefficient&quot;: 0.0001106768054592866,
+      &quot;center_rotating_coefficient&quot;: 1.0046086363393867,
+      &quot;maximum_norm_squared_deviation&quot;: 0.009238524457037434,
+      &quot;minimum_first_coefficient&quot;: 0.0001106768054592866,
+      &quot;minimum_rotating_coefficient&quot;: 3.2482270725694735e-15,
+      &quot;minimum_lapse&quot;: 0.0504074838637919,
+      &quot;minimum_momentum_margin&quot;: 0.0504074838637919,
+      &quot;relative_virial&quot;: -1.1356950078666054e-11,
+      &quot;max_bvp_residual&quot;: 9.998382091014633e-10,
+      &quot;collocation_nodes&quot;: 3700,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 1.3223293107853263e-09,
+        &quot;charge&quot;: 1.3571843604087116e-09,
+        &quot;center_rotating_coefficient&quot;: 1.326155859464569e-15
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: 0.002211321531897752,
+        &quot;charge&quot;: 0.00305742776370247
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 1600,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 1189423.9255594455,
+      &quot;charge&quot;: 1188995.1919949083,
+      &quot;energy_over_charge&quot;: 1.0003605847756356,
+      &quot;center_first_coefficient&quot;: 9.51457864784011e-06,
+      &quot;center_rotating_coefficient&quot;: 1.0010742347019628,
+      &quot;maximum_norm_squared_deviation&quot;: 0.002149623474647755,
+      &quot;minimum_first_coefficient&quot;: 9.51457864784011e-06,
+      &quot;minimum_rotating_coefficient&quot;: 1.072881998284734e-15,
+      &quot;minimum_lapse&quot;: 0.05707741935788113,
+      &quot;minimum_momentum_margin&quot;: 0.05707741935788113,
+      &quot;relative_virial&quot;: -3.635247623712059e-11,
+      &quot;max_bvp_residual&quot;: 9.971477058973473e-10,
+      &quot;collocation_nodes&quot;: 3857,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 9.21551341952881e-10,
+        &quot;charge&quot;: 9.43469222569896e-10,
+        &quot;center_rotating_coefficient&quot;: 0.0
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.0009377314368621735,
+        &quot;charge&quot;: -0.0007561936805006124
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;normal_rank&quot;: 2,
+      &quot;omega&quot;: 0.97,
+      &quot;norm_stiffness&quot;: 400,
+      &quot;radius&quot;: 110.0,
+      &quot;status&quot;: &quot;collocation-converged&quot;,
+      &quot;energy&quot;: 1189272.4745455289,
+      &quot;charge&quot;: 1189640.9133521477,
+      &quot;energy_over_charge&quot;: 0.9996902941026291,
+      &quot;center_first_coefficient&quot;: 3.876608756114841e-06,
+      &quot;center_rotating_coefficient&quot;: 1.0046086431660843,
+      &quot;maximum_norm_squared_deviation&quot;: 0.009238525939028852,
+      &quot;minimum_first_coefficient&quot;: 3.876608756114841e-06,
+      &quot;minimum_rotating_coefficient&quot;: 1.041650897665956e-15,
+      &quot;minimum_lapse&quot;: 0.05040747095810749,
+      &quot;minimum_momentum_margin&quot;: 0.05040747095810749,
+      &quot;relative_virial&quot;: -3.5944166447330624e-11,
+      &quot;max_bvp_residual&quot;: 9.997094436229756e-10,
+      &quot;collocation_nodes&quot;: 3773,
+      &quot;bvp_tolerance&quot;: 1e-09,
+      &quot;convergence&quot;: {
+        &quot;energy&quot;: 1.6008860387506526e-09,
+        &quot;charge&quot;: 1.635783737923608e-09,
+        &quot;center_rotating_coefficient&quot;: 0.0
+      },
+      &quot;relative_to_constrained&quot;: {
+        &quot;energy&quot;: -0.0010649434344420735,
+        &quot;charge&quot;: -0.00021352280077474665
+      },
+      &quot;coarse_status&quot;: &quot;collocation-converged&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;normal_rank&quot;: 0,
+      &quot;status&quot;: &quot;no-active-normal-generator&quot;
+    }
+  ],
+  &quot;scope&quot;: &quot;Unconstrained complex positive wave field with a common polynomial norm stiffness. All unused polarizations have conditional positive comparison solutions when both active radial coefficients are positive. Coupled two-amplitude radial stability, Dirac kinetics and simplex frequency selection remain unresolved.&quot;
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

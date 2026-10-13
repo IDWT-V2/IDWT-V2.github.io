@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>discrete-count-ground-response-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/discrete-count-ground-response-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="discrete-count-ground-response-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/discrete-count-ground-response-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="discrete-count-ground-response-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>discrete-count-ground-response-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/discrete-count-ground-response-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">experiment_key</th><td>discrete-count-ground-spatial-response</td></tr><tr><th scope="row">created_utc</th><td>2026-10-12T08:14:42.971636+00:00</td></tr><tr><th scope="row">evaluations</th><td>90</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;experiment_key&quot;: &quot;discrete-count-ground-spatial-response&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-12T08:14:42.971636+00:00&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/discrete-count-ground-response.py&quot;: &quot;0ffdb3995d4c0781b8baafb69a4227a94e3aeba68aa41471206380475d0d94a0&quot;,
+    &quot;experiments/inverse-current-radial.py&quot;: &quot;52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80&quot;
+  },
+  &quot;evaluations&quot;: 90,
+  &quot;conditions&quot;: {
+    &quot;independent orthonormal physical blocks agree with exact rational similarity&quot;: 60,
+    &quot;independent full physical eigenproblem agrees with the exact squared-frequency polynomial&quot;: 30
+  },
+  &quot;maximum_errors&quot;: {
+    &quot;independent orthonormal physical blocks agree with exact rational similarity&quot;: 3.302763188371787e-16,
+    &quot;independent full physical eigenproblem agrees with the exact squared-frequency polynomial&quot;: 3.2145069246112056e-15
+  },
+  &quot;cases&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;2/5&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 41454*z**3/15625 + 898533*z**2/390625 - 12636*z/15625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 1,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 0.6000183701929076,
+          &quot;imaginary&quot;: 0.4433350193768036
+        },
+        {
+          &quot;real&quot;: 0.6000183701929076,
+          &quot;imaginary&quot;: -0.4433350193768036
+        },
+        {
+          &quot;real&quot;: 1.4530192596141884,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: -3.469446951953614e-18,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;2/5&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 131454*z**3/15625 + 9958221*z**2/390625 - 322979076*z/9765625 + 5668704/390625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 3.443992641753858,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 2.042947572053385,
+          &quot;imaginary&quot;: 0.7729557672022672
+        },
+        {
+          &quot;real&quot;: 2.042947572053385,
+          &quot;imaginary&quot;: -0.7729557672022672
+        },
+        {
+          &quot;real&quot;: 0.8831682141393692,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;2/5&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 266454*z**3/15625 + 41772753*z**2/390625 - 571203576*z/1953125 + 22674816/78125&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 6.14111320633171,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 4.203640442450375,
+          &quot;imaginary&quot;: 1.0948892751976136
+        },
+        {
+          &quot;real&quot;: 4.203640442450375,
+          &quot;imaginary&quot;: -1.0948892751976136
+        },
+        {
+          &quot;real&quot;: 2.50466190876755,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;2/5&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 671454*z**3/15625 + 268436349*z**2/390625 - 9467018532*z/1953125 + 39680928/3125&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 13.684314582695443,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 10.684049174404072,
+          &quot;imaginary&quot;: 1.7328344756098852
+        },
+        {
+          &quot;real&quot;: 10.684049174404072,
+          &quot;imaginary&quot;: -1.7328344756098852
+        },
+        {
+          &quot;real&quot;: 7.920643068496377,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 2,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;2/5&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 2471454*z**3/15625 + 3657230109*z**2/390625 - 480063283524*z/1953125 + 7545045024/3125&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 45.126997925424654,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 39.484245509110636,
+          &quot;imaginary&quot;: 3.3196625423301507
+        },
+        {
+          &quot;real&quot;: 39.484245509110636,
+          &quot;imaginary&quot;: -3.3196625423301507
+        },
+        {
+          &quot;real&quot;: 34.0775670563541,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;18/55&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 1388*z**3/625 + 242288*z**2/171875 - 7104*z/15625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 1,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 0.37363607646850566,
+          &quot;imaginary&quot;: 0.4110296729403613
+        },
+        {
+          &quot;real&quot;: 0.37363607646850566,
+          &quot;imaginary&quot;: -0.4110296729403613
+        },
+        {
+          &quot;real&quot;: 1.4735278470629916,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.0,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;18/55&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 3388*z**3/625 + 1711008*z**2/171875 - 605184*z/78125 + 131072/78125&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 2.7336139646844617,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 1.1745051547120373,
+          &quot;imaginary&quot;: 0.6598376615189779
+        },
+        {
+          &quot;real&quot;: 1.1745051547120373,
+          &quot;imaginary&quot;: -0.6598376615189779
+        },
+        {
+          &quot;real&quot;: 0.33817572589146827,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;18/55&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 6188*z**3/625 + 5984816*z**2/171875 - 4087488*z/78125 + 82944/3125&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 4.293721160222624,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 2.294858710644758,
+          &quot;imaginary&quot;: 0.8998536808678101
+        },
+        {
+          &quot;real&quot;: 2.294858710644758,
+          &quot;imaginary&quot;: -0.8998536808678101
+        },
+        {
+          &quot;real&quot;: 1.0173614184878512,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;18/55&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 14188*z**3/625 + 32451696*z**2/171875 - 53414592*z/78125 + 2809856/3125&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 8.355821434556015,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 5.4951103264035055,
+          &quot;imaginary&quot;: 1.3711386016749318
+        },
+        {
+          &quot;real&quot;: 5.4951103264035055,
+          &quot;imaginary&quot;: -1.3711386016749318
+        },
+        {
+          &quot;real&quot;: 3.354757912636989,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;18/55&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 48188*z**3/625 + 380555936*z**2/171875 - 2193368064*z/78125 + 414056448/3125&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 14.82685524384911,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 19.095250004224553,
+          &quot;imaginary&quot;: 2.5356446338222733
+        },
+        {
+          &quot;real&quot;: 19.095250004224553,
+          &quot;imaginary&quot;: -2.5356446338222733
+        },
+        {
+          &quot;real&quot;: 24.08344474770176,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/125&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 49203*z**3/31250 + 911169*z**2/1250000 - 2349*z/12500&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 1,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 0.2617048312518251,
+          &quot;imaginary&quot;: 0.3321099759541883
+        },
+        {
+          &quot;real&quot;: 0.2617048312518251,
+          &quot;imaginary&quot;: -0.3321099759541883
+        },
+        {
+          &quot;real&quot;: 1.0510863374963506,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.0,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/125&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 116703*z**3/31250 + 29763693*z**2/6250000 - 20583477*z/7812500 + 19683/50000&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 1.9014390043807063,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.8030534385323148,
+          &quot;imaginary&quot;: 0.517053034007835
+        },
+        {
+          &quot;real&quot;: 0.8030534385323148,
+          &quot;imaginary&quot;: -0.517053034007835
+        },
+        {
+          &quot;real&quot;: 0.22695011855466518,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/125&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 206703*z**3/31250 + 97394157*z**2/6250000 - 617844267*z/39062500 + 33480783/6250000&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 2.9096061973649703,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 1.52354980988387,
+          &quot;imaginary&quot;: 0.6911863355129287
+        },
+        {
+          &quot;real&quot;: 1.52354980988387,
+          &quot;imaginary&quot;: -0.6911863355129287
+        },
+        {
+          &quot;real&quot;: 0.6577901828672909,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/125&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 454203*z**3/31250 + 483852933*z**2/6250000 - 702373599*z/3906250 + 472392/3125&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 5.444437128414872,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 3.503909427555163,
+          &quot;imaginary&quot;: 1.0280433528006667
+        },
+        {
+          &quot;real&quot;: 3.503909427555163,
+          &quot;imaginary&quot;: -1.0280433528006667
+        },
+        {
+          &quot;real&quot;: 2.0822400164747994,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/125&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 1466703*z**3/31250 + 5126620653*z**2/6250000 - 49443832971*z/7812500 + 908114571/50000&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 14.896514259400279,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 11.604118749777403,
+          &quot;imaginary&quot;: 1.8511291887164973
+        },
+        {
+          &quot;real&quot;: 11.604118749777403,
+          &quot;imaginary&quot;: -1.8511291887164973
+        },
+        {
+          &quot;real&quot;: 8.829744241044926,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/137&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 519444*z**3/428125 + 117986544*z**2/267578125 - 927936*z/9765625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 1,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 0.8154672375488873,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.19891630823285578,
+          &quot;imaginary&quot;: 0.2774080932056781
+        },
+        {
+          &quot;real&quot;: 0.19891630823285578,
+          &quot;imaginary&quot;: -0.2774080932056781
+        },
+        {
+          &quot;real&quot;: 5.733615481850855e-17,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/137&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 1209924*z**3/428125 + 146800512*z**2/53515625 - 196701198336*z/167236328125 + 20316635136/152587890625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 1.450085351180622,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.6036207443026993,
+          &quot;imaginary&quot;: 0.4238954982452619
+        },
+        {
+          &quot;real&quot;: 0.6036207443026993,
+          &quot;imaginary&quot;: -0.4238954982452619
+        },
+        {
+          &quot;real&quot;: 0.16877301422858038,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/137&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 2097684*z**3/428125 + 2293047792*z**2/267578125 - 1087574330304*z/167236328125 + 248878780416/152587890625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 2.1784966935066974,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 1.1225622976531513,
+          &quot;imaginary&quot;: 0.5590210799798484
+        },
+        {
+          &quot;real&quot;: 1.1225622976531513,
+          &quot;imaginary&quot;: -0.5590210799798484
+        },
+        {
+          &quot;real&quot;: 0.47607856520160163,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/137&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 4465044*z**3/428125 + 10669137264*z**2/267578125 - 445373650368*z/6689453125 + 9795520512/244140625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 3.9591597139224417,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 2.5053624249763793,
+          &quot;imaginary&quot;: 0.8167573768513077
+        },
+        {
+          &quot;real&quot;: 2.5053624249763793,
+          &quot;imaginary&quot;: -0.8167573768513077
+        },
+        {
+          &quot;real&quot;: 1.4594152901393924,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;36/137&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 13835844*z**3/428125 + 104041252224*z**2/267578125 - 13815438465024*z/6689453125 + 995515121664/244140625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 7.977604682906672,
+          &quot;imaginary&quot;: 1.439147321040588
+        },
+        {
+          &quot;real&quot;: 7.977604682906672,
+          &quot;imaginary&quot;: -1.439147321040588
+        },
+        {
+          &quot;real&quot;: 10.389596903854168,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 5.9724935843470774,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;12/49&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 6028*z**3/6125 + 45011*z**2/153125 - 852*z/15625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 1,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 0.15927163705156042,
+          &quot;imaginary&quot;: 0.23780908746245147
+        },
+        {
+          &quot;real&quot;: 0.15927163705156042,
+          &quot;imaginary&quot;: -0.23780908746245147
+        },
+        {
+          &quot;real&quot;: 0.6656199912030029,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.0,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;12/49&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 13868*z**3/6125 + 270819*z**2/153125 - 338508*z/546875 + 21952/390625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 1.1690206656528936,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.4807947058316585,
+          &quot;imaginary&quot;: 0.35886301857231034
+        },
+        {
+          &quot;real&quot;: 0.4807947058316585,
+          &quot;imaginary&quot;: -0.35886301857231034
+        },
+        {
+          &quot;real&quot;: 0.13355318798991325,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;12/49&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 23668*z**3/6125 + 817679*z**2/153125 - 12329616*z/3828125 + 248832/390625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 1.7324576362681474,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.8813384750194477,
+          &quot;imaginary&quot;: 0.4686351892129927
+        },
+        {
+          &quot;real&quot;: 0.8813384750194477,
+          &quot;imaginary&quot;: -0.4686351892129927
+        },
+        {
+          &quot;real&quot;: 0.36902867899907965,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;12/49&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 49148*z**3/6125 + 723087*z**2/30625 - 4653324*z/153125 + 352/25&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 3.078305356091157,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 1.921746422676493,
+          &quot;imaginary&quot;: 0.6753529745547151
+        },
+        {
+          &quot;real&quot;: 1.921746422676493,
+          &quot;imaginary&quot;: -0.6753529745547151
+        },
+        {
+          &quot;real&quot;: 1.1023650638619849,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;12/49&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 147148*z**3/6125 + 6579607*z**2/30625 - 129884772*z/153125 + 31104/25&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 7.805521274731468,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 5.922001197819325,
+          &quot;imaginary&quot;: 1.168766473657944
+        },
+        {
+          &quot;real&quot;: 5.922001197819325,
+          &quot;imaginary&quot;: -1.168766473657944
+        },
+        {
+          &quot;real&quot;: 4.374639594935992,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;angular_harmonic&quot;: 1,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;1512/7381&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 12814992*z**3/23065625 + 1389616803*z**2/14416015625 - 113076*z/9765625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 1,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 0.38279148511361544,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.08639842083568602,
+          &quot;imaginary&quot;: 0.1509440661768009
+        },
+        {
+          &quot;real&quot;: 0.08639842083568602,
+          &quot;imaginary&quot;: -0.1509440661768009
+        },
+        {
+          &quot;real&quot;: 7.6259349749404e-17,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;angular_harmonic&quot;: 2,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;1512/7381&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 28757952*z**3/23065625 + 1563312879*z**2/2883203125 - 89684605188*z/819091796875 + 838338336/152587890625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 0.6541598662489063,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.260486175552061,
+          &quot;imaginary&quot;: 0.22216270993361026
+        },
+        {
+          &quot;real&quot;: 0.260486175552061,
+          &quot;imaginary&quot;: -0.22216270993361026
+        },
+        {
+          &quot;real&quot;: 0.0716561094319594,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;angular_harmonic&quot;: 3,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;1512/7381&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 47358072*z**3/23065625 + 21843312039*z**2/14416015625 - 4469713973352*z/9010009765625 + 7958860416/152587890625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 0.9396314383010324,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.4625411716039655,
+          &quot;imaginary&quot;: 0.28386543786774526
+        },
+        {
+          &quot;real&quot;: 0.4625411716039655,
+          &quot;imaginary&quot;: -0.28386543786774526
+        },
+        {
+          &quot;real&quot;: 0.18847454527602603,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;angular_harmonic&quot;: 5,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;1512/7381&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 92529792*z**3/23065625 + 85179545163*z**2/14416015625 - 1378753481196*z/360400390625 + 216040608/244140625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 1.580170138852459,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 0.9524937816190049,
+          &quot;imaginary&quot;: 0.39564121873281455
+        },
+        {
+          &quot;real&quot;: 0.9524937816190049,
+          &quot;imaginary&quot;: -0.39564121873281455
+        },
+        {
+          &quot;real&quot;: 0.526430624694518,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;angular_harmonic&quot;: 10,
+      &quot;ground_c_exact&quot;: &quot;3/5&quot;,
+      &quot;diagnostic_epsilon_exact&quot;: &quot;1512/7381&quot;,
+      &quot;scalar_hessian_factor_exact&quot;: &quot;1&quot;,
+      &quot;polynomial_exact&quot;: &quot;z**4 - 251959392*z**3/23065625 + 640173329883*z**2/14416015625 - 28734491097756*z/360400390625 + 12960546912/244140625&quot;,
+      &quot;negative_real_squared_frequencies_exact&quot;: 0,
+      &quot;zero_squared_frequency_multiplicity_exact&quot;: 0,
+      &quot;nonreal_squared_frequency_roots_exact&quot;: 2,
+      &quot;eigenvalues&quot;: [
+        {
+          &quot;real&quot;: 3.652509149805066,
+          &quot;imaginary&quot;: 0.0
+        },
+        {
+          &quot;real&quot;: 2.6807308405807175,
+          &quot;imaginary&quot;: 0.6517282807378104
+        },
+        {
+          &quot;real&quot;: 2.6807308405807175,
+          &quot;imaginary&quot;: -0.6517282807378104
+        },
+        {
+          &quot;real&quot;: 1.9096174958184906,
+          &quot;imaginary&quot;: 0.0
+        }
+      ],
+      &quot;classification&quot;: &quot;exact reducing ground rotational spatial block, not an assigned particle&quot;
+    }
+  ],
+  &quot;limits&quot;: [
+    &quot;these are ground comparison preparations with c3/5 and epsilon=c/Hd&quot;,
+    &quot;the scalar curvature belongs to the discrete count law, not the original reconstructed law&quot;,
+    &quot;one exact negative squared frequency proves growth in that reducing spatial block&quot;,
+    &quot;zero negative-real roots do not exclude complex frequencies or establish persistence&quot;,
+    &quot;ground results do not identify the assigned excited electron or other particles&quot;
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

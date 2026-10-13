@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>positive-count-wave.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/positive-count-wave.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="positive-count-wave.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/positive-count-wave.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="positive-count-wave.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>positive-count-wave.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/positive-count-wave.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Smooth exact count charts and a positive wave completion with spectral gap checks.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from fractions import Fraction
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from math import isqrt
+from pathlib import Path
+import json
+
+import mpmath as mp
+import numpy as np
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;envelope&#39;, ROOT/&#39;convex-count-envelope.py&#39;)
+envelope = module_from_spec(spec)
+spec.loader.exec_module(envelope)
+COUNTS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def high(value):
+    return mp.mpf(value.numerator)/value.denominator
+
+
+def smooth_chart(candidates):
+    lines = sorted(candidates, key=lambda c:c[&#39;m&#39;])
+    boundaries = [(one[&#39;eta&#39;]-two[&#39;eta&#39;])/(two[&#39;m&#39;]-one[&#39;m&#39;]) for one,two in zip(lines,lines[1:])]
+    check(all(a&lt;b for a,b in zip(boundaries,boundaries[1:])),
+          &#39;all geometric count tangents occur in their ordered convex envelope&#39;)
+    margins = []
+    for i, line in enumerate(lines):
+        local = []
+        if i:
+            local.append(line[&#39;x&#39;]-boundaries[i-1])
+        if i&lt;len(boundaries):
+            local.append(boundaries[i]-line[&#39;x&#39;])
+        margins.append(min(local))
+    sigma = min(margins)/4
+    check(sigma&gt;0, &#39;one common smoothing width is fixed by all eligible chart nodes&#39;)
+    def evaluate(x):
+        for i, boundary in enumerate(boundaries):
+            z = x-boundary
+            if abs(z)&lt;sigma:
+                u = z/sigma
+                cdf = mp.mpf(1)/2+mp.mpf(15)/16*(u-mp.mpf(2)/3*u**3+u**5/5)
+                moment = mp.mpf(15)/16*(u*u/2-u**4/2+u**6/6-mp.mpf(1)/6)
+                hinge = sigma*(u*cdf-moment)
+                jump = lines[i+1][&#39;m&#39;]-lines[i][&#39;m&#39;]
+                value = lines[i][&#39;m&#39;]*x+lines[i][&#39;eta&#39;]+jump*hinge
+                derivative = lines[i][&#39;m&#39;]+jump*cdf
+                curvature = jump*mp.mpf(15)/16*(1-u*u)**2/sigma
+                return value, derivative, curvature
+        winner = max(lines, key=lambda c:c[&#39;m&#39;]*x+c[&#39;eta&#39;])
+        return winner[&#39;m&#39;]*x+winner[&#39;eta&#39;], winner[&#39;m&#39;], mp.mpf(0)
+    for line in lines:
+        value, derivative, curvature = evaluate(line[&#39;x&#39;])
+        check(abs(value-(line[&#39;omega&#39;]-line[&#39;h&#39;]*line[&#39;c&#39;]))&lt;mp.mpf(&#39;1e-75&#39;),
+              &#39;smoothing leaves every eligible exact count contact value unchanged&#39;)
+        check(derivative==line[&#39;m&#39;] and curvature==0,
+              &#39;smoothing retains an open affine chart at every eligible count state&#39;)
+    for boundary in boundaries[::max(1,len(boundaries)//7)]:
+        for fraction in [mp.mpf(&#39;-.7&#39;),mp.mpf(&#39;0&#39;),mp.mpf(&#39;.4&#39;)]:
+            x=boundary+fraction*sigma
+            value, first, second = evaluate(x)
+            check(second&gt;=0, &#39;the regularized count envelope remains convex through every tested transition&#39;)
+            numeric_first = mp.diff(lambda xx:evaluate(xx)[0],x)
+            numeric_second = mp.diff(lambda xx:evaluate(xx)[1],x)
+            check(abs(numeric_first-first)&lt;mp.mpf(&#39;1e-65&#39;),
+                  &#39;independent differentiation verifies the complete smoothed source coefficient&#39;)
+            check(abs(numeric_second-second)/max(1,abs(second))&lt;mp.mpf(&#39;1e-65&#39;),
+                  &#39;independent differentiation verifies the smoothed current-ratio Hessian&#39;)
+    bound = sigma*mp.mpf(5)/16*(lines[-1][&#39;m&#39;]-lines[0][&#39;m&#39;])
+    return sigma, bound, evaluate
+
+
+def main():
+    mp.mp.dps=100
+    sectors,cases=[],[]
+    for depth in envelope.forward.radial.DEPTHS:
+        epsilon,candidates,_=envelope.depth_carrier(depth)
+        sigma,raising_bound,evaluate=smooth_chart(candidates)
+        sectors.append(dict(depth=depth, eligible_charts=len(candidates), smoothing_width=str(sigma),
+                            maximum_potential_raising_bound_per_norm=str(raising_bound)))
+        for name,dd,index in envelope.forward.radial.ASSIGNMENTS:
+            if dd!=depth:
+                continue
+            level=index-1
+            count,first,_=envelope.forward.count_data(depth,level)
+            hq=Fraction(2*level+depth,2)
+            cq=epsilon*first
+            lambdaq=hq/cq
+            omegaq=epsilon*count
+            etaq=omegaq-lambdaq
+            m2q=lambdaq*lambdaq-hq*hq
+            zero_square=etaq*etaq-m2q
+            check(zero_square==hq*hq-2*lambdaq*omegaq+omegaq*omegaq,
+                  &#39;the full infinite wave-spectrum zero test reduces to an exact rational equation&#39;)
+            # Only the nearest levels can minimize the monotone positive branch.
+            if zero_square&gt;Fraction(depth*depth,4):
+                floor_root=isqrt((4*zero_square.numerator)//zero_square.denominator)
+                near=max(0,(floor_root-depth)//2)
+                levels=[near,near+1]
+            else:
+                levels=[0]
+            for k in levels:
+                check(Fraction((2*k+depth)**2,4)!=zero_square,
+                      &#39;the exact nearest-level comparison excludes every spatial zero mode for this assigned state&#39;)
+            gaps=[]
+            for k in levels:
+                bareq=Fraction(2*k+depth,2)
+                root=mp.sqrt(high(bareq*bareq+m2q))
+                # Rationalized evaluation avoids cancellation at large source coefficients.
+                gap=abs(high(bareq*bareq-zero_square))/(root+abs(high(etaq)))
+                gaps.append(gap)
+            gap=min(gaps)
+            check(gap&gt;0,&#39;the complete self-adjoint count generator has a positive distance from zero&#39;)
+            hh,cc,omega,eta=high(hq),high(cq),high(omegaq),high(etaq)
+            mass=mp.sqrt(high(m2q))
+            aa,bb=mp.sqrt((1+cc)/2),mp.sqrt((1-cc)/2)
+            pair=mp.matrix([aa,bb])
+            ham=mp.matrix([[hh+eta,mass],[mass,-hh+eta]])
+            residual=mp.norm(ham*ham*pair-omega*omega*pair)/(omega*omega)
+            check(residual&lt;mp.mpf(&#39;1e-65&#39;),
+                  &#39;the fully squared field equation retains the exact count frequency relatively&#39;)
+            normq=Fraction(17,10)
+            full_energy=2*omegaq*omegaq*normq
+            phase_action=2*omegaq*normq
+            check(full_energy==omegaq*phase_action,
+                  &#39;complete positive energy divided by canonical phase action equals the count frequency&#39;)
+            for k in [0,level,level+1,1000]:
+                spatial=mp.mpf(k)+mp.mpf(depth)/2
+                eigs=[eta-mp.sqrt(spatial*spatial+mass*mass),eta+mp.sqrt(spatial*spatial+mass*mass)]
+                for eig in eigs:
+                    check(eig*eig&gt;=0,&#39;every retained wave block has nonnegative squared lab frequency&#39;)
+                    # Exact oscillator energy checks both position and velocity data.
+                    freq=abs(eig)
+                    initial=mp.mpc(&#39;.03&#39;,&#39;.07&#39;); velocity=mp.mpc(&#39;-.02&#39;,&#39;.01&#39;)
+                    initial_energy=abs(velocity)**2+freq*freq*abs(initial)**2
+                    for time in [mp.mpf(&#39;.2&#39;),mp.mpf(&#39;3&#39;)]:
+                        value=mp.cos(freq*time)*initial+mp.sin(freq*time)/freq*velocity
+                        speed=-freq*mp.sin(freq*time)*initial+mp.cos(freq*time)*velocity
+                        check(abs(abs(speed)**2+freq*freq*abs(value)**2-initial_energy)
+                              /max(1,initial_energy)&lt;mp.mpf(&#39;1e-70&#39;),
+                              &#39;wave evolution conserves the complete graph-energy block with both initial data&#39;)
+            cases.append(dict(particle=name,depth=depth,inferred_index=index,
+                frequency_in_radius_units_exact=str(omegaq), zero_condition_rhs_exact=str(zero_square),
+                exact_nearest_spatial_levels=levels, full_generator_gap=str(gap),
+                wave_clock_relative_residual=str(residual),
+                positive_phase_action_normalization=&#39;Qplus=2*omega*N; not electric charge&#39;,
+                classification=&#39;exact positive count standing wave and nonresonant chart-local persistence&#39;))
+            print(json.dumps(dict(particle=name,depth=depth,gap=str(gap))),flush=True)
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    names=[&#39;positive-count-wave.py&#39;,&#39;convex-count-envelope.py&#39;,&#39;forward-count-action.py&#39;,
+           &#39;inverse-current-radial.py&#39;,&#39;excited-shell-orientation-current.py&#39;]
+    report=dict(experiment_key=&#39;positive-wave-exact-count-completion&#39;,
+        created_utc=datetime.now(timezone.utc).isoformat(),
+        sources={&#39;experiments/&#39;+name:sha256((ROOT/name).read_bytes()).hexdigest() for name in names},
+        evaluations=sum(COUNTS.values()),conditions=COUNTS,maximum_errors=ERRORS,sectors=sectors,cases=cases,
+        limits=[&#39;the positive square action changes the physical kinetic law&#39;,
+                &#39;the count interaction and sphere geometry remain effective premises&#39;,
+                &#39;one common compact convolution is an explicit functional choice, not a master-field derivation&#39;,
+                &#39;nonlinear persistence uses a nodeless field and an open chart; the full generator gap is proved at the diagnostic scales&#39;,
+                &#39;positive energy and a finite principal cone do not establish Lorentz boost inertia&#39;,
+                &#39;contact attraction and orientation response from the first-order action are not transferred&#39;,
+                &#39;source second variations at vacuum retain their regularity qualification&#39;])
+    path=ROOT/(&#39;positive-count-wave-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path),evaluations=report[&#39;evaluations&#39;])),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

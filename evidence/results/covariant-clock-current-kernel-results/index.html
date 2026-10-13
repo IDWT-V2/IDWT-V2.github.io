@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>covariant-clock-current-kernel-results.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/covariant-clock-current-kernel-results/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="covariant-clock-current-kernel-results.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/covariant-clock-current-kernel-results/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="covariant-clock-current-kernel-results.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>covariant-clock-current-kernel-results.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/covariant-clock-current-kernel-results.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">experiment_key</th><td>covariant-clock-dynamical-current-kernel</td></tr><tr><th scope="row">created_utc</th><td>2026-10-12T06:14:34.889971+00:00</td></tr><tr><th scope="row">evaluations</th><td>84</td></tr><tr><th scope="row">response_bound_difference</th><td>(d - 3)**2/(8*(d + 1)**2)</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;experiment_key&quot;: &quot;covariant-clock-dynamical-current-kernel&quot;,
+  &quot;created_utc&quot;: &quot;2026-10-12T06:14:34.889971+00:00&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/covariant-clock-current-kernel.py&quot;: &quot;327fdabaa3647b61400310a4009fd84c8c51392a02127ed2935c8c56e0733898&quot;,
+    &quot;experiments/inverse-current-radial.py&quot;: &quot;52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80&quot;
+  },
+  &quot;evaluations&quot;: 84,
+  &quot;conditions&quot;: {
+    &quot;actual first coexact block retains its background zero mode&quot;: 6,
+    &quot;charge-fixed zero-frequency current response equals the negative-branch pseudoinverse&quot;: 6,
+    &quot;the conserved zero-shell charge coordinate has no driven current response&quot;: 12,
+    &quot;the complete zero-shell field response is retained as a right-unitary drift&quot;: 12,
+    &quot;independent complete time evolution verifies the causal first-harmonic current response&quot;: 12,
+    &quot;retained background self-current feedback still conserves the zero-shell charge coordinate&quot;: 12,
+    &quot;full background self-current dynamics verifies the resummed first-harmonic susceptibility&quot;: 12,
+    &quot;background self-current feedback does not remove the retained free zero-shell field direction&quot;: 12
+  },
+  &quot;maximum_errors&quot;: {
+    &quot;actual first coexact block retains its background zero mode&quot;: 4.790749710500321e-16,
+    &quot;charge-fixed zero-frequency current response equals the negative-branch pseudoinverse&quot;: 4.163336342344337e-17,
+    &quot;the conserved zero-shell charge coordinate has no driven current response&quot;: 7.553630476953706e-15,
+    &quot;the complete zero-shell field response is retained as a right-unitary drift&quot;: 1.6046896105955112e-15,
+    &quot;independent complete time evolution verifies the causal first-harmonic current response&quot;: 3.556794345414484e-11,
+    &quot;retained background self-current feedback still conserves the zero-shell charge coordinate&quot;: 7.887250413779499e-15,
+    &quot;full background self-current dynamics verifies the resummed first-harmonic susceptibility&quot;: 3.862620001332872e-11,
+    &quot;background self-current feedback does not remove the retained free zero-shell field direction&quot;: 6.43878933054422e-16
+  },
+  &quot;cases&quot;: [
+    {
+      &quot;depth&quot;: 2,
+      &quot;all_harmonic_current_susceptibility&quot;: &quot;(2*L**2 + 2*L + z - 4)/((-L**2 - 4*L + z - 4)*(-L**2 + 2*L + z - 1))&quot;,
+      &quot;first_harmonic_current_susceptibility&quot;: &quot;1/(z - 9)&quot;,
+      &quot;first_harmonic_static_response_exact&quot;: &quot;-1/9&quot;,
+      &quot;absolute_static_response&quot;: 0.1111111111111111,
+      &quot;ground_self_current_responses&quot;: [
+        {
+          &quot;load_exact&quot;: &quot;1/100&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-19/15&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;6769/750&quot;,
+          &quot;susceptibility&quot;: &quot;750/(750*z - 6769)&quot;
+        },
+        {
+          &quot;load_exact&quot;: &quot;1/5&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-19/15&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;713/75&quot;,
+          &quot;susceptibility&quot;: &quot;75/(75*z - 713)&quot;
+        }
+      ],
+      &quot;classification&quot;: &quot;retained zero field mode and finite charge-fixed current response&quot;
+    },
+    {
+      &quot;depth&quot;: 3,
+      &quot;all_harmonic_current_susceptibility&quot;: &quot;2*(L**2 + 2*L + z - 3)/((-L**2 - 6*L + z - 9)*(-L**2 + 2*L + z - 1))&quot;,
+      &quot;first_harmonic_current_susceptibility&quot;: &quot;2/(z - 16)&quot;,
+      &quot;first_harmonic_static_response_exact&quot;: &quot;-1/8&quot;,
+      &quot;absolute_static_response&quot;: 0.125,
+      &quot;ground_self_current_responses&quot;: [
+        {
+          &quot;load_exact&quot;: &quot;1/100&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-239/110&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;44239/2750&quot;,
+          &quot;susceptibility&quot;: &quot;5500/(2750*z - 44239)&quot;
+        },
+        {
+          &quot;load_exact&quot;: &quot;1/5&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-239/110&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;4878/275&quot;,
+          &quot;susceptibility&quot;: &quot;550/(275*z - 4878)&quot;
+        }
+      ],
+      &quot;classification&quot;: &quot;retained zero field mode and finite charge-fixed current response&quot;
+    },
+    {
+      &quot;depth&quot;: 4,
+      &quot;all_harmonic_current_susceptibility&quot;: &quot;(2*L**2 + 6*L + 3*z - 8)/((-L**2 - 8*L + z - 16)*(-L**2 + 2*L + z - 1))&quot;,
+      &quot;first_harmonic_current_susceptibility&quot;: &quot;3/(z - 25)&quot;,
+      &quot;first_harmonic_static_response_exact&quot;: &quot;-3/25&quot;,
+      &quot;absolute_static_response&quot;: 0.12,
+      &quot;ground_self_current_responses&quot;: [
+        {
+          &quot;load_exact&quot;: &quot;1/100&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-1142/375&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;78696/3125&quot;,
+          &quot;susceptibility&quot;: &quot;9375/(3125*z - 78696)&quot;
+        },
+        {
+          &quot;load_exact&quot;: &quot;1/5&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-1142/375&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;17909/625&quot;,
+          &quot;susceptibility&quot;: &quot;1875/(625*z - 17909)&quot;
+        }
+      ],
+      &quot;classification&quot;: &quot;retained zero field mode and finite charge-fixed current response&quot;
+    },
+    {
+      &quot;depth&quot;: 5,
+      &quot;all_harmonic_current_susceptibility&quot;: &quot;2*(L**2 + 4*L + 2*z - 5)/((-L**2 - 10*L + z - 25)*(-L**2 + 2*L + z - 1))&quot;,
+      &quot;first_harmonic_current_susceptibility&quot;: &quot;4/(z - 36)&quot;,
+      &quot;first_harmonic_static_response_exact&quot;: &quot;-1/9&quot;,
+      &quot;absolute_static_response&quot;: 0.1111111111111111,
+      &quot;ground_self_current_responses&quot;: [
+        {
+          &quot;load_exact&quot;: &quot;1/100&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-3209/822&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;373109/10275&quot;,
+          &quot;susceptibility&quot;: &quot;41100/(10275*z - 373109)&quot;
+        },
+        {
+          &quot;load_exact&quot;: &quot;1/5&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-3209/822&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;86816/2055&quot;,
+          &quot;susceptibility&quot;: &quot;8220/(2055*z - 86816)&quot;
+        }
+      ],
+      &quot;classification&quot;: &quot;retained zero field mode and finite charge-fixed current response&quot;
+    },
+    {
+      &quot;depth&quot;: 6,
+      &quot;all_harmonic_current_susceptibility&quot;: &quot;(2*L**2 + 10*L + 5*z - 12)/((-L**2 - 12*L + z - 36)*(-L**2 + 2*L + z - 1))&quot;,
+      &quot;first_harmonic_current_susceptibility&quot;: &quot;5/(z - 49)&quot;,
+      &quot;first_harmonic_static_response_exact&quot;: &quot;-5/49&quot;,
+      &quot;absolute_static_response&quot;: 0.10204081632653061,
+      &quot;ground_self_current_responses&quot;: [
+        {
+          &quot;load_exact&quot;: &quot;1/100&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-233/49&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;24243/490&quot;,
+          &quot;susceptibility&quot;: &quot;2450/(490*z - 24243)&quot;
+        },
+        {
+          &quot;load_exact&quot;: &quot;1/5&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-233/49&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;2867/49&quot;,
+          &quot;susceptibility&quot;: &quot;245/(49*z - 2867)&quot;
+        }
+      ],
+      &quot;classification&quot;: &quot;retained zero field mode and finite charge-fixed current response&quot;
+    },
+    {
+      &quot;depth&quot;: 10,
+      &quot;all_harmonic_current_susceptibility&quot;: &quot;(2*L**2 + 18*L + 9*z - 20)/((-L**2 - 20*L + z - 100)*(-L**2 + 2*L + z - 1))&quot;,
+      &quot;first_harmonic_current_susceptibility&quot;: &quot;9/(z - 121)&quot;,
+      &quot;first_harmonic_static_response_exact&quot;: &quot;-9/121&quot;,
+      &quot;absolute_static_response&quot;: 0.0743801652892562,
+      &quot;ground_self_current_responses&quot;: [
+        {
+          &quot;load_exact&quot;: &quot;1/100&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-179989/22143&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;45195017/369050&quot;,
+          &quot;susceptibility&quot;: &quot;3321450/(369050*z - 45195017)&quot;
+        },
+        {
+          &quot;load_exact&quot;: &quot;1/5&quot;,
+          &quot;ground_eta_exact&quot;: &quot;-179989/22143&quot;,
+          &quot;squared_response_frequency_exact&quot;: &quot;5545439/36905&quot;,
+          &quot;susceptibility&quot;: &quot;332145/(36905*z - 5545439)&quot;
+        }
+      ],
+      &quot;classification&quot;: &quot;retained zero field mode and finite charge-fixed current response&quot;
+    }
+  ],
+  &quot;response_bound_difference&quot;: &quot;(d - 3)**2/(8*(d + 1)**2)&quot;,
+  &quot;limits&quot;: [
+    &quot;free positive Killing background and first-order current response&quot;,
+    &quot;a fixed full matrix-charge variation removes the conjugate zero-current preparation&quot;,
+    &quot;the secular field response is retained rather than discarded&quot;,
+    &quot;a dimension-dependent response maximum is not a color, charge or force derivation&quot;,
+    &quot;coupled excited-state current dynamics and persistence remain open&quot;
+  ]
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

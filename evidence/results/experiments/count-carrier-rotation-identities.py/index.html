@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>count-carrier-rotation-identities.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/count-carrier-rotation-identities.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="count-carrier-rotation-identities.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/count-carrier-rotation-identities.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="count-carrier-rotation-identities.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>count-carrier-rotation-identities.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/count-carrier-rotation-identities.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact tensor identities of the reduced count carriers; no trajectory simulation.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from itertools import combinations
+from pathlib import Path
+import json
+
+import numpy as np
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;carrier&#39;, ROOT/&#39;minimal-count-carrier.py&#39;)
+carrier = module_from_spec(spec)
+spec.loader.exec_module(carrier)
+CHECKS = {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    CHECKS[label] = CHECKS.get(label, 0)+1
+
+
+def exact(matrix):
+    return sp.Matrix(np.asarray(matrix).tolist()).applyfunc(lambda z: sp.nsimplify(z))
+
+
+def expectation(seed, matrix):
+    return sp.simplify(sp.trace(seed.conjugate().T*matrix*seed)/sp.trace(seed.conjugate().T*seed))
+
+
+def main():
+    sectors = []
+    for depth in [2, 3, 4, 5, 6, 10]:
+        alpha, beta, gammas, seed_float, tensor = carrier.preparation(depth)
+        gammas = [exact(g) for g in gammas]
+        # Recover Gaussian-integer columns so every subsequent calculation is exact.
+        raw = np.rint(seed_float.real/np.max(np.abs(seed_float))).astype(int)+1j*np.rint(
+            seed_float.imag/np.max(np.abs(seed_float))).astype(int)
+        seed = exact(raw)
+        dimension = depth+1
+        eye = sp.eye(dimension)
+        vectors = sp.eye(dimension).columnspace()
+        forms = [sp.Matrix(dimension, dimension, lambda i, j: int(round(tensor[k, i, j])))
+                 for k in range(dimension)]
+        for i, j, k in combinations(range(dimension), 3):
+            check(forms[i][j, k] == expectation(seed, sp.I*gammas[i]*gammas[j]*gammas[k]),
+                  &#39;every three-form coefficient is verified directly in exact rational Clifford arithmetic&#39;)
+        for gamma in gammas+[sp.I*gammas[i]*gammas[j] for i, j in combinations(range(dimension), 2)]:
+            check(expectation(seed, gamma) == 0, &#39;every seed balance moment is independently verified in exact rational arithmetic&#39;)
+        if depth in [5, 6]:
+            conjugation = sp.eye(len(beta))
+            for i in ([0, 2, 4] if depth == 5 else [0, 2, 4, 6]):
+                conjugation *= gammas[i]
+            check(conjugation*conjugation.conjugate() == sp.eye(len(beta)),
+                  &#39;the spinor real structure is an exact antiunitary involution&#39;)
+            for gamma in gammas:
+                check(conjugation*gamma.conjugate() == -gamma*conjugation,
+                      &#39;the real structure anticommutes with every Clifford vector and commutes with every real rotation&#39;)
+            real_seed = (1-sp.I)*seed if depth == 5 else seed
+            check((conjugation*real_seed.conjugate()-real_seed).applyfunc(sp.simplify) == sp.zeros(*real_seed.shape),
+                  &#39;the balanced pure seed belongs to the invariant eight-dimensional real spinor space after one phase choice&#39;)
+        if depth == 5:
+            chirality = sp.I*sp.prod(gammas)
+            check(chirality == chirality.conjugate().T and chirality**2 == sp.eye(len(beta)),
+                  &#39;six-generator chirality is an exact Hermitian involution&#39;)
+            complex_form = sp.Matrix(dimension, dimension, lambda i, j: 0 if i == j else
+                                    expectation(seed, -sp.I*chirality*gammas[i]*gammas[j]))
+            check(complex_form.T == -complex_form and complex_form**2 == -eye,
+                  &#39;depth-five seed defines an exact orthogonal complex structure on its Clifford vector space&#39;)
+        elif depth == 10:
+            axis = vectors[0]
+            complex_form = forms[0]
+            check(complex_form**2 == -eye+axis*axis.T,
+                  &#39;depth-ten seed defines five equal planes perpendicular to its distinguished three-form axis&#39;)
+            for k in range(dimension):
+                for i in range(dimension):
+                    for j in range(dimension):
+                        check(forms[k][i, j] == axis[k]*complex_form[i, j]+
+                              axis[i]*complex_form[j, k]+axis[j]*complex_form[k, i],
+                              &#39;the depth-ten three-form is exactly the axis one-form wedged with its perpendicular two-form&#39;)
+        if depth in [5, 6]:
+            def target(v):
+                result = v*v.T-(v.T*v)[0]*eye
+                if depth == 5:
+                    result += (complex_form*v)*(complex_form*v).T
+                return result
+            for i in range(dimension):
+                check(forms[i]**2 == target(vectors[i]), &#39;exact diagonal coefficients of the normal-contraction identity&#39;)
+                for j in range(i+1, dimension):
+                    check(forms[i]*forms[j]+forms[j]*forms[i] == target(vectors[i]+vectors[j])-
+                          target(vectors[i])-target(vectors[j]),
+                          &#39;exact mixed coefficients prove the contraction identity for every normal, not only sampled normals&#39;)
+            if depth == 5:
+                for i in range(dimension):
+                    for j in range(dimension):
+                        check(forms[i]*complex_form*vectors[j]+forms[j]*complex_form*vectors[i] == sp.zeros(dimension, 1),
+                              &#39;the depth-five contraction annihilates the pattern-defined complex normal direction&#39;)
+        if depth in [5, 6, 10]:
+            dims = {}
+            for group, indices in [(&#39;ambient&#39;, range(dimension)), (&#39;physical&#39;, range(1, dimension))]:
+                products = [gammas[i]*gammas[j]*seed for i, j in combinations(indices, 2)]
+                columns = [sp.Matrix(list(p)).applyfunc(sp.re).col_join(sp.Matrix(list(p)).applyfunc(sp.im)) for p in products]
+                real_map = sp.Matrix.hstack(*columns)
+                kernel = real_map.nullspace()
+                dims[group] = len(kernel)
+                check(len(kernel) == {(5, &#39;ambient&#39;): 8, (5, &#39;physical&#39;): 3,
+                                      (6, &#39;ambient&#39;): 14, (6, &#39;physical&#39;): 8,
+                                      (10, &#39;ambient&#39;): 24, (10, &#39;physical&#39;): 24}[(depth, group)],
+                      &#39;exact real infinitesimal seed stabilizer dimension&#39;)
+                for coefficients in kernel:
+                    check(real_map*coefficients == sp.zeros(real_map.rows, 1),
+                          &#39;every exact stabilizer basis element annihilates the actual seed&#39;)
+            if depth == 10:
+                gram = sp.Matrix(dimension, dimension, lambda i, j: sum(
+                    forms[a][i, b]*forms[a][j, b] for a in range(dimension) for b in range(dimension))/2)
+                check(gram == eye+4*axis*axis.T, &#39;the depth-ten three-form determines its axis by a simple isolated metric eigenvalue&#39;)
+                # Symbolic arbitrary normal: direct trace and minimal polynomial, not random testing.
+                x = sp.Matrix(sp.symbols(&#39;x0:&#39;+str(dimension), real=True))
+                contraction = sum((x[i]*forms[i] for i in range(dimension)), sp.zeros(dimension))
+                norm_squared, t = (x.T*x)[0], x[0]
+                check(contraction*x == sp.zeros(dimension, 1), &#39;the normal is always in the contraction kernel&#39;)
+                check(sp.expand(sp.trace(contraction**2)+2*(norm_squared+4*t*t)) == 0,
+                      &#39;exact depth-ten rotation trace fixes one full-strength pair and four axial pairs&#39;)
+                polynomial = contraction*(contraction**2+norm_squared*eye)*(contraction**2+t*t*eye)
+                check(polynomial.applyfunc(sp.expand) == sp.zeros(dimension),
+                      &#39;exact depth-ten contraction minimal polynomial holds for every normal&#39;)
+            sectors.append(dict(depth=depth, stabilizer_dimensions=dims))
+        print(json.dumps(dict(completed_depth=depth, evaluations=sum(CHECKS.values()))), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    paths = [Path(__file__), ROOT/&#39;minimal-count-carrier.py&#39;, ROOT/&#39;forward-count-action.py&#39;,
+             ROOT/&#39;inverse-current-radial.py&#39;, ROOT/&#39;excited-shell-orientation-current.py&#39;]
+    report = dict(experiment_key=&#39;count-carrier-exact-rotation-identities&#39;, created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest() for p in paths},
+                  evaluations=sum(CHECKS.values()), conditions=CHECKS, sectors=sectors,
+                  limits=[&#39;the normal-contraction identities describe local spin density, not total particle spin&#39;,
+                          &#39;the Clifford vector space includes the grading direction, not an extra physical spatial depth&#39;,
+                          &#39;the depth-five kernel axis is local; fixed encounter-axis dynamics is not derived&#39;,
+                          &#39;the seed preparation and sphere geometry remain conditional&#39;])
+    path = ROOT/(&#39;count-carrier-rotation-identities-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path), evaluations=report[&#39;evaluations&#39;])), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

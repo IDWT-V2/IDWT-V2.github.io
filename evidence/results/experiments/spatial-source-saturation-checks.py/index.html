@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>spatial-source-saturation-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/spatial-source-saturation-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="spatial-source-saturation-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/spatial-source-saturation-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="spatial-source-saturation-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>spatial-source-saturation-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/spatial-source-saturation-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Spatial Dirac source saturation, two-point smearing and full cubic leakage.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import module_from_spec, spec_from_file_location
+from math import comb, factorial, prod, sqrt
+from pathlib import Path
+import json
+
+import numpy as np
+from scipy.linalg import cho_factor, cho_solve, eigvalsh
+from scipy.special import eval_gegenbauer, roots_jacobi
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+HELPER = ROOT/&#39;spatial-band-curvature-checks.py&#39;
+spec = spec_from_file_location(&#39;spatial_band&#39;, HELPER)
+spatial = module_from_spec(spec)
+spec.loader.exec_module(spatial)
+DEPTHS = (2, 3, 4, 5, 6, 10)
+ASSIGNMENTS = [(&#39;W&#39;, 2, 76), (&#39;Z&#39;, 2, 81), (&#39;Higgs&#39;, 2, 95),
+               (&#39;down&#39;, 3, 1), (&#39;strange&#39;, 3, 4),
+               (&#39;up&#39;, 4, 3), (&#39;charm&#39;, 4, 20), (&#39;top&#39;, 4, 72),
+               (&#39;nu1&#39;, 5, 10), (&#39;nu2&#39;, 5, 15), (&#39;nu3&#39;, 5, 22),
+               (&#39;electron&#39;, 6, 13), (&#39;muon&#39;, 6, 35), (&#39;tau&#39;, 10, 23)]
+conditions = {}
+errors = {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    conditions[label] = conditions.get(label, 0)+1
+
+
+def close(actual, expected, label, tolerance=3e-9):
+    actual, expected = np.asarray(actual), np.asarray(expected)
+    relative = float(np.max(np.abs(actual-expected))/max(1.0, float(np.max(np.abs(expected)))))
+    errors[label] = max(errors.get(label, 0.0), relative)
+    check(relative &lt; tolerance, label)
+
+
+def shells(depth, maximum, t):
+    a, b = np.zeros((maximum+1, len(t))), np.zeros((maximum+1, len(t)))
+    lam = (depth-1)/2
+    for level in range(maximum+1):
+        a[level] = (level+depth-1)/(depth-1)*eval_gegenbauer(level, lam, t)
+        if level:
+            b[level] = eval_gegenbauer(level-1, lam+1, t)
+    return a, b
+
+
+def quadrature(depth, nodes):
+    t, weights = roots_jacobi(nodes, (depth-2)/2, (depth-2)/2)
+    return t, weights/np.sum(weights)
+
+
+def independent_evaluation(depth, level, points):
+    gamma = spatial.gammas(depth)
+    rank, ambient = len(gamma[0]), depth+1
+    symbol = gamma+[1j*np.eye(rank)]
+    indices = list(spatial.compositions(level, ambient))
+    lookup = {alpha: i for i, alpha in enumerate(indices)}
+    dimension = len(indices)*rank
+    if level:
+        lower = list(spatial.compositions(level-1, ambient))
+        c = np.zeros((len(lower)*rank, dimension), complex)
+        for i, beta in enumerate(lower):
+            for axis in range(ambient):
+                alpha = list(beta)
+                alpha[axis] += 1
+                j = lookup[tuple(alpha)]
+                c[i*rank:(i+1)*rank, j*rank:(j+1)*rank] = symbol[axis]*sqrt(alpha[axis])
+        factor = cho_factor(c@c.conj().T)
+        def project(value):
+            return value-c.conj().T@cho_solve(factor, c@value)
+    else:
+        def project(value):
+            return value
+    normalization = sqrt(prod(ambient+2*j for j in range(level)))
+    result = []
+    for point in points:
+        evaluation = np.hstack([np.eye(rank)*normalization*np.prod(np.asarray(point)**alpha)/
+                                sqrt(prod(factorial(i) for i in alpha)) for alpha in indices])
+        result.append(project(evaluation.conj().T))
+    return result
+
+
+def exact_checks():
+    t, d = sp.symbols(&#39;t d&#39;, real=True)
+    numerator = (1+d*t)**2+1-t*t
+    deficit = sp.expand((d+1)**2-numerator)
+    check(sp.expand(deficit-(1-t)*((d**2-1)*t+d**2+2*d-1)) == 0,
+          &#39;ground-plus-first-shell exact overlap deficit&#39;)
+    check(sp.expand(2*d-2*d*t-2*d*(1-t)) == 0,
+          &#39;equal ground polarization leaves a strict first-shell separation&#39;)
+    for depth in DEPTHS:
+        for level in (1, 2, 3):
+            r, z = sp.symbols(&#39;r z&#39;, positive=True)
+            radius = sp.sqrt(r*r+z*z)
+            lam = sp.Rational(depth-1, 2)
+            aa = sp.cancel(sp.Rational(level+depth-1, depth-1)*radius**level*
+                           sp.gegenbauer(level, lam, z/radius))
+            bb = sp.cancel(radius**(level-1)*sp.gegenbauer(level-1, lam+1, z/radius))
+            check(sp.simplify(sp.diff(aa, z)-depth*bb-r*sp.diff(bb, r)) == 0,
+                  &#39;zonal kernel is ambient monogenic scalar component&#39;)
+            check(sp.simplify(sp.diff(aa, r)/r+sp.diff(bb, z)) == 0,
+                  &#39;zonal kernel is ambient monogenic vector component&#39;)
+        x, w = quadrature(depth, 20)
+        a, b = shells(depth, 4, x)
+        g = np.array([comb(l+depth-1, depth-1) for l in range(5)], float)
+        minus_a, minus_b = x*a-(1-x*x)*b, -(a+x*b)
+        plus_gram = (a*w)@a.T+(b*w*(1-x*x))@b.T
+        minus_gram = (minus_a*w)@minus_a.T+(minus_b*w*(1-x*x))@minus_b.T
+        cross = (a*w)@minus_a.T+(b*w*(1-x*x))@minus_b.T
+        close(plus_gram, np.diag(g), &#39;positive zonal shells have physical orthogonal norms&#39;)
+        close(minus_gram, np.diag(g), &#39;negative zonal shells have physical orthogonal norms&#39;)
+        close(cross, np.zeros_like(cross), &#39;both Dirac signs are explicitly retained&#39;)
+
+
+def matrix_kernel_checks():
+    for depth in DEPTHS:
+        rank = 2**(depth//2)
+        north = np.eye(depth+1)[-1]
+        angle = .713
+        point = north*np.cos(angle)
+        point[0] = np.sin(angle)
+        frames_n, frames_y = [], []
+        for level in (0, 1, 2):
+            n, y = independent_evaluation(depth, level, [north, point])
+            frames_n.append(n)
+            frames_y.append(y)
+            aa, bb = shells(depth, level, np.array([np.cos(angle)]))
+            expected = aa[level, 0]*np.eye(rank)-1j*np.sin(angle)*bb[level, 0]*spatial.gammas(depth)[0]
+            close(y.conj().T@n, expected, &#39;kernel agrees with independently projected polynomial modes&#39;)
+            count = comb(level+depth, depth)
+            un, uy = np.vstack(frames_n)/sqrt(count), np.vstack(frames_y)/sqrt(count)
+            overlap = uy.conj().T@un
+            cumulative = np.sum(aa[:level+1, 0]), np.sum(bb[:level+1, 0])
+            singular = sqrt(cumulative[0]**2+np.sin(angle)**2*cumulative[1]**2)/count
+            close(overlap.conj().T@overlap, singular**2*np.eye(rank),
+                  &#39;all spatial polarization overlap singular values agree&#39;)
+            source_gram = count/2*np.block([[np.eye(rank), un.conj().T@uy],
+                                           [uy.conj().T@un, np.eye(rank)]])
+            target = sorted([count*(1-singular)/2]*rank+[count*(1+singular)/2]*rank)
+            close(eigvalsh(source_gram), target, &#39;two-point contact nonzero eigenvalues from independent frames&#39;)
+            if level:
+                check(singular &lt; 1, &#39;distinct points cannot saturate an excited cumulative band&#39;)
+                first = sqrt((1+depth*np.cos(angle))**2+np.sin(angle)**2)/(depth+1)
+                check(singular &lt;= 1-(depth+1)/count*(1-first)+3e-12,
+                      &#39;ground-plus-first-shell overlap bounds every larger band&#39;)
+
+
+def band_data(depth, cutoff, extra_nodes=0):
+    maximum = max(1, 3*cutoff)
+    t, weights = quadrature(depth, max(20, 3*cutoff+3+extra_nodes))
+    a, b = shells(depth, maximum, t)
+    aa, bb = np.sum(a[:cutoff+1], axis=0), np.sum(b[:cutoff+1], axis=0)
+    count = comb(cutoff+depth, depth)
+    density = (aa*aa+(1-t*t)*bb*bb)/count
+    close(weights@density, 1, &#39;bright spatial field has canonical unit norm&#39;, 2e-8)
+    i4, i6 = float(weights@(density*density)), float(weights@(density**3))
+    g = np.array([comb(l+depth-1, depth-1) for l in range(maximum+1)], float)
+    minus_a, minus_b = t*a-(1-t*t)*b, -(a+t*b)
+    positive = ((a*(weights*density))@aa+(b*(weights*density*(1-t*t)))@bb)/np.sqrt(g*count)
+    negative = ((minus_a*(weights*density))@aa+
+                (minus_b*(weights*density*(1-t*t)))@bb)/np.sqrt(g*count)
+    close(np.sum(positive**2)+np.sum(negative**2), i6,
+          &#39;complete cubic source Parseval identity across both Dirac signs&#39;, 4e-8)
+    selected = np.sum(positive[:cutoff+1]**2)
+    positive_out = np.sum(positive[cutoff+1:]**2)
+    negative_out = np.sum(negative**2)
+    check(-1e-10 &lt;= 1-selected/i6 &lt;= 1+1e-10, &#39;full source leakage fraction is admissible&#39;)
+    if cutoff:
+        check(i4 &lt; count, &#39;smooth bright self-density strictly misses full contact saturation&#39;)
+    return dict(count=count, quartic_overlap=i4, self_density_fraction_of_point_contact=i4/count,
+                cubic_source_squared_norm=i6, selected_positive_fraction=float(selected/i6),
+                omitted_positive_fraction=float(positive_out/i6),
+                negative_Dirac_fraction=float(negative_out/i6),
+                total_omitted_fraction=float(1-selected/i6))
+
+
+def pair_source_fraction(depth, cutoff, angle):
+    aa, bb = shells(depth, cutoff, np.array([np.cos(angle)]))
+    count = comb(cutoff+depth, depth)
+    singular = sqrt(float(np.sum(aa)**2+np.sin(angle)**2*np.sum(bb)**2))/count
+    return (1+min(1.0, singular))/2
+
+
+def main():
+    exact_checks()
+    matrix_kernel_checks()
+    cases = []
+    for label, depth, mode in ASSIGNMENTS:
+        cutoff = mode-1
+        data = band_data(depth, cutoff)
+        refined = band_data(depth, cutoff, 19)
+        for key in (&#39;quartic_overlap&#39;, &#39;cubic_source_squared_norm&#39;, &#39;total_omitted_fraction&#39;,
+                    &#39;negative_Dirac_fraction&#39;):
+            close(refined[key], data[key], &#39;independent quadrature refinement&#39;, 3e-8)
+        metric = (depth-1+1/(depth+2))*cutoff*(cutoff+depth+1)/(depth+1)**2
+        angle = 1e-4/max(1, cutoff)
+        fraction = pair_source_fraction(depth, cutoff, angle)
+        close((1-fraction)/angle**2, metric/4,
+              &#39;two-point width correction agrees with existing spatial quantum metric&#39;, 8e-4)
+        sources = {str(a): pair_source_fraction(depth, cutoff, a) for a in (.001, .01, .05)}
+        cases.append(dict(particle=label, depth=depth, mode_index=mode, cutoff=cutoff,
+                          sphere_radius=&#39;R; all angles dimensionless, physical separation R times angle&#39;,
+                          **data, two_equal_point_contact_fractions=sources))
+        print(label, depth, mode, &#39;self/point&#39;, data[&#39;self_density_fraction_of_point_contact&#39;],
+              &#39;leakage&#39;, data[&#39;total_omitted_fraction&#39;], flush=True)
+    comparisons = []
+    for depth in DEPTHS:
+        available = [case for case in cases if case[&#39;depth&#39;] == depth]
+        low, high = available[0], available[-1]
+        comparisons.append(dict(depth=depth, low=low[&#39;particle&#39;], high=high[&#39;particle&#39;],
+                                within_sector_ratio_available=len(available) &gt; 1,
+                                quartic_ratio_relative_to_simplex=(high[&#39;quartic_overlap&#39;]/low[&#39;quartic_overlap&#39;])/
+                                (high[&#39;count&#39;]/low[&#39;count&#39;])-1))
+    report = dict(created_at=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/spatial-source-saturation-checks.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest(),
+                           &#39;experiments/spatial-band-curvature-checks.py&#39;: sha256(HELPER.read_bytes()).hexdigest()},
+                  conditions=conditions, max_relative_errors=errors, cases=cases, family_comparisons=comparisons,
+                  scope=&#39;Actual positive spherical Dirac bands; density self-contact is a classical comparison, not electron position probability or a Lorentz-scalar master derivation.&#39;)
+    destination = ROOT/(&#39;spatial-source-saturation-results-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)+&#39;.json&#39;)
+    destination.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(destination), checks=sum(conditions.values()), conditions=len(conditions)), indent=2))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

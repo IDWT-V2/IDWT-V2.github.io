@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>finite-guide-clocks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/finite-guide-clocks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="finite-guide-clocks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/finite-guide-clocks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="finite-guide-clocks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>finite-guide-clocks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/finite-guide-clocks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Dynamic guide boundary response, reciprocal stress and distinct count clocks.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from math import comb, pi
+from pathlib import Path
+import itertools
+import json
+
+import numpy as np
+import sympy as s
+from scipy.integrate import quad, solve_bvp
+
+ROOT = Path(__file__).resolve().parent
+COUNTS, ERRORS = {}, {}
+ASSIGNMENTS = {2:[(&#39;W&#39;,76),(&#39;Z&#39;,81),(&#39;Higgs&#39;,95)],
+               3:[(&#39;down&#39;,1),(&#39;strange&#39;,4)],
+               4:[(&#39;up&#39;,3),(&#39;charm&#39;,20),(&#39;top&#39;,72)],
+               5:[(&#39;nu1-comparison&#39;,10),(&#39;nu2-comparison&#39;,15),(&#39;nu3-comparison&#39;,22)],
+               6:[(&#39;electron&#39;,13),(&#39;muon&#39;,35)],10:[(&#39;tau&#39;,23)]}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label,0)+1
+
+
+def exact(value, label):
+    check(s.simplify(value)==0,label)
+
+
+def close(actual, expected, label, tolerance=1e-8):
+    error = float(abs(actual-expected)/max(1,abs(expected)))
+    ERRORS[label] = max(ERRORS.get(label,0),error)
+    check(error&lt;tolerance,label)
+
+
+def amplitude(lam, omega, length, left, right, x):
+    alpha = np.sqrt(complex(lam*lam-omega*omega))
+    if abs(alpha)&lt;1e-12:
+        return left+(right-left)*x/length,(right-left)/length
+    den = np.sinh(alpha*length)
+    value = (left*np.sinh(alpha*(length-x))+right*np.sinh(alpha*x))/den
+    slope = alpha*(-left*np.cosh(alpha*(length-x))+right*np.cosh(alpha*x))/den
+    return value,slope
+
+
+def boundary_matrix(lam, omega, length):
+    alpha = np.sqrt(complex(lam*lam-omega*omega))
+    if abs(alpha)&lt;1e-12:
+        return np.array([[1,-1],[-1,1]],complex)/length
+    return alpha/np.sinh(alpha*length)*np.array([[np.cosh(alpha*length),-1],[-1,np.cosh(alpha*length)]])
+
+
+def mean_action_cost(lam, omega, length, endpoint):
+    return (np.vdot(endpoint,boundary_matrix(lam,omega,length)@endpoint)/4).real
+
+
+def symbolic():
+    alpha, length, x = s.symbols(&#39;alpha L x&#39;,positive=True)
+    a,b = s.symbols(&#39;a b&#39;,real=True)
+    z = (a*s.sinh(alpha*(length-x))+b*s.sinh(alpha*x))/s.sinh(alpha*length)
+    cost = alpha*((a*a+b*b)*s.coth(alpha*length)-2*a*b/s.sinh(alpha*length))/4
+    pressure = (s.diff(z,x)**2-alpha*alpha*z*z)/4
+    exact(s.diff(z,x,2)-alpha*alpha*z,&#39;dynamic spectral amplitude solves the full wave equation&#39;)
+    exact(s.diff(pressure,x),&#39;time-averaged full stress is independent of position&#39;)
+    exact(s.trigsimp(s.diff(cost,length)+pressure.subs(x,0)),
+          &#39;averaged action variation and independently derived pressure agree&#39;)
+    exact(s.limit(alpha*s.coth(alpha*length),alpha,0)-1/length,
+          &#39;diagonal boundary response has a regular threshold limit&#39;)
+    exact(s.limit(alpha/s.sinh(alpha*length),alpha,0)-1/length,
+          &#39;cross boundary response has the same regular threshold limit&#39;)
+    p = s.symbols(&#39;p&#39;,positive=True)
+    exact((alpha*s.coth(alpha*length)).subs(alpha,s.I*p)-p*s.cot(p*length),
+          &#39;above-gap diagonal response is oscillatory rather than exponential&#39;)
+    exact((alpha/s.sinh(alpha*length)).subs(alpha,s.I*p)-p/s.sin(p*length),
+          &#39;above-gap cross response retains its standing-wave poles&#39;)
+    omega, mass = s.symbols(&#39;omega mass&#39;,positive=True)
+    energy_density = (s.diff(z,x)**2+(mass*mass+omega*omega)*z*z)/4
+    cost_density = (s.diff(z,x)**2+(mass*mass-omega*omega)*z*z)/4
+    exact(energy_density-cost_density-omega*omega*z*z/2,
+          &#39;stored energy differs from averaged action cost by the retained kinetic term&#39;)
+    phase = s.symbols(&#39;phase&#39;,real=True)
+    field = s.exp(-s.I*omega*x)*phase
+    exact(s.conjugate(field)*field-phase*phase,
+          &#39;a single-frequency phase-invariant shape does not freeze its carrier clock&#39;)
+
+
+def dynamic_controls():
+    rows = []
+    endpoint = np.array([0.13+0.03j,-0.07+0.09j])
+    lam = 1.3
+    for omega in (0.4,1.3,1.9):
+        for length in (0.7,1.2):
+            grid = np.linspace(0,length,65)
+            initial_value = endpoint[0]+(endpoint[1]-endpoint[0])*grid/length
+            initial_slope = np.full(len(grid),(endpoint[1]-endpoint[0])/length)
+            initial = np.vstack([initial_value.real,initial_value.imag,
+                                  initial_slope.real,initial_slope.imag])
+            solution = solve_bvp(lambda x,y:np.vstack([y[2],y[3],
+                                 (lam*lam-omega*omega)*y[0],(lam*lam-omega*omega)*y[1]]),
+                                 lambda a,b:np.array([a[0]-endpoint[0].real,a[1]-endpoint[0].imag,
+                                                      b[0]-endpoint[1].real,b[1]-endpoint[1].imag]),
+                                 grid,initial,tol=1e-10,max_nodes=4096)
+            check(solution.success,&#39;independent complex harmonic boundary solver converges&#39;)
+            def reconstructed(x):
+                values = solution.sol(x)
+                return values[0]+1j*values[1],values[2]+1j*values[3]
+            norm,error = quad(lambda x:abs(reconstructed(x)[0])**2,0,length,epsabs=1e-12)
+            measured_energy,_ = quad(lambda x:(abs(reconstructed(x)[1])**2+
+                (lam*lam+omega*omega)*abs(reconstructed(x)[0])**2)/4,0,length,epsabs=1e-12)
+            cost = mean_action_cost(lam,omega,length,endpoint)
+            close(measured_energy,cost+omega*omega*norm/2,
+                  &#39;independent stored energy includes the extra kinetic contribution&#39;)
+            pressure = None
+            for x in np.linspace(0,length,7):
+                actual,slope = reconstructed(x)
+                expected,expected_slope = amplitude(lam,omega,length,*endpoint,x)
+                close(actual,expected,&#39;independent harmonic field matches exact boundary formula&#39;)
+                close(slope,expected_slope,&#39;independent harmonic spatial derivative matches exact formula&#39;)
+                current = (abs(slope)**2+(omega*omega-lam*lam)*abs(actual)**2)/4
+                if pressure is not None:
+                    close(current,pressure,&#39;actual mean pressure remains constant through the guide&#39;)
+                pressure = current
+            step = 1e-4*length
+            derivative = (mean_action_cost(lam,omega,length+step,endpoint)-
+                          mean_action_cost(lam,omega,length-step,endpoint))/(2*step)
+            close(derivative,-pressure,&#39;numerical fixed-frequency action derivative yields the actual stress force&#39;)
+            if omega&gt;lam:
+                check(pressure&gt;0,&#39;a propagating scalar channel has positive outward pressure&#39;)
+            rows.append(dict(channel_gap=lam,drive_frequency=omega,length=length,
+                             mean_shape_pressure=pressure,mean_stored_energy=measured_energy,
+                             mean_action_cost=cost,
+                             interpretation=&#39;exact scalar response identity control, not a selected transverse mode&#39;))
+    return rows
+
+
+def causal_controls():
+    rows = []
+    endpoint = np.array([0.2+0.07j,-0.1+0.11j])
+    for omega in (0.5,1.7,3.2):
+        for eta in (0.3,0.1,0.03):
+            length,lam = 1.4,1.1
+            frequency = omega+1j*eta
+            matrix = boundary_matrix(lam,frequency,length)
+            value = np.vdot(endpoint,matrix@endpoint)
+            norm,_ = quad(lambda x:abs(amplitude(lam,frequency,length,*endpoint,x)[0])**2,
+                          0,length,epsabs=2e-12)
+            close(value.imag,-2*omega*eta*norm,
+                  &#39;independent causal Green identity retains complete endpoint work&#39;)
+            negative_imag = -(matrix-matrix.conj().T)/(2j)
+            check(np.linalg.eigvalsh(negative_imag).min()&gt;0,
+                  &#39;causal boundary admittance is passive for arbitrary endpoint polarization&#39;)
+            rows.append(dict(omega=omega,causal_regulator_eta=eta,
+                             mean_boundary_power=-omega*value.imag/2,
+                             interpretation=&#39;upper-half-plane regulator, not a physical IDWT damping parameter&#39;))
+    return rows
+
+
+def count_controls():
+    rows,pairs = [],[]
+    phase = s.symbols(&#39;phase&#39;,real=True)
+    for depth,assignments in ASSIGNMENTS.items():
+        counts = [(name,index,comb(index+depth-1,depth)) for name,index in assignments]
+        for name,index,count in counts:
+            for t in (s.Rational(1,4),s.Rational(1,2),s.Rational(3,4)):
+                for scaled_length in (1,4):
+                    ratio = s.Rational(count*count,1)/(1-t)
+                    threshold = 1+pi*pi/scaled_length**2
+                    active = depth in (3,4)
+                    rows.append(dict(particle=name,depth=depth,index=index,count=count,
+                                     t_exact=str(t),mu_times_length=scaled_length,
+                                     direct_carrier_frequency_squared_over_gap_squared_exact=str(ratio),
+                                     radiation_threshold_squared_over_gap_squared=threshold,
+                                     generic_radiation_possible_if_guide_supplied=bool(float(ratio)&gt;threshold),
+                                     guide_present_under_existing_premises=active,
+                                     interpretation=&#39;Omega equals sector fundamental only in this labeled control&#39;))
+                    check(ratio&gt;1,&#39;every positive count carrier lies above the transverse gap in the declared control&#39;)
+        for first,second in itertools.combinations(counts,2):
+            difference,sum_count = second[2]-first[2],second[2]+first[2]
+            check(difference!=0,&#39;maintained sibling carriers retain distinct clocks&#39;)
+            for harmonic in (difference,sum_count):
+                exact(s.sin(2*s.pi*harmonic+phase)-s.sin(phase),
+                      &#39;unlike count-harmonic cross terms average exactly to zero over one fundamental period&#39;)
+            pairs.append(dict(depth=depth,first=first[0],second=second[0],
+                              count_difference=difference,
+                              phase_sensitive_linear_cross_force_period_average_exact=&#39;0&#39;))
+    for omega1,omega2 in ((1,2),(2,5),(3,7)):
+        for phase1,phase2 in ((0.1,0.7),(0.4,-0.2)):
+            measured,_ = quad(lambda t:np.cos(omega1*t+phase1)*np.cos(omega2*t+phase2),
+                              0,2*pi,epsabs=2e-12)
+            close(measured,0,&#39;independent time integration verifies unlike-harmonic phase cancellation&#39;)
+    return rows,pairs
+
+
+def main():
+    symbolic()
+    dynamic = dynamic_controls()
+    causal = causal_controls()
+    assignments,pairs = count_controls()
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = dict(experiment_key=&#39;finite-guide-distinct-clocks-and-dynamic-response&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+Path(__file__).name:sha256(Path(__file__).read_bytes()).hexdigest()},
+                  evaluations=sum(COUNTS.values()),conditions=COUNTS,maximum_errors=ERRORS,
+                  dynamic_controls=dynamic,causal_controls=causal,
+                  occupied_assignments=assignments,distinct_clock_pairs=pairs,
+                  exact_equations={&#39;finite_segment_threshold&#39;:&#39;mu^2+pi^2/L^2&#39;,
+                                   &#39;force&#39;:&#39;T-mean(P)=T+partial_L W&#39;,
+                                   &#39;mean_energy&#39;:&#39;W+(omega^2/2) integral |Z|^2 dx&#39;},
+                  limits=[&#39;slow phase-invariant shape coupling is distinct from direct mass-clock forcing&#39;,
+                          &#39;fundamental identification of Omega remains a hypothesis&#39;,
+                          &#39;the guide restriction to three/four is inherited from prior premises&#39;,
+                          &#39;zero averaged cross force does not mean zero individual response&#39;,
+                          &#39;causal eta is a resolvent regulator, not an added dissipation mechanism&#39;,
+                          &#39;generic continuum forcing above threshold requires outgoing radiation and source work&#39;,
+                          &#39;no nonlinear locking, particle mass selection or observed force is derived&#39;])
+    path = ROOT/(&#39;finite-guide-clocks-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path),evaluations=report[&#39;evaluations&#39;],maximum_errors=ERRORS)),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

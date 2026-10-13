@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>local-current-ratio-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/local-current-ratio-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="local-current-ratio-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/local-current-ratio-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="local-current-ratio-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>local-current-ratio-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/local-current-ratio-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;A local homogeneous scalar-current source on actual opposite Dirac shells.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from fractions import Fraction
+from hashlib import sha256
+from importlib.util import module_from_spec, spec_from_file_location
+from math import comb, sqrt
+from pathlib import Path
+import json
+
+import numpy as np
+from scipy.linalg import eigvals
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;scalar_spatial&#39;, ROOT/&#39;scalar-current-band-checks.py&#39;)
+scalar = module_from_spec(spec)
+spec.loader.exec_module(scalar)
+CONDITIONS, ERRORS = {}, {}
+COEFFICIENT = 256.
+SX = np.array([[0, 1], [1, 0]], complex)
+SZ = np.diag([1., -1.])
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    CONDITIONS[label] = CONDITIONS.get(label, 0)+1
+
+
+def close(actual, expected, label, tolerance=3e-8):
+    a, e = np.asarray(actual), np.asarray(expected)
+    error = float(np.max(abs(a-e))/max(1., float(np.max(abs(e)))))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    check(error &lt; tolerance, label)
+
+
+def local(field, alpha, beta, coefficient=COEFFICIENT):
+    density = float(np.vdot(field, field).real)
+    current = np.array([np.vdot(field, g@field).real for g in alpha])
+    signed = float(np.vdot(field, beta@field).real)
+    proper = sqrt(density*density-np.dot(current, current))
+    check(proper &gt; 0, &#39;actual tested field remains in the timelike-current domain&#39;)
+    potential = coefficient*signed*signed/(2*proper)
+    operator = coefficient*signed/proper*beta
+    operator -= coefficient*signed*signed/(2*proper**3)*(density*np.eye(len(beta))-
+                                                        sum(j*g for j, g in zip(current, alpha)))
+    return potential, operator@field, density, current, signed, proper
+
+
+def field_variations():
+    rng = np.random.default_rng(1732)
+    cases = []
+    for depth in scalar.sphere.DEPTHS:
+        alpha, beta, _ = scalar.clifford(depth)
+        rank = len(beta)
+        field = rng.normal(size=(rank, rank))+1j*rng.normal(size=(rank, rank))
+        field /= np.linalg.norm(field)
+        potential, gradient, density, current, signed, proper = local(field, alpha, beta)
+        check(0 &lt;= potential &lt;= COEFFICIENT*density/2*(1+1e-12),
+              &#39;current-ratio potential is nonnegative and bounded by its local intensity coefficient&#39;)
+        for _ in range(4):
+            variation = rng.normal(size=field.shape)+1j*rng.normal(size=field.shape)
+            variation /= np.linalg.norm(variation)
+            step = 2e-5
+            def finite(h):
+                return (local(field+h*variation, alpha, beta)[0]-
+                        local(field-h*variation, alpha, beta)[0])/(2*h)
+            derivative = (4*finite(step/2)-finite(step))/3
+            close(derivative, 2*np.vdot(gradient, variation).real,
+                  &#39;full complex variation retains scalar and time-spatial-current derivatives&#39;, 2e-7)
+        for scale in (.3, 2+3j):
+            p, g, *_ = local(scale*field, alpha, beta)
+            close(p, abs(scale)**2*potential, &#39;local ratio potential has exact amplitude degree two&#39;)
+            close(g, scale*gradient, &#39;complete local source has exact amplitude degree one&#39;)
+        direction = rng.normal(size=depth)
+        direction /= np.linalg.norm(direction)
+        axis = sum(x*g for x, g in zip(direction, alpha))
+        rapidity = .71
+        boost = np.cosh(rapidity/2)*np.eye(rank)+np.sinh(rapidity/2)*axis
+        close(boost.conj().T@beta@boost, beta, &#39;physical spinor boost preserves the scalar grading form&#39;)
+        p, _, rho, vector, j, n = local(boost@field, alpha, beta)
+        close(rho, np.cosh(rapidity)*density+np.sinh(rapidity)*np.dot(direction, current),
+              &#39;summed actual Dirac current obeys the local Lorentz boost law&#39;)
+        close(j, signed, &#39;summed scalar current is Lorentz invariant&#39;)
+        close(n, proper, &#39;proper summed Dirac-current norm is Lorentz invariant&#39;)
+        close(p, potential, &#39;the changed current-ratio potential is a local Lorentz scalar&#39;)
+        cases.append({&#39;depth&#39;: depth, &#39;graded_spinor_rank&#39;: rank,
+                      &#39;proper_current_over_intensity&#39;: proper/density})
+    return cases
+
+
+def null_current_limit():
+    cases = []
+    for depth in scalar.sphere.DEPTHS:
+        alpha, beta, _ = scalar.clifford(depth)
+        values, vectors = np.linalg.eigh(alpha[0])
+        u = vectors[:, np.argmax(values)]
+        for angle in (-.05, -.01, .01, .05):
+            field = np.cos(angle)*u+np.sin(angle)*beta@u
+            potential, gradient, rho, vector, signed, proper = local(field, alpha, beta)
+            close(signed, np.sin(2*angle), &#39;null-limit scalar current is the exact paired moment&#39;)
+            close(vector[0], np.cos(2*angle), &#39;null-limit spatial current is the exact paired moment&#39;)
+            close(vector[1:], np.zeros(depth-1), &#39;null-limit transverse spatial currents vanish&#39;)
+            close(proper, abs(signed), &#39;nonnull path reaches the null-current set with proper norm equal to absolute scalar current&#39;)
+            close(potential, COEFFICIENT*abs(signed)/2,
+                  &#39;potential has a continuous but nondifferentiable absolute-value null limit&#39;)
+            close(gradient, COEFFICIENT*np.sign(signed)/2*beta@field,
+                  &#39;complete gradient has unequal one-sided null-current limits&#39;)
+        cases.append({&#39;depth&#39;: depth, &#39;null_field_norm&#39;: float(np.vdot(u, u).real),
+                      &#39;one_sided_gradient_jump_norm&#39;: COEFFICIENT,
+                      &#39;potential_limit&#39;: 0, &#39;differentiable_at_nonzero_null_current&#39;: False})
+    return cases
+
+
+def pair_jacobian(h, coefficient, c):
+    x = float(np.vdot(c, SX@c).real/np.vdot(c, c).real)
+    omega = coefficient/2+h*h/(2*coefficient)
+    operator = h*SZ+coefficient*x*SX-coefficient*x*x/2*np.eye(2)
+    columns = []
+    for variation in (np.array([1, 0]), np.array([0, 1]), np.array([1j, 0]), np.array([0, 1j])):
+        dx = 2*np.vdot(variation, SX@c).real-2*x*np.vdot(variation, c).real
+        derivative = -1j*((operator-omega*np.eye(2))@variation+
+                           coefficient*dx*(SX-x*np.eye(2))@c)
+        columns.append(np.concatenate((derivative.real, derivative.imag)))
+    jacobian = np.array(columns).T
+    def rhs(y):
+        z = y[:2]+1j*y[2:]
+        sx = np.vdot(z, SX@z).real/np.vdot(z, z).real
+        dz = -1j*(h*SZ@z+coefficient*sx*SX@z-coefficient*sx*sx/2*z-omega*z)
+        return np.concatenate((dz.real, dz.imag))
+    y = np.concatenate((c.real, c.imag))
+    step = 1e-5
+    numerical = np.column_stack([(rhs(y+step*e)-rhs(y-step*e))/(2*step) for e in np.eye(4)])
+    close(jacobian, numerical, &#39;paired source Jacobian retains phase and norm variations&#39;)
+    values = eigvals(jacobian)
+    target = 2*sqrt(coefficient*coefficient-h*h)
+    close(sorted(values.imag), [-target, 0, 0, target], &#39;complete paired linearization has its exact elliptic shape frequency&#39;)
+    close(values.real, np.zeros(4), &#39;retained pair has no resolved exponential growth&#39;)
+    return target
+
+
+def spatial_solutions():
+    cases = []
+    for name, depth, index in scalar.sphere.ASSIGNMENTS:
+        level = index-1
+        alpha, beta0, _ = scalar.clifford(depth)
+        rank = len(beta0)
+        h = level+depth/2
+        check(COEFFICIENT &gt; h, &#39;one common current coefficient admits every tested mixed-sign branch&#39;)
+        c = h/COEFFICIENT
+        amplitudes = np.array([sqrt((1+c)/2), sqrt((1-c)/2)])
+        x = 2*np.prod(amplitudes)
+        omega = COEFFICIENT/2+h*h/(2*COEFFICIENT)
+        for theta in (.13, .41, .87, 1.39, 2.07, 2.83):
+            g = alpha[0]
+            t, s = np.cos(theta), np.sin(theta)
+            frame = np.cos(theta/2)*np.eye(rank)-1j*np.sin(theta/2)*g
+            beta = frame.conj().T@beta0@frame
+            actual_alpha = [frame.conj().T@a@frame for a in alpha]
+            aa, bb = scalar.sphere.shells(depth, level, np.array([t]))
+            degeneracy = comb(level+depth-1, depth-1)
+            positive = (aa[level, 0]*np.eye(rank)-1j*s*bb[level, 0]*g)/sqrt(rank*degeneracy)
+            negative = beta@positive
+            field = amplitudes[0]*positive+amplitudes[1]*negative
+            kinetic = h*(amplitudes[0]*positive-amplitudes[1]*negative)
+            potential, gradient, rho, current, signed, proper = local(field, actual_alpha, beta)
+            close(current/rho, np.zeros(depth), &#39;complete spatial multiplet has zero summed spatial current&#39;)
+            close(signed/rho, x, &#39;nonconstant spatial density cancels from the scalar-current ratio&#39;)
+            close(proper/rho, 1, &#39;balanced spatial current is strictly timelike&#39;)
+            close((kinetic+gradient-omega*field)/((COEFFICIENT+h)*np.linalg.norm(field)),
+                  np.zeros_like(field), &#39;full nonlinear spatial equation closes on its actual opposite Dirac-shell pair&#39;)
+        energy = h*np.vdot(amplitudes, SZ@amplitudes).real+COEFFICIENT*x*x/2
+        close(energy, omega, &#39;complete homogeneous stationary energy per canonical norm equals its clock&#39;)
+        shape = pair_jacobian(h, COEFFICIENT, amplitudes)
+        cases.append({&#39;name&#39;: name, &#39;depth&#39;: depth, &#39;mode_index&#39;: index, &#39;spatial_shell_level&#39;: level,
+                      &#39;bare_shell_frequency_in_inverse_radius_units&#39;: h,
+                      &#39;common_current_coefficient_in_inverse_radius_units&#39;: COEFFICIENT,
+                      &#39;stationary_frequency_in_inverse_radius_units&#39;: omega,
+                      &#39;scalar_current_over_proper_current&#39;: float(x),
+                      &#39;retained_pair_shape_frequency_in_inverse_radius_units&#39;: shape,
+                      &#39;full_spatial_stability_tested&#39;: False})
+    return cases
+
+
+def exact_and_family_checks(cases):
+    h, k = sp.symbols(&#39;h k&#39;, positive=True)
+    c, dc, potential_value = sp.symbols(&#39;c dc potential_value&#39;, real=True)
+    x = sp.sqrt(1-c*c)
+    potential_derivative = h*x/c
+    energy_derivative = c+h*dc+potential_derivative*(-c*dc/x)
+    check(sp.simplify(energy_derivative-c) == 0,
+          &#39;every smooth connected ratio-law stationary pair has envelope derivative equal to its signed shell occupation&#39;)
+    ratio_derivative = (h*c-(h*c+potential_value))/(h*h)
+    check(sp.simplify(ratio_derivative+potential_value/(h*h)) == 0,
+          &#39;every nonnegative ratio potential compresses bare-shell ratios on a connected positive-clock pair branch&#39;)
+    omega = k/2+h*h/(2*k)
+    check(sp.simplify(sp.diff(omega, h)-h/k) == 0, &#39;stationary envelope derivative is the positive-minus-negative shell occupation&#39;)
+    check(sp.simplify(sp.diff(omega/h, h)-(h*h-k*k)/(2*k*h*h)) == 0,
+          &#39;common branch compresses positive bare-shell frequency ratios&#39;)
+    records = []
+    for depth in (2, 3, 4, 5, 6):
+        family = [a for a in cases if a[&#39;depth&#39;] == depth]
+        low, high = family[0], family[-1]
+        count_ratio = Fraction(comb(high[&#39;spatial_shell_level&#39;]+depth, depth),
+                               comb(low[&#39;spatial_shell_level&#39;]+depth, depth))
+        bare_ratio = Fraction(2*high[&#39;spatial_shell_level&#39;]+depth, 2*low[&#39;spatial_shell_level&#39;]+depth)
+        actual_ratio = high[&#39;stationary_frequency_in_inverse_radius_units&#39;]/low[&#39;stationary_frequency_in_inverse_radius_units&#39;]
+        check(float(count_ratio) &gt; float(bare_ratio) &gt; actual_ratio,
+              &#39;all maintained multi-particle families exceed the exact common-branch ratio bound&#39;)
+        records.append({&#39;depth&#39;: depth, &#39;low&#39;: low[&#39;name&#39;], &#39;high&#39;: high[&#39;name&#39;],
+                        &#39;target_count_ratio_exact&#39;: str(count_ratio), &#39;bare_shell_ratio_exact&#39;: str(bare_ratio),
+                        &#39;constructed_branch_ratio&#39;: actual_ratio})
+    return records
+
+
+def main():
+    variations = field_variations()
+    null_limits = null_current_limit()
+    cases = spatial_solutions()
+    families = exact_and_family_checks(cases)
+    dependencies = [&#39;local-current-ratio-checks.py&#39;, &#39;scalar-current-band-checks.py&#39;,
+                    &#39;spatial-source-saturation-checks.py&#39;, &#39;spatial-band-curvature-checks.py&#39;]
+    report = {&#39;experiment_key&#39;: &#39;local-homogeneous-current-ratio-spatial-closure&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/&#39;+p: sha256((ROOT/p).read_bytes()).hexdigest() for p in dependencies},
+              &#39;classification&#39;: &#39;changed local covariant ratio action and actual full-multiplet spatial eigenfields&#39;,
+              &#39;assumptions&#39;: [&#39;same-spinor matrix carrier with complete balanced columns is stipulated&#39;,
+                              &#39;ordinary round-sphere geometry and graded Dirac carrier are declared controls&#39;,
+                              &#39;local potential kappa J_scalar^2/(2 sqrt(j_vector squared)) on the timelike-current domain&#39;,
+                              &#39;one common kappa R=256 for every diagnostic depth and assigned comparison index&#39;,
+                              &#39;mapping assigned cumulative cutoff N to an individual shell l=N is only a test hypothesis&#39;],
+              &#39;limits&#39;: [&#39;the ratio potential extends continuously by zero at null-current fields but its full source has a nondifferentiable cusp there&#39;,
+                         &#39;a balanced matrix carrier does not derive observed spin, charge or a master-field reduction&#39;,
+                         &#39;retained-pair ellipticity is not full spatial or nonlinear particle stability&#39;,
+                         &#39;compact control eigenfields do not establish localization or complete flat-space particle inertia&#39;,
+                         &#39;every maintained multi-particle family fails the exact common-branch count-ratio bound&#39;,
+                         &#39;the generalized nonnegative-potential ratio bound assumes the compared stationary pair states lie on one smooth connected branch&#39;],
+              &#39;condition_count&#39;: len(CONDITIONS), &#39;evaluation_count&#39;: sum(CONDITIONS.values()),
+              &#39;conditions&#39;: CONDITIONS, &#39;maximum_errors&#39;: ERRORS,
+              &#39;arbitrary_complex_variations&#39;: variations, &#39;null_current_limits&#39;: null_limits,
+              &#39;spatial_solutions&#39;: cases, &#39;family_comparison&#39;: families}
+    path = ROOT/(&#39;local-current-ratio-results-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)+&#39;.json&#39;)
+    path.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;report&#39;: str(path), &#39;conditions&#39;: len(CONDITIONS), &#39;evaluations&#39;: sum(CONDITIONS.values()),
+                      &#39;maximum_errors&#39;: ERRORS, &#39;family_comparison&#39;: families}, indent=2), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>covariant-clock-threshold.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-threshold.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="covariant-clock-threshold.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-threshold.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="covariant-clock-threshold.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>covariant-clock-threshold.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/covariant-clock-threshold.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact density-ratio threshold for the responding coexact current block.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;angular&#39;, ROOT/&#39;covariant-clock-angular.py&#39;)
+angular = module_from_spec(spec)
+spec.loader.exec_module(angular)
+L, Z = angular.L, angular.Z
+
+
+def main():
+    cases = []
+    load = sp.symbols(&#39;g&#39;, positive=True)
+    c = sp.Rational(3, 5)
+    for depth in [3, 4, 5, 6, 10]:
+        h = sp.Rational(depth, 2)
+        omega = c/sum(sp.Rational(1, j) for j in range(1, depth+1))
+        source = omega-h/c
+        k = -2*source
+        delta = (L-1)*(L+depth)
+        critical = sp.factor(delta**2/(2*k*delta+4*k*k*c))
+        real, imaginary = angular.form_blocks(depth, L, &#39;coexact-vector&#39;, load)
+        determinant_ratio = sp.factor(imaginary.det()/real.det())
+        expected = 1-load/critical
+        assert sp.cancel(determinant_ratio-expected) == 0
+        at_two = sp.factor(critical.subs(L, 2))
+        ratio = sp.factor(expected.subs({L: 2, load: sp.Rational(1, 5)}))
+        record = dict(depth=depth, c_exact=str(c),
+                      det_Y_over_det_X=str(determinant_ratio),
+                      critical_load_all_harmonics=str(critical),
+                      harmonic_two_critical_load_exact=str(at_two),
+                      harmonic_two_critical_load_decimal=float(at_two),
+                      harmonic_two_det_ratio_at_load_one_fifth=str(ratio),
+                      forced_negative_squared_root_at_load_one_fifth=bool(ratio &lt; 0))
+        cases.append(record)
+        print(json.dumps(record), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output = ROOT/(&#39;covariant-clock-threshold-results-&#39;+stamp+&#39;.json&#39;)
+    report = dict(experiment_key=&#39;covariant-clock-coexact-density-threshold&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                           for p in [Path(__file__), ROOT/&#39;covariant-clock-angular.py&#39;, ROOT/&#39;covariant-clock-ground.py&#39;]},
+                  cases=cases,
+                  limits=[&#39;determinant sign gives a sufficient instability test, not a sufficient stability test&#39;,
+                          &#39;ground coexact modes at d&gt;=3 only; depth two has an additional current channel&#39;,
+                          &#39;field density ratio is explicit and remains physically uncalibrated&#39;])
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output))), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

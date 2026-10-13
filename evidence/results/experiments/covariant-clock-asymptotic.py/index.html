@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>covariant-clock-asymptotic.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-asymptotic.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="covariant-clock-asymptotic.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-asymptotic.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="covariant-clock-asymptotic.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>covariant-clock-asymptotic.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/covariant-clock-asymptotic.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Check complete factors and physical high-harmonic spectral separation.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;angular&#39;, ROOT/&#39;covariant-clock-angular.py&#39;)
+angular = module_from_spec(spec)
+spec.loader.exec_module(angular)
+L, Z = angular.L, angular.Z
+T = sp.Symbol(&#39;t&#39;)
+
+
+def main():
+    path = sorted(ROOT.glob(&#39;covariant-clock-uniform-results-*.json&#39;))[-1]
+    report = json.loads(path.read_text())
+    cases = []
+    for case in report[&#39;cases&#39;]:
+        assert case[&#39;certified_all_harmonics&#39;]
+        depth, family = case[&#39;depth&#39;], case[&#39;family&#39;]
+        full = sp.sympify(case[&#39;polynomial&#39;], locals={&#39;L&#39;: L, &#39;z&#39;: Z})
+        n = int(case[&#39;coupled_degree&#39;])
+        coupled = max((sp.Poly(f, Z).monic() for f, m in sp.factor_list(full, Z)[1]), key=lambda p: p.degree())
+        assert coupled.degree() == n
+        if depth == 2:
+            dark, dark_limit = sp.Integer(1), sp.Integer(1)
+        elif family == &#39;scalar&#39;:
+            dark = (Z-(L-1)**2)*(Z-(L+depth)**2)
+            dark_limit = (T+2)*(T-2*depth)
+        else:
+            dark = (Z-L**2)*(Z-(L+depth-1)**2)
+            dark_limit = T*(T-2*(depth-1))
+        assert sp.cancel(full-coupled.as_expr()*dark) == 0
+        shifted = sp.Poly(sp.expand(coupled.as_expr().subs(Z, L*L+T*L)), L)
+        assert shifted.degree() == n
+        limiting = sp.Poly(shifted.LC(), T)
+        assert limiting.LC() == 1 and limiting.degree() == n
+        h, c, g = sp.Rational(depth, 2), sp.Rational(3, 5), sp.Rational(1, 100)
+        lam, mass = h/c, 4*h/3
+        if family == &#39;scalar&#39;:
+            p, q, eigenvalue = h, 1-h, depth
+        else:
+            p, q, eigenvalue = 1-h, h-2, 2*(depth-1)
+        sigma = sp.Matrix([[0, 1], [1, 0]])
+        c0 = sp.diag(p, q)+sp.Rational(depth-1, 2)*sigma
+        d0, d1 = sp.diag(c0, -c0), sp.diag(sigma, -sigma)
+        beta = sp.zeros(4)
+        beta[:2, 2:] = beta[2:, :2] = sp.eye(2)
+        base0 = sp.diag(d0+mass*beta-lam*sp.eye(4), d0-h*sp.eye(4))
+        lead = sp.diag(d1, d1)
+        one = sp.Matrix([[p, 1], [eigenvalue, q]])
+        dd = sp.diag(one, -one)
+        base_one = sp.diag(dd+mass*beta-lam*sp.eye(4), dd-h*sp.eye(4))
+        xx, yy = angular.form_blocks(depth, sp.Integer(1), family, g)
+        dx, dy = xx-base_one, yy-base_one
+        limit_matrix = lead*(base0+dx)+(base0+dy)*lead
+        scale = sp.sqrt(g/5)
+        limit_matrix[:4, 4:] = (limit_matrix[:4, 4:]/scale).applyfunc(sp.simplify)
+        limit_matrix[4:, :4] = (scale*limit_matrix[4:, :4]).applyfunc(sp.simplify)
+        assert sp.cancel(limit_matrix.charpoly(T).as_expr()-limiting.as_expr()*dark_limit) == 0
+        discriminant = sp.factor(sp.discriminant(limiting.as_expr(), T))
+        real_roots = int(limiting.count_roots(-sp.oo, sp.oo))
+        simple_real_limit = discriminant != 0 and real_roots == n
+        record = dict(depth=depth, family=family, coupled_degree=n,
+                      high_harmonic_offset_polynomial=str(limiting.as_expr()),
+                      offset_discriminant=str(discriminant), offset_real_distinct_roots=real_roots,
+                      asymptotic_simple_real_limit=bool(simple_real_limit),
+                      actual_physical_limit_matrix_agrees=True,
+                      all_other_factors_independently_verified=True)
+        cases.append(record)
+        print(json.dumps({k: v for k, v in record.items() if k not in [&#39;offset_discriminant&#39;, &#39;high_harmonic_offset_polynomial&#39;]}), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output = ROOT/(&#39;covariant-clock-asymptotic-results-&#39;+stamp+&#39;.json&#39;)
+    result = dict(experiment_key=&#39;covariant-clock-uniform-physical-asymptotics&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                           for p in [Path(__file__), ROOT/&#39;covariant-clock-angular.py&#39;, ROOT/&#39;covariant-clock-ground.py&#39;]} | {str(path.relative_to(Path.cwd())): sha256(path.read_bytes()).hexdigest()},
+                  cases=cases,
+                  limits=[&#39;simple distinct real limiting offsets support uniformly bounded diagonalization at large harmonic index&#39;,
+                          &#39;zero-frequency symmetry directions require the separate quotient argument&#39;,
+                          &#39;no nonlinear or assigned excited-state persistence theorem&#39;])
+    output.write_text(json.dumps(result, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output))), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

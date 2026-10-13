@@ -1,0 +1,199 @@
+{
+  "experiment_key": "continuous-count-wave-complete-ground-bound",
+  "created_utc": "2026-10-12T11:28:00.709362+00:00",
+  "sources": {
+    "experiments/continuous-count-wave-bound.py": "63b1a46f7ee7377381768101f4459eb1c952ab1f081fcadb5095cc6b55f59564",
+    "experiments/minimal-count-carrier.py": "c32f6a998a844bbccd3bc46483a551addf224b2b254f7b6d218a8fd0ca87ad2b",
+    "experiments/convex-count-envelope.py": "6650f29a11b56cf16794e50c809fb92cf6a25829453698095912b357307ad8d0",
+    "experiments/forward-count-action.py": "5f1dd9a03cf8e6b07a56d507791fed8ff859f10abf22bb755c60c3bd1ed6d909",
+    "experiments/inverse-current-radial.py": "52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80",
+    "experiments/excited-shell-orientation-current.py": "508484d445dbb86da9f88a31642268b5a1dba8264588e6f48ebb6cc00cf9c264"
+  },
+  "evaluations": 184,
+  "conditions": {
+    "the exact ground geometric band has one count per seed": 6,
+    "the logarithmic count derivative gives the uniform pair bound": 6,
+    "one common ground polarization has a nonnegative complete scalar Hessian": 6,
+    "the exact scalar source norm fits the full negative spectral gap": 6,
+    "the common ground control satisfies the positive-wave pair condition exactly": 6,
+    "the ground spatial operator has disjoint signed spectral branches": 6,
+    "actual minimal spatial fields give the exact normalized scalar-source direction": 24,
+    "the full real source derivative has exactly the claimed operator norm": 24,
+    "the complete real source derivative is positive on the actual minimal carrier": 24,
+    "arbitrary complex-field directions obey the full positive source bound": 48,
+    "every assigned positive count product obeys the exact logarithmic derivative inequality": 14,
+    "one diagnostic scale gives the assigned pair criterion without individual tuning": 14
+  },
+  "maximum_errors": {
+    "actual minimal spatial fields give the exact normalized scalar-source direction": 1.6653345369377348e-16,
+    "the full real source derivative has exactly the claimed operator norm": 2.917374371277784e-16
+  },
+  "sectors": [
+    {
+      "depth": 2,
+      "common_ground_c_exact": "3/5",
+      "common_ground_epsilon_exact": "2/5",
+      "source_norm_q_exact": "2/15",
+      "negative_gap_capacity_exact": "38/15",
+      "pair_condition_exact": "13/25",
+      "assigned_diagnostic_ground_c_exact": "9/1910",
+      "assigned_diagnostic_ground_q_exact": "-3647857/17190",
+      "ground_bound_applies_at_assigned_diagnostic_scale": false,
+      "common_ground_control_supports_all_assigned_levels": false
+    },
+    {
+      "depth": 3,
+      "common_ground_c_exact": "3/5",
+      "common_ground_epsilon_exact": "18/55",
+      "source_norm_q_exact": "137/45",
+      "negative_gap_capacity_exact": "239/55",
+      "pair_condition_exact": "1737/3025",
+      "assigned_diagnostic_ground_c_exact": "33/740",
+      "assigned_diagnostic_ground_q_exact": "3845179/146520",
+      "ground_bound_applies_at_assigned_diagnostic_scale": true,
+      "common_ground_control_supports_all_assigned_levels": false
+    },
+    {
+      "depth": 4,
+      "common_ground_c_exact": "3/5",
+      "common_ground_epsilon_exact": "36/125",
+      "source_norm_q_exact": "36/7",
+      "negative_gap_capacity_exact": "2284/375",
+      "pair_condition_exact": "1881/3125",
+      "assigned_diagnostic_ground_c_exact": "5/529298",
+      "assigned_diagnostic_ground_q_exact": "2521407355361/9262715",
+      "ground_bound_applies_at_assigned_diagnostic_scale": true,
+      "common_ground_control_supports_all_assigned_levels": false
+    },
+    {
+      "depth": 5,
+      "common_ground_c_exact": "3/5",
+      "common_ground_epsilon_exact": "36/137",
+      "source_norm_q_exact": "23741/3375",
+      "negative_gap_capacity_exact": "3209/411",
+      "pair_condition_exact": "290421/469225",
+      "assigned_diagnostic_ground_c_exact": "411/8251220",
+      "assigned_diagnostic_ground_q_exact": "28969159721456377/381515784750",
+      "ground_bound_applies_at_assigned_diagnostic_scale": true,
+      "common_ground_control_supports_all_assigned_levels": false
+    },
+    {
+      "depth": 6,
+      "common_ground_c_exact": "3/5",
+      "common_ground_epsilon_exact": "12/49",
+      "source_norm_q_exact": "1282/145",
+      "negative_gap_capacity_exact": "466/49",
+      "pair_condition_exact": "5407/8575",
+      "assigned_diagnostic_ground_c_exact": "441/369251500",
+      "assigned_diagnostic_ground_q_exact": "12952933673967834101/3148238289000",
+      "ground_bound_applies_at_assigned_diagnostic_scale": true,
+      "common_ground_control_supports_all_assigned_levels": false
+    },
+    {
+      "depth": 10,
+      "common_ground_c_exact": "3/5",
+      "common_ground_epsilon_exact": "1512/7381",
+      "source_norm_q_exact": "762206/48309",
+      "negative_gap_capacity_exact": "359978/22143",
+      "pair_condition_exact": "81095463/123816275",
+      "assigned_diagnostic_ground_c_exact": "183/4940030120",
+      "assigned_diagnostic_ground_q_exact": "180112966137216518350319/727876140954594",
+      "ground_bound_applies_at_assigned_diagnostic_scale": true,
+      "common_ground_control_supports_all_assigned_levels": false
+    }
+  ],
+  "assigned_pair_criteria": [
+    {
+      "particle": "W",
+      "depth": 2,
+      "index": 76,
+      "pair_condition_exact": "316017/3648100"
+    },
+    {
+      "particle": "Z",
+      "depth": 2,
+      "index": 81,
+      "pair_condition_exact": "358677/3648100"
+    },
+    {
+      "particle": "Higgs",
+      "depth": 2,
+      "index": 95,
+      "pair_condition_exact": "492489/3648100"
+    },
+    {
+      "particle": "down",
+      "depth": 3,
+      "index": 1,
+      "pair_condition_exact": "1737/547600"
+    },
+    {
+      "particle": "strange",
+      "depth": 3,
+      "index": 4,
+      "pair_condition_exact": "20421/136900"
+    },
+    {
+      "particle": "up",
+      "depth": 4,
+      "index": 3,
+      "pair_condition_exact": "50661/7003909320100"
+    },
+    {
+      "particle": "charm",
+      "depth": 4,
+      "index": 20,
+      "pair_condition_exact": "687397789/7003909320100"
+    },
+    {
+      "particle": "top",
+      "depth": 4,
+      "index": 72,
+      "pair_condition_exact": "1103079238209/7003909320100"
+    },
+    {
+      "particle": "nu1",
+      "depth": 5,
+      "index": 10,
+      "pair_condition_exact": "10419373449/17020657872100"
+    },
+    {
+      "particle": "nu2",
+      "depth": 5,
+      "index": 15,
+      "pair_condition_exact": "691181637921/68082631488400"
+    },
+    {
+      "particle": "nu3",
+      "depth": 5,
+      "index": 22,
+      "pair_condition_exact": "2756274972489/17020657872100"
+    },
+    {
+      "particle": "electron",
+      "depth": 6,
+      "index": 13,
+      "pair_condition_exact": "3140375793129/136346670252250000"
+    },
+    {
+      "particle": "muon",
+      "depth": 6,
+      "index": 35,
+      "pair_condition_exact": "224929393009533/1363466702522500"
+    },
+    {
+      "particle": "tau",
+      "depth": 10,
+      "index": 23,
+      "pair_condition_exact": "346942448721741936771/2030099230477568897900"
+    }
+  ],
+  "limits": [
+    "the all-spatial conclusion additionally uses the self-adjoint spectral Schur proof",
+    "the conclusion excludes exponential linear growth and does not remove zero or secular directions",
+    "ground controls do not establish assigned excited-field persistence",
+    "the common ground c=.6 scale cannot support the maintained high assigned levels",
+    "the original continuous constitutive source is used on its locally smooth domain",
+    "finite spatial samples check algebraic source bounds, not global nodelessness"
+  ]
+}

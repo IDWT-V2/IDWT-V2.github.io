@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>phase-lift-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/phase-lift-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="phase-lift-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/phase-lift-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="phase-lift-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>phase-lift-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/phase-lift-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Check complete spinor lifts and the metric retained by a projector column.&quot;&quot;&quot;
+
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import json
+
+import sympy as sp
+
+
+CHECKS=[]
+CASES=[]
+
+
+def check(name,condition):
+    if not bool(condition):
+        raise AssertionError(name)
+    CHECKS.append(name)
+
+
+def equal(name,lhs,rhs):
+    if isinstance(lhs,sp.MatrixBase):
+        check(name,(lhs-rhs).applyfunc(sp.simplify)==sp.zeros(*lhs.shape))
+    else:
+        check(name,sp.simplify(lhs-rhs)==0)
+
+
+def inner(v,w):
+    return sp.simplify((v.conjugate().T*w)[0])
+
+
+def root_lifts():
+    a,r,L=sp.symbols(&#39;a r L&#39;,positive=True)
+    angle=sp.Symbol(&#39;angle&#39;,real=True)
+    den=a*a+r*r
+    psi=sp.Matrix([a,r*sp.exp(sp.I*angle)])/sp.sqrt(den)
+    dr,da=psi.diff(r),psi.diff(angle)
+    equal(&#39;normalized local lift&#39;,inner(psi,psi),1)
+    equal(&#39;radial Berry connection&#39;,-sp.I*inner(psi,dr),0)
+    berry=-sp.I*inner(psi,da)
+    equal(&#39;angular Berry connection&#39;,berry,r*r/den)
+    fsr=inner(dr,dr)-inner(dr,psi)*inner(psi,dr)
+    fsa=inner(da,da)-inner(da,psi)*inner(psi,da)
+    equal(&#39;radial projective metric&#39;,fsr,a*a/den**2)
+    equal(&#39;angular projective metric&#39;,fsa,a*a*r*r/den**2)
+    equal(&#39;phase curvature total flux&#39;,sp.integrate(2*sp.pi*sp.diff(berry,r),(r,0,sp.oo)),2*sp.pi)
+    equal(&#39;canonical vacuum line Chern class&#39;,sp.I/(2*sp.pi)*sp.I*2*sp.pi,-1)
+    complete=inner(dr,dr)+inner(da,da)/r**2
+    equal(&#39;complete normalized spinor gradient&#39;,complete,(r*r+2*a*a)/den**2)
+    integral=sp.integrate(2*sp.pi*r*complete,(r,0,L))
+    expected=sp.pi*(sp.log(1+L*L/(a*a))+1-a*a/(a*a+L*L))
+    equal(&#39;finite-radius full normalized gradient&#39;,integral,expected)
+    check(&#39;full fixed-amplitude lift diverges&#39;,sp.limit(expected,L,sp.oo)==sp.oo)
+    equal(&#39;finite full-plane projective norm&#39;,sp.integrate(2*sp.pi*r*(fsr+fsa/r**2),(r,0,sp.oo)),2*sp.pi)
+
+    projector=psi*psi.conjugate().T
+    reference=sp.Matrix([0,1])
+    hole=projector*reference
+    equal(&#39;explicit amplitude-zero lift&#39;,hole,sp.Matrix([a*r*sp.exp(-sp.I*angle),r*r])/den)
+    equal(&#39;hole amplitude squared&#39;,inner(hole,hole),r*r/den)
+    equal(&#39;hole same ray away from core&#39;,hole,hole[1]/psi[1]*psi)
+    equal(&#39;hole radial metric&#39;,inner(hole.diff(r),hole.diff(r)),fsr)
+    equal(&#39;hole angular metric&#39;,inner(hole.diff(angle),hole.diff(angle)),fsa)
+    equal(&#39;hole mixed real metric&#39;,sp.re(inner(hole.diff(r),hole.diff(angle))),0)
+    complete_hole=inner(hole.diff(r),hole.diff(r))+inner(hole.diff(angle),hole.diff(angle))/r**2
+    equal(&#39;finite complete hole norm&#39;,sp.integrate(2*sp.pi*r*complete_hole,(r,0,sp.oo)),2*sp.pi)
+    center=reference/2
+    equal(&#39;hole target sphere constraint&#39;,inner(hole-center,hole-center),sp.Rational(1,4))
+    residual=hole.diff(r,2)+hole.diff(r)/r+hole.diff(angle,2)/r**2
+    equal(&#39;unrestricted flat-field residual&#39;,residual,-8*a*a/den**2*(hole-center))
+    equal(&#39;radial-potential force cannot match residual&#39;,
+          sp.det(hole.row_join(residual)),4*a*a/den**2*hole[0])
+    check(&#39;residual not identically zero&#39;,sp.simplify(residual[0])!=0)
+    equal(&#39;Cartesian core limit first component&#39;,sp.limit(hole[0],r,0),0)
+    equal(&#39;Cartesian core limit second component&#39;,sp.limit(hole[1],r,0),0)
+    equal(&#39;constant boundary first component&#39;,sp.limit(hole[0],r,sp.oo),0)
+    equal(&#39;constant boundary second component&#39;,sp.limit(hole[1],r,sp.oo),1)
+    # Reconstruct the entire norm from amplitude, local phase and projective terms.
+    amplitude=r/sp.sqrt(den)
+    phase_gradient=(-1+berry)**2/r**2
+    reconstructed=sp.diff(amplitude,r)**2+amplitude**2*(phase_gradient+fsr+fsa/r**2)
+    equal(&#39;complete polar lift with all three contributions&#39;,reconstructed,complete_hole)
+    equal(&#39;conformal complete determinant equation coefficient&#39;,
+          (1+sp.Symbol(&#39;kappa&#39;,positive=True)*fsr)/(1+sp.Symbol(&#39;kappa&#39;,positive=True)*fsr),1)
+
+
+def projector_column_controls():
+    t=sp.Symbol(&#39;overlap&#39;,positive=True)
+    for s in (2,4,8):
+        psi=sp.Matrix([sp.sqrt(t),sp.sqrt(1-t)]+[0]*(s-2))
+        reference=sp.eye(s)[:,0]
+        tangent=[sp.Matrix([sp.sqrt(1-t),-sp.sqrt(t)]+[0]*(s-2))]
+        tangent += [sp.eye(s)[:,i] for i in range(2,s)]
+        real_tangent=[]
+        for h in tangent:
+            real_tangent.extend((h,sp.I*h))
+        dprojector=[h*psi.conjugate().T+psi*h.conjugate().T for h in real_tangent]
+        # Symbol t is in the interior (0,1); refine its square-root conjugates explicitly.
+        replacements={sp.conjugate(sp.sqrt(1-t)):sp.sqrt(1-t)}
+        dprojector=[m.xreplace(replacements) for m in dprojector]
+        column=[m*reference for m in dprojector]
+        for i in range(len(real_tangent)):
+            for j in range(len(real_tangent)):
+                expected=(1 if i&lt;2 else t) if i==j else 0
+                actual=(column[i].conjugate().T*column[j])[0].xreplace(replacements)
+                equal(f&#39;rank{s} full column metric {i},{j}&#39;,
+                      (actual+sp.conjugate(actual).xreplace(replacements))/2,expected)
+                value=sp.trace(dprojector[i].conjugate().T*dprojector[j]).xreplace(replacements)
+                equal(f&#39;rank{s} full projector metric {i},{j}&#39;,
+                      (value+sp.conjugate(value).xreplace(replacements))/2,2 if i==j else 0)
+        at_zero=[m.subs(t,0) for m in column]
+        real_columns=sp.Matrix.hstack(*[sp.re(m).col_join(sp.im(m)) for m in at_zero])
+        equal(f&#39;rank{s} zero-overlap real differential rank&#39;,real_columns.rank(),2)
+        if s==2:
+            check(&#39;CP1 column isometry&#39;,len(real_tangent)==2)
+        else:
+            check(f&#39;rank{s} column loses complete metric&#39;,len(real_tangent)-2==2*(s-2))
+
+
+def sectors():
+    for depth,q in ((2,4),(3,3),(4,3),(5,2),(6,2),(10,0)):
+        s=2**(q-1) if q else 1
+        raydim=2*(s-1)
+        orientation=q*(q-1)
+        if q:
+            check(f&#39;d{depth} complete chiral polar degree count&#39;,2+raydim==2*s)
+            check(f&#39;d{depth} independent full coefficient adds degrees&#39;,orientation+2*s&gt;2*s)
+        CASES.append({&#39;depth&#39;:depth,&#39;normal_rank&#39;:q,&#39;chiral_rank&#39;:s,
+                      &#39;full_ray_dimension&#39;:raydim,&#39;orientation_dimension&#39;:orientation,
+                      &#39;root_defect_present&#39;:q&gt;=2,&#39;fixed_amplitude_phase_energy_finite&#39;:False if q else None,
+                      &#39;root_amplitude_zero_lift_norm&#39;:&#39;2*pi&#39; if q else None,
+                      &#39;defect_extended_directions&#39;:depth-2 if q else None,
+                      &#39;column_isometry_on_complete_ray&#39;:s==2})
+
+
+def main():
+    root_lifts()
+    projector_column_controls()
+    sectors()
+    path=Path(__file__).resolve()
+    report={&#39;created_at&#39;:datetime.now(timezone.utc).isoformat(),
+            &#39;experiment&#39;:&#39;complete-phase-and-amplitude-lift&#39;,
+            &#39;sources&#39;:{&#39;experiments/phase-lift-checks.py&#39;:sha256(path.read_bytes()).hexdigest()},
+            &#39;checks_passed&#39;:len(CHECKS),&#39;cases&#39;:CASES,
+            &#39;scope&#39;:&#39;Exact transverse root profiles, complete second-order norm, unrestricted residual and full projective differential metrics. Kinematic amplitude-zero lift and constrained-target interpretation; no unrestricted particle solution or mass-frequency selection.&#39;}
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output=path.with_name(&#39;phase-lift-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;checks_passed&#39;:len(CHECKS),&#39;cases&#39;:len(CASES),&#39;report&#39;:str(output)}))
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

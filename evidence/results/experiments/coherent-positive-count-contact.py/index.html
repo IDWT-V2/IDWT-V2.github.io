@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>coherent-positive-count-contact.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/coherent-positive-count-contact.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="coherent-positive-count-contact.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/coherent-positive-count-contact.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="coherent-positive-count-contact.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>coherent-positive-count-contact.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/coherent-positive-count-contact.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Phase-resolved coherent count beams under the same positive wave action.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location,module_from_spec
+from pathlib import Path
+import json
+
+import mpmath as mp
+import numpy as np
+from scipy.special import roots_jacobi
+
+ROOT=Path(__file__).resolve().parent
+spec=spec_from_file_location(&#39;contact&#39;,ROOT/&#39;positive-count-contact.py&#39;)
+contact=module_from_spec(spec)
+spec.loader.exec_module(contact)
+COUNTS,ERRORS={},{}
+
+
+def check(condition,label):
+    if not bool(condition):
+        raise AssertionError(label)
+    COUNTS[label]=COUNTS.get(label,0)+1
+
+
+def close(actual,expected,label,tolerance=2e-9):
+    error=float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1,np.linalg.norm(expected)))
+    ERRORS[label]=max(ERRORS.get(label,0),error)
+    check(error&lt;tolerance,label)
+
+
+def coefficients(candidates,data):
+    lines,boundaries,sigma,evaluate=data
+    masses=np.array([float(c[&#39;m&#39;]) for c in lines])
+    offsets=np.array([float(c[&#39;eta&#39;]) for c in lines])
+    edges=np.array([float(b) for b in boundaries])
+    width=float(sigma)
+    def source(x):
+        indices=np.searchsorted(edges,x,side=&#39;right&#39;)
+        mm,ee=masses[indices].copy(),offsets[indices].copy()
+        for shift in [0,-1]:
+            nearby=indices+shift
+            valid=(nearby&gt;=0)&amp;(nearby&lt;len(edges))
+            safe=np.clip(nearby,0,len(edges)-1)
+            u=(x-edges[safe])/width
+            mask=valid&amp;(abs(u)&lt;1)
+            if not np.any(mask):
+                continue
+            kk=safe[mask]; uu=u[mask]
+            cdf=.5+15/16*(uu-2/3*uu**3+uu**5/5)
+            moment=15/16*(uu**2/2-uu**4/2+uu**6/6-1/6)
+            jump=masses[kk+1]-masses[kk]
+            mm[mask]=masses[kk]+jump*cdf
+            ee[mask]=offsets[kk]-jump*(edges[kk]*cdf+width*moment)
+        return mm,ee
+    return source
+
+
+def matrix_check(depth,one,two):
+    gg=contact.wave.envelope.forward.radial.gammas(depth+1)
+    size=gg[0].shape[0]
+    eye=np.eye(size)
+    rotor=gg[1]@gg[2]
+    for theta,tt,phase in [(.37,.41,.0),(1.13,.73,.57),(.91,.29,np.pi/2)]:
+        position=np.zeros(depth+1)
+        position[0]=np.sqrt(1-tt)
+        position[1]=np.sqrt(tt)*np.cos(theta)
+        position[2]=np.sqrt(tt)*np.sin(theta)
+        beta=sum(value*g for value,g in zip(position,gg))
+        fields=[];bare=[]
+        for own in [one,two]:
+            level=own[&#39;level&#39;]
+            cc=float(own[&#39;c&#39;])
+            aa,bb=np.sqrt((1+cc)/2),np.sqrt((1-cc)/2)
+            uu=np.cos(level*theta)*eye+np.sin(level*theta)*rotor
+            bare.append(uu/np.sqrt(size))
+            fields.append((aa*eye+bb*beta)@uu/np.sqrt(size))
+        delta=(two[&#39;level&#39;]-one[&#39;level&#39;])*theta
+        predicted_beta=1j*position[0]*np.sin(delta) if depth==2 else 0
+        close(np.trace(bare[0].conj().T@bare[1]),np.cos(delta),
+              &#39;actual full-matrix spinor traces verify the coherent bare overlap&#39;)
+        close(np.trace(bare[0].conj().T@beta@bare[1]),predicted_beta,
+              &#39;actual Clifford traces retain the exceptional depth-two cross grading&#39;)
+        ai,bi=np.sqrt((1+float(one[&#39;c&#39;]))/2),np.sqrt((1-float(one[&#39;c&#39;]))/2)
+        aj,bj=np.sqrt((1+float(two[&#39;c&#39;]))/2),np.sqrt((1-float(two[&#39;c&#39;]))/2)
+        av,bv=ai*aj+bi*bj,ai*bj+bi*aj
+        actual=fields[0]+np.exp(1j*phase)*fields[1]
+        predicted_rho=2+2*np.real(np.exp(1j*phase)*(av*np.cos(delta)+bv*predicted_beta))
+        predicted_scalar=float(one[&#39;x&#39;])+float(two[&#39;x&#39;])+2*np.real(np.exp(1j*phase)*(bv*np.cos(delta)+av*predicted_beta))
+        close(np.vdot(actual,actual),predicted_rho,
+              &#39;direct physical matrix fields verify coherent intensity with relative phase&#39;)
+        close(np.vdot(actual,beta@actual),predicted_scalar,
+              &#39;direct physical matrix fields verify coherent scalar density with relative phase&#39;)
+
+
+def integrate(depth,one,two,source,normalization,phase,order):
+    bb=(depth-1)/2
+    points,weights=roots_jacobi(order,bb-1,0)
+    tt=((points+1)/2)[:,None]
+    weights=weights/weights.sum()
+    # Integrate one complete period of the difference harmonic. Uniform
+    # physical azimuth gives this same measure for every nonzero difference.
+    angular_order=order
+    theta=2*np.pi*(np.arange(angular_order)+.5)/angular_order
+    delta=theta[None,:]
+    cc=np.cos(phase)*np.cos(delta)
+    qq=-np.sin(phase)*np.sqrt(1-tt)*np.sin(delta) if depth==2 else np.zeros_like(tt+delta)
+    norms=[1,1] if normalization==&#39;unit-norm&#39; else [1/(2*float(c[&#39;omega&#39;])) for c in [one,two]]
+    log_rho=[np.log(norm*float(mp.rf(mp.mpf(depth+1)/2,c[&#39;level&#39;])/mp.factorial(c[&#39;level&#39;])))+c[&#39;level&#39;]*np.log(tt)
+             for norm,c in zip(norms,[one,two])]
+    common_log=np.maximum(*log_rho)
+    common_factor=np.exp(common_log)
+    rho=[np.exp(value-common_log) for value in log_rho]
+    root=np.sqrt(rho[0]*rho[1])
+    ai,bi=np.sqrt((1+float(one[&#39;c&#39;]))/2),np.sqrt((1-float(one[&#39;c&#39;]))/2)
+    aj,bj=np.sqrt((1+float(two[&#39;c&#39;]))/2),np.sqrt((1-float(two[&#39;c&#39;]))/2)
+    av,bv=ai*aj+bi*bj,ai*bj+bi*aj
+    intensity=rho[0]+rho[1]+2*root*(av*cc+bv*qq)
+    scalar=float(one[&#39;x&#39;])*rho[0]+float(two[&#39;x&#39;])*rho[1]+2*root*(bv*cc+av*qq)
+    check(np.all(intensity&gt;0),&#39;different-shell coherent matrix preparations have positive sampled density&#39;)
+    x=scalar/intensity
+    check(np.max(abs(x))&lt;1+2e-12,&#39;coherent scalar-to-intensity ratios obey the physical grading bound&#39;)
+    mass,eta=source(np.clip(x,-1,1))
+    uv=[]
+    for own,a,b in [(one,ai,bi),(two,aj,bj)]:
+        dm=mass-float(own[&#39;m&#39;]); de=eta-float(own[&#39;eta&#39;])
+        uv.append((float(own[&#39;omega&#39;])*a+dm*b+de*a,
+                   float(own[&#39;omega&#39;])*b+dm*a+de*b))
+    w1,w2=float(one[&#39;omega&#39;]),float(two[&#39;omega&#39;])
+    kinetic=w1*w1*rho[0]+w2*w2*rho[1]+2*w1*w2*root*(av*cc+bv*qq)
+    squared=sum((u*u+v*v)*density for (u,v),density in zip(uv,rho))
+    squared+=2*root*((uv[0][0]*uv[1][0]+uv[0][1]*uv[1][1])*cc+
+                    (uv[0][0]*uv[1][1]+uv[0][1]*uv[1][0])*qq)
+    check(np.min(squared)&gt;-1e-10*max(1,np.max(squared)),
+          &#39;the reconstructed complete coherent source norm is nonnegative&#39;)
+    integral=lambda value:float(weights@np.mean(common_factor*value,axis=1))
+    isolated=sum(2*float(c[&#39;omega&#39;])**2*norm for c,norm in zip([one,two],norms))
+    close(integral(kinetic),isolated/2,
+          &#39;azimuthal integration removes the full distinct-shell kinetic cross term&#39;,tolerance=2e-8)
+    energy=integral(kinetic+squared)
+    return dict(order=order,spatial_nodes=order*angular_order,complete_energy=energy,
+                contact_energy=energy-isolated,relative_contact=(energy-isolated)/isolated,
+                minimum_sampled_log_density=float(np.min(common_log+np.log(intensity))),
+                zero_underflow_energy_weight_nodes=int(np.count_nonzero(common_factor==0)))
+
+
+def main():
+    mp.mp.dps=100
+    levels={2:(75,80),3:(0,3),4:(2,19),5:(9,14),6:(12,34),10:(22,23)}
+    cases=[]; local_diagnostics=[]
+    for depth in contact.wave.envelope.forward.radial.DEPTHS:
+        epsilon,candidates,_=contact.wave.envelope.depth_carrier(depth)
+        one,two=[next(c for c in candidates if c[&#39;level&#39;]==level) for level in levels[depth]]
+        data=contact.smooth_data(candidates)
+        source=coefficients(candidates,data)
+        matrix_check(depth,one,two)
+        for name,dd,index in contact.wave.envelope.forward.radial.ASSIGNMENTS:
+            if dd!=depth:
+                continue
+            own=next(c for c in candidates if c[&#39;level&#39;]==index-1)
+            values=[contact.row_delta(own,c[&#39;m&#39;],c[&#39;eta&#39;]) for c in candidates if c[&#39;level&#39;]!=own[&#39;level&#39;]]
+            local_diagnostics.append(dict(particle=name,depth=depth,
+                minimum_other_unsmoothed_chart_source_energy_change=str(min(values)),
+                negative_other_chart_count=sum(value&lt;0 for value in values)))
+        for normalization in [&#39;unit-norm&#39;,&#39;equal-phase-action&#39;]:
+            for phase in [0,np.pi/4,np.pi/2]:
+                estimates=[integrate(depth,one,two,source,normalization,phase,order) for order in [96,192,384]]
+                case=dict(depth=depth,shell_levels=levels[depth],normalization=normalization,
+                    relative_complex_phase_radians=phase,quadrature=estimates,
+                    finest_relative_change=abs(estimates[-1][&#39;contact_energy&#39;]-estimates[-2][&#39;contact_energy&#39;])/max(1,abs(estimates[-1][&#39;contact_energy&#39;])),
+                    second_is_unassigned_mathematical_control=depth==10)
+                cases.append(case)
+                print(json.dumps(dict(depth=depth,normalization=normalization,phase=phase,
+                    relative_contacts=[e[&#39;relative_contact&#39;] for e in estimates])),flush=True)
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    names=[&#39;coherent-positive-count-contact.py&#39;,&#39;positive-count-contact.py&#39;,&#39;positive-count-wave.py&#39;,
+           &#39;convex-count-envelope.py&#39;,&#39;forward-count-action.py&#39;,&#39;inverse-current-radial.py&#39;,&#39;excited-shell-orientation-current.py&#39;]
+    report=dict(experiment_key=&#39;phase-resolved-coherent-positive-count-beams&#39;,created_utc=datetime.now(timezone.utc).isoformat(),
+        sources={&#39;experiments/&#39;+name:sha256((ROOT/name).read_bytes()).hexdigest() for name in names},
+        evaluations=sum(COUNTS.values()),conditions=COUNTS,maximum_errors=ERRORS,cases=cases,local_chart_diagnostics=local_diagnostics,
+        limits=[&#39;full matrix columns are a declared coherent carrier, not the minimum one-column branch&#39;,
+                &#39;finite quadrature resolution is reported explicitly; positive node density is not a global theorem&#39;,
+                &#39;the very narrow smoothing bands may require adaptive integration beyond these illustrations&#39;,
+                &#39;each prepared component retains its own isolated clock; no locking is imposed&#39;,
+                &#39;phase-dependent prepared energy does not establish a physical radial force or trajectory&#39;,
+                &#39;depth two retains its exceptional cross-grading trace&#39;,
+                &#39;depth ten includes an unassigned adjacent-shell control&#39;])
+    path=ROOT/(&#39;coherent-positive-count-contact-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path),evaluations=report[&#39;evaluations&#39;])),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

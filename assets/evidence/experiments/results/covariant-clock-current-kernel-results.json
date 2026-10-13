@@ -1,0 +1,171 @@
+{
+  "experiment_key": "covariant-clock-dynamical-current-kernel",
+  "created_utc": "2026-10-12T06:14:34.889971+00:00",
+  "sources": {
+    "experiments/covariant-clock-current-kernel.py": "327fdabaa3647b61400310a4009fd84c8c51392a02127ed2935c8c56e0733898",
+    "experiments/inverse-current-radial.py": "52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80"
+  },
+  "evaluations": 84,
+  "conditions": {
+    "actual first coexact block retains its background zero mode": 6,
+    "charge-fixed zero-frequency current response equals the negative-branch pseudoinverse": 6,
+    "the conserved zero-shell charge coordinate has no driven current response": 12,
+    "the complete zero-shell field response is retained as a right-unitary drift": 12,
+    "independent complete time evolution verifies the causal first-harmonic current response": 12,
+    "retained background self-current feedback still conserves the zero-shell charge coordinate": 12,
+    "full background self-current dynamics verifies the resummed first-harmonic susceptibility": 12,
+    "background self-current feedback does not remove the retained free zero-shell field direction": 12
+  },
+  "maximum_errors": {
+    "actual first coexact block retains its background zero mode": 4.790749710500321e-16,
+    "charge-fixed zero-frequency current response equals the negative-branch pseudoinverse": 4.163336342344337e-17,
+    "the conserved zero-shell charge coordinate has no driven current response": 7.553630476953706e-15,
+    "the complete zero-shell field response is retained as a right-unitary drift": 1.6046896105955112e-15,
+    "independent complete time evolution verifies the causal first-harmonic current response": 3.556794345414484e-11,
+    "retained background self-current feedback still conserves the zero-shell charge coordinate": 7.887250413779499e-15,
+    "full background self-current dynamics verifies the resummed first-harmonic susceptibility": 3.862620001332872e-11,
+    "background self-current feedback does not remove the retained free zero-shell field direction": 6.43878933054422e-16
+  },
+  "cases": [
+    {
+      "depth": 2,
+      "all_harmonic_current_susceptibility": "(2*L**2 + 2*L + z - 4)/((-L**2 - 4*L + z - 4)*(-L**2 + 2*L + z - 1))",
+      "first_harmonic_current_susceptibility": "1/(z - 9)",
+      "first_harmonic_static_response_exact": "-1/9",
+      "absolute_static_response": 0.1111111111111111,
+      "ground_self_current_responses": [
+        {
+          "load_exact": "1/100",
+          "ground_eta_exact": "-19/15",
+          "squared_response_frequency_exact": "6769/750",
+          "susceptibility": "750/(750*z - 6769)"
+        },
+        {
+          "load_exact": "1/5",
+          "ground_eta_exact": "-19/15",
+          "squared_response_frequency_exact": "713/75",
+          "susceptibility": "75/(75*z - 713)"
+        }
+      ],
+      "classification": "retained zero field mode and finite charge-fixed current response"
+    },
+    {
+      "depth": 3,
+      "all_harmonic_current_susceptibility": "2*(L**2 + 2*L + z - 3)/((-L**2 - 6*L + z - 9)*(-L**2 + 2*L + z - 1))",
+      "first_harmonic_current_susceptibility": "2/(z - 16)",
+      "first_harmonic_static_response_exact": "-1/8",
+      "absolute_static_response": 0.125,
+      "ground_self_current_responses": [
+        {
+          "load_exact": "1/100",
+          "ground_eta_exact": "-239/110",
+          "squared_response_frequency_exact": "44239/2750",
+          "susceptibility": "5500/(2750*z - 44239)"
+        },
+        {
+          "load_exact": "1/5",
+          "ground_eta_exact": "-239/110",
+          "squared_response_frequency_exact": "4878/275",
+          "susceptibility": "550/(275*z - 4878)"
+        }
+      ],
+      "classification": "retained zero field mode and finite charge-fixed current response"
+    },
+    {
+      "depth": 4,
+      "all_harmonic_current_susceptibility": "(2*L**2 + 6*L + 3*z - 8)/((-L**2 - 8*L + z - 16)*(-L**2 + 2*L + z - 1))",
+      "first_harmonic_current_susceptibility": "3/(z - 25)",
+      "first_harmonic_static_response_exact": "-3/25",
+      "absolute_static_response": 0.12,
+      "ground_self_current_responses": [
+        {
+          "load_exact": "1/100",
+          "ground_eta_exact": "-1142/375",
+          "squared_response_frequency_exact": "78696/3125",
+          "susceptibility": "9375/(3125*z - 78696)"
+        },
+        {
+          "load_exact": "1/5",
+          "ground_eta_exact": "-1142/375",
+          "squared_response_frequency_exact": "17909/625",
+          "susceptibility": "1875/(625*z - 17909)"
+        }
+      ],
+      "classification": "retained zero field mode and finite charge-fixed current response"
+    },
+    {
+      "depth": 5,
+      "all_harmonic_current_susceptibility": "2*(L**2 + 4*L + 2*z - 5)/((-L**2 - 10*L + z - 25)*(-L**2 + 2*L + z - 1))",
+      "first_harmonic_current_susceptibility": "4/(z - 36)",
+      "first_harmonic_static_response_exact": "-1/9",
+      "absolute_static_response": 0.1111111111111111,
+      "ground_self_current_responses": [
+        {
+          "load_exact": "1/100",
+          "ground_eta_exact": "-3209/822",
+          "squared_response_frequency_exact": "373109/10275",
+          "susceptibility": "41100/(10275*z - 373109)"
+        },
+        {
+          "load_exact": "1/5",
+          "ground_eta_exact": "-3209/822",
+          "squared_response_frequency_exact": "86816/2055",
+          "susceptibility": "8220/(2055*z - 86816)"
+        }
+      ],
+      "classification": "retained zero field mode and finite charge-fixed current response"
+    },
+    {
+      "depth": 6,
+      "all_harmonic_current_susceptibility": "(2*L**2 + 10*L + 5*z - 12)/((-L**2 - 12*L + z - 36)*(-L**2 + 2*L + z - 1))",
+      "first_harmonic_current_susceptibility": "5/(z - 49)",
+      "first_harmonic_static_response_exact": "-5/49",
+      "absolute_static_response": 0.10204081632653061,
+      "ground_self_current_responses": [
+        {
+          "load_exact": "1/100",
+          "ground_eta_exact": "-233/49",
+          "squared_response_frequency_exact": "24243/490",
+          "susceptibility": "2450/(490*z - 24243)"
+        },
+        {
+          "load_exact": "1/5",
+          "ground_eta_exact": "-233/49",
+          "squared_response_frequency_exact": "2867/49",
+          "susceptibility": "245/(49*z - 2867)"
+        }
+      ],
+      "classification": "retained zero field mode and finite charge-fixed current response"
+    },
+    {
+      "depth": 10,
+      "all_harmonic_current_susceptibility": "(2*L**2 + 18*L + 9*z - 20)/((-L**2 - 20*L + z - 100)*(-L**2 + 2*L + z - 1))",
+      "first_harmonic_current_susceptibility": "9/(z - 121)",
+      "first_harmonic_static_response_exact": "-9/121",
+      "absolute_static_response": 0.0743801652892562,
+      "ground_self_current_responses": [
+        {
+          "load_exact": "1/100",
+          "ground_eta_exact": "-179989/22143",
+          "squared_response_frequency_exact": "45195017/369050",
+          "susceptibility": "3321450/(369050*z - 45195017)"
+        },
+        {
+          "load_exact": "1/5",
+          "ground_eta_exact": "-179989/22143",
+          "squared_response_frequency_exact": "5545439/36905",
+          "susceptibility": "332145/(36905*z - 5545439)"
+        }
+      ],
+      "classification": "retained zero field mode and finite charge-fixed current response"
+    }
+  ],
+  "response_bound_difference": "(d - 3)**2/(8*(d + 1)**2)",
+  "limits": [
+    "free positive Killing background and first-order current response",
+    "a fixed full matrix-charge variation removes the conjugate zero-current preparation",
+    "the secular field response is retained rather than discarded",
+    "a dimension-dependent response maximum is not a color, charge or force derivation",
+    "coupled excited-state current dynamics and persistence remain open"
+  ]
+}

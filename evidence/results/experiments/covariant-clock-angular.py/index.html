@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>covariant-clock-angular.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-angular.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="covariant-clock-angular.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-angular.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="covariant-clock-angular.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>covariant-clock-angular.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/covariant-clock-angular.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Scalar and coexact-vector ground current harmonics with a responding clock.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+import json
+
+import numpy as np
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;pilot&#39;, ROOT/&#39;covariant-clock-ground.py&#39;)
+pilot = module_from_spec(spec)
+spec.loader.exec_module(pilot)
+L, Z = pilot.L, pilot.Z
+
+
+def form_blocks(depth, degree, family, load=sp.Rational(1, 5)):
+    h, c = sp.Rational(depth, 2), sp.Rational(3, 5)
+    lam, mass = h/c, 4*h/3
+    source = c/sum(sp.Rational(1, j) for j in range(1, depth+1))-lam
+    if family == &#39;scalar&#39;:
+        eigenvalue = degree*(degree+depth-1)
+        p, q, vector_index = h, 1-h, 1
+    else:
+        eigenvalue = (degree+1)*(degree+depth-2)
+        p, q, vector_index = 1-h, h-2, 0
+    two = sp.Matrix([[p, 1], [eigenvalue, q]])
+    kinetic = sp.diag(two, -two)
+    beta = sp.zeros(4)
+    beta[:2, 2:] = sp.eye(2)
+    beta[2:, :2] = sp.eye(2)
+    particle = kinetic+mass*beta-lam*sp.eye(4)
+    background = kinetic-h*sp.eye(4)
+    real = sp.diag(particle, background)
+    imaginary = real.copy()
+    rb = sp.eye(4)[:, vector_index]
+    # a sqrt(load) and b sqrt(load) have no irrational factor at load=1/5.
+    rp = sp.sqrt(load/5)*(2*rb-beta*rb)
+    imaginary[:4, 4:] += -2*source*rp*rb.T
+    imaginary[4:, :4] += -2*source*rb*rp.T
+    imaginary[4:, 4:] += 2*source*load*rb*rb.T
+    if depth == 2:
+        assert family == &#39;scalar&#39;
+        sb = beta*rb
+        sparticle = sp.sqrt(load/5)*(2*sb-beta*sb)
+        real[:4, 4:] += -2*source*sparticle*sb.T
+        real[4:, :4] += -2*source*sb*sparticle.T
+        real[4:, 4:] += 2*source*load*sb*sb.T
+    return real, imaginary
+
+
+def main():
+    cases = []
+    for depth in [2, 3, 4, 5, 6, 10]:
+        for family in ([&#39;scalar&#39;] if depth == 2 else [&#39;scalar&#39;, &#39;coexact-vector&#39;]):
+            real, imaginary = form_blocks(depth, L, family)
+            polynomial = sp.factor((imaginary*real).charpoly(Z).as_expr())
+            if family == &#39;scalar&#39;:
+                px, py = pilot.blocks(depth)
+                difference = sp.cancel(polynomial-(py*px).charpoly(Z).as_expr())
+                if difference != 0:
+                    raise AssertionError((&#39;independent scalar harmonic map&#39;, depth))
+            root_data = []
+            for harmonic in [1, 2, 3, 5, 10, 20]:
+                xp, yp = form_blocks(depth, sp.Integer(harmonic), family)
+                poly = sp.Poly(polynomial.subs(L, harmonic), Z)
+                factors = sp.factor_list(poly.as_expr(), Z)[1]
+                zero_multiplicity = int(sum(m for f, m in factors if sp.Poly(f, Z).as_expr() == Z))
+                nonzero = sp.Poly(sp.cancel(poly.as_expr()/Z**zero_multiplicity), Z)
+                # Sturm counts count distinct real roots; multiplicity is retained separately.
+                roots = nonzero.count_roots(0, sp.oo)
+                generator = sp.BlockMatrix([[sp.zeros(8), yp], [-xp, sp.zeros(8)]]).as_explicit()
+                nullities = []
+                if harmonic == 1:
+                    power = sp.eye(16)
+                    for order in range(1, 4):
+                        power = power*generator
+                        nullities.append(int(16-power.rank()))
+                eigenvalues = np.linalg.eigvals(np.asarray((yp*xp).evalf(), float))
+                growth = float(max(np.sqrt(-eigenvalues.astype(complex)).real))
+                root_data.append(dict(harmonic=harmonic, zero_squared_frequency_multiplicity=zero_multiplicity,
+                                      positive_distinct_sturm_roots=int(roots), nonzero_degree=int(nonzero.degree()),
+                                      zero_generator_nullities=nullities, floating_growth=growth))
+            record = dict(depth=depth, family=family, c_exact=&#39;3/5&#39;, load_exact=&#39;1/5&#39;,
+                          polynomial=str(polynomial), checks=root_data)
+            cases.append(record)
+            print(json.dumps({k: v for k, v in record.items() if k != &#39;polynomial&#39;}), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output = ROOT/(&#39;covariant-clock-angular-results-&#39;+stamp+&#39;.json&#39;)
+    report = dict(experiment_key=&#39;covariant-clock-angular-harmonics&#39;, created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                           for p in [Path(__file__), ROOT/&#39;covariant-clock-ground.py&#39;]}, cases=cases,
+                  limits=[&#39;ground-shell control with explicit particle/background density ratio&#39;,
+                          &#39;scalar family has independent basis-polynomial agreement&#39;,
+                          &#39;coexact family remains conditional on the stated Killing-frame differential-form reduction&#39;,
+                          &#39;finite harmonic tests do not prove uniform stability&#39;])
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output))), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

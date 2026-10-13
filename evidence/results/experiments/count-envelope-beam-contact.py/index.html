@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>count-envelope-beam-contact.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/count-envelope-beam-contact.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="count-envelope-beam-contact.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/count-envelope-beam-contact.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="count-envelope-beam-contact.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>count-envelope-beam-contact.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/count-envelope-beam-contact.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Mass-chart contact energy and exact alignment theorem for balanced beam columns.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from math import pi
+from pathlib import Path
+import json
+
+import mpmath as mp
+import numpy as np
+from scipy.special import betaincinv, ndtri
+from scipy.stats import qmc
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;envelope&#39;, ROOT/&#39;convex-count-envelope.py&#39;)
+envelope = module_from_spec(spec)
+spec.loader.exec_module(envelope)
+spec = spec_from_file_location(&#39;beams&#39;, ROOT/&#39;balanced-count-beams.py&#39;)
+beams = module_from_spec(spec)
+spec.loader.exec_module(beams)
+COUNTS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def close(actual, expected, label, tolerance=2e-10):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    check(error&lt;tolerance, label)
+
+
+def norm_mp(depth, level):
+    return mp.rf(mp.mpf(depth+1)/2, level)/mp.factorial(level)
+
+
+def exact_contact(depth, level1, level2, candidates):
+    one = next(c for c in candidates if c[&#39;level&#39;]==level1)
+    two = next(c for c in candidates if c[&#39;level&#39;]==level2)
+    active = [c for c in candidates if level1&lt;=c[&#39;level&#39;]&lt;=level2]
+    def f(c):
+        return c[&#39;m&#39;]*c[&#39;x&#39;]+c[&#39;eta&#39;]
+    a = [f(one)-(c[&#39;m&#39;]*one[&#39;x&#39;]+c[&#39;eta&#39;]) for c in active]
+    b = [f(two)-(c[&#39;m&#39;]*two[&#39;x&#39;]+c[&#39;eta&#39;]) for c in active]
+    check(a[0]==0 and b[-1]==0, &#39;the two isolated branches have their exact zero contact deficits&#39;)
+    for aa, bb in zip(a, b):
+        check(aa&gt;=0 and bb&gt;=0, &#39;every geometric chart has nonnegative endpoint deficits&#39;)
+    radii, weights = [], []
+    for i in range(len(active)-1):
+        weight = b[i]-b[i+1]
+        radius = (a[i+1]-a[i])/weight
+        check(weight&gt;0 and radius&gt;0, &#39;the contact has an exact positive layer-overlap decomposition&#39;)
+        if radii:
+            check(radius&gt;radii[-1], &#39;the complete intermediate-chart crossings occur in their geometric order&#39;)
+        radii.append(radius); weights.append(weight)
+    check(abs(sum(weights)-b[0])&lt;mp.mpf(&#39;1e-75&#39;), &#39;layer weights telescope to the first endpoint deficit&#39;)
+    check(abs(sum(w*r for w, r in zip(weights, radii))-a[-1])&lt;mp.mpf(&#39;1e-75&#39;),
+          &#39;weighted crossing radii telescope to the other endpoint deficit&#39;)
+    for exponent in [-20, -8, -2, 0, 2, 8, 20]:
+        ratio = mp.mpf(10)**exponent
+        direct = min(aa+ratio*bb for aa, bb in zip(a, b))
+        layered = sum(w*min(ratio, r) for w, r in zip(weights, radii))
+        check(abs(direct-layered)/max(1, abs(direct))&lt;mp.mpf(&#39;1e-75&#39;),
+              &#39;independent minimization verifies the exact layer-cake contact identity&#39;)
+    for ratio in [mp.mpf(&#39;.03&#39;), mp.mpf(&#39;.7&#39;), mp.mpf(&#39;5&#39;)]:
+        scalar = one[&#39;x&#39;]+ratio*two[&#39;x&#39;]
+        rho = 1+ratio
+        all_deficit = f(one)+ratio*f(two)-max(c[&#39;m&#39;]*scalar+c[&#39;eta&#39;]*rho for c in candidates)
+        direct = min(aa+ratio*bb for aa, bb in zip(a, b))
+        check(abs(all_deficit-direct)&lt;mp.mpf(&#39;1e-73&#39;),
+              &#39;the actual maximum over all admissible charts equals the active contact minimum&#39;)
+    n1, n2 = norm_mp(depth, level1), norm_mp(depth, level2)
+    beta_b = mp.mpf(depth-1)/2
+    aligned = mp.mpf(0)
+    for weight, radius in zip(weights, radii):
+        boundary = (radius*n1/n2)**(mp.mpf(1)/(level2-level1))
+        if boundary&gt;=1:
+            contribution = mp.mpf(1)
+        else:
+            contribution = mp.betainc(level2+1, beta_b, 0, boundary, regularized=True)
+            contribution += radius*mp.betainc(level1+1, beta_b, boundary, 1, regularized=True)
+        aligned += weight*contribution
+    orthogonal_overlap = None
+    orthogonal_bound = None
+    if depth&gt;=3:
+        orthogonal_overlap = mp.sqrt(n1*n2)*mp.gamma(1+mp.mpf(level1)/2)*mp.gamma(1+mp.mpf(level2)/2)
+        orthogonal_overlap /= mp.rf(mp.mpf(depth+1)/2, mp.mpf(level1+level2)/2)
+        orthogonal_bound = mp.sqrt(a[-1]*b[0])*orthogonal_overlap
+    # Independently integrate the complete kinetic and winning contact terms,
+    # without using the layer-overlap expression for the energy difference.
+    boundaries = [mp.mpf(0), mp.mpf(1)]
+    for radius in radii:
+        boundary = (radius*n1/n2)**(mp.mpf(1)/(level2-level1))
+        if 0&lt;boundary&lt;1:
+            boundaries.append(boundary)
+    boundaries.sort()
+    interaction_integral = mp.mpf(0)
+    for low, high in zip(boundaries, boundaries[1:]):
+        middle = (low+high)/2
+        rho1, rho2 = n1*middle**level1, n2*middle**level2
+        winning = max(candidates, key=lambda c:
+                      c[&#39;m&#39;]*(one[&#39;x&#39;]*rho1+two[&#39;x&#39;]*rho2)+c[&#39;eta&#39;]*(rho1+rho2))
+        for own, level in [(one, level1), (two, level2)]:
+            fraction = mp.betainc(level+1, beta_b, low, high, regularized=True)
+            interaction_integral += (winning[&#39;m&#39;]*own[&#39;x&#39;]+winning[&#39;eta&#39;])*fraction
+    kinetic_integral = one[&#39;h&#39;]*one[&#39;c&#39;]+two[&#39;h&#39;]*two[&#39;c&#39;]
+    total_energy = kinetic_integral+interaction_integral
+    check(abs(total_energy-(one[&#39;omega&#39;]+two[&#39;omega&#39;]-aligned))&lt;mp.mpf(&#39;1e-70&#39;),
+          &#39;independent complete kinetic and winning-contact integration verifies the pair energy&#39;)
+    check((total_energy&lt;0)==(aligned&gt;one[&#39;omega&#39;]+two[&#39;omega&#39;]),
+          &#39;the sign of complete pair energy is retained rather than hidden in an overlap deficit&#39;)
+    return one, two, a, b, weights, radii, aligned, orthogonal_overlap, orthogonal_bound, total_energy
+
+
+def sample_beam(depth, level, plane, size_power, seed):
+    sobol = qmc.Sobol(depth+1, scramble=True, seed=seed)
+    uu = sobol.random_base2(size_power)
+    tt = betaincinv(level+1, (depth-1)/2, uu[:, 0])
+    theta = 2*pi*uu[:, 1]
+    normals = ndtri(uu[:, 2:]); normals /= np.linalg.norm(normals, axis=1)[:, None]
+    a, b = plane
+    complement, _ = np.linalg.qr(np.column_stack([a, b, np.eye(depth+1)]))
+    complement = complement[:, 2:]
+    positions = np.sqrt(tt)[:, None]*(np.cos(theta)[:, None]*a+np.sin(theta)[:, None]*b)
+    positions += np.sqrt(1-tt)[:, None]*(normals@complement.T)
+    return positions
+
+
+def density(positions, depth, level, plane):
+    a, b = plane
+    return float(norm_mp(depth, level))*((positions@a)**2+(positions@b)**2)**level
+
+
+def plane_at(depth, angle):
+    eye = np.eye(depth+1)
+    return eye[0], np.cos(angle)*eye[1]+np.sin(angle)*eye[2]
+
+
+def contact_values(rho1, rho2, a, b):
+    return np.min(np.array([float(aa)*rho1+float(bb)*rho2 for aa, bb in zip(a, b)]), axis=0)
+
+
+def quadrature(depth, level1, level2, a, b, angle, power, seed, orthogonal=False):
+    eye = np.eye(depth+1)
+    plane1 = (eye[0], eye[1])
+    plane2 = (eye[2], eye[3]) if orthogonal else plane_at(depth, angle)
+    first = sample_beam(depth, level1, plane1, power, seed)
+    second = sample_beam(depth, level2, plane2, power, seed+1)
+    positions = np.concatenate([first, second])
+    rho1, rho2 = density(positions, depth, level1, plane1), density(positions, depth, level2, plane2)
+    proposal = (rho1+rho2)/2
+    values = contact_values(rho1, rho2, a, b)
+    answer = float(np.mean(values/proposal))
+    check(answer&gt;=0, &#39;the sampled complete contact energy has the analytically required attractive sign&#39;)
+    if not orthogonal and angle&gt;0:
+        step = 1e-6
+        plus = density(positions, depth, level2, plane_at(depth, angle+step))
+        minus = density(positions, depth, level2, plane_at(depth, angle-step))
+        fd = (contact_values(rho1, plus, a, b)-contact_values(rho1, minus, a, b))/(2*step)
+        a2, b2 = plane2
+        derivative_direction = -np.sin(angle)*eye[1]+np.cos(angle)*eye[2]
+        tt = (positions@a2)**2+(positions@b2)**2
+        drho = 2*float(norm_mp(depth, level2))*level2*tt**(level2-1)*(positions@b2)*(positions@derivative_direction)
+        winners = np.argmin(np.array([float(aa)*rho1+float(bb)*rho2 for aa, bb in zip(a, b)]), axis=0)
+        analytic = np.array([float(bb) for bb in b])[winners]*drho
+        # Integrate both variations against the SAME fixed importance proposal.
+        close(np.mean(fd/proposal), np.mean(analytic/proposal),
+              &#39;independent fixed-proposal field rotation variation verifies the contact torque&#39;, tolerance=3e-5)
+    # No orientation samples are used to prove the global alignment theorem.
+    return answer
+
+
+def main():
+    mp.mp.dps = 100
+    pair_levels = {2:(75,80), 3:(0,3), 4:(2,19), 5:(9,14), 6:(12,34), 10:(22,23)}
+    cases = []
+    for depth in beams.forward.radial.DEPTHS:
+        epsilon, candidates, _ = envelope.depth_carrier(depth)
+        level1, level2 = pair_levels[depth]
+        one, two, a, b, weights, radii, aligned, overlap, bound, total_energy = exact_contact(depth, level1, level2, candidates)
+        estimates = []
+        for angle in [pi/6, pi/3, pi/2]:
+            values = []
+            for power in [10, 12]:
+                for replicate in range(2):
+                    result = quadrature(depth, level1, level2, a, b, angle, power,
+                                        202610120000+depth*100+replicate*10)
+                    values.append(dict(samples=2*(2**power), replicate=replicate, contact_magnitude=result))
+            estimates.append(dict(relative_plane_angle_radians=angle, quadrature_estimates=values))
+        if depth&gt;=3:
+            values = [quadrature(depth, level1, level2, a, b, 0, power,
+                                 202610125000+depth*100, True) for power in [10,12]]
+        else:
+            values = None
+        # Same-branch isolated columns interact neither in energy nor source, for every orientation.
+        for candidate in candidates:
+            if candidate[&#39;level&#39;] in [n-1 for _, dd, n in beams.forward.radial.ASSIGNMENTS if dd==depth]:
+                xx = candidate[&#39;x&#39;]; isolated = candidate[&#39;m&#39;]*xx+candidate[&#39;eta&#39;]
+                for ratio in [mp.mpf(&#39;.1&#39;), mp.mpf(&#39;1&#39;), mp.mpf(&#39;7&#39;)]:
+                    potential = max(c[&#39;m&#39;]*xx*(1+ratio)+c[&#39;eta&#39;]*(1+ratio) for c in candidates)
+                    check(abs(potential-isolated*(1+ratio))&lt;mp.mpf(&#39;1e-74&#39;),
+                          &#39;all maintained same-branch orthogonal-column controls have exactly zero contact energy&#39;)
+        cases.append(dict(depth=depth, first_shell_level=level1, second_shell_level=level2,
+            second_is_unassigned_mathematical_control=depth==10,
+            aligned_contact_magnitude=str(aligned), aligned_contact_over_sum_isolated_energy=str(aligned/(one[&#39;omega&#39;]+two[&#39;omega&#39;])),
+            aligned_complete_pair_energy=str(total_energy), aligned_complete_energy_is_negative=bool(total_energy&lt;0),
+            layer_count=len(weights), layer_weights=[str(w) for w in weights],
+            layer_density_ratio_thresholds=[str(r) for r in radii],
+            orthogonal_circle_classical_overlap=str(overlap) if overlap is not None else None,
+            orthogonal_contact_upper_bound=str(bound) if bound is not None else None,
+            rigorous_aligned_exceeds_orthogonal_bound=bool(aligned&gt;bound) if bound is not None else None,
+            finite_orientation_estimates=estimates, orthogonal_circle_quadrature_estimates=values,
+            classification=&#39;exact attractive contact and global alignment bound; numerical angular illustrations&#39;))
+        print(json.dumps(dict(depth=depth, aligned_contact_magnitude=str(aligned),
+                              orthogonal_upper_bound=str(bound), nonconstant_pair=level1&gt;0)), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    source_names = [&#39;count-envelope-beam-contact.py&#39;, &#39;convex-count-envelope.py&#39;, &#39;balanced-count-beams.py&#39;,
+        &#39;minimal-count-carrier.py&#39;, &#39;forward-count-action.py&#39;, &#39;inverse-current-radial.py&#39;, &#39;excited-shell-orientation-current.py&#39;]
+    report = dict(experiment_key=&#39;count-envelope-balanced-beam-contact&#39;,
+        created_utc=datetime.now(timezone.utc).isoformat(),
+        sources={&#39;experiments/&#39;+name: sha256((ROOT/name).read_bytes()).hexdigest() for name in source_names},
+        evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS, cases=cases,
+        limits=[&#39;orthogonal column blocks are a stated two-pattern preparation of one field&#39;,
+                &#39;this preparation has no relative-phase dependence in the count envelope&#39;,
+                &#39;instantaneous energy and torque do not constitute encounter dynamics or a measured force&#39;,
+                &#39;cross-depth field extension and physical interaction rates remain unspecified&#39;,
+                &#39;the depth-three ground density makes its displayed pair orientation independent&#39;,
+                &#39;depth ten uses an adjacent unassigned-shell comparison as well as the maintained same-branch zero&#39;,
+                &#39;the aligned electron-muon preparation has negative complete energy in this diagnostic action&#39;,
+                &#39;rare orthogonal-circle quadrature is unresolved at the displayed sizes; use the exact upper bound&#39;,
+                &#39;global alignment follows from the positive layer-overlap proof, not sampled angle ordering&#39;,
+                &#39;all coefficients are from the same existing count action; no independent pair coefficient is fitted&#39;])
+    path = ROOT/(&#39;count-envelope-beam-contact-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "created_at": "2026-10-11T12:44:39.431243+00:00",
+  "experiment": "finite-amplitude-radial-hessian-symbolic-review",
+  "sources": {
+    "experiments/finite-amplitude-hessian-review.py": "cc4bda6c81e49abd4458d881b350065dd412dff081befd6feab6bd6f23c265d6"
+  },
+  "exact_checks": 8,
+  "checks": [
+    "complete amplitude potential Hessian 0,0",
+    "complete amplitude potential Hessian 0,1",
+    "complete mixed amplitude-gradient Hessian 0,0",
+    "complete mixed amplitude-gradient Hessian 0,1",
+    "complete amplitude potential Hessian 1,0",
+    "complete amplitude potential Hessian 1,1",
+    "complete mixed amplitude-gradient Hessian 1,0",
+    "complete mixed amplitude-gradient Hessian 1,1"
+  ],
+  "scope": "Direct symbolic differentiation verifies the two-amplitude potential and mixed gradient Hessians used by the finite-element energy-form calculation. It does not certify its numerical spectrum or nonlinear stability."
+}

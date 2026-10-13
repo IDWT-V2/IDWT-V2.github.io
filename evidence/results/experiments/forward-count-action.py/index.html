@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>forward-count-action.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/forward-count-action.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="forward-count-action.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/forward-count-action.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="forward-count-action.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>forward-count-action.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/forward-count-action.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Vary the algebraic count action forward, retaining actual spatial jets.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from fractions import Fraction
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from math import comb, factorial
+from pathlib import Path
+import json
+
+import mpmath as mp
+import numpy as np
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;orientation&#39;, ROOT/&#39;excited-shell-orientation-current.py&#39;)
+orientation = module_from_spec(spec)
+spec.loader.exec_module(orientation)
+radial = orientation.radial
+COUNTS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def close(actual, expected, label, tolerance=3e-8):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    check(error &lt; tolerance, label)
+
+
+def count_data(depth, level):
+    count = Fraction(comb(level+depth, depth))
+    reciprocals = [Fraction(1, level+j) for j in range(1, depth+1)]
+    first = count*sum(reciprocals)
+    second = count*(sum(reciprocals)**2-sum(v*v for v in reciprocals))
+    return count, first, second
+
+
+def polynomial(depth, chi):
+    return np.prod([chi+j-depth/2 for j in range(1, depth+1)])/factorial(depth)
+
+
+def bilinears(field, alpha, beta):
+    rho = np.vdot(field, field).real
+    scalar = np.vdot(field, beta@field).real
+    current = np.array([np.vdot(field, a@field).real for a in alpha])
+    norm = np.sqrt(rho*rho-current@current)
+    support = np.sqrt((rho-scalar)*(rho+scalar)-current@current)
+    return rho, scalar, current, norm, support
+
+
+def potential(field, chi, epsilon, alpha, beta, depth):
+    _, _, _, norm, support = bilinears(field, alpha, beta)
+    return epsilon*norm*polynomial(depth, chi)-chi*support
+
+
+def source(field, chi, epsilon, alpha, beta, depth):
+    rho, scalar, current, norm, support = bilinears(field, alpha, beta)
+    m = chi*scalar/support
+    eta = epsilon*polynomial(depth, chi)-chi*norm/support
+    return m*beta@field+eta/norm*(rho*field-sum(j*a@field for j, a in zip(current, alpha)))
+
+
+def symbolic_forward_variation():
+    h, chi, c, y, epsilon = sp.symbols(&#39;h chi c y epsilon&#39;, positive=True)
+    p = sp.Function(&#39;P&#39;)
+    energy = h*c+epsilon*p(chi)-chi*sp.sqrt(c*c+y*y)
+    check(sp.simplify(sp.diff(energy, c).subs(y, 0)-(h-chi)) == 0,
+          &#39;forward polarization variation locks the auxiliary label to the actual spatial eigenvalue&#39;)
+    check(sp.simplify(sp.diff(energy, chi).subs(y, 0)-(epsilon*sp.diff(p(chi), chi)-c)) == 0,
+          &#39;forward auxiliary variation fixes the polarization by the derivative of the spatial count&#39;)
+    check(sp.simplify(energy.subs({chi: h, y: 0})-epsilon*p(h)) == 0,
+          &#39;the complete stationary energy reduces to the count without discarding spatial kinetics&#39;)
+    check(sp.diff(energy, y).subs(y, 0) == 0,
+          &#39;the retained relative-phase equation is stationary on the real pair&#39;)
+    check(sp.simplify(sp.diff(energy, y, 2).subs({chi: h, y: 0})+h/c) == 0,
+          &#39;the forward action retains the original relative-phase curvature&#39;)
+    check(sp.simplify(-sp.diff(energy, c, chi)**2/sp.diff(energy, chi, 2)).subs(y, 0)
+          == -1/(epsilon*sp.diff(p(chi), chi, 2)),
+          &#39;eliminating the algebraic variable retains the original polarization curvature&#39;)
+
+
+def main():
+    symbolic_forward_variation()
+    mp.mp.dps = 85
+    rng = np.random.default_rng(202610120744)
+    epsilon_exact = {d: Fraction(3, 10)/max(count_data(d, n-1)[1]
+                     for _, dd, n in radial.ASSIGNMENTS if dd == d) for d in radial.DEPTHS}
+    cases = []
+    for name, depth, index in radial.ASSIGNMENTS:
+        level, h = index-1, Fraction(2*(index-1)+depth, 2)
+        count, first, second = count_data(depth, level)
+        epsq, cq = epsilon_exact[depth], epsilon_exact[depth]*first
+        check(0 &lt; cq &lt; 1 and second &gt; 0, &#39;one sector comparison scale keeps every inferred shell in the convex open chart&#39;)
+        def high(value):
+            return mp.mpf(value.numerator)/value.denominator
+        eps, ch, hh = high(epsq), high(cq), high(h)
+        def count_function(label):
+            return mp.fprod(label+j-mp.mpf(depth)/2 for j in range(1, depth+1))/factorial(depth)
+        def reduced_energy(polarization, label, phase):
+            return hh*polarization+eps*count_function(label)-label*mp.sqrt(polarization**2+phase**2)
+        def stationary_equations(polarization, label, phase):
+            return (mp.diff(lambda cc: reduced_energy(cc, label, phase), polarization),
+                    mp.diff(lambda zz: reduced_energy(polarization, zz, phase), label),
+                    mp.diff(lambda yy: reduced_energy(polarization, label, yy), phase))
+        solved = mp.findroot(stationary_equations, (ch*mp.mpf(&#39;.83&#39;), hh*mp.mpf(&#39;.97&#39;), ch*mp.mpf(&#39;.05&#39;)),
+                             tol=mp.mpf(&#39;1e-72&#39;), maxsteps=30)
+        check(mp.norm(solved-mp.matrix([ch, hh, 0])) &lt; mp.mpf(&#39;1e-65&#39;),
+              &#39;independent simultaneous stationary solve recovers the geometric label polarization and relative phase&#39;)
+        check(abs(reduced_energy(*solved)-eps*high(count))/(eps*high(count)) &lt; mp.mpf(&#39;1e-65&#39;),
+              &#39;independent stationary energy evaluation recovers the count clock relatively&#39;)
+        enumerated = sum(comb(k+depth-1, depth-1) for k in range(level+1))
+        check(enumerated == count,
+              &#39;independent cumulative spatial shell enumeration gives the constitutive count at the solved label&#39;)
+        xx = mp.sqrt(1-ch*ch)
+        aa, bb = mp.sqrt((1+ch)/2), mp.sqrt((1-ch)/2)
+        mass_source = hh*xx/ch
+        eta = eps*high(count)-hh/ch
+        omega = eps*high(count)
+        pair = mp.matrix([aa, bb])
+        pair_h = mp.matrix([[hh+eta, mass_source], [mass_source, -hh+eta]])
+        relative_residual = mp.norm(pair_h*pair-omega*pair)/omega
+        check(relative_residual &lt; mp.mpf(&#39;1e-65&#39;), &#39;high precision complete pair equation verifies the selected count clock relatively&#39;)
+        check(abs(hh*ch+eps*high(count)-hh*ch-omega) &lt; mp.mpf(&#39;1e-75&#39;),
+              &#39;high precision complete pair energy retains the spatial kinetic contribution&#39;)
+        generators = radial.gammas(depth+1)
+        alpha, beta = generators[:depth], generators[depth]
+        rank, eye = len(beta), np.eye(len(beta))
+        ep = float(eps)
+        for sample in range(3):
+            field = rng.normal(size=(rank, rank))+1j*rng.normal(size=(rank, rank))
+            field /= np.linalg.norm(field)
+            variation = rng.normal(size=field.shape)+1j*rng.normal(size=field.shape)
+            variation /= np.linalg.norm(variation)
+            chi, dc = float(h)+.17, .31
+            step = 2e-6
+            rho, scalar, current, norm, support = bilinears(field, alpha, beta)
+            factors = [chi+j-depth/2 for j in range(1, depth+1)]
+            derivative = polynomial(depth, chi)*sum(1/v for v in factors)
+            expected = 2*np.vdot(variation, source(field, chi, ep, alpha, beta, depth)).real
+            expected += dc*(ep*norm*derivative-support)
+            fd = (potential(field+step*variation, chi+step*dc, ep, alpha, beta, depth)
+                  -potential(field-step*variation, chi-step*dc, ep, alpha, beta, depth))/(2*step)
+            close(fd/max(1., chi), expected/max(1., chi),
+                  &#39;independent arbitrary field and auxiliary variations verify the complete local source&#39;)
+            direction = rng.normal(size=depth); direction /= np.linalg.norm(direction)
+            al = sum(v*a for v, a in zip(direction, alpha))
+            rapidity = .47
+            spin = np.cosh(rapidity/2)*eye+np.sinh(rapidity/2)*al
+            close(potential(spin@field, chi, ep, alpha, beta, depth),
+                  potential(field, chi, ep, alpha, beta, depth),
+                  &#39;actual spinor boosts preserve the one-field count potential&#39;)
+            position = rng.normal(size=depth+1); position /= np.linalg.norm(position)
+            frame, _ = np.linalg.qr(np.column_stack([position, rng.normal(size=(depth+1, depth))]))
+            t, v = position[0], frame[0, 1:]
+            av = sum(vi*a for vi, a in zip(v, alpha))
+            a, b, ap, bp = orientation.polynomials(depth, level, np.array(t))
+            matrix = a*eye-1j*b*av
+            jets = [(ap*v[i]*eye-1j*(bp*v[i]*av-t*b*al)+.5j*matrix@al)
+                    for i, al in enumerate(alpha)]
+            dmatrix = -1j*sum(al@jet for al, jet in zip(alpha, jets))
+            close(dmatrix, float(h)*matrix, &#39;actual covariant Clifford jets verify the spatial eigenvalue entering the forward derivation&#39;)
+            field = (float(aa)*eye+float(bb)*beta)@matrix
+            field /= np.linalg.norm(field)
+            dfield = (float(aa)*eye-float(bb)*beta)@dmatrix/np.linalg.norm((float(aa)*eye+float(bb)*beta)@matrix)
+            full = dfield+source(field, float(h), ep, alpha, beta, depth)
+            close(full/float(hh/ch), float(omega)*field/float(hh/ch),
+                  &#39;actual full local field source and spatial jet satisfy the selected stationary branch&#39;, 3e-6)
+        cases.append(dict(particle=name, depth=depth, inferred_index=index,
+                          auxiliary_label_exact=str(h), count_exact=str(count),
+                          epsilon_exact=str(epsq), polarization_exact=str(cq),
+                          frequency_in_radius_units_exact=str(epsq*count),
+                          pair_clock_relative_residual=str(relative_residual),
+                          source_coefficient=float(mass_source),
+                          eliminated_polarization_curvature_exact=str(-1/(epsq*second)),
+                          classification=&#39;forward conditional derivation from the explicit count constitutive action&#39;))
+        print(json.dumps(dict(completed=name, depth=depth, count=int(count))), flush=True)
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = dict(experiment_key=&#39;forward-algebraic-count-action&#39;, created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest() for p in
+                           [Path(__file__), ROOT/&#39;inverse-current-radial.py&#39;, ROOT/&#39;excited-shell-orientation-current.py&#39;]},
+                  evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS, cases=cases,
+                  limits=[&#39;the spatial counting constitutive potential is a stated premise recovered by inverse research&#39;,
+                          &#39;the algebraic label adds no propagating field or mediator&#39;,
+                          &#39;this action is equivalent to the raw inverse-current law, not its flattened persistence modification&#39;,
+                          &#39;spatial jet residuals are scaled by the large source coefficient; pair clocks are checked relatively at high precision&#39;,
+                          &#39;the conditional sphere, sector scales, sparse occupation and localized support are not derived here&#39;,
+                          &#39;no new assigned-depth preference, observed particle identification or additional persistence theorem follows&#39;])
+    output = ROOT/(&#39;forward-count-action-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

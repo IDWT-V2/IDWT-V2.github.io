@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>finite-amplitude-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/finite-amplitude-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="finite-amplitude-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/finite-amplitude-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="finite-amplitude-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>finite-amplitude-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/finite-amplitude-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Finite amplitude continuation of the complete-coefficient determinant law.&quot;&quot;&quot;
+
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import importlib.util
+import json
+import math
+import numpy as np
+import sympy as sp
+from scipy.integrate import solve_bvp,simpson
+from scipy.special import kve,gamma
+
+
+ROOT=Path(__file__).resolve().parent
+PARENT=ROOT/&#39;rotating-determinant-checks.py&#39;
+spec=importlib.util.spec_from_file_location(&#39;radial&#39;,PARENT)
+radial=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(radial)
+radial.BETA=1.0
+radial.TENSION=4.0
+CHECKS=[]
+
+
+def equal(name,lhs,rhs):
+    result=sp.trigsimp(sp.simplify(lhs-rhs))
+    if result!=0:raise AssertionError((name,result))
+    CHECKS.append(name)
+
+
+def derive():
+    a,c,pa,pc,beta,w,m2,b,T,M2=sp.symbols(&#39;a c pa pc beta omega m2 b T M2&#39;,real=True)
+    kappa=T*beta
+    s=a*a+c*c
+    A=1+beta*(pa*pa+pc*pc)
+    B=1-beta*w*w*c*c
+    V=kappa*(M2*(s-1)**2/4+(m2*c*c-b*c**4)/2)
+    routh=T*(sp.sqrt(A)*sp.sqrt(B)-1)+V
+    equal(&#39;first radial amplitude force&#39;,sp.diff(routh,a)/kappa,M2*(s-1)*a)
+    equal(&#39;second radial amplitude force&#39;,sp.diff(routh,c)/kappa,
+          (M2*(s-1)+m2-2*b*c*c-w*w*sp.sqrt(A)/sp.sqrt(B))*c)
+    equal(&#39;first radial momentum&#39;,sp.diff(routh,pa)/kappa,pa*sp.sqrt(B)/sp.sqrt(A))
+    equal(&#39;second radial momentum&#39;,sp.diff(routh,pc)/kappa,pc*sp.sqrt(B)/sp.sqrt(A))
+    lag=-routh
+    q=sp.diff(lag,w)
+    equal(&#39;complete charge&#39;,q,kappa*w*c*c*sp.sqrt(A)/sp.sqrt(B))
+    equal(&#39;complete energy&#39;,w*q-lag,T*(sp.sqrt(A)/sp.sqrt(B)-1)+V)
+    weight=sp.symbols(&#39;weight&#39;,real=True)
+    W=lambda x:M2*(s-1)+x*x*(m2-2*b*c*c-w*w*sp.sqrt(A)/sp.sqrt(B))
+    equal(&#39;finite amplitude convex polarization identity&#39;,W(weight),(1-weight**2)*W(0)+weight**2*W(1))
+    z=sp.symbols(&#39;z&#39;,real=True)
+    p=M2*(z-1)**2/4+(m2*z-b*z*z)/2
+    equal(&#39;large norm polynomial&#39;,p,(M2-2*b)*z*z/4+(m2-M2)*z/2+M2/4)
+    equal(&#39;large norm derivative at one&#39;,sp.diff(p,z).subs(z,1),(m2-2*b)/2)
+    zmin=(M2-m2)/(M2-2*b)
+    equal(&#39;large norm minimum&#39;,p.subs(z,zmin),(2*M2*(m2-b)-m2*m2)/(4*(M2-2*b)))
+    x,bb=sp.symbols(&#39;x Bstar&#39;,positive=True)
+    g=(M2-2*b)*x+m2-M2-w*w/sp.sqrt(1-beta*w*w*x)
+    equal(&#39;core maximum derivative&#39;,sp.diff(g,x).subs(x,(1-bb)/(beta*w*w)),
+          M2-2*b-beta*w**4/(2*bb**sp.Rational(3,2)))
+    equal(&#39;global sufficient bound exceeds quartic threshold&#39;,
+          m2*m2/(2*(m2-b))-2*b,(m2-2*b)**2/(2*(m2-b)))
+
+
+def solve_amplitudes(depth,omega,stiffness,radius,tolerance,seed_solution):
+    beta=1.0
+    tension=4.0
+    kappa=4.0
+    mu=math.sqrt(1-omega*omega)
+    nu=(depth-2)/2
+    robin=mu*kve(nu+1,mu*radius)/kve(nu,mu*radius)
+    mesh=np.linspace(0,radius,int(radius*16)+1)
+    if seed_solution.y.shape[0]==2:
+        f,p=seed_solution.sol(mesh)
+        # Stable cos(F)-1 avoids cancellation in the vacuum norm equation.
+        initial=np.array([-2*np.sin(f/2)**2,np.sin(f),-np.sin(f)*p,np.cos(f)*p])
+    else:initial=seed_solution.sol(mesh)
+    def fun(rr,y):
+        delta,c,pa,pc=y
+        a=1+delta
+        norm_delta=delta*(delta+2)+c*c
+        B=1-beta*omega*omega*c*c
+        margin=B-beta*(pa*pa+pc*pc)
+        root=np.sqrt(np.maximum(margin,1e-14))
+        return np.array([pa/root,pc/root,stiffness*norm_delta*a,
+                         (stiffness*norm_delta+1-c*c/2-omega*omega/root)*c])
+    def boundary(left,right):
+        B=1-omega*omega*right[1]**2
+        margin=B-right[2]**2-right[3]**2
+        return np.array([left[2],left[3],right[0],right[3]/math.sqrt(max(margin,1e-14))+robin*right[1]])
+    singular=np.diag([0,0,-(depth-1),-(depth-1)])
+    solution=solve_bvp(fun,boundary,mesh,initial,S=singular,tol=tolerance,max_nodes=24000)
+    if not solution.success:
+        return {&#39;depth&#39;:depth,&#39;omega&#39;:omega,&#39;norm_stiffness&#39;:stiffness,&#39;radius&#39;:radius,
+                &#39;status&#39;:&#39;collocation-failure&#39;,&#39;message&#39;:solution.message},solution
+    rr=np.linspace(0,radius,int(radius*300)+1)
+    delta,c,pa,pc=solution.sol(rr)
+    a=1+delta
+    norm_delta=delta*(delta+2)+c*c
+    B=1-omega*omega*c*c
+    margin=B-pa*pa-pc*pc
+    if np.min(B)&lt;=0 or np.min(margin)&lt;=0:raise AssertionError(&#39;inadmissible converged branch&#39;)
+    A=B/margin
+    V=kappa*(stiffness*norm_delta**2/4+(c*c-c**4/4)/2)
+    ratio=np.sqrt(A/B)
+    energy=tension*(A-B)/(B*(ratio+1))+V
+    charge=kappa*omega*c*c*ratio
+    pr=tension*(A-B)/(A*(1+np.sqrt(B/A)))-V
+    pt=-tension*(A*B-1)/(np.sqrt(A*B)+1)-V
+    measure=2*math.pi**(depth/2)/gamma(depth/2)*rr**(depth-1)
+    integrate=lambda values:float(simpson(values*measure,x=rr))
+    E,Q=integrate(energy),integrate(charge)
+    virial=integrate(pr+(depth-1)*pt)
+    if np.max(c)&lt;0.1 or np.min(c)&lt;-1e-7 or np.min(a)&lt;=0:raise AssertionError(&#39;trivial or sign-changing branch&#39;)
+    if abs(virial/E)&gt;1e-5:raise AssertionError((&#39;complete virial&#39;,depth,omega,stiffness,virial/E))
+    result={&#39;depth&#39;:depth,&#39;normal_rank&#39;:{2:4,3:3,4:3,5:2,6:2}[depth],&#39;omega&#39;:omega,
+            &#39;norm_stiffness&#39;:stiffness,&#39;radius&#39;:radius,&#39;status&#39;:&#39;collocation-converged&#39;,
+            &#39;energy&#39;:E,&#39;charge&#39;:Q,&#39;energy_over_charge&#39;:E/Q,
+            &#39;center_first_coefficient&#39;:float(a[0]),&#39;center_rotating_coefficient&#39;:float(c[0]),
+            &#39;maximum_norm_squared_deviation&#39;:float(np.max(np.abs(norm_delta))),
+            &#39;minimum_first_coefficient&#39;:float(np.min(a)),&#39;minimum_rotating_coefficient&#39;:float(np.min(c)),
+            &#39;minimum_lapse&#39;:float(np.min(B)),&#39;minimum_momentum_margin&#39;:float(np.min(margin)),
+            &#39;relative_virial&#39;:virial/E,&#39;max_bvp_residual&#39;:float(np.max(solution.rms_residuals)),
+            &#39;collocation_nodes&#39;:len(solution.x),&#39;bvp_tolerance&#39;:tolerance}
+    return result,solution
+
+
+def main():
+    derive()
+    cases=[]
+    diagnostics=[]
+    for omega in (0.95,0.97):
+        for stiffness in (25,100,400,1600):
+            Bstar=(omega**4/(2*(stiffness-0.5)))**(2/3)
+            maximum=(stiffness-0.5)/omega**2*(1-3*Bstar)+1-stiffness
+            diagnostics.append({&#39;omega&#39;:omega,&#39;norm_stiffness&#39;:stiffness,&#39;core_maximum&#39;:maximum})
+        for depth in (2,3,4,5,6):
+            constrained=radial.solve_depth(depth,omega,radius=110.0,tolerance=2e-9)
+            if constrained[&#39;status&#39;]!=&#39;collocation-converged&#39;:raise AssertionError(constrained)
+            seed=radial.PROFILES[(depth,omega,110.0,2e-9)]
+            for stiffness in (1600,400):
+                base,_=solve_amplitudes(depth,omega,stiffness,80.0,1e-7,seed)
+                refined,solution=solve_amplitudes(depth,omega,stiffness,110.0,1e-9,seed)
+                if refined[&#39;status&#39;]==&#39;collocation-converged&#39; and base[&#39;status&#39;]==&#39;collocation-converged&#39;:
+                    refined[&#39;convergence&#39;]={key:abs(refined[key]-base[key])/max(abs(refined[key]),1) for key in (&#39;energy&#39;,&#39;charge&#39;,&#39;center_rotating_coefficient&#39;)}
+                    if max(refined[&#39;convergence&#39;].values())&gt;1e-5:raise AssertionError((&#39;boundary convergence&#39;,refined))
+                    refined[&#39;relative_to_constrained&#39;]={key:(refined[key]-constrained[key])/constrained[key] for key in (&#39;energy&#39;,&#39;charge&#39;)}
+                    seed=solution
+                refined[&#39;coarse_status&#39;]=base[&#39;status&#39;]
+                cases.append(refined)
+                print(json.dumps({key:refined[key] for key in (&#39;depth&#39;,&#39;omega&#39;,&#39;norm_stiffness&#39;,&#39;status&#39;)}),flush=True)
+    cases.append({&#39;depth&#39;:10,&#39;normal_rank&#39;:0,&#39;status&#39;:&#39;no-active-normal-generator&#39;})
+    path=Path(__file__).resolve()
+    report={&#39;created_at&#39;:datetime.now(timezone.utc).isoformat(),
+            &#39;experiment&#39;:&#39;finite-amplitude-complete-coefficient-localization&#39;,
+            &#39;sources&#39;:{&#39;experiments/finite-amplitude-checks.py&#39;:sha256(path.read_bytes()).hexdigest(),
+                       &#39;experiments/rotating-determinant-checks.py&#39;:sha256(PARENT.read_bytes()).hexdigest()},
+            &#39;exact_checks&#39;:len(CHECKS),&#39;checks&#39;:CHECKS,
+            &#39;parameters&#39;:{&#39;beta&#39;:1,&#39;T&#39;:4,&#39;kappa&#39;:4,&#39;m_squared&#39;:1,&#39;quartic_b&#39;:&#39;1/4&#39;},
+            &#39;core_diagnostics&#39;:diagnostics,&#39;cases&#39;:cases,
+            &#39;scope&#39;:&#39;Unconstrained complex positive wave field with a common polynomial norm stiffness. All unused polarizations have conditional positive comparison solutions when both active radial coefficients are positive. Coupled two-amplitude radial stability, Dirac kinetics and simplex frequency selection remain unresolved.&#39;}
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output=path.with_name(&#39;finite-amplitude-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;exact_checks&#39;:len(CHECKS),&#39;cases&#39;:len(cases),&#39;report&#39;:str(output)}),flush=True)
+
+
+if __name__==&#39;__main__&#39;:main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

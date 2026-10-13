@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>finite-guide-imbalance.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/finite-guide-imbalance.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="finite-guide-imbalance.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/finite-guide-imbalance.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="finite-guide-imbalance.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>finite-guide-imbalance.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/finite-guide-imbalance.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Derive neutral-frame shape response and independently solve finite bridges.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import json
+
+import numpy as np
+import sympy as s
+from scipy.integrate import quad, solve_bvp
+from scipy.optimize import brentq
+
+ROOT = Path(__file__).resolve().parent
+COUNTS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label] = COUNTS.get(label, 0) + 1
+
+
+def exact(value, label):
+    check(s.simplify(value) == 0, label)
+
+
+def close(actual, expected, label, tolerance=1e-8):
+    error = float(np.linalg.norm(np.asarray(actual) - np.asarray(expected)) /
+                  max(1, np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0), error)
+    check(error &lt; tolerance, label)
+
+
+def symbolic():
+    u, v, w = s.symbols(&#39;u v w&#39;, real=True)
+    frame = s.Matrix([[u+v, w], [w, u-v]]) / s.sqrt(2)
+    norm = s.trace(frame.T*frame)
+    area = (frame.T*frame).det()
+    exact(norm-u*u-v*v-w*w, &#39;actual frame norm retains both shape channels&#39;)
+    exact(area-(u*u-v*v-w*w)**2/4, &#39;actual frame Gram area has the exact shape deficit&#39;)
+    derivatives = [frame.diff(a) for a in (u, v, w)]
+    for i in range(3):
+        for j in range(3):
+            exact(s.trace(derivatives[i].T*derivatives[j])-int(i == j),
+                  &#39;frame kinetic metric is the common canonical identity&#39;)
+    angle = s.symbols(&#39;angle&#39;, real=True)
+    rot = s.Matrix([[s.cos(angle), -s.sin(angle)], [s.sin(angle), s.cos(angle)]])
+    shape = s.Matrix([[v,w], [w,-v]])
+    transformed = rot*shape*rot.T
+    exact(s.trigsimp(transformed[0,0]-v*s.cos(2*angle)+w*s.sin(2*angle)),
+          &#39;shape polarization rotates twice the ordinary spatial angle&#39;)
+    exact(s.trigsimp(transformed[0,1]-v*s.sin(2*angle)-w*s.cos(2*angle)),
+          &#39;both physical shape directions transform together&#39;)
+
+    h, k2, k4, om, e0, i0, j2, j4 = s.symbols(
+        &#39;h k2 k4 om e0 i0 j2 j4&#39;, positive=True)
+    dielectric = k2*norm+k4*area
+    first = s.diff(dielectric.subs({v:h*v,w:h*w}),h).subs(h,0)
+    second = s.diff(dielectric.subs({v:h*v,w:h*w}),h,2).subs(h,0)/2
+    exact(first, &#39;shape has zero first dielectric source variation&#39;)
+    exact(second-(k2-k4*u*u/2)*(v*v+w*w),
+          &#39;complete dielectric quadratic coefficient is derived&#39;)
+    energy = (e0*i0)**2/(2*(i0+h*h*j2+h**4*j4))
+    exact(s.diff(energy,h,2).subs(h,0)/2+e0*e0*j2/2,
+          &#39;fixed-flux variation retains the complete electric quadratic cost&#39;)
+    potential = om*om*(v*v+w*w)/2-e0*e0*second/2
+    exact(potential-(om*om-k2*e0*e0+k4*e0*e0*u*u/2)*(v*v+w*w)/2,
+          &#39;both shape operators have the derived positive-gap potential&#39;)
+
+    x, length, k = s.symbols(&#39;x L k&#39;, positive=True)
+    left, right = s.symbols(&#39;left right&#39;, real=True)
+    z = (left*s.sinh(k*(length-x))+right*s.sinh(k*x))/s.sinh(k*length)
+    exact(s.diff(z,x,2)-k*k*z, &#39;exact finite bridge solves its Euler equation&#39;)
+    exact(z.subs(x,0)-left, &#39;exact bridge retains the first endpoint&#39;)
+    exact(z.subs(x,length)-right, &#39;exact bridge retains the second endpoint&#39;)
+    energy = k*((left*left+right*right)*s.coth(k*length)-
+                2*left*right/s.sinh(k*length))/2
+    boundary = (right*s.diff(z,x).subs(x,length)-left*s.diff(z,x).subs(x,0))/2
+    exact(s.trigsimp(boundary-energy), &#39;integration by parts gives the complete bridge energy&#39;)
+    plus, minus = (left+right)/2, (left-right)/2
+    diagonal = k*(plus*plus*s.tanh(k*length/2)+minus*minus/s.tanh(k*length/2))
+    exact(s.trigsimp(s.expand_trig((energy-diagonal).rewrite(s.exp))),
+          &#39;sum and mismatch shapes diagonalize the boundary energy&#39;)
+    pressure = (s.diff(z,x)**2-k*k*z*z)/2
+    exact(s.diff(pressure,x), &#39;longitudinal shape stress is conserved&#39;)
+    exact(s.trigsimp(s.diff(energy,length)+pressure.subs(x,0)),
+          &#39;moving-end energy and independent stress give identical force&#39;)
+
+    theta, amp = s.symbols(&#39;theta amp&#39;, real=True)
+    angular = k*amp*amp*(s.coth(k*length)-s.cos(theta)/s.sinh(k*length))
+    exact(s.diff(angular,theta)-k*amp*amp*s.sin(theta)/s.sinh(k*length),
+          &#39;reciprocal shape torque follows from the same energy&#39;)
+    exact(s.diff(angular,theta,2).subs(theta,s.pi)+k*amp*amp/s.sinh(k*length),
+          &#39;opposite endpoint shapes have negative angular curvature&#39;)
+    t, mass, omega = s.symbols(&#39;t mass omega&#39;, positive=True)
+    for n in (2,3):
+        grad = n*omega**2*(1-t)*mass/(4-n)
+        electric = (omega**2*t*mass+(grad+omega**2*(1-t)*mass)/2)/2
+        tension = electric+(grad+omega**2*mass)/2
+        exact(tension/mass-omega**2*(3+(1-n)*t)/(4-n),
+              &#39;actual mixed-frame guide moments fix tension per deformation norm&#39;)
+        width_bound = 2*(1-t)*(4-n)/(3+(1-n)*t)
+        exact(s.diff(width_bound,t)+2*(4-n)**2/(3+(1-n)*t)**2,
+              &#39;exact derivative is negative throughout the stated physical interval zero to one&#39;)
+        exact(width_bound.subs(t,0)-s.Rational(2*(4-n),3),
+              &#39;one common upper bound controls the formal equilibrium in guide-width units&#39;)
+    return {&#39;frame_norm&#39;:&#39;u^2+v^2+w^2&#39;, &#39;frame_area&#39;:&#39;(u^2-v^2-w^2)^2/4&#39;,
+            &#39;shape_operator&#39;:&#39;-Delta_y+mu^2+(kappa4 E0^2/2)u0^2&#39;,
+            &#39;on_shell_energy&#39;:&#39;T L+&lt;g+,K tanh(K L/2)g+&gt;+&lt;g-,K coth(K L/2)g-&gt;&#39;}
+
+
+def bridge_spectral(matrix, left, right, length):
+    values, vectors = np.linalg.eigh(matrix)
+    rates = np.sqrt(values)
+    a, b = vectors.T@left, vectors.T@right
+    plus, minus = (a+b)/2, (a-b)/2
+    z = rates*length/2
+    energy = np.sum(rates*(plus*plus*np.tanh(z)+minus*minus/np.tanh(z)))
+    inward = np.sum(values*(plus*plus/np.cosh(z)**2-minus*minus/np.sinh(z)**2))/2
+    return energy, inward
+
+
+def numerical():
+    rng = np.random.default_rng(202610121215)
+    cases = []
+    for dim in (1,2,4):
+        for length in (0.4,1.7,4.0):
+            raw = rng.normal(size=(dim,dim))/2
+            matrix = raw.T@raw+0.7**2*np.eye(dim)
+            left, right = rng.normal(size=dim)/10, rng.normal(size=dim)/10
+            grid = np.linspace(0,length,65)
+            initial = np.vstack([left[:,None]+(right-left)[:,None]*grid/length,
+                                  np.broadcast_to(((right-left)/length)[:,None],(dim,len(grid)))])
+            solution = solve_bvp(lambda x,y:np.vstack([y[dim:],matrix@y[:dim]]),
+                                 lambda a,b:np.r_[a[:dim]-left,b[:dim]-right],
+                                 grid, initial, tol=2e-10, max_nodes=4096)
+            check(solution.success, &#39;independent vector boundary solver converges&#39;)
+            def density(x):
+                data = solution.sol(x)
+                return (data[dim:]@data[dim:]+data[:dim]@matrix@data[:dim])/2
+            measured, error = quad(density,0,length,epsabs=2e-12,epsrel=2e-12)
+            energy, derivative = bridge_spectral(matrix,left,right,length)
+            close(measured,energy,&#39;independent integrated field energy matches the operator formula&#39;)
+            for x in np.linspace(0,length,7):
+                data = solution.sol(x)
+                pressure = (data[dim:]@data[dim:]-data[:dim]@matrix@data[:dim])/2
+                close(pressure,-derivative,&#39;independent field stress is constant and agrees with force&#39;)
+            step = 1e-4*length
+            ep = bridge_spectral(matrix,left,right,length+step)[0]
+            em = bridge_spectral(matrix,left,right,length-step)[0]
+            close((ep-em)/(2*step),derivative,&#39;direct moving-end energy difference agrees with force&#39;)
+            rotation = np.linalg.qr(rng.normal(size=(dim,dim)))[0]
+            transformed = bridge_spectral(rotation@matrix@rotation.T,rotation@left,rotation@right,length)
+            close(transformed,(energy,derivative),&#39;common rotation preserves the entire pair energy and force&#39;)
+            cases.append(dict(matrix_dimension=dim,length=length,shape_energy=energy,
+                              shape_inward_force=derivative,quadrature_error=error,
+                              interpretation=&#39;positive-operator identity control, not a physical transverse spectrum&#39;))
+    return cases
+
+
+def force_controls():
+    rows = []
+    for mu in (0.3,1.0,2.0):
+        rates = mu*np.array([1.0,1.3,2.1,3.7])
+        weights = np.array([0.11,0.17,0.29,0.43])
+        for cosine in (-1.0,-0.5,0.0,0.5,1.0):
+            plus2, minus2 = (1+cosine)/2,(1-cosine)/2
+            previous = None
+            for scaled_length in (0.1,0.2,0.5,1,2,4,8):
+                length = scaled_length/mu
+                z = rates*length/2
+                inward = 1+np.sum(weights*rates*rates*(plus2/np.cosh(z)**2-minus2/np.sinh(z)**2))/2
+                slope = np.sum(weights*rates**3*(minus2/np.sinh(z)**2/np.tanh(z)-
+                                                plus2/np.cosh(z)**2*np.tanh(z)))/2
+                if cosine &lt;= 0:
+                    check(slope&gt;0, &#39;nonpositive endpoint overlap makes inward force increase&#39;)
+                    if previous is not None:
+                        check(inward&gt;previous, &#39;independent lengths verify increasing inward response&#39;)
+                    check(inward&lt;1, &#39;mismatched inward force approaches tension from below&#39;)
+                if cosine == -1:
+                    repulsion = 1-inward
+                    bound = mu*mu/(2*np.sinh(mu*length/2)**2)
+                    check(repulsion&lt;=bound+2e-13*max(1,bound), &#39;gap controls the complete spectral outward response&#39;)
+                    check(bound&lt;=2/length**2, &#39;small-length estimate bounds the gap envelope&#39;)
+                previous = inward
+                rows.append(dict(mu=mu,endpoint_cosine=cosine,length=length,
+                                 inward_force=inward,inward_force_slope=slope))
+        def force(length):
+            return 1-np.sum(weights*rates*rates/np.sinh(rates*length/2)**2)/2
+        equilibrium = brentq(force,0.01/mu,20/mu,xtol=1e-13)
+        negative_curvature = -np.sum(weights*rates/np.sinh(rates*equilibrium))
+        check(negative_curvature&lt;0,&#39;formal radial balance remains an angular saddle&#39;)
+        rows.append(dict(mu=mu,radial_equilibrium=equilibrium,
+                         angular_curvature=negative_curvature,
+                         interpretation=&#39;formal quadratic endpoint control, not a bound hadron&#39;))
+    return rows
+
+
+def main():
+    equations = symbolic()
+    boundary_cases = numerical()
+    forces = force_controls()
+    sectors = []
+    for depth,carrier,rank in ((2,2,4),(3,4,3),(4,4,3),(5,6,2),(6,6,2),(10,10,0)):
+        middle = carrier//2
+        hodge_square = (-1)**(middle*middle)
+        gate = int(hodge_square == 1)
+        active = gate == 1 and rank &gt; 0
+        check(active == (depth in (3,4)), &#39;same middle-Hodge rule retains precisely the existing active guides&#39;)
+        gradient_coefficient = 4*middle-(depth-1)*(2*middle-2)
+        mass_coefficient = (depth-1)*(2*middle-2)
+        if depth in (3,4):
+            check(gradient_coefficient&gt;0 and mass_coefficient&gt;0,&#39;geometric profile identity allows the active guide&#39;)
+        else:
+            check(gradient_coefficient&lt;=0 or mass_coefficient==0,&#39;ungated geometric-degree profile control remains obstructed&#39;)
+        sectors.append(dict(depth=depth,even_carrier=carrier,hodge_gate=gate,
+                            normal_complex_rank=rank,guide_available_under_existing_premises=active,
+                            new_independent_color_selection=False))
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = dict(experiment_key=&#39;finite-guide-imbalance-competing-ranges&#39;,
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+Path(__file__).name:sha256(Path(__file__).read_bytes()).hexdigest()},
+                  evaluations=sum(COUNTS.values()),conditions=COUNTS,maximum_errors=ERRORS,
+                  exact_equations=equations,boundary_controls=boundary_cases,
+                  force_controls=forces,sectors=sectors,
+                  limits=[&#39;guide is conditional on the independently varied commuting connection action&#39;,
+                          &#39;endpoint deformations are prescribed slow shapes, not frozen unequal carrier clocks&#39;,
+                          &#39;positive matrix controls are not a discretization claim for the actual transverse spectrum&#39;,
+                          &#39;the full transverse continuum is retained by the analytic spectral proof&#39;,
+                          &#39;free endpoint orientation makes opposite shapes an angular saddle&#39;,
+                          &#39;small length can invalidate the quadratic end-core approximation&#39;,
+                          &#39;three/four restriction is inherited, not independently derived by this response&#39;,
+                          &#39;full non-Abelian confinement, physical units and the master-field reduction remain open&#39;])
+    path = ROOT/(&#39;finite-guide-imbalance-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path),evaluations=report[&#39;evaluations&#39;],maximum_errors=ERRORS)),flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

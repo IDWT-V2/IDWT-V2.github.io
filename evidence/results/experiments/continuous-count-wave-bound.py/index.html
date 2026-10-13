@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>continuous-count-wave-bound.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/continuous-count-wave-bound.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="continuous-count-wave-bound.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/continuous-count-wave-bound.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="continuous-count-wave-bound.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>continuous-count-wave-bound.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/continuous-count-wave-bound.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact continuous-count inequalities and actual minimal-carrier source bounds.&quot;&quot;&quot;
+from datetime import datetime,timezone
+from fractions import Fraction
+from hashlib import sha256
+from importlib.util import spec_from_file_location,module_from_spec
+from pathlib import Path
+import json
+
+import numpy as np
+
+ROOT=Path(__file__).resolve().parent
+def import_local(name,filename):
+    spec=spec_from_file_location(name,ROOT/filename)
+    module=module_from_spec(spec); spec.loader.exec_module(module)
+    return module
+
+envelope=import_local(&#39;envelope&#39;,&#39;convex-count-envelope.py&#39;)
+minimal=import_local(&#39;minimal&#39;,&#39;minimal-count-carrier.py&#39;)
+COUNTS,ERRORS={},{}
+
+
+def check(value,label):
+    if not bool(value):
+        raise AssertionError(label)
+    COUNTS[label]=COUNTS.get(label,0)+1
+
+
+def close(actual,expected,label,tolerance=2e-10):
+    error=float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1,np.linalg.norm(expected)))
+    ERRORS[label]=max(ERRORS.get(label,0),error)
+    check(error&lt;tolerance,label)
+
+
+def ground_coefficients(depth,epsilon):
+    count,first,second=envelope.forward.count_data(depth,0)
+    cc=epsilon*first
+    hh=Fraction(depth,2)
+    omega=epsilon
+    lam=hh/cc
+    qq=2*lam-2*(1-cc*cc)/(epsilon*second)
+    pair=epsilon*epsilon*(first*first+second)
+    return cc,omega,lam,qq,pair
+
+
+def main():
+    rng=np.random.default_rng(202610121125)
+    sectors=[];pairs=[]
+    for depth in envelope.forward.radial.DEPTHS:
+        count,first,second=envelope.forward.count_data(depth,0)
+        check(count==1,&#39;the exact ground geometric band has one count per seed&#39;)
+        check(second&lt;first*first,&#39;the logarithmic count derivative gives the uniform pair bound&#39;)
+        epsilon=Fraction(3,5)/first
+        cc,omega,lam,qq,pair=ground_coefficients(depth,epsilon)
+        check(qq&gt;=0,&#39;one common ground polarization has a nonnegative complete scalar Hessian&#39;)
+        check(qq&lt;=2*(lam-omega),&#39;the exact scalar source norm fits the full negative spectral gap&#39;)
+        check(pair&lt;1,&#39;the common ground control satisfies the positive-wave pair condition exactly&#39;)
+        check(lam&gt;omega,&#39;the ground spatial operator has disjoint signed spectral branches&#39;)
+        alpha,beta,ambient,seed,form=minimal.preparation(depth)
+        aa,bb=np.sqrt((1+float(cc))/2),np.sqrt((1-float(cc))/2)
+        fsecond=float(qq)/(2*float(cc)**2)
+        for _ in range(4):
+            position=rng.normal(size=depth+1); position/=np.linalg.norm(position)
+            grading=sum(x*g for x,g in zip(position,ambient))
+            field=(aa*np.eye(len(grading))+bb*grading)@seed
+            rho=np.vdot(field,field).real
+            scalar=np.vdot(field,grading@field).real
+            xx=scalar/rho
+            vec=(grading-xx*np.eye(len(grading)))@field
+            close(np.vdot(vec,vec).real,float(cc)**2*rho,
+                  &#39;actual minimal spatial fields give the exact normalized scalar-source direction&#39;)
+            real=np.concatenate([vec.real.ravel(),vec.imag.ravel()])
+            hessian=2*fsecond/rho*np.outer(real,real)
+            close(np.linalg.norm(hessian,2),float(qq),
+                  &#39;the full real source derivative has exactly the claimed operator norm&#39;)
+            check(np.linalg.eigvalsh(hessian)[0]&gt;-1e-10,
+                  &#39;the complete real source derivative is positive on the actual minimal carrier&#39;)
+            for _ in range(2):
+                variation=rng.normal(size=real.size)
+                value=variation@hessian@variation
+                check(-1e-10&lt;=value&lt;=float(qq)*np.dot(variation,variation)+1e-10,
+                      &#39;arbitrary complex-field directions obey the full positive source bound&#39;)
+        assigned_epsilon=Fraction(3,10)/max(envelope.forward.count_data(depth,n-1)[1]
+            for _,dd,n in envelope.forward.radial.ASSIGNMENTS if dd==depth)
+        ac,aw,al,aq,ap=ground_coefficients(depth,assigned_epsilon)
+        sectors.append(dict(depth=depth,common_ground_c_exact=str(cc),
+            common_ground_epsilon_exact=str(epsilon),source_norm_q_exact=str(qq),
+            negative_gap_capacity_exact=str(2*(lam-omega)),pair_condition_exact=str(pair),
+            assigned_diagnostic_ground_c_exact=str(ac),assigned_diagnostic_ground_q_exact=str(aq),
+            ground_bound_applies_at_assigned_diagnostic_scale=bool(aq&gt;=0 and aq&lt;=2*(al-aw)),
+            common_ground_control_supports_all_assigned_levels=all(epsilon*envelope.forward.count_data(depth,n-1)[1]&lt;1
+                for _,dd,n in envelope.forward.radial.ASSIGNMENTS if dd==depth)))
+    for name,depth,index in envelope.forward.radial.ASSIGNMENTS:
+        epsilon=Fraction(3,10)/max(envelope.forward.count_data(depth,n-1)[1]
+            for _,dd,n in envelope.forward.radial.ASSIGNMENTS if dd==depth)
+        count,first,second=envelope.forward.count_data(depth,index-1)
+        left=epsilon*epsilon*(first*first+count*second)
+        check(count*second&lt;first*first,
+              &#39;every assigned positive count product obeys the exact logarithmic derivative inequality&#39;)
+        check(left&lt;2*(epsilon*first)**2&lt;=Fraction(18,100),
+              &#39;one diagnostic scale gives the assigned pair criterion without individual tuning&#39;)
+        pairs.append(dict(particle=name,depth=depth,index=index,pair_condition_exact=str(left)))
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    names=[&#39;continuous-count-wave-bound.py&#39;,&#39;minimal-count-carrier.py&#39;,&#39;convex-count-envelope.py&#39;,
+           &#39;forward-count-action.py&#39;,&#39;inverse-current-radial.py&#39;,&#39;excited-shell-orientation-current.py&#39;]
+    report=dict(experiment_key=&#39;continuous-count-wave-complete-ground-bound&#39;,
+        created_utc=datetime.now(timezone.utc).isoformat(),
+        sources={&#39;experiments/&#39;+n:sha256((ROOT/n).read_bytes()).hexdigest() for n in names},
+        evaluations=sum(COUNTS.values()),conditions=COUNTS,maximum_errors=ERRORS,sectors=sectors,assigned_pair_criteria=pairs,
+        limits=[&#39;the all-spatial conclusion additionally uses the self-adjoint spectral Schur proof&#39;,
+                &#39;the conclusion excludes exponential linear growth and does not remove zero or secular directions&#39;,
+                &#39;ground controls do not establish assigned excited-field persistence&#39;,
+                &#39;the common ground c=.6 scale cannot support the maintained high assigned levels&#39;,
+                &#39;the original continuous constitutive source is used on its locally smooth domain&#39;,
+                &#39;finite spatial samples check algebraic source bounds, not global nodelessness&#39;])
+    path=ROOT/(&#39;continuous-count-wave-bound-results-&#39;+stamp+&#39;.json&#39;)
+    path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(path),evaluations=report[&#39;evaluations&#39;],maximum_errors=ERRORS)),flush=True)
+
+
+if __name__==&#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

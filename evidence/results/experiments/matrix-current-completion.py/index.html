@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>matrix-current-completion.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/matrix-current-completion.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="matrix-current-completion.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/matrix-current-completion.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="matrix-current-completion.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>matrix-current-completion.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/matrix-current-completion.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Lorentz-invariant matrix-current completion and exact ground controls.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+from math import comb
+import json
+
+import numpy as np
+from scipy.linalg import eigvals
+import sympy as sp
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;ground&#39;, ROOT/&#39;inverse-current-ground-proof.py&#39;)
+ground = module_from_spec(spec)
+spec.loader.exec_module(ground)
+radial = ground.radial
+CONDITIONS, ERRORS = {}, {}
+
+
+def check(value, label):
+    if not bool(value):
+        raise AssertionError(label)
+    CONDITIONS[label] = CONDITIONS.get(label, 0)+1
+
+
+def close(a, b, label, tolerance=3e-8):
+    error = np.linalg.norm(np.asarray(a)-np.asarray(b))/max(1., np.linalg.norm(b))
+    ERRORS[label] = max(ERRORS.get(label, 0.), float(error))
+    check(error &lt; tolerance, label)
+
+
+def invariants(field, beta):
+    rank = len(beta)
+    matrix = field@field.conj().T
+    right_scalar = field.conj().T@beta@field
+    rho = np.trace(matrix).real
+    signed = np.trace(right_scalar).real
+    square = np.trace(right_scalar@right_scalar).real
+    proper = np.sqrt(rank*square-signed*signed)
+    return matrix, right_scalar, rho, signed, square, proper
+
+
+def potential_gradient(field, beta):
+    # A separate smooth test function isolates the matrix chain rule.
+    # Exact count backgrounds are checked with their own f and f&#39; below.
+    matrix, _, rho, signed, square, proper = invariants(field, beta)
+    x = signed/proper
+    f, fp = .37+1.21*x*x/2, 1.21*x
+    density_gradient = (len(beta)*beta@matrix@beta-signed*beta)/proper
+    gradient = (fp*beta+(f-x*fp)*density_gradient)@field
+    return proper*f, gradient, density_gradient
+
+
+def nonlinear_checks():
+    rng = np.random.default_rng(2026101204)
+    cases = []
+    for depth in radial.DEPTHS:
+        matrices = radial.gammas(depth+1)
+        alpha, beta = matrices[:depth], matrices[depth]
+        rank = len(beta)
+        for sample in range(3):
+            field = rng.normal(size=(rank, rank))+1j*rng.normal(size=(rank, rank))
+            field /= np.linalg.norm(field)
+            matrix, right_scalar, rho, signed, square, proper = invariants(field, beta)
+            check(proper+1e-14 &gt;= abs(signed), &#39;matrix inertia bound keeps the completed ratio inside its physical unit interval&#39;)
+            close(square, np.trace(beta@matrix@beta@matrix).real,
+                  &#39;right scalar Gram matrix and left density give the same Lorentz scalar square&#39;)
+            value, gradient, _ = potential_gradient(field, beta)
+            variation = rng.normal(size=field.shape)+1j*rng.normal(size=field.shape)
+            variation /= np.linalg.norm(variation)
+            step = 2e-6
+            finite = (potential_gradient(field+step*variation, beta)[0]-potential_gradient(field-step*variation, beta)[0])/(2*step)
+            close(finite, 2*np.vdot(gradient, variation).real,
+                  &#39;independent complete matrix action variation verifies the invariant source&#39;)
+            close(potential_gradient(1.7*field, beta)[0], 1.7**2*value,
+                  &#39;completed invariant potential retains amplitude degree two&#39;)
+            close(potential_gradient(1.7*field, beta)[1], 1.7*gradient,
+                  &#39;completed invariant source retains amplitude degree one&#39;)
+            angle = .43
+            boost = np.cosh(angle/2)*np.eye(rank)+np.sinh(angle/2)*alpha[0]
+            close(boost.conj().T@beta@boost, beta,
+                  &#39;actual spinor boost preserves its indefinite scalar metric&#39;)
+            transformed = invariants(boost@field, beta)
+            close(transformed[1], right_scalar, &#39;entire right scalar Gram matrix is invariant under the actual Lorentz boost&#39;)
+            close(transformed[-1], proper, &#39;completed proper density is Lorentz invariant&#39;)
+            close(potential_gradient(boost@field, beta)[0], value,
+                  &#39;completed local potential is Lorentz invariant&#39;)
+            close(boost.conj().T@potential_gradient(boost@field, beta)[1], gradient,
+                  &#39;complete nonlinear source has the Lorentz contragredient transformation required by its action&#39;)
+            if depth == 2:
+                currents = [np.vdot(field, a@field).real for a in alpha]
+                ordinary = np.sqrt(rho*rho-sum(j*j for j in currents))
+                close(proper, ordinary, &#39;depth two completed and vector proper densities coincide identically&#39;)
+        for c in (.1, .3, .6, .8):
+            x = np.sqrt(1-c*c)
+            a, b = np.sqrt((1+c)/2), np.sqrt((1-c)/2)
+            field = (a*np.eye(rank)+b*beta)/np.sqrt(rank)
+            matrix, _, rho, signed, _, proper = invariants(field, beta)
+            density_gradient = (rank*beta@matrix@beta-signed*beta)/proper
+            close(proper, rho, &#39;balanced count background retains exactly the same density&#39;)
+            close(density_gradient, np.eye(rank), &#39;completed density has the same first field gradient on the exact count background&#39;)
+            close(signed/proper, x, &#39;completed action preserves the balanced scalar ratio&#39;)
+            h = depth/2
+            p, first, _ = radial.polynomial(depth, 0)
+            epsilon = c/float(first)
+            lam = h/c
+            f, fp = epsilon*float(p)-h*c, h*x/c
+            original = (fp*beta+(f-x*fp)*np.eye(rank))@field
+            completed = (fp*beta+(f-x*fp)*density_gradient)@field
+            close(original, completed, &#39;actual inverse count source and complete energy remain unchanged on the background&#39;)
+        # Generic complex fields in the exact rotational matrix algebra
+        # independently identify its additional tensor-current norm.
+        gamma = alpha[0]
+        tensor = -1j*gamma@beta
+        algebra = np.stack([np.eye(rank), -1j*gamma, beta, tensor])/np.sqrt(rank)
+        for sample in range(3):
+            z = rng.normal(size=4)+1j*rng.normal(size=4)
+            field = np.einsum(&#39;a,aij-&gt;ij&#39;, z, algebra)
+            _, _, rho, signed, _, proper = invariants(field, beta)
+            jr, jt = np.vdot(field, gamma@field).real, np.vdot(field, tensor@field).real
+            close(proper*proper, rho*rho-jr*jr-jt*jt,
+                  &#39;rotational matrix algebra derives the additional tensor-current square&#39;)
+        cases.append({&#39;depth&#39;: depth, &#39;spinor_rank&#39;: rank,
+                      &#39;classification&#39;: &#39;full spinor matrix variations and Lorentz transformations&#39;})
+    for name, depth, index in radial.ASSIGNMENTS:
+        matrices = radial.gammas(depth+1)
+        gamma, beta0 = matrices[0], matrices[depth]
+        rank, level = len(beta0), index-1
+        last = max(n for _, d, n in radial.ASSIGNMENTS if d == depth)
+        p, first, _ = radial.polynomial(depth, level)
+        epsilon = .3/float(radial.polynomial(depth, last-1)[1])
+        c = epsilon*float(first)
+        x = np.sqrt(1-c*c)
+        a, b = np.sqrt((1+c)/2), np.sqrt((1-c)/2)
+        h = level+depth/2
+        f, fp = epsilon*float(p)-h*c, h*x/c
+        for theta in (.37, 1.23):
+            t, s = np.cos(theta), np.sin(theta)
+            beta = (t*np.eye(rank)+1j*s*gamma)@beta0
+            aa = (level+depth-1)/(depth-1)*radial.eval_gegenbauer(level, (depth-1)/2, t)
+            bb = radial.eval_gegenbauer(level-1, (depth+1)/2, t) if level else 0.
+            positive = (aa*np.eye(rank)-1j*s*bb*gamma)/np.sqrt(rank*comb(level+depth-1, depth-1))
+            field = (a*np.eye(rank)+b*beta)@positive
+            matrix, _, rho, signed, _, proper = invariants(field, beta)
+            density_gradient = (rank*beta@matrix@beta-signed*beta)/proper
+            close(proper/rho, 1., &#39;every maintained actual spatial shell retains its original proper density&#39;)
+            close(density_gradient, np.eye(rank), &#39;every maintained actual spatial shell retains its complete density gradient&#39;)
+            original = (fp*beta+(f-x*fp)*np.eye(rank))@field
+            completed = (fp*beta+(f-x*fp)*density_gradient)@field
+            close(completed/max(1., np.linalg.norm(original)), original/max(1., np.linalg.norm(original)),
+                  &#39;completed local source preserves all fourteen exact spatial count branches&#39;)
+    return cases
+
+
+def symbolic_blend(depth, c_value):
+    z, kappa = sp.symbols(&#39;z kappa&#39;)
+    x = sp.Symbol(&#39;x&#39;, real=True)
+    c = sp.Rational(c_value)
+    lx, ly = ground.exact_block(depth, 1, c, x)
+    if depth != 2:
+        h = sp.Rational(depth, 2)
+        harmonic = 1
+        u, v = sp.Rational(depth, depth+1), sp.Rational(1, depth+1)
+        aa, bb, ab = (1+c)/2, (1-c)/2, x/2
+        tensor = sp.Matrix([[v*bb, -v*ab, -v*bb, v*ab],
+                            [-v*ab, v*aa, v*ab, -v*aa],
+                            [-u*bb, u*ab, u*bb, -u*ab],
+                            [u*ab, -u*aa, -u*ab, u*aa]])
+        first = sum(sp.Rational(1, j) for j in range(1, depth+1))
+        vector = 1-c*c/(h*first)
+        lx += 2*kappa*vector*tensor
+    raw = sp.Poly((ly*lx).charpoly(z).as_expr(), x)
+    reduced = sp.factor(sp.rem(raw, sp.Poly(x*x-1+c*c, x)).as_expr())
+    check(not reduced.has(x), &#39;completed exact harmonic polynomial retains only the physical mixing ratio&#39;)
+    check(reduced.subs(z, 0) == 0, &#39;completed matrix action retains the same zero symmetry direction&#39;)
+    cubic = sp.Poly(sp.cancel(reduced/z), z)
+    disc = sp.factor(sp.discriminant(cubic.as_expr(), z))
+    coefficients = cubic.all_coeffs()
+    # With three real roots, these elementary symmetric signs are
+    # equivalent to nonnegative roots, including their zero limits.
+    inequalities = [disc &gt;= 0, -coefficients[1] &gt;= 0,
+                    coefficients[2] &gt;= 0, -coefficients[3] &gt;= 0]
+    allowed = sp.reduce_inequalities(inequalities, kappa)
+    convex_allowed = sp.reduce_inequalities(inequalities+[kappa &gt;= 0, kappa &lt;= 1], kappa)
+    check(convex_allowed == sp.false,
+          &#39;every positive blend retains first-harmonic growth at both common tested preparations&#39;)
+    completed = sp.Poly(cubic.as_expr().subs(kappa, 1), z)
+    completed_disc = sp.discriminant(completed.as_expr(), z)
+    if depth != 2:
+        baseline = sp.Poly(cubic.as_expr().subs(kappa, 0), z)
+        check(sp.discriminant(baseline.as_expr(), z) &lt; 0,
+              &#39;exact blend baseline reproduces the already certified spatial instability&#39;)
+    record = {&#39;depth&#39;: depth, &#39;c_exact&#39;: str(c), &#39;x_squared_exact&#39;: str(1-c*c),
+              &#39;characteristic_polynomial&#39;: str(reduced),
+              &#39;cubic_discriminant&#39;: str(disc),
+              &#39;completed_cubic_discriminant&#39;: str(completed_disc),
+              &#39;real_blend_coefficients_with_nonnegative_first_harmonic_squared_frequencies&#39;: str(allowed),
+              &#39;convex_blend_coefficients_with_nonnegative_first_harmonic_squared_frequencies&#39;: str(convex_allowed),
+              &#39;classification&#39;: &#39;exact first spatial harmonic only; absence of its growth is not full stability&#39;}
+    print(json.dumps(record), flush=True)
+    return record
+
+
+def main():
+    nonlinear = nonlinear_checks()
+    symbolic = []
+    for c in [&#39;3/10&#39;, &#39;3/5&#39;]:
+        for depth in radial.DEPTHS:
+            symbolic.append(symbolic_blend(depth, c))
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = {&#39;experiment_key&#39;: &#39;lorentz-invariant-matrix-current-completion&#39;,
+              &#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(),
+              &#39;sources&#39;: {&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                          for p in [Path(__file__), ROOT/&#39;inverse-current-ground-proof.py&#39;, ROOT/&#39;inverse-current-radial.py&#39;]},
+              &#39;conditions&#39;: CONDITIONS, &#39;evaluations&#39;: sum(CONDITIONS.values()),
+              &#39;maximum_errors&#39;: ERRORS, &#39;nonlinear_cases&#39;: nonlinear, &#39;cases&#39;: symbolic,
+              &#39;limits&#39;: [&#39;count constitutive function and balanced matrix carrier remain supplied premises&#39;,
+                         &#39;same stationary frequencies do not prove localization, observed spin or particle identity&#39;,
+                         &#39;exact first-harmonic stability intervals do not cover higher harmonics or assigned excited shells&#39;,
+                         &#39;negative blend weights are explicitly permitted in the comparison and require their own global analysis&#39;,
+                         &#39;no assigned-depth preference, observed color mechanism or full persistence is claimed&#39;]}
+    output = ROOT/(&#39;matrix-current-completion-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;report&#39;: str(output), &#39;evaluations&#39;: report[&#39;evaluations&#39;]}), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

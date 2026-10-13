@@ -1,0 +1,946 @@
+{
+  "experiment_key": "minimal-balanced-count-carrier",
+  "created_utc": "2026-10-12T08:43:13.832431+00:00",
+  "sources": {
+    "experiments/minimal-count-carrier.py": "c32f6a998a844bbccd3bc46483a551addf224b2b254f7b6d218a8fd0ca87ad2b",
+    "experiments/forward-count-action.py": "5f1dd9a03cf8e6b07a56d507791fed8ff859f10abf22bb755c60c3bd1ed6d909",
+    "experiments/inverse-current-radial.py": "52d9f1c981635192e06d96b11f0b1e4e5e2d1bf3d5ed420b59411fd45ef7be80",
+    "experiments/excited-shell-orientation-current.py": "508484d445dbb86da9f88a31642268b5a1dba8264588e6f48ebb6cc00cf9c264"
+  },
+  "evaluations": 742,
+  "conditions": {
+    "exact Gaussian-integer seed arithmetic annihilates every ambient vector and bivector moment": 146,
+    "the explicit carrier attains its proved minimal column rank": 6,
+    "low Clifford moments exhaust the Hermitian density space at depths two and four": 2,
+    "the depth-three ambient chirality is Hermitian": 1,
+    "the depth-three ambient chirality squares to identity": 1,
+    "depth-three low moments and five complementary Clifford matrices exhaust the Hermitian density space": 1,
+    "the depth-three density complement is a five-generator Clifford system with doubly degenerate eigenvalues": 25,
+    "the actual reduced spatial kernel has zero bare scalar current": 70,
+    "the actual reduced spatial kernel has zero bare spatial vector current": 70,
+    "actual full Clifford spatial jets preserve the positive shell after carrier reduction": 70,
+    "the reduced massive field retains the complete bare density": 70,
+    "the reduced massive field retains the same local constitutive ratio": 70,
+    "the reduced massive field retains exactly zero summed spatial current": 70,
+    "the complete proper-current field equation preserves every count clock on the minimal carrier": 70,
+    "the normalized induced rotation form has equal strength in every spatial plane at depth two or six": 25,
+    "the canonical lower-depth balanced matrix seed has vanishing local spin form": 25,
+    "the normalized depth-five rotation form has two equal planes and one kernel direction": 15,
+    "the depth-ten induced rotation form has one unit plane and four axis-dependent planes": 5
+  },
+  "maximum_errors": {
+    "low Clifford moments exhaust the Hermitian density space at depths two and four": 0.0,
+    "depth-three low moments and five complementary Clifford matrices exhaust the Hermitian density space": 0.0,
+    "the depth-three density complement is a five-generator Clifford system with doubly degenerate eigenvalues": 0.0,
+    "the actual reduced spatial kernel has zero bare scalar current": 2.727852665973529e-16,
+    "the actual reduced spatial kernel has zero bare spatial vector current": 2.016163656272057e-16,
+    "actual full Clifford spatial jets preserve the positive shell after carrier reduction": 3.5036706549198197e-15,
+    "the reduced massive field retains the complete bare density": 3.3606660021156163e-16,
+    "the reduced massive field retains the same local constitutive ratio": 2.6072183628950023e-16,
+    "the reduced massive field retains exactly zero summed spatial current": 2.0396099332657776e-16,
+    "the complete proper-current field equation preserves every count clock on the minimal carrier": 3.4618220424782906e-12,
+    "the normalized induced rotation form has equal strength in every spatial plane at depth two or six": 8.98526478567621e-16,
+    "the canonical lower-depth balanced matrix seed has vanishing local spin form": 1.111439809434581e-31,
+    "the normalized depth-five rotation form has two equal planes and one kernel direction": 7.425867843113932e-16,
+    "the depth-ten induced rotation form has one unit plane and four axis-dependent planes": 1.0872260223411337e-15
+  },
+  "sectors": [
+    {
+      "depth": 2,
+      "spinor_rank": 2,
+      "minimal_column_rank": 2,
+      "nonzero_three_form_entries": [
+        {
+          "indices": [
+            0,
+            1,
+            2
+          ],
+          "value": -1.0
+        }
+      ]
+    },
+    {
+      "depth": 3,
+      "spinor_rank": 4,
+      "minimal_column_rank": 2,
+      "nonzero_three_form_entries": []
+    },
+    {
+      "depth": 4,
+      "spinor_rank": 4,
+      "minimal_column_rank": 4,
+      "nonzero_three_form_entries": []
+    },
+    {
+      "depth": 5,
+      "spinor_rank": 8,
+      "minimal_column_rank": 1,
+      "nonzero_three_form_entries": [
+        {
+          "indices": [
+            0,
+            1,
+            3
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            0,
+            2,
+            4
+          ],
+          "value": 1.0
+        },
+        {
+          "indices": [
+            1,
+            2,
+            5
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            3,
+            4,
+            5
+          ],
+          "value": -1.0
+        }
+      ]
+    },
+    {
+      "depth": 6,
+      "spinor_rank": 8,
+      "minimal_column_rank": 1,
+      "nonzero_three_form_entries": [
+        {
+          "indices": [
+            0,
+            1,
+            2
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            0,
+            3,
+            4
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            0,
+            5,
+            6
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            1,
+            3,
+            5
+          ],
+          "value": 1.0
+        },
+        {
+          "indices": [
+            1,
+            4,
+            6
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            2,
+            3,
+            6
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            2,
+            4,
+            5
+          ],
+          "value": -1.0
+        }
+      ]
+    },
+    {
+      "depth": 10,
+      "spinor_rank": 32,
+      "minimal_column_rank": 1,
+      "nonzero_three_form_entries": [
+        {
+          "indices": [
+            0,
+            1,
+            2
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            0,
+            3,
+            4
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            0,
+            5,
+            6
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            0,
+            7,
+            8
+          ],
+          "value": -1.0
+        },
+        {
+          "indices": [
+            0,
+            9,
+            10
+          ],
+          "value": -1.0
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "particle": "W",
+      "depth": 2,
+      "inferred_index": 76,
+      "minimal_columns": 2,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "Z",
+      "depth": 2,
+      "inferred_index": 81,
+      "minimal_columns": 2,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999998,
+            0.9999999999999998
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999996,
+            0.9999999999999996
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999993,
+            0.9999999999999993
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.0000000000000004,
+            1.0000000000000004
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "Higgs",
+      "depth": 2,
+      "inferred_index": 95,
+      "minimal_columns": 2,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            0.9999999999999998,
+            0.9999999999999998
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999998,
+            0.9999999999999998
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999996,
+            0.9999999999999996
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "down",
+      "depth": 3,
+      "inferred_index": 1,
+      "minimal_columns": 2,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "strange",
+      "depth": 3,
+      "inferred_index": 4,
+      "minimal_columns": 2,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            -6.842277657836031e-49,
+            9.458344070094686e-33,
+            9.458344070094687e-33
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.3684555315672042e-48,
+            1.9727384873471817e-32,
+            1.9727384873471825e-32
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.0,
+            1.5363096869539316e-32,
+            1.536309686953932e-32
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "up",
+      "depth": 4,
+      "inferred_index": 3,
+      "minimal_columns": 4,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            7.407539826499512e-33,
+            7.407539826499512e-33,
+            1.5865525337812878e-32,
+            1.5865525337812878e-32
+          ]
+        },
+        {
+          "squared_singular_values": [
+            8.283499871274647e-34,
+            8.283499871274647e-34,
+            3.0066479884514686e-33,
+            3.0066479884514693e-33
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.309562713434924e-33,
+            1.3095627134349247e-33,
+            1.0732793071757713e-32,
+            1.0732793071757717e-32
+          ]
+        },
+        {
+          "squared_singular_values": [
+            3.379560124634195e-35,
+            3.379560124634201e-35,
+            2.2321102199415513e-33,
+            2.2321102199415513e-33
+          ]
+        },
+        {
+          "squared_singular_values": [
+            3.885075005668521e-34,
+            3.885075005668523e-34,
+            1.0454245212003868e-33,
+            1.0454245212003871e-33
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "charm",
+      "depth": 4,
+      "inferred_index": 20,
+      "minimal_columns": 4,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            4.59381657467091e-33,
+            4.593816574670914e-33,
+            1.2466535096197662e-32,
+            1.2466535096197665e-32
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.7278746741813564e-32,
+            1.7278746741813575e-32,
+            3.73527879134256e-32,
+            3.735278791342561e-32
+          ]
+        },
+        {
+          "squared_singular_values": [
+            6.498899159145379e-35,
+            6.498899159145465e-35,
+            4.797586354386084e-33,
+            4.7975863543860845e-33
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.958835501694068e-32,
+            1.9588355016940684e-32,
+            4.676398694423251e-32,
+            4.6763986944232523e-32
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.4671090018984933e-33,
+            1.4671090018984935e-33,
+            1.3203981017086442e-32,
+            1.3203981017086445e-32
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "top",
+      "depth": 4,
+      "inferred_index": 72,
+      "minimal_columns": 4,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            5.557199047172901e-32,
+            5.557199047172906e-32,
+            5.557199047172906e-32,
+            5.557199047172908e-32
+          ]
+        },
+        {
+          "squared_singular_values": [
+            6.970796454725218e-34,
+            6.970796454725227e-34,
+            7.74266978013579e-33,
+            7.74266978013579e-33
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.230685140866364e-33,
+            1.2306851408663644e-33,
+            7.610520742813102e-33,
+            7.610520742813102e-33
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.2069042682229347e-33,
+            1.2069042682229347e-33,
+            1.2069042682229347e-33,
+            1.2069042682229347e-33
+          ]
+        },
+        {
+          "squared_singular_values": [
+            5.063044239788905e-35,
+            5.063044239788905e-35,
+            1.7889629377662205e-33,
+            1.7889629377662205e-33
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "nu1",
+      "depth": 5,
+      "inferred_index": 10,
+      "minimal_columns": 1,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            -2.775557561562892e-17,
+            0.9999999999999992,
+            0.9999999999999996,
+            0.9999999999999998,
+            1.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            3.2059858240305243e-16,
+            0.9999999999999993,
+            1.0,
+            1.0000000000000004,
+            1.0000000000000007
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.6653345369377348e-16,
+            0.9999999999999998,
+            1.0000000000000004,
+            1.0000000000000004,
+            1.0000000000000009
+          ]
+        },
+        {
+          "squared_singular_values": [
+            -1.1796119636642288e-16,
+            0.9999999999999996,
+            0.9999999999999997,
+            0.9999999999999998,
+            0.9999999999999999
+          ]
+        },
+        {
+          "squared_singular_values": [
+            -4.163336342344337e-17,
+            0.9999999999999996,
+            0.9999999999999998,
+            1.0,
+            1.0000000000000002
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "nu2",
+      "depth": 5,
+      "inferred_index": 15,
+      "minimal_columns": 1,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            8.326672684688674e-17,
+            0.9999999999999993,
+            0.9999999999999999,
+            1.0000000000000002,
+            1.0000000000000004
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.249000902703301e-16,
+            0.9999999999999987,
+            0.9999999999999996,
+            0.9999999999999999,
+            0.9999999999999999
+          ]
+        },
+        {
+          "squared_singular_values": [
+            2.708337026852364e-16,
+            0.9999999999999997,
+            1.0000000000000002,
+            1.0000000000000004,
+            1.0000000000000013
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.0,
+            0.9999999999999996,
+            0.9999999999999998,
+            1.0,
+            1.0000000000000004
+          ]
+        },
+        {
+          "squared_singular_values": [
+            6.938893903907228e-17,
+            0.9999999999999998,
+            1.0,
+            1.0000000000000004,
+            1.0000000000000004
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "nu3",
+      "depth": 5,
+      "inferred_index": 22,
+      "minimal_columns": 1,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            -5.551115123125783e-17,
+            0.9999999999999996,
+            1.0,
+            1.0,
+            1.0000000000000002
+          ]
+        },
+        {
+          "squared_singular_values": [
+            2.7755575615628914e-17,
+            0.9999999999999997,
+            0.9999999999999999,
+            1.0,
+            1.0000000000000002
+          ]
+        },
+        {
+          "squared_singular_values": [
+            -4.163336342344337e-17,
+            0.9999999999999998,
+            0.9999999999999999,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "squared_singular_values": [
+            -8.326672684688674e-17,
+            0.9999999999999993,
+            0.9999999999999996,
+            0.9999999999999998,
+            0.9999999999999999
+          ]
+        },
+        {
+          "squared_singular_values": [
+            5.551115123125783e-17,
+            0.9999999999999996,
+            0.9999999999999999,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "electron",
+      "depth": 6,
+      "inferred_index": 13,
+      "minimal_columns": 1,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            0.9999999999999991,
+            0.9999999999999994,
+            0.9999999999999999,
+            1.0,
+            1.0000000000000002,
+            1.0000000000000002
+          ]
+        },
+        {
+          "squared_singular_values": [
+            1.0000000000000002,
+            1.0000000000000004,
+            1.0000000000000007,
+            1.0000000000000007,
+            1.0000000000000007,
+            1.000000000000001
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999998,
+            0.9999999999999998,
+            0.9999999999999998,
+            0.9999999999999998,
+            1.0,
+            1.0000000000000009
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999997,
+            0.9999999999999999,
+            1.0,
+            1.0000000000000002,
+            1.0000000000000004,
+            1.0000000000000009
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999991,
+            0.9999999999999997,
+            0.9999999999999998,
+            0.9999999999999999,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "muon",
+      "depth": 6,
+      "inferred_index": 35,
+      "minimal_columns": 1,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            0.9999999999999998,
+            1.0,
+            1.0,
+            1.0,
+            1.0000000000000002,
+            1.0000000000000004
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999996,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0000000000000002
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.999999999999998,
+            0.9999999999999993,
+            0.9999999999999996,
+            0.9999999999999997,
+            0.9999999999999998,
+            0.9999999999999998
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999988,
+            0.9999999999999996,
+            1.0,
+            1.0,
+            1.0000000000000004,
+            1.0000000000000007
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9999999999999996,
+            1.0,
+            1.0,
+            1.0,
+            1.0000000000000002,
+            1.0000000000000009
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    },
+    {
+      "particle": "tau",
+      "depth": 10,
+      "inferred_index": 23,
+      "minimal_columns": 1,
+      "local_rotation_form_samples": [
+        {
+          "squared_singular_values": [
+            0.9905955378443113,
+            0.9905955378443114,
+            0.9905955378443114,
+            0.9905955378443116,
+            0.9905955378443118,
+            0.9905955378443121,
+            0.9905955378443122,
+            0.9905955378443123,
+            0.9999999999999997,
+            0.9999999999999999
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.0004442272395522453,
+            0.00044422723955237793,
+            0.00044422723955242407,
+            0.00044422723955244266,
+            0.00044422723955244803,
+            0.00044422723955244917,
+            0.0004442272395524542,
+            0.0004442272395524801,
+            1.0000000000000002,
+            1.0000000000000004
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.9675379683259621,
+            0.9675379683259621,
+            0.9675379683259626,
+            0.9675379683259627,
+            0.9675379683259628,
+            0.9675379683259631,
+            0.9675379683259632,
+            0.9675379683259636,
+            0.9999999999999997,
+            1.0000000000000007
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.02173885127105477,
+            0.021738851271054935,
+            0.021738851271055033,
+            0.021738851271055053,
+            0.02173885127105507,
+            0.021738851271055095,
+            0.021738851271055126,
+            0.021738851271055157,
+            1.0000000000000002,
+            1.0000000000000004
+          ]
+        },
+        {
+          "squared_singular_values": [
+            0.08772042566249368,
+            0.08772042566249383,
+            0.08772042566249386,
+            0.0877204256624939,
+            0.08772042566249395,
+            0.08772042566249397,
+            0.08772042566249401,
+            0.08772042566249408,
+            0.9999999999999998,
+            1.0
+          ]
+        }
+      ],
+      "classification": "exact reduced-carrier stationary mass state and local spin-density form, not observed particle spin"
+    }
+  ],
+  "limits": [
+    "the rank theorem assumes vanishing ambient Clifford vector and bivector seed moments",
+    "the local spin-density form omits orbital angular momentum and does not derive observed total spin",
+    "the same exact stationary equations survive; the full-matrix background persistence theorem is not transferred",
+    "a local kernel direction is not an established fixed encounter axis",
+    "depth-ten rotor-dependent rank is not a demonstrated decay or instability",
+    "ordinary sphere geometry, count constitutive law and sector scales remain conditional"
+  ]
+}

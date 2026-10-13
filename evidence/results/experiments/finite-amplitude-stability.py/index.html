@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>finite-amplitude-stability.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/finite-amplitude-stability.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="finite-amplitude-stability.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/finite-amplitude-stability.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="finite-amplitude-stability.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>finite-amplitude-stability.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/finite-amplitude-stability.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Complete two-amplitude Hessian and charge response of the finite-stiffness law.&quot;&quot;&quot;
+
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import importlib.util
+import json
+import math
+import numpy as np
+import sympy as sp
+from scipy.integrate import solve_bvp,simpson
+from scipy.linalg import eig_banded
+from scipy.special import kve,gamma
+
+
+ROOT=Path(__file__).resolve().parent
+PARENT=ROOT/&#39;finite-amplitude-checks.py&#39;
+spec=importlib.util.spec_from_file_location(&#39;finite_amplitude&#39;,PARENT)
+finite=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(finite)
+EXACT=[]
+
+
+def equal(name,lhs,rhs):
+    value=sp.simplify(lhs-rhs)
+    if value!=0:raise AssertionError((name,value))
+    EXACT.append(name)
+
+
+def differential_functions():
+    delta,c,pa,pc,w,M2=sp.symbols(&#39;delta c Pa Pc omega M2&#39;,real=True)
+    nd=delta*(delta+2)+c*c
+    S=1-w*w*c*c-pa*pa-pc*pc
+    g=[pa/sp.sqrt(S),pc/sp.sqrt(S),M2*nd*(1+delta),
+       (M2*nd+1-c*c/2-w*w/sp.sqrt(S))*c]
+    variables=(delta,c,pa,pc)
+    args=(*variables,w,M2)
+    jac=[[sp.lambdify(args,sp.diff(g[i],v),&#39;numpy&#39;) for v in variables] for i in range(4)]
+    src=[sp.lambdify(args,sp.diff(expr,w),&#39;numpy&#39;) for expr in g]
+    charge=4*w*c*c/sp.sqrt(S)
+    energy=4*(1/sp.sqrt(S)-1)+4*(M2*nd**2/4+(c*c-c**4/4)/2)
+    qdiff=[sp.lambdify(args,sp.diff(charge,v),&#39;numpy&#39;) for v in (*variables,w)]
+    ediff=[sp.lambdify(args,sp.diff(energy,v),&#39;numpy&#39;) for v in (*variables,w)]
+    a,p0,p1=sp.symbols(&#39;a p0 p1&#39;,real=True)
+    A=1+p0*p0+p1*p1
+    B=1-w*w*c*c
+    R=sp.sqrt(A)*sp.sqrt(B)-1+M2*(a*a+c*c-1)**2/4+(c*c-c**4/4)/2
+    H=sp.eye(2)-sp.Matrix([p0,p1])*sp.Matrix([p0,p1]).T/A
+    pp=sp.hessian(R,(p0,p1))
+    for i in range(2):
+        for j in range(2):equal(f&#39;complete radial kinetic Hessian {i},{j}&#39;,pp[i,j],sp.sqrt(B/A)*H[i,j])
+    eps,rho,weight,m2,b=sp.symbols(&#39;eps rho weight m2 b&#39;,real=True)
+    s=a*a+c*c+eps*eps*rho
+    z=c*c+eps*eps*weight*weight*rho
+    V=M2*(s-1)**2/4+(m2*z-b*z*z)/2
+    equal(&#39;unconstrained coefficient potential variation&#39;,sp.expand(V).coeff(eps,2),
+          (M2*(a*a+c*c-1)+weight*weight*(m2-2*b*c*c))*rho/2)
+    return jac,src,qdiff,ediff
+
+
+def sensitivity(solution,depth,omega,stiffness,functions):
+    jac,src,qdiff,ediff=functions
+    radius=110.0
+    def fun(rr,z):
+        vals=solution.sol(rr)
+        args=(*vals,omega,stiffness)
+        return np.array([sum(jac[i][j](*args)*z[j] for j in range(4))+src[i](*args) for i in range(4)])
+    mu=math.sqrt(1-omega*omega)
+    nu=(depth-2)/2
+    zz=mu*radius
+    ratio=kve(nu+1,zz)/kve(nu,zz)
+    robin=mu*ratio
+    dr=-omega/mu*(ratio+zz*(ratio*ratio-1-(2*nu+1)*ratio/zz))
+    end=solution.sol(radius)
+    args=(*end,omega,stiffness)
+    def boundary(left,right):
+        last=sum(jac[1][j](*args)*right[j] for j in range(4))+src[1](*args)+robin*right[1]+dr*end[1]
+        return np.array([left[2],left[3],right[0],last])
+    response=solve_bvp(fun,boundary,solution.x,np.zeros((4,len(solution.x))),
+                       S=np.diag([0,0,-(depth-1),-(depth-1)]),tol=1e-8,max_nodes=24000)
+    if not response.success:raise AssertionError(response.message)
+    rr=np.linspace(0,radius,33001)
+    vals=solution.sol(rr)
+    z=response.sol(rr)
+    args=(*vals,omega,stiffness)
+    measure=2*math.pi**(depth/2)/gamma(depth/2)*rr**(depth-1)
+    integrate=lambda f:float(simpson(f*measure,x=rr))
+    Qprime=integrate(sum(qdiff[j](*args)*z[j] for j in range(4))+qdiff[4](*args))
+    Eprime=integrate(sum(ediff[j](*args)*z[j] for j in range(4))+ediff[4](*args))
+    c,pa,pc=vals[1:]
+    B=1-omega*omega*c*c
+    A=B/(B-pa*pa-pc*pc)
+    fixed=integrate(4*c*c*np.sqrt(A)/B**1.5)
+    error=(Eprime-omega*Qprime)/max(abs(Eprime),1)
+    if abs(error)&gt;1e-6:raise AssertionError((&#39;variational identity&#39;,error))
+    return {&#39;dcharge_domega&#39;:Qprime,&#39;denergy_domega&#39;:Eprime,
+            &#39;fixed_shape_charge_susceptibility&#39;:fixed,&#39;fixed_charge_rank_update_ratio&#39;:Qprime/fixed,
+            &#39;family_identity_relative_error&#39;:error,&#39;sensitivity_residual&#39;:float(np.max(response.rms_residuals))}
+
+
+def spectrum(solution,depth,omega,stiffness,intervals,ell):
+    radius=110.0
+    step=radius/intervals
+    xi=np.array([-math.sqrt(3/5),0,math.sqrt(3/5)])
+    gauss=np.array([5/9,8/9,5/9])
+    rr=np.arange(intervals)[:,None]*step+step*(xi+1)/2
+    delta,c,pa,pc=solution.sol(rr.reshape(-1)).reshape(4,intervals,3)
+    a=1+delta
+    B=1-omega*omega*c*c
+    S=B-pa*pa-pc*pc
+    A=B/S
+    slopes=np.stack([pa,pc],axis=-1)/np.sqrt(S)[...,None]
+    H=np.eye(2)-slopes[..., :,None]*slopes[...,None,:]/A[...,None,None]
+    Cr=np.sqrt(B/A)
+    P=Cr[...,None,None]*H
+    U=np.empty((*rr.shape,2,2))
+    nd=delta*(delta+2)+c*c
+    U[...,0,0]=stiffness*(nd+2*a*a)
+    U[...,0,1]=U[...,1,0]=2*stiffness*a*c
+    U[...,1,1]=stiffness*(nd+2*c*c)+1-1.5*c*c-omega*omega*np.sqrt(A)/B**1.5
+    U+=np.sqrt(A*B)[...,None,None]*H*(ell*(ell+depth-2)/rr**2)[...,None,None]
+    J=np.zeros_like(U)
+    J[...,1,:]=-omega*omega*c[...,None]*slopes/np.sqrt(A*B)[...,None]
+    weights=step/2*gauss[None,:]*rr**(depth-1)
+    basis=[(1-xi)/2,(1+xi)/2]
+    deriv=[-1/step,1/step]
+    count=2*(intervals+1)
+    bands=np.zeros((4,count))
+    lump=np.zeros(count)
+    for node in (0,1):
+        values=np.sum(weights*basis[node],axis=1)
+        lump[2*node:2*(intervals+node):2]+=values
+        lump[2*node+1:2*(intervals+node)+1:2]+=values
+    for n in (0,1):
+        for m in (0,1):
+            block=np.sum(weights[...,None,None]*(
+                P*deriv[n]*deriv[m]+U*(basis[n]*basis[m])[None,:,None,None]
+                +J*(basis[n]*deriv[m])[None,:,None,None]
+                +np.swapaxes(J,-1,-2)*(deriv[n]*basis[m])[None,:,None,None]),axis=1)
+            for i in (0,1):
+                for j in (0,1):
+                    offset=2*(n-m)+i-j
+                    if offset&lt;0:continue
+                    columns=2*np.arange(intervals)+2*m+j
+                    np.add.at(bands[offset],columns,block[:,i,j])
+    first=2 if ell else 0
+    last=count-2
+    bands=bands[:,first:last]
+    lump=lump[first:last]
+    for offset in range(4):
+        length=len(lump)-offset
+        bands[offset,:length]/=np.sqrt(lump[:length]*lump[offset:])
+    values=eig_banded(bands,lower=True,eigvals_only=True,select=&#39;i&#39;,select_range=(0,3))
+    return [float(v) for v in values]
+
+
+def main():
+    finite.derive()
+    functions=differential_functions()
+    cases=[]
+    for omega in (0.95,0.97):
+        for depth in (2,3,4,5,6):
+            constrained=finite.radial.solve_depth(depth,omega,radius=110.0,tolerance=2e-9)
+            if constrained[&#39;status&#39;]!=&#39;collocation-converged&#39;:raise AssertionError(constrained)
+            seed=finite.radial.PROFILES[(depth,omega,110.0,2e-9)]
+            for stiffness in (1600,400):
+                coarse,_=finite.solve_amplitudes(depth,omega,stiffness,80.0,1e-7,seed)
+                result,solution=finite.solve_amplitudes(depth,omega,stiffness,110.0,1e-9,seed)
+                if result[&#39;status&#39;]!=&#39;collocation-converged&#39; or coarse[&#39;status&#39;]!=&#39;collocation-converged&#39;:raise AssertionError(result)
+                result[&#39;convergence&#39;]={key:abs(result[key]-coarse[key])/max(abs(result[key]),1) for key in (&#39;energy&#39;,&#39;charge&#39;,&#39;center_rotating_coefficient&#39;)}
+                if max(result[&#39;convergence&#39;].values())&gt;1e-5:raise AssertionError((&#39;boundary convergence&#39;,result))
+                result.update(sensitivity(solution,depth,omega,stiffness,functions))
+                result[&#39;coupled_amplitude_energy_form_spectra&#39;]={str(n):{
+                    &#39;ell&#39;+str(ell):spectrum(solution,depth,omega,stiffness,n,ell) for ell in (0,1)} for n in (1100,2200)}
+                cases.append(result)
+                seed=solution
+                print(json.dumps({key:result[key] for key in (&#39;depth&#39;,&#39;omega&#39;,&#39;norm_stiffness&#39;,&#39;dcharge_domega&#39;)}),flush=True)
+    cases.append({&#39;depth&#39;:10,&#39;normal_rank&#39;:0,&#39;status&#39;:&#39;no-active-normal-generator&#39;})
+    path=Path(__file__).resolve()
+    sources={str(&#39;experiments/&#39;+p.name):sha256(p.read_bytes()).hexdigest() for p in (path,PARENT,finite.PARENT)}
+    report={&#39;created_at&#39;:datetime.now(timezone.utc).isoformat(),
+            &#39;experiment&#39;:&#39;finite-amplitude-complete-coefficient-stability&#39;,&#39;sources&#39;:sources,
+            &#39;exact_checks&#39;:len(finite.CHECKS)+len(EXACT),&#39;checks&#39;:finite.CHECKS+EXACT,&#39;cases&#39;:cases,
+            &#39;scope&#39;:&#39;Complete coupled radial amplitude energy-form index, charge sensitivity and boundary/mesh controls for one finite-stiffness positive wave action. Energy-form eigenvalues use a positive ordinary radial mass for index counting and are not physical oscillation or growth frequencies. Unused-polarization positivity is a conditional analytic result. No nonlinear stability theorem, Lorentz Dirac dynamics or selected simplex spectrum is claimed.&#39;}
+    stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    output=path.with_name(&#39;finite-amplitude-stability-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;exact_checks&#39;:report[&#39;exact_checks&#39;],&#39;cases&#39;:len(cases),&#39;report&#39;:str(output)}),flush=True)
+
+
+if __name__==&#39;__main__&#39;:main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

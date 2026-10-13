@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>covariant-clock-geometry.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-geometry.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="covariant-clock-geometry.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/covariant-clock-geometry.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="covariant-clock-geometry.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>covariant-clock-geometry.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/covariant-clock-geometry.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Actual Clifford and spatial-jet checks for the coexact current family.&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from importlib.util import spec_from_file_location, module_from_spec
+from pathlib import Path
+from itertools import combinations
+import json
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parent
+spec = spec_from_file_location(&#39;radial&#39;, ROOT/&#39;inverse-current-radial.py&#39;)
+radial = module_from_spec(spec)
+spec.loader.exec_module(radial)
+COUNTS, ERRORS = {}, {}
+
+
+def close(actual, expected, label, tolerance=2e-11):
+    error = float(np.linalg.norm(np.asarray(actual)-np.asarray(expected))/max(1., np.linalg.norm(expected)))
+    ERRORS[label] = max(ERRORS.get(label, 0.), error)
+    if error &gt;= tolerance:
+        raise AssertionError((label, error))
+    COUNTS[label] = COUNTS.get(label, 0)+1
+
+
+def main():
+    rng = np.random.default_rng(202610120530)
+    cases = []
+    for depth in radial.DEPTHS:
+        matrices = radial.gammas(depth+1)
+        alpha, beta = matrices[:depth], matrices[depth]
+        rank = len(beta)
+        eye = np.eye(rank)
+        clifford = []
+        for grade in range(depth+1):
+            for indices in combinations(range(depth), grade):
+                matrix = eye.copy()
+                for index in indices:
+                    matrix = matrix@alpha[index]
+                clifford.append(matrix)
+                tvalue = (-1)**grade*(depth-2*grade)/2
+                actual = sum(a@matrix@a for a in alpha)/2
+                close(actual, tvalue*matrix, &#39;all exterior grades have the exact Killing-frame connection term&#39;)
+                close(sum(a@beta@matrix@a for a in alpha)/2, -tvalue*beta@matrix,
+                      &#39;parallel beta reverses the complete Killing-frame connection term&#39;)
+                close(np.trace(matrix), rank if grade == 0 else 0,
+                      &#39;all nontrivial Clifford characters have zero trace in the retained carrier&#39;)
+        if depth % 2:
+            clifford += [beta@m for m in clifford]
+        close(len(clifford), rank*rank, &#39;Clifford forms with the stated odd-depth doubling span the complete matrix carrier&#39;)
+        flat = np.array(clifford).reshape(len(clifford), -1)/np.sqrt(rank)
+        # For this monomial Clifford basis the product of distinct monomials
+        # is a phase times a nonidentity monomial; the trace check above
+        # proves its Gram orthogonality without a dense cubic Gram product.
+        close(np.sum(abs(flat)**2, axis=1), np.ones(rank*rank), &#39;complete Clifford matrix basis has unit diagonal Gram entries&#39;)
+        if depth % 2:
+            close([np.trace(m) for m in clifford[2**depth:]], np.zeros(2**depth),
+                  &#39;odd-depth beta monomials remain trace orthogonal to the original Clifford algebra&#39;)
+        for level in [1, 2]:
+            eigenvalue = (level+1)*(level+depth-2)
+            for sample in range(3):
+                ambient = rng.normal(size=depth+1)
+                ambient /= np.linalg.norm(ambient)
+                orthogonal, _ = np.linalg.qr(np.column_stack([ambient, rng.normal(size=(depth+1, depth))]))
+                tangent = orthogonal[:, 1:]
+                rotation = np.zeros((depth+1, depth+1))
+                rotation[0, 1], rotation[1, 0] = 1., -1.
+                linear = np.zeros(depth+1)
+                if level == 2:
+                    linear[2] = 1.
+                f = np.dot(linear, ambient) if level == 2 else 1.
+                vector = f*rotation@ambient
+                jacobian = f*rotation+np.outer(rotation@ambient, linear)
+                values = tangent.T@vector
+                derivative = tangent.T@jacobian@tangent
+                derivative = derivative.T  # derivative index first, component index second
+                second = np.zeros((depth, depth, depth))
+                for k in range(depth):
+                    for i in range(depth):
+                        ambient_second = (np.dot(linear, tangent[:, k])*rotation@tangent[:, i]
+                                          +np.dot(linear, tangent[:, i])*rotation@tangent[:, k])
+                        second[k, i, :] = tangent.T@ambient_second
+                        if k == i:
+                            second[k, i, :] -= level*values
+                        second[k, i, k] += values[i]
+                close(np.dot(ambient, vector), 0., &#39;ambient polynomial vector is exactly tangent to the ordinary sphere&#39;)
+                close(np.trace(derivative), 0., &#39;the spatial vector harmonic is divergence free&#39;)
+                rough = np.einsum(&#39;iij-&gt;j&#39;, second)
+                close(-rough+(depth-1)*values, eigenvalue*values,
+                      &#39;independent ambient second jets verify the coexact Hodge eigenvalue&#39;)
+                m1 = -1j*sum(v*a for v, a in zip(values, alpha))
+                dm1 = [-1j*sum(derivative[k, j]*alpha[j] for j in range(depth)) for k in range(depth)]
+                m2 = -sum(alpha[i]@alpha[j]*derivative[i, j] for i in range(depth) for j in range(depth))/np.sqrt(eigenvalue)
+                dm2 = [-sum(alpha[i]@alpha[j]*second[k, i, j] for i in range(depth) for j in range(depth))/np.sqrt(eigenvalue)
+                       for k in range(depth)]
+                d1 = -1j*sum(a@dm for a, dm in zip(alpha, dm1))+sum(a@m1@a for a in alpha)/2
+                d2 = -1j*sum(a@dm for a, dm in zip(alpha, dm2))+sum(a@m2@a for a in alpha)/2
+                close(d1, (1-depth/2)*m1+np.sqrt(eigenvalue)*m2,
+                      &#39;actual full spatial Dirac derivative closes the coexact vector into its two-form&#39;)
+                close(d2, np.sqrt(eigenvalue)*m1+(depth/2-2)*m2,
+                      &#39;actual full spatial Dirac derivative closes the two-form back into its vector&#39;)
+                if level == 1:
+                    positive = m1+np.sqrt((depth-1)/2)*m2
+                    close(positive.conj().T, -positive,
+                          &#39;first coexact positive Killing endomorphism is anti-Hermitian&#39;)
+                    for k in range(depth):
+                        derivative_positive = dm1[k]+np.sqrt((depth-1)/2)*dm2[k]
+                        close(derivative_positive, .5j*(alpha[k]@positive-positive@alpha[k]),
+                              &#39;zero coexact endomorphism is a constant right generator in the Killing frame&#39;)
+                    base = (2*eye+beta)/np.sqrt(5*rank)
+                    variation = (2*eye+beta)@positive/np.sqrt(5*rank)
+                    close(variation@base.conj().T+base@variation.conj().T, np.zeros_like(base),
+                          &#39;particle right-unitary zero mode changes no left density matrix to first order&#39;)
+                    close(positive+positive.conj().T, np.zeros_like(positive),
+                          &#39;background right-unitary zero mode changes no left density matrix to first order&#39;)
+                if depth &gt;= 3:
+                    # The two-form and its beta partner carry no physical
+                    # vector trace in this full retained Clifford module.
+                    close([np.trace(a@m2) for a in alpha], np.zeros(depth),
+                          &#39;coexact two-form carries no direct vector current&#39;)
+                    close([np.trace(a@beta@m2) for a in alpha], np.zeros(depth),
+                          &#39;beta coexact two-form carries no direct vector current&#39;)
+                    close([np.trace(a@beta@m1) for a in alpha], np.zeros(depth),
+                          &#39;unmixed beta vector has no independent vector trace above depth two&#39;)
+                close([np.trace(a@m1)/rank for a in alpha], -1j*values,
+                      &#39;actual Clifford vector trace derives the current-source normalization&#39;)
+                cases.append(dict(depth=depth, spinor_rank=rank, coexact_degree=level,
+                                  sample=sample, hodge_eigenvalue=eigenvalue,
+                                  classification=&#39;actual tangent vector, covariant second jets and full matrix Dirac closure&#39;))
+    stamp = datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%S.%fZ&#39;)
+    report = dict(experiment_key=&#39;covariant-clock-spatial-geometry&#39;, created_utc=datetime.now(timezone.utc).isoformat(),
+                  sources={&#39;experiments/&#39;+p.name: sha256(p.read_bytes()).hexdigest()
+                           for p in [Path(__file__), ROOT/&#39;inverse-current-radial.py&#39;]},
+                  evaluations=sum(COUNTS.values()), conditions=COUNTS, maximum_errors=ERRORS, cases=cases,
+                  limits=[&#39;ordinary unit sphere and full balanced matrix carrier are supplied premises&#39;,
+                          &#39;first two coexact harmonics receive explicit ambient polynomial jet checks&#39;,
+                          &#39;global Hodge completeness requires the accompanying analytical argument&#39;])
+    output = ROOT/(&#39;covariant-clock-geometry-results-&#39;+stamp+&#39;.json&#39;)
+    output.write_text(json.dumps(report, indent=2)+&#39;\n&#39;)
+    print(json.dumps(dict(report=str(output), evaluations=report[&#39;evaluations&#39;], maximum_errors=ERRORS)), flush=True)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One infinite physical manifold. All sectors nested. Macroscopic spatial dimensions.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>
