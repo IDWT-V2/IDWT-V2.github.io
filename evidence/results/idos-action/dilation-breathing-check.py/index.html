@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>dilation-breathing-check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/idos-action/dilation-breathing-check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="dilation-breathing-check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/idos-action/dilation-breathing-check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="dilation-breathing-check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>dilation-breathing-check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/idos-action/dilation-breathing-check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Bounded exact checks; no large tensors or PDE discretization.&quot;&quot;&quot;
+import sympy as s, json, math, hashlib
+from datetime import datetime, timezone
+from pathlib import Path
+out=Path(__file__).resolve().parent
+checks=[]
+def ck(name, value):
+    assert value, name
+    checks.append(name)
+L,al,be,ss,J,dim=s.symbols(&#39;L alpha beta s2 J d&#39;,positive=True)
+V=J*dim/4*(al/L**2-be*s.log(1+2*ss/L**2))
+M=J*dim/(8*al)
+force=4*al**2/L**3-8*al*be*ss/(L*(L**2+2*ss))
+ck(&#39;Gaussian radial full energy variation&#39;,s.simplify(-s.diff(V,L)/M-force)==0)
+beta_eq=al*(L**2+2*ss)/(2*ss*L**2)
+ck(&#39;Gaussian equilibrium&#39;,s.simplify(force.subs(be,beta_eq))==0)
+wb=16*al**2*ss/(L**4*(L**2+2*ss))
+ck(&#39;Gaussian breathing curvature&#39;,s.simplify(-s.diff(force,L).subs(be,beta_eq)-wb)==0)
+r=L**2/(L**2+2*ss)
+ck(&#39;degree two spectrum agreement&#39;,s.simplify(8*al**2/L**4*(1-r)-wb)==0)
+# Polynomial Hermite derivative, including normalization, tested symbolically.
+x=s.symbols(&#39;x&#39;,real=True)
+for n in range(9):
+    f=s.hermite(n,x)*s.exp(-x*x/2)/s.sqrt(2**n*s.factorial(n))
+    up=s.hermite(n+2,x)*s.exp(-x*x/2)/s.sqrt(2**(n+2)*s.factorial(n+2))
+    low=0 if n&lt;2 else s.hermite(n-2,x)*s.exp(-x*x/2)/s.sqrt(2**(n-2)*s.factorial(n-2))
+    rhs=(s.sqrt((n+1)*(n+2))*up-s.sqrt(n*(n-1))*low)/2
+    ck(f&#39;Hermite dilation n={n}&#39;,s.simplify(-f/2-x*s.diff(f,x)-rhs)==0)
+# Compositions only small cutoffs. Large cutoffs use generating-function identities.
+def comps(k,d):
+    if d==1: yield (k,); return
+    for j in range(k+1):
+        for tail in comps(k-j,d-1): yield (j,)+tail
+rows=[]
+for d in (2,3,4,5,6,10):
+    for N in range(5):
+        D=math.comb(N+d,d)
+        active=sum(sum((n+1)*(n+2) for n in ns) for k in (N,N-1) if k&gt;=0 for ns in comps(k,d))/s.Integer(4)
+        exact=s.Rational(d,2)*(math.comb(N+d+1,d+1)+(math.comb(N+d,d+1) if N else 0))
+        ck(f&#39;active leakage d={d} N={N}&#39;,active==exact)
+        ambient=active+s.Rational(10-d,2)*D
+        if N==0:
+            ck(f&#39;ground active leakage d={d}&#39;,active==s.Rational(d,2))
+            ck(f&#39;ground ambient leakage d={d}&#39;,ambient==5)
+        rows.append({&#39;d&#39;:d,&#39;N&#39;:N,&#39;D&#39;:D,&#39;L2_active_leakage&#39;:str(active),&#39;L2_full10_leakage&#39;:str(ambient)})
+# Exact connection-induced counterexample, d arbitrary: modes 0 and 2e1,
+# Q0=1,P0=0,Q2=0,P2=1; equal I and equal v is sufficient.
+g=s.sqrt(2)/2
+Q=s.Matrix([1,0]); P=s.Matrix([0,1]); G=s.Matrix([[0,-g],[g,0]])
+Qdot=-G*Q; Pdot=-G*P
+Idot=[s.simplify(Q[j]*Qdot[j]+P[j]*Pdot[j]) for j in range(2)]
+# Above quadrature choice has zero instantaneous transfer. Use in-phase Q values.
+Q=s.Matrix([1,1]); P=s.Matrix([0,0]); Qdot=-G*Q; Pdot=-G*P
+Idot=[s.simplify(Q[j]*Qdot[j]+P[j]*Pdot[j]) for j in range(2)]
+ck(&#39;connection equal-action tangent fails&#39;,Idot==[g,-g])
+# Nondegenerate equal energy: Q0=sqrt(2/v0), Q2=sqrt(2/v2), P=0.
+v0,v2=s.symbols(&#39;v0 v2&#39;,positive=True)
+Q=s.Matrix([s.sqrt(2/v0),s.sqrt(2/v2)]); Qdot=-G*Q
+bdot=[s.simplify(v*Q[i]*Qdot[i]) for i,v in enumerate((v0,v2))]
+ck(&#39;nondegenerate equal energy immediately separates&#39;,s.simplify(bdot[0]-bdot[1]-s.sqrt(2)*(v0+v2)/s.sqrt(v0*v2))==0)
+# Chirped Gaussian continuity and radial phase coefficients.
+Ld,Ldd=s.symbols(&#39;Ld Ldd&#39;,real=True)
+c=Ld/(2*al*L)
+cd=Ldd/(2*al*L)-Ld**2/(2*al*L**2)
+phase_rhs=2*al/L**4-2*al*c**2-2*be*(1-r)/L**2
+ck(&#39;quadratic phase radial equation&#39;,s.simplify((cd-phase_rhs).subs(Ldd,force))==0)
+source_paths={
+&#39;content/notes/topics/contact-operators/idos-energy-and-coherence.md&#39;:&#39;0a36f94efff55521408e75faa7f8fd29cbe63475b489f1c4ecc73f1bd5482e3f&#39;,
+&#39;content/notes/topics/contact-operators/self-supported-real-harmonic-core.md&#39;:&#39;628dfb7c82e9c90f58981484644ac869190e5791136bbbf25399975a08a66145&#39;,
+&#39;support_model&#39;:&#39;CEEM-S1 as stated in idos-energy-and-coherence.md&#39;}
+report={&#39;utc&#39;:datetime.now(timezone.utc).isoformat(),&#39;checks&#39;:len(checks),&#39;passed&#39;:checks,&#39;sources&#39;:source_paths,&#39;script_sha256&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),&#39;leakage&#39;:rows}
+p=out/(&#39;checks-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;)
+p.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;passed&#39;:len(checks),&#39;report&#39;:str(p)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

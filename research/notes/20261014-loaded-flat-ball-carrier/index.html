@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>A Responding Flat-Ball Carrier and Its Polarization Energy — IDWT V2</title>
+  <meta name="description" content="A common clamped elastic rule has an explicit full first-mode response, controlled spectral domains and a derived leading polarization energy at all six maintained depths; nonlinear self-support remains open.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261014-loaded-flat-ball-carrier/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Responding Flat-Ball Carrier and Its Polarization Energy — IDWT V2">
+  <meta property="og:description" content="A common clamped elastic rule has an explicit full first-mode response, controlled spectral domains and a derived leading polarization energy at all six maintained depths; nonlinear self-support remains open.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261014-loaded-flat-ball-carrier/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A Responding Flat-Ball Carrier and Its Polarization Energy — IDWT V2">
+  <meta name="twitter:description" content="A common clamped elastic rule has an explicit full first-mode response, controlled spectral domains and a derived leading polarization energy at all six maintained depths; nonlinear self-support remains open.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>A Responding Flat-Ball Carrier and Its Polarization Energy</h1>
+      <p class="article-date">Updated <time datetime="2026-10-14">October 14, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body">
+<p>The <a href="/research/notes/20261013-flat-ball-conformal-clock/">weighted-ball count action</a> has a nonzero
+local material load when its coefficients are allowed to respond. One common
+clamped elastic rule now gives an explicit solution of that linear load,
+finite-load control of the weighted spectral domain, and a leading
+polarization-dependent effective energy. These are mathematical consequences
+under the declared constitutive and boundary assumptions. The containing
+space remains ordinary shared flat space; the calculation concerns the active
+d-dimensional pattern at d=2,3,4,5,6,10.</p>
+<p>The underlying spatial operator is L_w=-w^(-1) div(w A grad), with
+w=sqrt(1-r^2), A=I-xx^T, and lambda_N=N(N+d+1). Its supplied positive
+polynomial P_d has P_d(lambda_N)=binomial(N+d,d)^2. The rotating mode
+f=alpha u exp(-i omega t) has omega^2=mu_d^2 P_d(lambda), weighted norm
+N0=int w|u|^2 and phase action Q=omega |alpha|^2 N0. Physical amplitude
+remains free. No amplitude is chosen to reproduce a measured mass.</p>
+<p>The response operator is a separate elastic operator
+L_el=-Delta-2 grad div, with clamped v=0 at r=1 and form
+a_el(v,h)=int [2 epsilon(v):epsilon(h)+div(v)div(h)]. Both elastic
+constants equal one at every depth. They are stated material choices,
+not quantities derived from the count alone. The coefficient field is
+phi=x+v, inserted into w(phi), A(phi) with ordinary spatial derivatives.
+It is not an isospectral coordinate pullback.</p>
+<p>For u=x1, put C=mu_d^2 P_d'(d+2)/2 and a=|alpha|^2. The complete
+variation of both the time term and spatial operator gives</p>
+<pre><code>J=C a j,
+j=x[1-(d+3)x1^2]/sqrt(1-r^2)+2sqrt(1-r^2)x1 e1.
+</code></pre>
+<p>The physical leading displacement is C a times the unit-load solution.
+The boundary is clamped for the elastic response only; the wave uses its
+weighted finite-energy spectral domain, not a hard-wall Dirichlet domain.
+The singular source is in H-minus-one, as follows from its square-integrable
+stress representation below. Coercivity gives a unique weak response.</p>
+<h2 id="an-explicit-full-first-mode-solution">An Explicit Full First-Mode Solution</h2>
+<p>A smaller angular form is preserved by the differential operator:</p>
+<pre><code>v=x F(R)+e1 x1 G(R)+x x1^2 H(R).
+</code></pre>
+<p>For L=-Delta-2 grad div, direct differentiation gives</p>
+<pre><code>L v=x A(R)+x x1^2 B(R)+e1 x1 D(R),
+A=-12R F''-6(d+2)F'-4G'-2H,
+B=-8G''-12R H''-(6d+28)H',
+D=-4R G''-(2d+12)G'-8R H'-4(d+3)H.
+</code></pre>
+<p>The full unit first-mode source is obtained by solving</p>
+<pre><code>A=1/sqrt(1-R),
+B=-(d+3)/sqrt(1-R),
+D=2sqrt(1-R),
+F(1)=G(1)=H(1)=0,
+</code></pre>
+<p>with regularity at R=0. A regular solution of these equations is an exact
+solution of the full clamped elastic problem, and coercivity then supplies
+uniqueness. Angular closure alone is not an existence proof for the radial
+system. It identifies the exact remaining differential equations, and
+enables high-order radial Galerkin approximations without coordinate growth.</p>
+<p>Write v=x F(R)+e1 x1 G(R)+x x1^2 H(R), R=r^2. Let</p>
+<pre><code>a_n=binomial(2n,n)/4^n,
+g_n=-(2d^2+4dn+13d+6n+16)
+      /[6(n+1)(n+2)(d+2n+4)(d+2n+6)],
+h_n=(d^2+2dn+11d+6n+20)
+      /[6(n+1)(d+2n+4)(d+2n+6)],
+f_n=-(2dn-d+4n^2+14n+4)
+      /[12(n+1)(n+2)(d+2n+4)(d+2n+6)].
+</code></pre>
+<p>Define the radial coefficients by</p>
+<pre><code>H(R)=H0+sum_(n&gt;=0) a_n h_n R^(n+1),
+G(R)=G0+G1 R+sum_(n&gt;=0) a_n g_n R^(n+2),
+F(R)=F0+F1 R+sum_(n&gt;=0) a_n f_n R^(n+2),
+H0=-sum a_n h_n,
+G1=[-2-(4d+12)H0]/(2d+12),
+G0=-G1-sum a_n g_n,
+F1=-(1+4G1+2H0)/[6(d+2)],
+F0=-F1-sum a_n f_n.
+</code></pre>
+<p>The three sum definitions impose F(1)=G(1)=H(1)=0. All constants are
+explicit: partial fractions use the identity</p>
+<pre><code>sum_(n&gt;=0) a_n/(n+A)=Beta(A,1/2), A&gt;0.
+</code></pre>
+<p>The rational factors above have only distinct negative simple poles for
+the maintained depths. Thus their sums reduce to finite beta expressions.
+For example at d=2,</p>
+<pre><code>F0=71/1260, F1=-61/1260,
+G0=-29/630, G1=19/126, H0=-139/630.
+</code></pre>
+<h2 id="verification-of-the-differential-equation">Verification of the Differential Equation</h2>
+<p>The coefficients of x x1^2 and e1 x1 at orders R^n and R^(n+1)
+give the two-by-two system</p>
+<pre><code>8(n+2) g_n+(12n+6d+28) h_n=(d+3)/(n+1),
+(n+2)(4n+2d+16) g_n+(8n+4d+20) h_n=1/(n+1).
+</code></pre>
+<p>Its determinant is -12(n+2)(d+2n+4)(d+2n+6), so it is invertible.
+The coefficient of x then determines f_n using
+a_(n+1)/a_n=(2n+1)/(2n+2). The remaining lowest-order equations fix
+G1 and F1 as stated. Consequently the series solves all three radial
+equations for 0&lt;=R&lt;1. Its smoothness at the origin follows from being a
+power series in R multiplying ordinary coordinate polynomials.</p>
+<h2 id="boundary-regularity-and-the-weak-solution">Boundary Regularity and the Weak Solution</h2>
+<p>The elementary bound a_n&lt;=1/sqrt(n+1) follows by induction from its exact
+ratio. Also h_n and f_n are O((n+1)^(-2)), while g_n is
+O((n+1)^(-3)). Hence F,G,H and their first derivatives converge absolutely
+and uniformly on [0,1]. Their second derivatives converge locally inside
+the ball, with the expected integrable boundary singularity.</p>
+<p>The resulting v is C1 on the closed ball, vanishes on its boundary and
+belongs to H1_0. Its interior equation L v=j holds classically. Against
+compactly supported tests it therefore holds distributionally; both sides
+extend continuously to H1_0 using the elastic form and the L2 stress
+representation of j. Density of compact tests gives the full weak equation.
+Coercivity establishes that this is the unique full clamped unit-load
+solution. No finite Galerkin truncation is used in this existence argument.</p>
+<h2 id="rigorous-boundary-admissibility-and-truncation-bounds">Rigorous Boundary Admissibility and Truncation Bounds</h2>
+<p>Let F_m,G_m,H_m be the complete coefficients, including the constants.
+Because the functions vanish at R=1,</p>
+<pre><code>|v|/(1-R)&lt;=K_d,
+K_d=sum_(m&gt;=1) m(|F_m|+|G_m|+|H_m|)&lt;infinity.
+</code></pre>
+<p>Thus the physical displacement C a v preserves |x+C a v|&lt;1 throughout
+the open ball whenever |C a| K_d&lt;1/2. The coefficient sums are explicit
+beta sums: h_n&gt;0, g_n&lt;0, and f_n&lt;0 for n&gt;=1; only f_0 changes sign
+at d=4. This estimate applies to the full solution, unlike the earlier
+finite-polynomial bound.</p>
+<p>For simple uniform truncation bounds set</p>
+<pre><code>Hc=(d^2+11d+20)/24,
+Gc=(2d^2+13d+16)/24,
+Fc=(2d+18+|4-d|)/48.
+</code></pre>
+<p>Then |a_n h_n|&lt;=Hc(n+1)^(-5/2),
+|a_n g_n|&lt;=Gc(n+1)^(-7/2), and
+|a_n f_n|&lt;=Fc(n+1)^(-5/2). Omitting indices n&gt;=M consequently gives</p>
+<pre><code>sup |v-v_M| &lt;= (2/3)(Fc+Hc)M^(-3/2)
+                       +(2/5)Gc M^(-5/2).
+</code></pre>
+<p>The load norm is bounded by
+integral |j|/Vol(B^d)&lt;=(d+4) integral (1-R)^(-1/2)/Vol(B^d)+2.
+Multiplying this by the uniform tail estimate bounds the error in the
+computed compliance and in every first-shell load overlap. Numerical
+rounding must additionally be enclosed; an unrounded tail estimate alone
+does not certify a floating-point sum.</p>
+<p>This solves the linear first-mode carrier problem at every maintained
+depth with one elastic rule. It does not establish the full coupled
+finite-amplitude eigenproblem, observed masses, or a second-mode solution.</p>
+<h2 id="exact-shell-splitting">Exact Shell Splitting</h2>
+<p>For each first-shell mode x_i, define</p>
+<pre><code>j_i=x[1-(d+3)x_i^2]/w+2w x_i e_i, w=sqrt(1-r^2),
+u_i=L^(-1)j_i, N0=integral w x_i^2.
+</code></pre>
+<p>The loads belong to H-minus-one through their L2 symmetric stress
+representations. The clamped problem is coercive. Rotational covariance and
+reciprocity imply that the compliance matrix has diagonal entry c and
+off-diagonal entry h:</p>
+<pre><code>&lt;j_i,L^(-1)j_i&gt;=c, &lt;j_i,L^(-1)j_j&gt;=h for i!=j.
+</code></pre>
+<p>Here h is a scalar, not a test field. The physical displacement generated
+by occupation of x1 is v=C a u1, with C&gt;0 and a=|alpha|^2&gt;0. Parity makes
+the first-shell perturbation matrix diagonal, and</p>
+<pre><code>delta_lambda_parallel=-C a c/N0,
+delta_lambda_transverse=-C a h/N0.
+</code></pre>
+<p>The difference is exactly</p>
+<pre><code>delta_lambda_transverse-delta_lambda_parallel
+  =C a (c-h)/N0
+  =C a a(u1-u2,u1-u2)/(2N0)&gt;0.                 (1)
+</code></pre>
+<p>The strict inequality follows because j1-j2 is not the zero distribution.
+Thus the exact full operator splits the occupied direction from every
+transverse direction. A finite-basis split is not needed as evidence for
+this theorem. The transverse shift's individual sign is not determined by
+(1). The loaded shift is negative because c&gt;0.</p>
+<h2 id="an-explicit-lower-bound">An Explicit Lower Bound</h2>
+<p>Take the clamped test field z=(1-r^2)(x1 e1-x2 e2). Beta moments give</p>
+<pre><code>&lt;j1-j2,z&gt;=-4d N0/(d+5),
+a(z,z)=8(d+6) Vol(B^d)/[(d+2)(d+4)].
+</code></pre>
+<p>For example the load moment uses
+integral w(x1^2-x2^2)^2=4N0/(d+5) and
+integral w^3(x1^2+x2^2)=6N0/(d+5).
+Elastic Cauchy--Schwarz consequently gives</p>
+<pre><code>c-h &gt;= d^2(d+2)(d+4) N0^2
+             /[(d+5)^2(d+6) Vol(B^d)] &gt; 0.       (2)
+</code></pre>
+<p>This applies uniformly at depths 2,3,4,5,6,10. It supplies no exceptional
+depth-five cancellation. Both formulas use the full spatial source and the
+same boundary and constitutive rule. No particle-specific coefficient is
+introduced.</p>
+<p>The matrix is the first-order spectral perturbation for the linear loaded
+carrier response. It does not establish a finite-amplitude coupled solution or the empirical
+particle spectrum. Coefficient admissibility follows separately from the
+full series bound above. It does show that the identity carrier's first-shell degeneracy
+cannot survive this nonzero mode-directed load at first order.</p>
+<h2 id="complementary-stress-upper-bound">Complementary Stress Upper Bound</h2>
+<p>For j1 use S=w[1-(d+3)x1^2]I-[2(d+2)/3]w^3 e1 e1^T.
+Direct differentiation gives -div S=j1. Since S is L2, the exact compliance
+also obeys</p>
+<pre><code>c &lt;= U0=1/2 integral [S:S-(tr S)^2/(d+2)].
+</code></pre>
+<p>Together with any conforming Galerkin lower bound cN, this yields the valid
+energy-norm error estimate ||u1-uN||_elastic^2&lt;=U0-cN. Its quantitative
+sharpness is a separate calculation; it is not inferred from a finite set
+of test residuals.</p>
+<h2 id="finite-load-spectral-control">Finite-Load Spectral Control</h2>
+<h2 id="boundary-control-gives-form-control">Boundary Control Gives Form Control</h2>
+<p>Let v be the full clamped first-mode response already constructed, and let</p>
+<pre><code>|v(x)| &lt;= K_d(1-r^2),  phi(x)=x+epsilon v(x),
+delta=|epsilon|K_d &lt; 1/2,
+w_phi=sqrt(1-|phi|^2), A_phi=I-phi phi^T.
+</code></pre>
+<p>Here epsilon=C|alpha|^2 for the physical first-mode load. The norm and
+gradient energy use the same deformed weight. The undeformed quantities
+are w=sqrt(1-r^2) and A=I-xx^T.</p>
+<p>The boundary vanishing estimate gives the pointwise inequalities</p>
+<pre><code>(1-2delta)(1-r^2) &lt;= 1-|phi|^2 &lt;= (1+2delta)(1-r^2),
+(1-2delta)A &lt;= A_phi &lt;= (1+2delta)A.
+</code></pre>
+<p>For the first inequality, expand |x+epsilon v|^2. The absolute change
+divided by 1-r^2 is at most 2delta r+delta^2(1-r^2), which is at most
+2delta when 0&lt;=r&lt;=1 and delta&lt;=1. For the matrix inequality conjugate
+the change by A^(-1/2): |A^(-1/2)x|=r/sqrt(1-r^2) and
+|A^(-1/2)epsilon v|&lt;=delta sqrt(1-r^2). The same bound applies to its
+operator norm. This controls the radially degenerate stiffness, not merely
+the unweighted coefficient difference.</p>
+<p>Consequently, for every function in the common weighted form domain,</p>
+<pre><code>sqrt(1-2delta) ||u||_w^2 &lt;= ||u||_(w_phi)^2
+                                  &lt;= sqrt(1+2delta) ||u||_w^2,
+(1-2delta)^(3/2) a_0(u,u) &lt;= a_phi(u,u)
+                                  &lt;= (1+2delta)^(3/2) a_0(u,u),
+</code></pre>
+<p>where a_phi=int w_phi grad(u)* A_phi grad(u). Both norms and forms are
+equivalent, with the same completed domain. Thus the deformed problem
+retains a positive self-adjoint weighted operator and compact form embedding.
+The latter follows from equivalence with the undeformed weighted polynomial
+operator, whose eigenvalues grow and whose individual multiplicities are finite.</p>
+<h2 id="bounds-on-every-ordered-eigenvalue">Bounds on Every Ordered Eigenvalue</h2>
+<p>Apply the minimum-over-subspaces characterization to the bounded Rayleigh
+quotients. At every ordered index, including multiplicities,</p>
+<pre><code>a_delta lambda_j(0) &lt;= lambda_j(phi) &lt;= b_delta lambda_j(0),
+a_delta=(1-2delta)^(3/2)/(1+2delta)^(1/2),
+b_delta=(1+2delta)^(3/2)/(1-2delta)^(1/2).
+</code></pre>
+<p>This remains valid when a formerly degenerate shell splits. It does not
+require choosing or tracking an eigenvector within that shell. Constants
+remain the zero mode exactly. No finite-basis extrapolation is involved.</p>
+<p>For the supplied increasing count polynomial P_d, define frequencies by
+omega_j(phi)=mu_d sqrt(P_d(lambda_j(phi))). Then</p>
+<pre><code>mu_d sqrt(P_d(a_delta lambda_j(0))) &lt;= omega_j(phi)
+                       &lt;= mu_d sqrt(P_d(b_delta lambda_j(0))).
+</code></pre>
+<p>All d roots of P_d are negative in the maintained construction. Comparing
+each positive factor separately yields the simpler uniform bounds</p>
+<pre><code>a_delta^(d/2) omega_j(0) &lt;= omega_j(phi)
+                              &lt;= b_delta^(d/2) omega_j(0).
+</code></pre>
+<p>These bound the whole family at once. At small delta their worst-case
+fractional width is 2d delta+O(delta^2); this is a conservative bound,
+not the actual mode-dependent shift. The exact response calculation supplies
+the latter for the first shell and already establishes nonuniform splitting.</p>
+<p>The common same-law constants K_d are</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Depth</th>
+<th>K_d</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>62/63</td>
+</tr>
+<tr>
+<td>3</td>
+<td>5 pi/288+22/21</td>
+</tr>
+<tr>
+<td>4</td>
+<td>649/540</td>
+</tr>
+<tr>
+<td>5</td>
+<td>119 pi/2112+661/594</td>
+</tr>
+<tr>
+<td>6</td>
+<td>12631/9240</td>
+</tr>
+<tr>
+<td>10</td>
+<td>534701/332640</td>
+</tr>
+</tbody>
+</table></div>
+<p>The construction therefore retains a controlled spectral problem for a
+nonzero open interval of physical load at every maintained depth. It does
+not prove that actual particle loads lie in a desired numerical mass tolerance.
+No amplitude has been chosen to fit a mass, and the exact simplex clocks
+are the undeformed input spectrum rather than an invariant of arbitrary
+loaded coefficients.</p>
+<h2 id="optional-geometric-map-bound">Optional Geometric Map Bound</h2>
+<p>For v=xF+e1 x1 G+x x1^2 H, the same absolutely convergent coefficient
+sums bound ||Dv||_op by 5K_d. Hence |epsilon|5K_d&lt;1 suffices to make
+phi an injective orientation-preserving map, with a Lipschitz inverse.
+The boundary is fixed, so its image is the same ball. This stronger
+geometric assertion is not needed for the form bounds above; the material
+coefficient field need not be reinterpreted as a physical coordinate map.</p>
+<h2 id="the-first-order-shift-is-a-genuine-spectral-derivative">The First-Order Shift Is a Genuine Spectral Derivative</h2>
+<p>Let D be the fixed completed form domain with inner product a_0+b_0,
+where b_0 is the undeformed weighted norm. The ratios
+w_phi/w and A^(-1/2) A_phi A^(-1/2) are bounded analytic functions of
+epsilon in a neighborhood of zero. Their Taylor series converge uniformly
+as coefficient operators: the only square root is that of
+1-2epsilon x.v/(1-r^2)-epsilon^2 |v|^2/(1-r^2), whose two coefficients
+are bounded. This gives bounded analytic forms a_epsilon,b_epsilon on D.</p>
+<p>Represent a_epsilon+b_epsilon by S_epsilon and b_epsilon by B_epsilon
+in that fixed form inner product. Then S_0=I, S_epsilon is positive and
+invertible for small real epsilon, and B_epsilon is compact. Thus</p>
+<pre><code>K_epsilon=S_epsilon^(-1/2) B_epsilon S_epsilon^(-1/2)
+</code></pre>
+<p>is a bounded analytic compact self-adjoint family for real epsilon.
+Its nonzero eigenvalues are 1/(1+lambda_j(epsilon)). Analytic perturbation
+on each isolated finite-dimensional spectral cluster therefore gives the
+usual first-order matrix a'_0-lambda b'_0. This construction avoids
+assuming that a varying weight preserves a high-order differential domain.</p>
+<p>For the first shell, normalize the basis by sqrt(N0). The derivative matrix
+is exactly -&lt;j_ij,v&gt;/N0, including the derivative of the kinetic weight.
+For v=K_el j_11, its parallel and transverse eigenvalues are -c/N0 and
+-h/N0. The full-PDE signs already enclosed by the series computation
+therefore describe actual spectral branches near epsilon=0. The positive
+polynomial P_d of the deformed self-adjoint operator supplies the matching
+higher-order wave realization through spectral calculus. This does not claim
+that its high-order operator domain is independent of epsilon.</p>
+<p>The external perturbation tools are described in Kato,
+<a href="https://webhomes.maths.ed.ac.uk/~v1ranick/papers/kato1.pdf"><em>Perturbation Theory for Linear Operators</em></a>,
+Chapter VII, sections 3, 4 and 6 (especially Theorem 4.2 and the generalized
+eigenvalue construction). They apply to spatial integrals and operators here;
+they do not change the ordinary spatial interpretation of the field.</p>
+<h2 id="polarization-of-the-complete-first-shell">Polarization of the Complete First Shell</h2>
+<h2 id="the-complete-quadratic-source">The Complete Quadratic Source</h2>
+<p>Let the occupied first-shell profile be u=z dot x, with a complex vector z.
+Define the real symmetric tensor T=Re(z* tensor z), rho=z* dot z, and
+sigma=|z dot z|^2. The same time-averaged carrier variation gives</p>
+<pre><code>j_T=x[tr T-(d+3)x.T.x]/sqrt(1-r^2)+2sqrt(1-r^2)T x.
+</code></pre>
+<p>Its physical source is C j_T, with C=mu_d^2 P_d'(d+2)/2. Thus no scalar
+amplitude factor is to be multiplied in again: it is already in T.
+Write K=(-Delta-2 grad div)^(-1) with the clamped boundary condition and
+define c=&lt;j_E11,K j_E11&gt;, h=&lt;j_E11,K j_E22&gt;. Rotational covariance and
+reciprocity determine the full bilinear response on symmetric tensors:</p>
+<pre><code>&lt;j_T,K j_U&gt;=h tr T tr U+(c-h)tr(TU).
+</code></pre>
+<p>To see this, orthogonally diagonalize a real symmetric T. Every diagonal
+source has self-overlap c and every distinct pair has overlap h. Polarization
+of that quadratic identity gives the displayed bilinear expression, without
+assuming simultaneous diagonalization of T and U.</p>
+<p>Since tr T=rho and tr T^2=(rho^2+sigma)/2,</p>
+<pre><code>&lt;j_T,K j_T&gt;=(c+h)rho^2/2+(c-h)sigma/2.
+</code></pre>
+<p>The full-operator splitting theorem establishes c-h&gt;0. The isotropic source
+also gives c+(d-1)h&gt;0; this follows from positive elastic compliance and
+the nonzero source j_I. For d&gt;=2 these imply c+h&gt;0. In particular, the
+negative cross overlap h found numerically is not a negative self-energy.</p>
+<h2 id="eliminate-the-carrier-at-fixed-phase-action">Eliminate the Carrier at Fixed Phase Action</h2>
+<p>To the first nontrivial order, the carrier energy and coupling are</p>
+<pre><code>E_carrier(v)=a_el(v,v)/2-C&lt;j_T,v&gt;.
+</code></pre>
+<p>Its unique stationary minimum is v=C K j_T, and its contribution is
+-C^2&lt;j_T,K j_T&gt;/2. Let N0=int sqrt(1-r^2)x1^2 and omega^2=mu_d^2 P_d(d+2).
+Use canonical amplitudes a=sqrt(omega N0) z and total leading phase action
+Q=a* dot a. The corresponding leading effective Hamiltonian is</p>
+<pre><code>H_eff=omega Q-eta1 Q^2-eta2 |a dot a|^2,
+eta1=C^2(c+h)/(4 omega^2 N0^2),
+eta2=C^2(c-h)/(4 omega^2 N0^2)&gt;0.
+</code></pre>
+<p>This is an expansion about zero load; its negative quartic term is not a
+globally bounded energy model and must not be extrapolated to large fields.
+The carrier is eliminated statically. A time-dependent application requires
+the carrier to respond adiabatically; finite carrier inertia is not included.
+For a linearly polarized branch, differentiating H_eff at fixed canonical
+phase action gives delta omega=-C^2 c Q/(omega^2 N0^2), agreeing with the
+earlier physical shift delta omega/omega=-C^2 rho c/(omega^2 N0).</p>
+<h2 id="a-conditional-polarization-preference-and-conserved-geometry">A Conditional Polarization Preference and Conserved Geometry</h2>
+<p>At a given Q, 0&lt;=|a dot a|&lt;=Q. The lower quartic energy occurs at
+|a dot a|=Q, where a has a common phase times a real vector. The circular
+case has a dot a=0 and lies higher by eta2 Q^2. The preference follows
+from c-h&gt;0 in every maintained dimension; it does not select depth five.</p>
+<p>This is an energy comparison at fixed Q, not a relaxation or damping law.
+Writing a=p+i q, rotational invariance conserves</p>
+<pre><code>J_ij=2(p_i q_j-p_j q_i),
+sum_(i&lt;j) J_ij^2=Q^2-|a dot a|^2.
+</code></pre>
+<p>A nonzero angular momentum therefore prevents an isolated trajectory of
+this effective Hamiltonian from simply becoming linearly polarized.
+Calling the energy preference spontaneous alignment would omit that
+conservation law and the missing dissipative channel.</p>
+<p>The canonical equation is</p>
+<pre><code>i dot a=(omega-2 eta1 Q)a-2 eta2 S a*, S=a dot a.
+</code></pre>
+<p>It gives dot Q=0 and dot S=-2i[omega-2(eta1+eta2)Q]S. Remove this common
+phase by a=exp(-i Omega t)b, Omega=omega-2(eta1+eta2)Q, and choose a fixed
+phase so S0=b dot b is real and nonnegative. With b=p+i q,</p>
+<pre><code>dot p=2 eta2(Q+S0)q,
+dot q=-2 eta2(Q-S0)p.
+</code></pre>
+<p>The ellipse evolves at nu=2 eta2 sqrt(Q^2-S0^2), with its invariants fixed.
+This is bounded internal polarization motion in the stated reduced action.
+It is not a derivation of the literal electron's six-dimensional orbital
+precession, nor of photon polarization or physical spin quantization.</p>
+<p>The full linear carrier solution therefore supplies more than one axis's
+frequency correction: it fixes the leading tensor response, polarization
+energy difference and conditional internal polarization dynamics under one
+constitutive law. The underlying count polynomial, elastic law and clamped
+boundary remain explicit model premises.</p>
+<h2 id="higher-harmonic-modes">Higher Harmonic Modes</h2>
+<h2 id="a-closed-elastic-block">A Closed Elastic Block</h2>
+<p>Let P_L be a homogeneous harmonic polynomial of degree L and R=r^2.
+For L&gt;=1, set v=x P_L F(R)+grad(P_L)G(R). Direct differentiation gives</p>
+<pre><code>div v=P_L[(d+L)F+2R F'+2L G'],
+(-Delta-2grad div)v=x P_L A(R)+grad(P_L)B(R),
+A=-12R F''-(6d+8L+12)F'-8L G'',
+B=-2(d+L+1)F-4R F'-4R G''-(2d+8L-4)G'.
+</code></pre>
+<p>For L=0 the gradient term vanishes; only the first radial equation remains,
+with A=-12R F''-6(d+2)F'. The boundary condition is F(1)=G(1)=0
+when both structures occur, together with regularity at the origin.</p>
+<p>Write the source coefficients as A_n,B_n and unknown series coefficients
+as F_n,G_n. For n&gt;=0 the exact two-by-two system is</p>
+<pre><code>[(n+1)(12n+6d+8L+12), 8L(n+2)(n+1)] [F_(n+1)] = [-A_n],
+[2d+2L+6+4n,          (n+2)(4n+2d+8L)] [G_(n+2)] = [-B_(n+1)].
+</code></pre>
+<p>Its determinant is
+12(n+1)(n+2)(2L+d+2n)(2L+d+2n+2)&gt;0.
+After these coefficients are found, F0=-sum_(m&gt;=1)F_m,
+G1=[-B0-2(d+L+1)F0]/(2d+8L-4), and
+G0=-G1-sum_(m&gt;=2)G_m. These impose the boundary values and the lowest
+remaining equation. Convergence and source-specific tail bounds must still
+be checked; invertibility of this recurrence alone is not that proof.</p>
+<h2 id="source-from-a-harmonic-occupied-mode">Source from a Harmonic Occupied Mode</h2>
+<p>For a homogeneous harmonic mode u of degree ell, lambda=ell(ell+d+1),
+put Q=u^2. Its stripped source is</p>
+<pre><code>j=x[Delta(Q)/2-ell(2ell+d+1)Q]/sqrt(1-R)
+    +ell sqrt(1-R) grad Q.
+</code></pre>
+<p>This follows directly from Delta(u^2)=2|grad u|^2 and x.grad u=ell u.
+Decompose Q into finitely many harmonic terms c R^s P_L with L+2s=2ell.
+One such term generates the radial load</p>
+<pre><code>A=c {[s(2L+d+2s-2)R^(s-1)-ell(2ell+d+1)R^s]/sqrt(1-R)
+       +2ell s sqrt(1-R)R^(s-1)},
+B=c ell sqrt(1-R)R^s.
+</code></pre>
+<p>Terms multiplied by s vanish when s=0. Both coefficients are polynomials
+times sqrt(1-R) or its inverse. Their Taylor coefficients are therefore
+finite shifts of the central-binomial sequence already used for the first
+mode. The same Navier block applies at every depth; no new elastic rule is
+needed for each occupied mode.</p>
+<h2 id="complete-second-mode-decomposition">Complete Second-Mode Decomposition</h2>
+<p>For u=x1*x2, ell=2, define</p>
+<pre><code>H2=x1^2+x2^2-2R/d,
+H4=x1^2*x2^2-R(x1^2+x2^2)/(d+4)+R^2/[(d+2)(d+4)].
+</code></pre>
+<p>Both are harmonic, and</p>
+<pre><code>u^2=H4+R H2/(d+4)+R^2/[d(d+2)].
+</code></pre>
+<p>Thus the full symmetric source requires one L=0 scalar block and the L=2
+and L=4 two-function blocks: five radial functions. At d=2, H2 vanishes
+identically and that block is absent. This is a genuine low-depth boundary
+case, not a depth-five suppression. A one-axis trial basis cannot represent
+this full symmetry simply by adding radial powers.</p>
+<h2 id="overlap-integrals-without-coordinate-expansion">Overlap Integrals Without Coordinate Expansion</h2>
+<p>For a harmonic polynomial define t_L as its squared mean over the unit
+sphere. Angular orthogonality makes different L blocks independent. In one
+block, the source/response overlap divided by the ball volume is</p>
+<pre><code>(d/2)t_L integral_0^1 R^(d/2+L-1)
+  [R A F+L(A G+B F)+L(2L+d-2) B G/R] dR.
+</code></pre>
+<p>The gradient identity used here is
+mean_sphere |grad P_L|^2=L(2L+d-2)t_L.
+For the chosen second-mode polynomials,</p>
+<pre><code>t0=1,
+t2=4(d-2)/[d^2(d+2)],
+t4=4(d^2+4d+6)/[d(d+2)^2(d+4)^2(d+6)].
+</code></pre>
+<p>The mode's weighted norm divided by ball volume is
+Beta(d/2+2,3/2)/[2(d+2)]. The physical frequency correction still uses
+that mode's own C=mu_d^2 P_d'(lambda)/2 and amplitude squared a.
+Comparing shifts at common a differs from comparing them at common
+phase action omega a N0. Neither comparison can omit these factors.</p>
+<h2 id="exact-positive-second-mode-response">Exact Positive Second-Mode Response</h2>
+<p>The clamped test displacement z=(1-R) grad H4 detects the complete second-mode
+source. Write a=d/2+4 and t4 for the angular norm above. Direct integration gives</p>
+<pre><code>&lt;j,z&gt;/Vol=-4d(d+2)t4 Beta(a,3/2),
+a_el(z,z)/Vol=16d(d+14)t4/(d+8).
+</code></pre>
+<p>The first expression is strictly negative at every maintained depth, including
+d=2. The second is positive. Therefore the full compliance obeys</p>
+<pre><code>&lt;j,L^(-1)j&gt;/N0 &gt;= &lt;j,z&gt;^2/[a_el(z,z)N0] &gt; 0.
+</code></pre>
+<p>The exact lower bounds, in increasing maintained depth, are</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Depth</th>
+<th>Full compliance divided by N0, lower bound</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>1024/22869</td>
+</tr>
+<tr>
+<td>3</td>
+<td>297 pi/17408</td>
+</tr>
+<tr>
+<td>4</td>
+<td>77824/1288287</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2431 pi/116736</td>
+</tr>
+<tr>
+<td>6</td>
+<td>65536/950625</td>
+</tr>
+<tr>
+<td>10</td>
+<td>38273024/522166645</td>
+</tr>
+</tbody>
+</table></div>
+<p>Thus the earlier vanishing overlap with a purely radial trial does not make
+this mode mechanically unresponsive. Its degree-four angular component
+drives a nonzero response under the same elastic law. The longitudinal
+eigenvalue correction is negative for positive physical load C a, with its
+magnitude bounded below by C a times the displayed value. No independent
+amplitude or depth-specific coefficient has been chosen to obtain this sign.</p>
+<p>Write W=sqrt(1-R), Q=u^2 and p=|grad u|^2-ell(2ell+d+1)Q.
+The source is -div(W p I)+W[grad p+ell grad Q], a derivative of a
+square-integrable tensor plus a square-integrable vector. It is therefore
+a bounded load on H1_0. Coercivity of the clamped elastic form gives existence and
+uniqueness of its weak response; this positivity argument does not depend
+on completing the radial series. It does not establish boundary admissibility
+of a finite physical load or the accuracy of a finite-basis approximation.</p>
+<p>The checker check-harmonic-loaded-blocks.py verifies the common block operator
+by full coordinate polynomial differentiation at all six depths, the recurrence
+determinant, the harmonic decomposition, and the angular norms. A separate
+direct three-invariant moment calculation agrees with every trial load above.</p>
+<p>This is a checked common reduction and a strict full second-mode response bound.
+It is not yet an explicit completed second-mode solution or a derived particle
+mass law.</p>
+<h2 id="verification-and-physical-scope">Verification and Physical Scope</h2>
+<p>The exact recurrence and boundary argument give the full first-mode linear
+solution. The <a href="/evidence/diagnostics/check-loaded-ball-series/">series checker</a>
+uses Arb arithmetic and an analytic truncation bound at all six depths;
+it encloses negative parallel and positive transverse first-shell shifts.
+The <a href="/evidence/diagnostics/check-harmonic-loaded-blocks/">harmonic checker</a>
+verifies the full coordinate operator identities, angular moments and the
+strict second-mode lower bound. The
+<a href="/evidence/diagnostics/check-loaded-polarization-action/">polarization checker</a>
+checks the tensor response identities, rotation covariance and all classical
+rotation charges at the same depths. The
+<a href="/evidence/diagnostics/check-loaded-shell-bounds/">splitting-bound checker</a>
+independently verifies the stress divergence and moment bounds.</p>
+<p>The first-mode carrier now has an actual full response and a well-defined
+spectral perturbation, rather than only an integrated force cancellation.
+Its loaded shell splits. The leading reduced polarization action is
+adiabatic and small-load; it is not a globally bounded finite-amplitude
+completion. The full nonlinear carrier and wave equations, sustaining
+boundary stress, transverse localization in the containing space, physical
+scales and occupied modes remain to be derived. The parent high-order
+dispersion also retains its propagation limitation. These results do not
+identify an observed particle or its measured spin or charge, and the
+internal polarization motion does not replace an electron's literal orbit.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261013-flat-ball-conformal-clock/">An exact flat-ball count clock and its conformal characterization</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#an-explicit-full-first-mode-solution">An Explicit Full First-Mode Solution</a></li><li class="toc-level-2"><a href="#verification-of-the-differential-equation">Verification of the Differential Equation</a></li><li class="toc-level-2"><a href="#boundary-regularity-and-the-weak-solution">Boundary Regularity and the Weak Solution</a></li><li class="toc-level-2"><a href="#rigorous-boundary-admissibility-and-truncation-bounds">Rigorous Boundary Admissibility and Truncation Bounds</a></li><li class="toc-level-2"><a href="#exact-shell-splitting">Exact Shell Splitting</a></li><li class="toc-level-2"><a href="#an-explicit-lower-bound">An Explicit Lower Bound</a></li><li class="toc-level-2"><a href="#complementary-stress-upper-bound">Complementary Stress Upper Bound</a></li><li class="toc-level-2"><a href="#finite-load-spectral-control">Finite-Load Spectral Control</a></li><li class="toc-level-2"><a href="#boundary-control-gives-form-control">Boundary Control Gives Form Control</a></li><li class="toc-level-2"><a href="#bounds-on-every-ordered-eigenvalue">Bounds on Every Ordered Eigenvalue</a></li><li class="toc-level-2"><a href="#optional-geometric-map-bound">Optional Geometric Map Bound</a></li><li class="toc-level-2"><a href="#the-first-order-shift-is-a-genuine-spectral-derivative">The First-Order Shift Is a Genuine Spectral Derivative</a></li><li class="toc-level-2"><a href="#polarization-of-the-complete-first-shell">Polarization of the Complete First Shell</a></li><li class="toc-level-2"><a href="#the-complete-quadratic-source">The Complete Quadratic Source</a></li><li class="toc-level-2"><a href="#eliminate-the-carrier-at-fixed-phase-action">Eliminate the Carrier at Fixed Phase Action</a></li><li class="toc-level-2"><a href="#a-conditional-polarization-preference-and-conserved-geometry">A Conditional Polarization Preference and Conserved Geometry</a></li><li class="toc-level-2"><a href="#higher-harmonic-modes">Higher Harmonic Modes</a></li><li class="toc-level-2"><a href="#a-closed-elastic-block">A Closed Elastic Block</a></li><li class="toc-level-2"><a href="#source-from-a-harmonic-occupied-mode">Source from a Harmonic Occupied Mode</a></li><li class="toc-level-2"><a href="#complete-second-mode-decomposition">Complete Second-Mode Decomposition</a></li><li class="toc-level-2"><a href="#overlap-integrals-without-coordinate-expansion">Overlap Integrals Without Coordinate Expansion</a></li><li class="toc-level-2"><a href="#exact-positive-second-mode-response">Exact Positive Second-Mode Response</a></li><li class="toc-level-2"><a href="#verification-and-physical-scope">Verification and Physical Scope</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

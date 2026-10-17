@@ -1,0 +1,550 @@
+{
+  "created_utc": "2026-10-13T23:48:56.975990+00:00",
+  "script_name": "entropy-difference-spectrum-checks.py",
+  "script_sha256": "5fd873824378fafa877964ccfe3541832c1e06c85684d9b009bfcdf66cfbcc3a",
+  "checks_passed": 5998,
+  "check_groups": {
+    "parameter_enclosure": 4,
+    "finite_interval_signs": 5940,
+    "classification_controls": 3,
+    "analytic_tail": 2,
+    "multiplicity_totals": 12,
+    "zero_blocks": 4,
+    "spectral_identities": 3,
+    "mehler_covariance": 6,
+    "finite_filter_certificate": 14,
+    "finite_filter_recurrence": 10
+  },
+  "parameter": {
+    "published_m_interval": [
+      "5087601680833816823/2500000000000000000",
+      "101752033616676336461/50000000000000000000"
+    ],
+    "independently_derived_m_interval": [
+      "1785868609825308076571902011229415257817887354588509088160592139363347284951847952428730082167235634925359191776410550678999882314297950025923253936836399523260022992670272385060595822555029485368265813719012343058948076589730048353123417131050198950712413058774920711525742352425686156190704641706822493939120915423636982811485647134752457063949846560357056036142093048105432552156889485642534570387272937388814827119163847391322578549891929721034886511128655981208027659488606403083302468616149853010295833391694778242954662693299/877559173192101506977006147718936430550385729190039071575697527742931413540443981515048532466530530055802219417528709203623519072083764342578989804166504479210827088837766672823339292573959369173175586810653200680443923655309832042720527047200872724695635115243722761390020505808410103563302200971795829242984876648706707701367601546431210398051861940791946918886260093259868180182127812974916900659621333160218528243123047414980919861363505701015261570244359631268969287758877055552271238466009685355673561776449748302913229450394",
+      "3571737219650616153143804022458830515635774709177018186646780278720542059464540479530713478545291160335631788133778701099646039938594887879860694544673068956236206183808135124295327765339565591017394018215662450510626722283785059666505115235491373393691900093110594037278189991178788019460572606610303949265689981986042349333690908714439691822595522404386551370055465669392154919837195807195004341527274764956693528842864439810527023782590491788760263796890837828937572116432244028730161460631564794937455792544206110454342386706223/1755118346384203013954012295437872861100771458380078112174981704760726737994821127109303255757197177961991714970332816358443933490960834925828159190085470167195498318117616661031308704466612432819419962151871529992206002097265752553529209539021172661197343231532806653918133916903707923019023593318131950665031792516637895007381872970503201567166731797308404657590177729450315309449978704935135428061157232376481939516382179790039614967100516319757172084512879724389076778040027303414586306336531897439229394587180861105988561285538"
+    ],
+    "method": "96-term exact rational atanh series per logarithm, with positive geometric remainder bound."
+  },
+  "spectrum": {
+    "finite_pairs": 5940,
+    "negative": [
+      {
+        "k": 3,
+        "l": 0,
+        "affine_half": [
+          "9/16",
+          "-21/16"
+        ],
+        "lambda_plus_interval": [
+          "-6711584872495648593/20000000000000000000",
+          "-134231697449912971851/400000000000000000000"
+        ]
+      },
+      {
+        "k": 4,
+        "l": 0,
+        "affine_half": [
+          "5/64",
+          "-89/64"
+        ],
+        "lambda_plus_interval": [
+          "-39412398319166183177/16000000000000000000",
+          "-788247966383323663539/320000000000000000000"
+        ]
+      },
+      {
+        "k": 5,
+        "l": 0,
+        "affine_half": [
+          "-265/768",
+          "-803/768"
+        ],
+        "lambda_plus_interval": [
+          "-4474285927227948610811/1280000000000000000000",
+          "-671142889084192291619/192000000000000000000"
+        ]
+      },
+      {
+        "k": 6,
+        "l": 0,
+        "affine_half": [
+          "-5803/9216",
+          "-3833/9216"
+        ],
+        "lambda_plus_interval": [
+          "-260705683692524260161061/76800000000000000000000",
+          "-39105852553878639023869/11520000000000000000000"
+        ]
+      },
+      {
+        "k": 7,
+        "l": 0,
+        "affine_half": [
+          "-88417/110592",
+          "42421/110592"
+        ],
+        "lambda_plus_interval": [
+          "-2291853185428557213624079/921600000000000000000000",
+          "-343777977814283582039191/138240000000000000000000"
+        ]
+      },
+      {
+        "k": 8,
+        "l": 0,
+        "affine_half": [
+          "-1186915/1327104",
+          "1695967/1327104"
+        ],
+        "lambda_plus_interval": [
+          "-2398177665342492926040521/2211840000000000000000000",
+          "-359726649801373938894209/331776000000000000000000"
+        ]
+      },
+      {
+        "k": 2,
+        "l": 1,
+        "affine_half": [
+          "-1/4",
+          "1/4"
+        ],
+        "lambda_plus_interval": [
+          "-51752033616676336461/100000000000000000000",
+          "-2587601680833816823/5000000000000000000"
+        ]
+      },
+      {
+        "k": 3,
+        "l": 1,
+        "affine_half": [
+          "-25/48",
+          "37/48"
+        ],
+        "lambda_plus_interval": [
+          "-9250677872225445487/16000000000000000000",
+          "-1387601680833816823/2400000000000000000"
+        ]
+      }
+    ],
+    "zero": [
+      {
+        "k": 0,
+        "l": 0,
+        "affine_half": [
+          "0",
+          "0"
+        ],
+        "lambda_plus_interval": [
+          "0",
+          "0"
+        ]
+      },
+      {
+        "k": 1,
+        "l": 0,
+        "affine_half": [
+          "0",
+          "0"
+        ],
+        "lambda_plus_interval": [
+          "0",
+          "0"
+        ]
+      },
+      {
+        "k": 0,
+        "l": 1,
+        "affine_half": [
+          "0",
+          "0"
+        ],
+        "lambda_plus_interval": [
+          "0",
+          "0"
+        ]
+      },
+      {
+        "k": 1,
+        "l": 1,
+        "affine_half": [
+          "0",
+          "0"
+        ],
+        "lambda_plus_interval": [
+          "0",
+          "0"
+        ]
+      }
+    ],
+    "minimum_positive_half": {
+      "lower": "48193736605288024579/1920000000000000000000",
+      "k": 4,
+      "l": 1
+    },
+    "exact_classification_transcript_sha256": "5701eab9e1e0924a12a6769e3f90e02ad2aef7a53ca384cd6bfb14fd537805b3",
+    "transcript_format": "UTF-8 rows k,l:a:b:lower_G:upper_G:sign followed by newline; l outer then k inner.",
+    "tail": {
+      "weighted_degree_at_least": 215,
+      "positive_beta_sum_upper": "16065500134851189384703/75000000000000000000",
+      "strict_half_gap_at_215": "59499865148810615297/75000000000000000000"
+    }
+  },
+  "depths": {
+    "2": {
+      "negative": 95,
+      "zero_Lplus": 27,
+      "modes": [
+        {
+          "k": 3,
+          "l": 0,
+          "multiplicity": 4
+        },
+        {
+          "k": 4,
+          "l": 0,
+          "multiplicity": 5
+        },
+        {
+          "k": 5,
+          "l": 0,
+          "multiplicity": 6
+        },
+        {
+          "k": 6,
+          "l": 0,
+          "multiplicity": 7
+        },
+        {
+          "k": 7,
+          "l": 0,
+          "multiplicity": 8
+        },
+        {
+          "k": 8,
+          "l": 0,
+          "multiplicity": 9
+        },
+        {
+          "k": 2,
+          "l": 1,
+          "multiplicity": 24
+        },
+        {
+          "k": 3,
+          "l": 1,
+          "multiplicity": 32
+        }
+      ],
+      "real_dynamical_kernel": 28,
+      "algebraic_zero_multiplicity": 54
+    },
+    "3": {
+      "negative": 267,
+      "zero_Lplus": 32,
+      "modes": [
+        {
+          "k": 3,
+          "l": 0,
+          "multiplicity": 10
+        },
+        {
+          "k": 4,
+          "l": 0,
+          "multiplicity": 15
+        },
+        {
+          "k": 5,
+          "l": 0,
+          "multiplicity": 21
+        },
+        {
+          "k": 6,
+          "l": 0,
+          "multiplicity": 28
+        },
+        {
+          "k": 7,
+          "l": 0,
+          "multiplicity": 36
+        },
+        {
+          "k": 8,
+          "l": 0,
+          "multiplicity": 45
+        },
+        {
+          "k": 2,
+          "l": 1,
+          "multiplicity": 42
+        },
+        {
+          "k": 3,
+          "l": 1,
+          "multiplicity": 70
+        }
+      ],
+      "real_dynamical_kernel": 33,
+      "algebraic_zero_multiplicity": 64
+    },
+    "4": {
+      "negative": 660,
+      "zero_Lplus": 35,
+      "modes": [
+        {
+          "k": 3,
+          "l": 0,
+          "multiplicity": 20
+        },
+        {
+          "k": 4,
+          "l": 0,
+          "multiplicity": 35
+        },
+        {
+          "k": 5,
+          "l": 0,
+          "multiplicity": 56
+        },
+        {
+          "k": 6,
+          "l": 0,
+          "multiplicity": 84
+        },
+        {
+          "k": 7,
+          "l": 0,
+          "multiplicity": 120
+        },
+        {
+          "k": 8,
+          "l": 0,
+          "multiplicity": 165
+        },
+        {
+          "k": 2,
+          "l": 1,
+          "multiplicity": 60
+        },
+        {
+          "k": 3,
+          "l": 1,
+          "multiplicity": 120
+        }
+      ],
+      "real_dynamical_kernel": 36,
+      "algebraic_zero_multiplicity": 70
+    },
+    "5": {
+      "negative": 1516,
+      "zero_Lplus": 36,
+      "modes": [
+        {
+          "k": 3,
+          "l": 0,
+          "multiplicity": 35
+        },
+        {
+          "k": 4,
+          "l": 0,
+          "multiplicity": 70
+        },
+        {
+          "k": 5,
+          "l": 0,
+          "multiplicity": 126
+        },
+        {
+          "k": 6,
+          "l": 0,
+          "multiplicity": 210
+        },
+        {
+          "k": 7,
+          "l": 0,
+          "multiplicity": 330
+        },
+        {
+          "k": 8,
+          "l": 0,
+          "multiplicity": 495
+        },
+        {
+          "k": 2,
+          "l": 1,
+          "multiplicity": 75
+        },
+        {
+          "k": 3,
+          "l": 1,
+          "multiplicity": 175
+        }
+      ],
+      "real_dynamical_kernel": 37,
+      "algebraic_zero_multiplicity": 72
+    },
+    "6": {
+      "negative": 3283,
+      "zero_Lplus": 35,
+      "modes": [
+        {
+          "k": 3,
+          "l": 0,
+          "multiplicity": 56
+        },
+        {
+          "k": 4,
+          "l": 0,
+          "multiplicity": 126
+        },
+        {
+          "k": 5,
+          "l": 0,
+          "multiplicity": 252
+        },
+        {
+          "k": 6,
+          "l": 0,
+          "multiplicity": 462
+        },
+        {
+          "k": 7,
+          "l": 0,
+          "multiplicity": 792
+        },
+        {
+          "k": 8,
+          "l": 0,
+          "multiplicity": 1287
+        },
+        {
+          "k": 2,
+          "l": 1,
+          "multiplicity": 84
+        },
+        {
+          "k": 3,
+          "l": 1,
+          "multiplicity": 224
+        }
+      ],
+      "real_dynamical_kernel": 36,
+      "algebraic_zero_multiplicity": 70
+    },
+    "10": {
+      "negative": 43692,
+      "zero_Lplus": 11,
+      "modes": [
+        {
+          "k": 3,
+          "l": 0,
+          "multiplicity": 220
+        },
+        {
+          "k": 4,
+          "l": 0,
+          "multiplicity": 715
+        },
+        {
+          "k": 5,
+          "l": 0,
+          "multiplicity": 2002
+        },
+        {
+          "k": 6,
+          "l": 0,
+          "multiplicity": 5005
+        },
+        {
+          "k": 7,
+          "l": 0,
+          "multiplicity": 11440
+        },
+        {
+          "k": 8,
+          "l": 0,
+          "multiplicity": 24310
+        },
+        {
+          "k": 2,
+          "l": 1,
+          "multiplicity": 0
+        },
+        {
+          "k": 3,
+          "l": 1,
+          "multiplicity": 0
+        }
+      ],
+      "real_dynamical_kernel": 12,
+      "algebraic_zero_multiplicity": 22
+    }
+  },
+  "spectral_identities": {
+    "cubic_lambda_plus_affine": [
+      "9/8",
+      "-21/8"
+    ],
+    "mixed_relation": "lambda_plus(2,1)=-lambda_plus(2,0)/3",
+    "rate_relation": "-lambda_minus(2,1)*lambda_plus(2,1)=lambda_minus(2,0)*lambda_plus(2,0)"
+  },
+  "finite_filter_certificate": {
+    "family_t": [
+      "1/16",
+      "1/8",
+      "1/4",
+      "1/2",
+      "1",
+      "2",
+      "3",
+      "4",
+      "8",
+      "16"
+    ],
+    "degree_K": 11,
+    "polynomial_Q_coefficients": [
+      "-128/5267025",
+      "392/351135",
+      "-107459/5267025",
+      "4203859/21068100",
+      "-49658389/42136200",
+      "188238743/42136200",
+      "-19666922/1755675",
+      "197451683/10534050",
+      "-96785293/4681800",
+      "67471063/4681800",
+      "-23/4",
+      "1"
+    ],
+    "positive_C": "128/1755675",
+    "M": "3960/17",
+    "weights": {
+      "2": "49021895131/47403225",
+      "3": "49008316423/63204300",
+      "4": "8186707463/14045400",
+      "5": "18194609257/42136200",
+      "6": "594130922/1755675",
+      "7": "2387636317/10534050",
+      "8": "958481293/4681800",
+      "9": "578800937/4681800",
+      "10": "7431/68",
+      "11": "1303/17"
+    },
+    "identity": "M G(K,1)+sum_i weights[i] G(i,0)=-alpha*C when F(1)=F(4)=alpha",
+    "scope": "Arbitrary real coefficients on this ten-filter family, alpha>0, with both widths present. No equal-well condition. The accompanying analytical argument treats any finite positive filter list."
+  },
+  "historical_source_artifacts": {
+    "spectrum_original_checker": {
+      "sha256": "4c0d757cffdd16f6eb1e633c460abd9ce9f403ec342a2c248f3e95edf0760052",
+      "bytes": 2855
+    },
+    "finite_filter_original_certificate": {
+      "sha256": "5506d073ee3def0ad83a415809720c27bc81dc9b90612c91efd91e873c800b59",
+      "bytes": 1898
+    },
+    "independent_cubic_original_checker": {
+      "sha256": "a1c08886339e8e2f4595c48a13c70e295fb0f8b1fc384f6b0189f278029d06ce",
+      "bytes": 816
+    }
+  },
+  "scope": "Exact finite spectral algebra plus rigorous parameter enclosure and an analytic tail bound. Not a nonlinear stability, PDE existence, lifetime, mass-family or observed-particle theorem."
+}

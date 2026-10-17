@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>A Common Small-Amplitude Spectral-Stability Regime for the Count Clocks — IDWT V2</title>
+  <meta name="description" content="A stiff-carrier regime gives uniformly bounded linear evolution for all fourteen fixed-profile count branches, including spatial currents, neutral modes and conditional forcing estimates.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261014-pullback-excited-spectral-stability/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Common Small-Amplitude Spectral-Stability Regime for the Count Clocks — IDWT V2">
+  <meta property="og:description" content="A stiff-carrier regime gives uniformly bounded linear evolution for all fourteen fixed-profile count branches, including spatial currents, neutral modes and conditional forcing estimates.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261014-pullback-excited-spectral-stability/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A Common Small-Amplitude Spectral-Stability Regime for the Count Clocks — IDWT V2">
+  <meta name="twitter:description" content="A stiff-carrier regime gives uniformly bounded linear evolution for all fourteen fixed-profile count branches, including spatial currents, neutral modes and conditional forcing estimates.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>A Common Small-Amplitude Spectral-Stability Regime for the Count Clocks</h1>
+      <p class="article-date">Updated <time datetime="2026-10-14">October 14, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body">
+<p>The <a href="/research/notes/20261014-material-pullback-count-action/">material pullback action</a> has exact
+stationary wave/carrier solutions with count frequencies. For a fixed
+nonzero spatial profile in each maintained degree space, real or complex, the full
+linearized spectrum is imaginary at sufficiently small field amplitude,
+provided the elastic carrier frequencies lie strictly above the negative-energy
+wave branches. This is a conditional theorem about the complete spatial
+linearization, not a finite matrix truncation or a nonlinear lifetime bound.</p>
+<p>For each supplied label, let omega_N=mu_d D_N, D_N=binomial(N+d,d), with
+mu_d&gt;0. A sufficient condition is</p>
+<pre><code>kappa [mu_d(D_N-1)]^2 &lt; Lambda_1(L_el).
+</code></pre>
+<p>For the finite set of labels one sufficiently small common positive kappa
+satisfies this at every depth. No particle-specific coefficient is needed.
+For fixed profile and parameters there is an amplitude interval about zero
+with the stated spectral property; the theorem does not determine a physical
+amplitude or certify the interval's numerical width. The scalar ground
+branch also has the separate complete energy-minimum theorem.</p>
+<p>The action still assumes a clamped active ball and its constitutive
+coefficients. Ordinary physical space remains flat and macroscopic; these
+spectral coefficient spaces describe classical spatial fields. They do not
+replace deterministic electron trajectories. The real-profile argument is
+given first. The subsequent extension derives the extra carrier gyroscopic
+term for complex spatial profiles and verifies the full collision argument.</p>
+<h2 id="1-quadratic-forms-and-the-weighted-domain-estimate">1. Quadratic forms and the weighted-domain estimate</h2>
+<p>Use X=L2_w(B) direct-sum L2_w(B) direct-sum L2(B;R^d),
+V=D(P^(1/2)) direct-sum D(P^(1/2)) direct-sum H1_0(B;R^d),
+q=(a,b,v), and K=diag(mu^2P-omega^2,mu^2P-omega^2,L_el), omega=mu D_N.
+The positive mass form is</p>
+<pre><code>m_alpha(q,q)=||a+alpha v.grad u||_w^2+||b||_w^2+kappa||v||_2^2.
+</code></pre>
+<p>Writing C=||grad u||_infinity and using w&lt;=1 gives</p>
+<pre><code>||a||_w^2+||v||_2^2
+  &lt;=2||a+alpha v.grad u||_w^2+(1+2alpha^2 C^2)||v||_2^2.
+</code></pre>
+<p>Thus M_alpha is bounded and boundedly positive on X, uniformly on every bounded alpha interval for fixed kappa&gt;0. In particular one lower bound is min(1/2,kappa/(1+2alpha^2 C^2),1).</p>
+<p>The only apparently troublesome gyro form is the wave/carrier pairing</p>
+<pre><code>B(b,v)=int w v.(b grad u-u grad b)
+      =int w b[2v.grad u+u div v+u v.grad log w].
+</code></pre>
+<p>The second expression defines its continuous extension; it does not assume an unweighted gradient bound on b. Put delta=1-r. On the unit ball, |grad log w|=r/(1-r^2)&lt;=1/delta. The convex-domain Hardy estimate ||v/delta||_2&lt;=2||grad v||_2 and the cube Poincare estimate ||v||_2&lt;=2/(pi sqrt(d))||grad v||_2 imply</p>
+<pre><code>|B(b,v)| &lt;= [4||grad u||_infinity/(pi sqrt(d))
+             +(sqrt(d)+2)||u||_infinity]
+            ||b||_w ||grad v||_2.
+</code></pre>
+<p>Integration by parts first holds for polynomial b and compactly supported smooth v, and then extends by density. This explicitly handles the singular derivative of w and uses the actual clamped trace. The complete wave form domain embeds compactly in L2_w because P's discrete eigenvalues tend to infinity with finite multiplicity. Therefore the B block V_wave -&gt; H^(-1) is compact; its adjoint H1_0 -&gt; V_wave* is compact too. The remaining gyro blocks factor through compact L2 embeddings. Consequently G_alpha:V-&gt;V* is bounded, skew, and compact.</p>
+<p>The elastic identity int[2epsilon:epsilon+(div v)^2]=int[|grad v|^2+2(div v)^2] holds for clamped v by integration by parts. Extension by zero to the containing cube (-1,1)^d yields Lambda_1(L_el)&gt;=d*pi^2/4. This gives an explicit sufficient bound without computing the first elastic eigenvalue.</p>
+<h2 id="2-analytic-fredholm-and-the-phase-space-realization">2. Analytic Fredholm and the Phase-Space Realization</h2>
+<p>Let S=(|K|+Pi_0)^(1/2), where Pi_0 projects onto ker K. S:V-&gt;X is an isomorphism and S^(-1):X-&gt;X is compact. As a map of forms,</p>
+<pre><code>Q(s,alpha)=S^(-1)[K+sG_alpha+s^2M_alpha]S^(-1)
+         =I-2Pi_- -Pi_0+compact(s,alpha).
+</code></pre>
+<p>This is an entire analytic Fredholm pencil of index zero. For sufficiently large real s, Re t_s(q,q)=k(q,q)+s^2m_alpha(q,q) is coercive in V: only finitely many wave eigenvalues of K are nonpositive, and M_alpha dominates the X norm. The skew gyro form has zero real diagonal part. Lax-Milgram gives an invertible point. Analytic Fredholm theory then gives isolated finite-multiplicity roots and finite local reductions.</p>
+<p>To make "full spectrum" precise rather than just discussing pencil eigenmodes, use Z=V direct-sum X and the closed operator</p>
+<pre><code>A_alpha(q,p)=(p,-M_alpha^(-1)(Kq+G_alpha p)),
+D(A_alpha)={(q,p) in V x V : Kq+G_alpha p belongs to X}.
+</code></pre>
+<p>K and G are interpreted as V-&gt;V* maps in this definition. The domain is dense by the positive-shift resolvent argument proved below; no separate operator-core assertion is needed. For a real invertible s, solving (s-A)(q,p)=(f,g) gives</p>
+<pre><code>T(s)q=M_alpha g+(sM_alpha+G_alpha)f,  p=sq-f.
+</code></pre>
+<p>The inverse T(s)^(-1):V*-&gt;V is bounded. The inclusion X-&gt;V* is compact, G:V-&gt;V* is compact, and V-&gt;X is compact. Hence this resolvent is compact on Z. The same formula verifies closedness. Thus there is no residual finite continuous or essential spectrum missed by the eigenmode argument. It is a spectral realization; global nonlinear well-posedness in the diffeomorphism class is still a separate problem.</p>
+<h2 id="3-negative-index-exhaustion-and-all-possible-collisions">3. Negative-index exhaustion and all possible collisions</h2>
+<p>The conserved Hermitian energy form on Z is</p>
+<pre><code>H((q,p),(q,p))=k(q,q)+m_alpha(p,p).
+</code></pre>
+<p>It has exactly 2 sum_(m&lt;N) dim V_m = 2 binomial(N+d-1,d) negative directions, independent of alpha. Its radical is ker K x {0}. At alpha=0, each lower shell has a positive-frequency mode q=(h,-i h,0), nu=omega-omega_m. Its energy is</p>
+<pre><code>H((q,i nu q),(q,i nu q))=-4nu omega_m ||h||_w^2.
+</code></pre>
+<p>The conjugate frequency supplies the other real direction per scalar mode. These clusters account for the entire negative index. The sum-frequency positive branch lies above omega, while every negative branch lies below omega. An upper difference branch collides only if D_l+D_m=2D_N, m&lt;N&lt;l. Elastic frequencies lie strictly above all negative branches under the stated stiffness inequality. Zero is separated from each negative branch because every count gap is nonzero.</p>
+<p>The exhaustive exact search across the fourteen labels gives one wave collision:</p>
+<pre><code>(d,N,m,l)=(2,75,30,102),
+(D_m,D_N,D_l)=(496,2926,5356), nu/mu=2430.
+</code></pre>
+<p>The search includes every lower degree and every possible upper count below 2D_N; it is not a truncated shell scan.</p>
+<h2 id="4-exceptional-collision-the-full-134-dimensional-argument">4. Exceptional collision: the full 134-dimensional argument</h2>
+<p>At the collision, eliminating the carrier gives the wave Schur term</p>
+<pre><code>-alpha^2 C_nu* (L_el-kappa nu^2+O(alpha^2))^(-1) C_nu.
+</code></pre>
+<p>There is no omitted direct wave-wave alpha^2 term in this real-background quadratic action. The carrier mass correction is alpha^2 and therefore enters this Schur term first at order alpha^4. At alpha=0 the inverse R_nu is positive, with a strict gap.</p>
+<p>For the lower helicity, C_nu h is a sign times nu j_m; for the upper helicity it is the opposite sign times nu j_l, where</p>
+<pre><code>j_k=w[omega_k h grad u-omega u grad h].
+</code></pre>
+<p>Any nonzero member h of V_k has a nonzero homogeneous top part h_k: otherwise it belongs to lower-degree polynomials and is orthogonal to itself. The same applies to nonzero u in V_N. Euler contraction gives</p>
+<pre><code>x.(j_k/w)_(N+k-1)=(N omega_k-k omega)u_N h_k.
+</code></pre>
+<p>At the exception, these two coefficients divided by mu are -50580 and 103248. Polynomial multiplication has no zero divisors. Thus each source is injective on its entire shell. Their top vector degrees are respectively 104 and 176. In a cancellation j_m+j_l=0, the degree-176 part first forces h_l=0, and then h_m=0. Multiplication by w cannot hide an interior nonzero polynomial. The source is nonzero as an H^(-1) functional as well, since compactly supported test fields detect it.</p>
+<p>Therefore Hc=C_nu* R_nu C_nu is strictly positive on the complete 31+103 dimensional collision space, without selecting a zonal subset. The first frequency derivative D is +4omega_m I on the lower space and -4omega_l I on the upper space in weighted-orthonormal bases. The leading reduced pencil is</p>
+<pre><code>D delta_nu-alpha^2 Hc.
+</code></pre>
+<p>D^(-1)Hc is similar to the Hermitian invertible matrix Hc^(1/2)D^(-1)Hc^(1/2). Its eigenvalues z are real and nonzero. On any repeated z eigenspace, Hc=zD, so D has the definite sign of z. There are 31 positive z roots and 103 negative z roots by congruence. The physical energy at positive nu has sign -D, since generally H(q,i nu q)=-nu &lt;q,T_nu'(nu)q&gt;. Thus the positive z cluster retains exactly 31 complex negative-energy modes, or 62 real directions including its conjugate. The opposite-sign clusters separate by order alpha^2, and their definite signatures survive the higher analytic corrections. Degeneracy within either sign is harmless.</p>
+<p>This argument proves existence of an amplitude interval. It does not supply a well-conditioned numerical lower bound for its width; the smallest source-Gram eigenvalue can matter greatly at degree 75.</p>
+<h2 id="5-finish-by-energy-including-the-stationary-kernel">5. Finish by energy, including the stationary kernel</h2>
+<p>Finite Riesz root spaces near each nonexceptional negative cluster vary continuously in Z and remain negative definite. For the exceptional cluster, the scaled local reduction delta_nu=alpha^2 z gives the definite subclusters just established. On a negative-definite invariant space the conserved energy is a positive norm after reversing sign, so its finite generator has only imaginary, semisimple eigenvalues. Combining the clusters and their conjugates gives a real invariant negative space W of dimension n_-(K).</p>
+<p>For any hypothetical eigenvector z with exponent s off the imaginary axis, energy conservation implies H(z,z)=0 and H(z,W)=0. The H-orthogonal complement of W is nonnegative by maximality of the negative index. A zero quadratic vector in a nonnegative Hermitian form is orthogonal to its entire space. Since it is also orthogonal to W, z lies in the full radical ker K x {0}. But an eigenvector has p=sq, impossible for nonzero s unless z=0. This excludes every off-axis eigenvalue, including arbitrary high frequencies, without a basis-completeness hypothesis.</p>
+<p>For zero, a length-two pencil chain would satisfy Kq0=0 and Kq1+G_alpha q0=0. Projection onto E0=V_N direct-sum V_N gives</p>
+<pre><code>Pi_0 G_alpha Pi_0 = [[0,2omega],[-2omega,0]] tensor I_(V_N).
+</code></pre>
+<p>This is invertible for omega&gt;0; the carrier cross terms vanish upon this projection because E0 has no carrier component. Hence q0=0, contradicting a chain. Zero is semisimple for every alpha in this real-profile linearization. The entire kernel has dimension 2 dim V_N; it is not merely the one phase tangent.</p>
+<p>A further corollary is that nonzero imaginary eigenvalues also cannot have a Jordan chain once W exhausts the negative index: on its complement every nonzero-frequency eigenvector has strictly positive energy, whereas a Jordan chain would force its leading eigenvector's self-energy to vanish. This is an algebraic spectral statement, not yet a nonlinear persistence bound.</p>
+<h2 id="extension-to-complex-spatial-profiles-and-stationary-current">Extension to Complex Spatial Profiles and Stationary Current</h2>
+<p>The physical reference ball B in ordinary R^d has w=sqrt(1-r^2), L=-w^(-1)div[w(I-xx^T)grad], and A0=mu^2 P_d(L). On V_N, A0=omega^2 with omega=mu binomial(N+d,d). The action in material variables is</p>
+<pre><code>L=1/2 int_B w (|U_t+b.grad U|^2-U* A0 U)
+   +kappa/2 int_B |phi_t|^2-E_el(phi-x),
+b=phi_t composed with phi^(-1),
+E_el(v)=1/2 int [2 epsilon(v):epsilon(v)+(div v)^2].
+</code></pre>
+<p>The wave and carrier are retained variables of the same proposed field law. No mediator or position-probability interpretation is used. The domain is the clamped smooth orientation-preserving material-map class, with the linearized form closure described below.</p>
+<p>Write u=p+i q, with real p,q in V_N, and</p>
+<pre><code>U=exp(-i omega t)[alpha u+a+i b_w], phi=x+v.
+</code></pre>
+<p>Below b_w is named h to avoid confusing the wave quadrature with material velocity. Thus eta=a+i h. The amplitude alpha is real; a constant complex factor can be incorporated into u. All integrals in wave terms use material coordinates y, renamed x at the identity.</p>
+<h2 id="complete-quadratic-expansion">Complete Quadratic Expansion</h2>
+<p>With a formal expansion parameter epsilon and phi=id+epsilon v,</p>
+<pre><code>b_material=epsilon v_t-epsilon^2 (v.grad)v_t+O(epsilon^3).
+</code></pre>
+<p>Consequently the first and second perturbed material time derivatives are</p>
+<pre><code>D1=eta_t-i omega eta+alpha v_t.grad u,
+D2=v_t.grad eta-alpha [(v.grad)v_t].grad u.
+</code></pre>
+<p>The background derivative is D0=-i omega alpha u. The quadratic wave kinetic density is |D1|^2/2+Re(D0* D2). Retaining only the first-order material velocity loses the second term involving stationary current.</p>
+<p>Define K=A0-omega^2, j=Im(u* grad u)=p grad q-q grad p, and</p>
+<pre><code>B_s(g,z)=int w z.(g grad s-s grad g).
+</code></pre>
+<p>Up to a time derivative and the vanishing first variation, the complete quadratic Lagrangian is</p>
+<pre><code>L2=1/2 int w [(a_t+alpha v_t.grad p)^2
+                     +(h_t+alpha v_t.grad q)^2-a K a-h K h]
+   +omega int w(h a_t-a h_t)
+   +omega alpha [B_p(h,v_t)-B_q(a,v_t)]
+   +omega alpha^2 int w j_i v_j partial_j(v_t,i)
+   +kappa/2 int |v_t|^2-1/2 a_el(v,v).
+</code></pre>
+<p>The last wave term is absent for constant-phase real profiles. Its symmetric bilinear part is a total derivative. It contributes the skew form</p>
+<pre><code>G_cc(v,z)=-omega alpha^2 int w j.[(v.grad)z-(z.grad)v]
+</code></pre>
+<p>to the equation M Q_tt+G Q_t+K_diag Q=0. Here Q=(a,h,v) and K_diag=diag(K,K,L_el). This sign convention agrees with G_ah=+2omega and G_ha=-2omega.</p>
+<h2 id="full-coupled-linear-equations">Full coupled linear equations</h2>
+<p>Put div_w z=w^(-1)div(w z) and T_s z=2z.grad s+s div_w z. Then</p>
+<pre><code>a_tt+2omega h_t+K a+alpha v_tt.grad p
+                      +omega alpha T_q(v_t)=0,
+h_tt-2omega a_t+K h+alpha v_tt.grad q
+                      -omega alpha T_p(v_t)=0.
+</code></pre>
+<p>The complete carrier equation is</p>
+<pre><code>kappa v_tt+L_el v
+  +alpha w grad p (a_tt+alpha v_tt.grad p)
+  +alpha w grad q (h_tt+alpha v_tt.grad q)
+  +omega alpha w[h_t grad p-p grad h_t
+                              +q grad a_t-a_t grad q]
+  +G_cc v_t=0,
+</code></pre>
+<p>where the distributional vector expression is</p>
+<pre><code>(G_cc z)_i=-omega alpha^2 {
+         partial_j(w j_i z_j)+w j_j partial_i z_j}.
+</code></pre>
+<p>Testing against v and integrating by parts gives precisely the skew form above. This also agrees with linearizing the canonical transport of the stationary carrier momentum m0=-omega alpha^2 w j. There is no static carrier load even when j is nonzero.</p>
+<h2 id="what-survives-the-real-profile-proof">What survives the real-profile proof</h2>
+<ol>
+<li>
+<p>The positive mass form is exactly</p>
+<pre><code>m(Q,Q)=||a+alpha v.grad p||_w^2
+           +||h+alpha v.grad q||_w^2+kappa||v||_2^2.
+</code></pre>
+<p>With C^2=||grad p||_infinity^2+||grad q||_infinity^2, one lower bound relative to ||a||_w^2+||h||_w^2+||v||_2^2 is min(1/2,kappa/(1+2alpha^2 C^2)). This holds on every bounded amplitude interval for fixed kappa&gt;0.</p>
+</li>
+<li>
+<p>K_diag and its kernel are independent of alpha and the profile phase. The negative index is 2 binomial(N+d-1,d), interpreted as zero at N=0. The stationary kernel is V_N direct-sum V_N with zero carrier displacement. Its restricted gyro form remains [[0,2omega],[-2omega,0]], hence zero has no length-two Jordan chain for any alpha.</p>
+</li>
+<li>
+<p>The old weighted B_s estimate applies separately to p and q. The new carrier skew term obeys</p>
+<pre><code>|G_cc(v,z)|&lt;=omega alpha^2 ||j||_infinity
+           (||v||_2 ||grad z||_2+||z||_2 ||grad v||_2).
+</code></pre>
+<p>Therefore it is bounded H1_0 -&gt; H^(-1). Each summand factors through one compact H1_0 -&gt; L2 embedding or its adjoint; it is compact as a form operator H1_0 -&gt; H^(-1). It introduces no uncontrolled derivative of the singular weight. The same V, X, compact-resolvent realization and analytic Fredholm pencil of the preceding real-profile argument therefore apply.</p>
+</li>
+<li>
+<p>At alpha=0 the complex-background choice disappears entirely. The negative-energy branches and all possible opposite-sign collisions are precisely those enumerated in the real-profile argument. For the fourteen supplied labels the sole wave collision is (d,N,m,l)=(2,75,30,102). The strict inequality</p>
+<pre><code>kappa [mu(D_N-1)]^2 &lt; Lambda_1(L_el)
+</code></pre>
+<p>separates the elastic frequencies from all negative wave branches. The same sufficient common bound using Lambda_1&gt;=d*pi^2/4 applies. It is a sufficient material regime, not a fitted particle law.</p>
+</li>
+<li>
+<p>At any nonexceptional negative cluster, the analytic perturbation remains negative definite for small alpha, regardless of the new skew term. The remaining issue is the exceptional collision; it is resolved next. Once the negative spaces exhaust the unchanged negative index, the previous energy orthogonality argument excludes every off-axis eigenvalue, including high frequencies. The conserved quadratic energy is still m(Q_t,Q_t)+k(Q,Q), since all additional terms are gyroscopic.</p>
+</li>
+</ol>
+<h2 id="complex-exceptional-collision">Complex exceptional collision</h2>
+<p>Complexify the real perturbation equations for spectral analysis. This mathematical complexification is distinct from the physical complex field's two real components. At positive disturbance frequency nu, the lower-branch helicity is (a,h)=(g,-i g); the upper-branch helicity is (g,+i g). The carrier row of T(nu)=K_diag-nu^2 M+i nu G, to first order in alpha, is respectively</p>
+<pre><code>C_minus g=nu w[omega_m g grad(conj u)-omega conj(u) grad g],
+C_plus  g=-nu w[omega_l g grad u-omega u grad g].
+</code></pre>
+<p>For a real u these reduce to the preceding real-profile source formulas. For complex u they cannot be replaced by a real part: that would discard a physical quadrature and could create spurious source kernels.</p>
+<p>The upper and lower source maps are injective on their full complexified polynomial shells. Contract the homogeneous top vector degree with x. The result is</p>
+<pre><code>(N omega_k-k omega) u_N g_k
+</code></pre>
+<p>for the upper map and its conjugate-profile counterpart for the lower map. At the sole collision these coefficients divided by mu are -50580 and 103248, and the respective top source degrees are 104 and 176. Nonzero complex polynomials have no zero divisors. The degree-176 term in a linear combination first forces the upper shell coefficient to vanish, then injectivity forces the lower one to vanish. This proves injectivity of the combined source C on all 31+103 complex collision coordinates, for every nonzero complex u in V_75.</p>
+<p>Eliminating the carrier gives</p>
+<pre><code>-alpha^2 C* [L_el-kappa nu^2+alpha^2 R2(nu)]^(-1) C.
+</code></pre>
+<p>R2 includes both the wave-dependent carrier mass and i nu G_cc/alpha^2. It is Hermitian for real nu. Since the leading inverse is strictly positive, the leading reduced wave correction is -alpha^2 Hc with Hc=C*(L_el-kappa nu^2)^(-1)C strictly positive. The stationary-current term first affects this wave Schur correction at order alpha^4; there is no direct wave-wave alpha^2 term.</p>
+<p>Thus the leading reduction D delta_nu-alpha^2 Hc has the same definite generalized eigenspaces as before: D is +4omega_m on the lower shell and -4omega_l on the upper shell in weighted-orthonormal bases. Hc^(1/2)D^(-1)Hc^(1/2) is Hermitian and invertible, with 31 positive and 103 negative roots. The opposite energy signs separate at order alpha^2 and remain definite after higher-order corrections. This supplies the required full-shell extension, rather than merely continuity from a chosen real profile.</p>
+<h2 id="concrete-rotating-spatial-control-at-every-maintained-depth">Concrete rotating spatial control at every maintained depth</h2>
+<p>Choose u=x1+i x2, which is in V_1 for every d&gt;=2. Then</p>
+<pre><code>omega=mu(d+1), j=(-x2,x1,0,...,0), div(w j)=0.
+</code></pre>
+<p>This profile is genuinely complex: no global phase makes it real. Its real components are</p>
+<pre><code>Re[alpha u exp(-i omega t)]=alpha(x1 cos omega t+x2 sin omega t),
+Im[alpha u exp(-i omega t)]=alpha(x2 cos omega t-x1 sin omega t).
+</code></pre>
+<p>They are two orthogonal spatial dipoles rotating together in one ordinary physical plane. This special spatial pattern also realizes multiplication by a complex phase as an angular shift; a generic complex profile need not do so. Neither the component phase nor this actual spatial rotation establishes spin, electric charge, or an electron trajectory. The sum of squared component amplitudes and the stationary energy density are axisymmetric.</p>
+<p>For clamped displacement shapes z1=(1-r^2)e1, z2=(1-r^2)e2 and W=int_B w, direct integration gives</p>
+<pre><code>G_cc(z1,z2)/(omega alpha^2 W)=12/[(d+3)(d+5)],
+int w |z1.grad u|^2/W=15/[(d+3)(d+5)],
+int w |u|^2/W=2/(d+3).
+</code></pre>
+<p>The first is a nonzero carrier gyroscopic coupling, not a force between separate particles. A real linear control u=x1 has j=0. The elliptic spatial control u=x1+i e x2 gives the same current gyro multiplied by e, continuously reaching zero as e tends to zero; it is still a balanced two-component exact family. It must not be confused with unequal time-quadrature amplitudes of a single real spatial profile, which need a responding carrier.</p>
+<p>| d | G_cc/(omega alpha^2 W) | Wave addition to carrier mass/(alpha^2 W) | ||u||_w^2/W |
+| ---: | ---: | ---: | ---: |
+| 2 | 12/35 | 3/7 | 2/5 |
+| 3 | 1/4 | 5/16 | 1/3 |
+| 4 | 4/21 | 5/21 | 2/7 |
+| 5 | 3/20 | 3/16 | 1/4 |
+| 6 | 4/33 | 5/33 | 2/9 |
+| 10 | 4/65 | 1/13 | 2/13 |</p>
+<p>The N=1 control is a common spatial diagnostic, not a reassignment of observed particle labels. The theorem above separately treats the maintained labels. No depth-five exception appears in this gyro law or the stability argument. This one-plane control does not exclude a different response from the full proposed five-dimensional folded pattern.</p>
+<h2 id="uniformly-bounded-linear-evolution-and-forced-response">Uniformly Bounded Linear Evolution and Forced Response</h2>
+<p>The same fixed-profile small-amplitude regime has a stronger conclusion:
+its complete linear evolution exists uniquely and remains uniformly bounded
+in the stated energy form norm for all time. A conserved positive quadratic
+norm proves this directly, including the stationary kernel. The bound is
+conditional on the clamped support and chosen constitutive parameters; it
+is not a nonlinear particle-lifetime theorem.</p>
+<p>The generation step uses the bounded perturbation theorem from Engel and
+Nagel, <a href="https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf">One-Parameter Semigroups for Linear Evolution Equations,
+Theorem III.1.3</a>.
+The domain, positive shift and coercivity needed here are derived below.</p>
+<h3 id="1-spaces-and-the-energy-s-stronger-structure">1. Spaces and the energy's stronger structure</h3>
+<p>Work over the real spaces for the physical perturbation, using their
+complexifications only when needed for spectral projections. Set</p>
+<pre><code>X = L2_w(B) + L2_w(B) + L2(B;R^d),
+V = D(P_d(L)^(1/2)) + D(P_d(L)^(1/2)) + H1_0(B;R^d),
+Z = V + X,
+K = diag(mu^2 P_d(L)-omega^2, mu^2 P_d(L)-omega^2, L_el).
+</code></pre>
+<p>Here '+' denotes Hilbert direct sum. The mass operator M=M_alpha is bounded,
+self-adjoint and strictly positive on X. For u=u_R+i u_I, it represents</p>
+<pre><code>m(q,q) = ||a+alpha v.grad u_R||_w^2
+       + ||h+alpha v.grad u_I||_w^2 + kappa ||v||_2^2.
+</code></pre>
+<p>In particular m &gt;= m_* ||q||_X^2 with</p>
+<pre><code>m_* = min(1/2, kappa/(1+2 alpha^2 C^2)),
+C^2 = ||grad u_R||_infinity^2+||grad u_I||_infinity^2.
+</code></pre>
+<p>The complete gyro G:V -&gt; V* is bounded and skew, including the stationary
+current term. The preceding weighted Hardy and current-form bounds establish
+this statement on these actual spaces. No strong L2 realization of G by
+itself is assumed.</p>
+<p>Let E=ker K, Pi_E the X-orthogonal projection, and S=(|K|+Pi_E)^(1/2).
+The finite kernel and the positive spectral gap off it make S:V -&gt; X an
+isomorphism. Equip Z with the equivalent reference norm</p>
+<pre><code>||(q,p)||_*^2 = ||S q||_X^2 + &lt;M p,p&gt;_X.
+</code></pre>
+<p>The conserved, generally indefinite form is</p>
+<pre><code>H((q,p),(r,s)) = k(q,r)+&lt;M p,s&gt;_X.
+</code></pre>
+<p>Relative to this reference inner product it is represented exactly by</p>
+<pre><code>J = I - 2 F_- - F_0,
+</code></pre>
+<p>where F_- and F_0 are the reference-orthogonal projections onto the
+negative spatial K eigenspaces and E, respectively, embedded as (q,0).
+Both projections have finite rank. Thus ||J||=1, the negative index is
+finite, and the radical is R=E x {0}. This explicit identity will provide
+coercivity after removing W and R. Merely knowing compact resolvent would
+not provide it.</p>
+<h3 id="2-generation-on-the-precise-form-domain">2. Generation on the precise form domain</h3>
+<p>Choose c&gt;0 so K_c=K+c I is strictly positive and its form k_c is equivalent
+to ||q||_V^2. Define</p>
+<pre><code>A_c(q,p) = (p, -M^(-1)(K_c q+G p)),
+D(A_c) = {(q,p) in V x V : K_c q+G p belongs to X}.
+</code></pre>
+<p>Here K_c and G act initially as V -&gt; V*. Use the shifted energy inner
+product k_c(q,r)+&lt;M p,s&gt;. The cancellation of the stiffness cross terms
+and the skewness of G show A_c is skew-symmetric.</p>
+<p>For every real nonzero lambda, the equation (lambda-A_c)(q,p)=(f,g),
+with (f,g) in V x X, reduces to</p>
+<pre><code>[K_c+lambda G+lambda^2 M]q
+    = M g+(lambda M+G)f,
+p=lambda q-f.
+</code></pre>
+<p>Its right side is in V*. The real part of the left form on (q,q) is
+k_c(q,q)+lambda^2 m(q,q), coercive on V for either sign of lambda.
+Lax-Milgram gives a unique q in V and p in V. The original equation then
+shows K_c q+G p=M(g-lambda p) is in X, exactly the domain condition.
+Consequently both lambda-A_c and lambda+A_c are onto Z for lambda&gt;0.</p>
+<p>The domain is dense. For completeness this can be obtained directly from
+the onto statements, without asserting an operator core: if h is
+orthogonal to D(A_c), solve (lambda-A_c)x=h. Then
+0=Re&lt;h,x&gt;=lambda ||x||^2, so x=0 and h=0. Skew symmetry together with
+both onto conditions makes A_c skew-adjoint, hence a unitary group
+generator in the shifted norm.</p>
+<p>The original operator is</p>
+<pre><code>A=A_c+B,   B(q,p)=(0,c M^(-1)q).
+</code></pre>
+<p>B is bounded Z -&gt; Z, because V embeds continuously in X and M^(-1) is
+bounded on X. Moreover D(A)=D(A_c): adding c q in X does not alter the
+membership condition. Thus bounded perturbation gives a strongly continuous
+group T(t) on Z with precisely</p>
+<pre><code>D(A)={(q,p) in V x V : K q+G p belongs to X}.
+</code></pre>
+<p>No separate condition Kq in X or Gp in X is imposed. Their possible
+cancellation is retained. Bounded perturbation alone gives an exponential
+bound; the uniform bound is proved next.</p>
+<p>On D(A), differentiation and gyro skewness give</p>
+<pre><code>H(Az,y)+H(z,Ay)=0.
+</code></pre>
+<p>The group preserves D(A), so H(T(t)z,T(t)y)=H(z,y) for such data. Density
+and continuity extend this identity to every z,y in Z. All initial data
+in Z therefore have unique global mild solutions. Initial data in D(A)
+have classical phase-space solutions.</p>
+<h3 id="3-a-bounded-stationary-projection-explicitly">3. A bounded stationary projection, explicitly</h3>
+<p>The stationary projection has an explicit formula. Define the finite-dimensional conserved functional</p>
+<pre><code>ell(q,p)=Pi_E(G q+M p) in E,
+</code></pre>
+<p>where Pi_E on V* means restriction to E followed by its X Riesz
+identification. Let</p>
+<pre><code>G_E=Pi_E G|_E = [[0,2 omega],[-2 omega,0]] tensor I_(V_N).
+</code></pre>
+<p>It is invertible and independent of alpha. Then</p>
+<pre><code>P_0(q,p)=(G_E^(-1) ell(q,p),0)
+</code></pre>
+<p>is a bounded projection Z -&gt; R. Indeed ell(e,0)=G_E e, while the
+equation yields ell(Az)=Pi_E(Gp-Kq-Gp)=0 for z in D(A).
+Consequently P_0 T(t)=P_0 and T(t)P_0=P_0. This also verifies
+P_0 A=A P_0=0 on D(A). Its range lies in D(A).</p>
+<p>In the reference norm, write g_<em>=||G||_(V_S -&gt; V_S</em>), where
+||q||<em>(V_S)=||S q||. Since ||e||</em>(V_S)=||e||_X for e in E,</p>
+<pre><code>||P_0||_* &lt;= (g_*+sqrt(||M||_(X-&gt;X)))/(2 omega).
+</code></pre>
+<p>This deliberately conservative bound follows by bounding the two terms
+in ell separately. It is finite and locally uniform in alpha for a fixed
+profile and fixed parameters. It shows why the actual projected gyro,
+not just the existence of a finite kernel, matters.</p>
+<p>The formula automatically agrees with the semisimple-zero spectral
+projection when that projection is used. It also proves directly that a
+zero Jordan chain cannot exist: applying P_0 A=0 to Az=r in R forces r=0.</p>
+<h3 id="4-energy-orthogonal-splitting-and-bounded-projections">4. Energy-orthogonal splitting and bounded projections</h3>
+<p>Let W be the finite-dimensional A-invariant negative-definite subspace
+constructed in the preceding small-amplitude proof, with dim W=n_-(H).
+Its generator has no zero eigenvalue. Choose a reference-orthonormal basis
+w_1,...,w_n and let H_W=(H(w_i,w_j)). Since H_W is negative definite,
+the linear equations</p>
+<pre><code>H(P_W z,w_j)=H(z,w_j),  j=1,...,n,
+</code></pre>
+<p>define a bounded projection P_W onto W. With
+eta_W=min_({w in W:||w||_*=1})(-H(w,w))&gt;0, one has</p>
+<pre><code>||P_W||_* &lt;= 1/eta_W.
+</code></pre>
+<p>The subspace U=ker P_W=W^(perp_H) is closed. Energy conservation and
+T(t)W=W imply T(t)U=U and P_W T(t)=T(t)P_W for every real t.
+In particular these projections preserve D(A) and commute with A there.</p>
+<p>R lies in U because it is the full radical. Also P_0 W=0: ell(Aw)=0
+and A|W is invertible imply ell(w)=0. Therefore P_W P_0=P_0 P_W=0.
+Writing</p>
+<pre><code>Y=ker P_W intersect ker P_0,
+z=w+r+y,  w=P_W z, r=P_0 z, y=(I-P_W-P_0)z,
+</code></pre>
+<p>gives a bounded direct-sum decomposition Z=W + R + Y. Each summand is
+group-invariant, and H has no cross terms in this decomposition. This is
+the needed energy-orthogonal decomposition, with the unavoidable radical
+removed by an independent bounded projection.</p>
+<h3 id="5-coercivity-on-the-infinite-dimensional-remainder">5. Coercivity on the infinite-dimensional remainder</h3>
+<p>By maximality of W's negative dimension, H is nonnegative on U.
+Its radical on U is exactly R: if H(u,u)=0, nonnegativity and polarization
+give H(u,U)=0, and H(u,W)=0 already, so u belongs to the full radical R.</p>
+<p>Let O_U be the reference-Hilbert orthogonal projection onto U. The bounded
+self-adjoint representative of H restricted to U is</p>
+<pre><code>J_U=I_U-O_U(2F_-+F_0)|_U.
+</code></pre>
+<p>This is identity minus a finite-rank self-adjoint operator. Its kernel is
+R. Restricting to the reference-orthogonal complement of R within U, all
+but a finite-dimensional subspace has representative identity; the remaining
+finite matrix is positive definite. Hence there is delta_U&gt;0 such that</p>
+<pre><code>H(u,u) &gt;= delta_U dist_*(u,R)^2,  u in U.
+</code></pre>
+<p>This proves coercivity on the infinite remainder. It uses the explicit energy structure,
+not a completeness theorem or an inference from imaginary eigenvalues.</p>
+<p>For y in Y and any r in R,</p>
+<pre><code>y=(I-P_0)(y-r),
+</code></pre>
+<p>so dist_<em>(y,R)&gt;=||y||_</em>/||I-P_0||_*. It follows that</p>
+<pre><code>H(y,y) &gt;= eta_Y ||y||_*^2,
+eta_Y=delta_U/||I-P_0||_*^2 &gt;0.
+</code></pre>
+<h3 id="6-conserved-positive-norm-and-the-uniform-bound">6. Conserved positive norm and the uniform bound</h3>
+<p>Define</p>
+<pre><code>||z||_sharp^2 = H(z,z)-2H(P_W z,P_W z)+||P_0 z||_*^2.
+</code></pre>
+<p>Under z=w+r+y this becomes</p>
+<pre><code>||z||_sharp^2 = -H(w,w)+||r||_*^2+H(y,y).
+</code></pre>
+<p>Every term is preserved by T(t): energy is conserved, P_W commutes with
+the group, and P_0 T(t)=P_0. Therefore T(t) is isometric in this norm.
+Explicit equivalence constants are</p>
+<pre><code>a=(1/3) min(eta_W,1,eta_Y),
+b=1+2||P_W||_*^2+||P_0||_*^2,
+a||z||_*^2 &lt;= ||z||_sharp^2 &lt;= b||z||_*^2.
+</code></pre>
+<p>When W is empty, omit eta_W and P_W. The factor 1/3 follows from
+||w+r+y||^2&lt;=3(||w||^2+||r||^2+||y||^2), without assuming Hilbert
+orthogonality of these summands. Thus</p>
+<pre><code>||T(t)z||_* &lt;= sqrt(b/a) ||z||_*,  t in R.
+</code></pre>
+<p>In particular there is no secular linear drift even in the stationary
+kernel, and no high-frequency growth hidden by the spectral statement.
+The perturbation norm can show bounded transient amplification relative
+to its original reference metric; the theorem does not claim its bound
+is close to one.</p>
+<h3 id="7-parameter-dependence-and-scope">7. Parameter dependence and scope</h3>
+<p>For each fixed profile and parameter set the constants above are finite.
+M and G vary continuously in their stated operator norms with alpha.
+P_0 has the explicit locally uniform bound above. Away from the exceptional
+collision, the preceding finite negative Riesz spaces vary continuously.
+At the exception, use the scaled reduced coordinate delta_nu=alpha^2 z:
+the positive-z generalized eigenspaces of D z-Hc are collectively definite
+and separated from the negative-z group. Their collective projector has a
+continuous limit as alpha tends to zero. The finite reduction is lifted back
+into the fixed phase space: its carrier components are O(alpha), and its
+off-resonant wave components are O(alpha squared). Continuity is asserted
+for this lifted invariant space, not for individual eigenvectors. Choose W(0) to be this limit;
+it is invariant because the entire collision eigenspace has the same
+unperturbed eigenvalue. The higher-order reduction then supplies continuous
+W(alpha), hence continuous P_W(alpha), across zero.</p>
+<p>Consequently the positive form defining ||.||_sharp varies continuously
+and remains uniformly coercive after shrinking the amplitude interval.
+One may therefore choose a single evolution bound for all |alpha|&lt;=a_0
+with a_0 sufficiently small. No numerical value for a_0 or the bound has
+been certified. The exceptional source-Gram conditioning and negative-space
+angles enter these constants and cannot be discarded. This is uniform in
+time and, locally, in amplitude for fixed profiles; it is not a proven
+profile-independent bound over arbitrary shell shapes.</p>
+<p>For a finite collection of fourteen fixed complex profiles and the common
+strict material regime, take the minimum admissible amplitude interval and
+the maximum of the fourteen finite evolution bounds. This provides one
+finite collection-wide bound, without a special depth-five coefficient.
+It does not calibrate amplitude or derive a constitutive stiffness.</p>
+<p>The carrier component is controlled in H1_0 and its velocity in L2. In
+dimensions 2,3,4,5,6,10 this does not control ||Dv||_infinity or preserve
+orientation/invertibility of id+v. The nonlinear material action is not
+proved well posed on this form closure. Thus this is a genuine linear
+persistence theorem for the closed, clamped constitutive candidate, not
+nonlinear orbital stability, a material-map lifetime, a free supporting
+boundary, an outgoing decay width, or a deterministic electron trajectory.
+No inference is transferred to the different first-order-chain or
+moving-material actions.</p>
+<h3 id="forced-linear-response-in-the-same-positive-norm">Forced linear response in the same positive norm</h3>
+<p>Write z_t=Az+F(t), z=(q,q_t). If F belongs to L1_loc(R;Z), the unique mild solution for t&gt;=0 is</p>
+<pre><code>z(t)=T(t)z0+int_0^t T(t-s)F(s) ds,
+||z(t)||_sharp &lt;= ||z0||_sharp+int_0^t ||F(s)||_sharp ds.
+</code></pre>
+<p>For a mechanical load Mq_tt+Gq_t+Kq=f(t), this applies directly when f(t) is in X with local integrability, by F=(0,M^-1 f). Its force-to-state norm is finite because M^-1 is bounded. A load known only in V* does not automatically meet this hypothesis; an extrapolation/admissibility estimate is required. Boundary forcing also needs its own realization. These restrictions should accompany any physical forcing claim.</p>
+<p>The original reference norm obeys</p>
+<pre><code>||z(t)||_* &lt;= sqrt(b/a)||z0||_* + a^(-1/2) int_0^t ||F(s)||_sharp ds.
+</code></pre>
+<p>This bound requires no stochastic model, no noise floor, and no assumed physical field amplitude.</p>
+<h4 id="constant-forcing-and-stationary-drift">Constant forcing and stationary drift</h4>
+<p>Let F(t)=F0. Put Q=I-P0 and A_Q=A restricted to QZ. Zero is isolated, P0 is its full projection, and A_Q^-1 is bounded. Exactly,</p>
+<pre><code>z(t)=T(t)z0+tP0F0+A_Q^-1[T(t)-I]QF0.
+</code></pre>
+<p>Consequently the nonstationary contribution is bounded by 2||A_Q^-1||_sharp ||QF0||_sharp, but constant forcing with P0F0 nonzero causes linear drift along the stationary family. For a mechanical load,</p>
+<pre><code>P0(0,M^-1 f0)=(G_E^-1 Pi_E f0,0).
+</code></pre>
+<p>This explicitly identifies which occupied-shell force components drive the neutral displacement. Homogeneous zero is semisimple and has no secular drift; external forcing of that mode can nevertheless drift. These statements are compatible.</p>
+<h4 id="harmonic-forcing-resonance-and-detuning">Harmonic forcing, resonance and detuning</h4>
+<p>Complexify the real system, retaining the real part for a physical harmonic load F(t)=Re[e^(i sigma t)F_sigma]. The group is unitary in the sharp inner product; its generator is skew-adjoint there. With the already proved compact resolvent, each finite-frequency spectral projection P_sigma onto ker(A-i sigma) is sharp-orthogonal. Define Q_sigma=I-P_sigma. On this complement, (i sigma-A)^-1 is bounded. The zero-initial-data complex response is exactly</p>
+<pre><code>t e^(i sigma t) P_sigma F_sigma
+  +(e^(i sigma t)-T(t))(i sigma-A)^-1 Q_sigma F_sigma.
+</code></pre>
+<p>If delta_sigma is the distance from sigma to the remaining generator frequencies, the second term is bounded by 2||Q_sigma F_sigma||_sharp/delta_sigma. At a nonresonant frequency P_sigma=0 and delta_sigma is the ordinary distance to the spectrum. Thus a resonant load grows linearly when its projection is nonzero, while each fixed nonresonant harmonic has a bounded response. The case sigma=0 recovers the preceding stationary formula.</p>
+<p>Near the exceptional collision, frequency separations shrink as alpha^2. The homogeneous group bound can stay uniform in alpha while these detuning bounds grow as alpha^-2. Uniform homogeneous persistence must not be presented as uniform robustness against near-resonant monochromatic forcing. For finite time the general t||F_sigma||_sharp bound remains uniform and can be sharper than the detuning bound.</p>
+<h3 id="finite-persistence-measured-in-complete-clock-cycles">Finite persistence measured in complete clock cycles</h3>
+<p>Specify a departure radius rho in the sharp norm and initial size epsilon0&lt;rho. If ||F(t)||<em>sharp&lt;=f</em>* on [0,t], the sufficient linear estimate is</p>
+<pre><code>epsilon0+t f_* &lt;= rho.
+</code></pre>
+<p>At n complete mass-frequency cycles, t=2pi n/omega_N, this becomes</p>
+<pre><code>epsilon0+(2pi n/omega_N)f_* &lt;= rho,
+n &lt;= omega_N(rho-epsilon0)/(2pi f_*)  when f_*&gt;0.
+</code></pre>
+<p>For a fixed radius R in the reference form norm, a sufficient condition is epsilon0+int||F||_sharp &lt;= sqrt(a)R. Sector-unit cycles are n/D_N and must not be confused with mass-frequency cycles. For an integrable forcing pulse the accumulated sharp impulse, rather than peak force alone, controls all later linear motion.</p>
+<p>These are conditional lower bounds on time before the specified linear norm can cross a threshold, not calculated exit times or measured lifetimes. Resonant forcing supplies an explicit possible accumulation channel, but its amplitude, spatial projection and duration have not been derived from the same-field surroundings. No seed or noise magnitude is assumed. There is no decay-width, survival-distribution or outgoing-flux calculation here.</p>
+<p>Even an arbitrarily long bound in V x X does not control ||Dv||_infinity in these dimensions. It therefore establishes neither continued invertibility of id+v nor nonlinear particle survival. It also does not select the observed finite-lived versus stable branches. The same proof applies at depths 2,3,4,5,6,10 with the maintained labels and no special depth-five coefficient; the constants retain profile, count, mass and material dependence.</p>
+<h2 id="verification-and-physical-scope">Verification and Physical Scope</h2>
+<p>The <a href="/evidence/results/experiments/check-pullback-excited-stability.py/">exact collision checker</a>
+enumerates all possible lower/upper wave collisions for the fourteen labels,
+checks the negative-index counts and shell multiplicities, and verifies the
+two exceptional source coefficients. The closed-domain, phase-space and
+energy arguments above supply the infinite-dimensional proof; arithmetic
+checks alone do not establish it.</p>
+<p>The <a href="/evidence/results/experiments/check-pullback-complex-stability.py/">complex-profile checker</a>
+checks the quadratic kinetic expansion, both helicity sources, and exact
+current and mass moments at all six maintained depths.</p>
+<p>This permits persistent excited count patterns within one common conditional
+material regime. It does not prove nonlinear stability of the material map,
+global invertibility, observed decay widths, physical support, occupied-state
+selection or calibrated elastic parameters. A closed conservative model with
+imaginary linear frequencies need not remain closed after an exterior is
+derived. Conversely an instability near a different carrier resonance is
+not by itself an observed decay process.</p>
+<p>The high-order spatial count action has no finite-propagation theorem here.
+Its stability result must not be transferred to the different moving-material
+or first-order-chain actions without deriving their own linearizations.</p>
+<p>For comparison, Bronski, Johnson and Kapitula, <em>An Instability Index Theory
+for Quadratic Pencils and Applications</em>, sections 2–3 and Theorem 3.1,
+<a href="https://arxiv.org/abs/1207.3764">arXiv:1207.3764</a>, treats related index methods.
+Its vanishing restricted gyroscopic-kernel hypothesis does not hold here:
+the restriction is invertible. The explicit domain and energy argument above
+handles this different case rather than applying that theorem directly.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261014-material-pullback-count-action/">An Exact Coupled Count-Clock Family on a Deformable Ball</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#1-quadratic-forms-and-the-weighted-domain-estimate">1. Quadratic forms and the weighted-domain estimate</a></li><li class="toc-level-2"><a href="#2-analytic-fredholm-and-the-phase-space-realization">2. Analytic Fredholm and the Phase-Space Realization</a></li><li class="toc-level-2"><a href="#3-negative-index-exhaustion-and-all-possible-collisions">3. Negative-index exhaustion and all possible collisions</a></li><li class="toc-level-2"><a href="#4-exceptional-collision-the-full-134-dimensional-argument">4. Exceptional collision: the full 134-dimensional argument</a></li><li class="toc-level-2"><a href="#5-finish-by-energy-including-the-stationary-kernel">5. Finish by energy, including the stationary kernel</a></li><li class="toc-level-2"><a href="#extension-to-complex-spatial-profiles-and-stationary-current">Extension to Complex Spatial Profiles and Stationary Current</a></li><li class="toc-level-2"><a href="#complete-quadratic-expansion">Complete Quadratic Expansion</a></li><li class="toc-level-2"><a href="#full-coupled-linear-equations">Full coupled linear equations</a></li><li class="toc-level-2"><a href="#what-survives-the-real-profile-proof">What survives the real-profile proof</a></li><li class="toc-level-2"><a href="#complex-exceptional-collision">Complex exceptional collision</a></li><li class="toc-level-2"><a href="#concrete-rotating-spatial-control-at-every-maintained-depth">Concrete rotating spatial control at every maintained depth</a></li><li class="toc-level-2"><a href="#uniformly-bounded-linear-evolution-and-forced-response">Uniformly Bounded Linear Evolution and Forced Response</a></li><li class="toc-level-3"><a href="#1-spaces-and-the-energy-s-stronger-structure">1. Spaces and the energy's stronger structure</a></li><li class="toc-level-3"><a href="#2-generation-on-the-precise-form-domain">2. Generation on the precise form domain</a></li><li class="toc-level-3"><a href="#3-a-bounded-stationary-projection-explicitly">3. A bounded stationary projection, explicitly</a></li><li class="toc-level-3"><a href="#4-energy-orthogonal-splitting-and-bounded-projections">4. Energy-orthogonal splitting and bounded projections</a></li><li class="toc-level-3"><a href="#5-coercivity-on-the-infinite-dimensional-remainder">5. Coercivity on the infinite-dimensional remainder</a></li><li class="toc-level-3"><a href="#6-conserved-positive-norm-and-the-uniform-bound">6. Conserved positive norm and the uniform bound</a></li><li class="toc-level-3"><a href="#7-parameter-dependence-and-scope">7. Parameter dependence and scope</a></li><li class="toc-level-3"><a href="#forced-linear-response-in-the-same-positive-norm">Forced linear response in the same positive norm</a></li><li class="toc-level-3"><a href="#finite-persistence-measured-in-complete-clock-cycles">Finite persistence measured in complete clock cycles</a></li><li class="toc-level-2"><a href="#verification-and-physical-scope">Verification and Physical Scope</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

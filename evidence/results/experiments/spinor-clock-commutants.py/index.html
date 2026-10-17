@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>spinor-clock-commutants.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/spinor-clock-commutants.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="spinor-clock-commutants.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/spinor-clock-commutants.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="spinor-clock-commutants.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>spinor-clock-commutants.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/spinor-clock-commutants.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact integer Clifford commutants and real invariant clock constructions.&quot;&quot;&quot;
+import hashlib
+import itertools
+import json
+from pathlib import Path
+import sys
+import subprocess
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parent.parent
+
+HERE = Path(__file__).resolve().parent
+checks = 0
+
+
+def require(condition):
+    global checks
+    assert condition
+    checks += 1
+
+
+def tensor(factors):
+    result = np.array([[1]])
+    for factor in factors:
+        result = np.kron(result, factor)
+    return result
+
+
+I = np.eye(2, dtype=np.int64)
+X = np.array([[0, 1], [1, 0]], dtype=np.int64)
+Z = np.diag([1, -1])
+J = np.array([[0, -1], [1, 0]], dtype=np.int64)
+Y = 1j * J
+gamma = []
+for k in range(5):
+    for middle in (X, Y):
+        gamma.append(tensor([Z] * k + [middle] + [I] * (4 - k)))
+eye32 = np.eye(32, dtype=np.int64)
+for i in range(10):
+    for j in range(10):
+        require(np.array_equal(gamma[i] @ gamma[j] + gamma[j] @ gamma[i],
+                               (2 if i == j else 0) * eye32))
+positive = [i for i in range(32) if i.bit_count() % 2 == 0]
+
+
+def realify(a):
+    require(np.all(a.real == np.rint(a.real)))
+    require(np.all(a.imag == np.rint(a.imag)))
+    return np.block([[a.real, -a.imag], [a.imag, a.real]]).astype(np.int64)
+
+
+generators = [realify((gamma[i] @ gamma[i + 1])[np.ix_(positive, positive)])
+              for i in range(9)]
+for g in generators:
+    require(np.array_equal(g.T, -g))
+    require(np.array_equal(g @ g, -eye32))
+
+# The 4^5 real Pauli tensor words are an orthogonal basis of all real
+# endomorphisms. Clifford adjoint conjugations diagonalize on this basis.
+words = list(itertools.product(range(4), repeat=5))
+basis = np.array([tensor([(I, X, Z, J)[i] for i in w]) for w in words])
+skew = np.array([sum(i == 3 for i in w) % 2 == 1 for w in words])
+require(basis.shape == (1024, 32, 32))
+for i, b in enumerate(basis):
+    require(np.array_equal(b.T, (-1 if skew[i] else 1) * b))
+    require(np.array_equal(b @ b.T, eye32))
+
+surviving = np.ones(1024, dtype=bool)
+ambient_j = np.kron(J, np.eye(16, dtype=np.int64))
+ambient = []
+expected = {2: (512, 256), 3: (256, 136), 4: (128, 72),
+            5: (64, 36), 6: (32, 16), 7: (16, 6),
+            8: (8, 2), 9: (4, 1), 10: (2, 1)}
+for d, g in enumerate(generators, 2):
+    commute = np.all(basis @ g == g @ basis, axis=(1, 2))
+    anticommute = np.all(basis @ g == -(g @ basis), axis=(1, 2))
+    require(np.all(commute | anticommute))
+    surviving &amp;= commute
+    dimensions = (int(surviving.sum()), int((surviving &amp; skew).sum()))
+    require(dimensions == expected[d])
+    require(np.array_equal(ambient_j @ g, g @ ambient_j))
+    ambient.append(dict(depth=d, real_commutant_dimension=dimensions[0],
+                        skew_commutant_dimension=dimensions[1],
+                        ambient_complex_structure_survives=True))
+
+# Quaternion units on real R^4: an explicit family of invariant clocks.
+units = [np.kron(J, I), np.kron(Z, J), np.kron(X, J)]
+eye4 = np.eye(4, dtype=np.int64)
+for i, a in enumerate(units):
+    require(np.array_equal(a.T, -a))
+    for j, b in enumerate(units):
+        require(np.array_equal(a @ b + b @ a, (-2 if i == j else 0) * eye4))
+for a in itertools.product(range(-2, 3), repeat=3):
+    b = sum((x * u for x, u in zip(a, units)), np.zeros((4, 4), dtype=np.int64))
+    require(np.array_equal(b @ b, -sum(x*x for x in a) * eye4))
+    for c in ((1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 2, -1)):
+        k = sum((x * u for x, u in zip(c, units)), np.zeros((4, 4), dtype=np.int64))
+        require(-int(np.trace(b @ k)) == 4 * sum(x*y for x, y in zip(a, c)))
+
+# Quaternionic J reversal is an internal symmetry, not a distinguished
+# antiparticle operation. Two copies of a real carrier also admit a clock.
+require(np.array_equal(units[1] @ units[0] @ units[1].T, -units[0]))
+for n in (1, 8, 16):
+    b = np.kron(J, np.eye(n, dtype=np.int64))
+    c = np.kron(Z, np.eye(n, dtype=np.int64))
+    require(np.array_equal(c @ c, np.eye(2*n, dtype=np.int64)))
+    require(np.array_equal(c @ b @ c, -b))
+    require(np.array_equal(b @ b, -np.eye(2*n, dtype=np.int64)))
+
+# Real irreducible spin modules: type from the real even Clifford algebra.
+types = {0: &#39;R&#39;, 1: &#39;R&#39;, 2: &#39;C&#39;, 3: &#39;H&#39;, 4: &#39;H&#39;, 5: &#39;H&#39;, 6: &#39;C&#39;, 7: &#39;R&#39;}
+minimal = [dict(depth=d, type=types[d % 8],
+                skew_dimension={&#39;R&#39;: 0, &#39;C&#39;: 1, &#39;H&#39;: 3}[types[d % 8]])
+           for d in range(1, 13)]
+selected = [r[&#39;depth&#39;] for r in minimal if r[&#39;depth&#39;] &lt;= 10 and r[&#39;skew_dimension&#39;]]
+require(selected == [2, 3, 4, 5, 6, 10])
+
+sources = {&#39;experiments/spinor-clock-commutants.py&#39;: hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+report = dict(checks_passed=checks, verification_scope=&quot;portable exact algebra&quot;, sources=sources,
+              arithmetic=&#39;integer int64; all matrix entries and products in bounded small integers&#39;,
+              minimal_modules=minimal, ambient_half_spin_restrictions=ambient,
+              selected_minimal_depths=selected,
+              assumptions=[&#39;Spin(d) is a candidate rotation representation, not derived particle spin.&#39;,
+                           &#39;Ambient carrier is one realified complex half-spin representation of Spin(10).&#39;,
+                           &#39;Real matrix components describe fields; physical coordinates remain R10.&#39;])
+(HERE / &#39;spinor-clock-commutants-results.json&#39;).write_text(json.dumps(report, indent=2) + &#39;\n&#39;)
+# A small, separately evaluated exact rank certificate for the quaternionic
+# commutant. The left and right actions are distinct real matrix algebras.
+left = [np.kron(I, J), np.kron(J, Z), np.kron(J, X)]
+skew_basis = []
+for i in range(4):
+    for j in range(i + 1, 4):
+        b = np.zeros((4, 4), dtype=np.int64)
+        b[i, j], b[j, i] = 1, -1
+        skew_basis.append(b)
+constraints = np.array([np.concatenate([(b @ l - l @ b).ravel() for l in left])
+                        for b in skew_basis]).T
+job = dict(assumptions=report[&#39;assumptions&#39;] + [
+    &#39;The 48 by 6 matrix constrains a real skew operator to commute with left quaternion multiplication.&#39;,
+    &#39;Nullity three supplies the quaternionic clock axes; it does not identify colour or weak interaction.&#39;],
+    sources=sources,
+    jobs=[dict(name=&#39;quaternionic-invariant-skew-forms&#39;, operation=&#39;matrix&#39;,
+               matrix=constraints.tolist()),
+          dict(name=&#39;normalized-clock-positive-metric&#39;, operation=&#39;matrix&#39;,
+               matrix=np.eye(4, dtype=np.int64).tolist())])
+(HERE / &#39;spinor-clock-commutants-matrix.json&#39;).write_text(json.dumps(job, indent=2) + &#39;\n&#39;)
+print(json.dumps(report, indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

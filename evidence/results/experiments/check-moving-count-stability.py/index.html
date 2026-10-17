@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>check-moving-count-stability.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/check-moving-count-stability.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="check-moving-count-stability.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/check-moving-count-stability.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="check-moving-count-stability.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>check-moving-count-stability.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/check-moving-count-stability.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Full-form finite-chain low-frequency collision certificate, exact integers.&quot;&quot;&quot;
+from fractions import Fraction as F
+from math import comb, factorial, isqrt, prod
+from pathlib import Path
+import json, hashlib, time
+M=100000
+B=40
+BITS=100
+LABELS=[(&#39;W&#39;,2,75),(&#39;Z&#39;,2,80),(&#39;Higgs&#39;,2,94),(&#39;down&#39;,3,0),(&#39;strange&#39;,3,3),(&#39;up&#39;,4,2),(&#39;charm&#39;,4,19),(&#39;top&#39;,4,71),(&#39;neutrino1&#39;,5,9),(&#39;neutrino2&#39;,5,14),(&#39;neutrino3&#39;,5,21),(&#39;electron&#39;,6,12),(&#39;muon&#39;,6,34),(&#39;tau&#39;,10,22)]
+
+def below(d,lam,z):
+    p,q=z.numerator,z.denominator
+    a=[lam+j*(d+1-j) for j in range(1,d+1)]
+    diag=[x+M*M for x in a[:-1]]+[a[-1]]
+    old,cur=1,diag[0]*q-p
+    signs=[1]
+    if cur: signs.append(1 if cur&gt;0 else -1)
+    for j in range(1,d):
+        old,cur=cur,(diag[j]*q-p)*cur-M*M*a[j]*q*q*old
+        if cur: signs.append(1 if cur&gt;0 else -1)
+    assert cur, &#39;An exact spectral endpoint needs separate handling.&#39;
+    return sum(x!=y for x,y in zip(signs,signs[1:]))
+
+cache={}
+def interval(d,lam):
+    key=(d,lam)
+    if key in cache:return cache[key]
+    a=[lam+j*(d+1-j) for j in range(1,d+1)]
+    # In normalized units f=M^(d-1)*sigma/d!, f&lt;=sqrt(product a)/d!.
+    hi=isqrt(prod(a))+1
+    lo=0
+    scale=F(1,M**(d-1))
+    # Isolate sigma using rational g=d!*f, with a common dyadic denominator.
+    assert below(d,lam,F(0))==0
+    assert below(d,lam,(hi*scale)**2)==1
+    den=1
+    for _ in range(BITS):
+        lo*=2;hi*=2;den*=2
+        mid=(lo+hi)//2
+        if below(d,lam,(F(mid,den)*scale)**2)==0:lo=mid
+        else:hi=mid
+    ans=(F(lo,den*factorial(d)),F(hi,den*factorial(d)))
+    cache[key]=ans
+    return ans
+
+def outiv(v):return [str(x) for x in v]
+def h(d,n,k):return comb(n+d-1,d-k-1)*comb(n+k-1,k)
+
+start=time.time(); rows=[]; depths={}
+for d in sorted({d for _,d,_ in LABELS}):
+    nmax=max(n for _,dd,n in LABELS if d==dd)
+    bg=interval(d,nmax*(nmax+d+1))
+    # Scalar cutoff bounds every family by strict monotonicity in lambda.
+    n=0
+    while interval(d,n*(n+d+1))[0]&lt;=2*bg[1]:n+=1
+    cutoff=n*(n+d+1)
+    fam={0:[dict(grade=0,degree=0,h=1,signed_chain_multiplicity=1)]}
+    for k in range(d):
+        n=1
+        while True:
+            lam=(n+k)*(n+d+1-k)*(1 if k==0 else B*B)
+            if lam&gt;=cutoff:break
+            fam.setdefault(lam,[]).append(dict(grade=k,degree=n,h=h(d,n,k),signed_chain_multiplicity=2*h(d,n,k)))
+            n+=1
+    # At lambda&gt;=cutoff all frequencies &gt; 2 highest background by monotonicity.
+    # Below cutoff, every non-low singular value &gt;= M-max_j sqrt(lambda+a_j).
+    maxweak=isqrt(cutoff+max(j*(d+1-j) for j in range(1,d+1)))+1
+    heavy=F((M-maxweak)*M**(d-1),factorial(d))
+    assert heavy&gt;2*bg[1]
+    spectrum=[(lam,interval(d,lam)) for lam in sorted(fam)]
+    depths[d]=dict(cutoff_lambda=cutoff,cutoff_frequency=outiv(interval(d,cutoff)),heavy_normalized_lower=str(heavy),families=[dict(lam=lam,frequency=outiv(iv),families=fam[lam]) for lam,iv in spectrum])
+    for name,dd,N in LABELS:
+        if dd!=d:continue
+        targetlam=N*(N+d+1); target=interval(d,targetlam)
+        included=[]
+        for lam,iv in spectrum:
+            if iv[1]&lt;2*target[0]:included.append((lam,iv))
+            else:assert iv[0]&gt;2*target[1]
+        sep=[];trivial=[];pairs=0
+        for i,(l,li) in enumerate(included):
+            for m,mi in included[i:]:
+                pairs+=1
+                if l==m==targetlam:
+                    trivial.append([l,m]);continue
+                diff=(li[0]+mi[0]-2*target[1],li[1]+mi[1]-2*target[0])
+                assert diff[0]&gt;0 or diff[1]&lt;0, (name,l,m,outiv(diff))
+                absolute=diff if diff[0]&gt;0 else (-diff[1],-diff[0])
+                sep.append((absolute,l,m,diff))
+        opposite=[x for x in sep if x[1]&lt;targetlam&lt;x[2]]
+        opposite.sort(key=lambda x:x[0][0])
+        opposite_result=None
+        if opposite:
+            best_op=opposite[0]
+            assert all(best_op[0][1]&lt;x[0][0] for x in opposite[1:])
+            opposite_result=dict(pair_lambda=[best_op[1],best_op[2]],separation=outiv(best_op[0]),decimal=float(sum(best_op[0])/2))
+        sep.sort(key=lambda x:x[0][0])
+        if not sep:
+            assert N==0 and len(included)==1
+            rows.append(dict(label=name,depth=d,degree=N,target_lambda=targetlam,target_frequency=outiv(target),frequency_count=1,pair_count=1,nontrivial_collisions=0,neutral_equal_frequency_pairs=trivial,extra_families_below_twice=[],minimum_absolute_separation=None,target_signed_chain_multiplicity=1))
+            print(name,&#39;ground: no nontrivial pairs&#39;,flush=True)
+            continue
+        best=sep[0]
+        assert all(best[0][1]&lt;x[0][0] for x in sep[1:]),&#39;Minimum not unique or intervals overlap.&#39;
+        rows.append(dict(opposite_energy_pair_count=len(opposite),opposite_energy_minimum=opposite_result,label=name,depth=d,degree=N,target_lambda=targetlam,target_frequency=outiv(target),frequency_count=len(included),pair_count=pairs,nontrivial_collisions=0,neutral_equal_frequency_pairs=trivial,extra_families_below_twice=[dict(lam=l,families=fam[l]) for l,_ in included if any(f[&#39;grade&#39;]&gt;0 for f in fam[l])],nearest_pair_lambda=[best[1],best[2]],nearest_signed_difference=outiv(best[3]),minimum_absolute_separation=outiv(best[0]),minimum_absolute_separation_decimal=float(sum(best[0])/2),minimum_relative_separation_decimal=float(sum(best[0])/sum(target)),target_signed_chain_multiplicity=sum(f[&#39;signed_chain_multiplicity&#39;] for f in fam[targetlam])))
+        print(name,len(included),best[1:3],float(sum(best[0])/2),flush=True)
+w=rows[0][&#39;opposite_energy_minimum&#39;]
+assert F(2361951706713,10**15)&lt;F(w[&#39;separation&#39;][0])&lt;F(w[&#39;separation&#39;][1])&lt;F(2361951706714,10**15)
+
+spectral_report=dict(status=&#39;passed&#39;,M=M,b=B,rows=rows,depths=depths,roots_certified=len(cache))
+
+data=spectral_report
+r=F(1,100)
+M=data[&#39;M&#39;]; b=data[&#39;b&#39;]; kappa=F(1,10)
+def iv(x): return tuple(F(v) for v in x)
+def poch(x,n):
+    z=F(1)
+    for k in range(n): z*=x+k
+    return z
+rows=[]
+for row in data[&#39;rows&#39;]:
+    d=row[&#39;depth&#39;]; N=row[&#39;degree&#39;]; target=row[&#39;target_lambda&#39;]
+    omega=iv(row[&#39;target_frequency&#39;])
+    a=F(d+1,2); m=N//2
+    emin=F(1) if N==0 else (poch(a,m)/factorial(m))**2 if N%2==0 else (2*a*poch(a+1,m)/factorial(m))**2/(N*(N+d+1))
+    kh=F(d+2,2)*emin/comb(N+d,d)**2
+    e=2*kappa*(F(b*M**(d-1),factorial(d)))**2*kh
+    families=data[&#39;depths&#39;][d][&#39;families&#39;]
+    spectral=[(f[&#39;lam&#39;],iv(f[&#39;frequency&#39;])) for f in families]
+    contours=[]
+    for low,nu in spectral:
+        if low&gt;=target: continue
+        center_iv=(omega[0]-nu[1],omega[1]-nu[0])
+        center=sum(center_iv)/2
+        error=(center_iv[1]-center_iv[0])/2
+        gaps=[center_iv[0]]
+        for lam,freq in spectral:
+            for sign_h in (-1,1):
+                unsigned=(omega[0]-freq[1],omega[1]-freq[0]) if sign_h==1 else (omega[0]+freq[0],omega[1]+freq[1])
+                for sign_j in (-1,1):
+                    if lam==low and sign_h==1 and sign_j==1: continue
+                    z=unsigned if sign_j==1 else (-unsigned[1],-unsigned[0])
+                    delta=max(center_iv[0]-z[1],z[0]-center_iv[1])
+                    assert delta&gt;0,(row[&#39;label&#39;],low,lam,sign_h,sign_j)
+                    gaps.append(delta)
+        # All omitted spatial fibers exceed twice the largest maintained clock.
+        cutoff=iv(data[&#39;depths&#39;][d][&#39;cutoff_frequency&#39;])
+        heavy=F(data[&#39;depths&#39;][d][&#39;heavy_normalized_lower&#39;])
+        gaps.extend([cutoff[0]-omega[1]-center_iv[1],heavy-omega[1]-center_iv[1]])
+        assert min(gaps)&gt;0
+        radius=min(gaps)/4
+        assert error&lt;radius/2
+        distance=radius/2
+        L=center+radius
+        assert e-r*r*L*L&gt;0
+        bound=r**4*L*L/(e-r*r*L*L)*(1+2*(L+omega[1])/distance)
+        assert bound&lt;1,(row[&#39;label&#39;],low,float(bound))
+        contours.append(dict(low_lambda=low,center=str(center),radius=str(radius),distance_lower=str(distance),bound=str(bound),bound_decimal=float(bound)))
+    worst=max(contours,key=lambda x:F(x[&#39;bound&#39;])) if contours else None
+    rows.append(dict(label=row[&#39;label&#39;],depth=d,degree=N,material_e_lower=str(e),contour_count=len(contours),worst=worst,contours=contours))
+    print(row[&#39;label&#39;],len(contours),None if worst is None else worst[&#39;bound_decimal&#39;],flush=True)
+
+from datetime import datetime, timezone
+stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)
+report=dict(status=&#39;passed&#39;,created_utc=stamp,spectral=spectral_report,contours=rows,r=str(r),kappa=str(kappa),
+    assumptions=[&#39;The finite chain and sector units are constitutive inputs.&#39;,
+                 &#39;Profiles are the real nodeless scalar/exact-one-form family.&#39;,
+                 &#39;The clamped material form uses the conservative exact weighted Korn bound.&#39;,
+                 &#39;Domain and energy-signature proofs are supplied by the accompanying article.&#39;],
+    sources={&#39;experiments/check-moving-count-stability.py&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest()})
+output=Path(__file__).with_name(&#39;moving-count-stability-&#39;+stamp+&#39;.json&#39;)
+output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;status&#39;:&#39;passed&#39;,&#39;roots&#39;:len(cache),&#39;positive_contours&#39;:sum(row[&#39;contour_count&#39;] for row in rows),&#39;output&#39;:str(output)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

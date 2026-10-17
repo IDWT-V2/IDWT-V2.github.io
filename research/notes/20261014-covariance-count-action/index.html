@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>A Covariance Action with Count Clocks and Relativistic Pattern Motion — IDWT V2</title>
+  <meta name="description" content="A positive classical spatial action realizes all fourteen supplied count clocks, exact relativistic Gaussian motion, frequency-dependent inertia and universal integrated transport bounds; general evolution remains open.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261014-covariance-count-action/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Covariance Action with Count Clocks and Relativistic Pattern Motion — IDWT V2">
+  <meta property="og:description" content="A positive classical spatial action realizes all fourteen supplied count clocks, exact relativistic Gaussian motion, frequency-dependent inertia and universal integrated transport bounds; general evolution remains open.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261014-covariance-count-action/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A Covariance Action with Count Clocks and Relativistic Pattern Motion — IDWT V2">
+  <meta name="twitter:description" content="A positive classical spatial action realizes all fourteen supplied count clocks, exact relativistic Gaussian motion, frequency-dependent inertia and universal integrated transport bounds; general evolution remains open.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research / Contact operators</p>
+      <h1>A Covariance Action with Count Clocks and Relativistic Pattern Motion</h1>
+      <p class="article-date">Updated <time datetime="2026-10-14">October 14, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body">
+<p>One positive spatial covariance identity supplies a changed inverse action
+with exact count-clock states and their complete relativistic dispersion.
+The <a href="/research/notes/20261014-smoothed-count-pattern-action/">smoothed count construction</a> supplies
+the explicit common potential V_count, its finite-band cutoff chi and its
+Gaussian Hessian. Its supplied depth units and count function remain inputs.
+This action removes the independent kinetic coefficient and current-speed
+saturation of the <a href="/research/notes/20261014-bounded-current-count-action/">bounded-current action</a>.
+It has a C1 energy on H1, but its general evolution theorem remains open.
+The earlier action's global-history theorem is not transferred to it.</p>
+<p>All positions are in ordinary shared R10. For a rank-d orthogonal projector
+P and Q=I-P, the supplied branches have filtered curvature
+C*=b P/(k+2)+b Q, smoothing variance sigma^2=1/(4b), and physical Gaussian
+width matrix B=2b P/(2k+3)+2b Q. Their clock is
+omega=mu_d binomial(k+d,d). The maintained fourteen labels are
+(2,75), (2,80), (2,94), (3,0), (3,3), (4,2), (4,19), (4,71),
+(5,9), (5,14), (5,21), (6,12), (6,34), (10,22).
+The width label k is not a spatial Hermite excitation number. Classical
+field profiles and normalized spatial integrals do not replace literal
+six-dimensional electron trajectories or supply a Born probability rule.</p>
+<h2 id="a-positive-geometric-remainder">A Positive Geometric Remainder</h2>
+<p>Let psi be a nonzero H1 classical field on ordinary R10. Define</p>
+<pre><code>rho=|psi|^2, u=G_sigma*rho, C=-D^2 log(u)/2,
+t=(G_sigma*|grad psi|^2)/u, r=grad log(u),
+tau=t-|r|^2/4,
+v=(G_sigma*Im(conjugate(psi) grad psi))/u.
+</code></pre>
+<p>At each convolution point x, use the normalized integration weight
+G_sigma(x-y)rho(y)/u(x). This is an estimate of the classical spatial
+field, not an electron-position probability postulate. Its mean m and
+positive-definite covariance Sigma obey</p>
+<pre><code>m=x+sigma^2 grad log(u),
+Sigma=sigma^2 I-2sigma^4 C.
+</code></pre>
+<p>The covariance is positive definite because a nonzero integrable density
+cannot be supported on an affine hyperplane. Hence every physical C has
+eigenvalues strictly less than 1/(2sigma^2), although negative eigenvalues
+are possible. Define</p>
+<pre><code>k(C)=sigma^2 tr[C^2(I-2sigma^2 C)^(-1)].
+</code></pre>
+<p>Write a(y)=grad psi(y)/psi(y) where psi is nonzero, taking zero on the
+zero set. In the weighted integrals, Re a=grad log(rho)/2 and Im a=j/rho.
+Integration by parts in y gives</p>
+<pre><code>E[Re a]=r/2,
+Cov(y,Re a)=-sigma^2 C.
+</code></pre>
+<p>Subtract the best affine part of Re a:</p>
+<pre><code>e(y)=Re a-r/2+sigma^2 C Sigma^(-1)(y-m).
+</code></pre>
+<p>It has zero mean and zero covariance with y. Orthogonal expansion of the
+ordinary spatial integrals then gives the exact identity</p>
+<pre><code>tau-k(C)=|v|^2+E|e|^2+E|Im a-v|^2 &gt;= |v|^2.        (1)
+</code></pre>
+<p>This is a covariance/completed-square identity, not an assumed uncertainty
+principle. Its integrations by parts are legitimate for H1 fields after
+Gaussian cutoffs: grad rho is L1 and Gaussian polynomial moments are finite.
+In particular k(C)&lt;=tau&lt;=t pointwise.</p>
+<p>For a Gaussian psi=exp(i p.x) phi_B with B positive,
+C=B(I+2sigma^2 B)^(-1) and both residual terms vanish. Therefore</p>
+<pre><code>tau-k(C)=|p|^2                                     (2)
+</code></pre>
+<p>at every x, not only after integration. The conditional variance term is
+what distinguishes a coherent moving Gaussian from a rapidly oscillating
+two-phase superposition.</p>
+<h2 id="one-smooth-finite-band-energy">One Smooth Finite-Band Energy</h2>
+<p>Use the existing compact matrix cutoff chi, equal to one near every target
+C*, with support strictly below the inverse pole. Define the smooth bounded
+functions</p>
+<pre><code>k_tilde(C)=chi(C) k(C),
+V_tilde(C)=V0+chi(C)[V_count(C)-V0], V0&gt;0.
+</code></pre>
+<p>Outside the supported descriptor domain the definitions are k_tilde=0 and
+V_tilde=V0. The count potential is positive on the compact support, so
+V_tilde has a strictly positive lower bound and bounded derivatives. For
+every actual field, (1) implies</p>
+<pre><code>s=tau-k_tilde(C) &gt;= 0.
+</code></pre>
+<p>Take the new canonical first-order-in-time energy</p>
+<pre><code>E_cv[psi]=integral u sqrt(V_tilde(C)^2+c^2 s) dx.    (3)
+</code></pre>
+<p>It is finite for every H1 field:</p>
+<pre><code>V_min N &lt;= E_cv &lt;= V_max N+c sqrt(N)||grad psi||_2.
+</code></pre>
+<p>No small-b condition is needed to keep the radicand positive: its positivity
+comes from (1), not from separately requiring V^2-c^2 k_tilde&gt;0. There is
+no independent alpha kinetic term and no phase-speed saturation. The count
+potential and finite-band cutoff remain explicit inverse constitutive inputs.</p>
+<h2 id="full-variation">Full Variation</h2>
+<p>Put f=sqrt(V_tilde^2+c^2(tau-k_tilde)),</p>
+<pre><code>a_f=c^2/(2f),
+f_C=(2 V_tilde V_tilde,C-c^2 k_tilde,C)/(2f),
+B_f=f-a_f tau+(a_f/4)|r|^2.
+</code></pre>
+<p>Direct differentiation gives</p>
+<pre><code>delta E_cv=integral B_f delta u
+                  -(a_f/2) r dot grad(delta u)
+                  +a_f delta(G*|grad psi|^2)+u f_C:delta C.
+</code></pre>
+<p>The full source is consequently</p>
+<pre><code>delta E_cv/delta conjugate(psi)
+    =-div[(G*a_f) grad psi]+psi T_f,               (4)
+T_f=G*[B_f+(1/2)div(a_f r)
+                     -(1/(2u))partial_ij(u f_Cij)].
+</code></pre>
+<p>As in the bounded-current proof, the last two derivative expressions should
+be interpreted through their direct Gaussian kernel form on general H1
+fields. The derivatives then act on kernels, not on the quotient t. The
+coefficients a_f and f_C are bounded because f&gt;=V_min, and the only new
+unbounded density factor grows like sqrt(tau). Its weighted square integral
+is controlled by integral u tau&lt;=||grad psi||^2.</p>
+<p>The continuity and tail argument below establishes an H1-to-H-minus-one
+Euler derivative and a real C1 energy using strong H1 convergence. The ordinary
+positive alpha kinetic coercivity of the prior action is absent, so its
+global H1 evolution proof does not transfer.</p>
+<h2 id="exact-complete-moving-gaussian-branches">Exact Complete Moving Gaussian Branches</h2>
+<p>At a target, V_count=omega and V_count,C=0. Let
+Omega=sqrt(omega^2+c^2|p|^2). Then f=Omega, a_f=c^2/(2Omega) and
+f_C=-a_f k_C are constants along the Gaussian. The identity</p>
+<pre><code>integral u tau-integral u k(C)
+   =||grad psi||^2-(1/2)integral u tr[C(I-2sigma^2 C)^(-1)]
+</code></pre>
+<p>follows from integral u |grad log(u)|^2/4=(1/2)integral u tr C.
+Its right side is exactly the old kinetic-plus-Gaussian-compensation
+functional with coefficient one. At a real Gaussian its complete Euler
+derivative vanishes; at exp(i p.x) phi_B it is
+p^2 psi-2i exp(i p.x) p dot grad(phi_B).</p>
+<p>Using this in the first variation of (3) yields the exact history</p>
+<pre><code>psi(t,x)=exp(i p.x-i Omega t) phi_B(x-X0-c^2 p t/Omega),
+E_cv=N Omega, P=Np,
+speed=c^2|p|/Omega&lt;c,
+M_inertial at p=0=N omega/c^2.                     (5)
+</code></pre>
+<p>Thus E_cv^2=c^2|P|^2+(N omega)^2 on every one of these complete branches.
+This holds for every supplied count branch under one action, without a
+low-momentum cutoff or particle-dependent amplitude choice. The overall
+norm N remains free. An exact relativistic branch dispersion is not a
+proof of Lorentz invariance of the full equation: the Gaussian spatial
+kernel selects a time slicing, and no Lorentz contraction or finite-speed
+propagation theorem for arbitrary disturbances has been derived.</p>
+<h2 id="complete-energy--momentum-inequality">Complete Energy--Momentum Inequality</h2>
+<p>The covariance identity also controls every H1 field, beyond the exact
+Gaussian family. Let V_min be the positive global lower bound of V_tilde.
+Since s&gt;=|v|^2, the triangle inequality for vectors (V_tilde,c v) gives</p>
+<pre><code>E_cv &gt;= integral u sqrt(V_tilde^2+c^2 |v|^2)
+     &gt;= sqrt[(integral u V_tilde)^2+c^2 |integral u v|^2]
+     &gt;= sqrt[(N V_min)^2+c^2 |P|^2],
+P=integral Im(conjugate(psi) grad psi)=integral u v.
+</code></pre>
+<p>The momentum identity uses the normalized Gaussian kernel. Thus the
+complete energy bounds canonical momentum for arbitrary finite-energy H1
+fields; this is not restricted to fitting the dispersion of selected
+branches. It still does not control the entire H1 norm.</p>
+<p>If a target has omega=V_min, its moving Gaussian realizes equality and is
+a global energy minimizer at prescribed N and P. That last identification
+requires the stated global potential inequality; it is not inferred from
+local stationarity of an arbitrary supplied target. Equality in the first
+step removes the two covariance residuals and selects a uniform-phase-
+gradient Gaussian. Higher-clock branches have no such ground-state claim.</p>
+<h2 id="rest-hessian-calculation">Rest Hessian Calculation</h2>
+<p>At a real Gaussian, s=0 pointwise and s&gt;=0 for every nearby field, while
+the cutoff is identically one near its constant C*. Therefore its first
+variation delta s vanishes pointwise for compact field variations. Also
+delta V=0 at the target. The negative square-root second derivative is
+multiplied by these vanishing first variations and contributes nothing.</p>
+<p>The complete rest Hessian is consequently the old smoothed count Hessian
+with alpha replaced, on that branch, by c^2/(2omega). Its density form is
+nonnegative with the same symmetry kernel, and its phase Hessian is
+2[c^2/(2omega)] integral rho |grad theta|^2. The completed-square identity proves the pointwise first-variation
+statement; the checks below corroborate it. The Hessian is interpreted
+in the same closed Gaussian form domain as the parent construction.</p>
+<h2 id="verification-and-regularity">Verification and Regularity</h2>
+<h3 id="completed-first-checks">Completed First Checks</h3>
+<p>The independent symbolic calculation checks delta(tau-k)=0 for all 28
+two-variable monomials through degree six at an anisotropic Gaussian.
+The full variation (4), including its variable kinetic coefficient, passes
+directional finite differences on positive, nodal and rapidly oscillating
+periodic profiles at two resolutions. The worst relative variation error
+is 1.17e-10 and the worst density-flux residual is 5.56e-13. The covariance
+remainder is nonnegative in all controls. The fourteen supplied count
+branches pass the exact energy-momentum and speed inequalities at four
+momentum ratios each. See the <a href="/evidence/diagnostics/check-conditional-variance/">variation and branch checker</a> and its dated report.
+The periodic check tests the algebra with a smooth positive toy V and the
+untruncated k on its sampled domain; it is not an R10 evolution experiment.</p>
+<h3 id="c1-energy-on-h1">C1 Energy on H1</h3>
+<p>The regularity statement follows from the following estimates. Split the scalar
+multiplier in (4) into the bounded-coefficient Gaussian-score terms and
+T0=G*(f-a_f tau). For a fixed constitutive law,</p>
+<pre><code>|f-a_f tau| &lt;= K(1+sqrt(tau)),
+integral rho |T0|^2 &lt;= K(N+||grad psi||^2).
+</code></pre>
+<p>The other multiplier terms have all finite weighted score moments exactly
+as before. The principal derivative coefficient D=G*a_f is bounded, so</p>
+<pre><code>||DE_cv(psi)||_(H-minus-one) &lt;= K||psi||_H1.
+</code></pre>
+<p>To prove continuity, let psi_n-&gt;psi strongly in H1, psi nonzero. Both
+u_n and e_n=G*|grad psi_n|^2 converge strongly in L1 and locally with every
+fixed Gaussian derivative. Therefore all normalized coefficients converge
+locally. The scalar integrand f-a_f tau grows at most like
+1+sqrt(e_n/u_n); a common positive mass ball gives an exponential upper
+bound exp(|x|^2/(4sigma^2)+K|x|), integrable against translated Gaussian
+kernels on compact target sets. Thus T0_n converges locally uniformly.</p>
+<p>The necessary tail control does not require higher kinetic moments. For a
+tail set A in the physical y variable, Jensen and Fubini give</p>
+<pre><code>integral_A rho_n |T0_n|^2
+    &lt;= K integral (u_n+e_n) w_(n,A),
+w_(n,A)(x)=[G*(rho_n 1_A)](x)/u_n(x), 0&lt;=w_(n,A)&lt;=1.
+</code></pre>
+<p>Outside a fixed x ball, tightness of both u_n and e_n makes this small.
+Inside it, u_n has a common positive lower bound and the numerator is at
+most ||G||_infinity integral_A rho_n, uniformly small as A moves outward.
+This proves strong L2 convergence of psi_n T0_n. The remaining scalar
+source terms use their stronger p&gt;2 score bounds. Bounded local convergence
+of D_n and strong convergence of grad psi_n give D_n grad psi_n-&gt;D grad psi
+in L2, hence the divergence terms converge in H-minus-one. At zero the
+displayed derivative bound suffices.</p>
+<p>The direct variation along an H1 line has integrable density, curvature
+and kinetic terms bounded by K||psi||_H1||h||_H1. Local differentiation,
+spatial truncation and this bound give its line-integral identity. The
+continuous derivative then establishes real Frechet C1 regularity on H1.
+This is the natural variational domain of (3), including physical nodes.
+It is not a Cauchy theorem.</p>
+<h3 id="why-the-previous-global-proof-does-not-transfer">Why the Previous Global Proof Does Not Transfer</h3>
+<p>For a unit-norm target phi, set psi_p=p^(-1/2)exp(i p x1)phi. Its exact
+branch energy tends to c while ||grad psi_p||^2 grows like p. Thus bounded
+energy and bounded norm do not control H1 for this relativistic-dispersion
+action. This is a concrete loss of the old coercive estimate, not merely a
+missing technical citation. The appropriate energy topology or an additional
+evolution estimate must be derived. No global evolution or uniqueness result
+is claimed for this changed action.</p>
+<h3 id="related-gaussian-mathematics">Related Gaussian Mathematics</h3>
+<p>The Gaussian weighted-mean identity is the multivariate version of the
+classical Tweedie identity; see Bradley Efron, <em>Tweedie's Formula and
+Selection Bias</em> (2011), <a href="https://statistics.stanford.edu/technical-reports/tweedies-formula-and-selection-bias">Stanford report record</a>.
+Its covariance form follows by a second differentiation, explicitly given
+above. The residual identity (1) is derived here by completing a covariance
+square. This use of normalized classical field integrals does not import
+the source's statistical physical interpretation into IDWT. The linked
+record and indexed formula were consulted; the full paper was not retrieved.</p>
+<h2 id="equality-selects-a-gaussian-shape">Equality Selects a Gaussian Shape</h2>
+<p>For the uncut covariance defect R=tau-k(C), the completed-square identity is</p>
+<pre><code>R=|v|^2+E|e|^2+E|Im(grad psi/psi)-v|^2.
+</code></pre>
+<p>If R=0 at one convolution point, every nonnegative term vanishes. Since the
+Gaussian kernel is strictly positive throughout ordinary space, the physical
+phase gradient is zero almost everywhere on the field's support, and its
+amplitude logarithmic gradient is affine in y. Equivalently the field obeys
+the distributional first-order system</p>
+<pre><code>grad psi=(b-B y)psi
+</code></pre>
+<p>with real b and symmetric B. Its nonzero integrable solutions are precisely
+constant-phase Gaussians with B positive definite. This formulation also
+excludes separate arbitrary phase choices across nodal components: the H1
+field itself solves the global first-order system, whose integrating factor
+is constant on connected ordinary space. A nonzero solution cannot acquire
+an internal nodal boundary.</p>
+<p>More generally R=|v|^2 with zero residual squares gives a Gaussian with
+constant spatial phase gradient, exp(i p.y) phi_B. Thus the coherent moving
+Gaussian is the equality class of a positive spatial integral identity,
+not merely a shape guessed for an ansatz calculation.</p>
+<p>For the cut defect s=tau-chi k=R+(1-chi)k, s=0 additionally requires chi=1
+on a nonzero Gaussian, since k&gt;0 there. If a common positive potential is
+chosen with V_tilde&gt;=omega_min and equality on selected lowest-clock target
+matrices, then E_cv&gt;=N omega_min. Equality forces exactly those rest Gaussian
+shapes. This last potential inequality is an additional global constitutive
+condition; the present note does not assume that arbitrary penalty choices
+already satisfy it. Higher-frequency stationary branches need not be global
+or local energy minima.</p>
+<h2 id="small-angular-velocity-response">Small Angular-Velocity Response</h2>
+<p>At a rest Gaussian the covariance action has the same phase quadratic energy
+as the smoothed action with alpha_*=c^2/(2omega):</p>
+<pre><code>E_phase=alpha_* integral rho |grad theta|^2.
+</code></pre>
+<p>Consider rotation in a physical coordinate plane (i,j), with density widths
+B_i and B_j. Define angular velocity Omega by x_i'=-Omega x_j,
+x_j'=Omega x_i. The rotating Gaussian density has</p>
+<pre><code>rho_t/rho=-2 Omega(B_i-B_j) x_i x_j.
+</code></pre>
+<p>The linearized continuity equation is
+rho_t=-2alpha_* div(rho grad theta). The phase</p>
+<pre><code>theta=-Omega(B_i-B_j)x_i x_j/[2alpha_*(B_i+B_j)]
+</code></pre>
+<p>solves this equation. Its angular momentum and energy are</p>
+<pre><code>L_ij=integral rho(x_i partial_j theta-x_j partial_i theta)
+    =I_ij Omega,
+E_phase=(1/2) I_ij Omega^2,
+I_ij=N(B_i-B_j)^2/[4alpha_* B_i B_j(B_i+B_j)]
+    =N omega(B_i-B_j)^2/[2c^2 B_i B_j(B_i+B_j)].
+</code></pre>
+<p>This is a positive complete quadratic response for reorienting an anisotropic
+density. Equal widths give zero because rotating an isotropic density does
+not change it. It is not an independent negative-mass or spin calculation.
+The phase is the minimum kinetic-energy solution for the prescribed density
+derivative, modulo a constant, by the weighted gradient variational principle.</p>
+<p>For a broad/complement pair of directions in a retained branch,</p>
+<pre><code>B_P=2b/(2k+3), B_Q=2b,
+I_PQ/M_translation=(k+1)^2/[2b(k+2)],
+M_translation=N omega/c^2.
+</code></pre>
+<p>Thus the same internal geometry and selected clock fix both translation
+inertia and this orientation response, without a second particle-specific
+inertial coefficient. There are d(10-d) such orientation tangent directions.
+At depth ten the Gaussian is isotropic and these tangents are absent;
+this does not establish an absence of angular-momentum-carrying deformations
+or identify a tau candidate's observed spin.</p>
+<p>These are linearized continuity and quadratic-energy results. Finite rotation
+generates shape changes at higher order, and an exact rotating relative
+equilibrium has not been constructed. No quantization, electric charge or
+electron orbital trajectory follows merely from this inertia formula.</p>
+<h2 id="universal-integrated-transport-bounds">Universal Integrated Transport Bounds</h2>
+<p>Use rho=|psi|^2, u=G*rho, j=Im(conjugate(psi) grad psi),
+s=tau-chi k, f=sqrt(V_tilde^2+c^2 s), and N=integral rho.
+The completed-square identity implies the stronger pointwise inequality</p>
+<pre><code>s &gt;= E_x |Im(grad psi/psi)|^2,
+</code></pre>
+<p>because its remaining amplitude-residual square and cutoff remainder are
+nonnegative. Define h(x) as the expectation on the right. Then
+G*|j| &lt;= u sqrt(h) and f^2&gt;=V_min^2+c^2 h.</p>
+<h2 id="density-flux-and-its-complete-bound">Density Flux and Its Complete Bound</h2>
+<p>The full Euler equation has real principal coefficient
+D=G*[c^2/(2f)] and real scalar multiplier. Therefore its exact density
+balance, whenever the equation is realized with sufficient regularity, is</p>
+<pre><code>rho_t+div F=0, F=2D j=c^2 j [G*(1/f)].
+</code></pre>
+<p>The normalized Gaussian is symmetric and positive. Fubini and the preceding
+pointwise inequalities give</p>
+<pre><code>integral |F| &lt;= c^2 integral (G*|j|)/f
+              &lt;= c^2 integral u sqrt(h)/f
+              &lt;= c integral u sqrt(1-V_min^2/f^2)
+              &lt;= c N sqrt[1-(N V_min/E_cv)^2] &lt; cN.       (1)
+</code></pre>
+<p>For the last step, first use concavity of the square root with weight u/N,
+then Jensen's inequality for 1/f^2 and E_cv=integral u f. The strict bound
+uses finite energy and V_min&gt;0. The inequalities themselves hold for every
+H1 field, independently of whether a generic evolution theorem is known.</p>
+<p>For any one-Lipschitz spatial test function g, a history satisfying the
+density balance consequently obeys</p>
+<pre><code>|d/dt integral g rho| &lt;= integral |F| &lt;= cN.
+</code></pre>
+<p>With a finite first moment, its center X=(integral x rho)/N therefore has
+|X_dot|&lt;c, and the sharper energy-dependent bound in (1) applies as well.
+This is a universal transport consequence, not only a property of the
+selected Gaussian branch. If a moving target has omega=V_min, it saturates
+the sharper bound. The common count potential still supplies that omega.</p>
+<h2 id="spatial-moments">Spatial Moments</h2>
+<p>For M2=integral |y|^2 rho(y), weighted conditional Cauchy--Schwarz gives</p>
+<pre><code>integral |y| |F(y)| dy
+  &lt;= c^2 integral u E_x[|y| |Im(grad psi/psi)|]/f
+  &lt;= c integral u sqrt(E_x|y|^2)
+  &lt;= c sqrt(N M2).
+</code></pre>
+<p>Thus |M2_dot|&lt;=2c sqrt(N M2), and the root-mean-square distance from any
+fixed origin grows no faster than c. Truncated moment functions justify
+the bound before assuming the full moment exists throughout a history.
+Likewise spatial cutoffs give a tail-mass estimate with rate cN/R. These
+estimates can assist a future compactness construction; they do not supply
+the missing global control of spatial gradients.</p>
+<p>There is no pointwise assertion |F(y)|&lt;=c rho(y). The convolution and the
+local phase gradient are evaluated at different points. The integral
+transport estimate therefore does not prove a light cone for disturbances,
+finite propagation, or Lorentz invariance. A general Cauchy theorem remains
+open. The exact Gaussian histories already constructed satisfy these laws.</p>
+<p>The <a href="/evidence/diagnostics/check-covariance-transport/">transport checker</a> verifies the energy--momentum and integrated-flux inequalities on four periodic controls at two resolutions. These finite controls corroborate the analytic argument; they do not establish a general Cauchy theorem. No special depth-five suppression follows from this common law.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261014-smoothed-count-pattern-action/">A Smoothed Count Action with Global Finite-Energy Histories</a></li><li><a href="/research/notes/20261014-bounded-current-count-action/">A Bounded Current Action with Count Clocks and Frequency-Dependent Inertia</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#a-positive-geometric-remainder">A Positive Geometric Remainder</a></li><li class="toc-level-2"><a href="#one-smooth-finite-band-energy">One Smooth Finite-Band Energy</a></li><li class="toc-level-2"><a href="#full-variation">Full Variation</a></li><li class="toc-level-2"><a href="#exact-complete-moving-gaussian-branches">Exact Complete Moving Gaussian Branches</a></li><li class="toc-level-2"><a href="#complete-energy--momentum-inequality">Complete Energy--Momentum Inequality</a></li><li class="toc-level-2"><a href="#rest-hessian-calculation">Rest Hessian Calculation</a></li><li class="toc-level-2"><a href="#verification-and-regularity">Verification and Regularity</a></li><li class="toc-level-3"><a href="#completed-first-checks">Completed First Checks</a></li><li class="toc-level-3"><a href="#c1-energy-on-h1">C1 Energy on H1</a></li><li class="toc-level-3"><a href="#why-the-previous-global-proof-does-not-transfer">Why the Previous Global Proof Does Not Transfer</a></li><li class="toc-level-3"><a href="#related-gaussian-mathematics">Related Gaussian Mathematics</a></li><li class="toc-level-2"><a href="#equality-selects-a-gaussian-shape">Equality Selects a Gaussian Shape</a></li><li class="toc-level-2"><a href="#small-angular-velocity-response">Small Angular-Velocity Response</a></li><li class="toc-level-2"><a href="#universal-integrated-transport-bounds">Universal Integrated Transport Bounds</a></li><li class="toc-level-2"><a href="#density-flux-and-its-complete-bound">Density Flux and Its Complete Bound</a></li><li class="toc-level-2"><a href="#spatial-moments">Spatial Moments</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

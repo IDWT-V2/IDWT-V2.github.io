@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>canonical-count-response-freedom.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/canonical-count-response-freedom.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="canonical-count-response-freedom.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/canonical-count-response-freedom.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="canonical-count-response-freedom.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>canonical-count-response-freedom.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/canonical-count-response-freedom.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Small exact checks of the canonically normalized closure obstruction.
+
+No spatial simulation, physical amplitude fit, or database mutation is made.
+Run with python3 -B PATH/check.py (installed SymPy). A dated JSON report is written.
+&quot;&quot;&quot;
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+from math import comb
+import json
+import sympy as s
+
+ROOT = Path(__file__).resolve().parent
+checks = []
+
+
+def check(condition, label):
+    if not bool(condition):
+        raise AssertionError(label)
+    checks.append(label)
+
+
+def zero(expr, label):
+    check(s.simplify(expr) == 0, label)
+
+
+def main():
+    a, b, c, z, mu, inertia, hb = s.symbols(&#39;a b c z mu inertia hbar&#39;, positive=True)
+    G = s.Matrix([[a, b], [b, c]])
+    zero((G-z*s.eye(2)).det().subs(b**2, a*c)-z*(z-a-c), &#39;rank-one full spectral polynomial&#39;)
+    zero((a-b**2/c).subs(b**2, a*c), &#39;static relaxed stiffness vanishes&#39;)
+    zero((b**2/c).subs(b**2, a*c)-a, &#39;removed relaxation contribution is a&#39;)
+    zero((mu*a/inertia).subs(inertia, hb**2/(mu*a))-(mu*a/hb)**2,
+         &#39;target clamped frequency requires the specified inverse stiffness inertia&#39;)
+
+    h, cp, yy, chi, fp2, qnorm, radius = s.symbols(&#39;h c y chi Fpp Q R&#39;, positive=True)
+    F = s.Function(&#39;F&#39;)
+    e = h*cp+F(chi)-chi*s.sqrt(cp**2+yy**2)
+    zero(s.diff(e, cp).subs(yy, 0)-(h-chi), &#39;stationarity retains the spatial kinetic term&#39;)
+    zero(s.diff(e, chi).subs(yy, 0)-(s.diff(F(chi), chi)-cp), &#39;auxiliary equation&#39;)
+    ecc = (s.diff(e, cp, 2)-s.diff(e, cp, chi)**2/s.diff(e, chi, 2)).subs(yy, 0)
+    zero(ecc+1/s.diff(F(chi), chi, 2), &#39;complete eliminated polarization Hessian&#39;)
+    eyy = s.diff(e, yy, 2).subs({yy: 0, chi: h})
+    zero(eyy+h/cp, &#39;relative phase Hessian&#39;)
+    # Canonical coefficient dynamics gives {c,y}=-2x/Q, x²=1-c².
+    # H=Q e/R, hence the norm cancels in the linear matrix.
+    x = s.symbols(&#39;x&#39;, positive=True)
+    J = s.Matrix([[0, -2*x/qnorm], [2*x/qnorm, 0]])
+    A = J*(qnorm/radius)*s.diag(-1/fp2, -h/cp)
+    expected_squared = 4*x*x*h/(radius**2*cp*fp2)
+    check(s.simplify(A*A+expected_squared*s.eye(2)) == s.zeros(2), &#39;canonical pair frequency and amplitude cancellation&#39;)
+
+    # An independent exact local Taylor calculation: sin² has second jet 2π².
+    xi, t = s.symbols(&#39;xi t&#39;, real=True)
+    F0, F1, F2, F3 = s.symbols(&#39;F0 F1 F2 F3&#39;)
+    Taylor = F0+F1*xi+F2*xi**2/2+F3*xi**3/6
+    deformed = Taylor+t*s.diff(Taylor, xi, 2)*s.sin(s.pi*xi)**2/(2*s.pi**2)
+    zero(deformed.subs(xi, 0)-F0, &#39;analytic deformation preserves value&#39;)
+    zero(s.diff(deformed, xi).subs(xi, 0)-F1, &#39;analytic deformation preserves source&#39;)
+    zero(s.diff(deformed, xi, 2).subs(xi, 0)-(1+t)*F2, &#39;analytic deformation rescales curvature&#39;)
+
+    n, total, hop, kap, v3, v4, e3, e4, phi = s.symbols(&#39;n N J kappa v3 v4 e3 e4 phi&#39;, real=True)
+    weight = v4*total+(v3-v4)*n
+    hn = e3*n+e4*(total-n)+kap*weight**2/2-2*hop*s.sqrt(n*(total-n))*s.cos(phi)
+    phase_hessian = s.diff(hn, phi, 2).subs(phi, 0)
+    population_hessian = s.diff(hn, n, 2).subs(phi, 0)
+    expected_pair = 2*hop*kap*(v3-v4)**2*s.sqrt(n*(total-n))+hop**2*total**2/(n*(total-n))
+    zero(s.expand(phase_hessian*population_hessian)-expected_pair, &#39;dimer canonical relative frequency&#39;)
+    zero(s.diff(hn, phi).subs(hop, 0), &#39;density-only rank-one action has no phase restoring term&#39;)
+    n3, n4, r12 = s.symbols(&#39;n3 n4 r12&#39;, positive=True)
+    hh = e3*n3+e4*n4+kap*(v3*n3+v4*n4)**2/2-2*hop*s.sqrt(n3*n4)
+    zero(n3*s.diff(hh,n3)+n4*s.diff(hh,n4)-hh-kap*(v3*n3+v4*n4)**2/2,
+         &#39;dimer complete energy differs from canonical frequency contraction by quartic energy&#39;)
+
+    source = json.loads((ROOT/&#39;results/canonical-count-response-inputs.json&#39;).read_text())
+    cases = []
+    for old in source[&#39;cases&#39;]:
+        depth, index = old[&#39;depth&#39;], old[&#39;inferred_index&#39;]
+        level = index-1
+        hv = s.Rational(2*level+depth, 2)
+        eps = s.Rational(old[&#39;epsilon_exact&#39;])
+        P = s.prod(chi+j-s.Rational(depth, 2) for j in range(1, depth+1))/s.factorial(depth)
+        Fbase = eps*P
+        count = s.binomial(level+depth, depth)
+        cv = s.diff(Fbase, chi).subs(chi, hv)
+        fpp = s.diff(Fbase, chi, 2).subs(chi, hv)
+        check(0 &lt; cv &lt; 1 and fpp &gt; 0, f&#39;{old[&quot;particle&quot;]}: open convex baseline&#39;)
+        zero(P.subs(chi, hv)-count, f&#39;{old[&quot;particle&quot;]}: count polynomial&#39;)
+        check(sum(comb(k+depth-1, depth-1) for k in range(level+1)) == count,
+              f&#39;{old[&quot;particle&quot;]}: independent cumulative shell count&#39;)
+        om0sq = 4*hv*(1-cv**2)/(cv*fpp)
+        row = {&#39;particle&#39;: old[&#39;particle&#39;], &#39;depth&#39;: depth, &#39;index&#39;: index,
+               &#39;h_exact&#39;: str(hv), &#39;count_exact&#39;: str(count),
+               &#39;epsilon_exact&#39;: str(eps), &#39;polarization_exact&#39;: str(cv),
+               &#39;particle_frequency_radius_units_exact&#39;: str(eps*count),
+               &#39;shape_frequency_squared_radius_units_exact&#39;: str(om0sq), &#39;deformations&#39;: []}
+        for tv in [0, 1, 3]:
+            Ft = Fbase+tv*s.diff(Fbase, chi, 2)*s.sin(s.pi*(chi-s.Rational(depth, 2)))**2/(2*s.pi**2)
+            fv = Ft.subs(chi, hv)
+            f1v = s.diff(Ft, chi).subs(chi, hv)
+            f2v = s.diff(Ft, chi, 2).subs(chi, hv)
+            zero(fv-eps*count, f&#39;{old[&quot;particle&quot;]} t={tv}: unchanged clock&#39;)
+            zero(f1v-cv, f&#39;{old[&quot;particle&quot;]} t={tv}: unchanged field polarization&#39;)
+            zero(f2v-(1+tv)*fpp, f&#39;{old[&quot;particle&quot;]} t={tv}: exact changed curvature&#39;)
+            omsq = 4*hv*(1-cv**2)/(cv*f2v)
+            zero(omsq/om0sq-s.Rational(1, 1+tv), f&#39;{old[&quot;particle&quot;]} t={tv}: canonical shape frequency ratio&#39;)
+            row[&#39;deformations&#39;].append({&#39;t&#39;: tv, &#39;shape_frequency_squared_ratio_exact&#39;: str(s.Rational(1, 1+tv))})
+        cases.append(row)
+    check(sorted({v[&#39;depth&#39;] for v in cases}) == [2, 3, 4, 5, 6, 10], &#39;all occupied depths covered&#39;)
+    check(len(cases) == 14, &#39;all fourteen maintained massive assignments covered&#39;)
+    sources = {&#39;experiments/results/canonical-count-response-inputs.json&#39;: sha256((ROOT/&#39;results/canonical-count-response-inputs.json&#39;).read_bytes()).hexdigest(), &#39;experiments/canonical-count-response-freedom.py&#39;: sha256(Path(__file__).read_bytes()).hexdigest()}
+    report = {&#39;created_utc&#39;: datetime.now(timezone.utc).isoformat(), &#39;input_kind&#39;:&#39;public diagnostic assignment table&#39;,
+              &#39;experiment_key&#39;:&#39;closure-a-canonical-response-freedom&#39;, &#39;checks_passed&#39;:len(checks),
+              &#39;checks&#39;: checks, &#39;sources&#39;:sources, &#39;cases&#39;:cases,
+              &#39;limits&#39;:[&#39;Exact reduced balanced-pair calculation, not a full spatial perturbation computation.&#39;,
+                        &#39;No collective baryon clock, particle identification, localization or boost inertia derived.&#39;,
+                        &#39;Canonical phase norm is arbitrary and unchanged; no measured field amplitude is used.&#39;,
+                        &#39;The photon n=0 and unresolved bottom branch are not the fourteen single-shell massive assignments.&#39;]}
+    output=ROOT/(&#39;canonical-count-response-freedom-results-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;)
+    output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+    print(json.dumps({&#39;checks_passed&#39;:len(checks),&#39;report&#39;:str(output),&#39;depths&#39;:[2,3,4,5,6,10]}))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

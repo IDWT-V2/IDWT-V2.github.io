@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>A Finite-Speed Local Parent for a Controlled Count-Frequency Window — IDWT V2</title>
+  <meta name="description" content="A positive local wave action approximates all fourteen supplied count clocks with exact error certificates, retaining extra branches and explicit scale costs.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261014-finite-speed-count-chain/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Finite-Speed Local Parent for a Controlled Count-Frequency Window — IDWT V2">
+  <meta property="og:description" content="A positive local wave action approximates all fourteen supplied count clocks with exact error certificates, retaining extra branches and explicit scale costs.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261014-finite-speed-count-chain/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A Finite-Speed Local Parent for a Controlled Count-Frequency Window — IDWT V2">
+  <meta name="twitter:description" content="A positive local wave action approximates all fourteen supplied count clocks with exact error certificates, retaining extra branches and explicit scale costs.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>A Finite-Speed Local Parent for a Controlled Count-Frequency Window</h1>
+      <p class="article-date">Updated <time datetime="2026-10-14">October 14, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body">
+<p>A finite collection of ordinary spatial field components can reproduce a
+controlled approximation to the supplied count clocks while its complete
+equations have positive wave energy and finite propagation. This is an
+inverse constitutive construction on a fixed weighted ball, not a forward
+derivation of the observed particle spectrum. The same construction covers
+depths 2, 3, 4, 5, 6 and 10 without separate particle amplitudes or potentials.</p>
+<p>At a common dimensionless coupling M=100000, exact rational certificates
+place every one of the fourteen maintained low-frequency ratios between
+0.999999 and 1 times its target count frequency. The model retains additional
+spatial-form branches, heavy component branches and unoccupied scalar modes.
+Its complete integrated mode count is therefore not only the target simplex
+count. Choosing the observed branches remains a physical question.</p>
+<p>The important change from the high-order scalar action is to retain its
+intermediate first-order spatial components. Squaring the complete coupled
+operator gives a second-order spatial wave equation. Its low branch can
+approximate the count law on a finite window; at arbitrarily high spatial
+frequency it does not retain the exact high-order count dispersion.</p>
+<p>The physical containing space remains ordinary flat space, currently R10.
+An active weighted ball is a constitutive support assumption within it,
+not a compactification or an independently existing sector. Differential
+form and chain indices label classical field components. They neither add
+spatial dimensions nor replace deterministic electron trajectories.</p>
+<h2 id="factor-the-count-through-ordinary-spatial-form-components">Factor the Count Through Ordinary Spatial Form Components</h2>
+<p>On the weighted material ball, use the closed differential complex of
+ordinary spatial forms with contravariant material tensor A=I-yy^T and
+measure w dy. Let D=d+delta be its self-adjoint Hodge-Dirac operator and
+Gamma the even/odd form parity. On scalar components, D^2=L0, while
+Gamma D=-D Gamma. These components are field indices on the d ordinary
+coordinates, not added spatial dimensions or exchanged particles.</p>
+<p>The full weighted differential-form realization and its boundary-domain
+proof are supplied below. They are essential to extending the finite-fiber
+algebra to an actual local spatial equation.</p>
+<p>Put a_j=j(d+1-j), j=1,...,d, and</p>
+<pre><code>Q_j=D+sqrt(a_j) Gamma.
+</code></pre>
+<p>Then Q_j^2=D^2+a_j. Every Q_j commutes with D^2, although the Q_j do
+not generally commute with each other. For A_eff=Q_d ... Q_1,</p>
+<pre><code>A_eff^* A_eff=product_(j=1)^d(D^2+a_j).
+</code></pre>
+<p>The adjacent factors cancel successively because their squares are central
+functions of D^2. On a scalar degree-N eigenmode this singular value is</p>
+<pre><code>sqrt(product_j[lambda_N+a_j])
+   =product_j(N+j)=d! binomial(N+d,d).
+</code></pre>
+<p>Thus a product of d first-order spatial couplings gives the full count
+clock, including the odd depths, without requiring an odd-order local
+scalar positive square root. The other form components are retained and
+must be counted separately in a physical field interpretation.</p>
+<h2 id="retain-the-intermediate-components-instead-of-eliminating-them">Retain the Intermediate Components Instead of Eliminating Them</h2>
+<p>Build a Hermitian chain of 2d component slots, with weak nearest-neighbor
+couplings Q_j between slots (2j-1,2j), and strong constant couplings M I
+between (2j,2j+1), j&lt;d. All diagonal entries are zero. Call it H_M.</p>
+<p>At zero weak coupling the two endpoints are the low-frequency slots and
+the interior slots form d-1 gapped pairs. Their zero-frequency Schur
+elimination gives the endpoint coupling</p>
+<pre><code>(-1)^(d-1) Q_d ... Q_1 / M^(d-1).
+</code></pre>
+<p>Consequently its low positive frequency approaches</p>
+<pre><code>omega_low=lambda_shape/M^(d-1),
+lambda_shape=d! D_N,
+</code></pre>
+<p>with relative corrections controlled by the weak-to-strong ratio. The
+frequency-dependent Schur complement and endpoint norm are essential for
+an error bound; the zero-frequency product alone is not exact at finite M.</p>
+<p>The complete H_M is first order in the physical spatial derivatives. Its
+principal derivative block consists of d independent off-diagonal D pairs;
+the strong bonds and sqrt(a_j) terms contain no spatial derivative. Thus
+its principal speed bound does not grow with d merely because the chain
+has d factors. The domain estimate below gives a common physical speed bound after
+assigning the shared derivative scale and physical radius. A positive classical
+second-time-order action can use potential ||H_M Psi||^2/2, with only
+second spatial order in its full equation. Negative eigenvalues of H_M
+are then opposite frequency signs, not negative quadratic energies.</p>
+<p>For a scalar eigenvalue lambda&gt;0, the invariant span of u and du/sqrt(lambda)
+has D=sqrt(lambda) sigma_x and Gamma=sigma_z. Each spectral comparison
+therefore needs only a 4d real symmetric matrix. For lambda=0 the constant
+scalar has D=0,Gamma=1 and needs a 2d matrix. This provides a bounded exact
+algebra/numerical test across all fourteen labels without particle simulation.</p>
+<h2 id="scope-of-the-comparison">Scope of the Comparison</h2>
+<p>The dimensionless M is common across the tested depths; sector frequency
+units remain the existing inputs. Restoring them multiplies H_M by
+mu_d M^(d-1)/d!. This rescales physical spatial speed unless the material
+radius is chosen consistently. Radius and heavy-component scale therefore
+remain a genuine constitutive tradeoff, not an extra per-particle fit.</p>
+<p>The parent's full mode count includes its other form components and heavy
+bands. It is not identical to the scalar low-band simplex IDOS. The target
+is a selected low-frequency branch approximating the maintained count clocks,
+with extra retained components explicitly visible. Exact infinite count
+dispersion and a finite-speed high-frequency parent must not be asserted
+simultaneously from this low-frequency calculation.</p>
+<h2 id="exact-chain-reduction-and-certified-error">Exact Chain Reduction and Certified Error</h2>
+<p>On a fixed spectral fiber, write Q_j=t_j U_j, where
+t_j=sqrt(lambda+a_j) and U_j is an orthogonal involution. Since the
+coupling graph is a path, independent orthogonal changes of basis at its
+vertices remove all U_j successively. There is no loop compatibility
+condition. The resulting matrix is one scalar chain per fiber component,
+with alternating bonds t_1,M,t_2,M,...,M,t_d. Thus the doubled low roots
+in a direct fiber calculation are exactly degenerate.</p>
+<p>Ordering odd vertices before even vertices gives H=[0,T;T*,0], with T
+lower bidiagonal, diagonal t_j and subdiagonal M. Its positive frequencies
+are the singular values of T. The matrix T*T has diagonal t_j^2+M^2
+for j&lt;d, last diagonal t_d^2, and squared off-diagonal entries M^2 t_(j+1)^2.
+These entries determine a characteristic recurrence with rational coefficients,
+even though the individual t_j may be irrational.</p>
+<p>The linked exact Sturm checker isolates the smallest squared root
+by exact rational Sturm counts, then encloses its frequency ratio using
+rational square-root bounds. All fourteen labels satisfy</p>
+<pre><code>0.999999 &lt; omega_low / [d! D_N / M^(d-1)] &lt; 1
+</code></pre>
+<p>at the common M=100000. The largest discrepancy is the depth-two N=94
+label, about -9.11998336516e-7. Decimal values are summaries of the rational
+certificates, not tolerances used to accept their signs.</p>
+<p>There is also a simple general bound. Put r=max_j(t_j/M)&lt;1 and
+omega_product=product_j(t_j)/M^(d-1). The bottom-left entry of T^(-1)
+has absolute value 1/omega_product. An entry omitting k endpoint factors
+is at most r^k/omega_product, and there are k+1 such entries. Therefore</p>
+<pre><code>1/omega_product &lt;= ||T^(-1)||
+    &lt;= ||T^(-1)||_F &lt;= 1/[omega_product(1-r^2)],
+
+1-r^2 &lt;= omega_low/omega_product &lt;= 1.
+</code></pre>
+<p>The finite Frobenius sum is bounded by sum_(k&gt;=0)(k+1)r^(2k).
+This proves controlled convergence for every fixed finite set of target
+modes. It also makes the limitation explicit: increasing M buys agreement;
+this agreement alone does not select M or constitute an independent mass fit.</p>
+<h2 id="the-complete-local-spatial-realization">The Complete Local Spatial Realization</h2>
+<h2 id="all-grade-adjoint-and-boundary-pairing">All-grade adjoint and boundary pairing</h2>
+<p>Write s=1-|y|^2, epsilon for exterior multiplication, i for contraction, and B_k=Lambda^k(I-yy^T)=I-epsilon_y i_y. On every grade, including zero and top grade,</p>
+<pre><code>B_k^(-1)=I+epsilon_y i_y/s.
+</code></pre>
+<p>For a k-form alpha, direct differentiation gives</p>
+<pre><code>delta_k alpha = w^(-1) B_(k-1)^(-1) delta_E(w B_k alpha)
+              = delta_E alpha+i_y(E+d+3-k)alpha,
+w=sqrt(s), delta_E=-sum_i i_i partial_i.
+</code></pre>
+<p>The factors act in the stated order. In particular, E acts on alpha before i_y increases its coefficient degree. Replacing E by its post-contraction value would introduce an incorrect shift. For k=0 the right side is zero.</p>
+<p>A direct algebraic way to check the cancellation is to use</p>
+<pre><code>partial_i B_k=-epsilon_i i_y-epsilon_y i_i,
+partial_i(log w)=-y_i/s,
+i_y B_k=s i_y.
+</code></pre>
+<p>The exact algebra checker evaluates precisely these differentiated metric expressions, followed by the actual inverse B_(k-1), against the polynomial formula. It evaluates the unsimplified weighted metric derivatives independently.</p>
+<p>On r=R, the outward normal is y/R, and therefore i_normal B_k=(s/R)i_y. The integration-by-parts boundary integrand has the factor w s=s^(3/2); its remaining polynomial factors and sphere area remain bounded as R tends to one. This proves adjoint pairing on polynomials at every grade. It does not impose an unsupported ordinary unweighted trace condition on general energy fields.</p>
+<h2 id="essential-self-adjointness-and-the-scalar-realization">Essential self-adjointness and the scalar realization</h2>
+<p>Let F_q be the polynomial forms with coefficient degree plus grade at most q. Both d and delta preserve F_q, and they are adjoints there. In particular D=d+delta is symmetric. Orthogonal complements E_q=F_q intersect F_(q-1)^perp are invariant under each of d, delta, D and grade projection. To see this separately for d, pair d u with v in F_(q-1) and use delta v in F_(q-1); the delta argument reverses the roles.</p>
+<p>Polynomial density requires a small explicit step because B_k degenerates at the boundary. First truncate an arbitrary finite-norm section to compact interior sets. On each such set B_k and w are uniformly positive, so smooth compactly supported coefficient approximations converge in norm. Their zero extensions are continuous on the closed ball and can be uniformly approximated by polynomials. B_k&lt;=I and integral w&lt;infinity convert that uniform convergence into norm convergence. Thus the union of F_q is dense in the stated Hilbert norm.</p>
+<p>On each finite E_q, D is self-adjoint. Their algebraic direct sum has closure with domain</p>
+<pre><code>{u=sum_q u_q : sum_q ||u_q||^2&lt;infinity,
+                 sum_q ||D u_q||^2&lt;infinity}.
+</code></pre>
+<p>The two deficiency equations can also be checked directly: their projection on every finite E_q vanishes, hence the whole deficiency vector vanishes by density. This proves essential self-adjointness of the polynomial operator and identifies its closure. The argument is valid for the degenerate ball and makes no assertion about essential self-adjointness of a different compact-support core.</p>
+<p>Define the closed d and delta by the same direct-sum construction. The finite-block identity ||D u||^2=||d u||^2+||delta u||^2 gives Dom(D)=Dom(d) intersect Dom(delta). Nilpotence means d maps its domain into Dom(d) with d^2=0, and similarly for delta; identities involving D^2 are stated on Dom(D^2).</p>
+<p>On scalars, the d closure equals the previous G closure after the pointwise grade-one isometry A^(1/2). Smooth closed-ball coefficients have polynomial approximations in C1, which converge in that graph norm. The scalar D^2 therefore has the same natural G*G realization as the scalar count model.</p>
+<h2 id="complete-spectrum-and-multiplicities">Complete spectrum and multiplicities</h2>
+<p>For coefficient degree N and grade k, put q=N+k. The leading homogeneous quotient of E_q has</p>
+<pre><code>D^2=-Delta+(N+k)(N+d+1-k)+2 d i_y.
+</code></pre>
+<p>The Euclidean Laplacian lowers total degree by two and does not affect the quotient matrix. Cartan's identity d i_y+i_y d=q I implies the direct splitting</p>
+<pre><code>homogeneous (N,k) forms = ker(i_y) direct_sum im(d), q&gt;0.
+</code></pre>
+<p>The projector onto im(d) is d i_y/q. Thus its two leading eigenvalues are lambda=(N+k)(N+d+1-k) on ker(i_y) and lambda+2q on im(d). The latter is precisely the eigenvalue of the partner family (N+1,k-1), not a missing third branch.</p>
+<p>This leading-degree argument is stronger than a potentially ambiguous triangular-eigenvalue claim. E_q is a genuine invariant finite-dimensional space, and its leading coefficient map is an isomorphism to the quotient F_q/F_(q-1). Consequently every quotient eigenvalue and multiplicity is realized by actual polynomial eigenforms in E_q. Since d and delta separately preserve E_q, the coexact and exact assignments survive the lower-degree corrections. For positive eigenvalue, delta-closed equals delta-exact by alpha=delta d alpha/lambda; the corresponding exact partner is d alpha/sqrt(lambda).</p>
+<p>The Koszul contraction sequence has no cohomology at q&gt;0 because d/q is its contracting homotopy. Its kernel dimensions obey</p>
+<pre><code>h_(N,k)+h_(N+1,k-1)=C(d,k) C(N+d-1,d-1),
+h_(N,k)=C(N+d-1,d-k-1) C(N+k-1,k).
+</code></pre>
+<p>The permitted coexact families have N&gt;=1 and 0&lt;=k&lt;d. Each gives D eigenvalues +/-sqrt((N+k)(N+d+1-k)), each with multiplicity h_(N,k). Add multiplicities whenever different families coincide. The only zero mode of D is the constant scalar. This does not mean that H_M has a zero frequency: its a_j bonds lift the constant branch too.</p>
+<p>The exact algebra checker also exhausts every homogeneous monomial and component in total degrees q=1,2,3,4 at all six depths. Its direct diagonal trace of D^2 agrees exactly with twice the sum of the proposed family eigenvalues times h. This is a spectral trace check in addition to the dimension count.</p>
+<p>At fixed d there are finitely many grades and lambda grows quadratically with N. Every eigenspace is finite-dimensional and only finitely many eigenvalues lie in a bounded interval. Therefore D has compact resolvent. The chain H_M also has compact resolvent for fixed finite M: its disjoint Q_j derivative bonds have compact resolvent, and the remaining bonds are bounded. Equivalently, each finite-fiber chain tends to infinite frequency as lambda tends to infinity, since its smallest singular value is bounded below by min_j sqrt(lambda+a_j)-M when this bound is positive.</p>
+<h2 id="grade-weights-and-finite-propagation">Grade weights and finite propagation</h2>
+<p>With b_0=1 and b_k=b&gt;=1 for k&gt;=1, the closed weighted complex retains exactly the scalar/exact-one-form family, and scales every other pair eigenvalue by b^2. This follows from</p>
+<pre><code>D_b^2|_k=b_(k-1)^2 d delta+b_k^2 delta d.
+</code></pre>
+<p>The same E_q decomposition supplies essential self-adjointness, without an appeal to ellipticity at the boundary.</p>
+<p>For a physical cotangent vector xi, exterior multiplication epsilon_xi has adjoint i_(A xi) in the B_k metric. Its paired grade blocks give</p>
+<pre><code>||[D_b,eta](y)||=b sqrt(grad eta dot A grad eta)
+</code></pre>
+<p>for d&gt;=2 and b&gt;=1. The equality is a pointwise fiber norm; the global multiplication norm is its essential supremum. At b=1 this reduces to the usual Clifford identity. The derivative chain bonds are disjoint, so their direct sum has this same norm, not d times this norm.</p>
+<p>Here is the required multiplier-domain detail. First approximate a smooth closed-ball eta in C1 by polynomials and apply the Leibniz identity to polynomial inputs. Closedness proves the identity for eta times a polynomial. Then approximate a general Dom(D_b) input in graph norm, using the bounded commutator. Finally extend a bounded Lipschitz eta from the ball to Euclidean space without enlarging its Lipschitz constant and mollify it. Its gradients converge almost everywhere and remain uniformly bounded. Dominated convergence in the weighted field norm and operator closedness prove domain invariance and the commutator identity for eta. The second commutator is zero because the first is pointwise multiplication.</p>
+<p>These arguments meet the metric-measure hypotheses of McIntosh and Morris, Theorem 3.1, in the open Euclidean ball with the continuous positive interior bundle metric B_k. Completeness of a closed Riemannian manifold and global equivalence to an unweighted component norm are not required. The theorem was independently checked in the primary paper: https://arxiv.org/pdf/1201.1818, Section 3. The application has unit group bound and commutator constant b, yielding propagation speed at most b.</p>
+<p>The real wave equation uses cos(t H_M) and integral_0^t cos(s H_M) ds, so the same support estimate applies to displacement and initial velocity. This supports positive linear fixed-medium evolution and finite propagation; it does not establish freely moving nonlinear support, full relativistic stress, occupation selection or measured persistence.</p>
+<h2 id="finite-m-separation-and-explicit-costs">Finite-M separation and explicit costs</h2>
+<p>The smallest extra eigenvalue is b^2*2(d+1). At N=1 the grade dependence is (k+1)(d+2-k), a concave quadratic; its minimum on 1&lt;=k&lt;=d-1 is 2(d+1), with the d=2 endpoint equality handled correctly. Increasing N increases every family eigenvalue.</p>
+<p>The monotonicity argument for the smallest chain frequency is valid at every finite M&gt;0. After removing fixed signs, T(lambda)^(-1) is entrywise positive on its lower triangle and decreases strictly on that support as lambda increases. The Gram matrix of this positive triangular matrix is strictly positive, because any two columns overlap in its final row. Its maximal singular vectors can therefore be chosen strictly positive. Entrywise strict comparison then gives strict decrease of the operator norm and strict increase of its reciprocal. This justifies ordering the whole extra spectrum by its smallest lambda, beyond the asymptotic weak-bond regime.</p>
+<p>At b=40, the six extra minima (9600,12800,16000,19200,22400,35200) strictly exceed the maintained scalar maxima (9118,21,5396,567,1394,726). Therefore every extra band, including its smallest one, lies above the highest maintained scalar low band at the same depth for every common finite M&gt;0. The existing integer inequalities at M=100000 provide a separate quantitative certificate in the small-error count regime. Separation alone does not require that particular M. The number 40 is a sufficient constitutive example, not a selected constant or a demonstrated optimum.</p>
+<p>Keep all costs in any integrated statement:</p>
+<ul>
+<li>Full real component counts for 2d slots are 16,48,128,320,768,20480 at depths 2,3,4,5,6,10. Complex independent fields double them.</li>
+<li>Every positive D^2 family of dimension 2h yields chain multiplicity 2h at each signed band and real wave multiplicity 4h at its squared frequency. Constant scalar fibers give one and two respectively. Coincident bands must be added.</li>
+<li>The physical speed bound is b<em>kappa_d</em>R, with kappa_d=mu_d M^(d-1)/d!. Fixing an upper speed c requires R&lt;=c<em>d!/(b</em>mu_d*M^(d-1)). Improving the count approximation and raising extra branches both carry explicit radius/constitutive costs.</li>
+<li>Extra dispersive branches, heavy chain bands and unoccupied scalar shells remain real degrees of freedom. The parent does not have only the simplex IDOS, and no depth-five-specific suppression follows.</li>
+<li>The ball, component carrier, b, M and sector units remain supplied inverse assumptions. Their same-field derivation and exterior realization remain open.</li>
+</ul>
+<h2 id="physical-scale-cost">Physical Scale Cost</h2>
+<p>After restoring the sector unit, kappa_d=mu_d M^(d-1)/d!, a physical radius
+R gives speed bound b kappa_d R. Consequently a speed ceiling c requires</p>
+<pre><code>R &lt;= c d!/[b mu_d M^(d-1)].
+</code></pre>
+<p>For b=1 and M=100000, saturation gives illustrative radii about 5.16e-31 m
+for the electron assignment and 2.60e-47 m for the tau assignment using the
+maintained frequency units. These are model consequences, not measured
+radii or an imposed minimum-length criterion. The b=40 extra-form separation
+divides these radii by forty. Increasing accuracy through M makes this
+particular construction more demanding in physical scale.</p>
+<p>This is a cost of this chain, not a theorem that every finite-speed count
+realization requires the same hierarchy. A different local parent must
+be compared through its complete branches, energy, speed and preparation.</p>
+<h2 id="preparing-the-low-frequency-branch">Preparing the Low-Frequency Branch</h2>
+<h2 id="a-small-heavy-band-amplitude-can-contain-almost-all-the-energy">A small heavy-band amplitude can contain almost all the energy</h2>
+<p>Fix one scalar spatial eigenmode and use the exact path gauge, so the
+chain has alternating positive bonds t_1,M,t_2,...,M,t_d. Put</p>
+<pre><code>s_j=t_j^2=lambda+j(d+1-j),
+omega_p=product_j t_j/M^(d-1),
+t_max=max t_j, Delta=M-t_max, r=t_max/M&lt;1/2.
+</code></pre>
+<p>The bipartite matrix is H=[0,T;T*,0], with T lower bidiagonal.
+Its low subspace P has frequencies +/-omega, omega=omega_low.
+All remaining frequencies have absolute value at least Delta.
+Let E_L be the left endpoint, in the odd component block. Then</p>
+<pre><code>||H E_L||^2=t_1^2,
+p_L=||P E_L||^2 &gt;= 1-t_1^2/Delta^2.
+</code></pre>
+<p>Thus nearly all squared field amplitude is low-band at small r. But for
+the positive wave action, displacement E_L and zero initial velocity have</p>
+<pre><code>E_total=t_1^2/2,
+E_low=omega^2 p_L/2,
+E_low/E_total &lt;= omega_p^2/t_1^2
+   =product_(j=2)^d(t_j/M)^2 &lt;= r^(2d-2).
+</code></pre>
+<p>This is an exact inequality. The energy is dominated by the small
+high-frequency component. It remains the same fraction for the compatible
+complex first-order preparation Psi_t=-iH Psi, for which both energies
+double. It is not legitimate to infer low-energy preparation from an
+endpoint amplitude plot alone.</p>
+<p>At M=100000 the upper fraction is 9.12e-7 for d2,N94, less than
+7.635e-39 for the depth-six electron label, and less than 7.447e-65 for
+the depth-ten tau label. These numbers diagnose an incorrectly undressed
+initial preparation. They do not say that normal modes carry that unwanted
+energy or that the parent action fails.</p>
+<h2 id="construct-the-required-dressing-explicitly">Construct the required dressing explicitly</h2>
+<p>Define vectors in the odd and even blocks by</p>
+<pre><code>u_j=(-1)^(j-1) product_(k&lt;j)t_k/M^(j-1),
+v_j=(-1)^(d-j) product_(k&gt;j)t_k/M^(d-j).
+</code></pre>
+<p>The empty products are one, so u_1=v_d=1. Direct cancellation gives</p>
+<pre><code>T* u=s omega_p e_d,    T v=s omega_p e_1,
+s=(-1)^(d-1).
+</code></pre>
+<p>For the count chain t_j=t_(d+1-j), so both squared norms are</p>
+<pre><code>Z=sum_(j=0)^(d-1) product_(k=1)^j s_k/M^(2j),
+1&lt;=Z&lt;=1/(1-r^2).
+</code></pre>
+<p>Put U=(u,0)/sqrt(Z), V=(0,v)/sqrt(Z). These are orthonormal. Their
+two-dimensional compression and its residual are</p>
+<pre><code>H_edge=s h sigma_x,    h=omega_p/Z,
+rho^2=omega_p^2 (Z-1)/Z^2.
+</code></pre>
+<p>Precisely, ||(I-P_edge)H P_edge||=rho. Each normalized
+W_+=(U+sV)/sqrt(2), W_-=(U-sV)/sqrt(2) has Rayleigh quotient +/-h
+and residual norm rho. The corresponding energy of displacement U is</p>
+<pre><code>E_dressed=||H U||^2/2=omega_p^2/(2Z).
+</code></pre>
+<p>Intermediate amplitudes of order r are indispensable: they cancel the
+large weak-bond energy, rather than merely adding a small correction to it.
+Their coefficients follow one recurrence from the common chain. No
+per-particle physical amplitude or independent normalization has been fit.</p>
+<p>For fixed finite lambda, Z=1+(lambda+d)/M^2+O(M^-4). Therefore</p>
+<pre><code>h/omega_p=1-(lambda+d)/M^2+O(M^-4).
+</code></pre>
+<p>This explains the leading count-frequency discrepancy as the norm of the
+intermediate dressing. For d2,N94 the leading error is -9120/10^10.
+It is not evidence of a separately derived physical mass correction.</p>
+<h2 id="certified-residue-and-improved-frequency-approximation">Certified residue and improved frequency approximation</h2>
+<p>Reflection through the chain commutes with H. The W_+ and W_- belong to
+opposite reflection sectors, and the two simple low eigenvalues do too.
+This excludes contamination of W_+ by the opposite low eigenvalue.
+Let g=Delta-h&gt;0 and assume rho&lt;g. Every unwanted eigenvalue in the
+W_+ sector is at distance at least g from h. Its total spectral weight is
+therefore at most rho^2/g^2. The same holds for W_-.</p>
+<p>For completeness, rho/h=sqrt(Z-1)&lt;1 when r&lt;1/2. Together with rho&lt;g,
+the residual interval (h-rho,h+rho) lies strictly inside (0,Delta).
+The spectral residual bound therefore assigns the positive low eigenvalue
+to W_+'s reflection sector; the assignment is not assumed from a picture.</p>
+<p>Let z_+ be the normalized exact positive low mode, phased to overlap
+positively with W_+. Then</p>
+<pre><code>|&lt;z_+,W_+&gt;|^2 &gt;= 1-rho^2/g^2,
+||z_+-W_+|| &lt;= sqrt(2)rho/g.
+</code></pre>
+<p>To obtain a sharper eigenvalue bound, expand the zero first moment
+&lt;W_+,(H-h)W_+&gt;=0 in the spectral basis. The other-frequency contribution
+has absolute value at most rho^2/g, since |nu-h|&gt;=g. Dividing by the
+low-mode weight gives</p>
+<pre><code>|omega-h| &lt;= b,
+b=rho^2/[g(1-rho^2/g^2)].
+</code></pre>
+<p>This is a two-sided bound even though heavy frequencies have both signs;
+no one-sided minimum principle has been incorrectly applied. A conservative
+rational Delta may replace the exact value throughout. The checker uses
+Delta_bound=M-(floor(sqrt(max s_j))+1).</p>
+<p>The dressed heavy energy fraction is also small:</p>
+<pre><code>E_heavy/E_dressed &lt;= (1+h/g)^2 (Z-1)/Z.
+</code></pre>
+<p>Indeed |nu|&lt;= (1+h/g)|nu-h| on the unwanted spectrum, so its squared
+energy is bounded by (1+h/g)^2 rho^2. This estimate extends to any linear
+combination of U and V because the two reflection sectors are orthogonal.
+It is O(r^2), in contrast to the almost-total heavy energy of bare endpoints.</p>
+<h2 id="finite-time-approximation-with-the-clock-kept-explicit">Finite-time approximation, with the clock kept explicit</h2>
+<p>Let K:C^2-&gt;full chain be the isometry with columns U,V. Let J be the
+isometry to the exact low singular vectors, with phases chosen so that</p>
+<pre><code>H J=J s omega sigma_x,
+||J-K||&lt;=sqrt(2)rho/g.
+</code></pre>
+<p>Then, for any two-component preparation z,</p>
+<pre><code>||exp(-itH)Kz-K exp(-it s h sigma_x)z||
+  &lt;= [2sqrt(2)rho/g+min(2,|t|b)] ||z||.
+</code></pre>
+<p>This follows by adding the two preparation differences and using the exact
+low evolution in between. For the ideal product count omega_p instead of h,
+the phase term is min(2,|t||omega-omega_p|). For exact low preparation J
+there is no preparation error. Cosine wave evolution with zero initial
+velocity obeys the same type of bound; arbitrary velocity data require
+their explicit sine-over-frequency factor and energy normalization.</p>
+<p>After K_cycles ideal count oscillations, the count phase discrepancy is</p>
+<pre><code>2 pi K_cycles |1-omega/omega_p|.
+</code></pre>
+<p>A one-part-per-million frequency approximation therefore does not guarantee
+phase agreement through arbitrarily many cycles. Conversely, an accumulated
+phase discrepancy does not indicate loss of energy, spatial persistence or
+decay. The exact chain remains conservative. Restoring the common physical
+factor kappa multiplies frequencies and inversely scales time, leaving this
+cycle statement unchanged.</p>
+<p>The analysis is per spatial spectral fiber, and is uniform on a fixed finite
+window when its worst constants are used. A spectral-window restriction or
+exact low-band projection is nonlocal in physical space. It does not inherit
+the full parent's finite propagation theorem as an independently local
+effective scalar equation. The complete local chain is the causal object.</p>
+<h2 id="a-moving-action-for-the-same-retained-parent">A Moving Action for the Same Retained Parent</h2>
+<p>The <a href="/research/notes/20261014-moving-finite-speed-count-action/">moving first-order action</a> retains
+these finite-M frequencies while adding the complete material recoil and a
+wave-weighted elastic law. It has positive joint kinetic response under a
+common speed margin and positive complete boost inertia. Its full clamped
+linear evolution is now certified bounded across all fourteen profiles at
+the common ratio s/c=1/100. This uses a fresh derivation of its complete
+quadratic action, domains, spectral contours and conserved positive norm.
+The free-body and pair-interaction extensions retain their distinct open
+questions. The new construction does not select M, support or occupation.</p>
+<h2 id="verification-and-remaining-physics">Verification and Remaining Physics</h2>
+<p>The <a href="/evidence/results/experiments/check-count-chain-sturm.py/">exact Sturm checker</a>
+uses rational arithmetic for all fourteen assigned labels, including
+rational square-root enclosures. It verifies the finite-chain frequency
+claim. The differential-form domain, full multiplicity and propagation
+arguments are given above; finite arithmetic does not replace those proofs.
+The <a href="/evidence/results/experiments/check-count-chain-forms.py/">form-algebra checker</a>
+independently verifies weighted adjoints, spectral traces and extra-branch
+separation using exact rational and integer arithmetic.</p>
+<p>Finite propagation uses McIntosh and Morris, <em>Finite Propagation Speed for
+First Order Systems and Huygens' Principle for Hyperbolic Equations</em>,
+<a href="https://arxiv.org/pdf/1201.1818">Theorem 3.1</a>. The weighted-domain and
+commutator checks above establish its hypotheses for this candidate.</p>
+<p>The conclusion is a scoped compatibility result: the supplied finite count
+window need not require an acausal high-order scalar equation. Its support,
+component origin, M, grade weight and frequency scales remain inputs.
+The construction alone supplies no free material support, complete moving
+particle inertia, observed interactions or lifetimes. Stability results
+for a different clamped pullback action do not automatically apply here.
+No special depth-five coupling suppression follows from this chain.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261014-material-pullback-count-action/">An Exact Coupled Count-Clock Family on a Deformable Ball</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#factor-the-count-through-ordinary-spatial-form-components">Factor the Count Through Ordinary Spatial Form Components</a></li><li class="toc-level-2"><a href="#retain-the-intermediate-components-instead-of-eliminating-them">Retain the Intermediate Components Instead of Eliminating Them</a></li><li class="toc-level-2"><a href="#scope-of-the-comparison">Scope of the Comparison</a></li><li class="toc-level-2"><a href="#exact-chain-reduction-and-certified-error">Exact Chain Reduction and Certified Error</a></li><li class="toc-level-2"><a href="#the-complete-local-spatial-realization">The Complete Local Spatial Realization</a></li><li class="toc-level-2"><a href="#all-grade-adjoint-and-boundary-pairing">All-grade adjoint and boundary pairing</a></li><li class="toc-level-2"><a href="#essential-self-adjointness-and-the-scalar-realization">Essential self-adjointness and the scalar realization</a></li><li class="toc-level-2"><a href="#complete-spectrum-and-multiplicities">Complete spectrum and multiplicities</a></li><li class="toc-level-2"><a href="#grade-weights-and-finite-propagation">Grade weights and finite propagation</a></li><li class="toc-level-2"><a href="#finite-m-separation-and-explicit-costs">Finite-M separation and explicit costs</a></li><li class="toc-level-2"><a href="#physical-scale-cost">Physical Scale Cost</a></li><li class="toc-level-2"><a href="#preparing-the-low-frequency-branch">Preparing the Low-Frequency Branch</a></li><li class="toc-level-2"><a href="#a-small-heavy-band-amplitude-can-contain-almost-all-the-energy">A small heavy-band amplitude can contain almost all the energy</a></li><li class="toc-level-2"><a href="#construct-the-required-dressing-explicitly">Construct the required dressing explicitly</a></li><li class="toc-level-2"><a href="#certified-residue-and-improved-frequency-approximation">Certified residue and improved frequency approximation</a></li><li class="toc-level-2"><a href="#finite-time-approximation-with-the-clock-kept-explicit">Finite-time approximation, with the clock kept explicit</a></li><li class="toc-level-2"><a href="#a-moving-action-for-the-same-retained-parent">A Moving Action for the Same Retained Parent</a></li><li class="toc-level-2"><a href="#verification-and-remaining-physics">Verification and Remaining Physics</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

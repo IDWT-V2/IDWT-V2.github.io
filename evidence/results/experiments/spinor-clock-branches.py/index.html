@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>spinor-clock-branches.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/spinor-clock-branches.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="spinor-clock-branches.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/spinor-clock-branches.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="spinor-clock-branches.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>spinor-clock-branches.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/spinor-clock-branches.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;One-off exact and numerical branch calculation for real same-field clocks.
+
+Positions remain ordinary R10. All small matrices below act on real field
+components or explicitly conditional collective coordinates. Numerical runs
+are reduced ODE controls, not simulations of identified particles.
+&quot;&quot;&quot;
+from datetime import datetime, timezone
+from fractions import Fraction
+import hashlib
+import itertools
+import json
+import math
+from pathlib import Path
+import subprocess
+import time
+
+import numpy as np
+import scipy
+from scipy.integrate import solve_ivp
+import sympy as sp
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parent
+START = time.monotonic()
+CHECKS = {}
+SECTIONS = []
+DATA = {}
+SNAPSHOT = 1187
+
+
+def check(group, condition):
+    if not bool(condition):
+        raise AssertionError(group)
+    CHECKS[group] = CHECKS.get(group, 0) + 1
+
+
+def zero(group, expr):
+    if isinstance(expr, sp.MatrixBase):
+        check(group, all(sp.simplify(x) == 0 for x in expr))
+    else:
+        check(group, sp.simplify(expr) == 0)
+
+
+def section(title, equations, result, assumptions):
+    SECTIONS.append(dict(title=title, equations=equations, result=result,
+                         assumptions=assumptions))
+    print(title, flush=True)
+
+
+def tensor(factors):
+    out = np.array([[1]])
+    for factor in factors:
+        out = np.kron(out, factor)
+    return out
+
+
+I2 = np.eye(2, dtype=np.int64)
+X = np.array([[0, 1], [1, 0]], dtype=np.int64)
+Z = np.diag([1, -1])
+J2 = np.array([[0, -1], [1, 0]], dtype=np.int64)
+UNITS = [np.kron(J2, I2), np.kron(Z, J2), np.kron(X, J2)]
+J1, J2H, J3 = [sp.Matrix(m) for m in UNITS]
+E4 = sp.eye(4)
+
+# 1. Minimal modules and all small multiplicity branches.
+types = {0: &#39;R&#39;, 1: &#39;R&#39;, 2: &#39;C&#39;, 3: &#39;H&#39;, 4: &#39;H&#39;, 5: &#39;H&#39;, 6: &#39;C&#39;, 7: &#39;R&#39;}
+dimensions = {1: 1, 2: 2, 3: 4, 4: 4, 5: 8, 6: 8, 7: 8,
+              8: 8, 9: 16, 10: 32, 11: 64, 12: 64}
+minimal = []
+copies = []
+for d in range(1, 13):
+    f = types[d % 8]
+    minimal.append(dict(depth=d, real_module_dimension=dimensions[d], type=f,
+                        skew_dimension={&#39;R&#39;: 0, &#39;C&#39;: 1, &#39;H&#39;: 3}[f]))
+    for m in range(1, 9):
+        skew_dim = {&#39;R&#39;: m*(m-1)//2, &#39;C&#39;: m*m, &#39;H&#39;: m*(2*m+1)}[f]
+        if f == &#39;R&#39;:
+            b = sp.zeros(m)
+            for k in range(0, m-1, 2):
+                b[k, k+1], b[k+1, k] = -1, 1
+            expected_rank = m-m % 2
+        elif f == &#39;C&#39;:
+            b = sp.kronecker_product(sp.eye(m), sp.Matrix(J2))
+            expected_rank = 2*m
+        else:
+            b = sp.kronecker_product(sp.eye(m), J1)
+            expected_rank = 4*m
+        check(&#39;multiplicity&#39;, b.rank() == expected_rank)
+        zero(&#39;multiplicity&#39;, b+b.T)
+        copies.append(dict(depth=d, type=f, multiplicity=m, skew_dimension=skew_dim,
+                           nondegenerate=(f != &#39;R&#39; or m % 2 == 0)))
+check(&#39;minimal&#39;, [r[&#39;depth&#39;] for r in minimal if r[&#39;depth&#39;] &lt;= 10 and r[&#39;skew_dimension&#39;]]
+      == [2, 3, 4, 5, 6, 10])
+DATA[&#39;minimal&#39;] = minimal
+DATA[&#39;multiplicities&#39;] = copies
+section(&#39;1. Minimal versus repeated real carriers&#39;,
+        [&#39;End_G(V)=F in {R,C,H}; dim(skew F)=(0,1,3).&#39;,
+         &#39;End_G(V^m)=M_m(F); dim(skew)=(m(m-1)/2,m^2,m(2m+1)).&#39;,
+         &#39;For F=R, a nondegenerate invariant alternating form exists iff m is even.&#39;],
+        &#39;The minimal rule selects the occupied depths; every real-type depth regains a clock with two copies. Odd real multiplicity has a null direction even when skew generators exist.&#39;,
+        &#39;One irreducible real spin module, or m identical copies. Spatial mode count is not automatically representation multiplicity.&#39;)
+
+# 2. Recompute full ambient restrictions exactly, including negative controls.
+Y = 1j*J2
+gamma = [tensor([Z]*k+[middle]+[I2]*(4-k)) for k in range(5) for middle in (X, Y)]
+eye32 = np.eye(32, dtype=np.int64)
+for i, a in enumerate(gamma):
+    for j, b in enumerate(gamma):
+        check(&#39;clifford&#39;, np.array_equal(a@b+b@a, (2 if i == j else 0)*eye32))
+positive = [i for i in range(32) if i.bit_count() % 2 == 0]
+generators = []
+for i in range(9):
+    a = (gamma[i]@gamma[i+1])[np.ix_(positive, positive)]
+    g = np.block([[a.real, -a.imag], [a.imag, a.real]]).astype(np.int64)
+    check(&#39;clifford&#39;, np.array_equal(g.T, -g))
+    generators.append(g)
+words = list(itertools.product(range(4), repeat=5))
+basis = np.array([tensor([(I2, X, Z, J2)[i] for i in w]) for w in words])
+skew = np.array([sum(i == 3 for i in w) % 2 == 1 for w in words])
+alive = np.ones(1024, dtype=bool)
+j0 = np.kron(J2, np.eye(16, dtype=np.int64))
+ambient = []
+expected = [(512,256),(256,136),(128,72),(64,36),(32,16),(16,6),(8,2),(4,1),(2,1)]
+for d, g in enumerate(generators, 2):
+    bg, gb = basis@g, g@basis
+    commute = np.all(bg == gb, axis=(1,2))
+    check(&#39;ambient&#39;, np.all(commute | np.all(bg == -gb, axis=(1,2))))
+    alive &amp;= commute
+    pair = (int(alive.sum()), int((alive &amp; skew).sum()))
+    check(&#39;ambient&#39;, pair == expected[d-2])
+    check(&#39;ambient&#39;, np.array_equal(j0@g, g@j0))
+    ambient.append(dict(depth=d, commutant_dimension=pair[0], skew_dimension=pair[1]))
+DATA[&#39;ambient&#39;] = ambient
+section(&#39;2. Shared Spin(10) carrier versus minimal carriers&#39;,
+        [&#39;J0=I_16 tensor J_2 up to component ordering; [J0,Spin(10)]=0.&#39;,
+         &#39;[J0,Spin(d)]=0 for every embedded subgroup.&#39;,
+         &#39;At d=7,8,9 the full skew-commutant dimensions are 6,2,1.&#39;],
+        &#39;All depths retain a nondegenerate clock in the shared 32-real-component carrier. Ambient restriction alone does not implement the minimal selector.&#39;,
+        &#39;A realified complex half-spin carrier; no spatial compactification.&#39;)
+del basis, gamma
+
+# 3. Energy symmetry need not preserve the symplectic form.
+symmetry = []
+for i, t in enumerate((J1, J2H, J3)):
+    defect = t.T*J3+J3*t
+    zero(&#39;kinetic-symmetry&#39;, t.T+t)
+    symmetry.append(dict(generator=i+1, preserves_isotropic_energy=True,
+                         preserves_fixed_J3_kinetics=(defect == sp.zeros(4)),
+                         kinetic_defect_rank=defect.rank()))
+check(&#39;kinetic-symmetry&#39;, [r[&#39;preserves_fixed_J3_kinetics&#39;] for r in symmetry] == [False,False,True])
+DATA[&#39;fixed_J_symmetry&#39;] = symmetry
+section(&#39;3. Quaternionic energy symmetry: first-order and second-order branches&#39;,
+        [&#39;H=omega psi^T psi/2 is invariant under all three quaternion units.&#39;,
+         &#39;L1=psi^T J3 dot(psi)/2-H requires T^T J3+J3 T=0.&#39;,
+         &#39;Only the J3 generator preserves this fixed first-order kinetic term.&#39;,
+         &#39;L2=(|dot(psi)|^2-omega^2|psi|^2)/2 preserves all three skew generators.&#39;],
+        &#39;An H-type commutant supplies three possible phase axes, but a fixed first-order clock retains only one continuous canonical phase symmetry. The isotropic second-order action retains all three.&#39;,
+        &#39;Classical commuting real fields. A Noether charge requires symmetry of the complete action, not only the energy.&#39;)
+
+# 4. Conjugation branches and conserved quantities.
+q = sp.Matrix(sp.symbols(&#39;q0:4&#39;, real=True))
+p = sp.Matrix(sp.symbols(&#39;p0:4&#39;, real=True))
+omega = sp.symbols(&#39;omega&#39;, positive=True)
+charge_rows = []
+for i, t in enumerate((J1,J2H,J3)):
+    charge = (q.T*t*p)[0]
+    derivative = sum(sp.diff(charge,q[k])*p[k]-sp.diff(charge,p[k])*omega**2*q[k] for k in range(4))
+    zero(&#39;second-order-charges&#39;, derivative)
+    charge_rows.append(str(charge))
+c = sp.diag(1,1,-1,-1)
+j = sp.kronecker_product(sp.Matrix(J2), sp.eye(2))
+zero(&#39;conjugation&#39;, c*c-sp.eye(4))
+zero(&#39;conjugation&#39;, c*j*c+j)
+zero(&#39;conjugation&#39;, J2H*J1*J2H.T+J1)
+zero(&#39;conjugation&#39;, J2H**2+E4)
+u,v = sp.symbols(&#39;u v&#39;, real=True)
+reverse_h = u*J2H+v*J3
+zero(&#39;conjugation&#39;, reverse_h*J1+J1*reverse_h)
+zero(&#39;conjugation&#39;, reverse_h**2+(u*u+v*v)*E4)
+common_b = sp.diag(sp.Matrix(J2), sp.Matrix(J2))
+opposite_phase = sp.diag(sp.Matrix(J2), -sp.Matrix(J2))
+swap = sp.BlockMatrix([[sp.zeros(2),sp.eye(2)],[sp.eye(2),sp.zeros(2)]]).as_explicit()
+charge_matrix = common_b*opposite_phase
+zero(&#39;conjugation&#39;, swap.T*common_b*swap-common_b)
+zero(&#39;conjugation&#39;, swap.T*charge_matrix*swap+charge_matrix)
+zero(&#39;conjugation&#39;, swap.T*swap-E4)
+zero(&#39;conjugation&#39;, common_b*common_b+E4)
+DATA[&#39;second_order_charges&#39;] = charge_rows
+section(&#39;4. Conjugation, circulation and both orders of time evolution&#39;,
+        [&#39;C=diag(I,-I), C^2=I, CJC=-J on two real copies.&#39;,
+         &#39;For L2, Q_T=q^T T p is conserved for each T=J1,J2,J3.&#39;,
+         &#39;For fixed first-order J, C reverses the symplectic form: it is not a same-time canonical symmetry.&#39;,
+         &#39;Inside one H commutant, an element reversing J1 is u J2+v J3; its square is -(u^2+v^2)I, never +I for nonzero real u,v.&#39;,
+         &#39;For one fixed first-order phase generator T=J, its moment map is Q=psi^T JT psi/2=-|psi|^2/2: sign-definite.&#39;,
+         &#39;For two copies, B=diag(J,J), T=diag(J,-J), Q=(|psi_2|^2-|psi_1|^2)/2.&#39;,
+         &#39;The copy swap obeys C^T B C=B, C^T(BT)C=-BT and preserves the common positive isotropic energy.&#39;],
+        &#39;Both signs of circulation exist in the second-order control. A paired first-order carrier also admits an explicit same-time canonical sign reversal, using a specified opposite-weight phase generator. A single uniform first-order phase has sign-definite action. Quaternionic reversal can square to minus identity; an involutive antipattern map is an additional requirement. No electric-charge identification follows.&#39;,
+        &#39;Internal classical circulation is distinct from observed electric charge. Reversing J together with the kinetic sector is a different branch from holding the action fixed.&#39;)
+
+# 5. Time-dependent clock axis: derive the full six-coordinate symplectic form.
+# In a north-pole chart a=(x,y,sqrt(1-x^2-y^2)), derivatives of J are J1,J2.
+norm2 = (q.T*q)[0]
+cross = sp.Matrix.hstack(J1*q/2, J2H*q/2)
+form = J3.row_join(cross).col_join((-cross.T).row_join(sp.zeros(2)))
+schur = sp.simplify(-cross.T*J3*cross)
+target_schur = sp.Matrix([[0,norm2/4],[-norm2/4,0]])
+zero(&#39;moving-axis-form&#39;, schur-target_schur)
+zero(&#39;moving-axis-form&#39;, form+form.T)
+zero(&#39;moving-axis-form&#39;, sp.det(form)-norm2**2/16)
+axis_inverse = sp.Matrix([[0,-4/norm2],[4/norm2,0]])
+zero(&#39;moving-axis-form&#39;, schur*axis_inverse-sp.eye(2))
+zero(&#39;moving-axis-form&#39;, cross.T*(-J3)*q)
+ax = sp.symbols(&#39;a1:4&#39;,real=True)
+ja = sum((ax[i]*t for i,t in enumerate((J1,J2H,J3))),sp.zeros(4))
+for i,t in enumerate((J1,J2H,J3)):
+    zero(&#39;moving-axis-noether&#39;, (q.T*ja*t*q)[0]/4+norm2*ax[i]/4)
+DATA[&#39;moving_axis&#39;] = dict(symplectic_matrix=str(form), schur_complement=str(schur),
+                          determinant=str(norm2**2/16), axis_inverse=str(axis_inverse),
+                          spin_coefficient=&#39;s=|psi|^2/4=I/2&#39;, singular_branch=&#39;psi=0&#39;)
+section(&#39;5. Derive a dynamical axis instead of adding an assumed rotor inertia&#39;,
+        [&#39;theta=psi^T J(a) dpsi/2, |a|=1; F=dtheta.&#39;,
+         &#39;At a=e3: F=[[J3,C],[-C^T,0]], C=(J1 psi,J2 psi)/2.&#39;,
+         &#39;F_axis,eff=-C^T J3 C=(|psi|^2/4)*[[0,1],[-1,0]].&#39;,
+         &#39;det(F)=|psi|^4/16; dot(a)=(1/s) a cross grad_a(H), s=|psi|^2/4.&#39;,
+         &#39;The norm I=|psi|^2/2 Poisson-commutes with a. At psi=0 this form is degenerate.&#39;,
+         &#39;Simultaneous psi -&gt; exp(t J_i/2)psi and a -&gt; rotation_i(t)a preserves the kinetic term.&#39;,
+         &#39;Its moment map is Q_i=psi^T J(a)J_i psi/4=-s a_i, with s=|psi|^2/4.&#39;],
+        &#39;Allowing an independent clock axis in the original first-order term generates first-order precession, with coefficient fixed by the field norm. It does not generate the earlier second-order rotor law. Both kinetic branches must be kept.&#39;,
+        &#39;The axis is an independent internal pattern variable in this extended action. If it is a function of psi, its pullback must be recomputed. No claim that the fundamental field already contains this variable.&#39;)
+
+# 6. A derived-axis pullback: an explicit different branch.
+K = sp.kronecker_product(sp.eye(2), sp.Matrix(J2))
+for t in (J1,J2H,J3):
+    zero(&#39;derived-axis&#39;, K*t-t*K)
+hopf = sp.Matrix([(q.T*K*t*q)[0]/norm2 for t in (J1,J2H,J3)])
+zero(&#39;derived-axis&#39;, (hopf.T*hopf)[0]-1)
+j_hopf = sum((hopf[i]*t for i,t in enumerate((J1,J2H,J3))), sp.zeros(4))
+zero(&#39;derived-axis&#39;, j_hopf*q+K*q)
+zero(&#39;derived-axis&#39;, q.T*j_hopf+q.T*K)
+DATA[&#39;derived_axis&#39;] = [str(sp.factor(x)) for x in hopf]
+section(&#39;6. Independent versus field-derived axis&#39;,
+        [&#39;Choose a fixed commuting K with K^2=-I; a_i=(psi^T K J_i psi)/|psi|^2.&#39;,
+         &#39;|a|^2=1; J(a)psi=-K psi.&#39;,
+         &#39;Pullback[psi^T J(a)dpsi/2]=-psi^T K dpsi/2.&#39;],
+        &#39;This explicit derived-axis choice collapses to a fixed kinetic structure and supplies no new independent axis degree of freedom. Its fixed K is additional structure; it is not a universal rotation-invariant selection law.&#39;,
+        &#39;Nonzero psi, fixed K. This branch is a test of coordinate dependence, not a new spatial dimension.&#39;)
+
+# 7. Exact paired precession for both g signs, aligned and antialigned.
+sa,sb,g,lam = sp.symbols(&#39;s_a s_b g lambda&#39;, nonzero=True, real=True)
+R = sp.Matrix([[0,-1],[1,0]])
+precession = []
+for epsilon in (1,-1):
+    matrix = sp.BlockMatrix([[epsilon*g*R/sa, -g*R/sa],
+                             [-epsilon*g*R/sb, g*R/sb]]).as_explicit()
+    expected_poly = lam**2*(lam**2+g**2*(epsilon/sa+1/sb)**2)
+    zero(&#39;pair-precession&#39;, (lam*sp.eye(4)-matrix).det()-expected_poly)
+    equal = matrix.subs({sa:1,sb:1,g:1})
+    precession.append(dict(relative_orientation=epsilon,
+                           characteristic_polynomial=str(sp.factor(expected_poly)),
+                           equal_coefficient_rank=equal.rank(),
+                           equal_coefficient_square_rank=(equal*equal).rank()))
+check(&#39;pair-precession&#39;, precession[1][&#39;equal_coefficient_square_rank&#39;]==0)
+DATA[&#39;precession_spectra&#39;] = precession
+section(&#39;7. First-order paired axes: both signs and both equilibria&#39;,
+        [&#39;V=-g a dot b; dot(a)=-(g/s_a) a cross b; dot(b)=(g/s_b) a cross b.&#39;,
+         &#39;L=s_a a+s_b b and a dot b are exactly conserved.&#39;,
+         &#39;dot(a)=g/(s_a s_b) L cross a; Omega_prec=|g| |L|/|s_a s_b|.&#39;,
+         &#39;At b=epsilon a: chi(lambda)=lambda^2[lambda^2+g^2(epsilon/s_a+1/s_b)^2].&#39;],
+        &#39;Both contact signs give conservative precession, not alignment. Generic nonzero branches have one relative oscillatory pair and two zero eigenvalues. Equal positive coefficients at antiparallel alignment give a nonzero nilpotent linear block: the zero frequency is a degenerate limit, not a positive restoring resonance.&#39;,
+        &#39;First-order axis action derived in section 5, with fixed nonzero norms. No assumed damping. Signed coefficients are also covered by the symbolic equation.&#39;)
+
+# 8. Newtonian rotors, both signs and orientations, including anisotropy.
+ia,ib = sp.symbols(&#39;iota_a iota_b&#39;, positive=True)
+rotor = []
+for epsilon in (1,-1):
+    stiffness = g*sp.Matrix([[epsilon,-1],[-1,epsilon]])
+    mass = sp.diag(ia,ib)
+    a = mass.inv()*stiffness
+    expected = lam*(lam-epsilon*g*(1/ia+1/ib))
+    zero(&#39;pair-rotor&#39;, (lam*sp.eye(2)-a).det()-expected)
+    for sign in (-1,0,1):
+        rotor.append(dict(orientation=epsilon, coupling=sign,
+                          restoring=epsilon*sign&gt;0, unstable=epsilon*sign&lt;0,
+                          neutral=sign==0))
+DATA[&#39;rotor_signs&#39;] = rotor
+section(&#39;8. Second-order paired axes: restoring and unstable branches&#39;,
+        [&#39;L_axes=(iota_a|dot(a)|^2+iota_b|dot(b)|^2)/2+g a dot b.&#39;,
+         &#39;iota_a(ddot(a)+|dot(a)|^2 a)=g[b-(a dot b)a].&#39;,
+         &#39;At b=epsilon a: nu_relative^2=epsilon*g*(1/iota_a+1/iota_b), twice.&#39;,
+         &#39;g*epsilon&gt;0: two restoring modes; g*epsilon&lt;0: two growing/decaying pairs; g=0: free axes.&#39;],
+        &#39;The second-order law distinguishes energy minima from maxima through exponential stability, unlike pure precession. It has twice the orientation phase-space dimension and needs separately derived positive inertias.&#39;,
+        &#39;An alternative effective kinetic action. The rate is not inherited from the first-order field term.&#39;)
+
+# 9. Interpolate the kinetic laws and classify all gyroscopic sign branches.
+inertia,s,kx,ky = sp.symbols(&#39;iota s k_x k_y&#39;, real=True)
+dispersion = (inertia*lam**2+kx)*(inertia*lam**2+ky)+s*s*lam**2
+zero(&#39;gyro-polynomial&#39;, (inertia*lam**2*sp.eye(2)-s*lam*R+sp.diag(kx,ky)).det()-dispersion)
+gyro_cases=[]
+for iv in (Fraction(1,2),Fraction(1),Fraction(2)):
+    for sv in (Fraction(0),Fraction(1),Fraction(3)):
+        for xv,yv in itertools.product((-3,-1,0,1,3),repeat=2):
+            A=iv*iv; B=iv*(xv+yv)+sv*sv; C=Fraction(xv*yv); disc=B*B-4*A*C
+            if C&lt;0:
+                label=&#39;real-growth&#39;
+            elif C==0:
+                label=&#39;zero-mode-with-growth&#39; if B&lt;0 else &#39;zero-mode-marginal&#39;
+            elif disc&lt;0:
+                label=&#39;complex-growth&#39;
+            elif B&lt;0:
+                label=&#39;real-growth&#39;
+            elif disc==0:
+                label=&#39;imaginary-collision&#39;
+            else:
+                label=&#39;pure-imaginary&#39;
+            M=np.array([[0,0,1,0],[0,0,0,1],[-xv/float(iv),0,0,-float(sv/iv)],
+                        [0,-yv/float(iv),float(sv/iv),0]],float)
+            eig=np.linalg.eigvals(M)
+            if label==&#39;pure-imaginary&#39;:
+                check(&#39;gyro-numeric-control&#39;, max(abs(eig.real))&lt;1e-7)
+            elif label in (&#39;real-growth&#39;,&#39;complex-growth&#39;,&#39;zero-mode-with-growth&#39;):
+                check(&#39;gyro-numeric-control&#39;, max(eig.real)&gt;1e-6)
+            gyro_cases.append(dict(inertia=str(iv),gyro=str(sv),kx=xv,ky=yv,
+                                   classification=label,discriminant=str(disc),
+                                   maximum_real_eigenvalue=float(max(eig.real))))
+DATA[&#39;gyroscopic_cases&#39;]=gyro_cases
+boundary=[]
+for label,iv,sv,xv,yv in [(&#39;isotropic-repeated-stable&#39;,1,0,1,1),
+                        (&#39;inverted-gyro-threshold&#39;,1,2,-1,-1),
+                        (&#39;free-inertial&#39;,1,0,0,0),(&#39;free-gyroscopic&#39;,1,1,0,0),
+                        (&#39;one-flat-stiffness&#39;,1,1,1,0)]:
+    m=sp.Matrix([[0,0,1,0],[0,0,0,1],[-sp.Rational(xv,iv),0,0,-sp.Rational(sv,iv)],
+                 [0,-sp.Rational(yv,iv),sp.Rational(sv,iv),0]])
+    ev=m.eigenvals()
+    eigen_rows=[]
+    for value,multiplicity in ev.items():
+        geometric=4-(m-value*sp.eye(4)).rank()
+        eigen_rows.append(dict(eigenvalue=str(value),algebraic=int(multiplicity),geometric=geometric))
+    jordan=any(r[&#39;algebraic&#39;]&gt;r[&#39;geometric&#39;] for r in eigen_rows)
+    check(&#39;gyro-boundaries&#39;,jordan==(label in (&#39;inverted-gyro-threshold&#39;,&#39;free-inertial&#39;,&#39;one-flat-stiffness&#39;)))
+    boundary.append(dict(case=label,eigenvalues=eigen_rows,has_jordan_drift=jordan))
+DATA[&#39;gyroscopic_boundaries&#39;]=boundary
+section(&#39;9. Mixed kinetic action and anisotropic response&#39;,
+        [&#39;iota ddot(delta)-s J_2 dot(delta)+diag(k_x,k_y)delta=0.&#39;,
+         &#39;chi(lambda)=iota^2 lambda^4+[iota(k_x+k_y)+s^2]lambda^2+k_x k_y.&#39;,
+         &#39;Strict imaginary spectrum: C=k_x k_y&gt;0, B=iota(k_x+k_y)+s^2&gt;0, B^2-4 iota^2 C&gt;0.&#39;,
+         &#39;A mixed-sign stiffness (C&lt;0) always has growth. Equality cases require a Jordan-block check.&#39;,
+         &#39;For k_x=k_y=2g: signed circular rates nu_+/-=[sqrt(s^2+8 iota g)+/-s]/(2 iota); magnitudes give frequencies.&#39;,
+         &#39;iota -&gt; 0: one slow rate 2g/s and one fast rate s/iota; s -&gt; 0 recovers the degenerate rotor rates.&#39;],
+        &#39;Gyroscopic terms can spectrally stabilize an inverted isotropic contact when s^2+8 iota g&gt;0, but cannot stabilize a mixed-sign stiffness. Exact eigenvector counts distinguish a bounded isotropic repeated frequency from Jordan drift at the inverted threshold. Free inertial motion drifts, whereas the fully gyroscopic free control has semisimple zero modes. The first-order limit discards a fast branch rather than reproducing two independent slow modes.&#39;,
+        &#39;Positive inertia for numerical controls; real signed g and anisotropy. Spectral classification is not nonlinear stability. No depth-specific coefficients.&#39;)
+
+# 10. Stiff partner, zero stiffness, sign reversals, and finite selection window.
+delta,kappa,vel,qp,pp=sp.symbols(&#39;Delta kappa velocity q p&#39;,real=True)
+lp=pp*vel-delta*pp**2/2-kappa*qp**2/2
+zero(&#39;stiff-partner&#39;, lp.subs(pp,vel/delta)-vel**2/(2*delta)+kappa*qp**2/2)
+stiff=[]
+for dv,kv in itertools.product((-4,-1,0,1,4),repeat=2):
+    product=dv*kv
+    stiff.append(dict(Delta=dv,kappa=kv,frequency_squared=product,
+                      classification=&#39;oscillatory&#39; if product&gt;0 else &#39;exponential&#39; if product&lt;0 else &#39;degenerate&#39;,
+                      positive_energy=dv&gt;0 and kv&gt;0,
+                      elimination_regular=dv!=0))
+DATA[&#39;stiff_branches&#39;]=stiff
+section(&#39;10. Exact isolation versus finite stiffness&#39;,
+        [&#39;L=p dot(q)-Delta p^2/2-kappa q^2/2.&#39;,
+         &#39;Delta !=0: L_eff=dot(q)^2/(2 Delta)-kappa q^2/2; Omega^2=kappa Delta.&#39;,
+         &#39;Delta*kappa&gt;0 oscillates; Delta*kappa&lt;0 grows; a zero coefficient is degenerate.&#39;,
+         &#39;Both negative gives oscillation but negative energy. Delta&gt;0,kappa&gt;0 gives positive energy.&#39;,
+         &#39;A finite positive pair is below a frequency window Lambda iff kappa Delta &lt;= Lambda^2.&#39;],
+        &#39;A gap does not exactly remove a canonical partner. A cutoff can hide it only with a specified dynamical scale. Negative-energy oscillation is separately labelled rather than counted as a physical success.&#39;,
+        &#39;Quadratic internal control. Zero Delta cannot use the eliminated formula.&#39;)
+
+# 11. First-order invariance of a proposed selected subspace.
+projector_cases=[]
+for keep in ([0],[0,1],[0,2],[0,3],[1,2],[0,1,2],[0,1,2,3]):
+    projector=sp.diag(*[int(i in keep) for i in range(4)])
+    leakage=(E4-projector)*J3*projector
+    block=(projector*J3*projector).extract(keep,keep)
+    projector_cases.append(dict(kept_components=keep,leakage_rank=leakage.rank(),
+                                restricted_skew_rank=block.rank(),
+                                invariant=leakage==sp.zeros(4),
+                                kinetic_nondegenerate=block.det()!=0))
+check(&#39;projector-branches&#39;,sum(r[&#39;invariant&#39;] for r in projector_cases)==3)
+check(&#39;projector-branches&#39;,all(r[&#39;kinetic_nondegenerate&#39;]==r[&#39;invariant&#39;] for r in projector_cases))
+DATA[&#39;projector_controls&#39;]=projector_cases
+section(&#39;11. A subspace must close under its clock generator&#39;,
+        [&#39;A constant projector P is invariant for dot(psi)=-omega J psi iff (I-P)JP=0.&#39;,
+         &#39;The pulled-back kinetic form is PJP on im(P), and must be nondegenerate there.&#39;,
+         &#39;For a general quadratic energy K: closure requires (I-P)J^{-1}KP=0.&#39;],
+        &#39;A small support projector is not automatically a closed first-order particle sector. Rank-one real projections lose the alternating form and leak under the unprojected clock. The script checks both invariant and leaking component choices.&#39;,
+        &#39;Linear positive-frequency control. A nonlinear selector needs the analogous full vector-field tangency condition.&#39;)
+
+# 12. Unequal-frequency conservative interaction, with both signs and positivity.
+wa,wb,e=sp.symbols(&#39;omega_a omega_b epsilon&#39;,real=True)
+clock_h=sp.Matrix([[wa,e],[e,wb]])
+zero(&#39;detuned-exchange&#39;,(lam*sp.eye(2)-clock_h).det()-((lam-wa)*(lam-wb)-e**2))
+families={&#39;electron-muon&#39;:(18564,3838380), &#39;electron-tau-shared-unit&#39;:(18564,64512240),
+          &#39;down-strange&#39;:(1,20), &#39;up-charm&#39;:(15,8855), &#39;charm-top&#39;:(8855,1215450),
+          &#39;neutrino-1-2&#39;:(2002,11628), &#39;neutrino-2-3&#39;:(11628,65780),
+          &#39;W-Z&#39;:(2926,3321), &#39;Z-Higgs&#39;:(3321,4560), &#39;equal-frequency-control&#39;:(1,1)}
+exchange=[]
+for family,(na,nb) in families.items():
+    for fraction in (Fraction(0),Fraction(1,100),Fraction(1,10),Fraction(1,2),Fraction(1),Fraction(2)):
+        for sign in (-1,1):
+            eps_squared=fraction*fraction*na*nb
+            denominator=Fraction((na-nb)**2)+4*eps_squared
+            transfer=4*eps_squared/denominator if denominator else Fraction(0)
+            exchange.append(dict(family=family,omega_ratio=str(Fraction(nb,na)),
+                                  coupling_sign=sign,coupling_over_geometric_frequency=str(fraction),
+                                  maximum_action_transfer=str(transfer),
+                                  maximum_action_transfer_decimal=float(transfer),
+                                  energy_positive=fraction&lt;1,
+                                  zero_energy_direction=fraction==1))
+            check(&#39;detuned-exchange&#39;, 0&lt;=transfer&lt;=1)
+DATA[&#39;exchange&#39;]=exchange
+section(&#39;12. Unequal natural clocks: mixing without prescribed synchronization&#39;,
+        [&#39;H=omega_a|z_a|^2+omega_b|z_b|^2+2 epsilon Re(z_a^* z_b).&#39;,
+         &#39;Omega_+/-=(omega_a+omega_b)/2 +/- sqrt((omega_a-omega_b)^2/4+epsilon^2).&#39;,
+         &#39;Maximum transferred action fraction=4 epsilon^2/[(omega_a-omega_b)^2+4 epsilon^2].&#39;,
+         &#39;For positive omega_a,omega_b, H&gt;0 iff epsilon^2&lt;omega_a omega_b.&#39;,
+         &#39;Changing sign(epsilon) changes eigenvector phase, not the frequencies or maximum fraction.&#39;],
+        &#39;The two eigenstates have common clocks but a generic unlike-particle preparation beats; conservation does not force phase locking. Large maintained frequency ratios strongly suppress weak-coupling exchange. Strong coupling can cross the positive-energy boundary and is explicitly marked.&#39;,
+        &#39;Two real quadratures written in paired notation, with an admitted common component map. Counts set same-sector frequency ratios; the electron/tau comparison additionally assumes their maintained common unit. No physical decay or interaction-rate identification.&#39;)
+
+# 13. Frequency, action and total energy: both linear and nonlinear branches.
+action,mu,nonlinear=sp.symbols(&#39;I mu lambda_nl&#39;,real=True)
+ham=mu*action+nonlinear*action**2/2
+frequency=sp.diff(ham,action)
+zero(&#39;energy-clock&#39;,frequency-ham/action-nonlinear*action/2)
+assignments=[(&#39;W&#39;,2,76),(&#39;Z&#39;,2,81),(&#39;Higgs&#39;,2,95),(&#39;down&#39;,3,1),(&#39;strange&#39;,3,4),
+             (&#39;up&#39;,4,3),(&#39;charm&#39;,4,20),(&#39;top&#39;,4,72),(&#39;nu1&#39;,5,10),(&#39;nu2&#39;,5,15),
+             (&#39;nu3&#39;,5,22),(&#39;electron&#39;,6,13),(&#39;muon&#39;,6,35),(&#39;tau&#39;,10,23)]
+counts=[]
+for name,d,n in assignments:
+    N=n-1; count=math.comb(N+d,d)
+    check(&#39;counts&#39;,sum(math.comb(k+d-1,d-1) for k in range(N+1))==count)
+    neutral=1+(d if N&gt;=1 else 0)
+    rate_squared=Fraction(N)*(Fraction(N)-2+Fraction(2)**(1-N))
+    check(&#39;counts&#39;,rate_squared&gt;=0)
+    counts.append(dict(particle=name,depth=d,n=n,N=N,IDOS=count,
+                       neutral_disturbance_modes=neutral,positive_disturbance_modes=count-neutral,
+                       top_core_disturbance_frequency_squared=str(rate_squared)))
+DATA[&#39;counts&#39;]=counts
+section(&#39;13. Count energy versus actual phase equation&#39;,
+        [&#39;H(I)=mu I+lambda_nl I^2/2; Omega=dH/dI=mu+lambda_nl I.&#39;,
+         &#39;H/I=mu+lambda_nl I/2; Omega-H/I=lambda_nl I/2.&#39;,
+         &#39;For independent positive-rate modes H=sum nu_j I_j, equal energies imply I_j=epsilon/nu_j and H=D epsilon, but dot(theta_j)=nu_j.&#39;,
+         &#39;D=C(N+d,d)=sum_{k=0}^N C(k+d-1,d-1).&#39;,
+         &#39;Original entropy-core control: nu_k^2=k[k-2+2^(1-k)], with k=0,1 neutral.&#39;,
+         &#39;A neutral disturbance is not a proof of zero complete bare field energy.&#39;],
+        &#39;Linear energy-to-phase identification holds for this homogeneous oscillator; the nonlinear branch differs. Equal modal energies reproduce a total count but do not create a count-proportional carrier. All fourteen count assignments and the N=0 boundary are evaluated.&#39;,
+        &#39;Known mode assignments are inputs. No amplitude is fitted to an observed mass. Disturbance frequencies and particle carrier frequencies remain distinct.&#39;)
+
+# 14. Finite-time reduced ODE controls, retaining both signs and initial angles.
+ode=[]
+max_errors={&#39;norm&#39;:0.,&#39;angle&#39;:0.,&#39;angular_momentum&#39;:0.,&#39;trajectory&#39;:0.,&#39;rotor_energy&#39;:0.}
+for gav in (-2.,0.,2.):
+    for sav,sbv in ((1.,1.),(1.,2.)):
+        for angle in (.2,1.2,math.pi-.2):
+            a0=np.array([0.,0.,1.]); b0=np.array([math.sin(angle),0.,math.cos(angle)])
+            total=sav*a0+sbv*b0
+            def rhs(t,y):
+                cross=np.cross(y[:3],y[3:])
+                return np.r_[-gav*cross/sav,gav*cross/sbv]
+            times=np.linspace(0.,8.,161)
+            sol=solve_ivp(rhs,(0.,8.),np.r_[a0,b0],method=&#39;DOP853&#39;,rtol=2e-10,atol=2e-12,t_eval=times)
+            check(&#39;precession-ode&#39;,sol.success)
+            axis=total/np.linalg.norm(total)
+            rate=gav*np.linalg.norm(total)/(sav*sbv)
+            exact=np.array([a0*math.cos(rate*t)+np.cross(axis,a0)*math.sin(rate*t)
+                            +axis*np.dot(axis,a0)*(1-math.cos(rate*t)) for t in times]).T
+            av,bv=sol.y[:3],sol.y[3:]
+            errors=dict(norm=float(max(np.max(abs(np.linalg.norm(av,axis=0)-1)),np.max(abs(np.linalg.norm(bv,axis=0)-1)))),
+                        angle=float(np.max(abs(np.sum(av*bv,axis=0)-np.dot(a0,b0)))),
+                        angular_momentum=float(np.max(abs(sav*av+sbv*bv-total[:,None]))),
+                        trajectory=float(np.max(abs(av-exact))))
+            for key,value in errors.items():
+                max_errors[key]=max(max_errors[key],value)
+                check(&#39;precession-ode&#39;,value&lt;2e-7)
+            ode.append(dict(kind=&#39;first-order&#39;,g=gav,s_a=sav,s_b=sbv,angle=angle,errors=errors))
+for gav in (-1.,1.):
+    for orientation in (-1.,1.):
+        iav,ibv=1.,2.
+        a0=np.array([0.,0.,1.]);b0=np.array([.05,0.,orientation*math.sqrt(1-.05**2)])
+        def rhs_rotor(t,y):
+            av,bv,va,vb=y[:3],y[3:6],y[6:9],y[9:]
+            c=np.dot(av,bv)
+            return np.r_[va,vb,gav*(bv-c*av)/iav-np.dot(va,va)*av,
+                         gav*(av-c*bv)/ibv-np.dot(vb,vb)*bv]
+        sol=solve_ivp(rhs_rotor,(0.,4.),np.r_[a0,b0,np.zeros(6)],method=&#39;DOP853&#39;,rtol=2e-10,atol=2e-12,
+                      t_eval=np.linspace(0.,4.,121))
+        check(&#39;rotor-ode&#39;,sol.success)
+        av,bv,va,vb=sol.y[:3],sol.y[3:6],sol.y[6:9],sol.y[9:]
+        energy=(iav*np.sum(va*va,axis=0)+ibv*np.sum(vb*vb,axis=0))/2-gav*np.sum(av*bv,axis=0)
+        drift=float(np.max(abs(energy-energy[0])))
+        normerror=float(max(np.max(abs(np.linalg.norm(av,axis=0)-1)),np.max(abs(np.linalg.norm(bv,axis=0)-1))))
+        check(&#39;rotor-ode&#39;,drift&lt;2e-7)
+        check(&#39;rotor-ode&#39;,normerror&lt;2e-7)
+        max_errors[&#39;rotor_energy&#39;]=max(max_errors[&#39;rotor_energy&#39;],drift)
+        ode.append(dict(kind=&#39;second-order&#39;,g=gav,orientation=orientation,energy_drift=drift,norm_error=normerror,
+                        initial_dot=float(np.dot(a0,b0)),final_dot=float(np.dot(av[:,-1],bv[:,-1]))))
+DATA[&#39;ode_controls&#39;]=ode
+DATA[&#39;ode_max_errors&#39;]=max_errors
+section(&#39;14. Exact histories versus numerical reduced evolution&#39;,
+        [&#39;First-order pair: both axes rotate about the conserved L with rate g|L|/(s_a s_b).&#39;,
+         &#39;Second-order pair: E=(iota_a|dot(a)|^2+iota_b|dot(b)|^2)/2-g a dot b is conserved.&#39;],
+        &#39;Eighteen first-order runs check the exact rotation formula and conservation for both signs and zero coupling. Four second-order runs check both stationary orientations and both contact signs. These are short consistency controls, not lifetime or nonlinear-stability theorems.&#39;,
+        &#39;DOP853 with rtol=2e-10, atol=2e-12. Numerical errors and trajectories are summarized in the JSON report.&#39;)
+
+# 15. Explicit branch ledger: conclusions must retain their assumptions.
+ledger=[
+    [&#39;minimal irreducible first-order carrier&#39;,&#39;C/H depths admit clocks&#39;,&#39;R depths lack a nondegenerate invariant first-order form&#39;],
+    [&#39;repeated real-type carrier&#39;,&#39;even multiplicity permits a clock&#39;,&#39;odd multiplicity leaves null directions&#39;],
+    [&#39;ambient restriction&#39;,&#39;clocks survive at every tested depth&#39;,&#39;does not implement minimal selection&#39;],
+    [&#39;fixed quaternionic first-order J&#39;,&#39;one continuous canonical phase symmetry&#39;,&#39;other two energy symmetries fail kinetic invariance&#39;],
+    [&#39;isotropic second-order kinetics&#39;,&#39;three conserved quaternionic circulations&#39;,&#39;no identification with charge or colour&#39;],
+    [&#39;first-order phase charge&#39;,&#39;one uniform phase has sign-definite action&#39;,&#39;paired opposite weights allow canonical sign-reversing copy swap&#39;],
+    [&#39;independent dynamical J&#39;,&#39;first-order sphere precession with s=I/2&#39;,&#39;zero field norm is singular&#39;],
+    [&#39;derived Hopf J(psi)&#39;,&#39;pullback reduces to fixed -K&#39;,&#39;no independent axis degree of freedom&#39;],
+    [&#39;pure first-order pair&#39;,&#39;both signs precess; angle conserved&#39;,&#39;no conservative attraction to alignment&#39;],
+    [&#39;second-order pair&#39;,&#39;energy-minimum branch restores&#39;,&#39;energy-maximum branch grows&#39;],
+    [&#39;mixed gyroscopic pair&#39;,&#39;sufficient gyro strength can stabilize two negative stiffnesses spectrally&#39;,&#39;mixed-sign stiffness always grows&#39;],
+    [&#39;repeated or zero eigenvalues&#39;,&#39;semisimple branches remain bounded linearly&#39;,&#39;defective branches have Jordan drift; both explicitly checked&#39;],
+    [&#39;finite stiff partner&#39;,&#39;positive finite gap retains a second-order oscillator&#39;,&#39;exact projection is a distinct assumption&#39;],
+    [&#39;equal frequency mixing&#39;,&#39;nonzero coupling permits complete action transfer&#39;,&#39;zero coupling transfers nothing&#39;],
+    [&#39;unequal frequency mixing&#39;,&#39;detuning suppresses weak transfer&#39;,&#39;large coupling can violate positive energy&#39;],
+    [&#39;linear homogeneous oscillator&#39;,&#39;Omega=H/I&#39;,&#39;nonlinear H generally gives Omega different from H/I&#39;],
+    [&#39;equal energy per counted mode&#39;,&#39;total energy is D epsilon&#39;,&#39;actual mode clocks remain their Hamiltonian derivatives&#39;],
+]
+DATA[&#39;branch_ledger&#39;]=ledger
+section(&#39;15. Conditional branch ledger&#39;,[],
+        &#39;Every calculation branch and its alternative are listed explicitly in branch_ledger. A passing algebraic check does not choose the physical branch.&#39;,
+        &#39;No observed particle, electric charge, mediator or probability interpretation is inferred from the matrix labels.&#39;)
+
+sources={&#39;experiments/spinor-clock-branches.py&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+stamp=datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)
+report=dict(created_utc=datetime.now(timezone.utc).isoformat(),verification_scope=&quot;portable branch equations and ODE controls&quot;,
+            runtime_seconds=time.monotonic()-START,checks=CHECKS,total_checks=sum(CHECKS.values()),
+            sources=sources,libraries=dict(numpy=np.__version__,sympy=sp.__version__,scipy=scipy.__version__),
+            sections=SECTIONS,data=DATA)
+result_path=HERE/(&#39;spinor-clock-branches-results-&#39;+stamp+&#39;.json&#39;)
+result_path.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+lines=[&#39;# Both Branches of the Real-Clock Calculation&#39;,&#39;&#39;,
+       &#39;This is the executed equation ledger. Each section states its assumptions and alternative outcomes.&#39;,
+       f&#39;Exact and control assertions passed: {sum(CHECKS.values())}.&#39;,&#39;&#39;]
+for item in SECTIONS:
+    lines+=[&#39;## &#39;+item[&#39;title&#39;],&#39;&#39;,item[&#39;assumptions&#39;],&#39;&#39;]
+    lines += [&#39;```text&#39;]+item[&#39;equations&#39;]+[&#39;```&#39;,&#39;&#39;] if item[&#39;equations&#39;] else []
+    lines += [item[&#39;result&#39;],&#39;&#39;]
+lines+=[&#39;## Branch Ledger&#39;,&#39;&#39;,&#39;| Condition | First outcome | Other outcome or limit |&#39;,&#39;| --- | --- | --- |&#39;]
+lines+=[&#39;| &#39;+&#39; | &#39;.join(row)+&#39; |&#39; for row in ledger]
+lines+=[&#39;&#39;,&#39;## Exact Minimal-Carrier Table&#39;,&#39;&#39;,&#39;| d | Type | Real dimension | Skew generators |&#39;,&#39;| ---: | --- | ---: | ---: |&#39;]
+lines += [f&quot;| {r[&#39;depth&#39;]} | {r[&#39;type&#39;]} | {r[&#39;real_module_dimension&#39;]} | {r[&#39;skew_dimension&#39;]} |&quot; for r in minimal]
+lines+=[&#39;&#39;,&#39;## Common Ambient Carrier&#39;,&#39;&#39;,&#39;| d | Real commutant dimension | Skew dimension |&#39;,&#39;| ---: | ---: | ---: |&#39;]
+lines += [f&quot;| {r[&#39;depth&#39;]} | {r[&#39;commutant_dimension&#39;]} | {r[&#39;skew_dimension&#39;]} |&quot; for r in ambient]
+lines+=[&#39;&#39;,&#39;## Weak Unequal-Frequency Exchange Control&#39;,&#39;&#39;,
+        &#39;Coupling magnitude is one hundredth of the geometric mean frequency. Entries are transferred action fractions, not decay rates or probabilities.&#39;,&#39;&#39;,
+        &#39;| Pair | Frequency ratio | Maximum fraction |&#39;,&#39;| --- | ---: | ---: |&#39;]
+lines += [f&quot;| {r[&#39;family&#39;]} | {r[&#39;omega_ratio&#39;]} | {r[&#39;maximum_action_transfer&#39;]} ({r[&#39;maximum_action_transfer_decimal&#39;]:.8g}) |&quot;
+          for r in exchange if r[&#39;coupling_over_geometric_frequency&#39;]==&#39;1/100&#39; and r[&#39;coupling_sign&#39;]==1]
+lines+=[&#39;&#39;,&#39;## Numerical Errors&#39;,&#39;&#39;,json.dumps(max_errors,indent=2),&#39;&#39;,
+        &#39;The JSON report contains every multiplicity, stiffness, gyroscopic, exchange and ODE case, including unfavorable and singular branches.&#39;,
+        &#39;No empirical particle assignment was changed. This script tests explicit candidate laws; it does not establish which action nature realizes.&#39;,&#39;&#39;]
+(HERE/&#39;equations-and-results.md&#39;).write_text(&#39;\n&#39;.join(lines))
+print(json.dumps(dict(result_path=str(result_path.relative_to(ROOT)),total_checks=sum(CHECKS.values()),
+                      runtime_seconds=report[&#39;runtime_seconds&#39;],ode_max_errors=max_errors),indent=2),flush=True)
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

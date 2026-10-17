@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>gaussian-matrix-check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/idos-action/gaussian-matrix-check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="gaussian-matrix-check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/idos-action/gaussian-matrix-check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="gaussian-matrix-check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>gaussian-matrix-check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/idos-action/gaussian-matrix-check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Bounded exact checks for full Gaussian covariance/chirp dynamics.&quot;&quot;&quot;
+import sympy as s
+import json, hashlib
+from pathlib import Path
+from datetime import datetime, timezone
+checks=[]
+def check(name, expr):
+    ok=all(s.simplify(x)==0 for x in expr) if isinstance(expr,s.MatrixBase) else s.simplify(expr)==0
+    if not ok: raise AssertionError((name,expr))
+    checks.append(name)
+a,b,k=s.symbols(&#39;alpha beta k&#39;,positive=True)
+g,h,c=s.symbols(&#39;g h c&#39;,positive=True)
+G=s.diag(g,h); C=s.Matrix([[0,c],[c,0]])
+F=lambda q:2*a/q**2-2*b*k/(q*(q+k))
+Gdot=2*a*(C*G+G*C)
+Cdot=2*a*(G.inv()**2-C**2)-2*b*(G.inv()-(G+k*s.eye(2)).inv())
+check(&#39;angular tensor conservation&#39;,Gdot*C+G*Cdot-Cdot*G-C*Gdot)
+# Energy derivative for a general rational, noncommuting symmetric point in each depth.
+counts=[]
+for d in (2,3,4,5,6,10):
+    GG=s.diag(*[s.Rational(i+2,i+1) for i in range(d)])
+    CC=s.Matrix(d,d,lambda i,j:s.Rational((i+1)*(j+1),37) if i!=j else s.Rational(i+1,29))
+    GD=2*(CC*GG+GG*CC)
+    CD=2*(GG.inv()**2-CC**2)-2*(GG.inv()-(GG+2*s.eye(d)).inv())
+    check(f&#39;d{d} angular conservation&#39;,GD*CC+GG*CD-CD*GG-CC*GD)
+    # W derivative = -G^-2+2[G^-1(G+2I)^-1].
+    WP=-GG.inv()**2+2*GG.inv()*(GG+2*s.eye(d)).inv()
+    check(f&#39;d{d} energy conservation&#39;,s.trace((CC*CD+CD*CC)*GG+CC**2*GD+WP*GD))
+    # Homogeneity phase identity, removing identical mu/log constants.
+    lhs=s.trace(GG.inv())-s.trace((GG+2*s.eye(d)).inv())
+    rhs=s.trace(GG.inv()+CC**2*GG)/2+s.trace(GG*CD)/4
+    check(f&#39;d{d} phase-energy identity&#39;,lhs-rhs)
+    # Cross block zero and stationary transverse block checked with symbolic 2x block.
+    if d&lt;10:
+        GT=s.diag(GG,2*s.eye(10-d)); CT=s.diag(CC,s.zeros(10-d))
+        GDT=2*(CT*GT+GT*CT); CDT=2*(GT.inv()**2-CT**2)-2*(GT.inv()-(GT+2*s.eye(10)).inv())
+        check(f&#39;d{d} stationary transverse block&#39;,GDT[d:,d:]+CDT[d:,d:])
+        check(f&#39;d{d} no cross-plane generation&#39;,GDT[:d,d:]+CDT[:d,d:])
+    counts.append({&#39;depth&#39;:d,&#39;quadratic_spatial_shell&#39;:d*(d+1)//2,&#39;independent_rotation_planes&#39;:d//2,&#39;cumulative_IDOS_through_degree_2&#39;:(d+1)*(d+2)//2})
+# Algebraic rotating solution checked modulo its defining quadratic, avoiding numerical root tests.
+y,w=s.symbols(&#39;y w&#39;,positive=True)
+poly=27*y*y-13*y-54
+w2=9*(y-1)/(5*y*y*(y+1))
+GG=s.diag(2*y,y); CC=s.Matrix([[0,w/6],[w/6,0]]); Om=s.Matrix([[0,-w],[w,0]])
+GD=2*(CC*GG+GG*CC); CD=2*(GG.inv()**2-CC**2)-2*(GG.inv()-(GG+2*s.eye(2)).inv())
+check(&#39;relative equilibrium G equation&#39;,GD-(Om*GG-GG*Om))
+for i in range(2):
+    expr=s.factor((CD-(Om*CC-CC*Om))[i,i].subs(w*w,w2))
+    num=s.together(expr).as_numer_denom()[0]
+    check(f&#39;relative equilibrium C equation {i}&#39;,s.rem(num,poly,y))
+check(&#39;rotation phase deficit&#39;,s.trace(GG*(Om*CC-CC*Om))/4+w*(GG*CC-CC*GG)[0,1]/2)
+# Small-amplitude frequency.
+g0=a*k/(b*k-a)
+fprime=s.diff(F(g),g).subs(g,g0)
+nu2=16*a*a*(k/2)/(g0*g0*(g0+k))
+check(&#39;quadratic disturbance frequency&#39;,-4*a*g0*fprime-nu2)
+yv=(s.Integer(13)+s.sqrt(6001))/54
+wv=s.sqrt(w2.subs(y,yv)); cv=wv/6
+e0=s.Rational(1,2)-s.log(2)
+excess=(1/(2*yv)+1/yv+3*yv*cv*cv-s.log(1+1/yv)-s.log(1+2/yv)-2*e0)/2
+numeric={key:str(s.N(value,25)) for key,value in {&#39;h&#39;:yv,&#39;rotation_rate&#39;:wv,&#39;chirp&#39;:cv,&#39;excess_energy_per_A&#39;:excess,&#39;escape_threshold_per_A&#39;:-e0/2,&#39;angular_momentum_per_A&#39;:yv*cv/2,&#39;carrier_deficit&#39;:wv*yv*cv/2}.items()}
+assert 0&lt;float(excess)&lt;float(-e0/2)
+checks.append(&#39;rotating sample lies strictly below escape threshold (numerical diagnostic)&#39;)
+report={&#39;date_utc&#39;:datetime.now(timezone.utc).isoformat(),&#39;checks&#39;:checks,&#39;check_count&#39;:len(checks),&#39;depths&#39;:counts,&#39;rotating_control&#39;:numeric,&#39;sources&#39;:{&#39;check.py&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},&#39;scope&#39;:&#39;Exact rational/algebraic matrix identities; one non-interval numerical diagnostic. No PDE evolution, particle simulation or full-field stability claim.&#39;}
+output=Path(__file__).with_name(&#39;checks-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;)
+output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;check_count&#39;:len(checks),&#39;output&#39;:str(output),&#39;rotating_control&#39;:numeric},indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

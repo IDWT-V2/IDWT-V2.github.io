@@ -1,0 +1,46 @@
+{
+  "checksPassed": 17,
+  "checks": [
+    "Radial Routh reduction",
+    "Strict convexity formula",
+    "Petal equilibrium is radial minimum",
+    "Positive radial frequency",
+    "Inner centrifugal barrier",
+    "Outer centrifugal barrier",
+    "Uniform positive convexity bound by positive coefficients",
+    "Continuous frequency-ratio derivative",
+    "Exact resonance L=2",
+    "Detuning slope L=2",
+    "Positive radial frequency and nonzero detuning L=2",
+    "Exact resonance L=3",
+    "Detuning slope L=3",
+    "Positive radial frequency and nonzero detuning L=3",
+    "Exact resonance L=4",
+    "Detuning slope L=4",
+    "Positive radial frequency and nonzero detuning L=4"
+  ],
+  "cases": [
+    {
+      "lock": 2,
+      "radiusSquared": "-1 + 4*sqrt(3)/3",
+      "radialFrequencySquared": "64/3 + 16*sqrt(3)",
+      "detuningDerivative": "-3/2"
+    },
+    {
+      "lock": 3,
+      "radiusSquared": "-1 + sqrt(2)",
+      "radialFrequencySquared": "8 + 32*sqrt(2)",
+      "detuningDerivative": "-8/3"
+    },
+    {
+      "lock": 4,
+      "radiusSquared": "-1 + 4*sqrt(15)/15",
+      "radialFrequencySquared": "64/15 + 16*sqrt(15)",
+      "detuningDerivative": "-15/4"
+    }
+  ],
+  "sources": {
+    "experiments/phase-action-radial-checks.py": "7a38f41a4fadddba0f852e689126674bac301d0353045a77bce8777d0a3146d9"
+  },
+  "scope": "Radial trapping for nonzero conserved block angular momenta in the fixed-norm collective action; no full-field stability or integer selection."
+}

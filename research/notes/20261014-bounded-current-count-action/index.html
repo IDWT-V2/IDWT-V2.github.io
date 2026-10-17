@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>A Bounded Current Action with Count Clocks and Frequency-Dependent Inertia — IDWT V2</title>
+  <meta name="description" content="One inverse classical spatial action combines supplied count clocks, global conserved-energy H1 histories, nodal data and positive frequency-dependent low-speed inertia; general uniqueness and physical branch selection remain open.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261014-bounded-current-count-action/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Bounded Current Action with Count Clocks and Frequency-Dependent Inertia — IDWT V2">
+  <meta property="og:description" content="One inverse classical spatial action combines supplied count clocks, global conserved-energy H1 histories, nodal data and positive frequency-dependent low-speed inertia; general uniqueness and physical branch selection remain open.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261014-bounded-current-count-action/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A Bounded Current Action with Count Clocks and Frequency-Dependent Inertia — IDWT V2">
+  <meta name="twitter:description" content="One inverse classical spatial action combines supplied count clocks, global conserved-energy H1 histories, nodal data and positive frequency-dependent low-speed inertia; general uniqueness and physical branch selection remain open.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research / Contact operators</p>
+      <h1>A Bounded Current Action with Count Clocks and Frequency-Dependent Inertia</h1>
+      <p class="article-date">Updated <time datetime="2026-10-14">October 14, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body">
+<p>The <a href="/research/notes/20261014-smoothed-count-pattern-action/">smoothed count action</a> supplies the bounded invariant density potential Z, its exact Gaussian branches and its count Hessian. The following common current term gives those branches the required proportionality between rest frequency and small-speed inertia, while retaining a finite-energy evolution domain. The count law and depth units are supplied inverse-construction inputs.</p>
+<h2 id="the-common-action">The Common Action</h2>
+<p>Let G be the normalized Gaussian with covariance sigma squared times the
+identity, alpha&gt;0, rho=|psi|^2, j=Im(conjugate(psi) grad psi),
+u=G<em>rho, J=G</em>j, v=J/u, and C=-D^2 log(u)/2. For nonzero psi in H1, u is
+strictly positive everywhere, even if psi has nodes. At the zero field define
+the nonlinear energy and its source to be zero.</p>
+<p>Use the bounded smooth invariant Z(C) and gamma(C)=kappa(C)-alpha from the
+smoothed construction. All their matrix derivatives are bounded.
+On a target Gaussian, Z supplies its count frequency omega and
+kappa=c^2/(2 omega), with kappa_C=0. These statements concern an inverse
+action with the count and scale prescription supplied as inputs.</p>
+<p>Choose one smooth F on [0,infinity) with F(s)=s for s&lt;=s0, 0&lt;=F'&lt;=1,
+and F'=0 for s&gt;=2s0. Here s0&gt;0 is a common constitutive scale, not a
+particle-specific fit. Set f(v)=F(|v|^2), q(v)=grad_v f. Then f, q,
+v dot q, and every positive-order derivative of f are bounded. The energy is</p>
+<pre><code>H[psi] = alpha integral |grad psi|^2
+         + integral u Z(C) + integral u gamma(C) f(v).
+</code></pre>
+<p>The time term is the original canonical complex-field symplectic term, so
+i psi_t=delta H/delta conjugate(psi). No additional physical field is added.
+The saturated term is denoted I. In particular</p>
+<pre><code>|I| &lt;= ||gamma||_infinity ||F||_infinity ||psi||_2^2,
+H &gt;= alpha ||grad psi||_2^2 - K ||psi||_2^2.
+</code></pre>
+<p>This is a stronger simple coercive estimate than the unsaturated comparison.
+The kinetic coefficient alpha remains strictly positive at large gradients.</p>
+<h2 id="full-variation-without-differentiating-the-current-quotient">Full Variation Without Differentiating the Current Quotient</h2>
+<p>For independent variations of u and J,</p>
+<pre><code>delta I = integral B delta u + Q dot delta J + u Kij delta Cij,
+B=gamma (f-v dot q), Q=gamma q, Kij=f gamma_Cij,
+delta Cij=-1/2 [delta uij/u-Ri delta uj/u-Rj delta ui/u
+                          +(2Ri Rj-Rij) delta u/u],
+R_beta=(D^beta u)/u.
+</code></pre>
+<p>All B,Q,K coefficients are bounded. They depend on psi, but their bounds do
+not depend on derivatives of psi. This is the essential improvement over
+quadratic growth at arbitrarily large v.</p>
+<p>Let H_beta(z)=D^beta G(z)/G(z). Swapping the convolutions in this direct
+variation gives the real density multiplier</p>
+<pre><code>T(y)=integral G(x-y) { B(x) - (1/2) Kij(x)
+      [H_ij(x-y)-Ri(x) H_j(x-y)-Rj(x) H_i(x-y)
+                      +2Ri(x)Rj(x)-Rij(x)] } dx.
+</code></pre>
+<p>Set A=G*Q. The complete current contribution is</p>
+<pre><code>F_I(psi)=T psi-i A dot grad psi-(i/2)(div A)psi.       (1)
+</code></pre>
+<p>The derivative kernels in T differentiate with respect to x, which fixes
+their signs. Formula (1) is equivalent on smooth rapidly decaying fields to
+T=G*[B-(2u)^(-1)partial_ij(u Kij)], but the direct kernel formula avoids
+derivatives of v and is the appropriate general H1 definition. Dropping the
+curvature terms, or the half-divergence term, changes the equation.</p>
+<h2 id="weighted-estimates-for-the-density-multiplier">Weighted Estimates for the Density Multiplier</h2>
+<p>The normalized convolution at x is the measure
+G(x-y)rho(y)dy/u(x). Its total mass is one; it is only an integration device.
+For every finite p and every Gaussian score,</p>
+<pre><code>integral u |R_beta|^p &lt;= N integral G |H_beta|^p,
+N=||psi||_2^2.
+</code></pre>
+<p>In the definition of T, each term is a bounded coefficient times a product
+of at most two normalized scores at x and a Gaussian score at x-y. Jensen
+in the fixed Gaussian convolution, Fubini, and Holder in u dx give</p>
+<pre><code>integral rho |T|^p &lt;= K_p N                         (2)
+</code></pre>
+<p>for every finite p&gt;=1. For example the term Ri H_j is controlled by</p>
+<pre><code>integral u |Ri|^p E_x |H_j|^p
+  &lt;= (integral u |Ri|^(2p))^(1/2)
+     (integral u E_x |H_j|^(2p))^(1/2) &lt;= K_p N.
+</code></pre>
+<p>Higher products use higher finite Gaussian moments. Also, since Q is
+uniformly bounded, every spatial derivative of A is uniformly bounded by
+||D^beta G||_1 ||Q||_infinity. Thus</p>
+<pre><code>||F_I(psi)||_2 &lt;= K (||psi||_2+||grad psi||_2).       (3)
+</code></pre>
+<p>This estimate includes arbitrary physical nodes and the zero field. Unlike
+the unsaturated current term, the source is locally bounded in the natural
+energy domain. It is not claimed to map all L2 fields into L2, since j
+requires the spatial gradient.</p>
+<h2 id="strong-continuity-and-the-energy-derivative">Strong Continuity and the Energy Derivative</h2>
+<p>If psi_n tends strongly to a nonzero psi in H1, both rho_n and j_n converge
+in L1. Their Gaussian convolutions and fixed derivatives converge uniformly.
+On each compact set u has a positive lower bound. Therefore C_n, v_n,
+B_n, Q_n and K_n converge locally uniformly.</p>
+<p>A common positive mass ball for rho_n bounds each R_beta,n by a common
+polynomial in x, using the Gaussian displacement estimate in the original
+source theorem. In T_n its only unbounded factors are those normalized
+scores and Gaussian scores. Gaussian domination proves local uniform
+convergence T_n to T. For any p&gt;2, (2) gives</p>
+<pre><code>integral_E |psi_n T_n|^2
+   &lt;= (integral_E rho_n)^(1-2/p) (K_p N_n)^(2/p).
+</code></pre>
+<p>Tightness of rho_n removes the tails, so T_n psi_n converges strongly in L2.
+The bounded A_n and div A_n converge locally uniformly. Their products with
+psi_n and grad psi_n therefore converge strongly in L2 by tightness of
+those strongly converging factors. At zero, (3) supplies continuity directly.
+Hence F_I:H1-&gt;L2 is continuous.</p>
+<p>The direct variation is justified along every H1 line psi+t h. Each term
+is integrable: density terms use the same score estimates and
+|delta rho|^2/rho&lt;=4|h|^2; the current term uses bounded Q and
+|delta j|&lt;=|h||grad psi|+|psi||grad h|. On compact spatial sets differentiation
+is ordinary differentiation of smooth convolutions with positive u.
+Global integration follows from these estimates and truncation. The
+line-integral identity and source continuity imply that I is continuously
+Frechet differentiable as a real functional on H1, with</p>
+<pre><code>DI(psi)[h]=2 Re integral conjugate(h) F_I(psi).
+</code></pre>
+<p>The expression at zero follows separately from |I|&lt;=K||psi||_2^2. The
+complete H is C1 on H1, with derivative in H-minus-one; its non-Laplacian
+part is the continuous L2 source F_0+F_I. No local Lipschitz estimate or
+general uniqueness claim follows from this argument.</p>
+<h2 id="a-compactness-property-needed-for-evolution">A Compactness Property Needed for Evolution</h2>
+<p>Suppose psi_n-&gt;psi strongly in L2 and psi_n is bounded in H1, with the
+corresponding weak H1 convergence. At a fixed convolution point x,</p>
+<pre><code>J_n(x)=Im integral G(x-y) conjugate(psi_n(y)) grad psi_n(y) dy
+</code></pre>
+<p>converges: its first factor converges strongly in L2 and its gradient factor
+converges weakly. Gaussian derivatives give the same result for each fixed
+derivative and locally uniform convergence by uniform equicontinuity.
+The density convolutions converge as before. Therefore the bounded
+coefficients and T_n converge locally uniformly when psi is nonzero.</p>
+<p>The potential energy I_n converges to I. Its integrand is bounded by K u_n,
+the u_n are tight in L1, and its local convergence is already established.
+This remains true at psi=0 since |I_n|&lt;=K||psi_n||_2^2. Likewise J_Z converges.
+The products T_n psi_n and (div A_n)psi_n converge strongly in L2 by (2).
+The term A_n dot grad psi_n converges weakly in L2, since A_n is bounded and
+locally convergent, so A_n times any fixed L2 test converges strongly in L2.
+At zero the latter weak convergence also follows distributionally from the
+integration-by-parts formula and bounded derivatives of A_n, followed by its
+uniform L2 bound. Thus the complete nonlinearity passes to the equation
+under the compactness available from finite-energy approximation.</p>
+<h2 id="global-weak-and-mild-existence-construction">Global Weak And Mild Existence: Construction</h2>
+<p>For every initial psi_0 in H1, the preceding properties yield at least one
+global psi in C(R;L2), bounded in H1, weakly continuous in H1, solving</p>
+<pre><code>i psi_t=-alpha Delta psi+F_0(psi)+F_I(psi).           (4)
+</code></pre>
+<p>Here is the construction and its exact scope.</p>
+<p>Add a temporary positive trap epsilon |x|^2. Project onto finitely many
+eigenfunctions of -alpha Delta+epsilon |x|^2+1. Since H is C1 on H1, its
+finite-dimensional Hamiltonian vector field is continuous. Peano existence,
+phase invariance and the C1 chain rule give global finite-dimensional
+solutions with exact N and trapped-energy conservation. Coercivity gives
+uniform H1 and trapped moment bounds. Equation (3) bounds time derivatives
+in the dual oscillator form domain. Form-domain compactness and dual
+interpolation give a subsequence converging strongly in C_t L2 on bounded
+time intervals, with bounded weak H1 convergence.</p>
+<p>The preceding compactness property passes (4) to the trapped limit. It also
+passes both potential energies, while kinetic and trap energies are lower
+semicontinuous. Therefore the limit conserves N and obeys H_epsilon(t)&lt;=
+H_epsilon(0). No equality is inferred solely from weak compactness.</p>
+<p>The unprojected trapped limit has local mass conservation</p>
+<pre><code>partial_t rho + div(2 alpha j + rho A)=0.            (5)
+</code></pre>
+<p>All coefficients in its additional transport flux are real. In particular,
+the half-divergence in (1) is necessary for (5). Bounded A and uniform H1
+control imply, with a cutoff changing between radii R and 2R,</p>
+<pre><code>integral_(|x|&gt;2R) rho(t)
+   &lt;= integral_(|x|&gt;R) rho(0)+K |t|/R,              (6)
+</code></pre>
+<p>uniformly as epsilon decreases to zero. Approximate general H1 initial
+data by smooth compact fields and choose epsilon so their trap energy tends
+to zero. On each fixed ball, a smooth spatial cutoff times psi has bounded
+global H1 norm and time derivative in global H-minus-one. Local compactness
+and interpolation give local C_t L2 convergence; (6) makes it global.</p>
+<p>Pass the equation using the compactness property, remove the trap against
+compact tests, and take a diagonal sequence in time. The limit has conserved
+N, H(t)&lt;=H(0), and a global H1 bound from coercivity. The energy inequality
+is relative to the initial state; it is not a proved dissipative law.</p>
+<p>The non-Laplacian source belongs to L_infinity,loc(L2) and is strongly
+measurable. Indeed weak H1 continuity and separability imply H1 strong
+measurability, and its H1-&gt;L2 map is continuous. The Fourier representation
+therefore gives the L2 Duhamel formula with its Bochner integral. This is
+global weak/mild existence, not a unique deterministic evolution theorem.
+The complete energy-balance proof below upgrades the inequality to equality and establishes strong H1 continuity. General uniqueness remains unproved.</p>
+<h2 id="exact-count-branches-motion-and-inertia">Exact Count Branches, Motion And Inertia</h2>
+<p>At a target filtered curvature C*, gamma_C=0 and V_count,C=0. A uniformly
+phased Gaussian exp(i p.x) phi_B has J=p u. Hence A=gamma* q(p) is constant
+and T=gamma*[f(p)-p dot q(p)]. Combining (1) with the original Gaussian
+closure yields the exact traveling field</p>
+<pre><code>psi(t,x)=exp(i p.x-i Omega(p)t) phi_B(x-X0-V(p)t),
+Omega(p)=omega+alpha |p|^2+gamma* F(|p|^2),
+V(p)=grad_p Omega=2[alpha+gamma*F'(|p|^2)]p.
+</code></pre>
+<p>The complete energy is N Omega(p), and the canonical momentum is Np.
+For |p|^2&lt;s0, these reduce exactly to</p>
+<pre><code>Omega=omega+c^2 |p|^2/(2 omega), V=c^2 p/omega,
+M_inertial=N omega/c^2.
+</code></pre>
+<p>Thus one common action contains the exact finite-band count clocks, positive
+frequency-dependent small-speed inertia, physical nodes in its energy
+domain, and at least one global weak/mild evolution. The common low-momentum
+band is explicit. It is not a relativistic all-speed dispersion relation.</p>
+<p>At rest the current starts quadratically and f agrees with |v|^2 in a
+neighborhood of zero. The original density Hessian and the reviewed positive
+current phase Hessian therefore survive unchanged. This holds at every
+maintained depth 2,3,4,5,6,10 under one rule, without special depth-five
+suppression. The finite-band count and depth scales are constitutive inputs;
+occupation selection, spin, charge and empirical coupling remain open.</p>
+<h2 id="translational-convexity-and-the-high-frequency-control">Translational Convexity and the High-Frequency Control</h2>
+<h3 id="a-common-choice-avoids-negative-translational-curvature">A Common Choice Avoids Negative Translational Curvature</h3>
+<p>Choose alpha at least sup_C kappa(C), so gamma&lt;=0 globally. This is one
+common kinetic constant; it does not alter the prescribed target clocks.
+Choose F' nonincreasing, hence F''&lt;=0, in its transition. Then every target
+dispersion has</p>
+<pre><code>D_p^2 Omega=2[alpha+gamma*F'] I+4gamma*F'' p p^T
+             &gt;= 2 kappa* I &gt; 0.
+</code></pre>
+<p>Thus the saturation need not introduce a negative effective translational
+mass in its transition band. The zero-momentum Hessian is still exactly
+c^2/omega times I. This proves convexity of the uniform-phase dispersion;
+it does not establish the full moving-field shape spectrum or orbital
+stability. Choosing arbitrary signs without this common constraint would
+not provide that conclusion.</p>
+<p>The original rapidly oscillating obstruction is also directly removed.
+For psi_p=a phi(1+exp(i p x1)), h=phi, the exact variations obey
+delta C=0, delta u=u/a and v=(p/2)e1. Once p^2/4&gt;=2s0, q(v)=0 and</p>
+<pre><code>DI_sat(psi_p)[phi]=(F_infinity/a) integral u gamma(C_p)
+                  =O(a).
+</code></pre>
+<p>With a=p^(-3/2), this tends to zero instead of the unsaturated divergence
+of order sqrt(p). This one sequence is a diagnostic; the general regularity
+argument above is what covers the complete energy domain.</p>
+<h2 id="full-rest-phase-hessian">Full Rest Phase Hessian</h2>
+<p>Let rho_star be a real Gaussian branch and theta its real phase disturbance. Put r_i=1-2sigma^2 C_i, B_i=C_i/r_i, t_n=product_i r_i^(n_i), M_n=sum_i B_i n_i and Q_n=t_n sum_i B_i n_i/r_i. The quadratic phase energy is alpha integral rho_star |grad theta|^2 + gamma_star integral |G*(rho_star grad theta)|^2/u. Its canonical Hermite-block coefficient is A_phase(n)=4[alpha M_n+gamma_star Q_n]. Since 0&lt;Q_n&lt;=M_n off the constant mode, A_phase&gt;=4 min(alpha,kappa_star) M_n&gt;0. Differentiating a normalized Hermite mode lowers its degree by one, explaining the factor t_n/r_i in Q_n. The density operator L is unchanged from the smoothed count action. Therefore the squared linear shape frequencies are eigenvalues of A_phase^(1/2) L A_phase^(1/2), which are nonnegative. The amplitude, translation and rotation kernel remains; symmetry Jordan drift and nonlinear persistence are separate questions. These statements concern the closed Gaussian form domain, as specified in the parent note.</p>
+<h2 id="explicit-shared-constitutive-choices">Explicit Shared Constitutive Choices</h2>
+<p>Use the compact cutoff chi and positive V from the smoothed count construction. Choose kappa0&gt;0 and set kappa=kappa0+chi[C][c^2/(2V(C))-kappa0] on its supported descriptor domain, and kappa=kappa0 elsewhere. This is smooth and bounded above and below by positive constants. Choose one alpha at least its global supremum. At every target chi=1 and V_C=0, so kappa=c^2/(2omega) and kappa_C=0.</p>
+<p>For a smooth saturation, let e(t)=exp(-1/t) for t&gt;0 and zero otherwise, and h(t)=e(t)/(e(t)+e(1-t)). Set F(s)=integral_0^s [1-h((r-s0)/s0)] dr. This is smooth, equals s below s0, is constant above 2s0, and has nonincreasing derivative in [0,1]. It therefore meets both the regularity and convexity hypotheses above. These are common constitutive choices rather than derived microscopic laws.</p>
+<h2 id="complete-conserved-energy-and-momentum">Complete Conserved Energy and Momentum</h2>
+<h2 id="equation-and-weighted-spatial-bounds">Equation and Weighted Spatial Bounds</h2>
+<p>Write the complete equation as</p>
+<pre><code>i psi_t=-alpha Delta psi+V psi-i A dot grad psi
+                                  -(i/2)(div A)psi,
+</code></pre>
+<p>where V=H_0+T is real and A=G*Q is real. The original density potential
+H_0 and the new direct density multiplier T have the following property:
+for every spatial derivative beta, finite p, and bounded displacement h,</p>
+<pre><code>integral rho(y) |D^beta V(y+h)|^p dy &lt;= K_(beta,p,h0) N,
+|h|&lt;=h0.
+</code></pre>
+<p>For H_0 this is the reviewed shifted-score estimate. For T differentiate
+only its y-dependent Gaussian and score factors inside the direct kernel
+formula. Each derivative adds a Gaussian polynomial score; a bounded shift
+adds an exponential of a linear Gaussian coordinate. All their finite
+Gaussian moments exist. The x-dependent coefficients remain bounded, and
+the normalized scores R_beta(x) have arbitrarily high finite u moments.
+Jensen, Fubini and Holder prove the same estimate. In particular</p>
+<pre><code>||psi grad V||_2 &lt;= K sqrt(N),
+||rho grad V||_1 &lt;= K N.
+</code></pre>
+<p>Every spatial derivative of A is bounded uniformly, since Q is bounded
+and each derivative of G has finite L1 norm. These bounds are uniform in
+time for the finite-energy histories already constructed.</p>
+<h2 id="density-and-current-balances">Density and Current Balances</h2>
+<p>Define rho=|psi|^2, j_i=Im(conjugate(psi) partial_i psi), and
+Rij=Re(partial_i conjugate(psi) partial_j psi). The exact distributional
+balances are</p>
+<pre><code>rho_t=-div(2 alpha j+rho A),                        (1)
+(j_i)_t=-partial_j Sij-rho partial_i V
+                     -partial_j(A_j j_i)-j_j partial_i A_j,
+Sij=2 alpha Rij-(alpha/2) delta_ij Delta rho.        (2)
+</code></pre>
+<p>Repeated indices are summed. Equation (2) is the canonical spatial current
+balance; j is half the density flux only when A=0 and alpha=1. The final
+term represents the covector response of j under the transport field A.</p>
+<p>These identities hold for H1 weak histories with the L2 source above.
+One may regularize in space and time in the equation, derive the bilinear
+identities, and pass to distributions. Gradient products converge under
+regularization of one fixed H1 history; potential-force products are
+integrable by the weighted bound. The real V times undifferentiated current
+terms cancel before the limit; V and its derivatives are locally bounded
+uniformly on finite time intervals by the common mass-ball score estimate.
+The A coefficients have globally bounded derivatives. Thus no H2 field
+or spatial moment is needed. This is regularization of an existing history,
+not an assertion of strong H1 convergence of its Galerkin construction.</p>
+<h2 id="kinetic-balance-by-difference-quotients">Kinetic Balance by Difference Quotients</h2>
+<p>Let q_h=[psi(.+h e_i)-psi]/h. Its equation has the same self-adjoint
+real-potential and transport terms with shifted coefficients, plus source</p>
+<pre><code>psi delta_h V - i(delta_h A) dot grad psi
+                            -(i/2)(delta_h div A)psi.
+</code></pre>
+<p>The shifted potential times q_h belongs to L2 for each nonzero h by the
+weighted estimates, and the other terms are L2. The H1/H-minus-one norm
+identity is therefore legitimate. Both the real potential and its
+half-divergence transport operator cancel in this norm identity.</p>
+<p>As h tends to zero, q_h tends strongly to partial_i psi in L2 at each
+time. The first source tends strongly to psi partial_i V by compact
+convergence and the uniform shifted weighted p&gt;2 estimates. The transport
+differences converge uniformly because A has bounded derivatives. All
+terms are dominated in time by the uniform H1 bound.</p>
+<p>Summing i and integrating by parts in the bounded smooth A terms gives
+the absolutely continuous kinetic identity</p>
+<pre><code>d/dt [alpha integral |grad psi|^2]
+   =-2 alpha integral grad V dot j - &lt;Sij, partial_j A_i&gt;,
+&lt;Sij, partial_j A_i&gt;
+   =2 alpha integral Rij partial_j A_i
+                   -(alpha/2) integral rho Delta div A.        (3)
+</code></pre>
+<p>In the second line derivatives of rho are understood distributionally;
+the final integrals are ordinary absolutely integrable quantities. This
+derivation does not assume that V grad psi is an L2 function.</p>
+<h2 id="nonlinear-energy-chain-rule">Nonlinear Energy Chain Rule</h2>
+<p>Let K_nl=integral u Z(C)+u gamma(C) f(J/u). Its direct first variation
+in the smoothed density and current gives, along a solution,</p>
+<pre><code>(K_nl)_t = &lt;V,rho_t&gt; + &lt;A,j_t&gt;.                    (4)
+</code></pre>
+<p>Here (4) must be justified rather than treated as a formal Hamiltonian
+chain rule. Equation (1) and the finite kinetic bound imply that u_t and
+all its spatial derivatives are Gaussian-score averages of a flux velocity
+with bounded squared rho integral:</p>
+<pre><code>integral rho |2 alpha j/rho+A|^2 &lt;= K (T+N),
+T=||grad psi||_2^2.
+</code></pre>
+<p>Exactly the earlier conditional Cauchy–Schwarz argument controls every
+differentiated curvature term by K sqrt(N) sqrt(T+N).
+Equation (2), convolved with G, gives J_t. Its terms have bounded L1 norms:
+Gaussian derivatives act on Rij in L1 and rho in L1; rho grad V is in L1;
+and A j and (grad A)j are in L1. Thus</p>
+<pre><code>||J_t||_1 &lt;= K(T+N+sqrt(NT)).
+</code></pre>
+<p>The coefficient Q=partial_J(u gamma f) is bounded, so its contribution is
+integrable as well. On compact spatial sets, positive u and these smoothed
+balances justify ordinary time differentiation. The global bounds permit
+Fubini, time integration and removal of spatial cutoffs. Hence K_nl is
+absolutely continuous and (4) is valid. In its right side, density derivatives
+are moved onto V and current derivatives onto A; the weighted V bound and
+bounded A derivatives justify each resulting integral.</p>
+<p>Insert (1)–(2) into (4). The terms rho A dot grad V cancel between the
+density and current balances. The two remaining transport contractions
+also cancel after interchanging their dummy indices:</p>
+<pre><code>integral (partial_j A_i) A_j j_i
+                  -integral A_i j_j partial_i A_j=0.
+</code></pre>
+<p>What remains is</p>
+<pre><code>(K_nl)_t=2 alpha integral grad V dot j
+                                  +&lt;Sij, partial_j A_i&gt;.       (5)
+</code></pre>
+<p>Equations (3) and (5) cancel exactly. Thus the complete energy is conserved
+for every constructed finite-energy weak/mild history:</p>
+<pre><code>H[psi(t)]=H[psi(s)] for all finite s,t.              (6)
+</code></pre>
+<p>Equation (3) also makes the kinetic norm continuous. Weak H1 continuity
+and norm conservation then imply psi belongs to C(R;H1). Its continuous
+H1-to-L2 source becomes continuous in L2 along the history.</p>
+<h2 id="scientific-scope">Scientific Scope</h2>
+<h3 id="total-momentum-and-finite-spatial-moments">Total Momentum and Finite Spatial Moments</h3>
+<p>The canonical momentum P=integral j exists for every H1 field. Integrating
+(2) with cutoffs gives</p>
+<pre><code>dP_i/dt=-integral rho partial_i V-j_j partial_i A_j.
+</code></pre>
+<p>Spatial translation invariance of the nonlinear energy makes this zero.
+To justify the identity at H1 regularity, translate the smoothed density and
+current in their direct energy expression, whose integral is invariant.
+Differentiate with spatial cutoffs, transfer derivatives onto the smooth
+coefficients, and remove the cutoffs. The required integrals are bounded by
+||psi grad V||_2 ||psi||_2 and ||grad A||_infinity ||j||_1.
+This gives integral rho partial_i V+j_j partial_i A_j=0, rather than
+assuming a differentiable H1 translation path. Thus total P is conserved.</p>
+<p>If the initial second spatial moment is finite, it stays finite. Equation
+(1), first with bounded truncated radial weights, implies</p>
+<pre><code>||x psi(t)||_2 &lt;= ||x psi(0)||_2
+                   +[2 alpha sup_s ||grad psi(s)||_2
+                              +||A||_infinity sqrt(N)] |t|.
+</code></pre>
+<p>The constant is uniform on the complete history by conserved energy and
+coercivity. Common rotational invariance then similarly conserves the
+angular momentum integral x_i j_j-x_j j_i. Its required weighted force
+integrals are controlled by the finite moment and the weighted grad V bound.
+No angular momentum is assigned to a field for which that integral diverges.</p>
+<p>These are complete-field conservation laws. They ensure that any exchange
+between separated profiles must balance within the same field, but do not
+define individually conserved particle momenta while profiles overlap.</p>
+<p>The result concerns one explicit bounded-current action with its supplied
+count clocks and fixed common saturation. It combines finite-energy nodal
+data, complete energy and norm conservation, exact localized count branches,
+and positive frequency-proportional low-speed inertia. It does not establish
+general uniqueness, finite propagation, observed particle identification,
+selected occupations or a derived absolute frequency unit. The additional
+saturation is a constitutive choice whose physical origin remains open.</p>
+<h2 id="reproducible-checks">Reproducible Checks</h2>
+<p>The <a href="/evidence/diagnostics/check-saturated-current/">full-variation diagnostic</a> tests positive, nodal and rapidly oscillating periodic fields at two resolutions. Its worst relative directional-derivative error is below 1.5e-10 and its worst density-flux residual below 6.3e-13. It uses a C3 compact-transition surrogate to test the variation, while the analytic action above uses a smooth saturation. All fourteen count-motion controls pass. The <a href="/evidence/diagnostics/check-current-balances/">symbolic balance checker</a> proves the variable-coefficient density and current identities and the transport cancellation in two coordinates. These finite checks corroborate algebra; the global H1 statements depend on the displayed analytic arguments.</p>
+<p><a href="/research/notes/20261014-smoothed-pattern-interactions/">Pattern separation and orientation</a> give further consequences and the limits of the positive Gaussian Hessian. No general uniqueness, finite propagation, empirical particle identification, occupied-mode selection or absolute scale derivation is asserted.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261014-smoothed-count-pattern-action/">A Smoothed Count Action with Global Finite-Energy Histories</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#the-common-action">The Common Action</a></li><li class="toc-level-2"><a href="#full-variation-without-differentiating-the-current-quotient">Full Variation Without Differentiating the Current Quotient</a></li><li class="toc-level-2"><a href="#weighted-estimates-for-the-density-multiplier">Weighted Estimates for the Density Multiplier</a></li><li class="toc-level-2"><a href="#strong-continuity-and-the-energy-derivative">Strong Continuity and the Energy Derivative</a></li><li class="toc-level-2"><a href="#a-compactness-property-needed-for-evolution">A Compactness Property Needed for Evolution</a></li><li class="toc-level-2"><a href="#global-weak-and-mild-existence-construction">Global Weak And Mild Existence: Construction</a></li><li class="toc-level-2"><a href="#exact-count-branches-motion-and-inertia">Exact Count Branches, Motion And Inertia</a></li><li class="toc-level-2"><a href="#translational-convexity-and-the-high-frequency-control">Translational Convexity and the High-Frequency Control</a></li><li class="toc-level-3"><a href="#a-common-choice-avoids-negative-translational-curvature">A Common Choice Avoids Negative Translational Curvature</a></li><li class="toc-level-2"><a href="#full-rest-phase-hessian">Full Rest Phase Hessian</a></li><li class="toc-level-2"><a href="#explicit-shared-constitutive-choices">Explicit Shared Constitutive Choices</a></li><li class="toc-level-2"><a href="#complete-conserved-energy-and-momentum">Complete Conserved Energy and Momentum</a></li><li class="toc-level-2"><a href="#equation-and-weighted-spatial-bounds">Equation and Weighted Spatial Bounds</a></li><li class="toc-level-2"><a href="#density-and-current-balances">Density and Current Balances</a></li><li class="toc-level-2"><a href="#kinetic-balance-by-difference-quotients">Kinetic Balance by Difference Quotients</a></li><li class="toc-level-2"><a href="#nonlinear-energy-chain-rule">Nonlinear Energy Chain Rule</a></li><li class="toc-level-2"><a href="#scientific-scope">Scientific Scope</a></li><li class="toc-level-3"><a href="#total-momentum-and-finite-spatial-moments">Total Momentum and Finite Spatial Moments</a></li><li class="toc-level-2"><a href="#reproducible-checks">Reproducible Checks</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

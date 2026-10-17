@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>check-pullback-complex-stability.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/check-pullback-complex-stability.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="check-pullback-complex-stability.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/check-pullback-complex-stability.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="check-pullback-complex-stability.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>check-pullback-complex-stability.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/check-pullback-complex-stability.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Small exact checks for the complex-profile quadratic action; no PDE numerics.&quot;&quot;&quot;
+import sympy as s
+import json, hashlib
+from pathlib import Path
+from datetime import datetime, timezone
+p,q,a,h,at,ht,alpha,omega,nu,omk=s.symbols(&#39;p q a h at ht alpha omega nu omk&#39;, real=True)
+p1,q1,a1,h1,z,vz=s.symbols(&#39;p1 q1 a1 h1 z vz&#39;, real=True)
+u0=p+s.I*q
+eta=a+s.I*h
+d0=-s.I*omega*alpha*u0
+d1=at+s.I*ht-s.I*omega*eta+alpha*z*(p1+s.I*q1)
+d2=z*(a1+s.I*h1)-alpha*vz*(p1+s.I*q1)
+actual=s.expand(s.re(s.conjugate(d1)*d1)/2+s.re(s.conjugate(d0)*d2))
+expected=((at+alpha*z*p1)**2+(ht+alpha*z*q1)**2)/2+omega*(h*at-a*ht)+omega**2*(a*a+h*h)/2+omega*alpha*z*(h*p1-p*h1+q*a1-a*q1)+omega*alpha**2*(p*q1-q*p1)*vz
+checks={&#39;quadratic_kinetic_expansion&#39;:s.expand(actual-expected)==0}
+# Carrier row for the helicity: mass and gyro terms before inserting the mode.
+g,g1=s.symbols(&#39;g g1&#39;)
+carrier=-nu**2*(p1*a+q1*h)+s.I*nu*omega*(h*p1-p*h1+q*a1-a*q1)
+low=s.expand(carrier.subs({a:g,h:-s.I*g,a1:g1,h1:-s.I*g1})-nu*((omega-nu)*g*(p1-s.I*q1)-omega*(p-s.I*q)*g1))
+up=s.expand(carrier.subs({a:g,h:s.I*g,a1:g1,h1:s.I*g1})+nu*((omega+nu)*g*(p1+s.I*q1)-omega*(p+s.I*q)*g1))
+checks.update(lower_helicity_source=low==0,upper_helicity_source=up==0)
+# Two-dimensional displacement bracket and weighted exact ball moments.
+x,y,R=s.symbols(&#39;x y R&#39;, real=True)
+f=1-x*x-y*y
+z1=s.Matrix([f,0]); z2=s.Matrix([0,f]); j=s.Matrix([-y,x])
+bracket=z2.jacobian([x,y])*z1-z1.jacobian([x,y])*z2
+checks[&#39;gyro_bracket_sign&#39;]=s.expand(-j.dot(bracket)-2*f*(x*x+y*y))==0
+rows=[]
+for d in [2,3,4,5,6,10]:
+    # Weighted ball is the Dirichlet moment law with d half parameters
+    # and radial remainder parameter 3/2.
+    ex2=s.Rational(1,d+3)
+    ex2R=s.Rational(d+2,(d+3)*(d+5))
+    eR=s.Rational(d,d+3)
+    eR2=s.Rational(d*(d+2),(d+3)*(d+5))
+    gyro=s.factor(4*(ex2-ex2R))
+    mass=s.factor(1-2*eR+eR2)
+    norm=2*ex2
+    checks[f&#39;d{d}_gyro&#39;]=gyro==s.Rational(12,(d+3)*(d+5))
+    checks[f&#39;d{d}_mass&#39;]=mass==s.Rational(15,(d+3)*(d+5))
+    checks[f&#39;d{d}_no_first_shell_collision&#39;]=s.binomial(d+2,d)&gt;2*(d+1)-1
+    rows.append(dict(d=d,gyro=str(gyro),mass=str(mass),norm=str(norm),count=d+1))
+N,m,l=75,30,102
+DN,Dm,Dl=[s.binomial(n+2,2) for n in [N,m,l]]
+checks[&#39;exception_counts&#39;]=Dm+Dl==2*DN
+checks[&#39;exception_lower_euler&#39;]=N*Dm-m*DN==-50580
+checks[&#39;exception_upper_euler&#39;]=N*Dl-l*DN==103248
+checks[&#39;exception_degrees&#39;]=(N+m-1,N+l-1)==(104,176)
+# General second-order carrier jet: EL of omega J_i v_j d_j(vdot_i).
+# Its variational row is -omega[d_j(J_i z_j)+J_j d_i z_j].
+# Test pairing is the negative bracket form checked above.
+checks={key:bool(value) for key,value in checks.items()}
+base=Path(__file__).parent
+out={&#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),&#39;all_pass&#39;:all(checks.values()),&#39;checks&#39;:checks,&#39;rows&#39;:rows,&#39;canonical_source&#39;:{&#39;path&#39;:&#39;content/notes/topics/operator-tools/material-pullback-count-action.md&#39;,&#39;snapshot&#39;:1125,&#39;sha256&#39;:&#39;010780d2b4131bea0302b8067533cffb398080b4d0faadf3f03bd38fda281d23&#39;},&#39;sources&#39;:{&#39;experiments/check-pullback-complex-stability.py&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}}
+name=base/(&#39;pullback-complex-stability-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;)
+name.write_text(json.dumps(out,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;all_pass&#39;:out[&#39;all_pass&#39;],&#39;checks&#39;:len(checks),&#39;result&#39;:str(name)}))
+assert out[&#39;all_pass&#39;]
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

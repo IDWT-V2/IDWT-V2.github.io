@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>check-pullback-excited-stability.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/check-pullback-excited-stability.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="check-pullback-excited-stability.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/check-pullback-excited-stability.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="check-pullback-excited-stability.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>check-pullback-excited-stability.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/check-pullback-excited-stability.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Independent finite arithmetic audit; no spatial discretization or DB writes.&quot;&quot;&quot;
+from math import comb
+from fractions import Fraction
+from pathlib import Path
+import hashlib, json
+from datetime import datetime, timezone
+LABELS=((2,75),(2,80),(2,94),(3,0),(3,3),(4,2),(4,19),(4,71),(5,9),(5,14),(5,21),(6,12),(6,34),(10,22))
+rows=[]
+for d,N in LABELS:
+    C=lambda n: comb(n+d,d)
+    mult=lambda n: comb(n+d-1,d-1)
+    pairs=[]
+    # Independent monotone integer bisection, unlike principal&#39;s lookup table.
+    for m in range(N):
+        target=2*C(N)-C(m)
+        lo,hi=N+1,2*N+d+2
+        assert C(hi)&gt;target
+        while lo&lt;hi:
+            mid=(lo+hi)//2
+            if C(mid)&lt;target: lo=mid+1
+            else: hi=mid
+        if C(lo)==target:
+            pairs.append({&#39;lower&#39;:m,&#39;upper&#39;:lo,&#39;lower_count&#39;:C(m),&#39;upper_count&#39;:C(lo),
+                &#39;beat&#39;:C(N)-C(m),&#39;lower_euler&#39;:N*C(m)-m*C(N),
+                &#39;upper_euler&#39;:N*C(lo)-lo*C(N),&#39;lower_dim&#39;:mult(m),&#39;upper_dim&#39;:mult(lo)})
+    neg=2*sum(mult(m) for m in range(N))
+    assert neg==(2*comb(N+d-1,d) if N else 0)
+    rows.append({&#39;depth&#39;:d,&#39;degree&#39;:N,&#39;count&#39;:C(N),&#39;negative_index&#39;:neg,
+        &#39;kernel_dimension&#39;:2*mult(N),&#39;collisions&#39;:pairs,
+        &#39;sufficient_kappa_upper_over_pi_squared_times_mu_squared&#39;:str(Fraction(d,4*(C(N)-1)**2)) if N else None})
+assert [(r[&#39;depth&#39;],r[&#39;degree&#39;],p[&#39;lower&#39;],p[&#39;upper&#39;]) for r in rows for p in r[&#39;collisions&#39;]]==[(2,75,30,102)]
+p=rows[0][&#39;collisions&#39;][0]
+assert (p[&#39;lower_euler&#39;],p[&#39;upper_euler&#39;],p[&#39;lower_dim&#39;],p[&#39;upper_dim&#39;])==(-50580,103248,31,103)
+report={&#39;status&#39;:&#39;passed&#39;,&#39;utc&#39;:datetime.now(timezone.utc).isoformat(),&#39;rows&#39;:rows,
+    &#39;assumptions&#39;:[&#39;The declared count law and fourteen assigned labels are inputs.&#39;],
+    &#39;checker_sha256&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+    &#39;scope&#39;:&#39;Exact counts, complete negative index and collision enumeration; analytic domain and stability proof are separately reviewed in the accompanying spectral-stability note.&#39;}
+output=Path(__file__).with_name(&#39;pullback-excited-stability-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;)
+output.write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;status&#39;:report[&#39;status&#39;],&#39;labels&#39;:len(rows),&#39;exceptional_collision&#39;:p,&#39;output&#39;:str(output)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

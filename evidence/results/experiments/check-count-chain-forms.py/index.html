@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>check-count-chain-forms.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/check-count-chain-forms.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="check-count-chain-forms.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/check-count-chain-forms.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="check-count-chain-forms.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>check-count-chain-forms.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/check-count-chain-forms.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Independent pointwise weighted-adjoint and spectral trace certificates.&quot;&quot;&quot;
+from fractions import Fraction as Q
+from math import comb, prod
+from itertools import combinations
+from pathlib import Path
+import hashlib,json
+from datetime import datetime,timezone
+
+def add(*vs):
+    out={}
+    for v in vs:
+        for m,c in v.items(): out[m]=out.get(m,0)+c
+    return {m:c for m,c in out.items() if c}
+def sc(v,c):return {m:x*c for m,x in v.items() if x*c}
+def ei(v,i):
+    return {m|(1&lt;&lt;i):c*(-1)**((m&amp;((1&lt;&lt;i)-1)).bit_count()) for m,c in v.items() if not m&amp;(1&lt;&lt;i)}
+def ii(v,i):
+    return {m^(1&lt;&lt;i):c*(-1)**((m&amp;((1&lt;&lt;i)-1)).bit_count()) for m,c in v.items() if m&amp;(1&lt;&lt;i)}
+def ev(v,y):return add(*(sc(ei(v,i),a) for i,a in enumerate(y)))
+def iv(v,y):return add(*(sc(ii(v,i),a) for i,a in enumerate(y)))
+def B(v,y):return add(v,sc(ev(iv(v,y),y),-1))
+def Binv(v,y):return add(v,sc(ev(iv(v,y),y),1/(1-sum(a*a for a in y))))
+def compositions(n,d):
+    if d==1:yield (n,);return
+    for j in range(n+1):
+        for tail in compositions(n-j,d-1):yield (j,)+tail
+
+def h(d,n,k):return comb(n+d-1,d-k-1)*comb(n+k-1,k)
+
+rows=[]
+for d in (2,3,4,5,6,10):
+    checks=0
+    y=tuple(Q(i+1,4*d*d) for i in range(d));s=1-sum(a*a for a in y)
+    for k in range(1,d+1):
+        masks=[sum(1&lt;&lt;i for i in I) for I in combinations(range(d),k)]
+        if d==10:masks=list(dict.fromkeys([masks[0],masks[len(masks)//2],masks[-1]]))
+        for m in masks:
+            for n in (0,1,3):
+                # Mixed monomial p, independently differentiated at a rational point.
+                p=tuple((n if i==0 else 1 if i==d-1 else 0) for i in range(d))
+                f=prod(a**r for a,r in zip(y,p));a={m:f}
+                derivatives=[sc(a,Q(p[i])/y[i]) for i in range(d)]
+                raw={}
+                for i in range(d):
+                    # (partial_i(w B a))/w, with actual component metric.
+                    derivative_B=add(sc(ei(iv(a,y),i),-1),sc(ev(ii(a,i),y),-1))
+                    jet=add(B(derivatives[i],y),derivative_B,sc(B(a,y),-y[i]/s))
+                    raw=add(raw,sc(ii(jet,i),-1))
+                actual=Binv(raw,y)
+                expected=add(*(sc(ii(v,i),-1) for i,v in enumerate(derivatives)),sc(iv(a,y),sum(p)+d+3-k))
+                assert actual==expected,(d,k,m,n)
+                assert Binv(B(a,y),y)==a
+                # The radial boundary contraction is exactly s times contraction.
+                assert iv(B(a,y),y)==sc(iv(a,y),s)
+                checks+=3
+    # Full leading-symbol trace over every homogeneous monomial, all grades.
+    # This is independent of the claimed multiplicity formula.
+    for q in range(1,5):
+        dim=trace=0
+        for k in range(min(d,q)+1):
+            n=q-k
+            for p in compositions(n,d):
+                for I in combinations(range(d),k):
+                    dim+=1
+                    trace+=q*(n+d+1-k)+2*sum(p[i]+1 for i in I)
+        pairs=[(q-k,k) for k in range(min(d-1,q-1)+1)]
+        assert dim==2*sum(h(d,n,k) for n,k in pairs)
+        assert trace==2*sum(h(d,n,k)*(n+k)*(n+d+1-k) for n,k in pairs)
+        checks+=2
+    maxN={2:94,3:3,4:71,5:21,6:34,10:22}[d]
+    scalar=maxN*(maxN+d+1);extra=1600*2*(d+1);M=100000
+    aj=[j*(d+1-j) for j in range(1,d+1)]
+    assert extra&gt;scalar
+    assert (M*M-extra-max(aj))**2*prod(extra+a for a in aj)&gt;M**4*prod(scalar+a for a in aj)
+    checks+=2
+    rows.append({&#39;d&#39;:d,&#39;checks&#39;:checks})
+root=Path(__file__).parent
+inputs={}
+report={&#39;utc&#39;:datetime.now(timezone.utc).isoformat(),&#39;source_sha256&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),&#39;checks&#39;:sum(x[&#39;checks&#39;] for x in rows),&#39;rows&#39;:rows,&#39;inputs&#39;:inputs,&#39;scope&#39;:&#39;Independent rational-point weighted adjoint on every grade; every component basis for depths &lt;=6, three representative components per grade at d10; exact radial-flux identity; exhaustive homogeneous full-spectrum dimension and trace for total degrees 1..4. Finite-M separation checked independently with integers at b40 and M100000. Analytic all-degree proof is in the accompanying count-chain note.&#39;}
+(root/(&#39;count-chain-forms-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;)).write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps(report,indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

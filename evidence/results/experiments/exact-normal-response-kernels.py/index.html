@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>exact-normal-response-kernels.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/exact-normal-response-kernels.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="exact-normal-response-kernels.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/exact-normal-response-kernels.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="exact-normal-response-kernels.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>exact-normal-response-kernels.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/exact-normal-response-kernels.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Bounded analytic checks for the normal-kernel comparison; no DB writes.&quot;&quot;&quot;
+from pathlib import Path
+from datetime import datetime, timezone
+import hashlib,json,math
+import sympy as s
+root=Path(__file__).resolve().parent
+x=s.symbols(&#39;x&#39;, real=True)
+a,k,g=s.symbols(&#39;a k g&#39;, positive=True)
+q=s.sech(k*x); th=s.tanh(k*x)
+checks=[]
+def check(name, expression):
+    residual=s.simplify(s.expand_trig(expression).rewrite(s.exp))
+    passed=residual==0
+    checks.append({&#39;name&#39;:name,&#39;passed&#39;:bool(passed),&#39;residual&#39;:str(residual)})
+    if not passed: raise AssertionError((name,residual))
+# Exact Helmholtz-Hartree solution. Parameters obey ell=1/(2k).
+ell=1/(2*k); A=6*a*k*k; B=s.sqrt(9*a*k*k/g)
+phi=B*q*q; W=A*q*q; eps=4*a*k*k
+check(&#39;Hartree stationary profile&#39;,-a*s.diff(phi,x,2)-W*phi+eps*phi)
+check(&#39;Hartree Helmholtz same-field response&#39;,W-ell**2*s.diff(W,x,2)-g*phi**2)
+check(&#39;Hartree phase zero mode&#39;,-a*s.diff(phi,x,2)-W*phi+eps*phi)
+check(&#39;Hartree translation response source&#39;,s.diff(W,x)-ell**2*s.diff(W,x,3)-2*g*phi*s.diff(phi,x))
+check(&#39;Hartree translation zero mode&#39;,-a*s.diff(phi,x,3)-W*s.diff(phi,x)-s.diff(W,x)*phi+eps*s.diff(phi,x))
+chi=q*th
+check(&#39;Hartree frozen first excited bound profile&#39;,-a*s.diff(chi,x,2)-W*chi+a*k*k*chi)
+# Use exact beta integral C_r=int sech(t)^r dt; C4=4/3,C6=16/15.
+C4=s.Rational(4,3); C6=s.Rational(16,15)
+Q=B**2*C4/k
+T=a*B**2*4*k*(C4-C6)
+Wint=B**2*A*C6/k
+E=T-Wint/2
+check(&#39;Hartree canonical branch norm&#39;,Q-12*a*k/g)
+check(&#39;Hartree complete energy&#39;,E+8*a*k*k*Q/5)
+check(&#39;Hartree stationary contraction&#39;,T-Wint+eps*Q)
+check(&#39;Hartree curvature-depth squared&#39;,2*a*s.diff(-W,x,2).subs(x,0)/A**2-s.Rational(2,3))
+check(&#39;Hartree bound-gap depth&#39;,3*a*k*k/A-s.Rational(1,2))
+# Generic power family, written with lambda=1/sigma, depth a lambda(lambda+1)k².
+lam=s.symbols(&#39;lam&#39;,positive=True)
+f=q**lam
+V=-a*lam*(lam+1)*k*k*q*q
+check(&#39;Generic power/PT stationary profile&#39;,-a*s.diff(f,x,2)+V*f+a*lam**2*k*k*f)
+check(&#39;Generic curvature-depth squared&#39;,2*a*s.diff(V,x,2).subs(x,0)/(a*lam*(lam+1)*k*k)**2-4/(lam*(lam+1)))
+golden=(1+s.sqrt(5))/2
+check(&#39;Ratio-two exponent exact&#39;,golden**2-golden-1)
+check(&#39;Ratio-two curvature exact&#39;,4*golden**2/(golden+1)-4)
+# Unitary weighted-kinetic conjugation on ordinary warped geometry.
+p=s.symbols(&#39;p&#39;,positive=True)
+J=s.cosh(k*x)**p
+chi=s.Function(&#39;chi&#39;)(x)
+f=chi/s.sqrt(J)
+Vgeo=a*k*k*(p*p/4-p*(p-2)*q*q/4)
+check(&#39;Warped metric induced kinetic potential&#39;,s.sqrt(J)*(-a*(s.diff(f,x,2)+s.diff(s.log(J),x)*s.diff(f,x)))-(-a*s.diff(chi,x,2)+Vgeo*chi))
+# Positive d&gt;=4 branch; lambda=(d-3)/2.
+depths=[]
+for d in (2,3,4,5,6,10):
+    lv=s.Rational(d-3,2)
+    bound=lv&gt;0
+    row={&#39;physical_depth&#39;:d,&#39;p&#39;:d-1,&#39;normal_bound_ground&#39;:bool(bound),&#39;full_local_power_sigma_d_minus_2&#39;:float(d*golden-2),&#39;full_Helmholtz_high_concentration&#39;:(&#39;kinetic dominates&#39; if d&lt;4 else &#39;critical coefficient&#39; if d==4 else &#39;attraction dominates&#39;)}
+    if bound:
+        Ag=lv*(lv+1)
+        ratio=s.simplify(2/s.sqrt(Ag))
+        row.update({&#39;geometric_depth_over_a_k2&#39;:str(Ag),&#39;curvature_depth_ratio&#39;:str(ratio),&#39;curvature_depth_decimal&#39;:float(ratio),&#39;bound_normal_levels&#39;:[j for j in range(10) if j&lt;lv], &#39;ground_energy_over_a_k2&#39;:str(s.Integer(d-2))})
+        ground=q**lv
+        check(f&#39;d{d} geometric ground profile&#39;,-a*s.diff(ground,x,2)+Vgeo.subs(p,d-1)*ground-a*k*k*(d-2)*ground)
+    depths.append(row)
+# Inclusions preserve a norm-density normal kernel exactly; compare two internal bands.
+u=s.Matrix([s.Rational(3,5),4*s.I/5]); inc=s.Matrix([[1,0],[0,1],[0,0]])
+check(&#39;Internal band norm preserved&#39;,(inc*u).conjugate().dot(inc*u)-u.conjugate().dot(u))
+check(&#39;Identity normal block compression&#39;,s.trace(inc.T*s.eye(3)*inc-s.eye(2)))
+# Coordinate rescaling y=b x: m_x=b²m, curvature_x=b²curvature_y.
+b,m,c=s.symbols(&#39;b m c&#39;,positive=True)
+check(&#39;Curvature ratio coordinate invariance&#39;,(b*b*c)/(b*b*m)-c/m)
+result={&#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),&#39;scope&#39;:&#39;Exact normal profiles, frozen spectra, responding zero modes, kinetic measure, depth comparisons. No particle-mass or stability claim.&#39;,&#39;code_sha256&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),&#39;sources&#39;:{&#39;experiments/exact-normal-response-kernels.py&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},&#39;checks&#39;:checks,&#39;all_passed&#39;:all(r[&#39;passed&#39;] for r in checks),&#39;depths&#39;:depths,&#39;hartree&#39;:{&#39;Q&#39;:&#39;12 a k/g&#39;,&#39;ell&#39;:&#39;1/(2 k)&#39;,&#39;A&#39;:&#39;6 a k^2&#39;,&#39;stationary_frequency&#39;:&#39;-4 a k^2/hbar&#39;,&#39;energy&#39;:&#39;-8 a k^2 Q/5&#39;,&#39;curvature_over_depth&#39;:&#39;sqrt(2/3)&#39;,&#39;frozen_gap_over_depth&#39;:&#39;1/2&#39;},&#39;ratio_two_local_power&#39;:{&#39;sigma&#39;:str(golden),&#39;sigma_float&#39;:float(golden),&#39;frozen_bound_level_count&#39;:1,&#39;interpretation&#39;:&#39;Target-selected exponent, no geometric derivation; curvature 2 is not a discrete gap.&#39;}}
+out=root/(&#39;exact-normal-response-kernels-results-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;)
+out.write_text(json.dumps(result,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;result&#39;:str(out),&#39;checks&#39;:len(checks),&#39;all_passed&#39;:result[&#39;all_passed&#39;],&#39;depths&#39;:depths},indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

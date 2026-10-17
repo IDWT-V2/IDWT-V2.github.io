@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Separation and Orientation Response of Smoothed Count Patterns — IDWT V2</title>
+  <meta name="description" content="Energy and source clustering for separated profiles, an exact orientation-dependent contact curvature across all maintained depths, and the limits of energetic stability for higher-frequency branches.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261014-smoothed-pattern-interactions/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Separation and Orientation Response of Smoothed Count Patterns — IDWT V2">
+  <meta property="og:description" content="Energy and source clustering for separated profiles, an exact orientation-dependent contact curvature across all maintained depths, and the limits of energetic stability for higher-frequency branches.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261014-smoothed-pattern-interactions/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Separation and Orientation Response of Smoothed Count Patterns — IDWT V2">
+  <meta name="twitter:description" content="Energy and source clustering for separated profiles, an exact orientation-dependent contact curvature across all maintained depths, and the limits of energetic stability for higher-frequency branches.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research / Contact operators</p>
+      <h1>Separation and Orientation Response of Smoothed Count Patterns</h1>
+      <p class="article-date">Updated <time datetime="2026-10-14">October 14, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body">
+<p>These results use the <a href="/research/notes/20261014-smoothed-count-pattern-action/">smoothed count action</a> and its <a href="/research/notes/20261014-bounded-current-count-action/">bounded-current completion</a>. They concern classical fields in shared ordinary R10, with supplied count and depth assignments.</p>
+<h2 id="energy-clustering-from-the-bounded-constitutive-functions">Energy Clustering from the Bounded Constitutive Functions</h2>
+<p>Let phi and chi be any two H1 fields. Translate chi by a vector R whose
+length tends to infinity, and allow any fixed relative phase. Write
+psi_R=phi+exp(i theta) chi(.-R). Then</p>
+<pre><code>H[psi_R] -&gt; H[phi]+H[chi],
+||psi_R||_2^2 -&gt; ||phi||_2^2+||chi||_2^2.
+</code></pre>
+<p>The kinetic and norm cross terms tend to zero by the weak convergence of
+translations in L2. The nonlinear proof is especially transparent for the
+bounded-current action. First approximate both fields strongly in H1 by
+smooth compactly supported fields. The energy is continuous on H1, but
+continuity alone is not uniform over all R, so this approximation needs an
+additional estimate. The source growth bound gives</p>
+<pre><code>|H_nl[f]-H_nl[g]|
+    &lt;= K (||f||_H1+||g||_H1) ||f-g||_H1.
+</code></pre>
+<p>It follows by integrating the bounded derivative along their connecting
+line. The constant is global for the fixed constitutive functions. Thus the
+compact approximation error is uniformly controlled as R varies.</p>
+<p>For compact disjoint supports, rho_R is exactly the sum of the two densities
+and j_R is exactly the sum of their currents. Around either occupied
+region, the translated Gaussian-smoothed density and current tend to zero
+with all derivatives. The normalized local coefficients converge to those
+of that isolated pattern, since its own smoothed density is positive.</p>
+<p>To control the intervening space, choose a fixed radius L around each
+support. Outside these two regions, the total convolved density has
+integral at most the sum of the two isolated Gaussian tails beyond L.
+Both nonlinear integrands are bounded by a constant times this density:</p>
+<pre><code>|u Z(C)|+|u gamma(C) F(|J/u|^2)| &lt;= K u.
+</code></pre>
+<p>Dominated convergence on the two fixed translated neighborhoods, followed
+by L tending to infinity, proves nonlinear energy additivity. No relative
+frequency locking or special orientation is required. For the original
+density-only action the same proof uses its L2 derivative bound.</p>
+<p>This is a limit theorem, not a finite-distance rate or a force calibration.
+It does not make the Gaussian interaction finite range. It does establish
+that infinitely separated finite-energy patterns do not retain a spurious
+global-moment interaction in these actions.</p>
+<h2 id="the-complete-nonlinear-source-also-clusters">The Complete Nonlinear Source Also Clusters</h2>
+<p>Let B(psi)=F_0(psi)+F_I(psi) denote the non-Laplacian source, with F_I=0
+for the original action. Then, for arbitrary fixed H1 profiles,</p>
+<pre><code>||B(phi+exp(i theta) chi(.-R))
+    -B(phi)-exp(i theta) B(chi)(.-R)||_2 -&gt; 0.
+</code></pre>
+<p>Around either center, the other profile tends to zero locally in H1 and
+its Gaussian-smoothed density and current tend to zero with all fixed
+derivatives. Cross density and cross current terms tend to zero globally
+in L1: each is a product of two fixed L2 functions translated apart.
+Thus the normalized coefficients converge locally to their isolated values.
+A common positive mass ball centered on the chosen profile supplies the
+polynomial score bound needed for the multiplier's convolution. This
+argument is repeated in coordinates centered on the other profile.</p>
+<p>Outside a radius L around both centers, the density is bounded by twice
+the sum of the two isolated densities. The weighted p&gt;2 multiplier
+estimates make its scalar source tail arbitrarily small as L grows,
+uniformly in R. The transport tail is controlled by bounded A times the
+sum of the two gradient tails, and bounded div A times the density tails.
+Local convergence and these uniform tails prove the displayed L2 limit.
+At a zero isolated profile the assertion is immediate.</p>
+<p>The estimates are uniform in the relative phase. Consequently the sum of
+two fixed rest Gaussians, each evolving at its own isolated frequency,
+has an L2 equation residual tending to zero with separation, uniformly on
+each bounded time interval. This verifies the unlike-frequency baseline
+without prescribing synchronization. A small residual is not yet a
+quantitative closeness theorem for an exact pair history: that would need
+an appropriate stability or continuous-dependence estimate for the flow.</p>
+<h2 id="a-constraint-on-interpreting-the-positive-gaussian-hessian">A Constraint on Interpreting the Positive Gaussian Hessian</h2>
+<p>The action is homogeneous of degree two in the overall field amplitude.
+Suppose normalized rest profiles phi_h and phi_l have energies omega_h and
+omega_l with omega_l&lt;omega_h. The common action contains both branches.
+For 0&lt;epsilon&lt;1, consider</p>
+<pre><code>psi_(epsilon,R)=sqrt(1-epsilon^2) phi_h
+                           +epsilon phi_l(.-R),
+</code></pre>
+<p>and rescale by a scalar tending to one as R tends to infinity to keep the
+norm exactly one. By clustering,</p>
+<pre><code>H[psi_(epsilon,R)]-omega_h
+    -&gt; epsilon^2(omega_l-omega_h)&lt;0.
+</code></pre>
+<p>For each epsilon choose R sufficiently large that the finite-separation
+error is smaller than half this strict decrease. Meanwhile the H1 distance
+to phi_h is bounded by O(epsilon), uniformly in R, because the translated
+lower branch has fixed H1 norm. Hence a higher-frequency Gaussian cannot
+be a constrained local minimum in the unrestricted H1 topology whenever
+the same action admits a lower-frequency branch.</p>
+<p>This does not contradict its nonnegative closed Gaussian relative-density
+Hessian. That form controls its own weighted perturbation domain; it is not
+a proved uniform second-order expansion in the ordinary H1 topology.
+Adding a tiny remote profile probes a different tail limit. The nonlinear
+energy is C1, and a Frechet C2 theorem in H1 was never established.</p>
+<p>Nor does this argument prove dynamical decay or even nonlinear orbital
+instability. It constructs lower-energy nearby states, not a trajectory
+connecting them, a transfer rate, or a lifetime. Finite-lived branches remain
+permitted. The useful next dynamical question is whether the actual equation
+can move field norm into those remote or outgoing components on a relevant
+timescale while conserving complete energy and momentum.</p>
+<p>At rest the added current energy vanishes on each real isolated Gaussian,
+so these statements apply to both smoothed actions. The result is common
+to all maintained depths and does not by itself single out depth five or
+identify an observed particle. Counts and positive sector units retain their
+status as supplied inverse-construction inputs.</p>
+<h2 id="equal-profile-separation-in-a-physical-direction">Equal-Profile Separation in a Physical Direction</h2>
+<p>Let phi_B be a real target Gaussian with norm one, and let n be an ordinary
+unit vector in R10. Normalize the sum phi_B(x-hn)+phi_B(x+hn) to norm one.
+The centers are separated by 2h. At h=0 it is the single normalized branch.
+The relative-density perturbation is</p>
+<pre><code>delta rho/rho=h^2[(n^T B x)^2-(n^T B n)/2]+O(h^4).
+</code></pre>
+<p>Gaussian filtering maps this to the analogous quadratic with B replaced by
+C, and therefore</p>
+<pre><code>delta C=-h^2(Cn)(Cn)^T+O(h^4).
+</code></pre>
+<p>The real field has zero current. Thus its current correction is exactly
+zero, and the result applies to both the original smoothed action and the
+saturated-current action. The kinetic-plus-compensation density Hessian
+vanishes for quadratic relative-density disturbances. Only the positive
+count Hessian T contributes at this order:</p>
+<pre><code>H_pair/N=omega+(h^4/2) T[(Cn)(Cn)^T,(Cn)(Cn)^T]+O(h^6).
+</code></pre>
+<p>The count-frequency term itself has zero first and second descriptor jets;
+its third jet can enter the remainder. For high counts the range where the
+quartic term dominates may be small. This expansion is at fixed one-profile
+norm and is not the distant sum of two unit-norm particles.</p>
+<h2 id="broad-and-narrow-directions-enter-the-same-formula">Broad and Narrow Directions Enter the Same Formula</h2>
+<p>Write C=aP+bQ, rank P=d, a=b/(k+2). For d&lt;10 put q=|Qn|^2 in [0,1].
+The broad-direction fraction is 1-q. Define</p>
+<pre><code>A=2 Lambda pi^2 b^2/(d^2 a^4),
+Z=8 Lambda pi^2/(a-b)^2, R=2 eta(a-b)^2,
+U=R a^4(1-1/d), W=[Z+R(1+1/d)] b^4, L=a^2+b^2.
+</code></pre>
+<p>The exact quartic coefficient is</p>
+<pre><code>K4(q)=(1/2){A[a^2-Lq]^2+U(1-q)^2+Wq^2}.          (1)
+</code></pre>
+<p>It is strictly positive. The omitted cross projector block is a rotation
+zero direction of the count Hessian, rather than an omitted elastic penalty.
+Equation (1) includes all block-diagonal contributions of the rank-one
+matrix (Cn)(Cn)^T.</p>
+<p>The softest direction is generally slightly tilted out of the broad plane:</p>
+<pre><code>q_min=(A L a^2+U)/(A L^2+U+W),                    (2)
+K4_min=(1/2)[A a^4+U
+                -(A L a^2+U)^2/(A L^2+U+W)].     (3)
+</code></pre>
+<p>For positive penalties, 0&lt;q_min&lt;1. The small tilt partly cancels the change
+in the width-index descriptor, leaving the depth and residual-matrix
+penalties. This is a consequence of the common geometric action, not an
+orientation acceptance factor inserted afterwards.</p>
+<p>At fixed d and large k, q_min is asymptotic to a^2/b^2=1/(k+2)^2, so the
+angle out of the broad plane is asymptotic to 1/(k+2) radians. The ratio of
+the minimum curvature to the purely broad-direction curvature tends to
+zero like a^4, with constants depending on the common penalties and d.
+At d=10 there is no Q direction, so only q=0 is physically available.
+One must not minimize over a nonexistent complement at depth ten.</p>
+<p>The pure-direction values are K4(0)=[A a^4+U]/2 and
+K4(1)=[A b^4+W]/2. Consequently the action already predicts a substantial
+contrast between response along a pattern's broad and narrow directions.
+Depth five follows the same formula as its neighbors; this does not derive
+the neutrino's weak electromagnetic response. Likewise, quartic energy
+curvature does not by itself supply an observed cross section or an electric
+charge. It is a concrete orientation-dependent consequence to test further.</p>
+<h2 id="checks-and-scope">Checks and Scope</h2>
+<p>The accompanying exact rational comparison fixes b=eta=1 and
+Lambda pi^2=1 for all branches. These are diagnostic shared units, not a
+particle-dependent adjustment. Equations (1)–(3) are checked for all fourteen
+maintained count labels at depths 2,3,4,5,6,10, respecting depth ten's absent
+complement. The mathematical input is the complete count Hessian, already
+given in the smoothed count action. This derivation does not add
+an occupied-branch selection mechanism or derive the supplied sector units.</p>
+<p>The <a href="/evidence/diagnostics/check-pair-orientation/">exact orientation checker</a> passes 66 rational assertions across the fourteen maintained labels. With the shared diagnostic units, the electron and muon controls have minimum-to-broad-direction quartic curvature ratios about 0.00587175 and 0.000131004. Their minimizing tilts are about 0.0711213 and 0.0277691 radians. These are profile-energy coefficients, not measured interaction rates. At depth ten the complementary directions are absent and no such tilt is available.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261014-smoothed-count-pattern-action/">A Smoothed Count Action with Global Finite-Energy Histories</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#energy-clustering-from-the-bounded-constitutive-functions">Energy Clustering from the Bounded Constitutive Functions</a></li><li class="toc-level-2"><a href="#the-complete-nonlinear-source-also-clusters">The Complete Nonlinear Source Also Clusters</a></li><li class="toc-level-2"><a href="#a-constraint-on-interpreting-the-positive-gaussian-hessian">A Constraint on Interpreting the Positive Gaussian Hessian</a></li><li class="toc-level-2"><a href="#equal-profile-separation-in-a-physical-direction">Equal-Profile Separation in a Physical Direction</a></li><li class="toc-level-2"><a href="#broad-and-narrow-directions-enter-the-same-formula">Broad and Narrow Directions Enter the Same Formula</a></li><li class="toc-level-2"><a href="#checks-and-scope">Checks and Scope</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

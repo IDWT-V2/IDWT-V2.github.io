@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>check-orientation-inertia.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/check-orientation-inertia.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="check-orientation-inertia.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/check-orientation-inertia.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="check-orientation-inertia.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>check-orientation-inertia.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/check-orientation-inertia.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Exact full signed spectral bound. Uses integer Sturm endpoint checks only.&quot;&quot;&quot;
+from fractions import Fraction as F
+from math import factorial, comb, isqrt, ceil
+from pathlib import Path
+import json, hashlib
+P=Path(__file__).parent
+import argparse
+from datetime import datetime, timezone
+parser=argparse.ArgumentParser()
+parser.add_argument(&#39;--input&#39;,type=Path,default=P/&#39;results/free-count-stability-20261014.json&#39;)
+src=parser.parse_args().input
+data=json.loads(src.read_text()); s=data[&#39;spectral&#39;]; M=s[&#39;M&#39;]; b=s[&#39;b&#39;]; r=F(1,100000)
+checks=0
+def check(x):
+ global checks
+ assert x
+ checks+=1
+def iv(x):return tuple(map(F,x))
+def sturm(d,lam,f):
+ z=(f*factorial(d)/M**(d-1))**2
+ p,q=z.numerator,z.denominator
+ a=[lam+j*(d+1-j) for j in range(1,d+1)]
+ diag=[x+M*M for x in a[:-1]]+[a[-1]]
+ old,cur=1,diag[0]*q-p; signs=[1]
+ if cur:signs.append(1 if cur&gt;0 else -1)
+ for j in range(1,d):
+  old,cur=cur,(diag[j]*q-p)*cur-M*M*a[j]*q*q*old
+  if cur:signs.append(1 if cur&gt;0 else -1)
+ check(cur!=0)
+ return sum(x!=y for x,y in zip(signs,signs[1:]))
+roots=0
+for dd,dep in s[&#39;depths&#39;].items():
+ d=int(dd); cutoff=dep[&#39;cutoff_lambda&#39;]; fam={0:[dict(grade=0,degree=0,h=1,signed_chain_multiplicity=1)]}
+ for k in range(d):
+  n=1
+  while True:
+   lam=(n+k)*(n+d+1-k)*(1 if k==0 else b*b)
+   if lam&gt;=cutoff:break
+   h=comb(n+d-1,d-k-1)*comb(n+k-1,k)
+   fam.setdefault(lam,[]).append(dict(grade=k,degree=n,h=h,signed_chain_multiplicity=2*h));n+=1
+ check({x[&#39;lam&#39;]:x[&#39;families&#39;] for x in dep[&#39;families&#39;]}==fam)
+ for f in dep[&#39;families&#39;]+[dict(lam=cutoff,frequency=dep[&#39;cutoff_frequency&#39;])]:
+  lo,hi=iv(f[&#39;frequency&#39;]);check(0&lt;lo&lt;hi);check(sturm(d,f[&#39;lam&#39;],lo)==0);check(sturm(d,f[&#39;lam&#39;],hi)==1);roots+=1
+ maxweak=isqrt(cutoff+max(j*(d+1-j) for j in range(1,d+1)))+1
+ heavy=F((M-maxweak)*M**(d-1),factorial(d));check(heavy==F(dep[&#39;heavy_normalized_lower&#39;]))
+ bg=max(F(x[&#39;target_frequency&#39;][1]) for x in s[&#39;rows&#39;] if x[&#39;depth&#39;]==d)
+ check(heavy&gt;2*bg);check(F(dep[&#39;cutoff_frequency&#39;][0])&gt;2*bg)
+rows=[]
+for row in s[&#39;rows&#39;]:
+ d,N=row[&#39;depth&#39;],row[&#39;degree&#39;]; target=row[&#39;target_lambda&#39;]; omlo,omhi=iv(row[&#39;target_frequency&#39;]);dep=s[&#39;depths&#39;][str(d)]
+ check(next(x[&#39;frequency&#39;] for x in dep[&#39;families&#39;] if x[&#39;lam&#39;]==target)==row[&#39;target_frequency&#39;])
+ candidates=[];signed=0
+ for f in dep[&#39;families&#39;]:
+  lam=f[&#39;lam&#39;];lo,hi=iv(f[&#39;frequency&#39;])
+  if lam==target:continue # BOTH full signed eigenspaces, including all multiplicities
+  check(hi&lt;omlo or lo&gt;omhi)
+  for sign in (-1,1):
+   nl,nh=(lo,hi) if sign==1 else (-hi,-lo);signed+=1
+   if nl&gt;omhi or nh&lt;-omhi:continue # ratio (nu+omega)/(nu-omega) positive
+   check(-omlo&lt;nl&lt;=nh&lt;omlo)
+   # -(nu+omega)/(nu-omega)=(omega+nu)/(omega-nu).
+   # Monotone increasing in nu. For nu positive use omega lower,
+   # for nu negative use omega upper (derivative -2nu/(omega-nu)^2).
+   om=omlo if nh&gt;=0 else omhi
+   candidates.append((F(om+nh,om-nh),lam,sign))
+ beta,near,sign=max(candidates,default=(F(0),None,None))
+ B=ceil(beta);w=1-r*r*(1+B);a=w/(r*r)-1
+ check(w&gt;r*r)
+ rows.append(dict(label=row[&#39;label&#39;],depth=d,degree=N,target_frequency=row[&#39;target_frequency&#39;],nearest_lower_lambda=near,nearest_sign=sign,beta_upper=str(beta),beta_integer_upper=B,w_lower=str(w),inertia_factor=str(a),signed_branches_checked=signed))
+B=max(x[&#39;beta_integer_upper&#39;] for x in rows);w=1-r*r*(1+B);A=w/r**2-1
+for row in rows:
+ d,N=row[&#39;depth&#39;],row[&#39;degree&#39;];lam=N*(N+d+1);g=F(lam,d+2)
+ row[&#39;angular_norm_ratio&#39;]=str(g)
+ if N:
+  row[&#39;common_inertia_over_profile_norm_lower&#39;]=str(A*g)
+  row[&#39;omega_ratio_squared_over_epsilon_upper&#39;]=str(2/(A*g))
+  # pi &lt; 22/7 gives a wholly rational squared per-cycle bound.
+  q=4*F(22,7)**2*2/(A*g)
+  row[&#39;cycle_angle_squared_over_epsilon_upper&#39;]=str(q)
+  c=F(isqrt(q.numerator*10**16//q.denominator)+1,10**8)
+  check(c*c&gt;q)
+  row[&#39;cycle_angle_over_sqrt_epsilon_rational_upper&#39;]=str(c)
+ else:row[&#39;orientation&#39;]=&#39;absent; no inverse or angular speed bound&#39;
+report=dict(status=&#39;passed&#39;,checks=checks,root_intervals_rechecked=roots,M=M,b=b,r=str(r),common_beta_integer_upper=B,common_w_lower=str(w),common_inertia_factor=str(A),rows=rows,sources={&#39;experiments/results/free-count-stability-20261014.json&#39;:hashlib.sha256(src.read_bytes()).hexdigest(),&#39;experiments/check-orientation-inertia.py&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest()})
+(P/(&#39;orientation-inertia-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;)).write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps({k:v for k,v in report.items() if k not in (&#39;rows&#39;,&#39;sources&#39;)},indent=2))
+for x in rows:print(x[&#39;label&#39;],x[&#39;beta_integer_upper&#39;],x.get(&#39;common_inertia_over_profile_norm_lower&#39;),x.get(&#39;cycle_angle_squared_over_epsilon_upper&#39;))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

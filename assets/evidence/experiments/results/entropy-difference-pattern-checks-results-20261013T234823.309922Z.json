@@ -1,0 +1,205 @@
+{
+  "created_utc": "2026-10-13T23:48:23.309922+00:00",
+  "script_name": "entropy-difference-pattern-checks.py",
+  "script_sha256": "6d577463c67bc0a0fee8f13a5c73a79709da9051446595f4447274b1d56f6bf4",
+  "sympy_version": "1.14.0",
+  "checks_passed": 103,
+  "groups": {
+    "support": {
+      "checks_passed": 75,
+      "checks": [
+        "three-filter partial fractions",
+        "Gaussian energy derivative",
+        "width root 1",
+        "width root m",
+        "width root 4",
+        "equal well parameter",
+        "two-filter roots",
+        "two-filter unstable rate",
+        "full frequency-energy d2",
+        "quadratic residual d2 axis0",
+        "quadratic residual d2 axis1",
+        "quadratic residual d2 axis2",
+        "quadratic residual d2 axis3",
+        "quadratic residual d2 axis4",
+        "quadratic residual d2 axis5",
+        "quadratic residual d2 axis6",
+        "quadratic residual d2 axis7",
+        "quadratic residual d2 axis8",
+        "quadratic residual d2 axis9",
+        "full frequency-energy d3",
+        "quadratic residual d3 axis0",
+        "quadratic residual d3 axis1",
+        "quadratic residual d3 axis2",
+        "quadratic residual d3 axis3",
+        "quadratic residual d3 axis4",
+        "quadratic residual d3 axis5",
+        "quadratic residual d3 axis6",
+        "quadratic residual d3 axis7",
+        "quadratic residual d3 axis8",
+        "quadratic residual d3 axis9",
+        "full frequency-energy d4",
+        "quadratic residual d4 axis0",
+        "quadratic residual d4 axis1",
+        "quadratic residual d4 axis2",
+        "quadratic residual d4 axis3",
+        "quadratic residual d4 axis4",
+        "quadratic residual d4 axis5",
+        "quadratic residual d4 axis6",
+        "quadratic residual d4 axis7",
+        "quadratic residual d4 axis8",
+        "quadratic residual d4 axis9",
+        "full frequency-energy d5",
+        "quadratic residual d5 axis0",
+        "quadratic residual d5 axis1",
+        "quadratic residual d5 axis2",
+        "quadratic residual d5 axis3",
+        "quadratic residual d5 axis4",
+        "quadratic residual d5 axis5",
+        "quadratic residual d5 axis6",
+        "quadratic residual d5 axis7",
+        "quadratic residual d5 axis8",
+        "quadratic residual d5 axis9",
+        "full frequency-energy d6",
+        "quadratic residual d6 axis0",
+        "quadratic residual d6 axis1",
+        "quadratic residual d6 axis2",
+        "quadratic residual d6 axis3",
+        "quadratic residual d6 axis4",
+        "quadratic residual d6 axis5",
+        "quadratic residual d6 axis6",
+        "quadratic residual d6 axis7",
+        "quadratic residual d6 axis8",
+        "quadratic residual d6 axis9",
+        "full frequency-energy d10",
+        "quadratic residual d10 axis0",
+        "quadratic residual d10 axis1",
+        "quadratic residual d10 axis2",
+        "quadratic residual d10 axis3",
+        "quadratic residual d10 axis4",
+        "quadratic residual d10 axis5",
+        "quadratic residual d10 axis6",
+        "quadratic residual d10 axis7",
+        "quadratic residual d10 axis8",
+        "quadratic residual d10 axis9",
+        "Gaussian Riccati real-imaginary decomposition"
+      ],
+      "values": {
+        "m": "2.03504067233352672920796",
+        "beta": [
+          "91.0512201700058018762388",
+          "-205.338294459015665065845",
+          "123.155448294676723252147"
+        ],
+        "h_min": "-3.62721321632975495394485",
+        "h_barrier": "-3.60006026512777152493771",
+        "well_curvatures": [
+          "0.388140252125072523452985",
+          "0.0302301435025611272429545"
+        ],
+        "width_oscillation_squared": [
+          "6.21024403400116037524776",
+          "30.9556669466225942967854"
+        ]
+      },
+      "depths": [
+        {
+          "depth": 2,
+          "width1_multiplicity": 2,
+          "width4_multiplicity": 8,
+          "kinetic_per_N": "17",
+          "frequency_minus_mu0": "-36.2721321632975495"
+        },
+        {
+          "depth": 3,
+          "width1_multiplicity": 3,
+          "width4_multiplicity": 7,
+          "kinetic_per_N": "31/2",
+          "frequency_minus_mu0": "-36.2721321632975495"
+        },
+        {
+          "depth": 4,
+          "width1_multiplicity": 4,
+          "width4_multiplicity": 6,
+          "kinetic_per_N": "14",
+          "frequency_minus_mu0": "-36.2721321632975495"
+        },
+        {
+          "depth": 5,
+          "width1_multiplicity": 5,
+          "width4_multiplicity": 5,
+          "kinetic_per_N": "25/2",
+          "frequency_minus_mu0": "-36.2721321632975495"
+        },
+        {
+          "depth": 6,
+          "width1_multiplicity": 6,
+          "width4_multiplicity": 4,
+          "kinetic_per_N": "11",
+          "frequency_minus_mu0": "-36.2721321632975495"
+        },
+        {
+          "depth": 10,
+          "width1_multiplicity": 10,
+          "width4_multiplicity": 0,
+          "kinetic_per_N": "5",
+          "frequency_minus_mu0": "-36.2721321632975495"
+        }
+      ]
+    },
+    "independent_support": {
+      "checks_passed": 9,
+      "checks": [
+        "matrix Riccati 00",
+        "matrix Riccati 01",
+        "matrix Riccati 10",
+        "matrix Riccati 11",
+        "noncommuting restricted energy conservation",
+        "norm conservation",
+        "heat Fisher equality",
+        "Gaussian entropy gain derivative",
+        "Galilean Hamilton derivative gives velocity"
+      ]
+    },
+    "cauchy_elementary": {
+      "checks_passed": 19,
+      "checks": [
+        "Fisher convexity remainder",
+        "negative entropy maximizing point",
+        "negative entropy maximum",
+        "negative entropy concavity",
+        "Gram disk critical angle",
+        "Gram disk squared maximum",
+        "D=1: weighted low exponent",
+        "D=2: weighted low exponent",
+        "D=3: weighted low exponent",
+        "D=3: spare high exponent",
+        "D=4: weighted low exponent",
+        "D=4: spare high exponent",
+        "D=5: weighted low exponent",
+        "D=5: spare high exponent",
+        "D=6: weighted low exponent",
+        "D=6: spare high exponent",
+        "D=10: weighted low exponent",
+        "D=10: spare high exponent",
+        "epsilon Cauchy integrated bound"
+      ]
+    }
+  },
+  "historical_source_artifacts": {
+    "support_original_checker": {
+      "sha256": "e6fce60b92ae4dc27714f0c500bd4e7a87f18559b44359dd3314be8fb160cb58",
+      "bytes": 3893
+    },
+    "support_review_original_checker": {
+      "sha256": "f961beb60058970810e92a5cdf1fa9eacdf7ba97277b818b1e7b0a3b93f6949f",
+      "bytes": 3118
+    },
+    "cauchy_review_original_checker": {
+      "sha256": "88ef40f400cedf847c9faf5f1df6d286f6f46cf044bc34a709f7e10ac4bd9751",
+      "bytes": 2395
+    }
+  },
+  "counting": "Only asserted finite mathematical identities are counted. Historical provenance checks and two repeated support-review identities are excluded.",
+  "scope": "Finite Gaussian, energy, Fisher, entropy-tail, Gram-disk and exponent identities. No numerical PDE evolution, general PDE proof, particle identification or full stability theorem."
+}

@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>An Exact Coupled Count-Clock Family on a Deformable Ball — IDWT V2</title>
+  <meta name="description" content="One material transformation law gives exact joint stationary count clocks, a complete ground-energy bound and spatial mode-conversion rules at all six depths, with active-ball support still prescribed.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261014-material-pullback-count-action/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="An Exact Coupled Count-Clock Family on a Deformable Ball — IDWT V2">
+  <meta property="og:description" content="One material transformation law gives exact joint stationary count clocks, a complete ground-energy bound and spatial mode-conversion rules at all six depths, with active-ball support still prescribed.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261014-material-pullback-count-action/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="An Exact Coupled Count-Clock Family on a Deformable Ball — IDWT V2">
+  <meta name="twitter:description" content="One material transformation law gives exact joint stationary count clocks, a complete ground-energy bound and spatial mode-conversion rules at all six depths, with active-ball support still prescribed.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>An Exact Coupled Count-Clock Family on a Deformable Ball</h1>
+      <p class="article-date">Updated <time datetime="2026-10-14">October 14, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body">
+<p>The <a href="/research/notes/20261013-flat-ball-conformal-clock/">weighted-ball count operator</a> admits an
+explicit extension in which both the wave and its material coefficients
+are varied. A common transformation law preserves the static count clocks,
+while the time-dependent action retains reciprocal wave/carrier coupling.
+Balanced component oscillations solve both equations exactly. Their ground
+branch has a complete positive energy bound, and simple spatial deformations
+produce mode-conversion selection rules tied to the same simplex counts.</p>
+<p>This is an inverse constitutive candidate on a clamped active ball at
+d=2,3,4,5,6,10. The containing physical space remains ordinary shared flat
+space, currently modeled by R10. It is not a derivation of a freely localized
+particle in that containing space. Carrier and wave variables are proposed
+retained components of one field; their realization in the master field
+remains to be supplied. They are not mediator particles. Internal spatial
+profiles do not replace deterministic electron trajectories.</p>
+<p>The reference wave operator is L0=-w^(-1) div[w(I-xx^T) grad], with
+w=sqrt(1-r^2), eigenvalues lambda_N=N(N+d+1), and complete degree-space
+dimension binomial(N+d-1,d-1). Its supplied positive polynomial P_d obeys
+P_d(lambda_N)=binomial(N+d,d)^2. All components use the same rule.
+The positive clamped elastic energy is</p>
+<pre><code>E_el(v)=1/2 int [2 epsilon(v):epsilon(v)+(div v)^2],
+epsilon(v)=(Dv+Dv^T)/2,
+sigma(v)=2 epsilon(v)+(div v)I,
+</code></pre>
+<p>so L_el=-Delta-2 grad div. These elastic coefficients are common material
+choices, not derived particle-specific numbers. Physical amplitudes remain
+free and are not fitted to observed masses.</p>
+<h2 id="transform-the-density-and-stiffness-together">Transform the Density and Stiffness Together</h2>
+<p>Let phi:B^d-&gt;B^d be a smooth orientation-preserving diffeomorphism equal
+to the identity on the boundary. Put F=Dphi, J=det F, and use y=phi(x)
+as a material label in the same d ordinary spatial coordinates. It does
+not add a physical dimension. Define</p>
+<pre><code>rho_phi(x)=J(x)w(phi(x)), w(y)=sqrt(1-|y|^2),
+A_phi(x)=F^(-1)[I-phi(x)phi(x)^T]F^(-T),
+L_phi=-rho_phi^(-1) div_x[rho_phi A_phi grad_x].
+</code></pre>
+<p>For a material function U(y), the chain rule and change of variables give</p>
+<pre><code>L_phi[U composed with phi]=(L_0 U) composed with phi,
+int rho_phi |U composed with phi|^2 dx=int w|U|^2dy,
+L_0=-w^(-1) div_y[w(I-yy^T)grad_y].
+</code></pre>
+<p>The quadratic gradient forms agree under the same substitution, proving
+the operator identity on their transported finite-energy domains. The
+entire polynomial P_d(L_phi) and its spectral domains transport with it.
+Every admissible static phi therefore has the same exact count frequencies.
+This uses the full Jacobian and inverse deformation gradient. Substitution
+only into w(phi) and I-phi phi^T is the <a href="/research/notes/20261014-loaded-flat-ball-carrier/">loaded coefficient law</a> and is not this
+isospectral material law.</p>
+<h2 id="a-complete-reduced-action-on-the-active-ball">A Complete Reduced Action on the Active Ball</h2>
+<p>Take a complex wave f, a positive common carrier inertia kappa, and the stated
+positive elastic strain form, with v=phi-x. The candidate is</p>
+<pre><code>S=1/2 int dt dx rho_phi [|f_t|^2-mu_d^2 f* P_d(L_phi)f]
+     +int dt [kappa/2 int |phi_t|^2 dx-E_el(phi-x)].
+</code></pre>
+<p>All spatial derivatives remain ordinary physical derivatives. For a fixed
+smooth carrier the wave potential is positive on its transported domain.
+The action has positive total energy</p>
+<pre><code>E=1/2 int rho_phi[|f_t|^2+mu_d^2 f*P_d(L_phi)f]dx
+               +kappa/2 int |phi_t|^2dx+E_el(phi-x).
+</code></pre>
+<p>No material convective derivative has replaced f_t in this action. That
+distinction matters for time-dependent coupling.</p>
+<p>For any complete polynomial eigenmode L_0 u=lambda_N u,</p>
+<pre><code>phi=x, f=alpha u exp(-i omega_N t),
+omega_N=mu_d binomial(N+d,d),
+</code></pre>
+<p>is an exact stationary-carrier solution of the joint equations below.
+The elastic first variation vanishes, and the wave carrier source also
+vanishes locally. This holds for every N and every maintained d using the
+same transformation rule. The scalar norm is not fixed. At these solutions,
+E=Q omega_N, Q=omega_N |alpha|^2 int w|u|^2, since the carrier's strain
+and velocity vanish.</p>
+<h2 id="check-the-carrier-equation-not-only-the-spectrum">Check the Carrier Equation, Not Only the Spectrum</h2>
+<p>There is also a direct check in laboratory coordinates. Let
+C_phi U=U composed with phi. Then P_d(L_phi)=C_phi P_d(L_0)C_phi^(-1).
+At the identity its variation is [v dot grad,P_d(L_0)]. In the on-mode
+action the density variation multiplies
+omega_N^2 |u|^2-mu_d^2 u<em>P_d(L_0)u=0 pointwise. The remaining integral
+is proportional to int w u</em>[v dot grad,P_d(L_0)]u=0 by the eigenvalue
+equation and weighted self-adjointness. This holds for arbitrary smooth
+clamped variations at every time, so it checks the local stationary carrier
+equation, not only an integrated force or dilation variation.</p>
+<p>Define the material wave U(y,t)=f(phi^(-1)(y,t),t) and material velocity
+b(y,t)=phi_t(phi^(-1)(y,t),t). Then the very same physical action becomes</p>
+<pre><code>S_wave=1/2 int dt dy w[|D_t U|^2-mu_d^2 U*P_d(L_0)U],
+D_t U=U_t+b dot grad_y U.
+</code></pre>
+<p>The b term follows from the ordinary time derivative f_t; it has not been
+added as an independent interaction. The wave equation is</p>
+<pre><code>partial_t(w D_t U)+div_y(w b D_t U)+w mu_d^2 P_d(L_0)U=0.
+</code></pre>
+<p>The material momentum conjugate to b is</p>
+<pre><code>m=w Re[(D_t U)* grad_y U].
+</code></pre>
+<p>For variation delta phi=eta composed with phi,
+delta b=eta_t+(b dot grad)eta-(eta dot grad)b. At fixed laboratory f,
+delta U=-eta dot grad U. On the wave equation, the latter contribution
+vanishes. Integration by parts therefore makes the wave's carrier source</p>
+<pre><code>-J {partial_t m+div_y(b tensor m)+(D_y b)^T m} composed with phi,
+</code></pre>
+<p>where the ith component of div_y(b tensor m) means partial_j(b_j m_i).
+Consequently the joint carrier equation, on the wave equation, is</p>
+<pre><code>kappa phi_tt-div_x sigma(phi-x)
+  =-J {m_t+partial_j(b_j m)+(D_y b)^T m} composed with phi.
+</code></pre>
+<p>For b=0 and U=alpha u exp(-i omega_N t), m is time independent, including
+when u is complex and carries a stationary spatial current. The source
+therefore vanishes pointwise, and phi=x satisfies its full interior Euler
+equation. This cancellation includes the determinant and inverse-gradient
+variations missing from the simpler substituted-coefficient candidate.</p>
+<h2 id="what-remains-coupled">What Remains Coupled</h2>
+<p>General histories are not separated into independent wave and carrier
+actions: the material kinetic term contains b dot grad U. Expanding it
+produces a mixed current term and the nonnegative quadratic response</p>
+<pre><code>1/2 int w Re(partial_i U* partial_j U) b_i b_j.
+</code></pre>
+<p>Together with positive kappa, the full wave/carrier kinetic form is
+positive. The displayed term is an additional carrier-motion response;
+it is not by itself the complete particle's translational inertia or a
+proof of the required inertia-to-frequency ratio. Wave and carrier
+variations must be solved together when assessing that response.</p>
+<p>The static count spectrum is protected here by a specified material
+transformation law. This offers an exact stationary support cancellation
+to compare with the genuine deformation shifts of the simpler material
+law. The mathematical difference is explicit and testable. Neither law
+has been selected empirically or derived from the master interaction.</p>
+<h2 id="polarization-conditions-for-exact-stationary-support">Polarization Conditions for Exact Stationary Support</h2>
+<h3 id="the-full-local-source">The Full Local Source</h3>
+<p>At the identity carrier, let every component have the same count frequency
+omega and write the real field as</p>
+<pre><code>Psi(x,t)=A(x) cos(omega t)+B(x) sin(omega t).
+</code></pre>
+<p>Every component of A and B belongs to the same complete spatial degree
+space. The wave equation is then satisfied exactly. The carrier momentum
+and force are</p>
+<pre><code>m_i=w partial_t Psi dot partial_i Psi,
+F_i=-partial_t m_i.
+</code></pre>
+<p>Direct expansion gives</p>
+<pre><code>m_i=(omega w/2)[
+   (B dot partial_i B-A dot partial_i A) sin(2omega t)
+   +(B dot partial_i A+A dot partial_i B) cos(2omega t)
+   +B dot partial_i A-A dot partial_i B],
+
+F_i=(omega^2 w/2) partial_i(|A|^2-|B|^2) cos(2omega t)
+      +omega^2 w partial_i(A dot B) sin(2omega t).
+</code></pre>
+<p>Thus the identity carrier is an exact joint solution if and only if</p>
+<pre><code>grad(|A|^2-|B|^2)=0,    grad(A dot B)=0.
+</code></pre>
+<p>The two scalar invariants may be spatial constants; requiring them to be
+zero is sufficient but not necessary. This is a pointwise condition on
+the complete field, not a time-averaged cancellation. A stationary current
+in the final term of m is allowed.</p>
+<p>For only one real field component, these two constants force A and B to
+be constant on the connected ball: (A^2+B^2)^2=(A^2-B^2)^2+4(AB)^2 is
+constant, and the pair (A,B) is restricted to a finite set unless both
+vanish. Continuity then fixes the pair. A nonconstant excited profile
+therefore needs at least two real components for this exact stationary
+carrier ansatz. The complex scalar action already supplies two; the real
+single-component version of the prescribed-medium action does not inherit
+the joint stationary family automatically.</p>
+<h3 id="why-the-complex-standing-family-works">Why the Complex Standing Family Works</h3>
+<p>For a real profile u, two real components with</p>
+<pre><code>A=(a u,0), B=(0,a u)
+</code></pre>
+<p>satisfy both conditions identically. They are precisely the circular
+component phase motion represented by a complex amplitude u exp(-i omega t),
+up to its sign convention. More generally a complex spatial profile has
+the real quadrature pair A=(Re u,Im u), B=(Im u,-Re u). Their norms agree
+and their dot product vanishes pointwise. Every exact stationary family
+already derived therefore survives this check.</p>
+<p>An unequal component ellipse A=(a u,0), B=(0,b u) instead drives</p>
+<pre><code>F=omega^2(a^2-b^2) w u grad u cos(2omega t).
+</code></pre>
+<p>For an excited nonconstant real polynomial u this is nonzero if a^2!=b^2.
+A single real standing component is b=0 and drives the same second-harmonic
+source. The spatially constant ground profile has no such load for any
+ellipse. These statements hold at all six depths, with no special depth-five
+exception.</p>
+<p>There is a useful distinction between component phase rotation and spatial
+rotation. A single real scalar profile</p>
+<pre><code>Psi=x1 cos(omega t)+x2 sin(omega t)
+</code></pre>
+<p>rotates its dipole in a physical two-plane, yet |A|^2-|B|^2=x1^2-x2^2
+and A B=x1 x2 are not constants. It drives an oscillating carrier. Calling
+this spatial rotation circular does not make it the two-component stationary
+phase family. Conversely, the latter's complex notation does not derive
+physical spin or transverse photon polarization.</p>
+<p>The consequence is a precise restriction on the exact stationary-support
+claim: it is an exact family of balanced component quadratures. Other
+polarizations require a responding carrier and may still admit periodic
+joint solutions. Their nonzero force does not establish that they fail to
+exist, decay, or lose the count frequency after self-consistent adjustment.</p>
+<h2 id="complete-ground-energy-control">Complete Ground-Energy Control</h2>
+<h3 id="an-exact-conserved-energy-identity">An Exact Conserved-Energy Identity</h3>
+<p>Use the positive phase-action convention</p>
+<pre><code>Q=-Im int rho_phi f* f_t dx.
+</code></pre>
+<p>Q is the conserved phase action, not an identified electric charge.</p>
+<p>For every admissible carrier, P_d(L_phi)&gt;=I, by exact isospectral transport
+of the positive ball operator. The full energy satisfies</p>
+<pre><code>E-mu_d Q
+  =1/2 int rho_phi |f_t+i mu_d f|^2
+   +mu_d^2/2 int rho_phi f*[P_d(L_phi)-I]f
+   +kappa/2 int |phi_t|^2+E_el(phi-x) &gt;=0.
+</code></pre>
+<p>The opposite sign gives E&gt;=mu_d|Q|. Phase invariance and time-translation
+invariance conserve Q and E along any sufficiently regular joint solution
+with the specified fixed boundary. The identity includes all supporting
+energy and makes no claim of an unproved weak evolution theory.</p>
+<p>Equality at Q&gt;0 requires phi_t=0, zero elastic strain, f_t=-i mu_d f,
+and a spatially constant f. Clamped boundary data remove rigid carrier
+motions, so phi=x. The exact ground branch is consequently the global
+energy minimizer at its fixed phase action in this candidate's domain.</p>
+<h3 id="quantitative-control-from-the-count-gap">Quantitative Control from the Count Gap</h3>
+<p>Let W=int_B w dy=int_B rho_phi dx, which is independent of phi, and let
+fbar=W^(-1) int rho_phi f. The first count is d+1, hence the exact gap is</p>
+<pre><code>P_d(lambda_1)-P_d(0)=(d+1)^2-1=d(d+2).
+</code></pre>
+<p>For Delta=E-mu_d Q,</p>
+<pre><code>int rho_phi |f-fbar|^2 &lt;= 2Delta/[mu_d^2 d(d+2)],
+int rho_phi |f_t+i mu_d f|^2 &lt;= 2Delta,
+kappa int |phi_t|^2 &lt;= 2Delta,
+E_el(phi-x)&lt;=Delta.
+</code></pre>
+<p>The clamped Korn and Poincare inequalities also control the carrier's H1
+distance from the identity by its elastic energy. This uses the full spatial
+operator, not a truncated eigenbasis.</p>
+<p>For fixed Q&gt;0, put A=sqrt(Q/(mu_d W)). Writing n=int rho_phi |f|^2 and
+e=f_t+i mu_d f gives |mu_d n-Q|&lt;=sqrt(n)||e||. Thus</p>
+<pre><code>|sqrt(n)-sqrt(Q/mu_d)|&lt;=sqrt(2Delta)/mu_d,
+inf_theta ||f-A exp(i theta)||_(rho_phi)
+     &lt;=sqrt(2Delta)/mu_d [1+2/sqrt(d(d+2))].
+</code></pre>
+<p>The latter estimate uses the constant projection and the triangle inequality;
+it is a sufficient bound, not an optimal constant. Together these inequalities
+give orbital energy stability of the ground branch over every interval on
+which the joint solution remains in the smooth diffeomorphism domain.
+They do not control the carrier gradient uniformly in high dimension or
+prove that the map stays invertible forever. The spatial norm is a classical
+field integral, not an electron-position probability.</p>
+<h3 id="why-the-excited-branch-needs-its-own-persistence-analysis">Why the Excited Branch Needs Its Own Persistence Analysis</h3>
+<p>For an occupied clock omega_N&gt;mu_d, completing the square instead produces
+the spatial form mu_d^2 P_d(L_phi)-omega_N^2. It has negative directions
+on lower shells. This does not by itself prove instability, since the
+linearized action has gyroscopic terms. It explains why the preceding
+ground-state minimization cannot be transferred to excited states, and
+why resonant transfer tests are relevant.</p>
+<p>The ground theorem holds at every maintained depth. Of the fourteen supplied
+comparison labels, (d,N)=(3,0) is a ground assignment; this coincidence does
+not identify that mathematical branch with an observed particle. Other
+ground branches and physical occupied-state selection remain to be explained.</p>
+<h2 id="internal-mode-conversion">Internal Mode Conversion</h2>
+<p>These are interactions within the active ball, not a force derived between independently localized particles.</p>
+<h3 id="distinct-natural-clocks-drive-the-carrier">Distinct Natural Clocks Drive the Carrier</h3>
+<p>Choose real wave eigenfunctions u_n orthonormal under int w. For one
+carrier shape v with displacement z(t), put</p>
+<pre><code>A_nm=int w u_n v dot grad u_m,
+U=sum_n q_n(t)u_n.
+</code></pre>
+<p>To leading order in carrier velocity the material kinetic action contains</p>
+<pre><code>z_t m_z, m_z=Re sum_(n,m) q_(n,t)* q_m A_nm.
+</code></pre>
+<p>Take two freely rotating modal coefficients q_n=a_n exp(-i omega_n t),
+q_m=a_m exp(-i omega_m t), retaining their separate natural frequencies.
+For Delta=omega_n-omega_m, their cross contribution is</p>
+<pre><code>m_z=-(omega_n A_nm-omega_m A_mn)
+                  Im[a_n* a_m exp(i Delta t)],
+-partial_t m_z=Delta(omega_n A_nm-omega_m A_mn)
+                  Re[a_n* a_m exp(i Delta t)].
+</code></pre>
+<p>Thus the carrier is driven at the beat frequency, with a phase-sensitive
+source. A single stationary mode, or a stationary superposition within one
+degenerate shell, has no time-dependent carrier load. No equality of unlike
+clocks has been imposed. The leading carrier equation is</p>
+<pre><code>kappa M_v z_tt+K_v z=-partial_t m_z.
+</code></pre>
+<p>The higher-order wave-dependent carrier mass belongs to the full action;
+dropping it here is a stated small-wave approximation.</p>
+<p>For canonical phase actions Q_n=omega_n |a_n|^2, the signed momentum coupling coefficient is</p>
+<pre><code>sqrt(Q_n Q_m)
+   [D_n A_nm-D_m A_mn]/sqrt(D_n D_m),
+omega_n=mu_d D_n.
+</code></pre>
+<p>The explicit common mu_d cancels from this momentum coupling. Its time
+derivative restores the factor mu_d(D_n-D_m), and the physical response
+also depends on the elastic denominator K_v-kappa M_v Delta^2. Consequently
+the action distinguishes a common sector clock, count ratios, spatial
+overlaps and resonance. It does not establish a universal coupling that
+depends only on the fundamental or only on a particle's mass-frequency.</p>
+<h3 id="a-spatial-degree-selection-rule">A Spatial Degree Selection Rule</h3>
+<p>Take a polynomial carrier shape v=(1-r^2)p(x), with each component of p
+of degree at most k. It is clamped at the sphere. Weighted integration by
+parts gives</p>
+<pre><code>div_w v=(1-r^2)div p-3 x dot p,
+V=v dot grad, V*=-V-div_w v.
+</code></pre>
+<p>Both V and V* increase polynomial degree by at most k+1. Since the complete
+wave degree space V_N is orthogonal to all lower-degree polynomials,</p>
+<pre><code>A_NM=0 whenever |N-M|&gt;k+1.
+</code></pre>
+<p>This is a rule for entire degree spaces, including their radial and angular
+multiplicities. It does not count one chosen angular family as the whole
+shell. If p has a definite homogeneous parity, the parity of N-M must
+also equal that of k+1 for a nonzero entry.</p>
+<p>In particular, v=(1-r^2)e_i couples only neighboring degrees N and N+/-1.
+The radial shape v=x(1-r^2) couples only N,N+/-2. These zeros follow from
+the actual spatial coupling operator and the common ball measure.</p>
+<h3 id="pascal-s-identity-becomes-a-beat-frequency-rule">Pascal's Identity Becomes a Beat-Frequency Rule</h3>
+<p>For the neighboring-degree channel, the count clock gives</p>
+<pre><code>omega_N-omega_(N-1)
+  =mu_d [binomial(N+d,d)-binomial(N+d-1,d)]
+  =mu_d binomial(N+d-1,d-1).
+</code></pre>
+<p>The final binomial is exactly the scalar multiplicity of degree N. Thus a
+simple allowed carrier motion drives at the shell-count frequency, while
+the stationary pattern oscillates at the cumulative-count frequency.
+For a two-degree channel the beat is the sum of the two intervening shell
+multiplicities. More generally the difference of cumulative counts is the
+corresponding finite sum of shell counts.</p>
+<p>This is a derived operator selection rule followed by a count identity.
+It is not an arithmetic recipe for adding particle indices or generating
+the observed families. Elastic resonance with these beats is a further
+condition; it has not been fitted to a lifetime or a measured interaction.</p>
+<h3 id="an-explicit-zonal-matrix-element">An Explicit Zonal Matrix Element</h3>
+<p>For an explicit example use Gegenbauer profiles
+u_N proportional to C_N^lambda(x1), lambda=(d+1)/2, and
+v=(1-r^2)e1. Integrating the unused coordinates gives</p>
+<pre><code>mean[1-r^2 at fixed x1]=3(1-x1^2)/(d+2).
+</code></pre>
+<p>Let h_N denote the unnormalized squared profile norm. The only nonzero
+matrix entries are</p>
+<pre><code>A_(M+1),M=-3M(M+1)/[2(d+2)(M+lambda)] sqrt(h_(M+1)/h_M),
+A_(M-1),M=3(M+2lambda-1)(M+2lambda)
+                  /[2(d+2)(M+lambda)] sqrt(h_(M-1)/h_M),
+h_N/h_(N-1)=(N+2lambda-1)(N+lambda-1)/[N(N+lambda)].
+</code></pre>
+<p>The raising coefficient vanishes at M=0, because a constant has zero
+gradient. The reverse matrix element need not vanish. The asymmetry is
+required by the weighted divergence and is already retained in the physical
+source above. This zonal submatrix illustrates the full degree selection
+rule; it is not the complete angular response matrix.</p>
+<h2 id="a-common-excited-branch-spectral-regime">A Common Excited-Branch Spectral Regime</h2>
+<p>For fixed real or complex spatial profiles, the <a href="/research/notes/20261014-pullback-excited-spectral-stability/">complete linearized spectral analysis</a>
+now establishes a sufficiently stiff common carrier regime with imaginary
+spectrum for all fourteen maintained labels at sufficiently small amplitude.
+The proof handles the full weighted domains, all negative-energy branches,
+and the exceptional depth-two wave collision. The stationary kernel is
+semisimple. This is distinct from the ground energy minimum and from
+nonlinear lifetime or material-map persistence. For complex current-carrying
+profiles the additional carrier gyroscopic form is derived and included in
+the same negative-index and collision argument.</p>
+<p>The linked excited-branch theorem also establishes unique, uniformly bounded
+linear evolution in the complete form phase space. Its conserved positive
+norm includes stationary modes and supports explicit conditional forcing
+bounds. This does not control nonlinear material invertibility or determine
+physical decay widths. The separate finite-speed moving action still needs
+its own stability proof.</p>
+<h2 id="verification-and-remaining-physical-work">Verification and Remaining Physical Work</h2>
+<p>The <a href="/evidence/diagnostics/check-material-pullback/">material checker</a>
+checks the complete nonlinear radial-map operator identity at symbolic depth,
+the full count-polynomial stationary variation at all six depths, and the
+ground-energy completed square. The arbitrary-map and arbitrary-variation
+proofs are the change-of-variables and commutator arguments above; sampled
+radial checks do not substitute for those proofs.</p>
+<p>The <a href="/evidence/diagnostics/check-pullback-polarization/">polarization checker</a>
+verifies the local source and distinguishes balanced component motion from
+a rotating scalar spatial dipole. The
+<a href="/evidence/diagnostics/check-pullback-mode-selection/">mode-selection checker</a>
+checks 63 exact zonal matrix entries, eight norm ratios and forty Pascal
+beat identities per depth. The full degree-space selection rule follows
+from the operator and its weighted adjoint, not from the zonal sample alone.</p>
+<p>The material map is restricted to smooth orientation-preserving ball
+diffeomorphisms with a clamped boundary. The energy bound controls the
+stated norms while a regular solution remains in that domain. It does not
+prove global evolution or continued invertibility. Excited branches do not
+inherit the ground energy minimum. The linked fixed-profile spectral theorem
+supplies a sufficient small-amplitude regime; nonlinear persistence remains open. The supplied high-order spatial dispersion
+also retains unbounded high-frequency group speed, so this is not a causal
+completion of the theory.</p>
+<p>The ball's size, exterior stress, finite extension through unused spatial
+directions, complete translational inertia, sector frequency units and
+occupied-state selection remain open. The exact law is compatible with all
+maintained count assignments without a separate material coefficient for
+each particle, but it does not independently select those assignments or
+establish empirical spin, electric charge, photon polarization or a special
+depth-five coupling suppression.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261013-flat-ball-conformal-clock/">An exact flat-ball count clock and its conformal characterization</a></li><li><a href="/research/notes/20261014-loaded-flat-ball-carrier/">A Responding Flat-Ball Carrier and Its Polarization Energy</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#transform-the-density-and-stiffness-together">Transform the Density and Stiffness Together</a></li><li class="toc-level-2"><a href="#a-complete-reduced-action-on-the-active-ball">A Complete Reduced Action on the Active Ball</a></li><li class="toc-level-2"><a href="#check-the-carrier-equation-not-only-the-spectrum">Check the Carrier Equation, Not Only the Spectrum</a></li><li class="toc-level-2"><a href="#what-remains-coupled">What Remains Coupled</a></li><li class="toc-level-2"><a href="#polarization-conditions-for-exact-stationary-support">Polarization Conditions for Exact Stationary Support</a></li><li class="toc-level-3"><a href="#the-full-local-source">The Full Local Source</a></li><li class="toc-level-3"><a href="#why-the-complex-standing-family-works">Why the Complex Standing Family Works</a></li><li class="toc-level-2"><a href="#complete-ground-energy-control">Complete Ground-Energy Control</a></li><li class="toc-level-3"><a href="#an-exact-conserved-energy-identity">An Exact Conserved-Energy Identity</a></li><li class="toc-level-3"><a href="#quantitative-control-from-the-count-gap">Quantitative Control from the Count Gap</a></li><li class="toc-level-3"><a href="#why-the-excited-branch-needs-its-own-persistence-analysis">Why the Excited Branch Needs Its Own Persistence Analysis</a></li><li class="toc-level-2"><a href="#internal-mode-conversion">Internal Mode Conversion</a></li><li class="toc-level-3"><a href="#distinct-natural-clocks-drive-the-carrier">Distinct Natural Clocks Drive the Carrier</a></li><li class="toc-level-3"><a href="#a-spatial-degree-selection-rule">A Spatial Degree Selection Rule</a></li><li class="toc-level-3"><a href="#pascal-s-identity-becomes-a-beat-frequency-rule">Pascal's Identity Becomes a Beat-Frequency Rule</a></li><li class="toc-level-3"><a href="#an-explicit-zonal-matrix-element">An Explicit Zonal Matrix Element</a></li><li class="toc-level-2"><a href="#a-common-excited-branch-spectral-regime">A Common Excited-Branch Spectral Regime</a></li><li class="toc-level-2"><a href="#verification-and-remaining-physical-work">Verification and Remaining Physical Work</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

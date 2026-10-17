@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>idos-scale-support-check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/idos-energy/idos-scale-support-check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="idos-scale-support-check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/idos-energy/idos-scale-support-check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="idos-scale-support-check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>idos-scale-support-check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/idos-energy/idos-scale-support-check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact finite checks of CEEM-S1 full canonical scale extension.&quot;&quot;&quot;
+import sympy as s
+from pathlib import Path
+from datetime import datetime,timezone
+import hashlib,json
+I=s.symbols(&#39;I0:3&#39;,positive=True); t=s.symbols(&#39;t0:3&#39;,real=True)
+L,M,a,p,q,k,eta,ref=s.symbols(&#39;L M a p q k eta ref&#39;,positive=True); P=s.symbols(&#39;P&#39;,real=True)
+v=(1,2,3); r=(1,-2,1); b=[v[j]*I[j] for j in range(3)]; B=sum(b)
+Cb=sum((z-B/3)**2 for z in b)/(2*ref); F=1+eta*s.cos(sum(r[j]*t[j] for j in range(3)))
+G=k*Cb*F; K=B+G; H=P**2/(2*M)+a*L**p+L**(-q)*K
+checks=[]
+def ck(n,x):
+    assert s.simplify(x)==0,n
+    checks.append(n)
+def rate(f):
+    return sum(s.diff(f,t[j])*s.diff(H,I[j])-s.diff(f,I[j])*s.diff(H,t[j]) for j in range(3))+s.diff(f,L)*s.diff(H,P)-s.diff(f,P)*s.diff(H,L)
+for n,f in [(&#39;B&#39;,B),(&#39;A&#39;,sum(I)),(&#39;G&#39;,G),(&#39;H&#39;,H)]:ck(n+&#39; conserved&#39;,rate(f))
+ck(&#39;radial velocity&#39;,s.diff(H,P)-P/M)
+ck(&#39;radial force&#39;,-s.diff(H,L)+p*a*L**(p-1)-q*K*L**(-q-1))
+for j in range(3):
+    ck(&#39;phase variation &#39;+str(j),s.diff(H,I[j])-L**(-q)*v[j]*(1+k*(b[j]-B/3)*F/ref))
+b0=s.symbols(&#39;b0&#39;,positive=True); uniform={I[j]:b0/v[j] for j in range(3)}
+for j in range(3):
+    ck(&#39;uniform b invariant &#39;+str(j),rate(b[j]).subs(uniform))
+    ck(&#39;breathing energy law &#39;+str(j),rate(b[j]*L**(-q)).subs(uniform)+q*b0*L**(-q-1)*P/M)
+D,e=s.symbols(&#39;D epsilon&#39;,positive=True)
+U=a*L**p+D*b0*L**(-q)
+# Eliminate b0 using the stationary condition, preserving arbitrary positive p,q.
+equilibrium={b0:p*a*L**(p+q)/(q*D)}
+ck(&#39;radial equilibrium&#39;,s.diff(U,L).subs(equilibrium))
+ck(&#39;positive radial curvature&#39;,s.diff(U,L,2).subs(equilibrium)-p*(p+q)*a*L**(p-2))
+ck(&#39;complete energy support factor&#39;,(U-(1+q/p)*D*b0*L**(-q)).subs(equilibrium))
+# Check general scaling exponents algebraically; evaluate rational p,q examples exactly.
+for pp,qq in [(1,1),(2,2),(2,1),(1,2),(s.Rational(1,2),s.Rational(3,2))]:
+    pp,qq=s.Rational(pp),s.Rational(qq)
+    for dd in (2,3,4,5,6,10):
+        count=s.binomial(dd+2,dd)
+        aa=s.Rational(3,2); ee=s.Rational(2,3)
+        ll=(qq*count*ee/(pp*aa))**(1/pp)
+        bb=ee*(qq*count*ee/(pp*aa))**(qq/pp)
+        ck(f&#39;common epsilon equilibrium {pp} {qq} {dd}&#39;,pp*aa*ll**(pp+qq)-qq*count*bb)
+        ck(f&#39;common epsilon full E {pp} {qq} {dd}&#39;,aa*ll**pp+count*bb*ll**(-qq)-(1+qq/pp)*count*ee)
+        ck(f&#39;common epsilon modal e {pp} {qq} {dd}&#39;,bb*ll**(-qq)-ee)
+# Shared action: energy and scale variables multiply all modal frequencies equally.
+ck(&#39;uniform carrier remains scale-rate&#39;,s.diff(H,I[0]).subs(uniform)-L**(-q)*v[0])
+now=datetime.now(timezone.utc); path=Path(__file__)
+out=path.parent/(&#39;scale-support-checks-&#39;+now.strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;)
+out.write_text(json.dumps({&#39;created_utc&#39;:now.isoformat(),&#39;status&#39;:&#39;passed&#39;,&#39;check_count&#39;:len(checks),&#39;checks&#39;:checks,&#39;script_sha256&#39;:hashlib.sha256(path.read_bytes()).hexdigest(),&#39;action&#39;:&#39;CEEM-S1&#39;,&#39;scope&#39;:&#39;Exact canonical identities and bounded rational exponent controls; no field PDE claim.&#39;},indent=2)+&#39;\n&#39;)
+print(out, len(checks))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

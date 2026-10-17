@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>A Moving Finite-Speed Count Action With Positive Inertia — IDWT V2</title>
+  <meta name="description" content="A common local material action retains all fourteen count approximations, balances wave momentum, gives positive kinetic response and admits a certified clamped linear regime.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261014-moving-finite-speed-count-action/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Moving Finite-Speed Count Action With Positive Inertia — IDWT V2">
+  <meta property="og:description" content="A common local material action retains all fourteen count approximations, balances wave momentum, gives positive kinetic response and admits a certified clamped linear regime.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261014-moving-finite-speed-count-action/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A Moving Finite-Speed Count Action With Positive Inertia — IDWT V2">
+  <meta name="twitter:description" content="A common local material action retains all fourteen count approximations, balances wave momentum, gives positive kinetic response and admits a certified clamped linear regime.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>A Moving Finite-Speed Count Action With Positive Inertia</h1>
+      <p class="article-date">Updated <time datetime="2026-10-14">October 14, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body">
+<p>The <a href="/research/notes/20261014-finite-speed-count-chain/">finite-speed count parent</a> can be embedded in one explicit moving-material
+action. The same action retains its fourteen supplied frequency assignments,
+accounts for internal energy transport in the complete momentum, and has a
+positive joint wave/material kinetic response. Weighting the elastic energy
+by the wave's own local energy removes a separately imposed carrier mass
+and an uncontrolled stiffness-to-amplitude ratio.</p>
+<p>This is an inverse construction. Its material geometry, component carrier,
+sector units and radius relation remain constitutive inputs. The frequency
+approximation is the existing finite-chain result, not a new fit or a forward
+selection of particle masses. The physical containing space is ordinary
+macroscopic space. The calculation below describes an active d-dimensional
+body for d=2,3,4,5,6,10; embedding its finite energy in all containing directions
+requires a further construction. Field components do not replace deterministic
+electron trajectories.</p>
+<h2 id="one-covariant-first-gradient-action">One Covariant First-Gradient Action</h2>
+<p>Let a be a physical material coordinate in a ball of radius R_d, y=a/R_d,
+w(a)=sqrt(1-|y|²), X(a,t) the physical material map and U(a,t) the retained
+real field components, including two real quadratures for complex notation.
+Set F=D_a X, v=X_t and gamma=(1-|v|²/c²)^(-1/2). The rest material derivative
+and rest strain are</p>
+<pre><code>D_A U=partial_A U+gamma²(F^T v)_A U_t/c²,
+Cmat=F^T F+gamma² F^T v v^T F/c².
+</code></pre>
+<p>These formulas follow by taking spacetime material labels phi^A(x,t), defining
+B^{AB}=partial_mu phi^A partial^mu phi^B, and contracting the wave derivative
+with the rest-spatial dual E_A^mu=partial^mu phi^B(B^-1)_(BA). The material
+four-velocity is orthogonal to all label gradients. Thus D_A=E_A^mu partial_mu,
+Cmat=B^-1 and the invariant material measure is w da dt/gamma. Gradients must
+remain independent and spacelike; the material map must remain invertible.</p>
+<p>Let H=k_d H_(M,b), k_d=mu_d M^(d-1)/d!, be the complete
+all-grade parent in y=a/R_d, with b_0=1 and b_k=b for k&gt;=1.
+Its physical first-order expression H=sum_A C_A(a)partial_A+M0(a) is in its
+orthonormal component chart. Its physical derivative coefficients contain
+R_d, giving s=b k_d R_d. M, b, kappa and r are dimensionless;
+H, omega, k_d and mu_d have frequency units. Retain all of its weighted lower-order terms.
+Define H_D by replacing partial_A with D_A and put</p>
+<pre><code>W(C)=||C-I||_F²/4+[tr(C-I)]²/8,
+S=int da dt (w/gamma){gamma²|U_t|²/2
+                 -[1+2 kappa W(Cmat)]|H_D U|²/2}.       (1)
+</code></pre>
+<p>The dimensionless kappa is common across depths. All fields in (1) are
+retained parts of the proposed common field law, not exchanged particles.
+Equation (1) contains only first time derivatives. Covariantizing a
+high-order scalar count polynomial would not have this property; the
+retained first-order parent is essential to the present proof.</p>
+<p>At X=a, H psi=omega psi with psi real gives the exact balanced solution</p>
+<pre><code>U=alpha psi exp(-i omega t),   X=a.
+</code></pre>
+<p>Here W(I)=DW(I)=0, the first material variation vanishes, and the internal
+flux is zero. With q=U_t, z=HU and h=(|q|²+|z|²)/2, this branch has
+|q|²=|z|²=h. Its rest energy and conserved phase action obey E0=Q omega.
+With p=L_(U_t), including the measure weight, the sign convention is
+Q=-int p.JU for U proportional to exp(-i omega t).
+Q is not identified with electric charge or fixed to an empirical action
+unit. No amplitude has been chosen to fit a mass.</p>
+<h2 id="complete-kinetic-response-and-local-momentum">Complete Kinetic Response and Local Momentum</h2>
+<p>At unstrained rest, the exact second velocity variation of (1), divided by w,
+is</p>
+<pre><code>delta²L/w=|delta q-C(vdelta)^T z/c²|²
+            +h|vdelta|²/c²
+            -[|C(vdelta)q|²+|C(vdelta)^T z|²]/c^4.
+</code></pre>
+<p>If ||C(b)||&lt;=s|b| in physical units, the remaining Schur form is at least
+h(1-2s²/c²)|vdelta|²/c². It is strictly positive wherever h&gt;0 and s&lt;c/sqrt(2).
+This controls arbitrary spatially varying material velocities, not just
+rigid translation. Overall physical amplitude cancels from the sign condition.</p>
+<p>For the complete material density L(F,v,U,q,G;a), including w, define</p>
+<pre><code>p=L_q, P_i=L_(v_i), R_A=L_(G_A), S_iA=L_(F_iA),
+e=q.p+v.P-L, K_A=q.R_A+v_i S_iA.
+</code></pre>
+<p>The full Euler equations imply</p>
+<pre><code>partial_t P_i+partial_A S_iA=0,
+partial_t e+partial_A K_A=0.
+</code></pre>
+<p>With J_X=det F&gt;0, the physical energy density, momentum and energy flux are
+respectively e/J_X, P/J_X and (e v+F K)/J_X. Covariance gives the exact identity</p>
+<pre><code>e v+F K=c² P,
+</code></pre>
+<p>and a symmetric physical momentum flux. At unstrained rest these reduce to</p>
+<pre><code>e=w h, J_i=-w z.C_i q, P_i=J_i/c², S_iA=0.
+</code></pre>
+<p>Internal wave energy transport therefore contributes to complete momentum.
+A mixed wave with changing flux cannot consistently keep its material
+momentum fixed. These are local conservation identities for solutions of
+the coupled equations, without a time average or a common clock imposed
+on distinct patterns. The zero total rest stress is a consequence of this
+particular isospectral material law, not a universal field postulate.</p>
+<h2 id="positive-translational-inertia-for-the-free-symmetry-family">Positive Translational Inertia for the Free Symmetry Family</h2>
+<p>A uniform boost of the stationary solution contracts the material map and
+adds its simultaneity phase. At infinitesimal velocity V,</p>
+<pre><code>xi_V(a,t)=Vt,
+eta_V(a)=omega J psi(a)(V.a)/c².
+</code></pre>
+<p>The phase structure J is multiplication by i in complex notation. The wave
+phase cannot be omitted while claiming the boosted solution. A direct check
+uses [H,f]=C(grad f) with f=V.a/c². Substitution into the complete quadratic
+wave and material equations gives</p>
+<pre><code>delta P(a)=w(a)h(a)V/c²,
+delta P_total=E0 V/c².
+</code></pre>
+<p>Thus the complete translational inertia is positive E0/c², without an added
+carrier mass. The canonical multiplier-domain result and the actual polynomial
+profiles justify this tangent. The boosted family uses natural free boundary
+conditions; a clamp does not permit the same translation symmetry.</p>
+<p>Ballistic center displacement is consequently an exact generalized zero
+mode of the free linear system. A norm measuring absolute position cannot
+stay uniformly bounded for a moving particle. Free stability must compare
+shape relative to its moving symmetry family and retain conserved momentum.
+A thin d-dimensional sheet in R10 is not automatically a complete ambient
+body: strain depending only on F^T F leaves arbitrary normal deformations
+without quadratic bending stiffness. This is a neutral quadratic kernel,
+not evidence of instability or decay; generic finite normal graphs have
+positive quartic strain energy.</p>
+<h2 id="the-supplied-profile-assignments">The Supplied Profile Assignments</h2>
+<p>The spatial polynomial degree is N=n-1 relative to the maintained
+mass-law index n. These assignments are inputs to this action test.</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Assignment</th>
+<th style="text-align:right">Depth d</th>
+<th style="text-align:right">Degree N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">75</td>
+</tr>
+<tr>
+<td>Z</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">80</td>
+</tr>
+<tr>
+<td>Higgs</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">94</td>
+</tr>
+<tr>
+<td>down</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td>strange</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td>up</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td>charm</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">19</td>
+</tr>
+<tr>
+<td>top</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">71</td>
+</tr>
+<tr>
+<td>neutrino1</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">9</td>
+</tr>
+<tr>
+<td>neutrino2</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">14</td>
+</tr>
+<tr>
+<td>neutrino3</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">21</td>
+</tr>
+<tr>
+<td>electron</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">12</td>
+</tr>
+<tr>
+<td>muon</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">34</td>
+</tr>
+<tr>
+<td>tau</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">22</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="nodeless-profiles-without-a-separate-physical-amplitude-fit">Nodeless Profiles Without a Separate Physical Amplitude Fit</h2>
+<p>The full scalar/exact-one-form pair removes zeros of a scalar zonal mode.
+For u(t)=C_N^a(t), a=(d+1)/2, t=y1 and lambda=N(N+d+1), define</p>
+<pre><code>E_N(t)=u(t)²+(1-t²)u'(t)²/lambda.
+</code></pre>
+<p>The Gegenbauer equation gives E_N'=2(d+1)t u'²/lambda. Parity then implies
+0&lt;E_N(0)&lt;=E_N(t)&lt;=E_N(1)=binomial(N+d,d)². The constant mode uses E_0=1 and its scalar profile directly.
+The exact central value is</p>
+<pre><code>E_(2m)(0)=[(a)_m/m!]²,
+E_(2m+1)(0)=[2a(a+1)_m/m!]²/lambda.
+</code></pre>
+<p>A real eigenprofile of the signed chain can balance its scalar and gradient
+weights, giving pointwise |psi|² proportional to E_N/2. This is one profile,
+not an extra duplicated spatial field. The balancing follows from choosing
+a unit vector with expectation 1/2 in a real two-by-two positive matrix of
+trace 1 formed from the exact chain rotations. It is a preparation choice
+within the degenerate eigenspace, not a dynamical occupation rule.</p>
+<p>After spatial normalization on the unit y-ball, let W_d=int_B w. All fourteen profiles obey</p>
+<pre><code>W_d min|psi|² &gt;= 2103280464675/8796093022208.
+</code></pre>
+<p>Physical da normalization instead uses volume R_d^d W_d and
+density multiplied by R_d^-d; the volume-density product and
+h_min/h_max stay unchanged. This lower bound concerns density relative to w. The weight and the form
+metric still degenerate at the ball boundary. On a fixed nonzero-amplitude
+profile h is nevertheless smooth, positive and bounded on the closed ball.</p>
+<h2 id="a-common-positive-causal-principal-regime">A Common Positive Causal Principal Regime</h2>
+<p>At unstrained rest normalize material displacement by chi=sqrt(h)xi/c and
+write r=s/c. The full directional acoustic pencil, including mixed wave and
+material derivatives, is positive on every covector at or outside speed c
+if</p>
+<pre><code>Acone=[[1-r²,-r(1+r)],[-r(1+r),1-r²-3 kappa]]&gt;0.
+</code></pre>
+<p>A sufficient common range is r&lt;1/2 and
+kappa&lt;(1+r)(1-2r)/[3(1-r)]. For example kappa=1/10 and r&lt;=1/3 satisfy this
+strictly. Positive kinetic and directional spatial forms supply real
+semisimple characteristic roots. This is a local principal statement;
+lower-order spectral stability requires the separate calculation below.</p>
+<p>The audited finite-strain extension admits an open regular neighborhood:
+||Cmat-I||_op&lt;1/10, abs(|q|²-|z|²)/(|q|²+|z|²)&lt;1/100 and normalized unweighted flux
+|J0|/(c h0)&lt;1/200, where J0_i=-z.Cphys_i q and h0=(|q|²+|z|²)/2, with the same kappa and reference symbol bound s0&lt;=c/3.
+The strained physical symbol Cphys(b)=Cref(F^T b) can reach
+sqrt(1.1)s0; that change is included in the bound. These
+are regular interior statements, not uniform boundary coercivity. It retains all
+mixed strain/flux terms. This does not prove that nonlinear evolution stays
+in that neighborhood or reaches the vacuum boundary regularly.</p>
+<h2 id="clamped-linear-evolution-and-the-quantitative-spectral-test">Clamped Linear Evolution and the Quantitative Spectral Test</h2>
+<p>The clamped control has the canonical full-form wave domain Dom(H), and
+material domain obtained by completing compact-interior displacements in
+its actual weighted strain norm. These closures are different and must not
+be interchanged. In dimensionless material coordinates put</p>
+<pre><code>chi=sqrt(h)xi/c, B=-J A, ||A||&lt;=1,
+r A chi=C(c chi/sqrt(h))z0/c², z0=omega psi,
+E[chi]=kappa(b k_d)² int w h[2|eps(chi/sqrt(h))|²
+                                  +div(chi/sqrt(h))²].
+</code></pre>
+<p>Here k_d=mu_d M^(d-1)/d!, r=b k_d R_d/c, and the full normalized matrices are</p>
+<pre><code>K_r=[[I,r A],[r A*,I-r²B*B]],
+G_r=[[-2omega J,r(H+omega)B],[-rB*(H+omega),0]],
+V_r=diag(H²-omega²,r^-2 E).
+</code></pre>
+<p>The mixed H terms are weak forms; B need not map the material domain into
+Dom(H). K_r is bounded positive for r&lt;1/sqrt(2). The exact weighted elastic
+identity with f=sqrt(1-|y|²) gives</p>
+<pre><code>int w[2|eps(v)|²+(div v)²] &gt;= (d+2)int w|v|²/(1-|y|²).
+</code></pre>
+<p>Density comparison proves E&gt;=eI with</p>
+<pre><code>e=kappa(b k_d)²(d+2)h_min/h_max&gt;0.
+</code></pre>
+<p>The stronger boundary-tail estimate supplies compact material embedding;
+interior Korn and Rellich handle the remaining compact region. The wave
+embedding is compact by the complete polynomial-block spectrum. The gyro
+is compact from the configuration form domain to its dual.</p>
+<p>The actual phase generator is</p>
+<pre><code>L_r(q,p)=(p,-K_r^-1(V_r q+G_r p)),
+Dom(L_r)={(q,p) in V x V: V_r q+G_r p belongs to X}.
+</code></pre>
+<p>A positive stiffness shift gives coercive resolvents at both signs of real
+lambda and a skew-adjoint shifted generator. Removing that bounded shift
+gives a global strongly continuous evolution on V x X, preserving the
+rotating energy. Compactness of the mixed forms gives compact phase resolvent.
+Separate strong membership of V_r q and G_r p is not imposed.</p>
+<p>For the nonzero spectral calculation define</p>
+<pre><code>D(lambda)=lambda-J(H+omega), F(lambda)=lambda-J(omega-H),
+T_r(lambda)=r^-2E+lambda²(I-r²B*B).
+</code></pre>
+<p>The exact wave Schur expression is</p>
+<pre><code>D(lambda)[F(lambda)-r²lambda² A T_r(lambda)^-1 A*D(lambda)].
+</code></pre>
+<p>The branch D(partial_t)eta=0, chi=0 is protected exactly. The other branch
+has a bounded-frequency correction of order r^4. Neither statement depends
+on making the physical amplitude small: it cancels in this normalized action.</p>
+<p>On a contour with |lambda|&lt;=L and bare spectral distance at least delta,
+right composition by F^-1 and the identity
+D F^-1=2(lambda-J omega)F^-1-I give the full-operator sufficient bound</p>
+<pre><code>q(r)=r^4 L²/(e-r²L²) [1+2(L+omega)/delta] &lt;1.       (2)
+</code></pre>
+<p>All high frequencies enter the resolvent norm; (2) is not a finite spatial
+truncation. The material denominator must remain positive. The underlying
+exact Sturm certificate includes every full-form family below the required
+window and excludes all remaining spatial and heavy chain bands analytically.
+It finds no nonzero opposite-energy collision across the fourteen labels.</p>
+<p>For M=100000, b=40, kappa=1/10 and the single common r=1/100, exact rational
+arithmetic verifies (2) on 456 positive-frequency negative-energy contours
+and their conjugates. The maximum is 0.235340209758762, strictly below 1/4.
+The ground assignment has no negative-energy contour. The circles are not counts of negative dimensions: every coincident
+angular, form and signed eigenspace is retained at its full multiplicity.
+A positive spatial family of dimension 2h has signed-chain multiplicity 2h;
+the constant has multiplicity 1, and temporal quadratures are retained.
+Contour arithmetic divides frequencies by mu_d and e by mu_d².
+These numbers use
+h_min/h_max from the nodeless profiles and the conservative Korn bound above.
+The very small former W collision is included, not rounded to zero.</p>
+<p>The signed symmetry of H makes the spectra of D and F identical: both
+contain all values plus/minus i(omega plus/minus nu). The same distance
+certificate therefore excludes protected D roots. The weak factorization
+uses D:X_w to Dom(H)* and F:Dom(H) to X_w; its bounded middle inverse
+reconstructs the combined generator domain. For fixed contours q(r)
+increases with positive r while its denominator stays positive. The
+certificate consequently covers every 0&lt;r&lt;=1/100, not just one endpoint.</p>
+<p>The spectral continuation argument is as follows. At small r, rescaling the
+material displacement by r gives phase resolvents converging on these fixed
+contours to the bare wave resolvent with zero material block. Their contour
+integrals are norm-close finite-rank projections, preserving full algebraic
+multiplicity. The pulled-back energy forms converge too, so their complete
+negative-energy subspaces remain negative definite. For positive r, a
+spectral contour invariant under lambda -&gt; -conjugate(lambda) has an energy-self-adjoint Riesz
+projection. Its restricted energy cannot be degenerate: a radical vector
+would be in the full stationary kernel, which the contour excludes. Its
+finite energy signature therefore cannot change while (2) keeps the contour
+free of spectrum. This continues negativity to the certified endpoint.</p>
+<p>The phase-space comparison is explicit. On the fixed form phase space use
+U_r(eta,z,v,u)=((eta,r z),(v,u)); material velocity u is not rescaled.
+The pulled-back energy converges in bounded-form norm to bare wave energy
+plus e(z,z)+||u||². For forcing (f,f_m,g,g_m), the weak Schur equations give,
+uniformly on each fixed contour, eta-eta0=O(r) in Dom(H), chi=O(r²) in
+Dom(E^(1/2)), chi/r=O(r), and both velocity differences O(r) in their L2
+spaces. Here eta0 solves the bare wave resolvent. Thus</p>
+<pre><code>||(lambda-U_r^-1 L_r U_r)^-1
+     -i_w(lambda-L_w)^-1 pi_w|| &lt;= C_Gamma r.
+</code></pre>
+<p>The limiting expression vanishes on material inputs; it is not a resolvent
+on the entire comparison space. Its contour integral is nevertheless the
+bare finite-rank wave projection. Projections at norm distance less than 1
+have equal rank by mutual injectivity on their ranges. The simultaneous
+energy-form convergence makes the full nearby Riesz range negative definite.</p>
+<p>For continuation, represent the energy by the bounded Hermitian operator
+Jenergy on a fixed positive phase norm. Its conservation gives</p>
+<pre><code>[(lambda-L_r)^-1]* Jenergy
+      =-Jenergy(-conjugate(lambda)-L_r)^-1.
+</code></pre>
+<p>Integrating on the reflected contours yields Q_r* Jenergy=Jenergy Q_r.
+The Riesz range is energy-orthogonal to its complete projection complement,
+without assuming an eigenbasis. Any vector in the restricted radical would
+then lie in the full radical; the contour excludes its zero eigenvalue.
+Continuous finite-dimensional nonsingular energy Gram matrices have constant
+inertia. This proves the continuation step for the entire certified interval.</p>
+<p>These finite subspaces exhaust the negative index of V_r. On the stationary
+kernel, the compressed gyro is exactly -2omega J and invertible. Its explicit
+stationary projection removes that finite radical. Relative to the natural
+positive form norm the energy is identity minus a finite-rank operator;
+the infinite complementary subspace is consequently coercive. Reversing the
+sign on the finite negative subspace and adding the squared stationary
+projection produces a conserved positive norm equivalent to the complete
+phase norm. Hence all linear disturbances remain bounded for all time in
+this clamped constitutive regime. No eigenbasis completeness assumption or
+finite Galerkin calculation replaces these steps.</p>
+<p>Writing N=ker V_r and using its finite-dimensional orthogonal projection,
+the stationary projection is exactly</p>
+<pre><code>G_N=P_N G_r|N=-2omega J,
+P0(q,p)=(G_N^-1 P_N(G_r q+K_r p),0).
+</code></pre>
+<p>The projection on dual forms means restriction to N. Differentiation gives
+P0 T(t)=T(t)P0=P0. If P_W is the energy-orthogonal projection onto the full
+negative invariant range, an explicit conserved positive norm is</p>
+<pre><code>||z||_sharp²=Henergy(z,z)-2Henergy(P_W z,P_W z)+||P0 z||_*².
+</code></pre>
+<p>Its equivalence to the reference form norm follows because the remaining
+energy operator is identity minus finite rank, positive off its finite
+stationary radical. The stationary projection gives a bounded complement.</p>
+<p>The norm bound is for each fixed profile and parameter set. Its numerical
+amplification constant has not been calibrated, and it does not control the
+pointwise material Jacobian needed for nonlinear persistence. The free body's
+rigid momentum reduction changes the wave correction at order r²; its
+separate complete proof is linked below. Neither result alone determines observed lifetimes.</p>
+<h2 id="natural-free-boundary-extension">Natural Free Boundary Extension</h2>
+<p>The <a href="/research/notes/20261014-free-count-pattern-linear-evolution/">free momentum reduction and complete linear proof</a>
+now certify a common interval 0&lt;r&lt;=1/100000 for all fourteen backgrounds.
+The stationary quotient is uniformly bounded; nonconstant zonal preparations
+retain exactly d-1 neutral orientation chains. This uses the actual free
+elastic resolvent and its rigid kernel, with an explicit weighted Korn
+constant. It is a separate proof from the clamped r&lt;=1/100 result above.
+Center reconstruction preserves the complete boost inertia. Nonlinear
+orientation evolution and the full ambient particle remain unresolved.</p>
+<h2 id="physical-scope">Physical Scope</h2>
+<p>Equation (1) connects retained count frequencies, local momentum balance,
+positive inertia, causal principal propagation and a controlled clamped
+linear regime in one common construction. The finite chain still has extra
+modes and an explicit radius cost R_d=c/[100 b k_d] in the certified example.
+Its small radius is a consequence of this parent, not a measured size or a
+universal restriction on alternative constructions. The sector frequency
+units, support, component origin and observed occupation remain inputs.</p>
+<p>A reciprocal pair interaction can preserve these isolated clocks, but its
+full domain and stability must be checked after adding it. A local causal
+Hessian bound alone is not that combined evolution theorem. The physical
+mass-frequency conversion is already known; this work addresses a candidate
+spatial mechanism and its consistency, not the conversion itself.</p>
+<h2 id="reproducibility">Reproducibility</h2>
+<p>The <a href="/evidence/results/experiments/check-moving-count-stability.py/">standalone exact checker</a>
+reconstructs the full-form spectral windows, isolates 319 lowest squared roots
+with integer Sturm recurrences, excludes omitted spatial and heavy bands,
+and verifies all 456 positive-frequency contours and their conjugates.
+Its <a href="/evidence/results/moving-count-stability-20261014/">complete result</a>
+retains exact rational intervals, multiplicities, elastic bounds and every
+contour margin. All decisions use exact fractions; displayed decimals are
+summaries. The accompanying domain and energy arguments establish the
+infinite-dimensional implications; arithmetic alone does not establish them.</p>
+<p>The group-generation step uses skew-adjoint generation and bounded
+perturbation as stated in Engel and Nagel,
+<a href="https://www.math.uni-tuebingen.de/de/forschung/agfa/members/engel-nagel_one-parameter-semigroups.pdf">One-Parameter Semigroups for Linear Evolution Equations, Chapters II–III</a>.
+The actual weighted forms, closures, compactness and energy projections are
+specified above. Finite propagation for the fixed first-order parent is
+proved with its full domain in the linked count-chain article.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261014-finite-speed-count-chain/">A Finite-Speed Local Parent for a Controlled Count-Frequency Window</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#one-covariant-first-gradient-action">One Covariant First-Gradient Action</a></li><li class="toc-level-2"><a href="#complete-kinetic-response-and-local-momentum">Complete Kinetic Response and Local Momentum</a></li><li class="toc-level-2"><a href="#positive-translational-inertia-for-the-free-symmetry-family">Positive Translational Inertia for the Free Symmetry Family</a></li><li class="toc-level-2"><a href="#the-supplied-profile-assignments">The Supplied Profile Assignments</a></li><li class="toc-level-2"><a href="#nodeless-profiles-without-a-separate-physical-amplitude-fit">Nodeless Profiles Without a Separate Physical Amplitude Fit</a></li><li class="toc-level-2"><a href="#a-common-positive-causal-principal-regime">A Common Positive Causal Principal Regime</a></li><li class="toc-level-2"><a href="#clamped-linear-evolution-and-the-quantitative-spectral-test">Clamped Linear Evolution and the Quantitative Spectral Test</a></li><li class="toc-level-2"><a href="#natural-free-boundary-extension">Natural Free Boundary Extension</a></li><li class="toc-level-2"><a href="#physical-scope">Physical Scope</a></li><li class="toc-level-2"><a href="#reproducibility">Reproducibility</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

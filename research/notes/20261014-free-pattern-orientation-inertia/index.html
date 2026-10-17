@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Free Pattern Orientation: Derived Inertia and Angular Response — IDWT V2</title>
+  <meta name="description" content="The free action determines a positive orientation inertia, its material counter-motion and exact conditional per-cycle angular bounds.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261014-free-pattern-orientation-inertia/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Free Pattern Orientation: Derived Inertia and Angular Response — IDWT V2">
+  <meta property="og:description" content="The free action determines a positive orientation inertia, its material counter-motion and exact conditional per-cycle angular bounds.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261014-free-pattern-orientation-inertia/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Pattern Orientation: Derived Inertia and Angular Response — IDWT V2">
+  <meta name="twitter:description" content="The free action determines a positive orientation inertia, its material counter-motion and exact conditional per-cycle angular bounds.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>Free Pattern Orientation: Derived Inertia and Angular Response</h1>
+      <p class="article-date">Updated <time datetime="2026-10-14">October 14, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body">
+<p>The neutral orientation directions in the <a href="/research/notes/20261014-free-count-pattern-linear-evolution/">free count action</a>
+have a derived response and inertia. Solving the complete wave and material
+equations gives the conjugate wave correction and the counter-motion required
+by zero total rigid momentum. The result is not obtained by assigning a rotor
+inertia or making a visualization drift.</p>
+<p>The spectral certificate uses chain M=100000, b=40 and kappa=1/10.
+M in the response equations instead denotes the material kinetic operator.
+Numbered equation references apply within their own derivation section.</p>
+<p>For all thirteen nonconstant maintained preparations, the full signed
+spectrum supplies a common positive inertia bound at 0&lt;r=s/c&lt;=1/100000.
+The constant preparation has no profile orientation. A supplied rotating
+perturbation-energy fraction gives an explicit upper bound on its linear
+angular coefficient per carrier oscillation. Zero angular initial data gives
+zero drift. No torque or disturbance level is selected by this calculation.</p>
+<p>The angle describes an internal material-profile axis. The observer-space
+field requires reconstruction through the material map, and neither angle
+is the deterministic electron center trajectory. The linear response below
+is exact. Finite nonlinear rotation remains a separate solvability problem;
+the formal sphere equation alone does not prove it.</p>
+<h2 id="exact-response-of-the-complete-free-action">Exact Response of the Complete Free Action</h2>
+<h3 id="definitions-and-actual-equations">Definitions and Actual Equations</h3>
+<p>All scalar products below are real, with the full weighted form metric and all chain components retained. The canonical parent H is self-adjoint on its polynomial-closure domain. Its selected real profile obeys H psi=omega psi, omega&gt;0. The separate temporal structure J satisfies J²=−1, J*=−J and commutes with H. The word real means the first temporal quadrature; J maps it to the orthogonal second quadrature.</p>
+<p>Use the audited normalized variables and operators</p>
+<pre><code>chi=sqrt(h) xi/c, h=omega²|psi|²,
+B=−JA, ||A||&lt;=1, M=1−r²A*A,
+S=H²−omega², D0=H+omega.
+</code></pre>
+<p>Here 0&lt;r&lt;1/sqrt(2) is the common normalized symbol speed. E is the natural FREE material operator. Let T be an orthonormal inclusion of ker E into material L2. Its range consists of sqrt(h)/c times the physical affine rigid fields; it is not the unweighted affine space. Write chi=Ta+z, T*z=0, and define</p>
+<pre><code>I=T*MT, C=T*A*, L=C J D0,
+p=I a_t+r C eta_t−r L eta+T*M z_t.                 (1)
+</code></pre>
+<p>The exact reduced action at p=0 is L_red=L_0−j^T I^−1j/2 with j the last three terms of (1). Its static wave operator is</p>
+<pre><code>Vw=S+r² L*I^−1L.                                 (2)
+</code></pre>
+<p>For reference the UNREDUCED linear equations, with the free E, are</p>
+<pre><code>eta_tt+rA chi_tt−2omega J eta_t+rD0 B chi_t+S eta=0,
+rA*eta_tt+M chi_tt−rB*D0 eta_t+r^−2 E chi=0.       (3)
+</code></pre>
+<p>These equations, not a clamped action or an assumed rotor, determine the response below.</p>
+<p>Let K=ker S, Q=K-perp. The selected signed eigenspaces, both temporal quadratures and all their angular multiplicities are retained. Define O={R_Omega psi}, the real orientation tangent space. R_Omega acts by the INDUCED rotation of spatial forms, so R_Omega(du)=d(R_Omega u). Holding one-form basis components fixed and differentiating only their coefficient functions is a different operation, wrong for the shell compression even at N=1.</p>
+<p>For N&gt;0 the audited angular calculation gives dim O=d−1, L_K has support precisely on JO, and its restriction</p>
+<pre><code>F=L|JO : JO -&gt; rigid-charge space
+</code></pre>
+<p>is injective. In particular L u=0 for u in O. Since D0u=2omega u,</p>
+<pre><code>F Ju=L Ju=−2omega C u.                            (4)
+</code></pre>
+<p>The spatially bounded, finite-rank rows L are justified by the actual polynomial backgrounds, not just by finite rank.</p>
+<p>On the off-shell space Q, S_Q has a bounded inverse but is generally indefinite. Set</p>
+<pre><code>W=I+r² L_Q S_Q^−1L_Q*,
+D=F*W^−1F : JO -&gt; JO.                            (5)
+</code></pre>
+<p>In the audited sufficiently small-r regime W&gt;0, hence D&gt;0. D here is a finite response matrix, not the spatial Dirac operator. No inverse of S on its kernel is used.</p>
+<h3 id="2-solve-the-entire-conjugate-response">2. Solve the entire conjugate response</h3>
+<p>Take a real tangent u in O and seek a solution of (3) of the form</p>
+<pre><code>eta(t)=t u+v, chi(t)=t T alpha+z.                 (6)
+</code></pre>
+<p>Because A maps real material displacements into the first temporal quadrature, while JD0u is in the second,</p>
+<pre><code>A*JD0u=0 pointwise.                              (7)
+</code></pre>
+<p>Consequently the static nonrigid material equation gives E z=0; taking z in the free nonrigid complement gives z=0 exactly. This is specific to the balanced real orientation tangent. It is not a general assertion that nonrigid material response vanishes for complex polarization or time-dependent acceleration.</p>
+<p>The remaining equations and zero momentum are exactly</p>
+<pre><code>S v+rL*alpha=2omega Ju,
+I alpha=rL v−rC u.                               (8)
+</code></pre>
+<p>Choose v orthogonal to the stationary kernel K0=K intersect (JO)-perp. Adding a stationary vector would merely change the representative. Then v=v_K+v_Q with v_K in JO. Projecting the first equation to K and Q gives</p>
+<pre><code>rF*alpha=2omega Ju,
+v_Q=−r S_Q^−1L_Q*alpha.                          (9)
+</code></pre>
+<p>Substitute into the second equation:</p>
+<pre><code>W alpha=rF v_K−rC u.                             (10)
+</code></pre>
+<p>Equations (4), (5), (9), and (10) now solve the response without discarding any off-shell wave modes:</p>
+<pre><code>v_K=(2omega/r²)D^−1Ju−Ju/(2omega),
+alpha=(2omega/r)W^−1F D^−1Ju,
+v_Q=−2omega S_Q^−1L_Q*W^−1F D^−1Ju.              (11)
+</code></pre>
+<p>The negative directions in S_Q are retained in W. These formulas do not replace W by I or assume that its off-shell term has positive sign.</p>
+<p>They also give the reduced generalized vector directly. With q0=(u,0) and q1=(v,0),</p>
+<pre><code>V_red q1=−G_red q0,
+−(G_red q0)_wave=2omega Ju+r²L*I^−1C u,
+(G_red q0)_nonrigid=0.                            (12)
+</code></pre>
+<p>The source is in wave L2. S_Q^−1 maps it into Dom(S_Q), and v_K is polynomial, so v is in Dom(S). Thus (q1,q0) belongs to the actual combined evolution-generator domain. Formula (6) is an exact solution of the QUADRATIC system for all t. It is not an approximation to that system, though its growth eventually leaves the small-perturbation neighborhood of the nonlinear background.</p>
+<h3 id="3-the-effective-kinetic-tensor-and-its-sign">3. The effective kinetic tensor and its sign</h3>
+<p>For tangent vectors u_a=partial psi/partial theta^a define e_a=J u_a and v_a by (11). The kinetic tensor is the conserved quadratic energy of these generalized modes:</p>
+<pre><code>M_ab=&lt;u_a,K_red u_b&gt;+&lt;v_a,V_red v_b&gt;.              (13)
+</code></pre>
+<p>Here the reduced material entries of u_a and v_a are zero. The kinetic wave block is 1−r²C*I^−1C. Eliminating the conjugate response in the action, including the gyro terms and their integration by parts, gives</p>
+<pre><code>L_orientation^(2)=1/2 M_ab theta_t^a theta_t^b.   (14)
+</code></pre>
+<p>The same tensor follows from projection of the equations: M_ab=&lt;u_a,K_red u_b+G_red v_b&gt;. Since G is skew and Vv_b=−Gu_b, this equals (13). This derivation fixes the sign; simply restricting the bare kinetic term to the stationary sphere would miss the response energy.</p>
+<p>There is a useful exact cancellation. Evaluate the unreduced energy on (6):</p>
+<pre><code>M(u,u)=||u||²+2r&lt;C u,alpha&gt;+&lt;alpha,I alpha&gt;+&lt;v,Sv&gt;.
+</code></pre>
+<p>Use (8) to obtain</p>
+<pre><code>M(u,u)=||u||²+r&lt;C u,alpha&gt;+2omega&lt;v,Ju&gt;.
+</code></pre>
+<p>Equations (4) and (9) give r&lt;C u,alpha&gt;=−||u||². Therefore</p>
+<pre><code>M(u,u')=(4omega²/r²)&lt;Ju,D^−1Ju'&gt;−&lt;u,u'&gt;.          (15)
+</code></pre>
+<p>The negative final term is real and must be retained. It is the finite correction to a positive leading response; it is not negative complete inertia.</p>
+<p>For a direct sufficient sign bound, D&lt;=||F||²/lambda_min(W). Hence</p>
+<pre><code>M(u,u)&gt;=[4omega² lambda_min(W)/(r²||F||²)−1]||u||².
+</code></pre>
+<p>For each fixed nonconstant preparation, a sufficiently small positive r makes the bracket strictly positive. The finite maintained list therefore has a common positive sufficient range, without per-particle retuning. The full-spectrum calculation below evaluates a sufficient lower bound at the common r=1/100000.</p>
+<p>There is a second sign proof using the audited energy structure. The generalized vector Z_u=(q1,q0) is energy-orthogonal to the invariant negative-frequency subspace W_neg. Indeed the generator sends Z_u to the stationary vector (q0,0), which is in the energy radical; invertibility of the generator on W_neg and energy skewness imply H(Z_u,W_neg)=0. The energy on the complementary stationary quotient is strictly positive. A nonzero u gives a nonzero velocity, so Z_u is not a stationary radical vector. Thus M(u,u)=H(Z_u,Z_u)&gt;0 in the audited small-speed regime. This proof does not pretend that V_red itself is positive on every excited field direction.</p>
+<p>For fixed amplitude and normalized angle, the leading scaling is</p>
+<pre><code>M=(4omega²/r²) (F*F)^−1 on JO + O(1),             (16)
+</code></pre>
+<p>interpreted through u_a, since W=1+O(r²). In particular the conjugate wave correction is O(r^−2) times angular speed, and alpha is O(r^−1) times angular speed. A small numerical angular speed alone is insufficient uniformly as r tends to zero. Perturbative use requires ||v(theta_t)|| small relative to the chosen profile scale and reconstructed physical velocity small relative to c. Amplitude scaling psi -&gt; a psi multiplies the physical tangent tensor by a²; the normalized operators stay unchanged. No physical amplitude has been fitted to a mass.</p>
+<h3 id="4-symmetry-family-sphere-geometry-and-reconstruction">4. Symmetry family, sphere geometry and reconstruction</h3>
+<p>A constant ordinary spatial rotation of the zonal axis gives another balanced standing profile psi_n, n in S^(d−1), with the same frequency. The induced form action and the radial material coefficients make this an exact stationary family of the specified action. The sphere parametrizes orientations of a spatial pattern; it is not an additional physical dimension or electron-position space.</p>
+<p>For even N, psi_(-n)=psi_n, so the sphere is a covering parametrization of a projective orientation orbit. For odd N the two profiles differ by sign; they become identified only if the temporal phase pi is also quotiented. Locally both descriptions have the same d−1 tangents and inertia. These identifications neither remove the Jordan directions nor change their local kinetic tensor.</p>
+<p>Rotational covariance and the zonal stabilizer imply that the symmetric tensor (15) is a constant multiple of the round metric on the axis sphere. In an orthonormal angular frame,</p>
+<pre><code>M_ab=I_orient delta_ab, I_orient&gt;0.               (17)
+</code></pre>
+<p>For d=2 this is a one-dimensional statement. At d=3 the real symmetric tensor commuting with SO(2) is scalar; at the larger depths the standard stabilizer representation gives the same conclusion. I_orient depends on the selected profile, its physical amplitude and the supplied constitutive parameters; its exact matrix value is not evaluated here; a certified lower bound is given below.</p>
+<p>Promoting this local kinetic tensor to a collective-coordinate ansatz gives the FORMAL leading action</p>
+<pre><code>L_eff=I_orient |n_t|²/2, |n|=1,
+n_tt+|n_t|² n=0.                                 (18)
+</code></pre>
+<p>Its solutions are great circles with constant speed. Their tangent at zero speed is precisely the secular term t u. Thus linear drift is compatible with bounded finite change of the orientation parameter. Equation (18) is not, by itself, a proof that the actual field follows that curve.</p>
+<p>Material reconstruction is essential. Formula (11) gives</p>
+<pre><code>a_t=alpha(theta_t),
+xi_t(y)=c T alpha(theta_t)/sqrt(h(y)).             (19)
+</code></pre>
+<p>The latter is an actual affine rigid physical velocity field, possibly expressed in mixed rigid coordinates. The wave's first-order angular response and this material response have total p=0 by (8). Omitting it changes the physical solution and misses the cancellation in (15). At finite orientation one must transport T, h and the response tensors with the profile; integrating the fixed infinitesimal coordinates a as if they were global rotation angles is unjustified.</p>
+<p>In the existing scalar-component convention the Eulerian field is obtained from U(y,t) by y=X^−1(x,t). Its first variation includes the transport contribution −xi dot grad psi in addition to eta (and the common temporal carrier). If a different physical tensor pushforward is prescribed, that pushforward must also be differentiated. The induced form representation defining psi_n must not be silently substituted for coefficientwise Eulerian transport. The computed theta therefore describes the material-profile orientation; the observer-space pattern requires reconstruction. Its internal field axis remains distinct from the literal deterministic electron center trajectory q(t) and its six-dimensional orbit-plus-precession dynamics.</p>
+<h3 id="5-exact-statements-formal-modulation-and-available-errors">5. Exact statements, formal modulation and available errors</h3>
+<p>Four levels must be kept separate.</p>
+<ol>
+<li>Constant-orientation standing profiles and constant material rotations/translations are exact symmetry relatives. This establishes static degeneracy.</li>
+<li>Equations (6) and (11) are exact solutions of the linearized free action, including its conjugate response and conserved zero rigid charges. There are exactly d−1 length-two chains for N&gt;0 under the audited hypotheses.</li>
+<li>Equation (18) is the covariant leading slow collective-coordinate prediction from that quadratic response. It suggests bounded travel on the orientation orbit, while including the required O(speed) response. It is not a proved invariant nonlinear manifold.</li>
+<li>An exact finite uniformly rotating solution requires solving the rotating-frame field and material equations, including centrifugal strain, the quadratic charge corrections, and every other stationary-mode solvability condition. No such family has been established by this calculation.</li>
+</ol>
+<p>A precise linear residual is available. At one fixed background let U map angle variations to u_a and R map them to q1_a. For an arbitrary smooth small theta(t), put q_app=U theta+R theta_t. Then the exact reduced linear residual is</p>
+<pre><code>Res=(K_red U+G_red R) theta_tt+K_red R theta_ttt.  (20)
+</code></pre>
+<p>The zeroth- and first-derivative terms cancel exactly. Projection with U* gives exactly the inertia tensor multiplying theta_tt: U* K_red R=0 by the orthogonal real/J temporal quadratures. The third-derivative term remains in the transverse residual. Constant theta_t gives zero residual. For theta(t)=Theta(epsilon t), with bounded derivatives, (20) is O(epsilon²) in the appropriate dual norm for fixed r; its constants can grow as r decreases because R=O(r^−2).</p>
+<p>This is a controlled residual statement for the linear model, not a nonlinear error theorem on time O(1/epsilon). For such a theorem one needs nonlinear well-posedness in a norm controlling the material map and coefficients, uniform tame remainder estimates, compatibility of natural moving boundaries, and solvability of the O(epsilon²) transverse response. The stationary kernel is much larger than O. Quadratic orientation motion may source those other stationary directions; a gap on the nonzero oscillatory quotient alone does not remove that obstruction. They may have to be included as additional collective variables. The indefinite nonlinear energy and possible resonances also require their own control. Compactness of S^(d−1) establishes none of these properties.</p>
+<h3 id="6-all-maintained-depths-and-the-constant-exception">6. All maintained depths and the constant exception</h3>
+<p>The maintained scalar degree is N=n−1. The same formula (15) applies without depth-specific coefficients.</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th style="text-align:right">d</th>
+<th>Maintained scalar degrees N</th>
+<th style="text-align:right">Real orientation directions for each N&gt;0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">2</td>
+<td>75, 80, 94</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>0, 3</td>
+<td style="text-align:right">2 for N=3; none for N=0</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>2, 19, 71</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>9, 14, 21</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>12, 34</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>22</td>
+<td style="text-align:right">9</td>
+</tr>
+</tbody>
+</table></div>
+<p>For N=0 the scalar profile is constant, its induced rotational derivative is zero, and O={0}. Thus F and D have no orientation columns: there is no orientation inverse to take and no meaningful scalar I_orient for this absent coordinate. The audited stationary zero is semisimple. Material rigid rotations still exist before momentum reduction, but they must not be relabelled as orientation motion of a constant profile. The down preparation is this exception. These massive depth-two controls do not establish photon transversality or a massless photon orientation inertia.</p>
+<p>No special depth-five fixed-axis mechanism appears: it has the same continuous orientation response, with four tangent directions and positive inertia in the same sufficient regime. Numerical differences in the inertia may follow from each actual profile; calculating them and the interacting torque remains separate from inserting an axis-lock assumption.</p>
+<h2 id="exact-spatial-angular-norm">Exact Spatial Angular Norm</h2>
+<p>Put u(t)=C_N^((d+1)/2)(t), t=y1, lambda=N(N+d+1), on the unit ball with
+w=sqrt(1-|y|^2). Integrating transverse coordinates gives marginal density
+proportional to (1-t^2)^(d/2). At fixed t the conditional second moment is</p>
+<pre><code>average(y2^2 | y1=t)=(1-t^2)/(d+2).
+</code></pre>
+<p>The rotation generator tilting the axis toward e2 has scalar action
+R12 u=plus/minus y2 u'(t). Integration by parts in the Gegenbauer equation
+therefore gives, for N&gt;0,</p>
+<pre><code>||R12 u||^2 = lambda ||u||^2/(d+2).                (1)
+</code></pre>
+<p>Both boundary terms vanish under the displayed marginal weight. The
+rotation is the induced rotation of forms. It commutes with d and with
+the scalar spatial operator, so</p>
+<pre><code>||R12(du/sqrt(lambda))||^2 = ||R12 u||^2,
+||du/sqrt(lambda)||^2 = ||u||^2.
+</code></pre>
+<p>Every scalar/exact-one-form chain eigenprofile is a fixed linear combination
+of these two components in its slots. Component orthogonality transfers
+(1) without changing its coefficient, regardless of the trace-one balancing
+choice. Thus the actual full profile satisfies</p>
+<pre><code>||partial_theta psi||^2/||psi||^2=lambda/(d+2).    (2)
+</code></pre>
+<p>This is a geometric angular sensitivity, not an angular frequency.
+For N=0 the profile is constant and this ratio vanishes; there is no
+orientation coordinate to invert. Exact rational moment integration verifies (1) at all fourteen maintained labels; the derivation applies to every degree.</p>
+<h2 id="certified-bounds-from-the-complete-signed-spectrum">Certified Bounds From the Complete Signed Spectrum</h2>
+<h3 id="exact-response-bound">Exact Response Bound</h3>
+<p>Use the moving action's natural free material domain, real balanced zonal preparation, full weighted form metric and all retained chain slots. Let K=ker(H²−omega²), Q=1−P_K, S_Q=(H²−omega²)|Q, D0=H+omega, C=T<em>A</em>, and L=C J D0. Here T is an isometric inclusion of the weighted rigid material kernel, ||A||&lt;=1, J*=−J, J²=−1 and [J,H]=0. Both complete signed eigenspaces H=+omega and H=−omega, including temporal and angular multiplicities, belong to K and are removed before any inverse is taken.</p>
+<p>The exact finite rigid response matrix is</p>
+<pre><code>W=1−r²CC*+r² L_Q S_Q^−1 L_Q*.
+</code></pre>
+<p>Here 1 is the identity on rigid-charge space; the earlier rigid inertia
+I=T<em>MT equals 1−r²CC</em>. These are different operators.</p>
+<p>Spectral calculus on Q gives the bounded self-adjoint operator</p>
+<pre><code>D0 Q S_Q^−1 Q D0 = f(H)Q,
+f(nu)=(nu+omega)/(nu−omega),   nu != +/-omega.
+</code></pre>
+<p>The apparent cancellation at −omega is not permission to invert S there: Q removes that eigenspace first. At +omega the pole is likewise excluded. Compact resolvent and isolation of these eigenspaces make f bounded on Q. Composition with J and C consequently extends the expression to a bounded rigid matrix, consistently with its original weak form.</p>
+<p>For nu&gt;omega or nu&lt;−omega, f(nu)&gt;0. For −omega&lt;nu&lt;omega it is negative, including negative signed H branches. Set</p>
+<pre><code>beta=max(0, sup_{nu in spec(H|Q), |nu|&lt;omega}
+               (omega+nu)/(omega−nu)).
+</code></pre>
+<p>Thus L_Q S_Q^−1 L_Q* &gt;= −beta CC*, because J commutes with f(H)Q and is unitary. Since CC*&lt;=I,</p>
+<pre><code>W &gt;= I−r²(1+beta)CC* &gt;= [1−r²(1+beta)]I.       (1)
+</code></pre>
+<p>This retains the negative off-shell stiffness exactly as a lower bound. Negative H does not mean negative laboratory wave energy. Its frequencies in (−omega,0) contribute ratios between zero and one; they are checked separately in the script rather than deleted by convention. Frequencies below −omega contribute positive f and cannot worsen (1).</p>
+<h3 id="complete-spectral-verification">Complete spectral verification</h3>
+<p>The <a href="/evidence/results/free-count-stability-20261014/">free spectral certificate</a> contains the complete full-form windows and rational low-frequency intervals. The new checker does not trust a rounded separation or a status flag. It independently reconstructs every family below each cutoff:</p>
+<pre><code>lambda=0 for the scalar constant;
+lambda=(n+k)(n+d+1−k) times [1 if k=0 else b²],
+n&gt;=1, 0&lt;=k&lt;d,
+h=binomial(n+d−1,d−k−1) binomial(n+k−1,k).
+</code></pre>
+<p>It matches the full family records and signed-chain multiplicity 2h (constant: 1), including coincident families. It rechecks all 319 supplied root intervals using integer Sturm counts for the d-by-d squared bidiagonal-chain recurrence: each lower endpoint has count zero and each upper endpoint count one. No matrix larger than a recurrence list is constructed.</p>
+<p>At lambda&gt;=cutoff the smallest chain singular value increases strictly with lambda. This follows by sign conjugation of T(lambda)^−1 to an entrywise positive lower triangular matrix whose entries strictly decrease with lambda; its positive Gram matrix and positive maximal singular vectors give strict decrease of its largest singular value. Hence the lowest frequency increases, and every band above the cutoff exceeds the cutoff frequency. Below the cutoff every other singular value is at least M−max_j sqrt(cutoff+a_j), by comparison with the strong-bond matrix whose d−1 nonzero singular values equal M. The checker verifies the conservative integer square-root tail bound and verifies both tails exceed twice the largest selected omega at that depth. Thus neither omitted spatial families nor omitted heavy bands can enter (−omega,omega).</p>
+<p>For each target it checks all included signed intervals, discards precisely its full +/-omega shell, and bounds every negative part of f. For a positive interval [l,u] below [omega_l,omega_u], use (omega_l+u)/(omega_l−u); for its negative interval use (omega_u−l)/(omega_u+l). These endpoint choices follow from monotonic increase in nu and derivative −2nu/(omega−nu)² in omega. The exact supremum enclosure is rounded upward only to a convenient integer B per label. Common sector units mu_d cancel in all ratios.</p>
+<p>All 3405 exact checks pass. Across all fourteen assignments beta&lt;=96, so</p>
+<pre><code>W &gt;= w0 I,  w0=9999999903/10000000000 &gt; r²,
+w0/r²−1 &gt;= 9999999902 (equality at r=1/100000).                           (2)
+</code></pre>
+<p>The same inequalities with this common w0 also hold for every 0&lt;r&lt;=1/100000. The angular-inertia factor displayed below is the endpoint factor, hence remains a conservative lower bound throughout that interval. This proof supplies W positivity independently of the free stability certificate's contour argument.</p>
+<h3 id="angular-inertia-and-supplied-energy-fraction">Angular inertia and supplied energy fraction</h3>
+<p>For N&gt;0, let u=partial_theta psi be a unit-angle zonal tilt and let F=L|JO. The accepted exact identities are</p>
+<pre><code>F Ju=−2omega C u,  ||F||&lt;=2omega,
+D=F*W^−1F&gt;0,
+M(u,u)=4omega² &lt;Ju,D^−1 Ju&gt;/r²−||u||²,
+||u||²=N(N+d+1)||psi||²/(d+2).
+</code></pre>
+<p>Equation (2) therefore gives an actual rational lower bound</p>
+<pre><code>I_orientation=M(u,u)
+   &gt;=9999999902 N(N+d+1)||psi||²/(d+2).          (3)
+</code></pre>
+<p>Supply a nonnegative fraction epsilon explicitly by defining E_orientation=epsilon E0, where E_orientation=I_orientation Omega²/2 is the conserved rotating quadratic energy of this particular generalized orientation solution and E0=omega²||psi||² is the balanced background laboratory rest energy. Then</p>
+<pre><code>(Omega/omega)² &lt;= 2epsilon(d+2)/[9999999902 N(N+d+1)],
+|Delta theta| &lt;= 2pi sqrt(2epsilon(d+2)/[9999999902 N(N+d+1)]).
+</code></pre>
+<p>The table gives a fully rational, slightly rounded upper coefficient c with |Delta theta|&lt;=c sqrt(epsilon). The script proves its rounding by squaring, using pi&lt;22/7. No epsilon is inferred from a collision, noise model or measured lifetime. For a concrete arithmetic example, a separately supplied epsilon=1/1000000 multiplies every c by 1/1000; that is an energy-budget input, not a predicted preparation.</p>
+<p>| Label | d | N | B &gt;= beta | I_orientation / ||psi||² lower bound | c (radians) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| W | 2 | 75 | 77 | 14624999856675 | 233/100000000 |
+| Z | 2 | 80 | 82 | 16599999837320 | 219/100000000 |
+| Higgs | 2 | 94 | 96 | 22794999776609 | 187/100000000 |
+| down | 3 | 0 | 0 | not applicable | not applicable |
+| strange | 3 | 3 | 4 | 209999997942/5 | 2169/50000000 |
+| up | 4 | 2 | 3 | 69999999314/3 | 291/5000000 |
+| charm | 4 | 19 | 11 | 759999992552 | 51/5000000 |
+| top | 4 | 71 | 37 | 26979999735596/3 | 297/100000000 |
+| neutrino1 | 5 | 9 | 5 | 1349999986770/7 | 81/4000000 |
+| neutrino2 | 5 | 14 | 7 | 399999996080 | 703/50000000 |
+| neutrino3 | 5 | 21 | 10 | 809999992062 | 247/25000000 |
+| electron | 6 | 12 | 6 | 284999997207 | 833/50000000 |
+| muon | 6 | 34 | 13 | 3484999965847/2 | 337/50000000 |
+| tau | 10 | 22 | 6 | 604999994071 | 1143/100000000 |</p>
+<p>The constant down assignment N=0 has beta=0 and the same common W bound, but its angular tangent vanishes. No orientation inverse or angular-speed assertion is made there. Depth five obeys exactly the same rule; its three entries do not establish a distinguished frozen axis or suppression law.</p>
+<p>Omega is freely specified linear initial data and may vanish. Delta theta means the linear angular coefficient multiplied by one actual carrier period. It is not a proved finite nonlinear rotation. The conjugate response grows as Omega/r², so a small angular coefficient alone does not ensure a small nonlinear perturbation. Material-profile orientation, the Eulerian reconstructed pattern and the literal deterministic electron trajectory remain distinct. No mandatory drift, physical noise floor, observed lifetime or electron precession is deduced.</p>
+<h2 id="reproducibility">Reproducibility</h2>
+<p>The <a href="/evidence/results/experiments/check-orientation-inertia.py/">exact orientation checker</a>
+reads the linked free spectral certificate, independently reconstructs its
+spatial families, checks all 319 Sturm intervals and their omitted-band
+bounds, and verifies every signed ratio and rational angular coefficient.
+Its <a href="/evidence/results/orientation-inertia-20261014/">complete result</a>
+contains 3,405 exact assertions, the source hashes and all fourteen labels.
+The default input is the sibling results/free-count-stability-20261014.json;
+an explicit --input path may be supplied after downloading the certificate.</p>
+<p>The analytical response, domain and angular-norm identities above are part
+of the result; arithmetic does not replace them. The physical support,
+carrier and sector units remain constitutive inputs. The common parameter
+and energy comparison do not select physical amplitudes, coupling strengths,
+occupied states or observed lifetimes.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261014-free-count-pattern-linear-evolution/">Free Count Patterns: Momentum Reduction and Bounded Shape Evolution</a></li><li><a href="/research/notes/20261014-moving-finite-speed-count-action/">A Moving Finite-Speed Count Action With Positive Inertia</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#exact-response-of-the-complete-free-action">Exact Response of the Complete Free Action</a></li><li class="toc-level-3"><a href="#definitions-and-actual-equations">Definitions and Actual Equations</a></li><li class="toc-level-3"><a href="#2-solve-the-entire-conjugate-response">2. Solve the entire conjugate response</a></li><li class="toc-level-3"><a href="#3-the-effective-kinetic-tensor-and-its-sign">3. The effective kinetic tensor and its sign</a></li><li class="toc-level-3"><a href="#4-symmetry-family-sphere-geometry-and-reconstruction">4. Symmetry family, sphere geometry and reconstruction</a></li><li class="toc-level-3"><a href="#5-exact-statements-formal-modulation-and-available-errors">5. Exact statements, formal modulation and available errors</a></li><li class="toc-level-3"><a href="#6-all-maintained-depths-and-the-constant-exception">6. All maintained depths and the constant exception</a></li><li class="toc-level-2"><a href="#exact-spatial-angular-norm">Exact Spatial Angular Norm</a></li><li class="toc-level-2"><a href="#certified-bounds-from-the-complete-signed-spectrum">Certified Bounds From the Complete Signed Spectrum</a></li><li class="toc-level-3"><a href="#exact-response-bound">Exact Response Bound</a></li><li class="toc-level-3"><a href="#complete-spectral-verification">Complete spectral verification</a></li><li class="toc-level-3"><a href="#angular-inertia-and-supplied-energy-fraction">Angular inertia and supplied energy fraction</a></li><li class="toc-level-2"><a href="#reproducibility">Reproducibility</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

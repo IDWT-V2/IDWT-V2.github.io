@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>idos-equal-energy-check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/idos-energy/idos-equal-energy-check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="idos-equal-energy-check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/idos-energy/idos-equal-energy-check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="idos-equal-energy-check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>idos-equal-energy-check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/idos-energy/idos-equal-energy-check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Bounded exact checks of the conservative mismatch action; no DB writes.&quot;&quot;&quot;
+from pathlib import Path
+from math import comb
+from fractions import Fraction as Q
+import sympy as s
+import json,hashlib,subprocess
+from datetime import datetime, timezone
+OUT=Path(__file__).resolve().parent
+checks=[]
+def check(name,value):
+    assert value,name
+    checks.append(name)
+I=s.symbols(&#39;I0:3&#39;,positive=True); th=s.symbols(&#39;t0:3&#39;,real=True)
+k,eta,eps=s.symbols(&#39;k eta eps&#39;,positive=True)
+nu=(1,2,3); r=(1,-2,1)
+e=[nu[j]*I[j] for j in range(3)]; H0=sum(e); mean=H0/3
+C=sum((v-mean)**2 for v in e)/(2*eps)
+psi=sum(r[j]*th[j] for j in range(3)); F=1+eta*s.cos(psi)
+H=H0+k*C*F
+Idot=[-s.diff(H,t) for t in th]; tdot=[s.diff(H,a) for a in I]
+check(&#39;changed amplitude Euler identity&#39;,s.simplify(2*sum(I[j]*tdot[j] for j in range(3))-2*H0-4*k*C*F)==0)
+check(&#39;H0 conservation&#39;,s.simplify(sum(nu[j]*Idot[j] for j in range(3)))==0)
+check(&#39;total action conservation&#39;,s.simplify(sum(Idot))==0)
+check(&#39;complete H conservation&#39;,s.simplify(sum(s.diff(H,I[j])*Idot[j]+s.diff(H,th[j])*tdot[j] for j in range(3)))==0)
+uniform={I[j]:eps/nu[j] for j in range(3)}
+for j in range(3):
+    check(f&#39;uniform invariant {j}&#39;,s.simplify(Idot[j].subs(uniform))==0)
+    check(f&#39;uniform rate {j}&#39;,s.simplify(tdot[j].subs(uniform)-nu[j])==0)
+    check(f&#39;complete canonical phase formula {j}&#39;,s.simplify(tdot[j]-nu[j]*(1+k*(e[j]-mean)*F/eps))==0)
+point={I[0]:s.Rational(11,10),I[1]:s.Rational(3,10),I[2]:s.Rational(13,30),th[0]:s.pi/2,th[1]:0,th[2]:0,eps:1,k:1,eta:s.Rational(1,2)}
+flow=[s.simplify(v.subs(point)) for v in Idot]
+check(&#39;nonzero reciprocal exchange&#39;,flow==[s.Rational(13,200),-s.Rational(13,100),s.Rational(13,200)])
+check(&#39;same H0 as uniform&#39;,H0.subs(point)==3)
+check(&#39;same action as uniform&#39;,sum(I).subs(point)==s.Rational(11,6))
+# Exact generic local U(1)-invariant quartic counterexample.
+g,B,A,Bb=s.symbols(&#39;g B A Bb&#39;,positive=True)
+Hloc=g*(A*I[0]**2+Bb*I[1]**2+4*B*I[0]*I[1]+2*B*I[0]*I[1]*s.cos(2*(th[0]-th[1])))
+difference=-nu[0]*s.diff(Hloc,th[0])+nu[1]*s.diff(Hloc,th[1])
+check(&#39;local quartic breaks equal energy&#39;,s.simplify(difference-4*g*B*(nu[0]+nu[1])*I[0]*I[1]*s.sin(2*(th[0]-th[1])))==0)
+labels=[(&#39;W&#39;,2,75),(&#39;Z&#39;,2,80),(&#39;Higgs&#39;,2,94),(&#39;down&#39;,3,0),(&#39;strange&#39;,3,3),(&#39;up&#39;,4,2),(&#39;charm&#39;,4,19),(&#39;top&#39;,4,71),(&#39;nu1&#39;,5,9),(&#39;nu2&#39;,5,14),(&#39;nu3&#39;,5,21),(&#39;electron&#39;,6,12),(&#39;muon&#39;,6,34),(&#39;tau&#39;,10,22)]
+rows=[]
+for name,d,N in labels:
+    mult=[comb(a+d-1,d-1) for a in range(N+1)]
+    D=comb(N+d,d); inv=sum((Q(v,a+1) for a,v in enumerate(mult)),Q(0))
+    check(f&#39;count {name}&#39;,sum(mult)==D)
+    check(f&#39;equal action extra factor {name}&#39;,sum(Q((a+1)*v,D) for a,v in enumerate(mult))==1+Q(d*N,d+1))
+    check(f&#39;positive mode capacity {name}&#39;,D&gt;0 and inv&gt;0)
+    rows.append({&#39;name&#39;:name,&#39;d&#39;:d,&#39;N&#39;:N,&#39;D&#39;:D,&#39;E_over_epsilon&#39;:D,&#39;J_times_omega_over_epsilon&#39;:str(inv),&#39;equal_action_energy_over_D_I_omega&#39;:str(1+Q(d*N,d+1)),&#39;same_depth_gap_law&#39;:&#39;nu_k=omega*(k+1)&#39;})
+for d in (2,3,4,5,6,10):
+    for N in range(7):
+        es=[Q(j+1,j+2) for j in range(comb(N+d,d))] if N&lt;3 else [Q(2),Q(3),Q(5)]
+        # The variance identity is dimension independent; use small finite witnesses.
+        av=sum(es)/len(es)
+        check(f&#39;variance identity {d} {N}&#39;,sum((v-av)**2 for v in es)==sum((es[i]-es[j])**2 for i in range(len(es)) for j in range(i))/len(es))
+        check(f&#39;count boundary {d} {N}&#39;,sum(comb(a+d-1,d-1) for a in range(N+1))==comb(N+d,d))
+sources={&#39;canonical_core_sha256&#39;:&#39;a53a7568c1b590028dbf77d1a6aec7fa29ab42f5e362da2c980dca48b000122f&#39;}
+result={&#39;created_utc&#39;:datetime.now(timezone.utc).isoformat(),&#39;status&#39;:&#39;passed&#39;,&#39;check_count&#39;:len(checks),&#39;checks&#39;:checks,&#39;sources&#39;:sources,&#39;script_sha256&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),&#39;assignments&#39;:rows,&#39;exchange_actions&#39;:[str(v) for v in flow],&#39;exchange_modal_energies&#39;:[str(nu[j]*flow[j]) for j in range(3)],&#39;limits&#39;:&#39;Finite exact identities, not spatial PDE evolution or a particle-clock derivation.&#39;}
+name=&#39;checks-&#39;+datetime.now(timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;
+(OUT/name).write_text(json.dumps(result,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;path&#39;:str(OUT/name),&#39;checks&#39;:len(checks),&#39;status&#39;:&#39;passed&#39;}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

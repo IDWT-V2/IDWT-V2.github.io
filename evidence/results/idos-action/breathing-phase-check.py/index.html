@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>breathing-phase-check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/idos-action/breathing-phase-check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="breathing-phase-check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/idos-action/breathing-phase-check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="breathing-phase-check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>breathing-phase-check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/idos-action/breathing-phase-check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>import sympy as s,json,pathlib,datetime,hashlib
+root=pathlib.Path(__file__).resolve().parent
+x,a,t=s.symbols(&#39;x a t&#39;, positive=True)
+w=a/x**2-s.log(1+1/x**2);q=x*x
+amin=q*(3*q+1)/(3*(q+1)**2)
+checks={}
+def check(name,expr):
+ assert s.factor(expr)==0,name
+ checks[name]=True
+check(&#39;convexity boundary&#39;,s.diff(w,x,2)-6*(a-amin)/x**4)
+P=(5*s.diff(w,x,3)**2-3*s.diff(w,x,2)*s.diff(w,x,4))*x**10*(q+1)**6/8
+positive=90*(q+1)**6*t**2+3*q*(q+1)**2*(35*q*q+126*q+19)*t+10*q*q*(5*q+1)**2
+check(&#39;Schaaf positive shifted polynomial&#39;,P.subs(a,amin+t)-positive)
+check(&#39;Schaaf inflection sign&#39;, (s.diff(w,x)*s.diff(w,x,3)).subs(a,amin)+16*(5*x*x+1)/(3*x**4*(x*x+1)**5))
+x0=s.sqrt(a/(1-a)); v2,v3,v4=[s.diff(w,x,k).subs(x,x0) for k in (2,3,4)]
+C=(2*a*a+32*a+11)/(24*(1-a)**2)
+check(&#39;small amplitude period coefficient&#39;,v4/(8*v2**2)-5*v3**2/(24*v2**3)+C)
+L,alpha,beta,S2,v,mu,J,d=s.symbols(&#39;L alpha beta S2 v mu J d&#39;,positive=True)
+W=alpha/L**2-beta*s.log(1+2*S2/L**2)
+c=v/(2*alpha*L)
+cdot=2*alpha/L**4-2*alpha*c*c-4*beta*S2/(L**2*(L**2+2*S2))
+phase=mu+d*(alpha/L**2-beta*s.log(1+2*S2/L**2)/2-beta*S2/(L**2+2*S2))
+H=J*mu/2+J*d*(W+alpha*c*c*L*L)/4
+check(&#39;exact Euler center phase factors&#39;,2*H-J*phase+J*d*L*L*cdot/4)
+for depth in (2,3,4,5,6,10):
+ check(&#39;radial mass depth &#39;+str(depth),(-s.diff(J*depth*W/4,L)/(J*depth/(8*alpha)))-(4*alpha*alpha/L**3-8*alpha*beta*S2/(L*(L*L+2*S2))))
+report={&#39;utc&#39;:datetime.datetime.now(datetime.timezone.utc).isoformat(),&#39;script_sha256&#39;:hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest(),&#39;checks&#39;:checks}
+(root/&#39;symbolic-checks.json&#39;).write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps(report,indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

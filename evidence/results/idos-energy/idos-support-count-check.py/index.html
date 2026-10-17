@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>idos-support-count-check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/idos-energy/idos-support-count-check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="idos-support-count-check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/idos-energy/idos-support-count-check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="idos-support-count-check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>idos-support-count-check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/idos-energy/idos-support-count-check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>from fractions import Fraction
+from math import comb
+import json
+rows=[]
+for d,n in [(2,75),(2,80),(2,94),(3,0),(3,3),(4,2),(4,19),(4,71),(5,9),(5,14),(5,21),(6,12),(6,34),(10,22)]:
+ D=comb(n+d,d); p=d; q=1; eps=Fraction(1); a=Fraction(1)
+ Lp=Fraction(q*D,p)
+ carrier=a*Lp
+ wave=D*eps
+ assert p*carrier==q*wave
+ total=carrier+wave
+ assert total==Fraction(p+q,p)*D*eps
+ # L^2 H&#39;&#39; at fixed actions, using stationarity, no root rounding.
+ hess_scaled=p*(p+q)*carrier
+ assert hess_scaled&gt;0
+ rows.append(dict(depth=d,cutoff=n,count=D,carrier_fraction=str(carrier/total),
+                  energy_factor=str(total/wave),radius_power=str(Lp),scaled_hessian=str(hess_scaled)))
+print(json.dumps(dict(checks=42,rows=rows),indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

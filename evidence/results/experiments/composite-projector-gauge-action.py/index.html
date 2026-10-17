@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>composite-projector-gauge-action.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/composite-projector-gauge-action.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="composite-projector-gauge-action.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/composite-projector-gauge-action.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="composite-projector-gauge-action.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>composite-projector-gauge-action.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/composite-projector-gauge-action.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Exact topology and representation traces for the conditional gauge reduction.&quot;&quot;&quot;
+from pathlib import Path
+from itertools import combinations
+import datetime, hashlib, json, sys
+import sympy as s
+OUT = Path(__file__).resolve().parent
+checks = []
+def ck(name, value):
+    assert bool(value), name
+    checks.append(name)
+H = s.Symbol(&#39;H&#39;)
+ce = s.expand((1-2*H)**3*(1+3*H)**2)
+ck(&#39;auxiliary Chern polynomial&#39;, ce == 1-15*H**2+10*H**3+60*H**4-72*H**5)
+ct = 1+6*H+15*H**2+20*H**3+15*H**4+6*H**5
+ck(&#39;tangent factorization&#39;, s.expand((1+2*H)*(1+H+H**2)*(1+3*H+3*H**2)) == ct)
+for a,b,expected in [(1,1,s.Rational(1,2)),(3,3,s.Rational(-1,2))]:
+    # ch(t)=exp(H)-1: coefficient of t^3 required by rank-two character.
+    k2 = s.Rational(a*a-2*b-a,2)
+    k3 = s.Rational(a**3-3*a*b-a,6)-k2
+    ck(f&#39;K integrality obstruction {a},{b}&#39;, k3 == expected and k3.q == 2)
+subsets = [c for r in [0,2,4] for c in combinations(range(5), r)]
+w = [-2,-2,-2,3,3]
+charges = [sum(w[i] for i in c) for c in subsets]
+ck(&#39;rank sixteen&#39;, len(subsets)==16)
+ck(&#39;vanishing first character&#39;, sum(charges)==0)
+ck(&#39;auxiliary second character&#39;, s.Rational(sum(q*q for q in charges),2)==60)
+ck(&#39;geometric half-spin second character&#39;, 2*(6**2-2*15)==12)
+ck(&#39;cubic charge bookkeeping&#39;, sum(q**3 for q in charges)==0)
+ck(&#39;nonisomorphism&#39;, 60 != 12)
+ck(&#39;line twist cannot preserve c1&#39;, 16 != 0)
+
+def exterior(A):
+    R=s.zeros(16)
+    for col,I in enumerate(subsets):
+        for slot,j in enumerate(I):
+            for i in range(5):
+                if A[i,j]==0: continue
+                seq=list(I);seq[slot]=i
+                if len(set(seq))!=len(seq):continue
+                sign=(-1)**sum(seq[a]&gt;seq[b] for a in range(len(seq)) for b in range(a+1,len(seq)))
+                R[subsets.index(tuple(sorted(seq))),col]+=sign*A[i,j]
+    return R
+
+def pair(i,j,imag=False):
+    A=s.zeros(5);A[i,j]= -s.I/2 if imag else s.Rational(1,2);A[j,i]= s.I/2 if imag else s.Rational(1,2);return A
+C=[]
+for i,j in combinations(range(3),2): C.extend([pair(i,j),pair(i,j,True)])
+C += [s.diag(s.Rational(1,2),-s.Rational(1,2),0,0,0),s.diag(1,1,-2,0,0)/(2*s.sqrt(3))]
+W=[pair(3,4),pair(3,4,True),s.diag(0,0,0,s.Rational(1,2),-s.Rational(1,2))]
+Y=s.diag(-s.Rational(1,3),-s.Rational(1,3),-s.Rational(1,3),s.Rational(1,2),s.Rational(1,2))
+RC,RW,RY=[exterior(A) for A in C],[exterior(A) for A in W],exterior(Y)
+for name,group in [(&#39;colour&#39;,RC),(&#39;weak&#39;,RW)]:
+    for i,A in enumerate(group):
+        for j,B in enumerate(group):ck(f&#39;{name} trace {i},{j}&#39;,s.simplify(s.trace(A*B))==(2 if i==j else 0))
+for i,A in enumerate(RC):
+    for j,B in enumerate(RW):
+        ck(f&#39;colour weak trace {i},{j}&#39;,s.trace(A*B)==0)
+        ck(f&#39;colour weak commutator {i},{j}&#39;,A*B==B*A)
+for i,A in enumerate(RC+RW):
+    ck(f&#39;hypercharge mixed trace {i}&#39;,s.trace(A*RY)==0)
+    ck(f&#39;hypercharge commutator {i}&#39;,A*RY==RY*A)
+ck(&#39;hypercharge trace&#39;,s.trace(RY*RY)==s.Rational(10,3))
+ck(&#39;fundamental hypercharge trace&#39;,s.trace(Y*Y)==s.Rational(5,6))
+for i,A in enumerate(C+W+[Y]):
+    ck(f&#39;exterior index four {i}&#39;,s.simplify(s.trace(exterior(A)**2)-4*s.trace(A**2))==0)
+# Split projector polynomial and differentiated projector curvature witness.
+D=s.diag(-2,3,0)
+Pc=D*(D-3*s.eye(3))/10;Pw=D*(D+2*s.eye(3))/15
+ck(&#39;spectral colour projector&#39;, Pc==s.diag(1,0,0))
+ck(&#39;spectral weak projector&#39;, Pw==s.diag(0,1,0))
+ck(&#39;orthogonal spectral projectors&#39;,Pc*Pw==s.zeros(3))
+# Anti-Hermitian frame generators: projected curvature -[X_off,Y_off] on image.
+P=s.diag(1,1,0)
+X=s.zeros(3);X[0,2]=1;X[2,0]=-1
+T=s.zeros(3);T[1,2]=1;T[2,1]=-1
+dx=X*P-P*X;dy=T*P-P*T
+FP=P*(dx*dy-dy*dx)*P
+ck(&#39;projector curvature formula&#39;,FP==-P*(X*T-T*X)*P)
+ck(&#39;composite curvature nonzero&#39;,FP!=s.zeros(3))
+# Explicit embedding dimensions: negative second Veronese and conjugated third.
+ck(&#39;ambient coefficient rank&#39;,3*s.binomial(7,2)+2*s.binomial(8,3)==175)
+ck(&#39;determinant cancellation&#39;,3*(-2)+2*3==0)
+normal_rows=[]
+for d in [2,3,4,5,6,10]:
+    e=d if d%2==0 else d+1;q=(10-e)//2
+    h=q*q if q&gt;=3 else 1 if q==2 else 0
+    normal_rows.append({&#39;physical_depth&#39;:d,&#39;even_carrier&#39;:e,&#39;q&#39;:q,&#39;canonical_J_target_holonomy_dimension&#39;:h,&#39;traceless_dimension&#39;:h-1 if h else 0})
+ck(&#39;occupied q controls&#39;,[r[&#39;q&#39;] for r in normal_rows]==[4,3,3,2,2,0])
+ck(&#39;canonical q2 has no su2&#39;,normal_rows[3][&#39;traceless_dimension&#39;]==0)
+report={&#39;created_utc&#39;:datetime.datetime.now(datetime.timezone.utc).isoformat(),&#39;verification_scope&#39;:&#39;portable mathematical assertions; archival source-hash checks omitted&#39;,&#39;script_sha256&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),&#39;checks_passed&#39;:len(checks),&#39;checks&#39;:checks,&#39;chern_character_2&#39;:{&#39;auxiliary_even_exterior&#39;:60,&#39;geometric_half_spin&#39;:12,&#39;coefficient&#39;:&#39;H^2&#39;},&#39;trace_indices&#39;:{&#39;SU3&#39;:&#39;2&#39;,&#39;SU2&#39;:&#39;2&#39;,&#39;Y&#39;:&#39;10/3&#39;},&#39;conditional_gY_squared_over_g2_squared&#39;:&#39;3/5&#39;,&#39;normal_comparison&#39;:normal_rows,&#39;scope&#39;:&#39;Exact identities and necessary obstructions; no spatial state, selected action, force law or measured coupling is established.&#39;}
+name=sys.argv[1] if len(sys.argv)&gt;1 else &#39;composite-projector-gauge-action-results-&#39;+datetime.datetime.now(datetime.timezone.utc).strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;
+p=OUT/name;p.write_text(json.dumps(report,indent=2)+&#39;\n&#39;);print(json.dumps({&#39;report&#39;:str(p),&#39;checks_passed&#39;:len(checks)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

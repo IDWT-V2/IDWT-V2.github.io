@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>idos-coherence-check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/idos-energy/idos-coherence-check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="idos-coherence-check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/idos-energy/idos-coherence-check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="idos-coherence-check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261001-sector-theory-evidence/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>idos-coherence-check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/idos-energy/idos-coherence-check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Light exact and finite-dimensional numerical coherence checks; no DB mutation.&quot;&quot;&quot;
+from fractions import Fraction as F
+from math import comb,sqrt
+import json,hashlib,pathlib,datetime
+import numpy as np
+from scipy.integrate import solve_ivp
+root=pathlib.Path(__file__).resolve().parent
+checks=0
+rows=[]
+def check(x):
+ global checks
+ assert x
+ checks+=1
+for d in (2,3,4,5,6,10):
+ for N in range(35):
+  D=comb(N+d,d)
+  check(sum(comb(k+d-1,d-1) for k in range(N+1))==D)
+  check(sum((F(comb(k+d-1,d-1),comb(k+d,d)) for k in range(N+1)),F())==d*sum((F(1,k) for k in range(d,N+d+1)),F()))
+ C=F(3*(d+3),d+5);M6=F(15*(d+3)**2,(d+5)*(d+7))
+ J=F(10);Delta=F(1);g=F(1);nu0=F(1);nu1=F(2)
+ I1=(Delta+2*g*J)/(g*(5-C));I0=J-I1
+ Om=nu0+g*(I0+3*I1)
+ check(0&lt;I1&lt;J)
+ check(Om==nu1+g*(C*I1+3*I0))
+ H2=nu0*I0+nu1*I1;H4=g/2*(I0**2+C*I1**2+6*I0*I1)
+ check(Om*J==H2+2*H4)
+ nu_rel2=4*g*g*(5-C)*I0*I1
+ check(nu_rel2&gt;0)
+ leakage2=g*g*(9*I0*I1**2*(C-1)+I1**3*(M6-C*C))
+ check(leakage2&gt;0)
+ cf=float(C)
+ def rhs(t,z):
+  a,b=z
+  return -1j*np.array([a+(abs(a)**2+2*abs(b)**2)*a+b*b*a.conjugate(),2*b+(cf*abs(b)**2+2*abs(a)**2)*b+a*a*b.conjugate()])
+ def energy(z):
+  a,b=z
+  return abs(a)**2+2*abs(b)**2+0.5*(abs(a)**4+cf*abs(b)**4+4*abs(a*b)**2+2*np.real((a.conjugate()*b)**2))
+ z0=np.array([sqrt(float(I0)),sqrt(float(I1))*np.exp(-0.015j)])
+ sol=solve_ivp(rhs,(0,20),z0,method=&#39;DOP853&#39;,rtol=2e-11,atol=2e-12,max_step=0.015)
+ check(sol.success)
+ norms=np.sum(abs(sol.y)**2,axis=0);ens=np.array([energy(z) for z in sol.y.T]);angles=np.angle(sol.y[1]*sol.y[0].conjugate())
+ nd=float(np.max(abs(norms-10)));ed=float(np.max(abs(ens-ens[0])));ph=float(np.max(abs(angles)));ir=[float(np.min(abs(sol.y[1])**2)),float(np.max(abs(sol.y[1])**2))]
+ check(nd&lt;1e-7);check(ed&lt;2e-6);check(ph&lt;0.016)
+ rows.append(dict(depth=d,C=str(C),threshold_J=str(Delta/(g*(3-C))),I0=str(I0),I1=str(I1),Omega=str(Om),H2=str(H2),H4=str(H4),H=str(H2+H4),relative_frequency_squared=str(nu_rel2),unprojected_cubic_leakage_squared=str(leakage2),numerical={&#39;time_end&#39;:20,&#39;initial_relative_phase&#39;:0.015,&#39;max_abs_relative_phase&#39;:ph,&#39;I1_range&#39;:ir,&#39;norm_drift&#39;:nd,&#39;energy_drift&#39;:ed,&#39;steps&#39;:len(sol.t)}))
+# Ground+first-shell beats recur exactly; at every depth D_1-D_0=d.
+for d in (2,3,4,5,6,10): check(comb(1+d,d)-1==d)
+# Forced carrier zero-data formula and resonant finite-time envelope checked analytically in report.
+out=dict(created_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),checks=checks,source_script_sha256=hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest(),rows=rows)
+(root/&#39;idos-coherence-checks.json&#39;).write_text(json.dumps(out,indent=2)+&#39;\n&#39;);print(json.dumps(out,indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One shared higher-dimensional space. Particles of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261001-sector-theory-evidence/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>
