@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/nonlinear-count-persistence-and-response/spatial/checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/nonlinear-count-persistence-and-response/spatial/checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/nonlinear-count-persistence-and-response/spatial/checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;NSP-I1: independent exact finite-cutoff trapping estimates, no parent imports.&quot;&quot;&quot;
+from fractions import Fraction as F
+from math import comb, factorial
+from pathlib import Path
+import datetime, hashlib, json, resource
+
+ROOT=Path(__file__).resolve().parent
+CHECKS=[]
+def ck(name, condition):
+    if not condition:
+        raise AssertionError(name)
+    CHECKS.append(name)
+def root_enclosure(value, d, bits=128):
+    &quot;&quot;&quot;Exact rational interval for value**(1/d), all integer comparisons.&quot;&quot;&quot;
+    scale=1&lt;&lt;bits
+    rhs=value.numerator*scale**d
+    den=value.denominator
+    lo,hi=0,scale
+    while hi**d*den&lt;=rhs:
+        hi*=2
+    while hi-lo&gt;1:
+        mid=(lo+hi)//2
+        if mid**d*den&lt;=rhs: lo=mid
+        else: hi=mid
+    ck(&#39;root bracket&#39;,lo**d*den&lt;=rhs&lt;hi**d*den)
+    return F(lo,scale),F(hi,scale)
+def weights(k,x):
+    return [u*v for u in [(1+k)/2,(1-k)/2]
+            for v in [1/(1+x*x),x*x/(1+x*x)]]
+def current(k,x,k0):
+    f=lambda t:t*t/(8*(1+t*t))
+    w=(1+k*k)*x*x/2-x/2+F(1,8)
+    if k0:
+        w-=f(k0)+k0/(4*(1+k0*k0)**2)*(k-k0)
+        w+=(k-k0)**2/4
+    return w
+ASSIGN={2:[76,81,95],3:[1,4],4:[3,20,72],5:[10,15,22],6:[13,35],10:[23]}
+EXPECTED=[2926,3321,4560,1,20,15,8855,1215450,2002,11628,65780,18564,3838380,64512240]
+rows=[];mixes=[]
+for d,ns in ASSIGN.items():
+    Jmax=d+99
+    counts={j:comb(j,d) for j in range(d,Jmax+1)}
+    for n in ns:
+        K=n+d-1;c=counts[K]
+        gaps={j:v-c for j,v in counts.items() if j!=K}
+        D=max(abs(a) for a in gaps.values());delta=min(abs(a) for a in gaps.values())
+        ck(&#39;Pascal threshold&#39;,F(c,c-comb(K-1,d))==F(K,d))
+        ck(&#39;root lower bound&#39;,factorial(d)*c&gt;=(K-d+1)**d)
+        ck(&#39;root upper bound&#39;,factorial(d)*c&lt;=K**d)
+        for law in [&#39;128&#39;,&#39;variable&#39;]:
+            if law==&#39;128&#39;:
+                gamma=(128-F(K,d))/c;H0=F(256,c);H1=F(512,c*c);eta_lower=F(128)
+            else:
+                gamma=F(1,d*c);H0=2*(1+F(K,d))/c;H1=4*(1+F(K,d))/(c*c);eta_lower=F(K+1,d)
+            ck(&#39;strict positive nonlinear coefficient&#39;,gamma&gt;0)
+            for j,Delta in gaps.items():
+                ck(&#39;entire-band quadratic coefficient lower bound&#39;,F(1,Delta)+eta_lower/c&gt;=gamma)
+            beta=gamma*delta*delta/2
+            tau_s=min(F(1,4),F(c,2*D),gamma/(2*(H1*D+H0)))
+            for k0,x0 in [(F(0),F(1,2)),(F(3,4),F(8,25))]:
+                rho=min(1-abs(k0),x0,F(1))/4
+                pmin=(1-abs(k0)-rho)/2*min(F(1),(x0-rho)**2)/(1+(x0+rho)**2)
+                tau=min(tau_s,pmin/4)
+                bars=[beta*tau,c*rho*rho/48,F(9*c,8),F(1,32)]
+                Ebar=min(bars)
+                ck(&#39;nonempty explicit basin&#39;,Ebar&gt;0)
+                ck(&#39;spectral remainder margin&#39;,gamma-(H1*D+H0)*tau&gt;=gamma/2)
+                ck(&#39;regular moment denominator&#39;,D*tau&lt;=F(c,2))
+                ck(&#39;individual profiles retain target projection&#39;,tau/pmin&lt;=F(1,4))
+                for sign in [-1,1]:
+                    ck(&#39;fixed signed charge reference energy&#39;,F(sign*sign*c,2)+F(c,2)==c)
+                row=dict(d=d,n=n,K=K,Kmax=Jmax,count=c,law=law,k0=str(k0),x0=str(x0),
+                         gap=delta,max_gap=D,gamma=str(gamma),H0=str(H0),H1=str(H1),
+                         beta=str(beta),rho=str(rho),pmin=str(pmin),tau=str(tau),
+                         Ebar=str(Ebar),relative_Ebar=str(Ebar/c),tau_decimal=float(tau),
+                         Ebar_decimal=float(Ebar),relative_Ebar_decimal=float(Ebar/c),
+                         limiting_barrier=[&#39;spectral&#39;,&#39;current&#39;,&#39;radial&#39;,&#39;material&#39;][bars.index(Ebar)],
+                         full_kernel_dimension=45+4*(comb(K+d-1,d-1)-1))
+                rows.append(row)
+                # All four profiles have independently different off-shell amounts.
+                # The current also moves, so its p weights are not reference constants.
+                k=k0+rho/3;x=x0+rho/5;p=weights(k,x)
+                ck(&#39;exact weight normalization&#39;,sum(p)==1)
+                ck(&#39;positive moving kinetic weights&#39;,min(p)&gt;=pmin)
+                for mix_kind in range(3):
+                    target_t=tau/F(2+mix_kind)
+                    factors=[F(1),F(2),F(3),F(4)]
+                    norm=sum(pa*fac for pa,fac in zip(p,factors))
+                    es=[target_t*fac/norm for fac in factors]
+                    others=list(gaps)
+                    js=([min(others),max(others),min(others),max(others)] if mix_kind==0 else
+                        [min(others,key=lambda j:abs(gaps[j])),max(others),others[len(others)//2],min(others)] if mix_kind==1 else
+                        [max(others),min(others),max(others),min(others)])
+                    m=sum(pa*((1-e)*c+e*counts[j]) for pa,e,j in zip(p,es,js))
+                    z=sum(pa*((1-e)*c*c+e*counts[j]**2) for pa,e,j in zip(p,es,js))
+                    t=sum(pa*e for pa,e in zip(p,es));u=m-c
+                    D2=sum(pa*e*gaps[j]**2 for pa,e,j in zip(p,es,js))
+                    variance=z-m*m
+                    ck(&#39;global variance identity&#39;,variance==D2-u*u)
+                    ck(&#39;four-profile independent positive mixtures&#39;,all(0&lt;e&lt;F(1,4) for e in es))
+                    ck(&#39;weighted Cauchy remainder&#39;,u*u&lt;=t*D2)
+                    if law==&#39;128&#39;:etalo=etahi=F(128)
+                    else:
+                        sl,sh=root_enclosure(factorial(d)*m,d)
+                        etalo=1+sl/d;etahi=1+sh/d
+                    Blo=m+etalo*variance/m;Bhi=m+etahi*variance/m
+                    ck(&#39;nonlinear spectral lower inequality&#39;,Blo-c&gt;=beta*t)
+                    ck(&#39;nonlinear stronger D2 inequality&#39;,Blo-c&gt;=gamma*D2/2)
+                    w=current(k,x,k0);dist=(k-k0)**2+(x-x0)**2
+                    ck(&#39;both-current nonlinear lower inequality&#39;,w&gt;=dist/48)
+                    lamlo=Blo*(1+w);lamhi=Bhi*(1+w)
+                    ck(&#39;joint nonlinear clock inequality&#39;,lamlo-c&gt;=beta*t+c*dist/48)
+                    # Exact complete energy decomposition for a rational test Lambda,
+                    # including a nonzero artificial Tred and Vs to test bookkeeping.
+                    # This identity is algebraic, not a trajectory or physical tensor claim.
+                    lam=(lamlo+lamhi)/2;rad=F(3,2);charge=F(1);Tred=F(2,7);Vs=F(1,9)
+                    H=Tred+charge**2/(2*rad**2)+rad**2*lam**2/2+Vs
+                    split=Tred+(charge/rad-rad*lam)**2/2+charge*(lam-c)+Vs
+                    ck(&#39;complete nonnegative energy identity&#39;,H-c==split)
+                    mixes.append(dict(d=d,n=n,law=law,k0=str(k0),kind=mix_kind,
+                                     t=str(t),B_minus_c_lower=str(Blo-c),beta_t=str(beta*t),
+                                     nonlinear_ratio_lower=float((Blo-c)/(beta*t))))
+# Every real current branch proof has a small exact rational off-reference grid control.
+for k0,x0 in [(F(0),F(1,2)),(F(3,4),F(8,25))]:
+    for ik in range(-15,16):
+        k=F(ik,16);s=k*k
+        ck(&#39;current curvature polynomial&#39;,4*(1-3*s)+(1+s)**3==(s-1)**2*(s+5))
+        fpp=(1-3*s)/(4*(1+s)**3)
+        ck(&#39;repaired global curvature lower bound&#39;,fpp&gt;=-F(1,16))
+        for ix in range(1,25):
+            x=F(ix,12)
+            ck(&#39;current global coercivity grid&#39;,current(k,x,k0)&gt;=((k-k0)**2+(x-x0)**2)/48)
+# Exact full noncommuting 10x10 support trace diagnostic, no numpy dependency.
+N=10
+matmul=lambda A,B:[[sum(A[i][k]*B[k][j] for k in range(N)) for j in range(N)] for i in range(N)]
+transpose=lambda A:list(map(list,zip(*A)))
+sq=[F(2),F(1,2)]+[F(1)]*8
+Fm=[[sq[i] if i==j else F((i+2*j)%5-2,100) for j in range(N)] for i in range(N)]
+h=matmul(transpose(Fm),Fm)
+C=[[h[i][j]/sq[i]/sq[j]-(i==j) for j in range(N)] for i in range(N)]
+Zhi=[[h[i][j]/sq[i]**2-(i==j) for j in range(N)] for i in range(N)]
+trace=sum(matmul(Zhi,Zhi)[i][i] for i in range(N))
+frob=sum(v*v for row in C for v in row)
+ck(&#39;full noncommuting material trace square&#39;,trace==frob)
+ck(&#39;nonzero material diagnostic&#39;,frob&gt;0)
+ck(&#39;material safe tube&#39;,frob&lt;F(1,4))
+ck(&#39;all actual counts&#39;,[r[&#39;count&#39;] for r in rows if r[&#39;law&#39;]==&#39;128&#39; and r[&#39;k0&#39;]==&#39;0&#39;]==EXPECTED)
+ck(&#39;all 56 branches&#39;,len(rows)==56)
+ck(&#39;full d3 n4 null family&#39;,next(r for r in rows if r[&#39;d&#39;]==3 and r[&#39;n&#39;]==4)[&#39;full_kernel_dimension&#39;]==153)
+now=datetime.datetime.now(datetime.timezone.utc)
+report=dict(version=&#39;NSP-I1&#39;,status=&#39;passed&#39;,created_at=now.isoformat(),assertions=len(CHECKS),
+            scope=&#39;Exact rational trapping constants and nonlinear mixtures; no ODE simulation, no PDE claim, no parent checker replay.&#39;,
+            rows=rows,mixtures=mixes,noncommuting_material_frobenius_squared=str(frob),
+            min_nonlinear_ratio_lower=min(r[&#39;nonlinear_ratio_lower&#39;] for r in mixes),
+            max_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+            source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
+name=&#39;results-&#39;+now.strftime(&#39;%Y%m%dT%H%M%SZ&#39;)+&#39;.json&#39;
+(ROOT/name).write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+lines=[&#39;# Exact sufficient trapping estimates&#39;,&#39;&#39;,
+       &#39;All units A=mu_d=g=kappa=IF=a0=chi=ell=1; Kmax=d+99. Scientific scaling is in derivation.md. Decimal table entries summarize exact rational bounds in the JSON, not measured lifetimes.&#39;, &#39;&#39;,
+       &#39;| d | n | c | law | tau primary | Ebar primary | Ebar/E0 primary | tau outer | Ebar outer | limiting barrier |&#39;,
+       &#39;|---|---|---|---|---|---|---|---|---|---|&#39;]
+for i in range(0,len(rows),2):
+    a,b=rows[i:i+2]
+    lines.append(f&quot;|{a[&#39;d&#39;]}|{a[&#39;n&#39;]}|{a[&#39;count&#39;]}|{a[&#39;law&#39;]}|{a[&#39;tau_decimal&#39;]:.6g}|{a[&#39;Ebar_decimal&#39;]:.6g}|{a[&#39;relative_Ebar_decimal&#39;]:.6g}|{b[&#39;tau_decimal&#39;]:.6g}|{b[&#39;Ebar_decimal&#39;]:.6g}|{a[&#39;limiting_barrier&#39;]}/{b[&#39;limiting_barrier&#39;]}|&quot;)
+lines+=[&#39;&#39;,f&quot;Passed {len(CHECKS)} exact assertions and {len(mixes)} four-profile nonlinear mixture cases. Minimum certified (B-c)/(beta t) was {report[&#39;min_nonlinear_ratio_lower&#39;]:.6g}. This is a bounded diagnostic supporting the analytic all-time theorem, not a sampled proof of it.&quot;,&#39;&#39;,f&#39;Full result: {name}.&#39;]
+(ROOT/&#39;results.md&#39;).write_text(&#39;\n&#39;.join(lines)+&#39;\n&#39;)
+print(json.dumps({k:report[k] for k in [&#39;version&#39;,&#39;status&#39;,&#39;assertions&#39;,&#39;max_rss_kib&#39;,&#39;min_nonlinear_ratio_lower&#39;]}))
+print(name)
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

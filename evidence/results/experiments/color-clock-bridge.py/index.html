@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>color-clock-bridge.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/color-clock-bridge.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="color-clock-bridge.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/color-clock-bridge.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="color-clock-bridge.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>color-clock-bridge.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/color-clock-bridge.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Bounded color/spinor bridge checks; no DB writes, simulations or fits.&quot;&quot;&quot;
+import math,json,hashlib,pathlib,datetime
+from fractions import Fraction as F
+import numpy as np
+from scipy.integrate import quad
+from scipy.special import kv,gamma
+P=pathlib.Path(__file__).resolve().parent
+D=[2,3,4,5,6,10]
+particles=[(&#39;W&#39;,2,76),(&#39;Z&#39;,2,81),(&#39;Higgs&#39;,2,95),(&#39;down&#39;,3,1),(&#39;strange&#39;,3,4),(&#39;up&#39;,4,3),(&#39;charm&#39;,4,20),(&#39;top&#39;,4,72),(&#39;nu1&#39;,5,10),(&#39;nu2&#39;,5,15),(&#39;nu3&#39;,5,22),(&#39;electron&#39;,6,13),(&#39;muon&#39;,6,35),(&#39;tau&#39;,10,23)]
+checks=[]
+def ck(name,err,tol=1e-11):
+ checks.append({&#39;name&#39;:name,&#39;error&#39;:float(err),&#39;tolerance&#39;:tol,&#39;pass&#39;:bool(err&lt;tol)})
+def radial(d,q,p=0):
+ a=(d+p)/2;b=q*(d-1)-a
+ return math.inf if b&lt;=0 else math.pi**(d/2)*gamma(a)/gamma(d/2)*gamma(b)/gamma(q*(d-1))
+def form(d,z):
+ nu=(d-2)/2
+ return 1. if z==0 else 2**(1-nu)*z**nu*kv(nu,z)/gamma(nu)
+# Full four-dimensional Clifford tangent, with color generators kept separate.
+s1=np.array([[0,1],[1,0]],complex);s2=np.array([[0,-1j],[1j,0]]);s3=np.diag([1,-1]);I=np.eye(2)
+gam=[np.kron(s1,I),np.kron(s2,I),np.kron(s3,s1),np.kron(s3,s2)]
+K=[1j*gam[i]@gam[j] for i in range(4) for j in range(i+1,4)]
+Ts=[]
+for i in range(3):
+ for j in range(i+1,3):
+  t=np.zeros((3,3),complex);t[i,j]=t[j,i]=.5;Ts.append(t)
+  t=np.zeros((3,3),complex);t[i,j]=-.5j;t[j,i]=.5j;Ts.append(t)
+Ts += [np.diag([1,-1,0])/2,np.diag([1,1,-2])/(2*math.sqrt(3))]
+seed=np.array([1,0,0,0],complex);color=np.array([1,0,0],complex)
+cc=sum(float(np.vdot(color,t@color).real)**2 for t in Ts)
+ck(&#39;pure color adjoint expectation norm&#39;,abs(cc-1/3))
+rng=np.random.default_rng(20261018)
+for d in [3,4]:
+ for j in range(16):
+  x=rng.normal(size=d);t=float(x@x);v=(np.eye(4)+1j*sum(x[i]*gam[i] for i in range(d)))@seed
+  actual=cc*sum(float(np.vdot(v,k@v).real)**2 for k in K)/(1+t)**(2*d)
+  target=2/3*(1+t*t)/(1+t)**(2*d)
+  ck(f&#39;full Clifford bubble current d{d} point{j}&#39;,abs(actual-target))
+# General seed polarizations: exact angular second moments and Clifford identity.
+chir=gam[0]@gam[1]@gam[2]@gam[3]
+polarization_controls=[]
+for j in range(12):
+ chi=rng.normal(size=4)+1j*rng.normal(size=4);chi/=np.linalg.norm(chi)
+ delta=float(np.vdot(chi,chir@chi).real)
+ v=np.array([float(np.vdot(chi,1j*chir@g@chi).real) for g in gam])
+ ck(f&#39;Spin5 bilinear unit identity seed{j}&#39;,abs(delta*delta+float(v@v)-1))
+ for d in [3,4]:
+  predicted=(5-v[3]**2)/12 if d==3 else (25+delta**2)/63
+  alpha=d/2;beta=3*d/2-2;total=alpha+beta
+  # Exact spherical averaging needs only antipodal coordinate axes here.
+  def angular(r):
+   vals=[]
+   for axis in range(d):
+    for sign in [-1,1]:
+     w=(np.eye(4)+1j*sign*r*gam[axis])@chi
+     vals.append(cc*sum(float(np.vdot(w,k@w).real)**2 for k in K))
+   return sum(vals)/len(vals)
+  area=2*math.pi**(d/2)/gamma(d/2)
+  integral=quad(lambda r:r**(d-1)*angular(r)/(1+r*r)**(2*d),0,np.inf,epsabs=2e-11)[0]*area
+  ratio=integral/radial(d,2)
+  ck(f&#39;general seed integrated current d{d} seed{j}&#39;,abs(ratio-predicted),2e-10)
+  polarization_controls.append({&#39;seed&#39;:j,&#39;d&#39;:d,&#39;delta_squared&#39;:delta**2,&#39;normal_bilinear_squared&#39;:v[3]**2,&#39;predicted_I2_coefficient&#39;:predicted,&#39;actual&#39;:ratio})
+# Analytic beta integrals independently checked by radial quadrature.
+rows=[]
+for d in D:
+ alpha=F(d,2);beta=F(3*d,2)-2
+ R=(alpha*(alpha+1)+beta*(beta+1))/((alpha+beta)*(alpha+beta+1))
+ gate=int(math.ceil(d/2)%2==0)
+ norm=radial(d,1);quartic=radial(d,2)
+ area=2*math.pi**(d/2)/gamma(d/2)
+ integral=quad(lambda r:r**(d-1)*(1+r*r)**(-2*(d-1)),0,np.inf,epsabs=1e-12)[0]*area
+ ck(f&#39;quartic integral d{d}&#39;,abs(integral-quartic))
+ row={&#39;d&#39;:d,&#39;schur&#39;:{2:&#39;C&#39;,3:&#39;H&#39;,4:&#39;H&#39;,5:&#39;H&#39;,6:&#39;C&#39;,10:&#39;C&#39;}[d], &#39;minimal_real_rank&#39;:{2:2,3:4,4:4,5:8,6:8,10:32}[d], &#39;skew_rank&#39;:3 if d in [3,4,5] else 1,&#39;middle_rank&#39;:math.comb(2*math.ceil(d/2)-1,math.ceil(d/2)-1),&#39;hodge_gate&#39;:gate,&#39;normal_commutant_dimension&#39;:8 if d&lt;=4 else (3 if d&lt;=6 else 0),&#39;finite_Q&#39;:d&gt;2,&#39;finite_second_moment&#39;:d&gt;4,&#39;second_moment_over_a2&#39;:str(F(d,d-4)) if d&gt;4 else None,&#39;Q_over_A2_ad&#39;:None if d==2 else norm,&#39;I2_over_A4_ad&#39;:quartic,&#39;chirality_radial_factor&#39;:str(R),&#39;color_contact_over_A4_ad&#39;:(2/3*float(R)*quartic if d in [3,4] else 0)}
+ if d in [3,4]:
+  integ=quad(lambda r:r**(d-1)*(1+r**4)*(1+r*r)**(-2*d),0,np.inf,epsabs=1e-12)[0]*area*2/3
+  ck(f&#39;actual color current integral d{d}&#39;,abs(integ-row[&#39;color_contact_over_A4_ad&#39;]))
+  row[&#39;color_contact_over_Q2_a_minus_d&#39;]=row[&#39;color_contact_over_A4_ad&#39;]/norm**2
+ if d&gt;2:
+  row[&#39;form_factors&#39;]={str(z):form(d,z) for z in [.01,.1,1,3,10]}
+  # Schwinger parameter formula independently integrates the Fourier kernel.
+  nu=(d-2)/2
+  for z in [.1,1,3]:
+   integral=quad(lambda t:t**(nu-1)*math.exp(-t-z*z/(4*t)),0,np.inf,epsabs=2e-12)[0]/gamma(nu)
+   ck(f&#39;form factor integral d{d} z{z}&#39;,abs(integral-form(d,z)),2e-10)
+ rows.append(row)
+labels=[]
+for name,d,n in particles:
+ S=math.comb(n+d-1,d);H=math.comb(n+d-2,d-1)
+ # This is the published width/current branch, not an inferred particle lifetime.
+ inertia_reduced=F(n*n,2*(n+2))
+ # ν+ν-=λ/(I/N); k=n-1. Scale-free diagnostic c²b/μ=1, λ=12.
+ u=24*(n+2)/(S*n*n)
+ low=u/(math.sqrt(36+u)+6)
+ labels.append({&#39;name&#39;:name,&#39;d&#39;:d,&#39;n&#39;:n,&#39;S&#39;:S,&#39;H&#39;:H,&#39;H_over_S&#39;:str(F(H,S)), &#39;I_over_Nomega_times_c2b&#39;:str(inertia_reduced),&#39;nu_minus_unit_scale_lambda12&#39;:low if d&lt;10 else None,&#39;has_cross_plane_in_source_family&#39;:d&lt;10,&#39;color_current_S2_coefficient_over_gamma_q02_a_minus_d&#39;:next(x for x in rows if x[&#39;d&#39;]==d)[&#39;color_contact_over_A4_ad&#39;]/(next(x for x in rows if x[&#39;d&#39;]==d)[&#39;Q_over_A2_ad&#39;] or 1)**2*S*S if d in [3,4] else 0})
+# Exact modular rank certificate for the minimal joint Spin(3) x SU(3) carrier.
+def realify(A):
+ return np.rint(np.block([[A.real,-A.imag],[A.imag,A.real]])).astype(np.int64)
+spin_gens=[realify(np.kron(1j*s,np.eye(3))) for s in [s1,s2,s3]]
+color_anti=[]
+for i in range(3):
+ for j in range(i+1,3):
+  a=np.zeros((3,3),complex);a[i,j]=1;a[j,i]=-1;color_anti.append(a)
+  a=np.zeros((3,3),complex);a[i,j]=a[j,i]=1j;color_anti.append(a)
+color_anti += [1j*np.diag([1,-1,0]),1j*np.diag([1,1,-2])]
+joint=spin_gens+[realify(np.kron(np.eye(2),a)) for a in color_anti]
+basis=[]
+for i in range(12):
+ for j in range(12):
+  e=np.zeros((12,12),dtype=np.int64);e[i,j]=1;basis.append(e)
+def constraints(bs):
+ return np.array([np.concatenate([(e@g-g@e).reshape(-1) for g in joint]) for e in bs],dtype=np.int64).T
+def modular_rank(A,p=1000003):
+ a=A.copy()%p;row=0
+ for col in range(a.shape[1]):
+  nz=np.flatnonzero(a[row:,col])
+  if not len(nz):continue
+  pivot=row+int(nz[0]);a[[row,pivot]]=a[[pivot,row]]
+  a[row]=(a[row]*pow(int(a[row,col]),p-2,p))%p
+  nzrows=np.flatnonzero(a[:,col]);nzrows=nzrows[nzrows!=row]
+  a[nzrows]=(a[nzrows]-a[nzrows,col,None]*a[row])%p
+  row+=1
+  if row==a.shape[0]:break
+ return row
+rank=modular_rank(constraints(basis))
+J12=realify(1j*np.eye(6));I12=np.eye(12,dtype=np.int64)
+ck(&#39;joint complex structure commutes exactly&#39;,max(np.max(abs(J12@g-g@J12)) for g in joint))
+ck(&#39;joint full commutant modular rank142&#39;,abs(rank-142))
+skew=[]
+for i in range(12):
+ for j in range(i+1,12):
+  a=np.zeros((12,12),dtype=np.int64);a[i,j]=1;a[j,i]=-1;skew.append(a)
+skewrank=modular_rank(constraints(skew))
+ck(&#39;joint skew commutant modular rank65&#39;,abs(skewrank-65))
+# The displayed I,J kernel basis plus these rank lower bounds certify rational nullities2,1.
+joint_clock={&#39;real_carrier_rank&#39;:12,&#39;generators&#39;:len(joint),&#39;modulus&#39;:1000003,&#39;commutator_rank_mod_p&#39;:rank,&#39;commutant_dimension&#39;:144-rank,&#39;skew_constraint_rank_mod_p&#39;:skewrank,&#39;skew_dimension&#39;:66-skewrank,&#39;exact_kernel_basis&#39;:&#39;I12 and J12; J12 alone for skew part&#39;}
+# The two discarded quaternionic clock axes have a definite color symmetry defect.
+def real_matrix(A):
+ return np.block([[A.real,-A.imag],[A.imag,A.real]])
+eps=1j*s2
+A=np.kron(eps,np.eye(3))
+Janti=np.block([[A.real,A.imag],[A.imag,-A.real]])
+Jphase=real_matrix(1j*np.eye(6));Janti2=Jphase@Janti
+clocks=[Jphase,Janti,Janti2]
+colors=[real_matrix(np.kron(np.eye(2),1j*t)) for t in Ts]
+defects=np.zeros((3,3))
+for i,a in enumerate(clocks):
+ for j,b in enumerate(clocks):
+  defects[i,j]=sum(np.sum((a@g-g@a)*(b@g-g@b)) for g in colors)/12
+ck(&#39;color quaternionic clock-axis defect&#39;,np.max(abs(defects-np.diag([0,10/3,10/3]))))
+joint_clock[&#39;normalized_axis_defect&#39;]=defects.tolist()
+# Explicit real-type carrier times complex color always has a clock.
+J=np.kron(np.eye(3),np.array([[0,-1],[1,0]]))
+ck(&#39;real six-dimensional color clock antisymmetric&#39;,np.max(abs(J.T+J)))
+ck(&#39;real six-dimensional color clock nondegenerate&#39;,np.max(abs(J@J+np.eye(6))))
+out={&#39;utc&#39;:datetime.datetime.now(datetime.timezone.utc).isoformat(),&#39;script_sha256&#39;:hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest(),&#39;depth_rows&#39;:rows,&#39;particle_rows&#39;:labels,&#39;polarization_controls&#39;:polarization_controls,&#39;joint_spin_color_clock&#39;:joint_clock,&#39;checks&#39;:checks,&#39;all_passed&#39;:all(c[&#39;pass&#39;] for c in checks),&#39;fitted_constants&#39;:[],&#39;empirical_lifetimes_used&#39;:False}
+(P/&#39;results.json&#39;).write_text(json.dumps(out,indent=2))
+print(json.dumps({&#39;checks&#39;:len(checks),&#39;all_passed&#39;:out[&#39;all_passed&#39;],&#39;max_error&#39;:max(c[&#39;error&#39;] for c in checks),&#39;depth_rows&#39;:rows,&#39;particle_rows&#39;:labels},indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

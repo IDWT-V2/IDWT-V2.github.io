@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>provenance.json — IDWT V2</title>
+  <meta name="description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/constructive-count-clocks/provenance/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="provenance.json — IDWT V2">
+  <meta property="og:description" content="Recorded data and provenance for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/constructive-count-clocks/provenance/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="provenance.json — IDWT V2">
+  <meta name="twitter:description" content="Recorded data and provenance for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>provenance.json</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Recorded data and provenance for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/constructive-count-clocks/provenance.json">Download recorded JSON</a></p><div class="table-scroll" tabindex="0" role="region" aria-label="Recorded values"><table><tbody><tr><th scope="row">created_utc</th><td>2026-10-18T12:43:57.181929+00:00</td></tr><tr><th scope="row">scope</th><td>Reviewed conditional inverse constructions, not identified physical particles or a final mass operator.</td></tr><tr><th scope="row">retrieval</th><td>Exact complete proofs and dispositions are retained by SHA-256 identity in the research catalog.</td></tr><tr><th scope="row">calibration</th><td>Pinned dated inputs; the copied author clock report explicitly uses rounded example sector units.</td></tr></tbody></table></div><details class="record-data"><summary>View complete data</summary><pre><code>{
+  &quot;created_utc&quot;: &quot;2026-10-18T12:43:57.181929+00:00&quot;,
+  &quot;scope&quot;: &quot;Reviewed conditional inverse constructions, not identified physical particles or a final mass operator.&quot;,
+  &quot;sources&quot;: {
+    &quot;experiments/results/constructive-count-clocks/spatial/checks.py&quot;: &quot;c3561ced0a98d2871945732fde2a77b898a8b72c343eb35cce403a1d00829fbc&quot;,
+    &quot;experiments/results/constructive-count-clocks/spatial/results.json&quot;: &quot;0f82bb0ec8ff3476675ecc4472ec5699751d6c607ede11b1529772bcb24ccabc&quot;,
+    &quot;experiments/results/constructive-count-clocks/response/check.py&quot;: &quot;1c1f3cead7b70fee6b58166ad3a9896d40ddfd26d3e5d6d6b6aca9f66ea22b98&quot;,
+    &quot;experiments/results/constructive-count-clocks/response/results.json&quot;: &quot;eb73cc28e7b26ba419054735e541ae608463d53210d2a5f245ae3d585aa668da&quot;,
+    &quot;experiments/results/constructive-count-clocks/clock/check.py&quot;: &quot;5d8c1d483d5133feb96637369b67854ced98da5b036fd3f01cde59d2b799e41e&quot;,
+    &quot;experiments/results/constructive-count-clocks/clock/results.json&quot;: &quot;1801c04e9718c27ca961af923b243cc67900edc61d241c6a770e7b8bd5d80cd5&quot;
+  },
+  &quot;evidence&quot;: [
+    {
+      &quot;construction&quot;: &quot;spatial&quot;,
+      &quot;original_assertions&quot;: [
+        341,
+        59574
+      ],
+      &quot;original_replayed&quot;: true,
+      &quot;combined_assertions&quot;: 5679,
+      &quot;variable_coefficient_assertions&quot;: 5770,
+      &quot;combined_and_variable_replayed&quot;: true,
+      &quot;independent_combination_assertions&quot;: 60537,
+      &quot;governing_assertions&quot;: 45,
+      &quot;last_two_replayed&quot;: false,
+      &quot;copied_checker&quot;: &quot;spatial/checks.py&quot;,
+      &quot;copied_checker_assertions&quot;: 5770
+    },
+    {
+      &quot;construction&quot;: &quot;response&quot;,
+      &quot;original_assertions&quot;: [
+        128,
+        185
+      ],
+      &quot;original_replayed&quot;: true,
+      &quot;operator_assertions&quot;: 22,
+      &quot;operator_replayed&quot;: true,
+      &quot;governing_assertions&quot;: 42,
+      &quot;governing_replayed&quot;: false,
+      &quot;copied_checker&quot;: &quot;response/check.py&quot;,
+      &quot;copied_checker_assertions&quot;: 22
+    },
+    {
+      &quot;construction&quot;: &quot;corrected local clock&quot;,
+      &quot;author_reference_cases&quot;: 84,
+      &quot;independent_assertions&quot;: 474,
+      &quot;original_replayed&quot;: true,
+      &quot;governing_assertions&quot;: 123,
+      &quot;governing_replayed&quot;: false,
+      &quot;copied_checker&quot;: &quot;clock/check.py&quot;,
+      &quot;copied_checker_reference_cases&quot;: 84
+    }
+  ],
+  &quot;proofs&quot;: [
+    {
+      &quot;title&quot;: &quot;Original spatial construction&quot;,
+      &quot;byte_count&quot;: 22274,
+      &quot;sha256&quot;: &quot;146b6904017c85240fd963d5fb7bc575294a752532f6c017803ee4c6bf02427a&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Independent spatial construction&quot;,
+      &quot;byte_count&quot;: 22260,
+      &quot;sha256&quot;: &quot;dc470f381fce52c7ea1367b198f3bb0f97e3ac0801e2ad0b3145df2fde5d87b1&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Combined spatial construction&quot;,
+      &quot;byte_count&quot;: 18185,
+      &quot;sha256&quot;: &quot;d8722df264e1ffe100d8e454bc0ab1c3734dcdeff2c24ffbfd36ad96c411820f&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Independent spatial combination&quot;,
+      &quot;byte_count&quot;: 17125,
+      &quot;sha256&quot;: &quot;6eb075c456b738d6600aaad0ee9e3abdeba6356aedc83a8f721579cefb717a43&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Variable restoring coefficient verification&quot;,
+      &quot;byte_count&quot;: 8332,
+      &quot;sha256&quot;: &quot;1905897ef782368d22dbd4fa28dc4bc3cafee67a23fcff28fd88302030b13d75&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Governing spatial comparison SCI-3&quot;,
+      &quot;byte_count&quot;: 13395,
+      &quot;sha256&quot;: &quot;d667d71cc368fb9dc1092df610ad0316506d7ea7973ec39cb9766b8caf54be82&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Spatial disposition&quot;,
+      &quot;byte_count&quot;: 2611,
+      &quot;sha256&quot;: &quot;7df0f9664327bfb22c8ebc3ab9cd4f15045eb062c90a95c0bd8cee0e7c63f0a8&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Original response construction&quot;,
+      &quot;byte_count&quot;: 23141,
+      &quot;sha256&quot;: &quot;c06b09e81ba40835ab4ebba0b074ac1b062b90bcaf602107199ce4d338c09381&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Independent response construction&quot;,
+      &quot;byte_count&quot;: 26178,
+      &quot;sha256&quot;: &quot;c19dd4ec513012a442703f94d20ab3940d8f580ff1bff0f9e7078a5b43c65996&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Original response comparison&quot;,
+      &quot;byte_count&quot;: 18430,
+      &quot;sha256&quot;: &quot;42ce9c778e99caad725c308d5694dc0ffb41910957e8084a2ed6d594a8a1ba50&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Response operator extension&quot;,
+      &quot;byte_count&quot;: 14096,
+      &quot;sha256&quot;: &quot;c818bee46c34c2b9b60be42f119f519e4dc35971653063d0addf595cfe45ba91&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Governing operator comparison OPR&quot;,
+      &quot;byte_count&quot;: 12458,
+      &quot;sha256&quot;: &quot;35036bdd20533c3b87cc80b9b28bc90d9c40769e22fd2160b158d8cd42a5e6b6&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Response disposition&quot;,
+      &quot;byte_count&quot;: 2612,
+      &quot;sha256&quot;: &quot;06c93bafc2daeb439087a6edce7a11d3bd07b657a0f4154cbfad8ba348df898d&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Corrected local clock construction&quot;,
+      &quot;byte_count&quot;: 35188,
+      &quot;sha256&quot;: &quot;9733cd2ad17014dbb1fc31cee6f4a535bee5eb0adbee36b8e7b335a186f1b245&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Independent corrected clock construction&quot;,
+      &quot;byte_count&quot;: 33269,
+      &quot;sha256&quot;: &quot;1d10a849d83273eb39f66f3c9d7bf62d61b31c4f3396c0913ff112f55f6a860a&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Governing corrected clock comparison ICC&quot;,
+      &quot;byte_count&quot;: 15765,
+      &quot;sha256&quot;: &quot;73df404daf006758061185cdf6a0ad9c8d02ea1d0a266e1ea67acd681c95bc6c&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Clock disposition&quot;,
+      &quot;byte_count&quot;: 3114,
+      &quot;sha256&quot;: &quot;a28b8abbe70de898632df1c024601132814e4d5ce228d1b8e46fcb1b3ed1e515&quot;
+    }
+  ],
+  &quot;retrieval&quot;: &quot;Exact complete proofs and dispositions are retained by SHA-256 identity in the research catalog.&quot;,
+  &quot;calibration&quot;: &quot;Pinned dated inputs; the copied author clock report explicitly uses rounded example sector units.&quot;
+}
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,143 @@
+{
+  "created_utc": "2026-10-18T12:43:57.181929+00:00",
+  "scope": "Reviewed conditional inverse constructions, not identified physical particles or a final mass operator.",
+  "sources": {
+    "experiments/results/constructive-count-clocks/spatial/checks.py": "c3561ced0a98d2871945732fde2a77b898a8b72c343eb35cce403a1d00829fbc",
+    "experiments/results/constructive-count-clocks/spatial/results.json": "0f82bb0ec8ff3476675ecc4472ec5699751d6c607ede11b1529772bcb24ccabc",
+    "experiments/results/constructive-count-clocks/response/check.py": "1c1f3cead7b70fee6b58166ad3a9896d40ddfd26d3e5d6d6b6aca9f66ea22b98",
+    "experiments/results/constructive-count-clocks/response/results.json": "eb73cc28e7b26ba419054735e541ae608463d53210d2a5f245ae3d585aa668da",
+    "experiments/results/constructive-count-clocks/clock/check.py": "5d8c1d483d5133feb96637369b67854ced98da5b036fd3f01cde59d2b799e41e",
+    "experiments/results/constructive-count-clocks/clock/results.json": "1801c04e9718c27ca961af923b243cc67900edc61d241c6a770e7b8bd5d80cd5"
+  },
+  "evidence": [
+    {
+      "construction": "spatial",
+      "original_assertions": [
+        341,
+        59574
+      ],
+      "original_replayed": true,
+      "combined_assertions": 5679,
+      "variable_coefficient_assertions": 5770,
+      "combined_and_variable_replayed": true,
+      "independent_combination_assertions": 60537,
+      "governing_assertions": 45,
+      "last_two_replayed": false,
+      "copied_checker": "spatial/checks.py",
+      "copied_checker_assertions": 5770
+    },
+    {
+      "construction": "response",
+      "original_assertions": [
+        128,
+        185
+      ],
+      "original_replayed": true,
+      "operator_assertions": 22,
+      "operator_replayed": true,
+      "governing_assertions": 42,
+      "governing_replayed": false,
+      "copied_checker": "response/check.py",
+      "copied_checker_assertions": 22
+    },
+    {
+      "construction": "corrected local clock",
+      "author_reference_cases": 84,
+      "independent_assertions": 474,
+      "original_replayed": true,
+      "governing_assertions": 123,
+      "governing_replayed": false,
+      "copied_checker": "clock/check.py",
+      "copied_checker_reference_cases": 84
+    }
+  ],
+  "proofs": [
+    {
+      "title": "Original spatial construction",
+      "byte_count": 22274,
+      "sha256": "146b6904017c85240fd963d5fb7bc575294a752532f6c017803ee4c6bf02427a"
+    },
+    {
+      "title": "Independent spatial construction",
+      "byte_count": 22260,
+      "sha256": "dc470f381fce52c7ea1367b198f3bb0f97e3ac0801e2ad0b3145df2fde5d87b1"
+    },
+    {
+      "title": "Combined spatial construction",
+      "byte_count": 18185,
+      "sha256": "d8722df264e1ffe100d8e454bc0ab1c3734dcdeff2c24ffbfd36ad96c411820f"
+    },
+    {
+      "title": "Independent spatial combination",
+      "byte_count": 17125,
+      "sha256": "6eb075c456b738d6600aaad0ee9e3abdeba6356aedc83a8f721579cefb717a43"
+    },
+    {
+      "title": "Variable restoring coefficient verification",
+      "byte_count": 8332,
+      "sha256": "1905897ef782368d22dbd4fa28dc4bc3cafee67a23fcff28fd88302030b13d75"
+    },
+    {
+      "title": "Governing spatial comparison SCI-3",
+      "byte_count": 13395,
+      "sha256": "d667d71cc368fb9dc1092df610ad0316506d7ea7973ec39cb9766b8caf54be82"
+    },
+    {
+      "title": "Spatial disposition",
+      "byte_count": 2611,
+      "sha256": "7df0f9664327bfb22c8ebc3ab9cd4f15045eb062c90a95c0bd8cee0e7c63f0a8"
+    },
+    {
+      "title": "Original response construction",
+      "byte_count": 23141,
+      "sha256": "c06b09e81ba40835ab4ebba0b074ac1b062b90bcaf602107199ce4d338c09381"
+    },
+    {
+      "title": "Independent response construction",
+      "byte_count": 26178,
+      "sha256": "c19dd4ec513012a442703f94d20ab3940d8f580ff1bff0f9e7078a5b43c65996"
+    },
+    {
+      "title": "Original response comparison",
+      "byte_count": 18430,
+      "sha256": "42ce9c778e99caad725c308d5694dc0ffb41910957e8084a2ed6d594a8a1ba50"
+    },
+    {
+      "title": "Response operator extension",
+      "byte_count": 14096,
+      "sha256": "c818bee46c34c2b9b60be42f119f519e4dc35971653063d0addf595cfe45ba91"
+    },
+    {
+      "title": "Governing operator comparison OPR",
+      "byte_count": 12458,
+      "sha256": "35036bdd20533c3b87cc80b9b28bc90d9c40769e22fd2160b158d8cd42a5e6b6"
+    },
+    {
+      "title": "Response disposition",
+      "byte_count": 2612,
+      "sha256": "06c93bafc2daeb439087a6edce7a11d3bd07b657a0f4154cbfad8ba348df898d"
+    },
+    {
+      "title": "Corrected local clock construction",
+      "byte_count": 35188,
+      "sha256": "9733cd2ad17014dbb1fc31cee6f4a535bee5eb0adbee36b8e7b335a186f1b245"
+    },
+    {
+      "title": "Independent corrected clock construction",
+      "byte_count": 33269,
+      "sha256": "1d10a849d83273eb39f66f3c9d7bf62d61b31c4f3396c0913ff112f55f6a860a"
+    },
+    {
+      "title": "Governing corrected clock comparison ICC",
+      "byte_count": 15765,
+      "sha256": "73df404daf006758061185cdf6a0ad9c8d02ea1d0a266e1ea67acd681c95bc6c"
+    },
+    {
+      "title": "Clock disposition",
+      "byte_count": 3114,
+      "sha256": "a28b8abbe70de898632df1c024601132814e4d5ce228d1b8e46fcb1b3ed1e515"
+    }
+  ],
+  "retrieval": "Exact complete proofs and dispositions are retained by SHA-256 identity in the research catalog.",
+  "calibration": "Pinned dated inputs; the copied author clock report explicitly uses rounded example sector units."
+}

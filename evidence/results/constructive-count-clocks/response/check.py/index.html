@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/constructive-count-clocks/response/check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/constructive-count-clocks/response/check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/constructive-count-clocks/response/check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+import sympy as s
+from pathlib import Path
+import json,hashlib,datetime
+P=Path(__file__).resolve().parent; checks=[]
+def ck(n,c):
+ assert bool(c),n
+ checks.append(n)
+def eq(n,a,b):ck(n,s.simplify(a-b)==0)
+L=s.Matrix([[9,2],[2,6]]);B=s.Matrix([[1,s.Rational(7,12)],[0,s.sqrt(95)/12]]);R=(L-4*s.eye(2)).inv()
+ck(&#39;response eigenvalues&#39;,set(L.eigenvals())=={5,10});ck(&#39;source Gram&#39;,s.simplify(B.T*B)==s.Matrix([[1,s.Rational(7,12)],[s.Rational(7,12),1]]))
+K0=s.diag(4,9)+B.T*R*B;K=K0.row_join(-B.T).col_join((-B).row_join(L));v=s.Matrix([1,0]);Y=R*B*v;u=v.col_join(Y)
+ck(&#39;support nonzero both entries&#39;,Y==s.Matrix([s.Rational(1,3),-s.Rational(1,3)]));ck(&#39;full exceptional eigenmode&#39;,s.simplify(K*u-4*u)==s.zeros(4,1));eq(&#39;full norm&#39;,u.dot(u),s.Rational(11,9))
+for j in range(1,5):ck(&#39;full positive principal minor &#39;+str(j),s.simplify(K[:j,:j].det())&gt;0)
+S=K0-B.T*L.inv()*B;ck(&#39;positive static remainder&#39;,s.simplify(S[0,0])&gt;0 and s.simplify(S.det())&gt;0)
+ck(&#39;full zero&#39;,s.diag(0,K)*s.Matrix([1,0,0,0,0])==s.zeros(5,1));ck(&#39;full kernel rank&#39;,s.diag(0,K).rank()==4)
+# Arbitrary spatial source and operator variations at the reference point.
+Bd=s.Matrix([[s.Rational(1,2),-1],[2,s.Rational(1,3)]]);Ld=s.Matrix([[1,3],[3,-2]])
+for sig in [-1,1]:
+ lamd=4+sig;Rd=R*(lamd*s.eye(2)-Ld)*R
+ Kd=s.diag(sig,0)+Bd.T*R*B+B.T*R*Bd+B.T*Rd*B
+ pot=(v.T*Kd*v)[0]+(Y.T*Ld*Y)[0]-2*(Y.T*Bd*v)[0]
+ eq(&#39;complete changed source cancellation &#39;+str(sig),pot,sig+lamd*Y.dot(Y))
+ mean=(4+pot)/(4*u.dot(u))
+ eq(&#39;mean source h derivative &#39;+str(sig),mean,s.Rational(lamd,4))
+z=s.symbols(&#39;z&#39;);F=K0-z*s.eye(2)-B.T*(L-z*s.eye(2)).inv()*B
+ck(&#39;dynamic normalization derivative&#39;,s.simplify(-F.diff(z)-(s.eye(2)+B.T*(L-z*s.eye(2)).inv()**2*B))==s.zeros(2))
+# Positive response below target still allowed by the actual Schur criterion.
+lowL=s.eye(2);smallB=B/10;lowK=s.diag(4,9)+smallB.T*(lowL-4*s.eye(2)).inv()*smallB
+lowS=lowK-smallB.T*smallB
+ck(&#39;below target response can be healthy&#39;,s.simplify(lowS[0,0])&gt;0 and s.simplify(lowS.det())&gt;0)
+# Gradient response exact spectral bounds, no grid approximation.
+p2=s.symbols(&#39;p2&#39;,nonnegative=True);eq(&#39;gradient resolvent gap&#39;,p2+9-4,p2+5);eq(&#39;gradient bound positive factorization&#39;,s.Rational(1,25)-1/(p2+5)**2,p2*(p2+10)/(25*(p2+5)**2));ck(&#39;gradient norm bound&#39;, (p2*(p2+10)/(25*(p2+5)**2)).is_nonnegative)
+lam=s.symbols(&#39;lambda&#39;);poly=s.factor(K.charpoly(lam).as_expr());ck(&#39;polynomial target factor&#39;,s.simplify(poly.subs(lam,4))==0)
+report={&#39;created_utc&#39;:datetime.datetime.now(datetime.timezone.utc).isoformat(),&#39;checks_passed&#39;:len(checks),&#39;checks&#39;:checks,&#39;response&#39;:str(L),&#39;source&#39;:str(B),&#39;full_active_stiffness&#39;:str(s.simplify(K)),&#39;squared_frequency_polynomial&#39;:str(poly),&#39;full_norm&#39;:&#39;11/9&#39;,&#39;scope&#39;:&#39;Exact matrix checks and analytic gradient spectral bounds. No PDE discretization.&#39;,&#39;code_sha256&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+(P/&#39;results.json&#39;).write_text(json.dumps(report,indent=2)+&#39;\n&#39;);print(json.dumps({&#39;checks_passed&#39;:len(checks),&#39;polynomial&#39;:str(poly)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

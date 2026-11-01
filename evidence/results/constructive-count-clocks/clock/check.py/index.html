@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/constructive-count-clocks/clock/check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/constructive-count-clocks/clock/check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/constructive-count-clocks/clock/check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Small matrices only; exact rational Collatz enclosures plus 80-digit checks.&quot;&quot;&quot;
+from pathlib import Path
+from fractions import Fraction as Q
+import math,json,hashlib
+import mpmath as mp
+mp.mp.dps=140
+out=Path(__file__).resolve().parent
+g=Q(5000); rows=[(&#39;W&#39;,2,76),(&#39;Z&#39;,2,81),(&#39;Higgs&#39;,2,95),(&#39;down&#39;,3,1),(&#39;strange&#39;,3,4),(&#39;up&#39;,4,3),(&#39;charm&#39;,4,20),(&#39;top&#39;,4,72),(&#39;nu1&#39;,5,10),(&#39;nu2&#39;,5,15),(&#39;nu3&#39;,5,22),(&#39;electron&#39;,6,13),(&#39;muon&#39;,6,35),(&#39;tau&#39;,10,23)]
+def real(x):return mp.mpf(x.numerator)/x.denominator if isinstance(x,Q) else mp.mpf(x)
+def chain(d,n):
+ A=[[g**(i-j-d+1)*math.prod(Q(n+k) for k in range(d) if k&lt;j or k&gt;i) if i&gt;=j else Q(0) for j in range(d)]for i in range(d)]
+ M=[[sum(A[k][i]*A[k][j]for k in range(d))for j in range(d)]for i in range(d)]
+ ev,V=mp.eigsy(mp.matrix([[real(v)for v in r]for r in M]))
+ v=[Q(mp.nstr(abs(V[i,d-1]),125))for i in range(d)]
+ ratios=[sum(M[i][j]*v[j]for j in range(d))/v[i]for i in range(d)]
+ lo,hi=min(ratios),max(ratios)
+ assert lo&gt;0 and real(hi-lo)/real(lo)&lt;mp.mpf(&#39;1e-65&#39;)
+ return Q(1)/hi,Q(1)/lo
+cache={(d,n):chain(d,n)for _,d,n in rows}
+z=lambda d,n: Q((2*n+d-1)**2,4*5000**2)
+R=Q(&#39;206.76828299&#39;)/Q(3515,17)
+eL,eU=cache[6,13];mL,mU=cache[6,35];den=z(6,35)-R**2*z(6,13)
+aL=(R**2*eL-mU)/den;aU=(R**2*eU-mL)/den
+assert den&gt;0 and aL&gt;0
+eta=real((aL+aU)/2)
+fe=mp.sqrt(real((eL+eU)/2)+eta*real(z(6,13)))
+records=[]
+# The mu ratios below are source rounded MeV-equivalent examples only; the proofs permit arbitrary supplied positive units.
+units={2:mp.mpf(&#39;27.47064959&#39;),3:mp.mpf(&#39;4.701857978&#39;),4:mp.mpf(&#39;0.1451024874&#39;),5:mp.mpf(&#39;7.55562e-13&#39;),6:mp.mpf(&#39;0.00002752633861&#39;),10:mp.mpf(&#39;0.00002752633861&#39;)}
+fnu=lambda n: mp.sqrt(real(sum(cache[5,n],Q(0))/2)+eta*real(z(5,n)))
+units[5]=mp.sqrt(mp.mpf(&#39;7.49e-5&#39;)/(11628**2*fnu(15)**2-2002**2*fnu(10)**2))*mp.mpf(&#39;1e-6&#39;)
+omega_star=min(units.values())/(2*fe)
+for name,d,n in rows:
+ lo,hi=cache[d,n];zl=z(d,n);fL=lo+aL*zl;fU=hi+aU*zl;f=mp.sqrt(real((fL+fU)/2));D=math.comb(n+d-1,d);H=units[d]*D*f/(1 if d==5 else fe)
+ # Differentiate the small analytic matrix, not particle-wise interpolation.
+ def freq(nn):
+  A=mp.matrix(d)
+  for i in range(d):
+   for j in range(i+1):A[i,j]=mp.mpf(5000)**(i-j-d+1)*mp.fprod(nn+k for k in range(d)if k&lt;j or k&gt;i)
+  val=mp.eigsy(A.T*A,eigvals_only=True)[d-1]
+  S=mp.fprod(nn+k for k in range(d))/math.factorial(d)
+  return S*mp.sqrt(1/val+eta*((nn+(d-1)/2)/5000)**2)
+ deriv=mp.diff(freq,mp.mpf(n))/(mp.mpf(D)*sum(mp.mpf(1)/(n+k)for k in range(d)))
+ assert deriv&gt;0
+ N=n-1;diag=Q(N*(2*N+d),(d+1)*(d+2));off=Q(N*(N-1),(d+1)*(d+2));lam=diag+(d-1)*off
+ assert lam/(1+d*diag)&lt;=1
+ variants=[]
+ for entropy in [&#39;fixed&#39;,&#39;branch&#39;]:
+  base=omega_star if entropy==&#39;fixed&#39; else H;b=base/128;k=8/base
+  for clock in [&#39;positive&#39;,&#39;even+&#39;,&#39;even-&#39;]:
+   sign=-1 if clock==&#39;even-&#39; else 1;a2=mp.mpf(0)if clock==&#39;positive&#39;else 8*k/mp.sinh(8*k*H)
+   speed2=k/(1/b+a2)
+   assert 0&lt;speed2&lt;=mp.mpf(1)/16 and H/2&gt;0 and H&gt;=omega_star
+   # Material exact reference derivatives, including entropy-dependent clock kappa.
+   def Fc(t,h,kap):
+    if clock==&#39;positive&#39;:return t-h
+    return (mp.log(mp.cosh(4*kap*t))-mp.log(mp.cosh(4*kap*h)))/(4*kap*mp.tanh(4*kap*h))
+   # Derivatives at huge kH use analytic stable closed forms to avoid finite differencing saturation.
+   Ft=sign;FH=-1;Fk=0
+   assert Fc(sign*H,H,k)==0
+   v=mp.mpf(&#39;0.6&#39;);gam=1/mp.sqrt(1-v*v)
+   assert abs((gam*H)**2-(gam*H*v)**2-H**2)&lt;H**2*mp.mpf(&#39;1e-75&#39;)
+   variants.append(dict(entropy=entropy,clock=clock,phase_speed_squared=mp.nstr(speed2,35),phase_charge=sign,time_displacement_weight=mp.nstr(H/2,35),clock_reference_derivatives=[Ft,FH,Fk]))
+ records.append(dict(label=name,d=d,n=n,count=D,correction=mp.nstr(f,45),anchored_shift_ppm=mp.nstr((f/fe-1)*10**6,35),example_frequency_MeV_equivalent=mp.nstr(H,35),F_x=mp.nstr(deriv,35),raw_second_moment_diagonal=str(diag),raw_second_moment_offdiagonal=str(off),variants=variants,t_squared_bounds=[str(lo),str(hi)],correction_squared_bounds=[str(fL),str(fU)]))
+# Exact component metric counterexample and corrected stiffness positivity proof check.
+G=mp.diag([4,1]);D=mp.diag([6,5]);C=mp.diag([mp.mpf(1)/2,1])*D.T*D*mp.diag([mp.mpf(1)/2,1]);assert list(mp.eigsy(C,eigvals_only=True))==[9,25]
+# Occupation lower bound for arbitrary tangents: exact random rational samples of the proved identity.
+occupation=[]
+for count in [1,2,3,15,20]:
+ u=[Q(i)-Q(count-1,2)for i in range(count)];sout=Q(2,7);u0=u[0]
+ q_m=-count**2*sum(x*x for x in u)+2*count*sout
+ q_v0=2*count**2*sum((u0-x)**2 for x in u)+2*count*sout
+ bound=count**2*sum(x*x for x in u)+2*count**3*u0*u0+4*count*sout
+ assert q_m+q_v0==bound and bound&gt;0
+ occupation.append({&#39;D&#39;:count,&#39;exact_lower_bound&#39;:str(bound)})
+# Support residuals at x/L=(u,0,...): all independent tensor entries.
+for u in [mp.mpf(0),mp.mpf(&#39;0.4&#39;),mp.mpf(1),mp.mpf(3)]:
+ W=(1+u*u)**-4;Z=u*(1+u*u)**-5
+ dW=-8*u*(1+u*u)**-5;dZ=(1+u*u)**-5-10*u*u*(1+u*u)**-6
+ assert abs(dW+8*Z)&lt;mp.mpf(&#39;1e-75&#39;)
+ assert abs(dZ-W**mp.mpf(&#39;1.25&#39;)+10*Z*Z/W)&lt;mp.mpf(&#39;1e-75&#39;)
+ assert abs(Z*Z-W**mp.mpf(&#39;2.25&#39;)+W**mp.mpf(&#39;2.5&#39;))&lt;mp.mpf(&#39;1e-75&#39;)
+I0=(529-760*mp.log(2)+mp.mpf(11017)/693)/212
+assert I0&lt;mp.mpf(11)/128 and Q(20)-Q(1024,53)==Q(36,53)
+# Enclose fitted ratio squared with exact rational arithmetic.
+fmeL=mL+aL*z(6,35);fmeU=mU+aU*z(6,35);feeL=eL+aL*z(6,13);feeU=eU+aU*z(6,13)
+rlo=Q(3515,17)**2*fmeL/feeU;rhi=Q(3515,17)**2*fmeU/feeL
+assert rlo&lt;=Q(&#39;206.76828299&#39;)**2&lt;=rhi
+assert real(rhi-rlo)&lt;mp.mpf(&#39;1e-58&#39;)
+report={&#39;precision_digits&#39;:140,&#39;eta_interval&#39;:[str(aL),str(aU)],&#39;eta_decimal&#39;:mp.nstr(eta,65),&#39;ratio_squared_interval&#39;:[str(rlo),str(rhi)],&#39;ratio_target&#39;:&#39;206.76828299&#39;,&#39;all_rows&#39;:records,&#39;constitutive_clock_entropy_cases&#39;:84,&#39;occupation_lower_bound_tests&#39;:occupation,&#39;support_radial_residual_tests&#39;:4,&#39;I0&#39;:mp.nstr(I0,40),&#39;rounding_note&#39;:&#39;Collatz spectral and squared-ratio endpoints are exact rationals; printed square roots and derivatives are high precision diagnostics. Example units are rounded source values, neutrino unit uses the dated solar splitting 7.49e-5 eV^2 with the corrected counts, not an absolute mass measurement.&#39;,&#39;proof_scope&#39;:&#39;Reference bulk principal bounds and co-rotating energy, not nonlinear global evolution.&#39;,&#39;script_sha256&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),&#39;passed&#39;:True}
+(out/&#39;results.json&#39;).write_text(json.dumps(report,indent=2)+&#39;\n&#39;);print(json.dumps({k:report[k]for k in [&#39;eta_decimal&#39;,&#39;constitutive_clock_entropy_cases&#39;,&#39;I0&#39;,&#39;passed&#39;]},indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

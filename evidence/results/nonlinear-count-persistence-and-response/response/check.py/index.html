@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/nonlinear-count-persistence-and-response/response/check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/nonlinear-count-persistence-and-response/response/check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/nonlinear-count-persistence-and-response/response/check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;IMR-1 independent exact checks. Writes only this packet&#39;s results.&quot;&quot;&quot;
+from pathlib import Path
+import sympy as s
+import json, hashlib, datetime, math
+P=Path(__file__).resolve().parent
+Q=s.Rational
+checks=[]
+def ck(name,condition):
+    assert bool(condition),name
+    checks.append(name)
+def eq(name,a,b):
+    if isinstance(a,s.MatrixBase):
+        ck(name, all(s.expand(x)==0 or s.simplify(x)==0 for x in a-b))
+    else: ck(name,s.simplify(a-b)==0)
+def matstr(A): return [[str(x) for x in A.row(i)] for i in range(A.rows)]
+def model(B,L,lambdas,theta,D=None,Qresp=None):
+    N=B.cols; m=B.rows
+    D=s.eye(N) if D is None else D
+    Rm=s.eye(m) if Qresp is None else Qresp
+    # B denotes source force covectors in physical response coordinates.
+    Y=s.Matrix.hstack(*[(L-theta*lambdas[i]*Rm).inv()*B[:,i] for i in range(N)])
+    La=s.diag(*lambdas); G=s.simplify(Y.T*Rm*Y)
+    Mr=D+(1-2*theta)*G; C=-(1-theta)*Rm*Y
+    K0=D*La+Y.T*L*Y-theta*(G*La+La*G)
+    Mf=Mr.row_join(C.T).col_join(C.row_join(Rm))
+    Kf=K0.row_join(-B.T).col_join((-B).row_join(L))
+    W=s.eye(N).col_join(Y)
+    eq(&#39;full target rows &#39;+str((N,theta,lambdas[:2])),Kf*W,Mf*W*La)
+    eq(&#39;complete mode norms &#39;+str((N,theta,lambdas[:2])),W.T*Mf*W,D)
+    eq(&#39;kinetic symmetric &#39;+str((N,theta)),Mf,Mf.T)
+    eq(&#39;stiffness symmetric &#39;+str((N,theta)),Kf,Kf.T)
+    T=Rm-theta**2*Rm*Y*D.inv()*Y.T*Rm
+    V=L-theta**2*Rm*Y*La*D.inv()*Y.T*Rm
+    return Mf,Kf,W,G,T,V
+# Recompute actual source integrals; no parent executable is imported.
+x=s.symbols(&#39;x&#39;,real=True);f=s.sqrt(15)*(1-x*x)/4;hc=s.sqrt(Q(3,8))
+eq(&#39;f norm&#39;,s.integrate(f*f,(x,-1,1)),1)
+eq(&#39;h norm&#39;,2*hc**2*(1+s.integrate((2-x)**2,(x,1,2))),1)
+A=s.integrate(f**4,(x,-1,1));mix=s.integrate(f*f*hc*hc,(x,-1,1));H=2*hc**4*(1+s.integrate((2-x)**4,(x,1,2)))
+eq(&#39;source constants A&#39;,A,Q(5,7));eq(&#39;source constants B&#39;,mix,Q(3,8));eq(&#39;source constants H&#39;,H,Q(27,80))
+eq(&#39;normalized correlation squared&#39;,mix**2/(A*H),Q(7,12))
+depths=[2,3,4,5,6,10];t=s.sqrt(Q(7,12));R=s.Matrix([[t**abs(i-j) for j in depths] for i in depths]);Rp=R.inv()
+eq(&#39;actual dual metric inverse&#39;,R*Rp,s.eye(6))
+for k in range(1,7):ck(&#39;source Gram positive minor &#39;+str(k),s.simplify(R[:k,:k].det())&gt;0)
+# Fixed diagonal obstruction follows from the actual two spatial columns.
+r=Q(7,12);shape=s.Matrix([[1,r],[0,s.sqrt(95)/12]])
+B=s.Matrix.hstack(shape[:,0],shape[:,1],shape[:,0])/2
+Yfixed=s.Matrix.hstack(B[:,0]/8,B[:,1]/5,B[:,2]/9)
+eq(&#39;fixed metric obstruction entry&#39;,Yfixed[:,0].dot(Yfixed[:,1]),Q(7,1920))
+ck(&#39;fixed metric obstruction genuinely nonzero&#39;,Yfixed[:,0].dot(Yfixed[:,1])!=0)
+# Useful fixed diagonal nonflat exception, exact source overlap and positivity.
+c=(48-4*s.sqrt(95))/7;Bexc=s.Matrix([[4,c],[c,4]]);Lexc=s.Matrix([[5,c],[c,8]])
+eq(&#39;fixed exception actual normalized overlap&#39;,8*c/(16+c*c),r)
+eq(&#39;fixed exception low branch&#39;,Lexc-Bexc,s.diag(1,4))
+ck(&#39;fixed exception c bounds&#39;,bool(c&gt;1) and bool(c&lt;2))
+ck(&#39;fixed exception high positivity determinant&#39;,bool(s.simplify((Lexc+Bexc).det())&gt;0))
+Kexc=Lexc.row_join(-Bexc).col_join((-Bexc).row_join(Lexc));Wexc=s.eye(2).col_join(s.eye(2))
+eq(&#39;fixed exception all target rows&#39;,Kexc*Wexc,Wexc*s.diag(1,4))
+eq(&#39;fixed exception full orthogonality&#39;,Wexc.T*Wexc,2*s.eye(2))
+# Simultaneous two massive clocks and dressed zero; full complement retained.
+z=s.symbols(&#39;z&#39;); examples=[]
+for theta in [s.Integer(1),Q(1,2)]:
+    Mf,Kf,W,G,T,V=model(B,9*s.eye(2),[1,4,0],theta)
+    for k in range(1,6):ck(f&#39;small full kinetic positive {theta} {k}&#39;,s.simplify(Mf[:k,:k].det())&gt;0)
+    for k in [1,2]:
+        ck(f&#39;small complement kinetic positive {theta} {k}&#39;,s.simplify(T[:k,:k].det())&gt;0)
+        ck(f&#39;small complement energy positive {theta} {k}&#39;,s.simplify(V[:k,:k].det())&gt;0)
+    eq(&#39;small full dressed zero &#39;+str(theta),Kf*W[:,2],s.zeros(5,1))
+    ck(&#39;small zero is not dark &#39;+str(theta),W[3:,2]!=s.zeros(2,1))
+    eq(&#39;small kernel dimension &#39;+str(theta),Kf.rank(),4)
+    poly=s.factor((Kf-z*Mf).det())
+    eq(&#39;full characteristic factorization &#39;+str(theta),poly,(1-z)*(4-z)*(-z)*(V-z*T).det())
+    eq(&#39;full kinetic determinant &#39;+str(theta),Mf.det(),T.det())
+    if theta==1:
+        F=Kf[:3,:3]-z*Mf[:3,:3]-B.T*B/(9-z)
+        eq(&#39;actual offdiagonal reciprocal probe&#39;,F[0,1],-G[0,1]*(z-1)*(z-4)/(9-z))
+        ck(&#39;static cross response nonzero&#39;,s.simplify(F[0,1].subs(z,0))!=0)
+    else:eq(&#39;fixed retained diagonal in derivative repair&#39;,Mf[:3,:3],s.eye(3))
+    # Verify general derivative pencil norm for an arbitrary retained trial vector.
+    C=Mf[3:,:3];Mr=Mf[:3,:3];K0=Kf[:3,:3]
+    Rz=s.eye(2)/(9-z);Zlift=Rz*(B+z*C)
+    F=K0-z*Mr-(B.T+z*C.T)*Rz*(B+z*C)
+    eq(&#39;complete pencil derivative norm &#39;+str(theta),-F.diff(z),Mr+C.T*Zlift+Zlift.T*C+Zlift.T*Zlift)
+    examples.append({&#39;theta&#39;:str(theta),&#39;kinetic&#39;:matstr(Mf),&#39;stiffness&#39;:matstr(Kf),&#39;full_modes&#39;:matstr(W),&#39;response_trace&#39;:str(s.trace(G)),&#39;characteristic&#39;:str(poly),&#39;complement_characteristic&#39;:str(s.factor((V-z*T).det()))})
+# Above-response example: no hypothetical off-range exclusion.
+Mf,Kf,W,G,T,V=model(B/10,s.eye(2),[4,9,0],s.Integer(1))
+for k in range(1,6):ck(&#39;above response kinetic positive &#39;+str(k),s.simplify(Mf[:k,:k].det())&gt;0)
+for k in [1,2]:ck(&#39;above response complement positive &#39;+str(k),s.simplify(V[:k,:k].det())&gt;0)
+ck(&#39;above response exact full kernel&#39;,Kf.rank()==4)
+# General algebra in exact scalar symbols, independent of numeric source basis.
+a,b,ell,th,gram=s.symbols(&#39;a b ell th gram&#39;,real=True)
+# Off diagonal K0 symmetry follows automatically; identity for harmonic support and retained rows.
+eq(&#39;general full support identity&#39;,(ell-th*b)-(ell-b)-(1-th)*b,0)
+eq(&#39;general full retained identity&#39;,ell-th*(a+b)-(ell-th*a)-b*(-th),0)
+# Fourteen ordinary labels (bottom excluded from ordinary assignment list).
+labels=[(&#39;W&#39;,2,76),(&#39;Z&#39;,2,81),(&#39;H&#39;,2,95),(&#39;down&#39;,3,1),(&#39;strange&#39;,3,4),(&#39;up&#39;,4,3),(&#39;charm&#39;,4,20),(&#39;top&#39;,4,72),(&#39;nu1&#39;,5,10),(&#39;nu2&#39;,5,15),(&#39;nu3&#39;,5,22),(&#39;electron&#39;,6,13),(&#39;muon&#39;,6,35),(&#39;tau&#39;,10,23)]
+counts=[math.comb(n+d-1,d) for _,d,n in labels];maxcount=max(counts)
+ck(&#39;fourteen ordinary labels&#39;,len(counts)==14);ck(&#39;all ordinary count frequencies distinct&#39;,len(set(counts))==14)
+lam=[s.Integer(0)]+[Q(k,maxcount)**2 for k in counts]
+di=[2]+[d for _,d,n in labels];N=len(lam)
+Bc=s.zeros(6,N)
+for i,d in enumerate(di):Bc[depths.index(d),i]=Q(1,8)
+allrows=[]
+# Use exact dual response coordinates, preserving the entire actual six-source span.
+for theta in [s.Integer(1),Q(1,2)]:
+    # L coordinate form 4 R^-1; response source covectors Bc.
+    Mf,Kf,W,G,T,V=model(Bc,4*Rp,lam,theta,Qresp=Rp)
+    eq(&#39;all labels dressed zero &#39;+str(theta),Kf*W[:,0],s.zeros(N+6,1))
+    ck(&#39;all labels nonzero response &#39;+str(theta),all(W[N:,i]!=s.zeros(6,1) for i in range(N)))
+    tr=s.trace(G);bound=Q(5,192) if theta==1 else Q(15,784)
+    ck(&#39;all labels exact trace bound &#39;+str(theta),tr&lt;=bound)
+    ck(&#39;uniform kinetic bound &#39;+str(theta),1-theta**2*bound&gt;0)
+    # Matrix identity proves V&gt;=4T using known PSD Gram form and nonnegative diagonals.
+    Y=W[N:,:];La=s.diag(*lam)
+    eq(&#39;all labels complement gap identity &#39;+str(theta),V-4*T,theta**2*Rp*Y*(4*s.eye(N)-La)*Y.T*Rp)
+    if theta==Q(1,2):eq(&#39;all labels retained diagonal fixed&#39;,Mf[:N,:N],s.eye(N))
+    # Entrywise actual Y Gram, including repeated spatial sources at distinct frequencies.
+    for i in range(N):
+        for j in range(i,N):
+            eq(f&#39;actual spatial full Gram {theta} {i},{j}&#39;,G[i,j],Q(1,64)*t**abs(di[i]-di[j])/((4-theta*lam[i])*(4-theta*lam[j])))
+    allrows.append({&#39;theta&#39;:str(theta),&#39;response_trace_exact&#39;:str(tr),&#39;response_trace_decimal&#39;:str(tr.evalf(15)),&#39;trace_bound&#39;:str(bound),&#39;kinetic_margin&#39;:str(1-theta**2*bound),&#39;full_dimension&#39;:N+6,&#39;targets&#39;:15,&#39;complement_modes&#39;:6,&#39;complement_squared_gap&#39;:4})
+# All physical supplied sector units remain symbolic in theorem; this test is a count-only control.
+rows=[{&#39;label&#39;:label,&#39;d&#39;:d,&#39;n&#39;:n,&#39;count&#39;:count,&#39;frequency_symbolic&#39;:f&#39;mu_{d}*{count}&#39;,&#39;count_control_frequency_over_max&#39;:str(Q(count,maxcount)),&#39;count_control_squared&#39;:str(Q(count,maxcount)**2)} for (label,d,n),count in zip(labels,counts)]
+eq(&#39;conditional bottom count a&#39;,math.comb(18,3),816);eq(&#39;conditional bottom count b&#39;,math.comb(19,3),969)
+# Full charge-energy identity with actual norm, signs are independent.
+h,amp,Dii=s.symbols(&#39;h amp Dii&#39;,positive=True)
+for sign in [-1,1]:eq(&#39;complete charge energy &#39;+str(sign),h*h*amp*amp*Dii,h*abs(sign*h*amp*amp*Dii))
+# Domain bounds for continuum are spectral, no finite-source closure assumption.
+k2,gap=s.symbols(&#39;k2 gap&#39;,positive=True)
+eq(&#39;continuum bound factorization&#39;,1/gap**2-1/(gap+k2)**2,k2*(2*gap+k2)/(gap**2*(gap+k2)**2))
+ck(&#39;continuum resolvent norm bound&#39;,(k2*(2*gap+k2)/(gap**2*(gap+k2)**2)).is_positive)
+report={&#39;created_utc&#39;:datetime.datetime.now(datetime.timezone.utc).isoformat(),&#39;version&#39;:&#39;IMR-1&#39;,&#39;status&#39;:&#39;all passed&#39;,&#39;checks_passed&#39;:len(checks),&#39;checks&#39;:checks,&#39;examples&#39;:examples,&#39;fourteen_labels&#39;:rows,&#39;simultaneous_controls&#39;:allrows,&#39;above_response&#39;:{&#39;response_eigenvalue&#39;:1,&#39;massive_squared_targets&#39;:[4,9],&#39;complete_positive&#39;:True},&#39;script_sha256&#39;:hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),&#39;scope&#39;:&#39;Exact finite action and actual source integrals. Fourteen-label numeric control uses equal supplied sector units; uniform theorem permits every positive supplied sector scale. No empirical scale fit, source-free localization or physical particle identification.&#39;}
+(P/&#39;results.json&#39;).write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;checks_passed&#39;:len(checks),&#39;count_rows&#39;:rows,&#39;bounds&#39;:allrows},indent=2))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

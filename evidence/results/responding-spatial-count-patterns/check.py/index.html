@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>check.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/responding-spatial-count-patterns/check.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="check.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/responding-spatial-count-patterns/check.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="check.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>check.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/results/responding-spatial-count-patterns/check.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Scoped checks for Responding Spatial Count Patterns, Python standard library.
+Run: python3 -B check.py --output results.json
+New independent checks of selected displayed identities, not a replay of any
+original checker, spatial quadrature suite, or nonlinear encounter simulation.
+&quot;&quot;&quot;
+import argparse
+import datetime
+from fractions import Fraction as F
+import hashlib
+import json
+import math
+from pathlib import Path
+
+checks = []
+def check(name, condition):
+    if not condition:
+        raise AssertionError(name)
+    checks.append(name)
+def dot(a, b):
+    return sum(x*y for x, y in zip(a, b))
+def add(a, b):
+    return [x+y for x, y in zip(a, b)]
+def scale(a, c):
+    return [c*x for x in a]
+def sub(a, b):
+    return add(a, scale(b, -1))
+def J(a):
+    return [v for x,y in zip(a[::2],a[1::2]) for v in (-y,x)]
+def close(a, b):
+    return abs(a-b) &lt;= 2e-12 * max(1,abs(a),abs(b))
+
+# Exact rational substitution in the full rotating identity, including an
+# independent spatial response complement. Source s has unit norm (3/5,4/5).
+h, om, g, lam = F(2), F(5), F(1,5), F(9,2)
+delta=om*om-h*h
+z=[F(3,2),F(-2,3)]; zd=[F(2,7),F(5,9)]
+s=[F(3,5),F(4,5)]
+u=[s0*z0 for s0 in s for z0 in z]+[F(0),F(0)]
+y=[F(1,3),F(2,5),F(-3,7),F(1,11),F(2),F(-1)]
+yd=[F(1,2),F(-2,3),F(3,4),F(4,5),F(1,7),F(2,9)]
+r2=dot(z,z)
+energy=(dot(zd,zd)+r2*(lam+g*g/(om*om-lam))+dot(yd,yd)+om*om*dot(y,y))/2-g*dot(u,y)
+charge=dot(J(z),zd)+dot(J(y),yd)
+for sig in [-1,1]:
+    rotating=(dot(sub(zd,scale(J(z),sig*h)),sub(zd,scale(J(z),sig*h)))
+       +dot(sub(yd,scale(J(y),sig*h)),sub(yd,scale(J(y),sig*h))))/2
+    residual=sub(y,scale(u,g/delta))
+    rhs=rotating+delta*dot(residual,residual)/2+r2*(lam-h*h)*(1+g*g/((om*om-lam)*delta))/2
+    check(&#39;rational complete rotating identity sign &#39;+str(sig),energy-sig*h*charge==rhs)
+
+# Exact complete potential squares for both neutral actions, with arbitrary
+# response, positive unit density directions and explicit radial derivatives.
+s1=[F(1),F(0)];s2=[F(3,5),F(4,5)]; response=[F(2,3),F(-1,4)]
+r1,r2,rs=F(3,2),F(5,4),F(7,6)
+for xi in [0,2]:
+    def amp(r): return r*r if xi==2 else r*r/(rs*rs+r*r)
+    def damp(r): return 2*r if xi==2 else 2*r*rs*rs/(rs*rs+r*r)**2
+    j1=scale(s1,g*amp(r1));j2=scale(s2,g*amp(r2));js=add(j1,j2)
+    v=om*om*dot(response,response)/2-dot(js,response)+(dot(j1,j1)+dot(j2,j2))/(2*om*om)+xi*dot(j1,j2)/(om*om)
+    diff=sub(response,scale(js,1/(om*om)))
+    vc=om*om*dot(diff,diff)/2+(xi-1)*dot(j1,j2)/(om*om)
+    check(&#39;rational neutral square xi=&#39;+str(xi),v==vc)
+    dj=scale(s1,g*damp(r1))
+    check(&#39;rational isolated radial self force xi=&#39;+str(xi),dot(dj,scale(j1,1/(om*om)))-dot(dj,j1)/(om*om)==0)
+    pairforce=dot(dj,scale(js,1/(om*om)))-dot(dj,add(j1,scale(j2,xi)))/(om*om)
+    check(&#39;rational static radial cross sign xi=&#39;+str(xi),pairforce==(1-xi)*dot(dj,j2)/(om*om))
+    if xi==0:
+        check(&#39;saturated bounded cross&#39;,0&lt;=dot(j1,j2)&lt;=g*g)
+        check(&#39;saturated shifted budget positive&#39;,g*g-dot(j1,j2)&gt;0)
+
+# Exact conservative lower factors used in the common cap proof.
+A=F(3);Z=1+g*g/delta**2;E0=h*A
+check(&#39;charge roots at maximal epsilon&#39;,F(1)+F(1,4)-F(3,4)==F(1,2) and F(1)+F(1,4)+F(3,4)==2)
+check(&#39;radius lower budget factor&#39;,(A/(2*h)-4*(A*delta/(16*h))/delta)/(2*Z)==A/(8*h*Z))
+cap=(om*om+h*h)/2
+check(&#39;cap barrier factor&#39;,(A/(8*h*Z))*(cap-h*h)/2==E0*(cap/h**2-1)/(16*Z))
+check(&#39;material half strain barrier&#39;,F(1,8)*F(1,2)**2==F(1,32))
+
+# Actual fourteen supplied count labels; no empirical recalibration.
+rows=[(&#39;W&#39;,2,76,2926),(&#39;Z&#39;,2,81,3321),(&#39;Higgs&#39;,2,95,4560),
+ (&#39;down&#39;,3,1,1),(&#39;strange&#39;,3,4,20),(&#39;up&#39;,4,3,15),(&#39;charm&#39;,4,20,8855),
+ (&#39;top&#39;,4,72,1215450),(&#39;nu1&#39;,5,10,2002),(&#39;nu2&#39;,5,15,11628),
+ (&#39;nu3&#39;,5,22,65780),(&#39;electron&#39;,6,13,18564),(&#39;muon&#39;,6,35,3838380),(&#39;tau&#39;,10,23,64512240)]
+for name,d,n,c in rows:
+    K=n+d-1
+    check(name+&#39; count&#39;,math.comb(K,d)==c)
+    if K&gt;d:
+        check(name+&#39; Pascal relative gap&#39;,F(c,c-math.comb(K-1,d))==F(K,d))
+check(&#39;all maintained depths&#39;,set(d for _,d,_,_ in rows)=={2,3,4,5,6,10})
+check(&#39;pair counts&#39;,math.comb(14,2)==91 and math.comb(15,2)==105)
+
+# Explicit exact-invariant solution evaluated in floating arithmetic; analytic
+# time derivatives are used, not a time-step integrator. h=2, Omega=5,g=1/5.
+hf,of,gf,R=2.,5.,.2,1.3
+D=of*of-hf*hf;k=hf*hf+gf*gf/D
+ws2=(k+of*of-math.sqrt((of*of-k)**2+8*gf*gf))/2
+ws,wa=math.sqrt(ws2),math.sqrt(k);bs=math.sqrt(2)*gf/(of*of-ws2);Zs=1+bs*bs
+check(&#39;bright/dark positive&#39;,0&lt;ws&lt;wa)
+max_residual=0.;max_energy_error=0.;max_charge_error=0.
+for index,phase in enumerate([math.pi/3,math.pi/2,2*math.pi/3,math.pi]):
+    for sig in [-1,1]:
+        # A common phase may be chosen freely at each sample. This evaluates
+        # the analytic solution, its first derivatives and second derivatives.
+        plus=[R,0.];minus=[R*math.cos(phase),sig*R*math.sin(phase)]
+        pd=scale(J(plus),sig*ws);md=scale(J(minus),sig*wa)
+        Y=scale(plus,bs);Yd=scale(pd,bs);Ydd=scale(Y,-ws2)
+        z1=scale(add(plus,minus),1/math.sqrt(2));z2=scale(sub(plus,minus),1/math.sqrt(2))
+        d1=scale(add(pd,md),1/math.sqrt(2));d2=scale(sub(pd,md),1/math.sqrt(2))
+        dd1=scale(add(scale(plus,-ws2),scale(minus,-wa*wa)),1/math.sqrt(2))
+        dd2=scale(sub(scale(plus,-ws2),scale(minus,-wa*wa)),1/math.sqrt(2))
+        residuals=add(dd1,sub(scale(z1,k),scale(Y,gf)))+add(dd2,sub(scale(z2,k),scale(Y,gf)))+add(Ydd,sub(scale(Y,of*of),scale(add(z1,z2),gf)))
+        max_residual=max(max_residual,max(map(abs,residuals)))
+        check(&#39;oscillator rows &#39;+str((index,sig)),all(close(x,0) for x in residuals))
+        E=(dot(d1,d1)+dot(d2,d2)+dot(Yd,Yd)+k*(dot(z1,z1)+dot(z2,z2))+of*of*dot(Y,Y))/2-gf*dot(add(z1,z2),Y)
+        Q=dot(J(z1),d1)+dot(J(z2),d2)+dot(J(Y),Yd)
+        Et=R*R*(ws2*Zs+wa*wa);Qt=sig*R*R*(ws*Zs+wa)
+        max_energy_error=max(max_energy_error,abs(E-Et));max_charge_error=max(max_charge_error,abs(Q-Qt))
+        check(&#39;complete transfer energy &#39;+str((index,sig)),close(E,Et))
+        check(&#39;complete transfer charge &#39;+str((index,sig)),close(Q,Qt))
+        check(&#39;transfer radius &#39;+str((index,sig)),close(dot(z1,z1),R*R*(1+math.cos(phase))))
+        check(&#39;transfer retained charge &#39;+str((index,sig)),close(dot(J(z1),d1),sig*R*R*(ws+wa)*(1+math.cos(phase))/2))
+        if index&lt;3:
+            check(&#39;finite coexistence &#39;+str((index,sig)),R*R/2-1e-12&lt;=dot(z1,z1)&lt;=3*R*R/2+1e-12)
+        else:
+            check(&#39;boundary velocity nonzero &#39;+str(sig),dot(d1,d1)&gt;0 and close(dot(d1,d1),R*R*(wa-ws)**2/2))
+
+parser=argparse.ArgumentParser();parser.add_argument(&#39;--output&#39;,default=&#39;results.json&#39;);args=parser.parse_args()
+source=Path(__file__).read_bytes()
+result={&#39;title&#39;:&#39;New scoped responding-spatial identity checker&#39;,&#39;status&#39;:&#39;passed&#39;,&#39;assertions&#39;:len(checks),
+ &#39;executed_utc&#39;:datetime.datetime.now(datetime.timezone.utc).isoformat(),
+ &#39;source_sha256&#39;:hashlib.sha256(source).hexdigest(),&#39;source_bytes&#39;:len(source),
+ &#39;requirements&#39;:&#39;Python 3 standard library only&#39;,&#39;checks&#39;:checks,
+ &#39;transfer_example&#39;:{&#39;h&#39;:hf,&#39;Omega&#39;:of,&#39;g&#39;:gf,&#39;amplitude&#39;:R,&#39;omega_s&#39;:ws,&#39;omega_a&#39;:wa,
+ &#39;max_equation_residual&#39;:max_residual,&#39;max_energy_error&#39;:max_energy_error,&#39;max_charge_error&#39;:max_charge_error,
+ &#39;boundary_velocity_squared&#39;:R*R*(wa-ws)**2/2},
+ &#39;scope&#39;:&#39;Exact rational substitutions for rotating identity with complement and both signs, neutral squares/radial signs, cap factors, fourteen counts; analytic invariant-transfer solution evaluated numerically.&#39;,
+ &#39;not_executed&#39;:[&#39;Original 1567/366/530/152 suites&#39;,&#39;105 spatial overlap quadratures&#39;,&#39;full nonlinear encounter integration&#39;,&#39;gradient-response evolution&#39;,&#39;empirical validation&#39;]}
+Path(args.output).write_text(json.dumps(result,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;status&#39;:&#39;passed&#39;,&#39;assertions&#39;:len(checks),&#39;source_sha256&#39;:result[&#39;source_sha256&#39;],&#39;output&#39;:args.output}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Joint Mass and Ratio Accuracy Under the Fixed IDWT Prescription — IDWT V2</title>
+  <meta name="description" content="A reproducible electron-only joint comparison retaining individual mass accuracy, ratio accuracy, all admissible assignments and overlapping rung choices.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261031-joint-mass-ratio-precision/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Joint Mass and Ratio Accuracy Under the Fixed IDWT Prescription — IDWT V2">
+  <meta property="og:description" content="A reproducible electron-only joint comparison retaining individual mass accuracy, ratio accuracy, all admissible assignments and overlapping rung choices.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261031-joint-mass-ratio-precision/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Joint Mass and Ratio Accuracy Under the Fixed IDWT Prescription — IDWT V2">
+  <meta name="twitter:description" content="A reproducible electron-only joint comparison retaining individual mass accuracy, ratio accuracy, all admissible assignments and overlapping rung choices.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research / Research overview</p>
+      <h1>Joint Mass and Ratio Accuracy Under the Fixed IDWT Prescription</h1>
+      <p class="article-date">Updated <time datetime="2026-10-31">October 31, 2026</time></p>
+      <p class="scope-label">reviewed conditional</p>
+      
+    </header>
+    
+    <div class="article-body">
+<p>This method accompanies section 5.3 of the particle-geometry case. The sole observed anchor is the electron. All ten other included masses are scored, and absolute and ratio constraints form one joint event. The reported quantities are retrospective reference-distribution coverage under the fixed prescription.</p>
+<h2 id="1-the-question-and-the-retained-model">1. The question and the retained model</h2>
+<p>An approximate numerical formula can match some masses much more tightly than others. This test preserves each achieved accuracy separately. Ratios add another distinction. If two predictions have similar signed offsets, much of their common offset cancels in the ratio. Allowing those two errors to move independently to opposite sides of their absolute bands can spoil the ratio even though both absolute tests still pass.</p>
+<p>This calculation therefore asks one joint question: <strong>how much of a declared reference distribution satisfies every individual absolute-accuracy bound and every within-family ratio-accuracy bound, under at least one permitted complete placement and jointly chosen integer tuple?</strong> The same masses enter both kinds of bound, so their acceptance regions are integrated together. Their probabilities are never multiplied as independent evidence.</p>
+<p>The maintained count and mass prediction are</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-0" data-tex-sha256="4b64f1dd12cfce2417063557b1c9ccdd3ada2bc7fdfd4992629400360e538ffe"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>n</mi><mo separator="true">,</mo><mi>d</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">(</mo><mfrac linethickness="0px"><mrow><mi>n</mi><mo>+</mo><mi>d</mi><mo>−</mo><mn>1</mn></mrow><mi>d</mi></mfrac><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mspace width="2em"/><mi>P</mi><mo stretchy="false">(</mo><mi>n</mi><mo separator="true">,</mo><mi>d</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>m</mi><mi>e</mi></msub><msub><mi>a</mi><mi>d</mi></msub><mi>C</mi><mo stretchy="false">(</mo><mi>n</mi><mo separator="true">,</mo><mi>d</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>n</mi><mo>≥</mo><mn>1</mn><mo separator="true">,</mo></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(1)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+C(n,d)=\binom{n+d-1}{d},\qquad
+P(n,d)=m_e a_d C(n,d),\qquad n\ge1,
+\tag{1}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span></span><span class="katex-tag"><span class="katex-strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">1</span></span><span class="mord">)</span></span></span></span></span></span></span>
+<span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-1" data-tex-sha256="59be3a3fde13f5bf485b573ec0d9c65e85477d871a1dc61e38e45429cfc44a02"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mo stretchy="false">(</mo><msub><mi>a</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>a</mi><mn>3</mn></msub><mo separator="true">,</mo><msub><mi>a</mi><mn>4</mn></msub><mo separator="true">,</mo><msub><mi>a</mi><mn>6</mn></msub><mo separator="true">,</mo><msub><mi>a</mi><mn>10</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">(</mo><msqrt><mn>2890</mn></msqrt><mo separator="true">,</mo><msqrt><mrow><mn>32</mn><msqrt><mn>7</mn></msqrt></mrow></msqrt><mo separator="true">,</mo><mfrac><msqrt><mrow><mn>48</mn><mi mathvariant="normal">/</mi><msqrt><mn>7</mn></msqrt></mrow></msqrt><mn>15</mn></mfrac><mo separator="true">,</mo><mfrac><mn>1</mn><mn>18564</mn></mfrac><mo separator="true">,</mo><mfrac><mn>1</mn><mn>18564</mn></mfrac><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(2)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+(a_2,a_3,a_4,a_6,a_{10})=
+\left(\sqrt{2890},\sqrt{32\sqrt7},
+\frac{\sqrt{48/\sqrt7}}{15},\frac1{18564},\frac1{18564}\right).
+\tag{2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:3.78em;vertical-align:-1.55em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.875em;height:3.6em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.875em" height="3.6em" viewBox="0 0 875 3600"><path d="M863,9c0,-2,-2,-5,-6,-9c0,0,-17,0,-17,0c-12.7,0,-19.3,0.3,-20,1
+c-5.3,5.3,-10.3,11,-15,17c-242.7,294.7,-395.3,682,-458,1162c-21.3,163.3,-33.3,349,
+-36,557 l0,84c0.2,6,0,26,0,60c2,159.3,10,310.7,24,454c53.3,528,210,
+949.7,470,1265c4.7,6,9.7,11.7,15,17c0.7,0.7,7,1,19,1c0,0,18,0,18,0c4,-4,6,-7,6,-9
+c0,-2.7,-3.3,-8.7,-10,-18c-135.3,-192.7,-235.5,-414.3,-300.5,-665c-65,-250.7,-102.5,
+-544.7,-112.5,-882c-2,-104,-3,-167,-3,-189
+l0,-92c0,-162.7,5.7,-314,17,-454c20.7,-272,63.7,-513,129,-723c65.3,
+-210,155.3,-396.3,270,-559c6.7,-9.3,10,-15.3,10,-18z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9561em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">2890</span></span></span><span style="top:-2.9161em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.0839em;"><span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.47em;"><span class="svg-align" style="top:-3.8em;"><span class="pstrut" style="height:3.8em;"></span><span class="mord" style="padding-left:1em;"><span class="mord">32</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9561em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;">7</span></span><span style="top:-2.9161em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.0839em;"><span></span></span></span></span></span></span></span><span style="top:-3.43em;"><span class="pstrut" style="height:3.8em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.88em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.88em" viewBox="0 0 400000 1944" preserveAspectRatio="xMinYMin slice"><path d="M983 90
+l0 -0
+c4,-6.7,10,-10,18,-10 H400000v40
+H1013.1s-83.4,268,-264.1,840c-180.7,572,-277,876.3,-289,913c-4.7,4.7,-12.7,7,-24,7
+s-12,0,-12,0c-1.3,-3.3,-3.7,-11.7,-7,-25c-35.3,-125.3,-106.7,-373.3,-214,-744
+c-10,12,-21,25,-33,39s-32,39,-32,39c-6,-5.3,-15,-14,-27,-26s25,-30,25,-30
+c26.7,-32.7,52,-63,76,-91s52,-60,52,-60s208,722,208,722
+c56,-175.3,126.3,-397.3,211,-666c84.7,-268.7,153.8,-488.2,207.5,-658.5
+c53.7,-170.3,84.5,-266.8,92.5,-289.5z
+M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.37em;"><span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.23em;"><span style="top:-2.6276em;"><span class="pstrut" style="height:3.3136em;"></span><span class="mord"><span class="mord">15</span></span></span><span style="top:-3.5436em;"><span class="pstrut" style="height:3.3136em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-4.23em;"><span class="pstrut" style="height:3.3136em;"></span><span class="mord"><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3136em;"><span class="svg-align" style="top:-3.8em;"><span class="pstrut" style="height:3.8em;"></span><span class="mord" style="padding-left:1em;"><span class="mord">48/</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9072em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;">7</span></span><span style="top:-2.8672em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1328em;"><span></span></span></span></span></span></span></span><span style="top:-3.2736em;"><span class="pstrut" style="height:3.8em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.88em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.88em" viewBox="0 0 400000 1944" preserveAspectRatio="xMinYMin slice"><path d="M983 90
+l0 -0
+c4,-6.7,10,-10,18,-10 H400000v40
+H1013.1s-83.4,268,-264.1,840c-180.7,572,-277,876.3,-289,913c-4.7,4.7,-12.7,7,-24,7
+s-12,0,-12,0c-1.3,-3.3,-3.7,-11.7,-7,-25c-35.3,-125.3,-106.7,-373.3,-214,-744
+c-10,12,-21,25,-33,39s-32,39,-32,39c-6,-5.3,-15,-14,-27,-26s25,-30,25,-30
+c26.7,-32.7,52,-63,76,-91s52,-60,52,-60s208,722,208,722
+c56,-175.3,126.3,-397.3,211,-666c84.7,-268.7,153.8,-488.2,207.5,-658.5
+c53.7,-170.3,84.5,-266.8,92.5,-289.5z
+M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5264em;"><span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">18564</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">18564</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.875em;height:3.6em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.875em" height="3.6em" viewBox="0 0 875 3600"><path d="M76,0c-16.7,0,-25,3,-25,9c0,2,2,6.3,6,13c21.3,28.7,42.3,60.3,
+63,95c96.7,156.7,172.8,332.5,228.5,527.5c55.7,195,92.8,416.5,111.5,664.5
+c11.3,139.3,17,290.7,17,454c0,28,1.7,43,3.3,45l0,9
+c-3,4,-3.3,16.7,-3.3,38c0,162,-5.7,313.7,-17,455c-18.7,248,-55.8,469.3,-111.5,664
+c-55.7,194.7,-131.8,370.3,-228.5,527c-20.7,34.7,-41.7,66.3,-63,95c-2,3.3,-4,7,-6,11
+c0,7.3,5.7,11,17,11c0,0,11,0,11,0c9.3,0,14.3,-0.3,15,-1c5.3,-5.3,10.3,-11,15,-17
+c242.7,-294.7,395.3,-681.7,458,-1161c21.3,-164.7,33.3,-350.7,36,-558
+l0,-144c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
+-470,-1265c-4.7,-6,-9.7,-11.7,-15,-17c-0.7,-0.7,-6.7,-1,-18,-1z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">.</span></span><span class="katex-tag"><span class="katex-strut" style="height:3.78em;vertical-align:-1.55em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">2</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>The dimensionless coefficients and reference counts are fixed throughout. In the equivalent sector-coefficient notation,</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-2" data-tex-sha256="aa268c3093ec579992839937c60a2c6e21e12ed02e7aa81e4f60a4cb29c23c78"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>g</mi><mn>22</mn></msub><mo>=</mo><mn>1445</mn><mi mathvariant="normal">/</mi><mn>2</mn><mo separator="true">,</mo><mspace width="1em"/><msub><mi>g</mi><mn>33</mn></msub><mo>=</mo><mn>8</mn><msqrt><mn>7</mn></msqrt><mo separator="true">,</mo><mspace width="1em"/><msub><mi>g</mi><mn>44</mn></msub><mo>=</mo><mn>12</mn><mi mathvariant="normal">/</mi><msqrt><mn>7</mn></msqrt><mo separator="true">,</mo><mspace width="1em"/><msub><mi>g</mi><mn>66</mn></msub><mo>=</mo><msub><mi>g</mi><mrow><mn>10</mn><mo separator="true">,</mo><mn>10</mn></mrow></msub><mo>=</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>4</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">
+g_{22}=1445/2,\quad g_{33}=8\sqrt7,\quad
+ g_{44}=12/\sqrt7,\quad g_{66}=g_{10,10}=1/4,
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">22</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1445/2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">33</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.1505em;vertical-align:-0.1944em;"></span><span class="mord">8</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9561em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;">7</span></span><span style="top:-2.9161em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.0839em;"><span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">44</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.2061em;vertical-align:-0.25em;"></span><span class="mord">12/</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9561em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;">7</span></span><span style="top:-2.9161em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.0839em;"><span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">66</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span><span class="mpunct mtight">,</span><span class="mord mtight">10</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1/4</span><span class="mpunct">,</span></span></span></span></span></span>
+<span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-3" data-tex-sha256="49d4a25146b7d076b483b95ef67414b206aee9e2a130fc11f9c8d743b30c098d"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msub><mi>μ</mi><mi>d</mi></msub><mo>=</mo><mfrac><msub><mi>m</mi><mi>e</mi></msub><msubsup><mi>C</mi><mi>d</mi><mo>⋆</mo></msubsup></mfrac><msqrt><mrow><msub><mi>g</mi><mrow><mi>d</mi><mi>d</mi></mrow></msub><mi mathvariant="normal">/</mi><msub><mi>g</mi><mn>66</mn></msub></mrow></msqrt><mo separator="true">,</mo><mspace width="1em"/><mo stretchy="false">(</mo><msubsup><mi>C</mi><mn>2</mn><mo>⋆</mo></msubsup><mo separator="true">,</mo><msubsup><mi>C</mi><mn>3</mn><mo>⋆</mo></msubsup><mo separator="true">,</mo><msubsup><mi>C</mi><mn>4</mn><mo>⋆</mo></msubsup><mo separator="true">,</mo><msubsup><mi>C</mi><mn>6</mn><mo>⋆</mo></msubsup><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>15</mn><mo separator="true">,</mo><mn>18564</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="1em"/><msub><mi>μ</mi><mn>10</mn></msub><mo>=</mo><msub><mi>μ</mi><mn>6</mn></msub><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(3)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\mu_d=\frac{m_e}{C_d^\star}\sqrt{g_{dd}/g_{66}},\quad
+(C_2^\star,C_3^\star,C_4^\star,C_6^\star)=(1,1,15,18564),\quad
+\mu_{10}=\mu_6.
+\tag{3}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.0949em;vertical-align:-0.9873em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6705em;"><span style="top:-2.3987em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span><span style="top:-3.0448em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">⋆</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9873em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9839em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">dd</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">66</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.9439em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.28em" viewBox="0 0 400000 1296" preserveAspectRatio="xMinYMin slice"><path d="M263,681c0.7,0,18,39.7,52,119
+c34,79.3,68.167,158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120
+c340,-704.7,510.7,-1060.3,512,-1067
+l0 -0
+c4.7,-7.3,11,-11,19,-11
+H40000v40H1012.3
+s-271.3,567,-271.3,567c-38.7,80.7,-84,175,-136,283c-52,108,-89.167,185.3,-111.5,232
+c-22.3,46.7,-33.8,70.3,-34.5,71c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1
+s-109,-253,-109,-253c-72.7,-168,-109.3,-252,-110,-252c-10.7,8,-22,16.7,-34,26
+c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26s76,-59,76,-59s76,-60,76,-60z
+M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2561em;"><span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7387em;"><span style="top:-2.453em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">⋆</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7387em;"><span style="top:-2.453em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">⋆</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7387em;"><span style="top:-2.453em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">⋆</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7387em;"><span style="top:-2.453em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">⋆</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">15</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">18564</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">.</span></span><span class="katex-tag"><span class="katex-strut" style="height:2.0949em;vertical-align:-0.9873em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">3</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>The last equality retains the shared charged-lepton fundamental. It is a separate premise about the common kind and normalization, not a consequence of equal g coefficients alone. The coefficient law remains a maintained numerical proposal whose physical derivation is open.</p>
+<p>The blocks W/Z/Higgs, down/strange, up/charm/top, electron/muon and tau must occupy distinct permitted depths. All 120 permutations over {2,3,4,6,10} are considered before imposing the exact electron reference and common lepton scale. These equations force electron/muon to depth six with n_e=13 and tau to depth ten. At the other depths the exact electron equation has no positive integer solution. The remaining admissible placements are the six permutations of the first three blocks over depths two, three and four. This is the maintained explicit alternative rule; no new rule for moving coefficients or refitting scales is invented.</p>
+<p>All ten nonanchor masses, including W, down and up, remain randomized scored targets. No extra anchor is introduced. Bottom retains its unresolved ordinary-integer exception and is not scored. Neutrino absolute masses require a separate calibration and are also outside this test. A massless photon does not enter positive-mass logarithms. These exclusions state the present empirical scope; they are not additional successes.</p>
+<p>The physical project still uses one field on ordinary ten-space-plus-time spacetime. The mass-list integration below is statistical bookkeeping, not a new physical manifold or a probability law for electron position. The deterministic electron trajectories and absence of mediator particles are unchanged. No physical amplitude is fitted.</p>
+<h2 id="2-exact-empirical-inputs-and-the-observed-bounds">2. Exact empirical inputs and the observed bounds</h2>
+<p>The calculation retains the archived central values in the new particle-geometry case. It does not silently replace them with a later empirical compilation. The mass and quoted-error inputs in data.json are identical to those already checked against the <a href="https://pdg.lbl.gov/2024/tables/rpp2024-sum-gauge-higgs-bosons.pdf">2024 PDG boson</a>, <a href="https://pdg.lbl.gov/2024/tables/rpp2024-sum-leptons.pdf">lepton</a> and <a href="https://pdg.lbl.gov/2024/tables/rpp2024-sum-quarks.pdf">quark</a> summaries.</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Label</th>
+<th style="text-align:right">Archived mass, MeV/c²</th>
+<th style="text-align:right">Quoted half-width, MeV/c²</th>
+<th>Maintained (d,n)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Electron, fixed</td>
+<td style="text-align:right">0.51099895000</td>
+<td style="text-align:right">0.00000000015</td>
+<td>(6,13)</td>
+</tr>
+<tr>
+<td>W</td>
+<td style="text-align:right">80369.2</td>
+<td style="text-align:right">13.3</td>
+<td>(2,76)</td>
+</tr>
+<tr>
+<td>Z</td>
+<td style="text-align:right">91188.0</td>
+<td style="text-align:right">2.0</td>
+<td>(2,81)</td>
+</tr>
+<tr>
+<td>Higgs</td>
+<td style="text-align:right">125200.0</td>
+<td style="text-align:right">110.0</td>
+<td>(2,95)</td>
+</tr>
+<tr>
+<td>Down</td>
+<td style="text-align:right">4.70</td>
+<td style="text-align:right">0.07</td>
+<td>(3,1)</td>
+</tr>
+<tr>
+<td>Strange</td>
+<td style="text-align:right">93.5</td>
+<td style="text-align:right">0.8</td>
+<td>(3,4)</td>
+</tr>
+<tr>
+<td>Up</td>
+<td style="text-align:right">2.16</td>
+<td style="text-align:right">0.07</td>
+<td>(4,3)</td>
+</tr>
+<tr>
+<td>Charm</td>
+<td style="text-align:right">1273.0</td>
+<td style="text-align:right">4.6</td>
+<td>(4,20)</td>
+</tr>
+<tr>
+<td>Top</td>
+<td style="text-align:right">172570.0</td>
+<td style="text-align:right">290.0</td>
+<td>(4,72)</td>
+</tr>
+<tr>
+<td>Muon</td>
+<td style="text-align:right">105.6583755</td>
+<td style="text-align:right">0.0000023</td>
+<td>(6,35)</td>
+</tr>
+<tr>
+<td>Tau</td>
+<td style="text-align:right">1776.93</td>
+<td style="text-align:right">0.09</td>
+<td>(10,23)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The light-quark values are MS-bar parameters at 2 GeV; charm is the MS-bar value at its own mass scale. Those quark half-widths are quoted at 90% confidence. The top value is the direct event-kinematic average. This is not a set of identical, independent Gaussian rest-mass measurements, and no such likelihood is constructed.</p>
+<p>For each nonanchor label, define its signed logarithmic residual under the maintained assignment:</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-4" data-tex-sha256="19f2e155d466aab25c6923164cd6933068b797ccf66eff3de79f4553c9510473"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msub><mi>r</mi><mi>i</mi></msub><mo>=</mo><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><msubsup><mi>P</mi><mi>i</mi><mo>∗</mo></msubsup><mi mathvariant="normal">/</mi><msub><mi>M</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><msub><mi>δ</mi><mi>i</mi></msub><mo>=</mo><mi mathvariant="normal">∣</mi><msub><mi>r</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><mo separator="true">,</mo><mspace width="2em"/><msub><mi>η</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mi mathvariant="normal">∣</mi><msub><mi>r</mi><mi>j</mi></msub><mo>−</mo><msub><mi>r</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(4)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+r_i=\log(P_i^*/M_i),\qquad
+\delta_i=|r_i|,\qquad
+\eta_{ij}=|r_j-r_i|.
+\tag{4}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">lo<span style="margin-right:0.0139em;">g</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7387em;"><span style="top:-2.453em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0379em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣.</span></span><span class="katex-tag"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">4</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>A positive r means that the formula prediction is too high; a negative r means it is too low. The absolute bound delta preserves that mass's achieved proximity. The ratio bound eta preserves the achieved proximity of P_j/P_i to M_j/M_i, because the logarithmic ratio residual is r_j−r_i.</p>
+<p><strong>The primary bounds use these actual central residuals without uncertainty floors.</strong> Published errors are documented to explain empirical meaning; they are not silently substituted by max(residual,error). This choice evaluates the achieved numerical accuracies. It should not be confused with claiming that all predictions agree within experimental errors. Some central offsets are much larger than their quoted errors, while a central coincidence can also be tighter than a measurement's precision.</p>
+<p>The independent chain widths used in the integration are shown below. The first width in each block is an absolute bound; the others are adjacent ratio bounds. All values are dimensionless logarithmic errors.</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Label</th>
+<th style="text-align:right">Absolute bound delta_i</th>
+<th>Chain coordinate and half-width</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W</td>
+<td style="text-align:right">0.0001234313639</td>
+<td>e_W: 0.0001234313639</td>
+</tr>
+<tr>
+<td>Z</td>
+<td style="text-align:right">0.0004607798971</td>
+<td>e_Z − e_W: 0.0003373485332</td>
+</tr>
+<tr>
+<td>H</td>
+<td style="text-align:right">0.0005283118385</td>
+<td>e_H − e_Z: 6.753194134e-05</td>
+</tr>
+<tr>
+<td>down</td>
+<td style="text-align:right">0.0003952363726</td>
+<td>e_down: 0.0003952363726</td>
+</tr>
+<tr>
+<td>strange</td>
+<td style="text-align:right">0.005728582348</td>
+<td>e_strange − e_down: 0.005333345975</td>
+</tr>
+<tr>
+<td>up</td>
+<td style="text-align:right">0.007627002919</td>
+<td>e_up: 0.007627002919</td>
+</tr>
+<tr>
+<td>charm</td>
+<td style="text-align:right">0.009290975172</td>
+<td>e_charm − e_up: 0.001663972253</td>
+</tr>
+<tr>
+<td>top</td>
+<td style="text-align:right">0.02175172983</td>
+<td>e_top − e_charm: 0.01246075466</td>
+</tr>
+<tr>
+<td>muon</td>
+<td style="text-align:right">1.730021744e-05</td>
+<td>e_muon: 1.730021744e-05</td>
+</tr>
+<tr>
+<td>tau</td>
+<td style="text-align:right">0.0006441478765</td>
+<td>e_tau − e_muon: 0.000626847659</td>
+</tr>
+</tbody>
+</table></div>
+<p>Full high-precision signed residuals, absolute bounds and pair bounds are saved in thresholds.json. Rounded values in prose do not define the numerical acceptance test.</p>
+<h2 id="3-the-joint-event-including-all-allowed-rungs">3. The joint event, including all allowed rungs</h2>
+<p>Let x_i=log(M_i^reference/m_e). For a candidate placement pi and index tuple n, write</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-5" data-tex-sha256="7ea5d240eb62de95cb1a31587013890eb6cb38cc293f8ded498828f26a039413"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msub><mi>s</mi><mi>i</mi></msub><mo>=</mo><mi>log</mi><mo>⁡</mo><mo fence="true" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><msub><mi>a</mi><msub><mi>d</mi><mi>i</mi></msub></msub><mi>C</mi><mo stretchy="false">(</mo><msub><mi>n</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>d</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo fence="true" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo><mo separator="true">,</mo><mspace width="2em"/><msub><mi>e</mi><mi>i</mi></msub><mo>=</mo><msub><mi>s</mi><mi>i</mi></msub><mo>−</mo><msub><mi>x</mi><mi>i</mi></msub><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(5)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+s_i=\log\bigl(a_{d_i}C(n_i,d_i)\bigr),\qquad e_i=s_i-x_i.
+\tag{5}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mop">lo<span style="margin-right:0.0139em;">g</span></span><span class="mopen"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2501em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose"><span class="delimsizing size1">)</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">.</span></span><span class="katex-tag"><span class="katex-strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">5</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>A reference spectrum passes exactly when there exists <strong>one complete admissible placement and one joint rung tuple</strong> for which</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-6" data-tex-sha256="04201a847350fb82a2fe75519e19ff5aded3d30f79c7dae60f9b2a62db1f8e2c"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi mathvariant="normal">∣</mi><msub><mi>e</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><mo>≤</mo><msub><mi>δ</mi><mi>i</mi></msub><mspace width="1em"/><mrow><mtext>for every nonanchor label</mtext></mrow><mo separator="true">,</mo><mspace width="2em"/><mi mathvariant="normal">∣</mi><msub><mi>e</mi><mi>j</mi></msub><mo>−</mo><msub><mi>e</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><mo>≤</mo><msub><mi>η</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mspace width="1em"/><mrow><mtext>for every within-family pair</mtext></mrow><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(6)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+|e_i|\le\delta_i\quad\hbox{for every nonanchor label},
+\qquad
+|e_j-e_i|\le\eta_{ij}\quad\hbox{for every within-family pair}.
+\tag{6}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0379em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:1em;"></span><span class="mord">for every nonanchor label</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:1em;"></span><span class="mord">for every within-family pair.</span></span><span class="katex-tag"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">6</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>The electron residual is zero. Its ratios with muon and tau duplicate their respective absolute constraints; they are not counted a second time. Tau/muon provides a further joint strip. The boson triple and up-type triple retain all their pair strips, including the algebraically dependent long ratios. Redundancy in one joint event is harmless; multiplying redundant probabilities would not be.</p>
+<p>All allowed indices are available in both actual and reference comparisons. Repeated indices are permitted, consistently with the maintained conservative alternative class. <strong>Independent nearest-rung choices are insufficient for this event.</strong> A non-nearest choice can be inside its absolute band and preserve a ratio that the nearest choice spoils. The algorithm counts every jointly admissible tuple, including overlapping bands and non-nearest choices.</p>
+<p>The maintained observed tuple satisfies equation (6) by construction, generally on its boundary. The inherited exact nearest-rung certificates show it uniquely minimizes each individual absolute error at its maintained depth, while the fixed prescription excludes different complete placements at those achieved absolute accuracies. This does not establish that the observed thresholds were chosen independently of the data.</p>
+<h3 id="3-1-an-exact-simplification-specific-to-this-residual-vector">3.1 An exact simplification specific to this residual vector</h3>
+<p>The actual W/Z/Higgs, down/strange and up/charm/top residuals are positive and increase in their mass order. The muon/tau residuals are negative with increasing magnitude. These sign and order facts are checked numerically at high precision, rather than assumed for a generic spectrum.</p>
+<p>For a block listed in its mass order, define independent integration coordinates</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-7" data-tex-sha256="8ef9c6368701e2c552448291a6c46248d0ad3011d39b3377360989f8680e881b"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msub><mi>z</mi><mn>1</mn></msub><mo>=</mo><msub><mi>e</mi><mn>1</mn></msub><mo separator="true">,</mo><mspace width="2em"/><msub><mi>z</mi><mn>2</mn></msub><mo>=</mo><msub><mi>e</mi><mn>2</mn></msub><mo>−</mo><msub><mi>e</mi><mn>1</mn></msub><mo separator="true">,</mo><mspace width="2em"/><msub><mi>z</mi><mn>3</mn></msub><mo>=</mo><msub><mi>e</mi><mn>3</mn></msub><mo>−</mo><msub><mi>e</mi><mn>2</mn></msub><mspace width="1em"/><mrow><mtext>when the block has three members</mtext></mrow><mo separator="true">,</mo></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(7)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+z_1=e_1,\qquad z_2=e_2-e_1,\qquad
+z_3=e_3-e_2\quad\hbox{when the block has three members},
+\tag{7}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:1em;"></span><span class="mord">when the block has three members</span><span class="mpunct">,</span></span><span class="katex-tag"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">7</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>with half-widths</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-8" data-tex-sha256="69766cb2acd29d5e8484b178f421989a46212fbe794baea50ecd5db28ce5b66e"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msub><mi>h</mi><mn>1</mn></msub><mo>=</mo><msub><mi>δ</mi><mn>1</mn></msub><mo separator="true">,</mo><mspace width="2em"/><msub><mi>h</mi><mn>2</mn></msub><mo>=</mo><msub><mi>η</mi><mn>12</mn></msub><mo separator="true">,</mo><mspace width="2em"/><msub><mi>h</mi><mn>3</mn></msub><mo>=</mo><msub><mi>η</mi><mn>23</mn></msub><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(8)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+h_1=\delta_1,\qquad h_2=\eta_{12},\qquad h_3=\eta_{23}.
+\tag{8}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0379em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">12</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">23</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">.</span></span><span class="katex-tag"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">8</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>For these actual residuals, equation (6) is exactly equivalent to |z_j|≤h_j. The short strips are already required by (6). Conversely, their half-widths telescope: h_1+h_2=delta_2 and h_1+h_2+h_3=delta_3. Triangle inequalities then recover every absolute bound and every longer pair strip. The same argument works for the negative lepton residuals because the bounds are absolute differences.</p>
+<p>The transformation is triangular with determinant one. Thus a fixed placement/rung tuple gives a translated acceptance box with volume</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-9" data-tex-sha256="a99586e2a84e6399d78f482165f829c2ab641df628f1443e102f34a901d339bd"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>V</mi><mo>=</mo><munderover><mo>∏</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mn>10</mn></munderover><mo stretchy="false">(</mo><mn>2</mn><msub><mi>h</mi><mi>j</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mn>1.0409457956707493</mn><mo>×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>29</mn></mrow></msup></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(9)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+V=\prod_{j=1}^{10}(2h_j)
+ =1.0409457956707493\times10^{-29}
+\tag{9}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.2222em;">V</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:3.2149em;vertical-align:-1.4138em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8011em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∏</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord">2</span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1.0409457956707493</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8641em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">29</span></span></span></span></span></span></span></span></span></span><span class="katex-tag"><span class="katex-strut" style="height:3.2149em;vertical-align:-1.4138em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">9</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>in the ten logarithmic integration variables. These are one numerical coordinate per scored mass, not ten added physical dimensions. Using this volume alone would still overcount overlaps and ignore the allowed window and ordering; those are handled next.</p>
+<h2 id="4-reference-distribution-and-certified-index-domains">4. Reference distribution and certified index domains</h2>
+<p>Keep the electron fixed. Draw the ten nonanchor log mass ratios independently on [0,L], L=log R, then sort within WZH, down/strange, up/charm/top and the muon/tau pair. The resulting density on the ordered domain D is</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-10" data-tex-sha256="30841134e39a02fda1645b2c5b6ff2f22d572bacf19630c7f54669399756c2b0"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>ρ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>3</mn><mo stretchy="false">!</mo><mtext> </mtext><mn>2</mn><mo stretchy="false">!</mo><mtext> </mtext><mn>3</mn><mo stretchy="false">!</mo><mtext> </mtext><mn>2</mn><mo stretchy="false">!</mo></mrow><msup><mi>L</mi><mn>10</mn></msup></mfrac><mtext> </mtext><msub><mn mathvariant="bold">1</mn><mi>D</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>144</mn><msup><mi>L</mi><mn>10</mn></msup></mfrac><msub><mn mathvariant="bold">1</mn><mi>D</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(10)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\rho(x)=\frac{3!\,2!\,3!\,2!}{L^{10}}\,\mathbf1_D(x)
+       =\frac{144}{L^{10}}\mathbf1_D(x).
+\tag{10}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">ρ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mclose">!</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathbf">1</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0278em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">144</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathbf">1</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0278em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord">.</span></span><span class="katex-tag"><span class="katex-strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">10</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>Here D imposes 0≤x_i≤L and the six adjacent within-block ordering inequalities. Cross-family ordering is not imposed. This is a declared comparison ensemble, not a physical prediction for the distribution of masses or an exhaustive model of all alternatives to IDWT.</p>
+<p>Three branches were declared before the calculation:</p>
+<ol>
+<li>R=10^6 with the historical index cap n≤100.</li>
+<li>R=10^6 with every rung whose absolute band intersects the window.</li>
+<li>R=10^7 with every such rung.</li>
+</ol>
+<p>The cap of 100 is historical and post hoc, without a demonstrated physical selection mechanism. For complete-window branches, label i at depth d can contribute only if</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-11" data-tex-sha256="020a45bd7ab86d606413b94fe3a917c2af2aef506c20682004b278c280624c2e"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mo>−</mo><msub><mi>δ</mi><mi>i</mi></msub><mo>≤</mo><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><msub><mi>a</mi><mi>d</mi></msub><mi>C</mi><mo stretchy="false">(</mo><mi>n</mi><mo separator="true">,</mo><mi>d</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≤</mo><mi>L</mi><mo>+</mo><msub><mi>δ</mi><mi>i</mi></msub><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(11)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+-\delta_i\le\log(a_d C(n,d))\le L+\delta_i.
+\tag{11}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord">−</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0379em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">lo<span style="margin-right:0.0139em;">g</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mclose">))</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0379em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">.</span></span><span class="katex-tag"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">11</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>Strict monotonicity gives finite lower and upper index limits. The code finds them individually for every permitted label/depth pair. The largest required upper limits are 194 and 616 in the two windows. These are completeness bounds for the stated event and mass windows, not claims that arbitrary finite caps exhaust an unspecified infinite problem.</p>
+<p>There are no new coefficient choices for other depths. Depth five lacks an independently supplied absolute unit in this prescription; adding one or changing a family scale would change the test. The independent geometric depth selector is not multiplied into the numerical coverage.</p>
+<h2 id="5-direct-integration-of-the-rare-union">5. Direct integration of the rare union</h2>
+<p>Sampling arbitrary reference spectra until a fraction near 10^-20 passes would be infeasible. Instead, sample directly from the component acceptance boxes and correct for how often their union is counted. This is importance sampling: the sampling distribution is chosen to visit the region being measured, with its density accounted for exactly.</p>
+<p>For each placement pi and label, retain its list of all rungs satisfying (11) and the branch's cap. Let Q_pi be the product of the ten list sizes and Q=sum_pi Q_pi. Every tuple's untruncated box has volume V. Choose pi with probability Q_pi/Q, choose its ten rung indices uniformly from their lists, and draw each z_j uniformly from [−h_j,h_j]. Recover the residuals by cumulative sums within each block and set x_i=s_i−e_i.</p>
+<p>At any point x, let K(x) be the number of <strong>all</strong> component boxes that contain it, summed over every admissible placement and rung tuple. The sampling density is K(x)/(QV). Therefore the desired union coverage is exactly</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-12" data-tex-sha256="2b0733c5f00fc0a7398bbb680f52a155c4815a47f31f477ca22f96e53bc72d34"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>p</mi><mo>=</mo><mfrac><mrow><mn>144</mn><mi>Q</mi><mi>V</mi></mrow><msup><mi>L</mi><mn>10</mn></msup></mfrac><mi mathvariant="double-struck">E</mi><mtext> ⁣</mtext><mrow><mo fence="true">[</mo><mfrac><mrow><msub><mn mathvariant="bold">1</mn><mi>D</mi></msub><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><mrow><mi>K</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mfrac><mo fence="true">]</mo></mrow><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(12)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+ p=\frac{144QV}{L^{10}}
+   \mathbb E\!\left[\frac{\mathbf1_D(X)}{K(X)}\right].
+\tag{12}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">144</span><span class="mord mathnormal">Q</span><span class="mord mathnormal" style="margin-right:0.2222em;">V</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathbb">E</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">[</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">K</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">1</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0278em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">]</span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">.</span></span><span class="katex-tag"><span class="katex-strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">12</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>Points outside the mass window or prescribed ordering contribute zero. Points covered by several tuples receive weight 1/K, so they are not counted several times. The same correction handles overlap between different assignments. This is not a Poisson approximation or an assumption that fitting events are independent.</p>
+<h3 id="5-1-counting-every-containing-tuple">5.1 Counting every containing tuple</h3>
+<p>For each family, find every first-label rung inside its absolute band. For each such residual, find every second-label rung within the required adjacent residual-difference strip. For three-member blocks, count every third-label rung in its strip relative to each second residual. Binary searches on increasing rung centers make these path counts efficient.</p>
+<p>Multiply the four family counts within each fixed placement, then sum across the six placements. This gives K exactly for the stated finite rung lists, subject to the explicitly tested numerical comparisons. Small controls compare it with direct enumeration of all rung tuples and all pair constraints. No nearest-rung shortcut is used.</p>
+<p>The actual sampled multiplicities reached 2, 6 and 41 in the three branches, respectively. Thus overlap correction is material, particularly in the wider window. A saved actual reference example in the n≤100 branch admits a depth-two up-family tuple (6,81,97), while no complete assignment using its independently nearest rungs satisfies the full joint event. The corresponding log mass list and all ten jointly feasible indices are retained in results.json for direct checking.</p>
+<h2 id="6-sampling-uncertainty-and-numerical-arithmetic">6. Sampling uncertainty and numerical arithmetic</h2>
+<p>Each branch uses a fixed one million component-box draws, with seeds 2026103101, 2026103102 and 2026103103. The sample budget is not stopped or changed when a desired probability appears.</p>
+<p>Two estimates are retained. The weighted mean of I_D/K directly estimates equation (12). A second estimate independently thins each in-domain draw with probability 1/K. These thinned indicators are Bernoulli trials with success probability theta=E[I_D/K], enabling a simple finite-sample concentration bound.</p>
+<p>For observed success fraction q and trial value theta, define the Bernoulli divergence</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-13" data-tex-sha256="cdba707e1c0055f68bf02389d573adf08dadd36b6cdf82a9c55b34945c1bbc80"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>q</mi><mi mathvariant="normal">∥</mi><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><mi>q</mi><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>q</mi><mi mathvariant="normal">/</mi><mi>θ</mi><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>q</mi><mo stretchy="false">)</mo><mi>log</mi><mo>⁡</mo><mo fence="true" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>q</mi><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>θ</mi><mo stretchy="false">)</mo><mo fence="true" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(13)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+D(q\Vert\theta)=q\log(q/\theta)
+ +(1-q)\log\bigl((1-q)/(1-\theta)\bigr).
+\tag{13}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mord">∥</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.0139em;">g</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.0139em;">g</span></span><span class="mopen"><span class="delimsizing size1">(</span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mclose">)</span><span class="mord">/</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span><span class="mclose"><span class="delimsizing size1">)</span></span><span class="mord">.</span></span><span class="katex-tag"><span class="katex-strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">13</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>Inverting N D(q||theta)≤log(2/alpha), with alpha=0.01/3 for each fixed run, gives conservative Chernoff intervals. Their simultaneous sampling coverage is at least 99% across the three declared branches by a union bound. This is a statistical sampling guarantee for the fixed event, not a statement about empirical mass uncertainties or historical model selection. The interval is constructed from the thinned Bernoulli estimator; the lower-variance weighted estimate is also displayed but is not assigned an unjustified binomial formula.</p>
+<p>The centers and half-widths are computed at 80 decimal digits and their float conversions checked against that calculation. An additional arithmetic guard uses epsilon=10^-11 in log coordinates, comfortably larger than the checked conversion differences below 10^-13. The sum of expanded-minus-contracted component-box volumes bounds a possible box-boundary shift. A further union-of-slabs bound handles the 20 window faces and six ordering faces. With B=144QV/L^10 and h_min the smallest half-width, the added probability guard is</p>
+<p><span class="math math-display" data-equation-id="idwt-d860ecc092ecbcee-14" data-tex-sha256="738bd0d4c7b79383cf297499b983228763b5606dfefebf4cc29085e574d91f0f"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msub><mi>b</mi><mrow><mi mathvariant="normal">n</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">m</mi></mrow></msub><mo>=</mo><mi>B</mi><mrow><mo fence="true">[</mo><munder><mo>∏</mo><mi>j</mi></munder><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>ϵ</mi><mi mathvariant="normal">/</mi><msub><mi>h</mi><mi>j</mi></msub><mo stretchy="false">)</mo><mo>−</mo><munder><mo>∏</mo><mi>j</mi></munder><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>ϵ</mi><mi mathvariant="normal">/</mi><msub><mi>h</mi><mi>j</mi></msub><mo stretchy="false">)</mo><mo>+</mo><mn>26</mn><mi>ϵ</mi><mi mathvariant="normal">/</mi><msub><mi>h</mi><mi>min</mi><mo>⁡</mo></msub><mo fence="true">]</mo></mrow><mi mathvariant="normal">.</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(14)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+ b_{\rm num}=B\left[
+ \prod_j(1+\epsilon/h_j)-\prod_j(1-\epsilon/h_j)
+ +26\epsilon/h_{\min}\right].
+\tag{14}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">num</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:3.1638em;vertical-align:-1.4138em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">[</span></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∏</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">ϵ</span><span class="mord">/</span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∏</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">ϵ</span><span class="mord">/</span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">26</span><span class="mord mathnormal">ϵ</span><span class="mord">/</span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3175em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">m</span><span class="mtight">i</span><span class="mtight">n</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size4">]</span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">.</span></span><span class="katex-tag"><span class="katex-strut" style="height:3.1638em;vertical-align:-1.4138em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">14</span></span><span class="mord">)</span></span></span></span></span></span></span></p>
+<p>The first terms compare expanded and contracted box volumes; the last term uses the bounded marginal density of each linear coordinate on a uniform-increment box. The stated guard is conditional on the finite arithmetic errors staying within epsilon. This is high-precision checking plus a conservative perturbation bound, <strong>not formal directed-rounding interval arithmetic</strong>. The numerical guard is reported separately and enlarges each displayed interval.</p>
+<h2 id="7-completed-results">7. Completed results</h2>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Electron-only reference window</th>
+<th>Index domain</th>
+<th style="text-align:right">Weighted coverage estimate</th>
+<th>Simultaneous sampling interval enlarged by numerical guard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1…10^6 electron masses</td>
+<td>Every relevant rung; n≤194 suffices</td>
+<td style="text-align:right">2.83743×10^-20</td>
+<td>[2.67360, 2.98227]×10^-20</td>
+</tr>
+<tr>
+<td>1…10^7 electron masses</td>
+<td>Every relevant rung; n≤616 suffices</td>
+<td style="text-align:right">7.32835×10^-18</td>
+<td>[6.70999, 7.71839]×10^-18</td>
+</tr>
+</tbody>
+</table></div>
+<p>For the two complete-window branches, the thinned counts are 4,864 and 3,066 from one million proposal draws each. Their point estimates are 2.82548×10^-20 and 7.20423×10^-18. Displayed interval endpoints are rounded outward. These are thousands of direct importance-sampling successes, not a claim inferred from zero rare hits in an ordinary random-spectrum simulation.</p>
+<p>For the complete-window branches, the numerical guards are approximately 9.76×10^-23 and 3.95×10^-20. The main source of displayed interval width is sampling uncertainty. All counts, component volumes, proposal normalizations, multiplicity histograms, seeds, certificates and run versions are retained in results.json.</p>
+<p>The increase in coverage in the wider window is real for this ensemble: higher-index rungs become denser. Both main results retain every relevant higher-index alternative, without independently retuning any scale. A declared finite-cap control, retained only in the reproducibility results, gives 4.82016×10^-21 at n≤100 and R=10^6, with outward-rounded guarded interval [4.628,5.034]×10^-21; it is not the complete-window headline.</p>
+<h3 id="7-1-what-the-joint-coverage-does-and-does-not-say">7.1 What the joint coverage does and does not say</h3>
+<p>The event preserves ten unequal absolute bounds and the ratio cancellations simultaneously. Under the same underlying reference distribution and complete assignment/index search, adding an acceptance requirement can only reduce or leave unchanged the union of acceptable mass lists. A looser bound therefore still constrains the joint event; it does not weaken the tight bounds on other labels. Every mass contributes through the same joint acceptance geometry.</p>
+<p>The down and up bounds retain their central numerical closeness rather than enlarging it to their larger measurement widths. The reference distribution is the stated full log-mass window. These are explicit choices defining the event, not a measurement-likelihood analysis.</p>
+<p>The <strong>conditional conclusion</strong> is that the supplied numerical prescription reproduces the selected central masses and their within-family ratios in a very small region of this declared reference distribution, even after all permitted complete assignments and relevant rung choices are admitted. The result supports investigating the organized numerical pattern under its stated constraints.</p>
+<p>It is not a global discovery probability. The coefficients, reference counts, family choices and exclusions were developed with the masses known, and the ten absolute and ratio tolerances are explicitly taken from the observed residual vector. Their full historical selection process has not been randomized or penalized here. Nor does the calculation prove precision agreement with every experimental mass, resolve quark mass-scheme interpretation, explain bottom, set the neutrino absolute scale or derive sustained particle solutions.</p>
+<p>Spin, charge, color and depth-selection constructions remain separate conditional mathematics. Shared premises can make their compatibility interesting, but those results are not independent probability factors to multiply into equation (12).</p>
+<h2 id="8-reproduction-and-verification">8. Reproduction and verification</h2>
+<p>Save the three files below together. The calculation requires Python, NumPy and mpmath. Run <code>python joint-coverage.py</code>, then <code>python check-certificates.py</code>. In the project checkout, use the shared capped compute runner. The first script regenerates thresholds and results from the exact decimal inputs; the second checks domain certificates and saved joint-rung witnesses. The main computation used fixed seeds 2026103101, 2026103102 and 2026103103 and one million proposal draws per branch. No simulation is rerun by this editorial integration.</p>
+<p>The author calculation passed 480 controls and 370 additional certificate/witness checks. Independent review checks the event, normalization, all-rung multiplicity, finite-domain certificates and confidence construction. Finite checks support these stated identities and algorithms; their number is not a count of independent physical predictions.</p>
+<h3 id="data-json">data.json</h3>
+<pre><code class="language-json">{
+  "benchmark": "Maintained new case, archived PDG 2024 central values; MeV/c^2",
+  "electron_anchor_fixed": true,
+  "particles": {
+    "electron": {"mass_MeV":"0.51099895000", "quoted_error_MeV":"0.00000000015", "source":"leptons", "page":1},
+    "muon": {"mass_MeV":"105.6583755", "quoted_error_MeV":"0.0000023", "source":"leptons", "page":1},
+    "tau": {"mass_MeV":"1776.93", "quoted_error_MeV":"0.09", "source":"leptons", "page":2},
+    "W": {"mass_MeV":"80369.2", "quoted_error_MeV":"13.3", "source":"gauge-higgs-bosons", "page":1},
+    "Z": {"mass_MeV":"91188.0", "quoted_error_MeV":"2.0", "source":"gauge-higgs-bosons", "page":2},
+    "H": {"mass_MeV":"125200.0", "quoted_error_MeV":"110.0", "source":"gauge-higgs-bosons", "page":4},
+    "down": {"mass_MeV":"4.70", "quoted_error_MeV":"0.07", "source":"quarks", "page":1, "confidence":"90 percent quoted", "definition":"MSbar at 2 GeV"},
+    "strange": {"mass_MeV":"93.5", "quoted_error_MeV":"0.8", "source":"quarks", "page":1, "confidence":"90 percent quoted", "definition":"MSbar at 2 GeV"},
+    "up": {"mass_MeV":"2.16", "quoted_error_MeV":"0.07", "source":"quarks", "page":1, "confidence":"90 percent quoted", "definition":"MSbar at 2 GeV"},
+    "charm": {"mass_MeV":"1273.0", "quoted_error_MeV":"4.6", "source":"quarks", "page":1, "confidence":"90 percent quoted", "definition":"MSbar at its own MSbar mass"},
+    "top": {"mass_MeV":"172570.0", "quoted_error_MeV":"290.0", "source":"quarks", "page":2, "definition":"direct event-kinematic mass average"}
+  },
+  "external_sources": {
+    "leptons":"https://pdg.lbl.gov/2024/tables/rpp2024-sum-leptons.pdf",
+    "quarks":"https://pdg.lbl.gov/2024/tables/rpp2024-sum-quarks.pdf",
+    "gauge-higgs-bosons":"https://pdg.lbl.gov/2024/tables/rpp2024-sum-gauge-higgs-bosons.pdf"
+  },
+  "scope":"Quoted errors are retained as published, not converted into a common Gaussian likelihood. Their rectangular envelope is not a joint confidence region. Bottom and neutrinos are not scored."
+}
+</code></pre>
+<h3 id="joint-coverage-py">joint-coverage.py</h3>
+<pre><code class="language-python">"""Observed absolute-and-ratio accuracy union; run with agent-compute.py only."""
+from pathlib import Path
+from itertools import permutations,product
+from math import comb,factorial
+import json,hashlib,platform,time
+import numpy as np
+import mpmath as mp
+
+ROOT=Path(__file__).resolve().parent
+mp.mp.dps=80
+DATA=json.loads((ROOT/'data.json').read_text())
+NAMES=('W','Z','H','down','strange','up','charm','top','muon','tau')
+GROUPS=((0,1,2),(3,4),(5,6,7),(8,9))
+PERMS=list(permutations((2,3,4)))
+DEPTHS=[p+(6,10) for p in PERMS]
+MAINTAINED_N=(76,81,95,1,4,3,20,72,35,23)
+MAINTAINED_D=(2,2,2,3,3,4,4,4,6,10)
+MASSES=[mp.mpf(DATA['particles'][name]['mass_MeV']) for name in NAMES]
+ME=mp.mpf(DATA['particles']['electron']['mass_MeV'])
+A={2:mp.sqrt(2890),3:mp.sqrt(32*mp.sqrt(7)),4:mp.sqrt(48/mp.sqrt(7))/15,6:mp.mpf(1)/18564,10:mp.mpf(1)/18564}
+OBS=[mp.log(ME*A[d]*comb(n+d-1,d)/mass) for n,d,mass in zip(MAINTAINED_N,MAINTAINED_D,MASSES)]
+DELTA=[abs(e) for e in OBS]
+H=[mp.mpf(0)]*10
+for g in GROUPS:
+ H[g[0]]=DELTA[g[0]]
+ for i,j in zip(g,g[1:]):H[j]=abs(OBS[j]-OBS[i])
+V=mp.fprod(2*h for h in H)
+DENSITY_FACTOR=mp.mpf(144)
+CHECKS=[]
+def ck(name,condition):
+ if not condition:raise AssertionError(name)
+ CHECKS.append(name)
+
+def label_depths(p):return (p[0],)*3+(p[1],)*2+(p[2],)*3+(6,10)
+def center(n,d):return mp.log(A[d]*comb(n+d-1,d))
+def candidate_lists(decades,cap):
+ L=mp.mpf(decades)*mp.log(10);lists={};cert=[]
+ for i in range(10):
+  ds=(6,) if i==8 else (10,) if i==9 else (2,3,4)
+  for d in ds:
+   n=1;vals=[];ids=[]
+   while center(n,d)-DELTA[i]&lt;=L:
+    s=center(n,d)
+    if s+DELTA[i]&gt;=0 and (cap is None or n&lt;=cap):vals.append(s);ids.append(n)
+    n+=1
+   ck(f'upper cap certificate {decades} {cap} {i} {d}',center(n,d)-DELTA[i]&gt;L)
+   ck(f'preceding cap certificate {decades} {cap} {i} {d}',center(n-1,d)-DELTA[i]&lt;=L)
+   cert.append(dict(label=NAMES[i],depth=d,last_relevant=n-1,retained=len(vals),first_retained=ids[0],last_retained=ids[-1]))
+   arr=np.asarray([float(v) for v in vals]);nums=np.asarray(ids,dtype=np.int64)
+   ck(f'float center rounding {decades} {cap} {i} {d}',max(abs(mp.mpf(float(x))-v) for x,v in zip(arr,vals))&lt;mp.mpf('1e-13'))
+   lists[i,d]=(arr,nums,vals)
+ return L,lists,cert
+
+def count_group(x,arrays,h):
+ """Count ALL rung paths, using closed successive-error intervals."""
+ n=len(x);out=np.zeros(n,dtype=np.int64)
+ lo=np.searchsorted(arrays[0],x[:,0]-h[0],side='left')
+ hi=np.searchsorted(arrays[0],x[:,0]+h[0],side='right')
+ for off in range(int(np.max(hi-lo,initial=0))):
+  inds=np.flatnonzero(lo+off&lt;hi)
+  e1=arrays[0][lo[inds]+off]-x[inds,0]
+  lo2=np.searchsorted(arrays[1],x[inds,1]+e1-h[1],side='left')
+  hi2=np.searchsorted(arrays[1],x[inds,1]+e1+h[1],side='right')
+  if x.shape[1]==2:
+   out[inds]+=hi2-lo2;continue
+  for off2 in range(int(np.max(hi2-lo2,initial=0))):
+   good=np.flatnonzero(lo2+off2&lt;hi2);jj=inds[good]
+   e2=arrays[1][lo2[good]+off2]-x[jj,1]
+   lo3=np.searchsorted(arrays[2],x[jj,2]+e2-h[2],side='left')
+   hi3=np.searchsorted(arrays[2],x[jj,2]+e2+h[2],side='right')
+   out[jj]+=hi3-lo3
+ return out
+
+def multiplicity(x,lists):
+ counts={}
+ for gi,g in enumerate(GROUPS):
+  ds=(None,) if gi==3 else (2,3,4)
+  for d in ds:
+   arrays=[lists[i,(6 if i==8 else 10) if d is None else d][0] for i in g]
+   counts[gi,d]=count_group(x[:,g],arrays,[float(H[i]) for i in g])
+ total=np.zeros(len(x),dtype=np.int64)
+ for p in PERMS:total+=counts[0,p[0]]*counts[1,p[1]]*counts[2,p[2]]*counts[3,None]
+ return total
+
+def nearest_all_passes(x,lists):
+ out=np.zeros(len(x),dtype=bool)
+ for p in PERMS:
+  es=np.empty_like(x)
+  for i,d in enumerate(label_depths(p)):
+   arr=lists[i,d][0];k=np.searchsorted(arr,x[:,i]);low=np.clip(k-1,0,len(arr)-1);high=np.clip(k,0,len(arr)-1)
+   choose=np.where(abs(arr[low]-x[:,i])&lt;=abs(arr[high]-x[:,i]),low,high)
+   es[:,i]=arr[choose]-x[:,i]
+  yes=np.all(abs(es)&lt;=np.asarray([float(v) for v in DELTA]),axis=1)
+  for g in GROUPS:
+   for i,j in zip(g,g[1:]):yes&amp;=abs(es[:,j]-es[:,i])&lt;=float(H[j])
+  out|=yes
+ return out
+
+def bernoulli_kl_interval(successes,N,alpha):
+ # Chernoff tail inversion: each wrong-side tail &lt;= alpha/2.
+ q=mp.mpf(successes)/N;c=mp.log(2/mp.mpf(alpha))/N
+ def kl(p):
+  if p&lt;=0:return mp.mpf(0) if q==0 else mp.inf
+  if p&gt;=1:return mp.mpf(0) if q==1 else mp.inf
+  return (q*mp.log(q/p) if q else 0)+((1-q)*mp.log((1-q)/(1-p)) if q&lt;1 else 0)
+ if q==0:low=mp.mpf(0)
+ else:
+  a=mp.mpf(0);b=q
+  for _ in range(200):
+   m=(a+b)/2
+   if kl(m)&gt;c:a=m
+   else:b=m
+  low=(a+b)/2
+ if q==1:high=mp.mpf(1)
+ else:
+  a=q;b=mp.mpf(1)
+  for _ in range(200):
+   m=(a+b)/2
+   if kl(m)&gt;c:b=m
+   else:a=m
+  high=(a+b)/2
+ return low,high
+
+def basic_checks():
+ ck('ordered-null density factor',factorial(3)*factorial(2)*factorial(3)*factorial(2)==144)
+ for gi,g in enumerate(GROUPS):
+  sg=1 if gi&lt;3 else -1
+  ck(f'observed residual sign group {gi}',all(sg*OBS[i]&gt;0 for i in g))
+  ck(f'observed residual absolute order group {gi}',all(DELTA[i]&lt;DELTA[j] for i,j in zip(g,g[1:])))
+  for k,i in enumerate(g):ck(f'chain sums to absolute bound {i}',abs(sum(H[j] for j in g[:k+1])-DELTA[i])&lt;mp.mpf('1e-70'))
+  for k,i in enumerate(g):
+   for j in g[k+1:]:
+    ck(f'pair strip telescopes {i} {j}',abs(abs(OBS[j]-OBS[i])-(DELTA[j]-DELTA[i]))&lt;mp.mpf('1e-70'))
+ # The triangular residual transform has unit diagonal; test exact determinant.
+ import sympy as sp
+ B=sp.eye(10)
+ for g in GROUPS:
+  for i,j in zip(g,g[1:]):B[j,i]=-1
+ ck('exact residual-chain Jacobian determinant one',B.det()==1)
+ # Independent small brute-force all-tuple count, including coincident rungs.
+ rng=np.random.default_rng(347913)
+ for dim in (2,3):
+  for case in range(30):
+   arrays=[np.sort(rng.uniform(-1,1,4)) for _ in range(dim)]
+   h=rng.uniform(.1,.8,dim);x=rng.uniform(-1,1,(8,dim))
+   got=count_group(x,arrays,h)
+   brute=[]
+   for point in x:
+    count=0
+    for values in product(*arrays):
+     es=np.asarray(values)-point
+     if abs(es[0])&lt;=h[0] and all(abs(es[j]-es[j-1])&lt;=h[j] for j in range(1,dim)):count+=1
+    brute.append(count)
+   ck(f'all-rung path count versus brute force {dim} {case}',np.array_equal(got,brute))
+ # Concrete non-nearest example: first residual0.1; nearest second residual-0.01
+ # fails width0.02, whereas second residual0.11 succeeds.
+ ex=count_group(np.array([[0.,0.]]),[np.array([.1]),np.array([-.01,.11])],[.11,.02])
+ ck('non-nearest jointly feasible rung retained',ex[0]==1 and abs(-.01-.1)&gt;.02 and abs(.11-.1)&lt;.02)
+ ck('duplicate-component inverse multiplicity identity',sp.Rational(6,3)==sp.Rational(12,6))
+ for n in (0,10,100):
+  lo,hi=bernoulli_kl_interval(n,100,mp.mpf('.01'))
+  ck(f'KL interval covers observed proportion {n}',lo&lt;=mp.mpf(n)/100&lt;=hi)
+
+
+def calibrate(decades,cap,N,seed):
+ start=time.monotonic();L,lists,cert=candidate_lists(decades,cap)
+ counts=[int(np.prod([len(lists[i,d][0]) for i,d in enumerate(label_depths(p))],dtype=object)) for p in PERMS]
+ Q=sum(counts);weights=np.array([c/Q for c in counts]);hf=np.asarray([float(h) for h in H])
+ ck('float widths '+str((decades,cap)),max(abs(mp.mpf(float(v))-h) for v,h in zip(hf,H))&lt;mp.mpf('1e-13'))
+ rng=np.random.default_rng(seed);valid_total=hits=0;weighted=0.;squared=0.;hist={};witness=None;nearest_fail_count=0
+ for offset in range(0,N,20000):
+  batch=min(20000,N-offset);which=rng.choice(len(PERMS),size=batch,p=weights)
+  centers=np.empty((batch,10));indices=np.empty((batch,10),dtype=np.int64)
+  for ip,p in enumerate(PERMS):
+   rows=np.flatnonzero(which==ip)
+   for i,d in enumerate(label_depths(p)):
+    arr,nums,_=lists[i,d];k=rng.integers(0,len(arr),size=len(rows));centers[rows,i]=arr[k];indices[rows,i]=nums[k]
+  increments=rng.uniform(-1,1,(batch,10))*hf
+  residual=np.empty_like(increments)
+  for g in GROUPS:residual[:,g]=np.cumsum(increments[:,g],axis=1)
+  x=centers-residual
+  good=np.all((x&gt;=0)&amp;(x&lt;=float(L)),axis=1)
+  for g in GROUPS:
+   for i,j in zip(g,g[1:]):good&amp;=x[:,i]&lt;=x[:,j]
+  ix=np.flatnonzero(good);xx=x[ix];K=multiplicity(xx,lists)
+  ck(f'proposal point has a containing tuple {decades} {cap} batch{offset}',np.all(K&gt;=1))
+  valid_total+=len(ix)
+  if len(ix):
+   values,ns=np.unique(K,return_counts=True)
+   for value,num in zip(values,ns):hist[int(value)]=hist.get(int(value),0)+int(num)
+   inv=1./K;weighted+=float(inv.sum());squared+=float((inv*inv).sum());hits+=int(np.sum(rng.random(len(K))&lt;inv))
+   if witness is None:
+    bad=~nearest_all_passes(xx,lists)
+    if np.any(bad):
+     jj=int(np.flatnonzero(bad)[0]);kk=ix[jj]
+     witness=dict(log_mass_ratios=x[kk].tolist(),proposal_placement=PERMS[int(which[kk])],
+                  jointly_feasible_indices=indices[kk].tolist(),proposal_residuals=residual[kk].tolist(),multiplicity=int(K[jj]))
+   nearest_fail_count+=0 # No exhaustive nearest-failure rate is claimed.
+  if offset%200000==0:print('progress',decades,cap,offset+batch,'valid',valid_total,'thinned hits',hits,flush=True)
+ # Three fixed runs: union-bound adjustment gives simultaneous confidence &gt;=99%.
+ alpha=mp.mpf('.01')/3;low,high=bernoulli_kl_interval(hits,N,alpha)
+ norm=DENSITY_FACTOR*Q*V/L**10
+ # Conservative arithmetic guard around component half-widths/centers and 26
+ # ordered-window faces. Actual MP-to-float errors were checked &lt;1e-13;
+ # epsilon1e-11 also allows arithmetic rounding in differences and sample maps.
+ eps=mp.mpf('1e-11')
+ box_guard=mp.fprod(1+eps/h for h in H)-mp.fprod(1-eps/h for h in H)
+ domain_guard=26*eps/min(H)
+ guard=norm*(box_guard+domain_guard)
+ out=dict(decades=decades,index_cap=cap or max(c['last_relevant'] for c in cert),complete_window=cap is None,
+  draws=N,seed=seed,component_counts=counts,total_components=Q,component_volume=V,normalization=norm,
+  ordered_window_hits=valid_total,thinned_hits=hits,weighted_estimate=norm*mp.mpf(weighted)/N,
+  bernoulli_estimate=norm*hits/N,sampling_interval=[norm*low,norm*high],
+  simultaneous_confidence_at_least='0.99 for the three declared branches by Chernoff and union bound',
+  numerical_guard=guard,guarded_interval=[max(0,norm*low-guard),norm*high+guard],
+  arithmetic_guard_epsilon=eps,arithmetic_guard_scope='Conservative analytic slab/box perturbation bound, conditional on finite floating-point error staying within epsilon; high precision center and width checks pass. Not directed-rounding formal arithmetic.',
+  multiplicity_histogram=hist,non_nearest_witness=witness,cap_certificates=cert,
+  elapsed_seconds=time.monotonic()-start)
+ print('RESULT',json.dumps(serial({k:out[k] for k in ('decades','index_cap','weighted_estimate','bernoulli_estimate','guarded_interval','ordered_window_hits','thinned_hits','numerical_guard')})),flush=True)
+ return out
+
+def serial(x):
+ if isinstance(x,mp.mpf):return mp.nstr(x,55)
+ if isinstance(x,dict):return {str(k):serial(v) for k,v in x.items()}
+ if isinstance(x,(tuple,list)):return [serial(v) for v in x]
+ return x
+
+def main():
+ basic_checks()
+ threshold=dict(absolute_bounds={name:DELTA[i] for i,name in enumerate(NAMES)},
+  signed_observed_residuals={name:OBS[i] for i,name in enumerate(NAMES)},
+  chain_halfwidths={name:H[i] for i,name in enumerate(NAMES)},
+  all_pair_bounds=[dict(first=NAMES[i],second=NAMES[j],bound=abs(OBS[j]-OBS[i])) for g in GROUPS for k,i in enumerate(g) for j in g[k+1:]],
+  empirical_width_floors_applied=False,coverage_not_global_pvalue=True)
+ (ROOT/'thresholds.json').write_text(json.dumps(serial(threshold),indent=2)+'\n')
+ result=dict(event='All absolute bounds AND all within-family ratio strips; all allowed rung tuples and six assignments; sole electron anchor',
+  thresholds=threshold,branches=[],versions=dict(python=platform.python_version(),numpy=np.__version__,mpmath=mp.__version__),
+  code_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),data_sha256=hashlib.sha256((ROOT/'data.json').read_bytes()).hexdigest())
+ for dec,cap,seed in ((6,100,2026103101),(6,None,2026103102),(7,None,2026103103)):
+  result['branches'].append(calibrate(dec,cap,1000000,seed))
+  result['checks']=CHECKS;result['check_count']=len(CHECKS)
+  (ROOT/'results.json').write_text(json.dumps(serial(result),indent=2)+'\n')
+ print('COMPLETE',len(CHECKS),'checks',flush=True)
+if __name__=='__main__':main()
+</code></pre>
+<h3 id="check-certificates-py">check-certificates.py</h3>
+<pre><code class="language-python">"""Small exact cap certificates and direct all-pair witness checks; capped execution."""
+from pathlib import Path
+from fractions import Fraction as F
+from itertools import product,permutations
+from math import comb
+import json,hashlib
+import mpmath as mp
+mp.mp.dps=80
+R=Path(__file__).resolve().parent
+z=json.loads((R/'results.json').read_text());data=json.loads((R/'data.json').read_text())
+names=('W','Z','H','down','strange','up','charm','top','muon','tau');groups=((0,1,2),(3,4),(5,6,7),(8,9))
+ns=(76,81,95,1,4,3,20,72,35,23);ds=(2,2,2,3,3,4,4,4,6,10)
+A={2:F(2890**2),3:F(7168),4:F(256,39375),6:F(1,18564**4),10:F(1,18564**4)}
+a={2:mp.sqrt(2890),3:mp.sqrt(32*mp.sqrt(7)),4:mp.sqrt(48/mp.sqrt(7))/15,6:mp.mpf(1)/18564,10:mp.mpf(1)/18564}
+me=F(data['particles']['electron']['mass_MeV']);mass=[F(data['particles'][name]['mass_MeV']) for name in names]
+obs4=[(me/m)**4*A[d]*comb(n+d-1,d)**4 for m,n,d in zip(mass,ns,ds)]
+# Independently reconstruct residual thresholds from exact fourth powers.
+r=[mp.log(mp.mpf(v.numerator)/v.denominator)/4 for v in obs4];delta=[abs(v) for v in r]
+checks=[]
+def ck(name,b):
+ if not b:raise AssertionError(name)
+ checks.append(name)
+for i,name in enumerate(names):ck('threshold reconstructed from rational fourth power '+name,abs(r[i]-mp.mpf(z['thresholds']['signed_observed_residuals'][name]))&lt;mp.mpf('1e-54'))
+for bi,b in enumerate(z['branches']):
+ limit=10**b['decades']
+ for c in b['cap_certificates']:
+  i=names.index(c['label']);d=c['depth'];n=c['last_relevant'];v=max(obs4[i],1/obs4[i]);lower=1/v
+  ck(f'exact last window rung {bi} {i} {d}',A[d]*comb(n+d-1,d)**4&lt;=limit**4*v)
+  ck(f'exact first excluded upper rung {bi} {i} {d}',A[d]*comb(n+d,d)**4&gt;limit**4*v)
+  k=c['first_retained'];ck(f'exact first lower-window rung {bi} {i} {d}',A[d]*comb(k+d-1,d)**4&gt;=lower)
+  if k&gt;1:ck(f'exact preceding lower exclusion {bi} {i} {d}',A[d]*comb(k+d-2,d)**4&lt;lower)
+  ck(f'finite-domain list length {bi} {i} {d}',c['retained']==min(n,b['index_cap'])-k+1)
+ # Independently enumerate all absolute-band candidates and ALL pair strips at
+ # a real sampled non-nearest witness. No residual-chain shortcut is used.
+ w=b['non_nearest_witness'];ck(f'non-nearest witness exists {bi}',w is not None)
+ x=[mp.mpf(str(v)) for v in w['log_mass_ratios']]
+ ck(f'witness window {bi}',all(0&lt;=v&lt;=mp.log(limit) for v in x))
+ ck(f'witness ordered {bi}',all(x[i]&lt;=x[j] for g in groups for i,j in zip(g,g[1:])))
+ total=0;any_nearest=False;assignment_counts=[]
+ for p in permutations((2,3,4)):
+  depth=(p[0],)*3+(p[1],)*2+(p[2],)*3+(6,10)
+  candidates=[];near=[]
+  for i,d in enumerate(depth):
+   vals=[(n,mp.log(a[d]*comb(n+d-1,d))-x[i]) for n in range(1,b['index_cap']+1)]
+   near.append(min(vals,key=lambda t:abs(t[1]))[1])
+   candidates.append([e for n,e in vals if abs(e)&lt;=delta[i]])
+  good_near=all(abs(e)&lt;=d for e,d in zip(near,delta))
+  for g in groups:
+   for ii,i in enumerate(g):
+    for j in g[ii+1:]:good_near=good_near and abs(near[j]-near[i])&lt;=abs(r[j]-r[i])
+  any_nearest=any_nearest or good_near
+  q=1
+  for g in groups:
+   num=0
+   for es in product(*(candidates[i] for i in g)):
+    if all(abs(es[v]-es[u])&lt;=abs(r[g[v]]-r[g[u]]) for u in range(len(g)) for v in range(u+1,len(g))):num+=1
+   q*=num
+  total+=q;assignment_counts.append(q)
+ ck(f'direct all-pair multiplicity agrees {bi}',total==w['multiplicity'])
+ ck(f'all independent-nearest assignments fail witness {bi}',not any_nearest)
+ ck(f'weighted estimate within guarded interval {bi}',mp.mpf(b['guarded_interval'][0])&lt;=mp.mpf(b['weighted_estimate'])&lt;=mp.mpf(b['guarded_interval'][1]))
+ b['independent_witness_assignment_counts']=assignment_counts
+out=dict(check_count=len(checks),checks=checks,witness_assignment_counts=[b['independent_witness_assignment_counts'] for b in z['branches']],
+    checked_results_sha256=hashlib.sha256((R/'results.json').read_bytes()).hexdigest(),code_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
+(R/'certificate-results.json').write_text(json.dumps(out,indent=2)+'\n')
+print(json.dumps(dict(check_count=len(checks),witness_assignment_counts=out['witness_assignment_counts']),indent=2))
+</code></pre>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261030-particle-geometry-evidence/">The Case for Investigating IDWT Particle Geometry</a></li><li><a href="/research/notes/20261030-particle-geometry-readable-draft/">Investigating IDWT Particle Geometry — A Readable Research Draft</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#1-the-question-and-the-retained-model">1. The question and the retained model</a></li><li class="toc-level-2"><a href="#2-exact-empirical-inputs-and-the-observed-bounds">2. Exact empirical inputs and the observed bounds</a></li><li class="toc-level-2"><a href="#3-the-joint-event-including-all-allowed-rungs">3. The joint event, including all allowed rungs</a></li><li class="toc-level-3"><a href="#3-1-an-exact-simplification-specific-to-this-residual-vector">3.1 An exact simplification specific to this residual vector</a></li><li class="toc-level-2"><a href="#4-reference-distribution-and-certified-index-domains">4. Reference distribution and certified index domains</a></li><li class="toc-level-2"><a href="#5-direct-integration-of-the-rare-union">5. Direct integration of the rare union</a></li><li class="toc-level-3"><a href="#5-1-counting-every-containing-tuple">5.1 Counting every containing tuple</a></li><li class="toc-level-2"><a href="#6-sampling-uncertainty-and-numerical-arithmetic">6. Sampling uncertainty and numerical arithmetic</a></li><li class="toc-level-2"><a href="#7-completed-results">7. Completed results</a></li><li class="toc-level-3"><a href="#7-1-what-the-joint-coverage-does-and-does-not-say">7.1 What the joint coverage does and does not say</a></li><li class="toc-level-2"><a href="#8-reproduction-and-verification">8. Reproduction and verification</a></li><li class="toc-level-3"><a href="#data-json">data.json</a></li><li class="toc-level-3"><a href="#joint-coverage-py">joint-coverage.py</a></li><li class="toc-level-3"><a href="#check-certificates-py">check-certificates.py</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>clock-connectivity-synthesis-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/clock-connectivity-synthesis-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="clock-connectivity-synthesis-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/clock-connectivity-synthesis-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="clock-connectivity-synthesis-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>clock-connectivity-synthesis-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/clock-connectivity-synthesis-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Bounded exact checks of the proposed clock/connectivity synthesis.&quot;&quot;&quot;
+from pathlib import Path
+import json
+import sympy as s
+
+root = Path(__file__).resolve().parent
+checks = []
+
+def check(name, condition):
+    assert bool(condition), name
+    checks.append(name)
+    print(&#39;PASS &#39; + name, flush=True)
+
+def equal(name, left, right=0):
+    check(name, s.simplify(left - right) == 0)
+
+I1, I2, Om, hbar, c, p, U, lam = s.symbols(&#39;I1 I2 Om hbar c p U lam&#39;, positive=True)
+C = s.symbols(&#39;C&#39;, integer=True, positive=True)
+B = Om * (I1 + I2 + hbar * (C - 1)) + U
+H = s.sqrt(c*c*p*p + B*B)
+equal(&#39;complete canonical clock derivative&#39;, s.diff(H, I1), Om*B/H)
+equal(&#39;translation velocity&#39;, s.diff(H, p), c*c*p/H)
+equal(&#39;rest momentum Hessian&#39;, s.diff(H, p, 2).subs(p, 0), c*c/B)
+bad = lam*(I1-I2)**2/(I1+I2)**2
+equal(&#39;degree-zero source homogeneity&#39;, I1*s.diff(bad,I1)+I2*s.diff(bad,I2))
+check(&#39;degree-zero does not preserve individual clocks&#39;, s.simplify(s.diff(bad,I1)-s.diff(bad,I2)) != 0)
+
+def laplacian(n, edges):
+    L = s.zeros(n)
+    for i,j,w in edges:
+        L[i,i] += w
+        L[j,j] += w
+        L[i,j] -= w
+        L[j,i] -= w
+    return L
+
+for n, edges, components in [
+    (1,[],1), (3,[(0,1,1),(1,2,1)],1),
+    (4,[(0,1,1),(2,3,2)],2),
+    (4,[(0,1,1),(1,2,1),(2,3,1),(3,0,1)],1),
+]:
+    L = laplacian(n,edges)
+    check(f&#39;graph rank n={n}, components={components}&#39;,L.rank()==n-components)
+    check(f&#39;constant kernel n={n}&#39;,L*s.ones(n,1)==s.zeros(n,1))
+    equal(f&#39;calibrated rest count n={n}&#39;,Om*(components*hbar+hbar*L.rank()),n*hbar*Om)
+
+t = s.symbols(&#39;t&#39;, real=True)
+f = 6*t**5-15*t**4+10*t**3
+equal(&#39;spectral smoothing lower endpoint&#39;,f.subs(t,0))
+equal(&#39;spectral smoothing upper endpoint&#39;,f.subs(t,1),1)
+for order in (1,2):
+    for endpoint in (0,1):
+        equal(f&#39;smoothing endpoint derivative {order}, {endpoint}&#39;,s.diff(f,t,order).subs(t,endpoint))
+equal(&#39;nonnegative spectral smoothing derivative&#39;,s.diff(f,t),30*t*t*(1-t)**2)
+w, eps = s.symbols(&#39;w eps&#39;,positive=True)
+L2=laplacian(2,[(0,1,w)])
+check(&#39;two-site actual spectrum&#39;,L2.eigenvals()=={0:1,2*w:1})
+equal(&#39;two-site transition force coefficient&#39;,s.diff(f.subs(t,2*w/eps),w),2/eps*s.diff(f,t).subs(t,2*w/eps))
+
+k, F, x = s.symbols(&#39;k F x&#39;,positive=True)
+energy = k*x*x/2-F*x
+equal(&#39;shape equilibrium&#39;,s.diff(energy,x).subs(x,F/k))
+equal(&#39;relaxed susceptibility energy&#39;,energy.subs(x,F/k),-F*F/(2*k))
+P1,P2,C1,C2=s.symbols(&#39;P1 P2 C1 C2&#39;)
+joined=Om*(P1+P2+hbar*(C1+C2-1))
+split=Om*(P1+hbar*(C1-1))+Om*(P2+hbar*(C2-1))
+equal(&#39;rest merger reference cost&#39;,joined-split,hbar*Om)
+report={&#39;status&#39;:&#39;passed&#39;,&#39;count&#39;:len(checks),&#39;checks&#39;:checks,
+        &#39;scope&#39;:&#39;Exact finite algebra and small graph fixtures; no field PDE, continuum stability or physical selection test.&#39;}
+(root/&#39;clock-connectivity-synthesis-checks.json&#39;).write_text(json.dumps(report,indent=2)+&#39;\n&#39;)
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>
