@@ -129,9 +129,9 @@
     </div>
     <div class="lab-controls" aria-label="Closed orbit examples">
       <button class="orbit-button" style="--orbit:#ffd27a" data-l="0" aria-label="Circular solution" title="Circular solution" aria-pressed="false">Ring</button>
-      <button class="orbit-button" style="--orbit:#5a9bff" data-l="1" aria-label="L = 1, one signed petal" title="L = 1 · 1 signed petal" aria-pressed="false">L1</button>
+      <button class="orbit-button" style="--orbit:#5a9bff" data-l="1" aria-label="L = 1, two petals" title="L = 1 · 2 petals" aria-pressed="false">L1</button>
       <button class="orbit-button" style="--orbit:#46d39a" data-l="2" aria-label="L = 2, four lobes" title="L = 2 · 4 lobes" aria-pressed="true">L2</button>
-      <button class="orbit-button" style="--orbit:#e06ad0" data-l="3" aria-label="L = 3, three signed petals" title="L = 3 · 3 signed petals" aria-pressed="false">L3</button>
+      <button class="orbit-button" style="--orbit:#e06ad0" data-l="3" aria-label="L = 3, six petals" title="L = 3 · 6 petals" aria-pressed="false">L3</button>
       <button class="orbit-button" style="--orbit:#ef917b" data-l="4" aria-label="L = 4" title="L = 4" aria-pressed="false">L4</button>
       <label class="depth-label" for="depth" title="Uncalibrated height scale η of the observer readout">Height η <input id="depth" type="range" min="0" max="2" value="2" step="0.01"></label>
       <button class="reset-button" id="pauseOrbit" aria-label="Pause animation" aria-pressed="false">Pause</button>
@@ -148,7 +148,7 @@
     </div>
     <div class="lab-controls" aria-label="Position readout">
       <label class="depth-label" for="responsePower" title="Change the position response while keeping the same Hamiltonian motion">Readout
-        <select id="responsePower" aria-label="Position response"><option value="signed">Spatial (Signed)</option><option value="0.5">Folded (√q)</option><option value="1">Smooth (q)</option></select>
+        <select id="responsePower" aria-label="Position response"><option value="0.5">Folded (√q)</option><option value="signed">Spatial (Signed)</option><option value="1">Smooth (q)</option></select>
       </label>
       <span class="response-note" id="responseNote">Constant-radius ring</span>
     </div>
@@ -159,7 +159,7 @@
       <p id="stateReturn"></p>
       <p id="phaseReadout"></p>
     </div>
-    <p class="orbit-caption" id="modelCaption">Flat Action uses prescribed gyroscopic and restoring coefficients. The chosen integer ratios close exactly. Spatial shows three signed real coordinates; Folded and Smooth are separate readouts. Radius is normalized and one clock turn takes 8.5 seconds of animation time.</p>
+    <p class="orbit-caption" id="modelCaption">Flat Action uses prescribed gyroscopic and restoring coefficients. The chosen integer ratios close exactly. The default Folded readout shows two, four and six petals for L1, L2 and L3. Spatial (Signed) is an optional coordinate projection with different odd-L counts. Radius is normalized and one clock turn takes 8.5 seconds of animation time.</p>
     </details>
     </div>
   </figure>
@@ -1220,7 +1220,7 @@ M1001 80h400000v40h-400000z" /></svg></span></span></span><span class="vlist-s">
   imbalance.addEventListener('input', updateOrbit);
   orbitModel.addEventListener('change', () => {
     if (orbitModel.value === 'action' && angularLevel === 1) angularLevel = 2;
-    responsePower.value = orbitModel.value !== 'representation' ? 'signed' : '0.5';
+    if (orbitModel.value === 'representation' && responsePower.value === 'signed') responsePower.value = '0.5';
     updateOrbit();
   });
   phaseOffset.addEventListener('change', updateOrbit);
