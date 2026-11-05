@@ -44,9 +44,8 @@
     </header>
     
     <div class="article-body">
-<p><strong>Physical premise (IDWT):</strong> There is one infinite-dimensional physical
-manifold. All sectors form one nested chain of submanifolds within it.
-Particle depth counts ordinary, literal macroscopic spatial dimensions.
+<p><strong>Physical premise (IDWT):</strong> One field lives in ten ordinary spatial dimensions
+plus time. Particle depth describes its bound spatial involvement in that space.
 “Observed” and “unobserved” describe an observer's access to those dimensions,
 not different kinds of physical dimension.
 See <a href="/theory/particle-depth-as-spatial-geometry/#literal-macroscopic-spatial-dimensions">spatial meaning and mathematical scope</a>.</p>
@@ -55,13 +54,19 @@ See <a href="/theory/particle-depth-as-spatial-geometry/#literal-macroscopic-spa
 Python helper modules remain alongside the diagnostics that import them.
 See the <a href="/research/notes/20260906-diagnostic-catalog/">diagnostic catalog</a>
 for each calculation's scope and the links to its derivation.</p>
+<p>Begin with the linked derivation and its declared assumptions, inputs and exact source fingerprints. Compare reproduced outputs with the recorded evidence before drawing a physical conclusion.</p>
 <p>Run these commands from the repository root:</p>
-<pre><code class="language-sh">python3 -B experiments/idwt-v2.py
-OPENBLAS_NUM_THREADS=1 python3 -B experiments/run_checks.py --skip-continuation --jobs 2
+<pre><code class="language-sh">python3 scripts/agent-compute.py run -- .venv/bin/python -B experiments/idwt-v2.py
+OPENBLAS_NUM_THREADS=1 python3 scripts/agent-compute.py run -- .venv/bin/python -B experiments/run_checks.py --skip-continuation --jobs 1
 </code></pre>
 <p>The selected suite includes the saved-state refinement audit but explicitly
 excludes two expensive continuation searches. Omit <code>--skip-continuation</code>
-to include them. Individual scripts can also be run directly.</p>
+to include them only when that larger calculation is authorized. Individual
+research scripts also run through scripts/agent-compute.py, including small
+numerical and symbolic checks. The shared runner permits up to eight
+independently reserved physical cores, each capped at 25%, with the runner's
+memory and no-swap limits. A suite's child processes remain within its reserved
+core; use separate reservations for independently assigned tasks.</p>
 <h2 id="recorded-evidence">Recorded evidence</h2>
 <p>The <a href="/evidence/results/experiments/spatial-band-integration-checks.py/">spatial-band integration checker</a>
 and <a href="/evidence/results/spatial-band-integration-results/">recorded results</a> verify
@@ -76,6 +81,7 @@ verify the stated hypotheses' consequences rather than a particle identification
 <p><a href="/evidence/results/"><code>results/</code></a> contains the existing numerical reports, input
 candidates, and frozen protocols. Separate reports preserve the inputs,
 settings and results of each calculation for comparison.</p>
+<p>Preserve exact source fingerprints, numerical settings and output reports when comparing calculations. A passing test verifies its stated mathematical comparison; it does not by itself identify a physical particle or interaction.</p>
 <p>The cylindrical refinement check automatically saves each completed report in
 <code>results/two-path-study/</code> with the current UTC date and time in its filename,
 for example <code>cross-method-verification-20260908T074500.123456Z.json</code>. It preserves
@@ -89,15 +95,16 @@ SymPy, and mpmath.</p>
 <h2 id="reproducing-the-normal-geometry-and-coupling-checks">Reproducing the Normal-Geometry and Coupling Checks</h2>
 <p>The geometric color synthesis and sector-case paper link the standalone Python
 sources and their frozen JSON reports. Download source files into an
-<code>experiments/</code> directory beneath a common working root. Recent frozen reports
-are published under <code>experiments/results/</code>; when a checker names an input under
-<code>results/</code>, save that report beneath the working root at its original <code>results/</code>
+experiments/ directory beneath a common working root. Recent frozen reports
+are published under experiments/results/; when a checker names an input under
+results/, save that report beneath the working root at its original results/
 path. These download copies retain the original bytes and source hashes.
 Install the dependencies imported by the selected checker, including SymPy,
 NumPy or SciPy where used, and retain any sibling checker it imports. Use a
 fresh output filename where the checker accepts one. A passing calculation
 verifies its stated mathematical comparison, not the identification of a
-physical color force or electric charge.</p>
+physical color force or electric charge. Project research runs still use the
+shared compute runner above.</p>
 </div>
     
   </article>
