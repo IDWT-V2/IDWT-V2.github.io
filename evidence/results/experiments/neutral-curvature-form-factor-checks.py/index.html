@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>neutral-curvature-form-factor-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/neutral-curvature-form-factor-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="neutral-curvature-form-factor-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/neutral-curvature-form-factor-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="neutral-curvature-form-factor-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>neutral-curvature-form-factor-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/neutral-curvature-form-factor-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Neutral integrated charge with unequal radial orientation shapes.&quot;&quot;&quot;
+import argparse
+from hashlib import sha256
+import json
+from pathlib import Path
+import sympy as s
+
+p=argparse.ArgumentParser(description=__doc__)
+p.add_argument(&#39;--output&#39;,type=Path,required=True)
+args=p.parse_args()
+if args.output.exists():
+    raise FileExistsError(args.output)
+u,lam=s.symbols(&#39;u lam&#39;,positive=True)
+f0=1-s.exp(-u)
+fj=1-s.exp(-lam*u)
+enclosed=f0**2*(f0-fj)/2
+checks=[]
+def require(name,test):
+    if not test:
+        raise AssertionError(name)
+    checks.append(name)
+require(&#39;neutral boundary origin&#39;,s.limit(enclosed,u,0)==0)
+require(&#39;neutral boundary infinity&#39;,s.limit(enclosed,u,s.oo)==0)
+require(&#39;matched shape zero density&#39;,s.simplify(enclosed.subs(lam,1))==0)
+moment=-s.Rational(1,2)*(1/lam-2/(lam+1)+1/(lam+2)-s.Rational(1,3))
+require(&#39;signed second moment&#39;,s.simplify(moment-(s.Rational(1,6)-1/(lam*(lam+1)*(lam+2))))==0)
+require(&#39;linear shape sensitivity&#39;,s.diff(moment,lam).subs(lam,1)==s.Rational(11,36))
+for value in [s.Rational(1,2),s.Integer(1),s.Integer(2)]:
+    integrated=-s.integrate(enclosed.subs(lam,value),(u,0,s.oo))
+    require(f&#39;explicit integral lambda={value}&#39;,s.simplify(integrated-moment.subs(lam,value))==0)
+result={&#39;code_sha256&#39;:sha256(Path(__file__).read_bytes()).hexdigest(),
+        &#39;check_count&#39;:len(checks),&#39;checks&#39;:checks,&#39;status&#39;:&#39;author checked; independent review pending&#39;,
+        &#39;signed_second_moment_over_reference_radius_squared&#39;:str(s.factor(moment)),
+        &#39;scope&#39;:&#39;Integrated neutrality and conditional spatial charge form factor; not a measured neutrino charge radius.&#39;}
+args.output.write_text(json.dumps(result,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;passed&#39;:len(checks)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

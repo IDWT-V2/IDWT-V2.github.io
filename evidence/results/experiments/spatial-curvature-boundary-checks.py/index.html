@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>spatial-curvature-boundary-checks.py — IDWT V2</title>
+  <meta name="description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/evidence/results/experiments/spatial-curvature-boundary-checks.py/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="spatial-curvature-boundary-checks.py — IDWT V2">
+  <meta property="og:description" content="Reproducible source and supporting text for the associated calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/evidence/results/experiments/spatial-curvature-boundary-checks.py/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="spatial-curvature-boundary-checks.py — IDWT V2">
+  <meta name="twitter:description" content="Reproducible source and supporting text for the associated calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" >Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" aria-current="page">Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Evidence</p>
+      <h1>spatial-curvature-boundary-checks.py</h1>
+      
+      
+      
+    </header>
+    <p class="scope-label">IDWT's physical premise is one infinite-dimensional manifold with all sectors nested as submanifolds. Particle depth counts macroscopic spatial dimensions; matrix and field-component counts in a calculation add no physical dimensions.</p>
+    <div class="article-body"><p>Reproducible source and supporting text for the associated calculation.</p><p><a class="text-link" href="/assets/evidence/experiments/spatial-curvature-boundary-checks.py">Download recorded text</a></p><details class="record-data"><summary>View complete source excerpt</summary><pre><code>&quot;&quot;&quot;Author checks for spatial curvature, boundary invariants and projected covariance.&quot;&quot;&quot;
+import argparse
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+from pathlib import Path
+import sympy as s
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument(&#39;--output&#39;, type=Path, required=True)
+args = parser.parse_args()
+if args.output.exists():
+    raise FileExistsError(args.output)
+checks = []
+
+
+def require(name, condition):
+    if not condition:
+        raise AssertionError(name)
+    checks.append(name)
+
+
+def pfaffian(a):
+    if a.rows == 0:
+        return s.Integer(1)
+    return sum((-1)**(j+1)*a[0, j]*pfaffian(a.minor_submatrix(0, j).minor_submatrix(j-1, 0))
+               for j in range(1, a.rows))
+
+
+def wedge(a, b):
+    out = {}
+    for ia, va in a.items():
+        for ib, vb in b.items():
+            if set(ia) &amp; set(ib):
+                continue
+            indices = ia + ib
+            sign = (-1)**sum(indices[i] &gt; indices[j]
+                             for i in range(len(indices)) for j in range(i+1, len(indices)))
+            key = tuple(sorted(indices))
+            out[key] = out.get(key, 0) + sign*va*vb
+    return {k: s.simplify(v) for k, v in out.items() if v != 0}
+
+
+rows = []
+for d in [2, 4, 6, 10]:
+    m = d//2
+    j = s.diag(*[s.Matrix([[0, 1], [-1, 0]]) for _ in range(m)])
+    x = s.Matrix([s.Rational(i+1, d+1) for i in range(d)])
+    a = s.Rational(3, 2)
+    den = a*a + (x.T*x)[0]
+    w = j*x
+    f = 2*j/den + 2*(x*w.T-w*x.T)/den**2
+    pf = s.factor(pfaffian(f))
+    require(f&#39;curvature Pfaffian d={d}&#39;, pf == 2**m*a*a/den**(m+1))
+    require(f&#39;conjugation parity d={d}&#39;, pfaffian(-f) == (-1)**m*pf)
+    sphere = 2*s.pi**m/s.gamma(m)
+    integral = s.simplify(s.factorial(m)*2**m*a*a*sphere
+        * s.gamma(m)*s.gamma(1)/s.gamma(m+1)/(2*a*a)/(2*s.pi)**m)
+    require(f&#39;whole-space integral d={d}&#39;, integral == 1)
+    r = s.symbols(&#39;r&#39;, positive=True)
+    ball = (r*r/(a*a+r*r))**m
+    radial = s.factorial(m)*2**m*a*a*sphere*r**(2*m-1)/(a*a+r*r)**(m+1)/(2*s.pi)**m
+    require(f&#39;finite-ball derivative d={d}&#39;, s.simplify(s.diff(ball, r)-radial) == 0)
+    rows.append({&#39;depth&#39;:d, &#39;normalized_integral&#39;:str(integral),
+                 &#39;conjugation_sign&#39;:(-1)**m, &#39;finite_norm_profile&#39;: d &gt; 2})
+
+# Differentiate the proposed connection explicitly in four coordinates.
+x = s.Matrix(s.symbols(&#39;x0:4&#39;, real=True))
+a = s.symbols(&#39;a&#39;, positive=True)
+j = s.diag(s.Matrix([[0, 1], [-1, 0]]), s.Matrix([[0, 1], [-1, 0]]))
+den = a*a+(x.T*x)[0]
+connection = -j*x/den
+f = s.Matrix(4, 4, lambda i,k:s.diff(connection[k], x[i])-s.diff(connection[i], x[k]))
+expected = 2*j/den+2*(x*(j*x).T-(j*x)*x.T)/den**2
+require(&#39;connection differentiation&#39;, (f-expected).applyfunc(s.simplify) == s.zeros(4))
+require(&#39;Bianchi identity representative&#39;, s.simplify(s.diff(f[1,2],x[0])+s.diff(f[2,0],x[1])+s.diff(f[0,1],x[2])) == 0)
+
+# Exact normalized-spinor check, including a concrete Clifford representation.
+sx = s.Matrix([[0,1],[1,0]])
+sy = s.Matrix([[0,-s.I],[s.I,0]])
+sz = s.diag(1,-1)
+gammas = [s.kronecker_product(sx,s.eye(2)),s.kronecker_product(sy,s.eye(2)),
+          s.kronecker_product(sz,sx),s.kronecker_product(sz,sy)]
+chi = s.Matrix([1,0,0,0])
+z = (a*s.eye(4)+s.I*sum((x[i]*gammas[i] for i in range(4)),s.zeros(4)))*chi/s.sqrt(den)
+require(&#39;normalized spinor&#39;, s.simplify((s.conjugate(z).T*z)[0]) == 1)
+for i in range(4):
+    ai = s.simplify(-s.I*(s.conjugate(z).T*z.diff(x[i]))[0])
+    require(f&#39;spinor connection component {i}&#39;, s.simplify(ai-connection[i]) == 0)
+
+# Pullback permits products of oriented planes only when enough directions exist.
+for d in [2,3,4,5,6,10]:
+    two = {(i,i+1):s.Integer(1) for i in range(0,d-1,2)}
+    product = {():s.Integer(1)}
+    for k in range(1,7):
+        product = wedge(product,two)
+        require(f&#39;exterior rank d={d} k={k}&#39;, bool(product) == (2*k &lt;= d))
+
+# A deterministic shear changes projected covariance without adding trajectories.
+t = s.symbols(&#39;t&#39;, real=True)
+cov = s.eye(4)
+transport = s.Matrix([[1,0,0,0],[0,1,0,-t],[t,0,1,0],[0,0,0,1]])
+omega = s.diag(s.Matrix([[0,1],[-1,0]]),s.Matrix([[0,1],[-1,0]]))
+require(&#39;shear symplectic&#39;, transport.T*omega*transport == omega)
+out = transport*cov*transport.T
+require(&#39;full covariance volume preserved&#39;, out.det() == 1)
+require(&#39;observed covariance increases&#39;, s.simplify(out[:2,:2].det()-(1+t*t)) == 0)
+
+result = {&#39;created&#39;:datetime.now(timezone.utc).isoformat(),
+          &#39;status&#39;:&#39;author-checked; independent review pending&#39;,
+          &#39;code_sha256&#39;:sha256(Path(__file__).read_bytes()).hexdigest(),
+          &#39;checks&#39;:checks,&#39;check_count&#39;:len(checks),&#39;curvature_integrals&#39;:rows,
+          &#39;scope&#39;:&#39;Exact sampled Pfaffians plus analytic formulas and representative symbolic derivatives; no physical charge identification.&#39;}
+args.output.write_text(json.dumps(result,indent=2)+&#39;\n&#39;)
+print(json.dumps({&#39;passed&#39;:len(checks),&#39;output&#39;:str(args.output)}))
+</code></pre></details></div>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>
