@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>IDOS Energy, Coherence, and Supporting Dynamics — Part 82 — IDWT V2</title>
+  <meta name="description" content="Part 82 of the IDOS energy, coherence, and supporting dynamics calculation.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261015-idos-energy-and-coherence-part-82/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="IDOS Energy, Coherence, and Supporting Dynamics — Part 82 — IDWT V2">
+  <meta property="og:description" content="Part 82 of the IDOS energy, coherence, and supporting dynamics calculation.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261015-idos-energy-and-coherence-part-82/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="IDOS Energy, Coherence, and Supporting Dynamics — Part 82 — IDWT V2">
+  <meta name="twitter:description" content="Part 82 of the IDOS energy, coherence, and supporting dynamics calculation.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research / Contact operators</p>
+      <h1>IDOS Energy, Coherence, and Supporting Dynamics — Part 82</h1>
+      <p class="article-date">Updated <time datetime="2026-10-16">October 16, 2026</time></p>
+      
+      
+    </header>
+    
+    <div class="article-body"><aside class="reading-callout"><p>This calculation retains its stated assumptions and action. For the current ten-space-plus-time physical picture, common-frequency portions and later developments, see <a href="/research/notes/20261030-particle-geometry-readable-draft/">the new particle-geometry and sector-depths case</a>.</p></aside>
+<p><a href="/research/notes/20261015-idos-energy-and-coherence/">Contents</a> · <a href="/research/notes/20261015-idos-energy-and-coherence-part-81/">Previous</a></p>
+<p>Under the charge-weighted clock interpretation the branch is coherent;
+under the stricter ordinary-volume law <span class="math" data-equation-id="idwt-3ea903fd9bc78896-0" data-tex-sha256="9466cc2970fb6482b3953a28553402b770ddd82da48b71ac0df5e0e64147f246"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi mathvariant="normal">Ω</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi mathvariant="normal">∣</mi><mo>=</mo><mi mathvariant="script">H</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mi>σ</mi></mrow><annotation encoding="application/x-tex">|\Omega(x)|=\mathcal H(x)/\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣Ω</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.0097em;">H</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span></span></span></span></span>,
+its energy density <span class="math" data-equation-id="idwt-3ea903fd9bc78896-1" data-tex-sha256="653be75621b0a99fc6cdbdee3440480f40e21fff7bd486cc7f48ddf798353f94"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi mathvariant="normal">Ω</mi></mrow><annotation encoding="application/x-tex">w(x)\Omega</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord">Ω</span></span></span></span></span> is uniform only on the plateau. The positive
+exterior still needs the explicit participation bridge. Neither conditional
+reading selects the observed cutoff, derives the supplied sector units or
+calibrates <span class="math" data-equation-id="idwt-3ea903fd9bc78896-2" data-tex-sha256="4ae81572f06e1b88fd5ced7a1a000945432e83e1551e6f721ee9c00b8cc33260"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">Q</span></span></span></span></span>. The bottom count/mixing conflict, tau adjacency exception,
+neutrino qualifications, finite-component carrier and reciprocal interaction
+remain separate questions. All physical coordinates here are ordinary
+<span class="math" data-equation-id="idwt-3ea903fd9bc78896-3" data-tex-sha256="f8169ce9025563ac49814c26de0f108476a0e7197462730c9e8671dea771d0e5"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="double-struck">R</mi><mn>10</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb R^{10}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathbb">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span></span></span></span></span></span></span></span></span>; the electron's literal deterministic six-dimensional
+orbit-plus-precession trajectory is distinct from this classical field
+response. No mediator particle, compactification, Kaluza--Klein tower or
+position-probability cloud is introduced.</p>
+<p>The range author's 230 finite assertions and two exact matrix jobs, and the
+reviewer's 41 assertions and two independent matrix jobs, support algebra
+and domain checks; the continuum range statement follows from the proof.</p>
+<p><a href="/research/notes/20261015-idos-energy-and-coherence/">Contents</a> · <a href="/research/notes/20261015-idos-energy-and-coherence-part-81/">Previous</a></p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261015-idos-energy-and-coherence/">IDOS Energy, Coherence, and Supporting Dynamics</a></li></ul>
+    </section>
+    
+  </article>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

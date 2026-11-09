@@ -14,7 +14,663 @@
 <meta name="twitter:title" content="Projected Electron Orbits in the 6D Sector — IDWT">
 <meta name="twitter:description" content="Deterministic trajectories and interactive spatial projections; the displayed family in four position coordinates does not select electron depth.">
 <title>Projected Electron Orbits in the 6D Sector — IDWT</title>
-<link rel="stylesheet" href="/assets/orbit.css">
+<style>
+  :root { --nav-h: 0px; }
+  .orbit-lab { min-height: 85vh; }
+  .orbit-stage { min-height: 60vh; }
+  @media (max-width: 900px) { .orbit-stage { min-height: 55vh; } }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #05070e;
+  --text: #e6e8f0;
+  --muted: #9aa3b8;
+  --muted-2: #7a8499;
+  --accent-1: #8b9cff;
+  --accent-2: #a78bfa;
+  --accent-3: #60a5fa;
+  --card: rgba(16,21,36,0.6);
+  --border: rgba(139,156,255,0.14);
+  --border-hover: rgba(139,156,255,0.28);
+  --code-bg: rgba(139,156,255,0.1);
+  --nav-h: 56px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+    color: var(--accent-1);
+}
+
+/* ── Background ────────────────────────────────────── */
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(900px 600px at 15% -5%, rgba(96,165,250,0.18), transparent 60%),
+    radial-gradient(800px 500px at 85% 0%, rgba(167,139,250,0.16), transparent 60%),
+    radial-gradient(700px 500px at 50% 120%, rgba(139,156,255,0.13), transparent 60%),
+    #05070e;
+}
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+/* ── Navigation ────────────────────────────────────── */
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: rgba(5,7,14,0.80);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(139,156,255,0.08);
+}
+
+.nav-logo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 0%, #c7d2ff 55%, #8b9cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: color 0.18s, background 0.18s;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.05);
+}
+
+.nav-links a[aria-current="page"] {
+  color: var(--accent-1);
+  background: rgba(139,156,255,0.08);
+}
+
+/* ── Corner orbs ───────────────────────────────────── */
+
+.corner-orb {
+  position: fixed;
+  top: calc(var(--nav-h) + 12px);
+  width: 210px;
+  height: 210px;
+  z-index: 2;
+  pointer-events: none;
+  background: transparent;
+  filter: saturate(1.3) brightness(0.9);
+  opacity: 0.96;
+}
+.corner-orb.left  { left: 18px; }
+.corner-orb.right { right: 18px; }
+.corner-orb canvas { width: 100%; height: 100%; display: block; }
+
+@media (max-width: 1279px) {
+  .corner-orb { display: none; }
+}
+
+@media (max-width: 720px) {
+  .corner-orb { width: 140px; height: 140px; }
+  .corner-orb.left  { left: 12px; }
+  .corner-orb.right { right: 12px; }
+}
+
+/* ── Layout ────────────────────────────────────────── */
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+  position: relative;
+  z-index: 10;
+}
+
+/* ── Heroes ────────────────────────────────────────── */
+
+.hero {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 0 60px;
+}
+
+/* Smaller hero for interior pages */
+.page-hero {
+  min-height: 38vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: calc(var(--nav-h) + 64px) 0 48px;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+/* ── Typography ────────────────────────────────────── */
+
+h1 {
+  font-size: clamp(4.5rem, 14vw, 8.5rem);
+  line-height: 0.9;
+  margin: 0 0 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  background: linear-gradient(180deg, #ffffff 15%, #c7d2ff 55%, #8b9cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 20px 40px rgba(99,102,241,0.15));
+}
+
+h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Page/article title — smaller, no drop shadow */
+.page-hero h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  line-height: 1.08;
+  filter: none;
+  margin-bottom: 20px;
+}
+
+.sub {
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  color: var(--text);
+  margin: 0 0 12px;
+  max-width: 720px;
+}
+
+.tag {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin: 0 0 36px;
+  max-width: 640px;
+}
+
+/* ── Buttons / CTA ─────────────────────────────────── */
+
+.cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+.btn:hover {
+  border-color: var(--border-hover);
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-1px);
+}
+.btn.primary {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: #060816;
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(139,156,255,0.25), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(139,156,255,0.32);
+}
+
+/* ── Sections ──────────────────────────────────────── */
+
+section {
+  padding: 72px 0;
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+section + section { padding-top: 0; }
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 0 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+h2::before {
+  content: "";
+  flex-shrink: 0;
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-1), transparent);
+  border-radius: 2px;
+}
+
+p.lead {
+  font-size: 1.1rem;
+  color: #d6daf0;
+  margin: 0 0 20px;
+}
+
+/* ── Code / formula ────────────────────────────────── */
+
+.formula {
+  margin: 28px 0 8px;
+  padding: 18px 20px;
+  background: linear-gradient(180deg, rgba(139,156,255,0.08), rgba(139,156,255,0.03));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-align: center;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.98rem;
+  color: #c9d4ff;
+}
+
+code {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--code-bg);
+  color: #c7d2fe;
+  padding: 0.18em 0.45em;
+  border-radius: 6px;
+  font-size: 0.92em;
+  border: 1px solid rgba(139,156,255,0.12);
+}
+
+/* ── Why list ──────────────────────────────────────── */
+
+.why {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 0;
+  display: grid;
+  gap: 14px;
+}
+.why li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.why li:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+.why .n {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(139,156,255,0.12);
+  color: var(--accent-1);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* ── Tables ────────────────────────────────────────── */
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 24px 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(8,12,24,0.5);
+  backdrop-filter: blur(6px);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+th, td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+th {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-2);
+  font-weight: 600;
+  background: rgba(255,255,255,0.02);
+}
+tr:last-child td { border-bottom: none; }
+td:nth-child(2) {
+  font-family: "JetBrains Mono", monospace;
+  color: #dbe2ff;
+}
+.note {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+/* ── Card grid ─────────────────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+.card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 190px;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+  color: inherit;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 16px 40px rgba(5,8,18,0.6), 0 0 0 1px rgba(139,156,255,0.08) inset;
+}
+.card-head { margin-bottom: 8px; }
+.part {
+  font-size: 0.75rem;
+  color: var(--accent-3);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.card h3 {
+  margin: 4px 0 0;
+  font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 10px 0 18px;
+  flex-grow: 1;
+}
+.dl {
+  align-self: flex-start;
+  font-size: 0.88rem;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: rgba(139,156,255,0.1);
+  color: #c7d2fe;
+  text-decoration: none;
+  border: 1px solid rgba(139,156,255,0.18);
+  transition: all 0.18s ease;
+  font-weight: 500;
+}
+.dl:hover {
+  background: rgba(139,156,255,0.18);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* ── Callout / paper card ──────────────────────────── */
+
+.callout {
+  margin-top: 20px;
+  padding: 28px 24px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(139,156,255,0.08), rgba(139,156,255,0.03));
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.paper-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, rgba(139,156,255,0.11), rgba(167,139,250,0.07));
+  border: 1px solid rgba(139,156,255,0.28);
+  border-radius: 16px;
+  margin: 0 0 20px;
+  backdrop-filter: blur(10px);
+}
+.paper-card-text .part { font-size: 0.75rem; color: var(--accent-1); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.paper-card-text h3 { margin: 4px 0 8px; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; }
+.paper-card-text p { color: var(--muted); font-size: 0.95rem; margin: 0; max-width: 620px; }
+
+/* ── Derivation tower (dl) ─────────────────────────── */
+
+/* Wrapper supplies the vertical rhythm; dl itself has no self-margin */
+.tower-wrap { margin: 28px 0 12px; }
+
+dl.derivation-tower { margin: 0; }
+
+dl.derivation-tower dt {
+  margin-top: 14px;
+  padding: 12px 18px;
+  background: linear-gradient(180deg, rgba(139,156,255,0.10), rgba(139,156,255,0.04));
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.97rem;
+  color: #c9d4ff;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+dl.derivation-tower dt:first-child { margin-top: 0; }
+
+dl.derivation-tower dd {
+  margin: 0;
+  padding: 13px 18px 18px;
+  background: rgba(8,12,24,0.50);
+  border: 1px solid var(--border);
+  border-top: 1px solid rgba(139,156,255,0.06);
+  border-radius: 0 0 14px 14px;
+  color: #c4cae2;
+  font-size: 0.97rem;
+  line-height: 1.78;
+}
+
+/* Sector colour accents — palette from visualizations/triangles.html */
+dl.derivation-tower dt.d2          { border-left: 3px solid #00aaff; }
+dl.derivation-tower dt.d3          { border-left: 3px solid #00ff44; }
+dl.derivation-tower dt.d4          { border-left: 3px solid #ff6600; }
+dl.derivation-tower dt.d5          { border-left: 3px solid #cc00ff; }
+dl.derivation-tower dt.d6          { border-left: 3px solid #ff0000; }
+dl.derivation-tower dt.d10         { border-left: 3px solid #ffdd00; }
+dl.derivation-tower dt.d2  + dd   { border-left: 3px solid #00aaff; }
+dl.derivation-tower dt.d3  + dd   { border-left: 3px solid #00ff44; }
+dl.derivation-tower dt.d4  + dd   { border-left: 3px solid #ff6600; }
+dl.derivation-tower dt.d5  + dd   { border-left: 3px solid #cc00ff; }
+dl.derivation-tower dt.d6  + dd   { border-left: 3px solid #ff0000; }
+dl.derivation-tower dt.d10 + dd   { border-left: 3px solid #ffdd00; }
+
+@media (max-width: 640px) {
+  dl.derivation-tower dt,
+  dl.derivation-tower dd { padding-left: 14px; padding-right: 14px; }
+}
+
+/* ── Prose ─────────────────────────────────────────── */
+
+.prose {
+  margin-top: 28px;
+  color: #c4cae2;
+  font-size: 1.02rem;
+  line-height: 1.82;
+}
+.prose p { margin: 0 0 1.35em; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--text); font-weight: 600; }
+.prose em { color: #dbe2ff; font-style: italic; }
+.prose h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 2em 0 0.6em;
+  letter-spacing: -0.01em;
+}
+.prose ul, .prose ol {
+  padding-left: 1.4em;
+  margin: 0 0 1.35em;
+}
+.prose li { margin-bottom: 0.4em; }
+
+/* ── Sector stack visual ───────────────────────────── */
+
+.sector-stack {
+  margin: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sector-row {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  align-items: center;
+  gap: 14px;
+}
+.sector-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+  color: var(--muted-2);
+  font-weight: 500;
+}
+.sector-bar-wrap {
+  height: 32px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.sector-bar {
+  height: 100%;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+  transition: width 0.4s ease;
+}
+.sector-particles {
+  font-size: 0.88rem;
+  color: var(--muted);
+  white-space: nowrap;
+  text-align: right;
+  min-width: 100px;
+}
+.sector-new-dirs {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--accent-1);
+  opacity: 0.7;
+}
+
+/* ── Footer ────────────────────────────────────────── */
+
+footer {
+  max-width: 900px;
+  margin: 40px auto 0;
+  padding: 32px 24px 60px;
+  color: var(--muted-2);
+  font-size: 0.9rem;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+footer a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(154,163,184,0.4);
+}
+footer a:hover {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}
+
+/* ── Responsive ────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  main { padding: 0 18px 80px; }
+  section { padding: 56px 0; }
+  .hero { min-height: 80vh; padding-top: 60px; }
+  .why li { grid-template-columns: 24px 1fr; }
+  .site-nav { padding: 0 18px; }
+  .sector-row { grid-template-columns: 48px 1fr; }
+  .sector-particles { display: none; }
+}
+
+</style>
 
 
 <style>
@@ -71,6 +727,11 @@
   #imbalance { width: 64px; height: 20px; margin: 0; accent-color: #8b9cff; }
   #imbalanceValue { font-variant-numeric: tabular-nums; min-width: 3.3em; }
   .lab-controls select { width: 48px; height: 26px; min-height: 26px; background: #11162c; color: #d8ddf1; padding: 0 2px; border: 1px solid #39436c; border-radius: 4px; font: inherit; }
+  .lab-controls[aria-label="Position readout"] { flex-wrap: wrap; justify-content: flex-start; gap: 6px 10px; padding: 6px 8px; overflow-x: hidden; }
+  #exchangePlanes { width: 140px; }
+  .phase-spread-label { flex-wrap: wrap; max-width: 100%; white-space: normal; }
+  .phase-spread-label .response-note { white-space: normal; }
+  #planeSpread { width: 90px; max-width: 100%; }
   #responsePower { width: 116px; }
   #orbitModel { width: 140px; }
   .response-note { color: #aeb7d8; font-size: 11px; white-space: nowrap; }
@@ -125,7 +786,7 @@
     </div>
     <div class="lab-tools" tabindex="0" role="group" aria-label="Orbit controls and readouts">
     <div class="lab-controls" aria-label="Visualization controls">
-      <label class="depth-label" for="orbitModel">Dynamics <select id="orbitModel"><option value="flat">Flat Action</option></select></label>
+      <label class="depth-label" for="orbitModel">Baseline Law <select id="orbitModel"><option value="flat">Flat Action</option></select></label>
     </div>
     <div class="lab-controls" aria-label="Closed orbit examples">
       <button class="orbit-button" style="--orbit:#ffd27a" data-l="0" aria-label="Circular solution" title="Circular solution" aria-pressed="false">Ring</button>
@@ -151,6 +812,10 @@
         <select id="responsePower" aria-label="Position response"><option value="0.5">Folded (√q)</option><option value="signed">Spatial (Signed)</option><option value="1">Smooth (q)</option></select>
       </label>
       <span class="response-note" id="responseNote">Constant-radius ring</span>
+      <label class="depth-label">Exchange planes
+        <select id="exchangePlanes" aria-label="Exchange planes"><option value="one">One Plane</option><option value="three" selected>Three Phased Planes</option></select>
+      </label>
+      <label class="depth-label phase-spread-label">Plane phase spread <input id="planeSpread" type="range" min="0" max="3.1416" step="0.01" value="0.90" aria-label="Plane phase spread"> <output id="planeSpreadValue">0.90</output> rad <span class="response-note">(default 0.90 rad: chosen to resemble the relative nub sizes in textbook orbital diagrams)</span></label>
     </div>
     <details class="lab-details">
     <summary>State &amp; orbit details</summary>
@@ -167,7 +832,7 @@
 <header class="page-hero">
   <div class="eyebrow">Interactive derivation · Electron sector</div>
   <h1>Projected Electron Orbits in the 6D Sector</h1>
-  <p class="sub">Follow a literal deterministic electron trajectory around a nucleus. The displayed candidate uses four spatial directions within the electron’s six-dimensional setting. A connection to the nucleus’s depth-three and depth-four quarks motivates that choice; the attractive interaction must still derive the directional constraint. The canvas shows three of the four coordinates, producing the ring or petals in projection.</p>
+  <p class="sub">Explore a four-direction orbit construction within the six-dimensional electron setting. The default three-plane readout shows lobes with smaller nubs between them; its phase offsets are adjustable. Choose Spatial (Signed) to view coordinates of the baseline flat-action trajectory instead. The nuclear interaction still needs to derive the proposed directional constraint.</p>
 </header>
 <section>
   <h2>The physical idea</h2>
@@ -175,14 +840,14 @@
   <div class="prose">
     <p>The attractive interaction between an electron and a nucleus may constrain the external orbit to four spatial directions. The nucleus’s depth-three and depth-four quark patterns motivate this hypothesis, but their depth numbers do not establish a common alignment or the direction of the force. The displayed law explicitly assumes four-direction restoring and gyroscopic terms. Its exact trajectory turns at one rate while passing between two orthogonal planes at a second rate. The electron’s distance from the nucleus stays constant. A three-coordinate projection has an apparent radius that contracts and expands as the angular position advances, giving a ring or petals.</p>
     <p>The electron itself remains a six-dimensional pattern. Its other two position coordinates are zero in this preparation; that does not show that those directions are dynamically inert or unreachable by the nuclear interaction. A projected force alone would leave free motion in its complement unless initial data or another mechanism confines it. Both nuclear and electron–electron responses need the coupled field dynamics. The relation between this orbit and three-dimensional bulk matter is examined in <a href="/research/notes/20261022-nuclear-depth-orbit-dimension/">a separate note with scoped energy and orientation checks</a>.</p>
-    <p>The default Flat Action display evaluates this motion exactly. The external position trajectory is distinct from the electron’s internal classical field oscillations. Its gyroscopic and restoring coefficients are prescribed inputs, and the closed examples use integer frequency ratios chosen by hand. The equations below make the picture reproducible and state the open test: whether the electron–nucleus interaction produces the selected motion, its rate and the measured response.</p>
+    <p>The Flat Action law supplies the baseline trajectory and clock rates. The default display applies a separate three-plane construction to those rates, producing the nubbed readout described below. That readout is not itself an established solution of the flat action. The external trajectory remains distinct from internal field oscillations; the coefficients and integer frequency ratios are supplied inputs.</p>
   </div>
 </section>
 <section>
   <h2>The electron and the displayed object</h2>
   <div class="prose">
     <p>The electron follows literal deterministic motion in six ordinary spatial dimensions. Physical spacetime has infinitely many ordinary spatial dimensions plus time. Matter occupies up to ten spatial dimensions; all remaining spatial directions are unbound for every particle. The working matter-domain geometry is flat. Particle depth describes dimensional involvement of the same field.</p>
-    <p>The Flat Action canvas shows three real coordinates of the electron’s external position around the nucleus. The chosen trajectory uses four directions and has two remaining position coordinates set to zero. It embeds in six or more containing dimensions without selecting the electron’s physical depth. Here <span class="math" data-equation-id="idwt-487af54f5666109f-0" data-tex-sha256="72dfcfb0c470ac255cde83fb8fe38de8a128188e03ea5ba5b2a93adbea1062fa"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></span> labels the chosen frequency ratio between the orbit and its precession. Their relation to observed atomic states, energies and transition strengths requires the physical interaction and observer response. Squared coordinates and ray overlaps do not assign a probability cloud to the electron.</p>
+    <p>The Spatial (Signed) setting shows three real coordinates of the baseline external position around the nucleus, with an adjustable display-height scale. The default Folded setting instead shows a normalized three-plane readout. The chosen trajectory uses four directions and has two remaining position coordinates set to zero. It embeds in six or more containing dimensions without selecting the electron’s physical depth. Here <span class="math" data-equation-id="idwt-4446e1d2616e7dcc-0" data-tex-sha256="72dfcfb0c470ac255cde83fb8fe38de8a128188e03ea5ba5b2a93adbea1062fa"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></span> labels the chosen frequency ratio between the orbit and its precession. Their relation to observed atomic states, energies and transition strengths requires the physical interaction and observer response. Squared coordinates and ray overlaps do not assign a probability cloud to the electron.</p>
   </div>
 </section>
 
@@ -196,8 +861,36 @@
     <p>Writing pairs of real coordinates as complex shorthand, its exact trajectory is</p>
     <span class="math math-display" data-equation-id="idwt-3260da0871b0aadd-0" data-tex-sha256="32864b437e61a6c913fa056d8f48108241fbb088283ec5536db50abb6e0e32bb"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>z</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>ρ</mi><msup><mi>e</mi><mrow><mi>i</mi><mi>β</mi><mi>t</mi></mrow></msup><mo stretchy="false">(</mo><mi>cos</mi><mo>⁡</mo><mi>δ</mi><mi>t</mi><mo separator="true">,</mo><mi>sin</mi><mo>⁡</mo><mi>δ</mi><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"></mspace><mi>q</mi><mo>=</mo><mo stretchy="false">(</mo><mi mathvariant="normal">ℜ</mi><msub><mi>z</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">ℑ</mi><msub><mi>z</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">ℜ</mi><msub><mi>z</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">ℑ</mi><msub><mi>z</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">z(t)=\rho e^{i\beta t}(\cos\delta t,\sin\delta t),\qquad q=(\Re z_1,\Im z_1,\Re z_2,\Im z_2).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.1491em;vertical-align:-0.25em;"></span><span class="mord mathnormal">ρ</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight" style="margin-right:0.0528em;">β</span><span class="mord mathnormal mtight">t</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">ℜ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">ℑ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">ℜ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">ℑ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></span>
     <p>In the frame rotating at <span class="math" data-equation-id="idwt-742faab932c920ad-0" data-tex-sha256="f3f3804480e8551ac91a68ccc198310e514ec1424346595aca42a3a558ddee0a"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span></span></span></span></span>, this is circular oscillator motion at <span class="math" data-equation-id="idwt-742faab932c920ad-1" data-tex-sha256="d203ba01eef4198ca268a62391076e5080e260b3fcb9b05b334d66206a893936"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span></span></span></span></span>; the two signed normal frequencies are <span class="math" data-equation-id="idwt-742faab932c920ad-2" data-tex-sha256="6df61808c07768639f2064223cf5a6f000877cd687d27f857d2e4b863cd0c4e0"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo>+</mo><mi>δ</mi></mrow><annotation encoding="application/x-tex">\beta+\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span></span></span></span></span> and <span class="math" data-equation-id="idwt-742faab932c920ad-3" data-tex-sha256="7626af05e3706831e1065c03b51a052eafb2b792cda91ff9aeb48accad006409"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo>−</mo><mi>δ</mi></mrow><annotation encoding="application/x-tex">\beta-\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span></span></span></span></span>. The default petal examples set <span class="math" data-equation-id="idwt-742faab932c920ad-4" data-tex-sha256="dd14a2233a42f71bd8d406769b50d7568abfd794433eb7f4be54e03dcec92e51"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mi>ρ</mi><mo>=</mo><mi>β</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m=\rho=\beta=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">ρ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span>, <span class="math" data-equation-id="idwt-742faab932c920ad-5" data-tex-sha256="acb3a22d67658a55cd994c4c487b6caedd494195234724afcef00f7a0ef61995"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mo>=</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">\delta=L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></span>, and <span class="math" data-equation-id="idwt-742faab932c920ad-6" data-tex-sha256="384319bc7efce08db3f81bc4dd19eb76619da99dea9096800f441a9d572fc4e7"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><msup><mi>L</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k=L^2-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span>. Thus changing L changes the restoring coefficient; this is a family of prescribed candidate laws, not integer selection by one fixed action. L1 has k = 0. The Ring is a separate harmonic-circle preparation with <span class="math" data-equation-id="idwt-742faab932c920ad-7" data-tex-sha256="16c74c49be67fb21b7d2cecaf4b04beba2a6a05364a6552a25b8afeda96e47f3"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo>=</mo><mn>0</mn><mo separator="true">,</mo><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\beta=0,k=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span>, parametrized by <span class="math" data-equation-id="idwt-742faab932c920ad-8" data-tex-sha256="3a68fbb2eeef908a472b903c7e001f59d8e5d353ad44804cc0d2396d15c2e909"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mo>=</mo><mo stretchy="false">(</mo><mi>cos</mi><mo>⁡</mo><mi>t</mi><mo separator="true">,</mo><mi>sin</mi><mo>⁡</mo><mi>t</mi><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">q=(\cos t,\sin t,0,0)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mclose">)</span></span></span></span></span>.</p>
-    <p>The signed plane image is <span class="math" data-equation-id="idwt-b994d96cb47d877d-0" data-tex-sha256="c375cefe2f37565237e5c48e4514406715e644651ca79aaebb162219d39df023"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>L</mi><mi>θ</mi><mo stretchy="false">)</mo><msup><mi>e</mi><mrow><mi>i</mi><mi>θ</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\cos(L\theta)e^{i\theta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.0991em;vertical-align:-0.25em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight" style="margin-right:0.0278em;">θ</span></span></span></span></span></span></span></span></span></span></span></span></span>, with <span class="math" data-equation-id="idwt-b994d96cb47d877d-1" data-tex-sha256="c177b54555753d05f839fd1d93347fbf196955bd70e9a8384cb28364aaaef371"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mi>β</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\theta=\beta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mord mathnormal">t</span></span></span></span></span>: it has L distinct petals for odd integer L and 2L for even L. Its radial maxima over a full clock turn are not always distinct petals. Folded and Smooth use nonnegative radius and have 2L petals. Their illustrative height is a separate readout, not the signed physical coordinate. None of these readouts is a probability cloud or a calibrated detector response.</p>
+    <p>The signed plane image is <span class="math" data-equation-id="idwt-e9849dc493703afd-0" data-tex-sha256="c375cefe2f37565237e5c48e4514406715e644651ca79aaebb162219d39df023"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>L</mi><mi>θ</mi><mo stretchy="false">)</mo><msup><mi>e</mi><mrow><mi>i</mi><mi>θ</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\cos(L\theta)e^{i\theta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.0991em;vertical-align:-0.25em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight" style="margin-right:0.0278em;">θ</span></span></span></span></span></span></span></span></span></span></span></span></span>, with <span class="math" data-equation-id="idwt-e9849dc493703afd-1" data-tex-sha256="c177b54555753d05f839fd1d93347fbf196955bd70e9a8384cb28364aaaef371"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mi>β</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\theta=\beta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mord mathnormal">t</span></span></span></span></span>: it has L distinct petals for odd integer L and 2L for even L. Its radial maxima over a full clock turn are not always distinct petals. Folded and Smooth use nonnegative radius and have 2L petals. Their illustrative height is a separate readout, not the signed physical coordinate. These one-plane petal counts do not specify the additional extrema of the three-plane readout. None of these readouts is a probability cloud or a calibrated detector response.</p>
     <p>The four components of <span class="math" data-equation-id="idwt-07280cea16d18e42-0" data-tex-sha256="8e35c2cd3bf6641bdb0e2050b76932cbb2e6034a0ddacc1d9bea82a6ba57f7cf"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span></span></span></span></span> are a premise of this candidate law. Their proposed connection to the nucleus’s quark depths needs a derivation of the attractive interaction and its directional constraint. Along the stated trajectory <span class="math" data-equation-id="idwt-07280cea16d18e42-1" data-tex-sha256="6820e7bca3755aa321bd44d9747187b15d45d8ef845b9c06699f42f93f3bc066"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>q</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>ρ</mi></mrow><annotation encoding="application/x-tex">|q|=\rho</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">ρ</span></span></span></span></span> is constant: the electron keeps a fixed distance from the nucleus while its orbit precesses. The flat force coefficient is <span class="math" data-equation-id="idwt-07280cea16d18e42-2" data-tex-sha256="8b4de13b8bb19759decb7ff6ee9904f5b04f4221674574a90fd67fe5652c6eb8"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>β</mi></mrow><annotation encoding="application/x-tex">2\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span></span></span></span></span>. The exact curve establishes compatibility with the prescribed law; its rate, restoring coefficient, frequency lock, position-dependent current, complete same-field reduction and reciprocal nuclear response remain to be derived. Nor does the flat action derive a physical isoclinic field from the electron’s internal phase. Corrected density-weighted reductions have position-dependent norm, inertia and amended charge potential; an unweighted uniform-field formula cannot substitute for them.</p>
+  </div>
+</section>
+
+
+<section id="three-plane-readout">
+  <h2>Why There Are Nubs Between the Lobes</h2>
+  <div class="prose">
+    <p>The default Three Phased Planes setting starts with the normalized real vector <span class="math" data-equation-id="idwt-08a54d6024532716-0" data-tex-sha256="1339c4472abf66188962f199d4fcd9c5dc1b36458247cd9abe967782c455cb1e"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup><mo separator="true">,</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup><mo separator="true">,</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><msqrt><mrow><mn>1</mn><mo>+</mo><mn>3</mn><mo>×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>6</mn></mrow></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex">v=(1,10^{-3},10^{-3},10^{-3})/\sqrt{1+3\times10^{-6}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.1634em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">/</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9134em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span><span style="top:-2.8734em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z" /></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1266em;"><span></span></span></span></span></span></span></span></span></span>. It applies rotations in the coordinate planes <span class="math" data-equation-id="idwt-08a54d6024532716-1" data-tex-sha256="2952887bc45642d0298722df28ed2d9b7a306c5a43682247a6a3b481e5933782"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(0,1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span>, then <span class="math" data-equation-id="idwt-08a54d6024532716-2" data-tex-sha256="53928fca0613d5f23bcc0947b57079dc94b21a942725681209c2b36cd77388d5"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(0,2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mclose">)</span></span></span></span></span>, then <span class="math" data-equation-id="idwt-08a54d6024532716-3" data-tex-sha256="790de8a192a1f545c98601b9053d96c8e7c963889a27f4f0c032014db1c1e771"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(0,3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span><span class="mclose">)</span></span></span></span></span>, using angles <span class="math" data-equation-id="idwt-08a54d6024532716-4" data-tex-sha256="b850894027b9a04101e1ded906a43025a1242084a7a092ed946be74816942a0e"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>j</mi></msub><mo>=</mo><mi>L</mi><mi>θ</mi><mo>+</mo><mi>j</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\alpha_j=L\theta+js</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span><span class="mord mathnormal">s</span></span></span></span></span>, where <span class="math" data-equation-id="idwt-08a54d6024532716-5" data-tex-sha256="043a718774c572bd8a25adbeb1bfcd5c0256ae11cecf9f9c3f925d0e52beaf89"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span></span> is the Plane Phase Spread slider and <span class="math" data-equation-id="idwt-08a54d6024532716-6" data-tex-sha256="c177b54555753d05f839fd1d93347fbf196955bd70e9a8384cb28364aaaef371"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mi>β</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\theta=\beta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mord mathnormal">t</span></span></span></span></span>. Each rotation replaces <span class="math" data-equation-id="idwt-08a54d6024532716-7" data-tex-sha256="5b8a68f7bff14edca597f00af330a4fc0fea33ff68599c936667364f92c1052c"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>v</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>v</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(v_0,v_j)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span> by <span class="math" data-equation-id="idwt-08a54d6024532716-8" data-tex-sha256="265a3217bbfb43ed26c6ebc97225be646b2ca115df227380621dff32ba4bbcbb"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>v</mi><mn>0</mn></msub><mi>cos</mi><mo>⁡</mo><msub><mi>α</mi><mi>j</mi></msub><mo>−</mo><msub><mi>v</mi><mi>j</mi></msub><mi>sin</mi><mo>⁡</mo><msub><mi>α</mi><mi>j</mi></msub><mo separator="true">,</mo><mtext>&#160;</mtext><msub><mi>v</mi><mn>0</mn></msub><mi>sin</mi><mo>⁡</mo><msub><mi>α</mi><mi>j</mi></msub><mo>+</mo><msub><mi>v</mi><mi>j</mi></msub><mi>cos</mi><mo>⁡</mo><msub><mi>α</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(v_0\cos\alpha_j-v_j\sin\alpha_j,\ v_0\sin\alpha_j+v_j\cos\alpha_j)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.954em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace">&#160;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span>. These are real rotations in four coordinates; the displayed radius is a readout of their result.</p>
+    <p>The code takes <span class="math" data-equation-id="idwt-97459cc663f8fa1c-0" data-tex-sha256="4937317bc306beee803ef494ceed64d97237e40c8d4b825d2e0ae0a69368d424"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>=</mo><mi mathvariant="normal">∣</mi><msub><mi>v</mi><mn>0</mn></msub><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">a_0=|v_0|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span></span></span></span></span> and <span class="math" data-equation-id="idwt-97459cc663f8fa1c-1" data-tex-sha256="4ee92e84172f9cb0d658235057aa06883876f1a55a0e931a0e17b0d0f457ba9c"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>=</mo><mi mathvariant="normal">∣</mi><msub><mi>v</mi><mn>1</mn></msub><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">a_1=|v_1|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span></span></span></span></span>, scales each by its own sampled maximum over an exchange cycle, and calls the resulting values <span class="math" data-equation-id="idwt-97459cc663f8fa1c-2" data-tex-sha256="fdb257147fb74248b897c60331a14da98056c18c01448c872ff4866292113003"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover accent="true"><mi>a</mi><mo stretchy="true">^</mo></mover><mn>0</mn></msub><mo separator="true">,</mo><msub><mover accent="true"><mi>a</mi><mo stretchy="true">^</mo></mover><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\widehat a_0,\widehat a_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.865em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord katex-accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6706em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">a</span></span><span class="svg-align" style="top:-3.4306em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.24em;"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="0.24em" viewBox="0 0 1062 239" preserveAspectRatio="none"><path d="M529 0h5l519 115c5 1 9 5 9 10 0 1-1 2-1 3l-4 22
+c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z" /></svg></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord katex-accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6706em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">a</span></span><span class="svg-align" style="top:-3.4306em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.24em;"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="0.24em" viewBox="0 0 1062 239" preserveAspectRatio="none"><path d="M529 0h5l519 115c5 1 9 5 9 10 0 1-1 2-1 3l-4 22
+c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z" /></svg></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>. Folded uses <span class="math" data-equation-id="idwt-97459cc663f8fa1c-3" data-tex-sha256="9b7f7d99d00eb918ef00cc184c2ce3ca53a1615f92242baebd2fec04a2acfc5f"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><msub><mover accent="true"><mi>a</mi><mo stretchy="true">^</mo></mover><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">R=\widehat a_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8206em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord katex-accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6706em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">a</span></span><span class="svg-align" style="top:-3.4306em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.24em;"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="0.24em" viewBox="0 0 1062 239" preserveAspectRatio="none"><path d="M529 0h5l519 115c5 1 9 5 9 10 0 1-1 2-1 3l-4 22
+c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z" /></svg></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>; Smooth uses <span class="math" data-equation-id="idwt-97459cc663f8fa1c-4" data-tex-sha256="5fa748c7e8b9be8a6eb0dc5fdf7438a34dbb0a398a88416ce799b1584158e7ad"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><msubsup><mover accent="true"><mi>a</mi><mo stretchy="true">^</mo></mover><mn>0</mn><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">R=\widehat a_0^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.0622em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord katex-accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6706em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">a</span></span><span class="svg-align" style="top:-3.4306em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.24em;"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="0.24em" viewBox="0 0 1062 239" preserveAspectRatio="none"><path d="M529 0h5l519 115c5 1 9 5 9 10 0 1-1 2-1 3l-4 22
+c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z" /></svg></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span></span>. The displayed coordinates are</p>
+    <span class="math math-display" data-equation-id="idwt-c2fc32c8d82531b6-0" data-tex-sha256="6a2ce23c8f96ff49a05daa143c51c1ffdfa28e8910e410bf58ead821caf1d272"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>X</mi><mo>=</mo><mi>R</mi><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo separator="true">,</mo><mspace width="2em"></mspace><mi>Y</mi><mo>=</mo><mi>R</mi><mi>sin</mi><mo>⁡</mo><mi>θ</mi><mo separator="true">,</mo><mspace width="2em"></mspace><mi>Z</mi><mo>=</mo><mi>η</mi><msubsup><mover accent="true"><mi>a</mi><mo stretchy="true">^</mo></mover><mn>1</mn><mrow><mtext> </mtext><mn>2</mn><mi>p</mi></mrow></msubsup><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>3</mn><mi>θ</mi><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">X=R\cos\theta,\qquad Y=R\sin\theta,\qquad Z=\eta\widehat a_1^{\,2p}\cos(3\theta),</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.2222em;">Y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">Z</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.1983em;vertical-align:-0.2663em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">η</span><span class="mord"><span class="mord katex-accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6706em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">a</span></span><span class="svg-align" style="top:-3.4306em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.24em;"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="0.24em" viewBox="0 0 1062 239" preserveAspectRatio="none"><path d="M529 0h5l519 115c5 1 9 5 9 10 0 1-1 2-1 3l-4 22
+c-1 5-5 9-11 9h-2L532 67 19 159h-2c-5 0-9-4-11-9l-5-22c-1-6 2-12 8-13z" /></svg></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.932em;"><span style="top:-2.4337em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.1809em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mspace mtight" style="margin-right:0.1952em;"></span><span class="mord mtight">2</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2663em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span></span></span>
+    <p>where <span class="math" data-equation-id="idwt-45d1af0daedbf0cf-0" data-tex-sha256="6d1b6b3f4b387198a72339eb8f10510640319015f6c1bf87c71036b2a1fabd32"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">p=1/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1/2</span></span></span></span></span> for Folded and <span class="math" data-equation-id="idwt-45d1af0daedbf0cf-1" data-tex-sha256="791a7b3a1c84e05cbf520166fc1107eebd36ea5ed05f636222d80d2bf4183966"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">p=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span> for Smooth. The height <span class="math" data-equation-id="idwt-45d1af0daedbf0cf-2" data-tex-sha256="59a94416a2a319caf40a348286e620ef3594226a2eac1efe842231962d1e157d"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>η</mi></mrow><annotation encoding="application/x-tex">\eta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">η</span></span></span></span></span> and the factor <span class="math" data-equation-id="idwt-45d1af0daedbf0cf-3" data-tex-sha256="203bab91b33c9509c7804e90e4f920867a70175ebe76f35bb4e1aa20d81e8964"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>3</mn><mi>θ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\cos(3\theta)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mclose">)</span></span></span></span></span> are illustrative display choices, not coordinates derived from the flat-action solution. The small seeded components and phase spread alter peak heights and can introduce secondary maxima—the nubs. Their number and relative size depend on the preparation and readout, so the L buttons label the exchange-rate ratio rather than a guaranteed total lobe count. The default phase spread of 0.90 radians was chosen to resemble the relative sizes of the smaller lobes in textbook orbital diagrams. This is a visual size comparison; it does not establish agreement of the complete angular shapes or identify these readouts with textbook orbitals.</p>
+    <p>One Plane restores the simpler Folded or Smooth readout described above. Spatial (Signed) bypasses the three-plane readout and uses the baseline position coordinates; its phase-spread control therefore has no effect. The Ring also bypasses the three-plane construction. State-distance information refers to the baseline trajectory, even while the canvas shows the nubbed readout. One clock turn takes 8.5 seconds of animation time; physical clock units remain uncalibrated.</p>
   </div>
 </section>
 
@@ -209,11 +902,56 @@
 (() => {
   const stage = document.getElementById('orbitStage');
   const canvas = document.getElementById('orbitCanvas');
+  let zoom = 1.0;   // wheel to zoom (0.3 to 8); drag to rotate
+  canvas.addEventListener('wheel', event => { event.preventDefault(); zoom = Math.min(8, Math.max(0.3, zoom * (event.deltaY < 0 ? 1.12 : 1 / 1.12))); }, { passive: false });
+
   const ctx = canvas.getContext('2d');
   const depth = document.getElementById('depth');
   const imbalance = document.getElementById('imbalance');
   const phaseOffset = document.getElementById('phaseOffset');
   const responsePower = document.getElementById('responsePower');
+  const exchangePlanes = document.getElementById('exchangePlanes');
+  const planeSpread = document.getElementById('planeSpread');
+  const planeSpreadValue = document.getElementById('planeSpreadValue');
+  // June 2026 construction: the occupied amplitude is rotated into each of the three
+  // other coordinates at the same exchange rate with offset phases k*spread (k = 1, 2, 3).
+  // Returns the normalized moduli of the first two amplitudes.
+  // Normalization: the shared amplitude never reaches 1, so divide by the maxima over one
+  // exchange cycle (recomputed when the spread changes) to fill the stage like the one-plane case.
+  let planeNorm = {spread: null, a0: 1, a1: 1};
+  function rawThreePlane(exchange, spread) {
+    const v = [1, 1e-3, 1e-3, 1e-3];
+    for (let k = 1; k <= 3; k++) {
+      const ang = exchange + k * spread;
+      const c = Math.cos(ang), s = Math.sin(ang);
+      const v0 = v[0], vk = v[k];
+      v[0] = c * v0 - s * vk; v[k] = s * v0 + c * vk;
+    }
+    const n = Math.hypot(v[0], v[1], v[2], v[3]) || 1;
+    return [Math.abs(v[0]) / n, Math.abs(v[1]) / n];
+  }
+  function threePlaneAmplitudes(exchange) {
+    const spread = Number(planeSpread.value);
+    if (planeNorm.spread !== spread) {
+      let m0 = 1e-9, m1 = 1e-9;
+      for (let i = 0; i < 2000; i++) { const [a, b] = rawThreePlane(i / 2000 * 2 * Math.PI, spread); if (a > m0) m0 = a; if (b > m1) m1 = b; }
+      planeNorm = {spread, a0: m0, a1: m1};
+    }
+    const [a0, a1] = rawThreePlane(exchange, spread);
+    return [Math.min(1, a0 / planeNorm.a0), Math.min(1, a1 / planeNorm.a1)];
+  }
+  function unusedThreePlane(exchange) {
+    const spread = Number(planeSpread.value);
+    const v = [1, 1e-3, 1e-3, 1e-3];
+    for (let k = 1; k <= 3; k++) {
+      const ang = exchange + k * spread;
+      const c = Math.cos(ang), s = Math.sin(ang);
+      const v0 = v[0], vk = v[k];
+      v[0] = c * v0 - s * vk; v[k] = s * v0 + c * vk;
+    }
+    const n = Math.hypot(v[0], v[1], v[2], v[3]) || 1;
+    return [Math.abs(v[0]) / n, Math.abs(v[1]) / n];
+  }
   const responseNote = document.getElementById('responseNote');
   const orbitModel = document.getElementById('orbitModel');
   const representationControls = document.getElementById('representationControls');
@@ -297,7 +1035,7 @@
       button.disabled = !flat && action && level === 1;
       button.setAttribute('aria-pressed', String(level === angularLevel));
       const button_label = level === 0 ? 'Circular solution' : !flat && action && level === 1 ? 'L1: available in Flat Action or Section Generator' :
-        `L = ${level}, ${action && responsePower.value === 'signed' && level % 2 ? level : 2 * level} petals`;
+        `L = ${level} · exchange-rate ratio`;
       button.setAttribute('aria-label', button_label);
       button.setAttribute('title', button_label);
     });
@@ -307,12 +1045,12 @@
       responsePower.disabled = ring;
       const {rho, beta, delta, phaseAction, stiffness} = actionParameters();
       const signed = responsePower.value === 'signed';
-      label.textContent = ring ? 'Circular action solution' : `L = ${angularLevel} · ${signed && angularLevel % 2 ? angularLevel : 2 * angularLevel} petals`;
-      responseNote.textContent = ring ? 'Constant-radius circle' : signed ? 'Three real spatial coordinates' : 'Alternative coordinate readout';
+      label.textContent = ring ? 'Circular action solution' : `L = ${angularLevel} · ${signed ? 'signed spatial projection' : exchangePlanes.value === 'three' ? 'three-plane nubbed readout' : 'one-plane readout'}`;
+      responseNote.textContent = ring ? 'Constant-radius circle' : signed ? 'Baseline coordinates · height scaled' : exchangePlanes.value === 'three' ? 'Normalized phased-plane readout' : 'One-plane readout';
       orbitCondition.textContent = flat ? `Flat: m = 1 · k = ${stiffness} · ρ = 1 · β = ${beta} · δ = ${delta}.` : `Curved: Λ = 1 · K = 8 · J = ${phaseAction} · ρ = ${rho.toFixed(5)} · β = ${beta.toFixed(5)} · δ = ${delta.toFixed(5)}.`;
       stateReturn.textContent = flat ? (ring ? 'Exact harmonic circle · β = 0, k = 1; distinct preparation.' : 'Exact closed preparation · integer ratio is chosen, not dynamically selected.') : ring ? 'Exact closed circular solution · J = 2; distinct preparation from the petal branch.' :
         'Exact closed solution · phase mismatch per clock turn: 0° · radial trapping for nonzero block momenta.';
-      modelCaption.textContent = (flat ? 'Flat Action uses prescribed β and k; L changes k. ' : 'Curved Action retains its projective metric and conserved phase. ') + 'The selected action supplies the position and rates. No drift is added. Spatial shows a signed coordinate projection; folding changes odd-L images. Radius is normalized for display. One clock turn takes 8.5 seconds of animation time; physical clock units remain uncalibrated.';
+      modelCaption.textContent = 'Flat Action supplies the baseline clock rates; L changes k. ' + (ring ? 'The Ring is a separate circular preparation. ' : signed ? 'Spatial (Signed) shows baseline coordinates with scaled height; plane spread is bypassed. ' : exchangePlanes.value === 'three' ? 'Three ordered phased rotations generate the normalized nubbed readout. Its illustrative height is not a derived spatial coordinate. ' : 'One Plane shows the simpler Folded or Smooth readout. ') + 'The state-distance readout refers to the baseline trajectory. One clock turn takes 8.5 seconds of animation time; physical clock units remain uncalibrated.';
       if (reset_clock) { start = performance.now(); if (pausedAt !== null) pausedAt = start; }
       return;
     }
@@ -349,8 +1087,12 @@
   function point(theta) {
     const {delta, omega} = parameters();
     const response_power = Number(responsePower.value);
-    const radial = angularLevel === 0 ? 1 : Math.hypot(Math.cos(omega * theta), delta / omega * Math.sin(omega * theta)) ** (2 * response_power);
-    const hidden = angularLevel === 0 ? 0 : (angularLevel / omega * Math.abs(Math.sin(omega * theta))) ** (2 * response_power);
+    let radial = angularLevel === 0 ? 1 : Math.hypot(Math.cos(omega * theta), delta / omega * Math.sin(omega * theta)) ** (2 * response_power);
+    let hidden = angularLevel === 0 ? 0 : (angularLevel / omega * Math.abs(Math.sin(omega * theta))) ** (2 * response_power);
+    if (angularLevel !== 0 && exchangePlanes.value === 'three') {
+      const [a0, a1] = threePlaneAmplitudes(omega * theta);
+      radial = a0 ** (2 * response_power); hidden = a1 ** (2 * response_power);
+    }
     let x = radial * Math.cos(theta);
     let y = radial * Math.sin(theta);
     let z = Number(depth.value) * hidden * Math.cos(3 * theta);
@@ -361,10 +1103,15 @@
         [x, y, z] = [position[0] / rho, position[1] / rho, Number(depth.value) * position[2] / rho];
       } else {
         const exchange = delta * theta / beta;
-        const radius = Math.abs(Math.cos(exchange)) ** (2 * response_power);
+        let radius = Math.abs(Math.cos(exchange)) ** (2 * response_power);
+        let hiddenAmp = Math.abs(Math.sin(exchange)) ** (2 * response_power);
+        if (exchangePlanes.value === 'three') {
+          const [a0, a1] = threePlaneAmplitudes(exchange);
+          radius = a0 ** (2 * response_power); hiddenAmp = a1 ** (2 * response_power);
+        }
         x = radius * Math.cos(theta);
         y = radius * Math.sin(theta);
-        z = Number(depth.value) * Math.abs(Math.sin(exchange)) ** (2 * response_power) * Math.cos(3 * theta);
+        z = Number(depth.value) * hiddenAmp * Math.cos(3 * theta);
       }
     }
     const cy = Math.cos(yaw);
@@ -382,7 +1129,7 @@
     const view_depth = angularLevel === 0 ? 0 : Number(depth.value);
     const stretch_x = Math.hypot(Math.cos(yaw), view_depth * Math.sin(yaw));
     const stretch_y = Math.hypot(Math.cos(pitch), Math.sin(pitch) * Math.sin(yaw), view_depth * Math.sin(pitch) * Math.cos(yaw));
-    const scale = Math.min(width, height) * 0.37 / Math.max(1, stretch_x, stretch_y);
+    const scale = zoom * Math.min(width, height) * 0.37 / Math.max(1, stretch_x, stretch_y);
     return {
       x: width / 2 + p.x * scale,
       y: height / 2 - p.y * scale,
@@ -451,7 +1198,7 @@
     const {epsilon} = parameters();
     const relativePhase = ((epsilon * thetaNow) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
     phaseReadout.textContent = orbitModel.value === 'flat' ?
-      `Clock turns: ${(thetaNow / (2 * Math.PI)).toFixed(2)} · distance from initial position: ${Math.hypot(...actionPosition(thetaNow).map((value, index) => value - actionPosition(0)[index])).toFixed(3)} (normalized length).` : orbitModel.value === 'action' ?
+      `Clock turns: ${(thetaNow / (2 * Math.PI)).toFixed(2)} · baseline distance from initial position: ${Math.hypot(...actionPosition(thetaNow).map((value, index) => value - actionPosition(0)[index])).toFixed(3)} (normalized length).` : orbitModel.value === 'action' ?
       `Clock turns: ${(thetaNow / (2 * Math.PI)).toFixed(2)} · current position-ray overlap: ${(100 * returnFidelity(thetaNow)).toFixed(1)}%.` :
       `Clock turns: ${(thetaNow / (2 * Math.PI)).toFixed(2)} · block-offset phase εt: ${(relativePhase * 180 / Math.PI).toFixed(1)}° · current state return: ${(100 * returnFidelity(thetaNow)).toFixed(1)}%.`;
     requestAnimationFrame(draw);
@@ -472,6 +1219,8 @@
     updateOrbit();
   });
   phaseOffset.addEventListener('change', updateOrbit);
+  exchangePlanes.addEventListener('change', () => updateOrbit(false));
+  planeSpread.addEventListener('input', () => { planeSpreadValue.value = Number(planeSpread.value).toFixed(2); updateOrbit(false); });
   responsePower.addEventListener('change', () => updateOrbit(false));
   function alignRate(extra) {
     if (angularLevel === 0) return;
