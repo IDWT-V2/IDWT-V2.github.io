@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Shapes of the Counted Patterns and the Exact Branch at Every Depth — IDWT V2</title>
+  <meta name="description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261110-case-simplex-shapes-and-branch/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Shapes of the Counted Patterns and the Exact Branch at Every Depth — IDWT V2">
+  <meta property="og:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261110-case-simplex-shapes-and-branch/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Shapes of the Counted Patterns and the Exact Branch at Every Depth — IDWT V2">
+  <meta name="twitter:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>Shapes of the Counted Patterns and the Exact Branch at Every Depth</h1>
+      <p class="article-date">Updated <time datetime="2026-11-10">November 10, 2026</time></p>
+      <p class="scope-label">conditional research</p>
+      
+    </header>
+    
+    <div class="article-body">
+<h2 id="shapes">Shapes</h2>
+<p>The count C = S(n, d) is the number of sites of a complete simplex of side n - 1 in d directions (spacing 1). Exact (rational) statistics, no enumeration; checked against the enumerated electron run. Electron d = 6, side 12: 18,564 sites; muon d = 6, side 34: 3,838,380; tau d = 10, side 22: 64,512,240, the only complete simplex of that count (the tau count is not a complete simplex in six directions). Second moments are isotropic in every axis (2.0357, 12.446, 2.75). Output:</p>
+<pre><code>electron_d6_side12 {'d': 6, 'side': 12, 'sites': 18564, 'isotropic_second_moment': 2.03571, 'rms_radius': 3.49489, 'circumradius': 7.85584, 'inradius': 1.30931, 'vertex_to_facet_ratio': 6.0, 'circum_over_rms': 2.24781, 'in_over_rms': 0.37463, 'vertex_axis_skewness': 1.31702, 'vertex_axis_kurtosis': 4.64133, 'interior_sites': 462, 'interior_fraction': 0.02489, 'modal_face_dimension': 4, 'modal_face_fraction': 0.3733, 'mean_face_dimension': 3.66667}
+   cumulative fraction of sites in faces of dimension &lt;= j: {'0': 0.0004, '1': 0.0128, '2': 0.1165, '3': 0.4276, '4': 0.8009, '5': 0.9751, '6': 1.0}
+muon_d6_side34 {'d': 6, 'side': 34, 'sites': 3838380, 'isotropic_second_moment': 12.44643, 'rms_radius': 8.64168, 'circumradius': 22.25822, 'inradius': 3.7097, 'vertex_to_facet_ratio': 6.0, 'circum_over_rms': 2.57568, 'in_over_rms': 0.42928, 'vertex_axis_skewness': 1.28863, 'vertex_axis_kurtosis': 4.62535, 'interior_sites': 1107568, 'interior_fraction': 0.28855, 'modal_face_dimension': 5, 'modal_face_fraction': 0.43283, 'mean_face_dimension': 4.95}
+   cumulative fraction of sites in faces of dimension &lt;= j: {'0': 0.0, '1': 0.0002, '2': 0.005, '3': 0.0547, '4': 0.2786, '5': 0.7114, '6': 1.0}
+tau_d10_side22 {'d': 10, 'side': 22, 'sites': 64512240, 'isotropic_second_moment': 2.75, 'rms_radius': 5.24404, 'circumradius': 14.8324, 'inradius': 1.48324, 'vertex_to_facet_ratio': 10.0, 'circum_over_rms': 2.82843, 'in_over_rms': 0.28284, 'vertex_axis_skewness': 1.54805, 'vertex_axis_kurtosis': 5.83077, 'interior_sites': 352716, 'interior_fraction': 0.00547, 'modal_face_dimension': 7, 'modal_face_fraction': 0.2974, 'mean_face_dimension': 6.5625}
+   cumulative fraction of sites in faces of dimension &lt;= j: {'0': 0.0, '1': 0.0, '2': 0.0006, '3': 0.0074, '4': 0.0502, '5': 0.1959, '6': 0.4735, '7': 0.7709, '8': 0.9444, '9': 0.9945, '10': 1.0}
+</code></pre>
+<h2 id="the-exact-branch">The exact branch</h2>
+<p>For d bound directions the stationary branch of i Phi_t = -i gamma.grad Phi + M beta Phi - g rho^(1/9) Phi is f = A (1+r^2/a^2)^(-5), a = (10-d)/(2M), g (s0 A^2)^(1/9) = 20M/(10-d), energy per norm -(8M/9)(9-d)/(10-d), the same tail exponent for every d, checked on explicit Clifford matrices. At d = 10 the regular branch has zero width. Output:</p>
+<pre><code>4 {'a': 2.3076923076923075, 'g_coefficient': 4.690776657894754, 'max_residual': 2.982133948284426e-11, 'derivative_scale': 0.5058329202884521, 'residual_with_d6_width_kept': 0.10693077351084634, 'required_gA_s0_pow': 4.333333333333334, 'ratio_20M_over_10md': 4.333333333333333}
+6 {'a': 1.5384615384615383, 'g_coefficient': 7.03616498684213, 'max_residual': 1.179788563452958e-11, 'derivative_scale': 0.09897559062367046, 'residual_with_d6_width_kept': 4.875708173746341e-12, 'required_gA_s0_pow': 6.5, 'ratio_20M_over_10md': 6.5}
+8 {'a': 0.7692307692307692, 'g_coefficient': 14.07232997368426, 'max_residual': 1.4053287292179121e-14, 'derivative_scale': 2.5836837451539784e-05, 'residual_with_d6_width_kept': 0.0027076874394491406, 'required_gA_s0_pow': 13.0, 'ratio_20M_over_10md': 13.0}
+d=10: a = (10-d)/(2M) = 0 -&gt; the regular branch has zero width and infinite required coupling; no solution of this form.
+</code></pre>
+<hr>
+<h2 id="independent-verification-opus-agent-10-november-2026">Independent verification (Opus agent, 10 November 2026)</h2>
+<p>Verified exactly: the counts 18,564, 3,838,380, 64,512,240; the second moments in closed form, lambda = k(k+m)/(2m(m+1)) with m = d+1 (57/28, 697/56, 11/4); circumradii and rms radii; the face table (sites with s nonzero barycentric parts number C(m,s) C(k-1,s-1)) and interior fractions 2.489%, 28.855%, 0.5467%; the branch by hand derivation (p = 5, a = (10-d)/(2M), g(s0 A^2)^(1/9) = 20M/(10-d), E/N = -(8M/9)(9-d)/(10-d), valid for d &lt; 10, convergent for d &lt; 18); both branch scripts rerun with residuals of 1e-11 or below and quadrature agreeing to about 1e-13.</p>
+<p>Corrections accepted:</p>
+<ol>
+<li>64,512,240 = binom(n+d-1, d) has exactly three solutions for d = 1..40: d = 1 (n = 64,512,240), d = 10 (n = 23, side 22) and d = 22 (n = 11, side 10). The tau is the only complete simplex of that count with 2 &lt;= d &lt;= 21; in particular none in six directions. The Case now says one matter-domain dimension, ten.</li>
+<li>18,564 counts weak compositions of 12 into 7 parts (zeros allowed); positive compositions number 462, the interior count.</li>
+<li>The simplex is the programme's reading of the label count (Case section 3: 'a simplex count in exponent labels', slack integer is bookkeeping). The isotropic second moments hold in the regular embedding, which treats the slack coordinate symmetrically; in the corner embedding of section 3 (d unit axes, slack as bookkeeping) the covariance has a (d+1):1 anisotropy and the electron's per-axis value is 3.49. Isotropy of the second moment follows for any arrangement with S_{d+1} symmetry. The fourth moment is anisotropic (10.0 to 18.5 across directions, electron run). The Case now states the premise and the embedding.</li>
+<li>The branch sits at frequency -M, the continuum edge, so the tail is algebraic (f ~ r^-10). E/N is zero at d = 9 and positive for 9 &lt; d &lt; 10. At d = 10 there is no solution of this form: a = 0, the required coupling diverges, E/N diverges; it exists only as the limit d -&gt; 10. The Case now says so. The explicit Clifford check covers d = 4, 6, 8; the statement for other d rests on the analytic derivation.</li>
+</ol>
+<p><a href="/research/notes/20261030-particle-geometry-readable-draft/">Return to the Case</a>.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261030-particle-geometry-readable-draft/">From Particle Masses to Shared Geometry — The Case for Investigating IDWT</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#shapes">Shapes</a></li><li class="toc-level-2"><a href="#the-exact-branch">The exact branch</a></li><li class="toc-level-2"><a href="#independent-verification-opus-agent-10-november-2026">Independent verification (Opus agent, 10 November 2026)</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

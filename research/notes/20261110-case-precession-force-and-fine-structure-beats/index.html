@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>The Precession Term and the Fine-Structure Beats — IDWT V2</title>
+  <meta name="description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261110-case-precession-force-and-fine-structure-beats/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Precession Term and the Fine-Structure Beats — IDWT V2">
+  <meta property="og:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261110-case-precession-force-and-fine-structure-beats/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The Precession Term and the Fine-Structure Beats — IDWT V2">
+  <meta name="twitter:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>The Precession Term and the Fine-Structure Beats</h1>
+      <p class="article-date">Updated <time datetime="2026-11-10">November 10, 2026</time></p>
+      <p class="scope-label">conditional research</p>
+      
+    </header>
+    
+    <div class="article-body">
+
+<p>Document 3 of 3. 9 November 2026, revised after independent verification the same day.
+Author: the author. For assembly into the case. Scripts and outputs:
+precession_bend.py/.out, projection_bend.py/.out in agents/claude/periodic-table-10d-20261109/.
+Verification report: verification-doc-3.md.</p>
+<h2 id="1-the-non-central-term-in-the-orbit-model">1. The non-central term in the orbit model</h2>
+<p>In the four-direction orbit model (agents/claude/nucleus-lock-20261107/lock_size.py) the up
+quarks pull with charge 4/3 through four-direction distance and the down quark pushes with
+charge 1/3 through three-direction distance. Near the three-space, with w the fourth
+coordinate and r the three-direction radius, for a point nucleus,</p>
+<pre><code>V = -1/r + (2/3) w^2 / r^3          (model)
+V = -1/r + (1/2) w^2 / r^3          (a central four-direction pull -1/rho)
+</code></pre>
+<p>so the non-central part is (1/6) w^2 / r^3. The radial force is -1/r^2 (orbital rate
+Omega^2 = 1/r^3) and the fourth-direction restoring force is -(4/3) w / r^3, so the
+fourth-direction oscillation runs at sqrt(4/3) times the orbital rate in the small-tilt,
+point-nucleus limit, a drift of sqrt(4/3) - 1 = 0.1547 turns per orbit (verified
+independently; a numerical check at softening s = 0.01 gives a ratio 1.15470054).</p>
+<p>Correction from verification. The first version of this document matched 0.1547005 to the
+stored line 0.1546669 of the hydrogen runs. That was a coincidence of digits: the stored number
+is the angular frequency in atomic units of the (x1, x2) motion in the s = 100, 1 a0, 10 degree
+reference run, essentially the orbital frequency itself, not a drift per orbit; in that run the
+fourth-direction line is 0.4693522, a ratio near 3, because the nucleus is softened to atom
+size. The point-nucleus run that does bear on the drift is findings item 5 of
+hydrogen-tests-quick-20261109 (s = 0.01, tilt 10 degrees): lines 0.99998 and 1.15758, a drift of
+0.1576 per orbit, consistent with sqrt(4/3) - 1 at finite tilt. The drift depends on tilt and
+on softening; 0.1547 is its small-tilt point-nucleus limit.</p>
+<p>The split into central and non-central parts is a choice of reference. The fourth-direction
+frequency comes entirely from the 4/3 pull; the push weakens the in-plane binding. The
+hydrogen findings (item 3) show no second line and no precession without the down-quark term,
+which is why the non-central part is called the precession term here.</p>
+<h2 id="2-scale-of-the-non-central-term-against-what-bending-needs">2. Scale of the non-central term against what bending needs</h2>
+<p>In the pair-repulsion model with all four pairs of equal weight, holding two bonds at the water
+angle instead of the tetrahedral one costs 0.00165 in units of e^2 over the shell radius;
+ammonia's angle 0.00051; H2S's 92.1 degrees 0.0218 (verified by an independent minimisation,
+which also finds the same energies in four dimensions: the lone pairs gain nothing by entering
+the fourth direction, supporting section 5). The non-central energy of one pair at tilt alpha
+is (1/6) sin^2(alpha)/r in the same units; equating it to half the bending cost gives tilts of
+4.0, 2.2 and 14.8 degrees. The stored hydrogen runs use 10 degrees.</p>
+<p>What this comparison is and is not. It is a comparison of scales: the non-central term at
+hydrogen-run tilts is of the same order as the bending energies. It is not a demonstration
+that the term drives the bend: (a) the term is positive, it raises the energy of a tilted pair
+and pulls it back toward w = 0 (that is why the fourth-direction rate exceeds the orbital
+rate), so it resists tilt rather than paying for a bend; (b) the coefficient 1/6 is the
+proton's; by section 4(c) a nucleus with equal protons and neutrons has non-central part
+(Z/2) w^2/r^3, three times the proton's per unit charge, so oxygen's value differs; (c)
+screening by inner electrons and the pair charge 2e are ignored, and section 3 tilts the bonds
+while this section tilts the lone pairs. The first version of this document said "strength is
+not the obstacle"; the defensible statement is that the magnitudes are comparable, status
+reading.</p>
+<h2 id="3-direction-compensation-geometry">3. Direction: compensation geometry</h2>
+<p>Two bonds at the tetrahedral four-direction angle, tilted into the fourth direction by s and -s,
+show cos(theta) = (s^2 - 1/3)/(1 - s^2); water's 104.48 is exact at s = 1/3 (Document 1,
+section 3). Three equivalent bonds tilted equally open the angle (s = 1/3 gives 120 against
+ammonia's 106.67), so the compensation geometry in one hidden direction fails on the pyramidal
+class; Document 1, section 5, treats a second hidden direction.</p>
+<h2 id="4-three-routes-to-cos-theta--1-4-and-their-standing">4. Three routes to cos(theta) = -1/4 and their standing</h2>
+<p>(a) Compensation geometry with s = 1/3 (above).
+(b) Five equidistant directions in four dimensions: n + 1 equidistant unit vectors in R^n sum
+to zero when centred, giving mutual cosine -1/n; for five in four dimensions, -1/4
+(arccos = 104.4775). Water has four valence pairs; a fifth repelling point (the core pair)
+would give this angle to water but also to ammonia and H2S, which do not show it. Not
+favoured.
+(c) The proton model's push/pull ratio (1/3)/(4/3) = 1/4 read as -cos(theta). A proton (uud)
+pulls 4/3 and pushes 1/3; a neutron (udd) pulls 2/3 and pushes 2/3, net zero; a nucleus
+with Z protons and N neutrons pulls (2/3)(2Z + N) and pushes (1/3)(Z + 2N); for N = Z the
+ratio is 1/2 (arccos(-1/2) = 120). Oxygen-16 has N = Z, so this route would not give water
+104.48. Least favoured.</p>
+<h2 id="5-repulsion-cannot-supply-the-tilt">5. Repulsion cannot supply the tilt</h2>
+<p>For any four unit vectors in any dimension, 0 &lt;= |sum v_i|^2 = 4 + 2 sum of the six pair
+cosines, so the cosines average at least -1/3 and the largest is at least -1/3, with equality
+only for the regular tetrahedron, which spans three dimensions. Four mutually repelling pairs
+therefore gain nothing by leaving the observed three directions. The tilt of Document 1 needs
+something other than pair repulsion: the nucleus's non-central pull (section 2 shows only that
+its scale is comparable), or something the shared orbit does because it is anchored to a second
+nucleus. Repulsion does fix which molecules can tilt in one hidden direction: two bonds can take
+opposite senses, three cannot, which is the split Document 1 finds.</p>
+<h2 id="6-on-the-tilt-value">6. On the tilt value</h2>
+<p>The orbit model has no intrinsic tilt: the 10 degrees of the stored runs is a launch
+condition. The value the water fit asks for, s = 1/3 (19.5 degrees), and the heavy value
+s^2 = 1/3 (35.3 degrees), are not derivable from the model as it stands. Whether a lumpy,
+rotating nucleus drives the orbit to a definite tilt is the dynamical question. The full test
+is a two-centre orbit simulation in the four-direction model with the nuclei free to move in
+the fourth direction: does a bound molecule bend into the fourth direction on its own, and by
+how much. Not started.</p>
+<h2 id="7-status">7. Status</h2>
+<p>Established: the expansions and the sqrt(4/3) ratio (section 1); the bending energies
+(section 2); the tetrahedral bound (section 5); the simplex cosine and the nucleus push/pull
+ratios (section 4). Readings: the non-central term as "the precession force"; the scale
+comparison of section 2; which route gives -1/4; the orbit anchoring as the tilt's source.
+Withdrawn: the match of 0.1547 to the stored line 0.1546669; the statement that strength is not
+the obstacle. Open: the tilt's dynamical origin.</p>
+<hr>
+<h2 id="beats-between-two-electrons-on-one-shell">Beats between two electrons on one shell</h2>
+<p>The excess fourth-direction drift over the flat orbit was integrated for tilts from 0.5 to 45 degrees (point nucleus, both nuclear types) and fitted as about 0.10 sin^2(tilt) for the proton and 0.25 sin^2(tilt) for an equal-protons-and-neutrons nucleus. Each measured fine-structure splitting divided by the valence electron's hydrogen-like orbit frequency gives a beat fraction; the tilt difference that produces it on the curve is read off. The tilt differences are read from the lines, not derived.</p>
+<pre><code>r=1/4: excess ~ k sin^2(tilt), k = 0.122, 0.120, 0.100 at 2, 3, 5 degrees
+r=1/2: excess ~ k sin^2(tilt), k = 0.321, 0.264, 0.251 at 2, 3, 5 degrees
+line             cm-1   Zeff   fraction  tilt r=1/4  tilt r=1/2
+C 3P 1-0        16.42   1.82   1.81e-04        2.2         1.0
+C 3P 2-1        27.00   1.82   2.97e-04        2.8         1.6
+C+ 2P           63.42   2.68   3.23e-04        3.0         1.7
+N+ 3P 1-0       48.74   2.95   2.04e-04        2.4         1.2
+N+ 3P 2-1       82.64   2.95   3.46e-04        3.1         1.8
+O 3P 2-1       158.27   2.00   1.44e-03        6.9         4.3
+O 3P 1-0        68.72   2.00   6.26e-04        4.5         2.8
+O++ 3P 1-0     113.18   4.02   2.55e-04        2.6         1.4
+O++ 3P 2-1     193.00   4.02   4.36e-04        3.5         2.2
+Ne+ 2P         780.42   3.47   2.36e-03        8.9         5.6
+Si+ 2P         287.24   3.29   3.27e-03       10.4         6.5
+</code></pre>
+<hr>
+<h2 id="independent-verification-of-the-precession-force-document">Independent verification of the precession-force document</h2>
+<h1 id="independent-verification-of-document-3-the-precession-force">Independent verification of Document 3 (the precession force)</h1>
+<p>9 November 2026. Verifier: a separate Opus agent launched by the author at the stated
+instruction, read access to the packet, no write access. Report summarised faithfully; the
+author's response follows.</p>
+<h2 id="verifier-s-findings">Verifier's findings</h2>
+<p>Section 1: the expansion of the model potential to -1/r + (2/3) w^2/r^3, the central-pull
+expansion -1/r + (1/2) w^2/r^3, the non-central part (1/6) w^2/r^3, the frequencies
+Omega^2 = 1/r^3 and omega_w^2 = (4/3)/r^3, and sqrt(4/3) - 1 = 0.1547005 are all correct; a
+numerical check at s = 0.01 gives a ratio 1.15470054. Discrepancy: the match to the stored line
+0.1546669 is wrong. In findings.md item 6 and the zeeman outputs, 0.1546669 is the angular
+frequency in atomic units of the (x1, x2) motion in the s = 100, r = 1 a0, 10 degree reference
+run (orbital frequency 0.156489975 in zeeman.out), not a drift per orbit; the w line there is
+0.4693522, a ratio near 3. The agreement of digits is a coincidence. The point-nucleus run
+(findings item 5, s = 0.01, tilt 10 degrees: lines 0.99998 and 1.15758, drift 0.1576) is the
+correct comparison and is consistent with sqrt(4/3) - 1 at finite tilt. The statement that the
+rate does not depend on tilt holds only in the small-w point-nucleus limit.</p>
+<p>Section 2: both scripts reran byte-identical through the runner. Independent minimisation
+(vectorised, Powell, six starts, three and four dimensions): tetrahedral energy 3.6742346
+(6/sqrt(8/3)); bending costs 0.00165, 0.00051, 0.02182; tilts 4.03, 2.24, 14.82 degrees; the
+four-dimensional results are identical to the three-dimensional ones, supporting section 5. The
+arithmetic is right; the physical reading is not: (a) the non-central term is positive, raising
+the energy of a tilted pair and pulling it back, so it is a cost of tilting, not energy available
+to pay for a bend; (b) 1/6 is the proton's coefficient, and by section 4(c) an N = Z nucleus has
+non-central part (Z/2) w^2/r^3, three times the proton's per unit charge, with
+omega_w/Omega = sqrt(2); (c) screening, pair charge 2e and the lone-pair versus bond geometry
+are ignored.</p>
+<p>Sections 4 and 5: arccos(-1/4) = 104.4775; the projection values at s = 1/3 (-1/4 opposite,
+-1/2 equal); the simplex argument (n + 1 equidistant vectors in R^n, c = -1/n); the Gram
+argument for four vectors (sum of six cosines at least -2, equality only for the regular
+tetrahedron); the push/pull formulas including the neutron's net zero; all correct.</p>
+<p>Statuses: "the identification of the non-central term and its drift" as established is
+overstated because of the false match to the stored line; "the force that causes the
+precession" is defensible with care (no second line or precession without the down-quark term,
+but the central/non-central split is a choice of reference and the w frequency comes from the
+4/3 pull); "strength is not the obstacle" and "suffices in strength" are not established and
+should be a scale comparison with status reading; the tetrahedral bound, the 4(c) ratios, the
+"not favoured" and "least favoured" readings and the open dynamical question are honest.</p>
+<p>Verdict: arithmetic and geometry check out; two inferences need repair: remove or replace the
+0.1546669 match (cite the s = 0.01 run, drift 0.1576 at 10 degrees); reduce the strength argument
+to a scale comparison.</p>
+<h2 id="author-s-response">Author's response</h2>
+<p>Accepted in full. Section 1 now states the coincidence, cites the point-nucleus run and gives
+the drift's dependence on tilt and softening; section 2 is rewritten as a scale comparison with
+the three objections stated; section 7 lists the two withdrawn statements. The author also told
+the research programme directly that the earlier claim of a match to the stored line was wrong.</p>
+<p><a href="/research/notes/20261030-particle-geometry-readable-draft/">Return to the Case</a>.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261030-particle-geometry-readable-draft/">From Particle Masses to Shared Geometry — The Case for Investigating IDWT</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#1-the-non-central-term-in-the-orbit-model">1. The non-central term in the orbit model</a></li><li class="toc-level-2"><a href="#2-scale-of-the-non-central-term-against-what-bending-needs">2. Scale of the non-central term against what bending needs</a></li><li class="toc-level-2"><a href="#3-direction-compensation-geometry">3. Direction: compensation geometry</a></li><li class="toc-level-2"><a href="#4-three-routes-to-cos-theta--1-4-and-their-standing">4. Three routes to cos(theta) = -1/4 and their standing</a></li><li class="toc-level-2"><a href="#5-repulsion-cannot-supply-the-tilt">5. Repulsion cannot supply the tilt</a></li><li class="toc-level-2"><a href="#6-on-the-tilt-value">6. On the tilt value</a></li><li class="toc-level-2"><a href="#7-status">7. Status</a></li><li class="toc-level-2"><a href="#beats-between-two-electrons-on-one-shell">Beats between two electrons on one shell</a></li><li class="toc-level-2"><a href="#independent-verification-of-the-precession-force-document">Independent verification of the precession-force document</a></li><li class="toc-level-1"><a href="#independent-verification-of-document-3-the-precession-force">Independent verification of Document 3 (the precession force)</a></li><li class="toc-level-2"><a href="#verifier-s-findings">Verifier's findings</a></li><li class="toc-level-2"><a href="#author-s-response">Author's response</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Shell Counts and the Rydberg Squares from Four Directions — IDWT V2</title>
+  <meta name="description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261110-case-shell-counts-and-rydberg-squares/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Shell Counts and the Rydberg Squares from Four Directions — IDWT V2">
+  <meta property="og:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261110-case-shell-counts-and-rydberg-squares/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Shell Counts and the Rydberg Squares from Four Directions — IDWT V2">
+  <meta name="twitter:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>Shell Counts and the Rydberg Squares from Four Directions</h1>
+      <p class="article-date">Updated <time datetime="2026-11-10">November 10, 2026</time></p>
+      <p class="scope-label">conditional research</p>
+      
+    </header>
+    
+    <div class="article-body">
+
+<p>9 November 2026. Arithmetic in shells.py / shells.out; exact.</p>
+<h2 id="the-three-dimensional-account-and-what-it-has-to-assume">The three-dimensional account and what it has to assume</h2>
+<p>In three dimensions the number of distinct angular patterns of degree l is 2l + 1 (1, 3, 5, 7:
+s, p, d, f). To get the shell capacities 2, 8, 18, 32 one must add these up to n - 1 and then
+explain why patterns of different l share one level. That requires the exact 1/r potential and
+its hidden symmetry (the Runge-Lenz vector), and even then the filling order of the periodic
+table (periods of 2, 8, 8, 18, 18, 32, 32) does not follow; it is supplied by the Madelung rule
+(n + l, then n), which is empirical.</p>
+<h2 id="in-four-directions-it-is-one-number">In four directions it is one number</h2>
+<p>The electron's orbit lives in four directions, so its shell is a three-sphere. The number of
+distinct angular patterns of degree m on a three-sphere is (m + 1)^2: 1, 4, 9, 16. Two
+electrons per orbit gives 2, 8, 18, 32. No accidental degeneracy, no hidden symmetry, no sum
+over l: the squares are the pattern count in four directions, in the same way that 2l + 1 is
+the pattern count in three.</p>
+<p>Under observer rotations (the three directions we see) the degree-m patterns of the
+three-sphere split into l = 0, 1, ..., m, once each:</p>
+<pre><code>m = 0 : s                 -&gt;  2 electrons
+m = 1 : s + p             -&gt;  8
+m = 2 : s + p + d         -&gt; 18
+m = 3 : s + p + d + f     -&gt; 32
+</code></pre>
+<p>That is exactly the subshell content of the periods: period 4 is 4s 3d 4p (s + p + d), period
+6 is 6s 4f 5d 6p (s + p + d + f). The "n + l" grouping is the branching of one four-direction
+degree into three-direction pieces.</p>
+<h2 id="why-each-period-after-the-first-appears-twice">Why each period after the first appears twice</h2>
+<p>Equal orbits that keep a constant distance from one another (the condition for a stable shell,
+chemistry-note.md section 1) form a Hopf family, and Hopf families come in two handednesses.
+A shell of degree m can be realised as a left family or a right family, giving two periods of
+the same length. A single orbit (m = 0) belongs to both at once, so the first period has no
+twin. Period lengths: 2; 8, 8; 18, 18; 32, 32. Reading, consistent with the facts; the order in
+which the families fill is dynamics, not yet done.</p>
+<h2 id="where-3-4-and-6-enter">Where 3, 4 and 6 enter</h2>
+<ul>
+<li>4, the orbit directions: gives the capacities (m + 1)^2.</li>
+<li>3, the observed directions: gives the subshell split 1, 3, 5, 7 inside each period.</li>
+<li>6, the electron's own depth: does not enter the shell count. The factor two per orbit is two
+electrons sharing one orbit in opposite phase; whether that factor is the electron's bound
+pair is not shown.</li>
+</ul>
+<h2 id="status">Status</h2>
+<p>The pattern counts are exact arithmetic (harmonic polynomials in four and three variables, the
+same kind of label counting as the count law S(n, d)). The identification of a period with one
+degree on the three-sphere and of the doubling with handedness is a reading that matches every
+period length and every period's subshell content with nothing fitted. What is not done: the
+dynamics that orders the periods and fixes which locked orbits realise the patterns.</p>
+<h1 id="why-the-hydrogen-lines-are-built-from-squares">Why the hydrogen lines are built from squares</h1>
+<p>9 November 2026. Author: the author. Addendum to the shell-count result
+(shells-note.md, sent as ed8c4f4c) and correction of the author's framing of the hydrogen-line
+work of 7 November (papers/hydrogen-orbit-patterns-20261107 and the review in
+agents/claude/hydrogen-review-20261107/).</p>
+<h2 id="the-fact">The fact</h2>
+<p>The Rydberg set is the set of differences 1/a^2 - 1/b^2. The squares in it were found
+empirically (Balmer 1885) and are explained conventionally as the spectrum of the 1/r potential.</p>
+<h2 id="the-reading-from-the-shell-count">The reading from the shell count</h2>
+<p>In four directions the number of distinct angular patterns of degree m on the orbit shell (a
+three-sphere) is (m + 1)^2 (shells.py; exact). That count gave the periodic table's shell
+capacities 2, 8, 18, 32 this afternoon. Hydrogen's level n holds n^2 distinct states for the
+same reason: the electron's orbit shell is a three-sphere, and the count of orbits on it at
+degree n - 1 is n^2. The orbit model supplies the energy side: within its orbit family the
+potential-energy share is (1 - 1/L^2)/2 exactly, so differences between orbit labels are
+(1/a^2 - 1/b^2)/2 (hydrogen review, point H3). The squares in the lines and the squares in
+the shells are one fact: the orbit is in four directions.</p>
+<h2 id="the-conventional-mirror">The conventional mirror</h2>
+<p>Fock (1935) showed that hydrogen's bound states are exactly the harmonics on a three-sphere
+and that the n^2 degeneracy, an "accidental" degeneracy in three dimensions requiring a hidden
+symmetry (the Runge-Lenz vector) to explain, is the rotation group of that sphere. It has been
+treated since as a transformation of momentum space that happens to work for the 1/r
+potential. In the four-direction picture the sphere is the shell of a real orbit and the hidden
+symmetry is the fourth direction. Reading, consistent with the record; not a new calculation.</p>
+<h2 id="what-the-hydrogen-line-work-of-7-november-established-restated">What the hydrogen-line work of 7 November established, restated</h2>
+<p>With hydrogen's radius and binding energy as inputs, the four-direction orbit's two circular
+components reproduce the Rydberg pattern exactly, one component at 2/sqrt(5) of the Rydberg
+frequency, 0.65% from Lyman-beta at 8/9. The review's control (small-integer patterns land on
+the Rydberg set at a similar rate) tested whether landing on the squares is rare; it is not.
+That control does not bear on the point above: the model produces the 1/L^2 ladder as an
+identity of its orbit family, it does not merely land on it. The author's earlier framing of
+the control as discounting the result is withdrawn; the result stands as a fit under the
+project's reverse-engineering method, in which measured quantities are inputs.</p>
+<h2 id="the-model-s-own-output">The model's own output</h2>
+<p>Independent of any hydrogen input: the fourth-direction motion runs at sqrt(4/3) times the
+orbital rate for a proton (up quarks pulling 4/3 through four directions, the down quark
+pushing 1/3 through three), a drift of sqrt(4/3) - 1 = 0.1547 turns per orbit, confirmed to
+five figures by direct integration today (beats-20261109/drift_curve.out); sqrt(2) and 0.414
+for a nucleus with equal protons and neutrons. This ratio is fixed by the quark charges and the
+dimensions they occupy. It has not yet been matched to a measurement; the beats work uses its
+tilt dependence.</p>
+<h2 id="what-is-owed">What is owed</h2>
+<p>At fixed drift and radius the orbit family's total energy is the same for every L (review
+point A2), so the 1/L^2 appears in how energy is shared, not in what could be emitted. For the
+squares to be the model's lines, the total energy must differ between branches as
+1/a^2 - 1/b^2, with the radius and rate derived from the electron and nucleus patterns rather
+than supplied. Not done.</p>
+<h2 id="arithmetic-output">Arithmetic output</h2>
+<pre><code>degree m   patterns in 3 dirs (2m+1)   patterns in 4 dirs (m+1)^2   split under observer rotations   electrons (x2)
+   0               1                         1                      1(s)                      2
+   1               3                         4                      1(s) + 3(p)               8
+   2               5                         9                      1(s) + 3(p) + 5(d)       18
+   3               7                        16                      1(s) + 3(p) + 5(d) + 7(f)   32
+
+period   subshells            length   four-direction reading
+   1      1s                     2      m = 0
+   2      2s 2p                  8      m = 1, first family
+   3      3s 3p                  8      m = 1, second family
+   4      4s 3d 4p              18      m = 2, first family
+   5      5s 4d 5p              18      m = 2, second family
+   6      6s 4f 5d 6p           32      m = 3, first family
+   7      7s 5f 6d 7p           32      m = 3, second family
+
+Every period length is 2 (m+1)^2 and every period contains exactly the subshells l = 0..m once each.
+</code></pre>
+<hr>
+<h2 id="independent-verification-opus-agent-10-november-2026">Independent verification (Opus agent, 10 November 2026)</h2>
+<p>Verified: (m+1)^2 as the dimension of degree-m harmonics in four variables (Laplacian kernel rank computed for m = 0..5: 1, 4, 9, 16, 25, 36); the SO(4) to SO(3) branching l = 0..m once each; every period's subshell content and length against an independently built Madelung order, character by character; 2/sqrt(5) = 0.8944272 against 8/9 = 0.8888889, offset 0.623% bare and 0.650% with the square-root reduced-mass handling.</p>
+<p>Corrections required and accepted:</p>
+<ol>
+<li>(m+1)^2 counts independent harmonic functions (modes). A map from each degree-m mode to a set of deterministic orbits is not given; "count of orbits" overstated it. The Case now says "two electrons per pattern".</li>
+<li>The shell and Fock mathematics is the standard SO(4) group theory of the Coulomb problem; what is the programme's own is the physical reading (the three-sphere is the shell of a real orbit in four directions). The Case wording on the three-direction count now names the hidden SO(4) symmetry of the 1/r potential, not an accident.</li>
+<li>The Hopf-handedness doubling of periods does not follow from the representation theory: each degree-m space is invariant under both SU(2) factors, so it supplies no second copy. It stays a reading with no mechanism. The conventional account of the doubling is an extra SU(2) label in SO(4,2) x SU(2) (Barut 1972, Ostrovsky 1981, Kibler 2004, cited from memory). Strictly, the n + l groups have lengths 2, 2, 8, 8, 18, 18, 32, 32, so the first period is doubled there too. The degree reading fixes which l values occur, not the principal number of each subshell.</li>
+<li>Fock's sphere is built from momentum-space components with a level-dependent scale; "the sphere is the shell of a real orbit" is a reinterpretation, not a correspondence. The Runge-Lenz link is Pauli (1926) and Bargmann (1936). Moser (1970, Kepler orbits to great circles on S^3) and Kustaanheimo-Stiefel (1965, Kepler problem to a four-dimensional oscillator through the Hopf map) are the closest conventional precedents; both are now cited in the Case.</li>
+<li>The two circular components do not reproduce the Rydberg pattern exactly. The exact statement is the energy-share identity (1 - 1/L^2)/2 (review point H3); the component frequencies (point H1) place one component 0.65% from Lyman-beta. The Case now separates the two, adds the 0.62% bare figure, and states that the ladder is in the energy sharing at fixed total (review point A2). Review point C3 (the offset is arithmetic in origin) is carried in the hydrogen review report.</li>
+<li>The orbit label L is not shown to equal the harmonic number n = m + 1; "one fact" is a reading.</li>
+</ol>
+<p><a href="/research/notes/20261030-particle-geometry-readable-draft/">Return to the Case</a>.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261030-particle-geometry-readable-draft/">From Particle Masses to Shared Geometry — The Case for Investigating IDWT</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#the-three-dimensional-account-and-what-it-has-to-assume">The three-dimensional account and what it has to assume</a></li><li class="toc-level-2"><a href="#in-four-directions-it-is-one-number">In four directions it is one number</a></li><li class="toc-level-2"><a href="#why-each-period-after-the-first-appears-twice">Why each period after the first appears twice</a></li><li class="toc-level-2"><a href="#where-3-4-and-6-enter">Where 3, 4 and 6 enter</a></li><li class="toc-level-2"><a href="#status">Status</a></li><li class="toc-level-1"><a href="#why-the-hydrogen-lines-are-built-from-squares">Why the hydrogen lines are built from squares</a></li><li class="toc-level-2"><a href="#the-fact">The fact</a></li><li class="toc-level-2"><a href="#the-reading-from-the-shell-count">The reading from the shell count</a></li><li class="toc-level-2"><a href="#the-conventional-mirror">The conventional mirror</a></li><li class="toc-level-2"><a href="#what-the-hydrogen-line-work-of-7-november-established-restated">What the hydrogen-line work of 7 November established, restated</a></li><li class="toc-level-2"><a href="#the-model-s-own-output">The model's own output</a></li><li class="toc-level-2"><a href="#what-is-owed">What is owed</a></li><li class="toc-level-2"><a href="#arithmetic-output">Arithmetic output</a></li><li class="toc-level-2"><a href="#independent-verification-opus-agent-10-november-2026">Independent verification (Opus agent, 10 November 2026)</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

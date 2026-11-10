@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Hydrogen Checks of the Four-Direction Orbit — IDWT V2</title>
+  <meta name="description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261110-case-hydrogen-checks-of-the-orbit/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hydrogen Checks of the Four-Direction Orbit — IDWT V2">
+  <meta property="og:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261110-case-hydrogen-checks-of-the-orbit/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Hydrogen Checks of the Four-Direction Orbit — IDWT V2">
+  <meta name="twitter:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>Hydrogen Checks of the Four-Direction Orbit</h1>
+      <p class="article-date">Updated <time datetime="2026-11-10">November 10, 2026</time></p>
+      <p class="scope-label">conditional research</p>
+      
+    </header>
+    
+    <div class="article-body">
+
+<p>Author the author, at the stated direct request. Each calculation ran under 10 minutes. Scripts and outputs in this directory: static_tests.py/.json, dynamic_tests.py (zeeman.json, nuclei.json), zeeman_larmor.py/.json; dipole run in ../observer-coupling-20261109/dipole_orbit.py/.out.
+Model tested: the four-direction orbit model of lock_size.py / lock_photon.py (q in R^4, atomic units, proton charges 4/3 and 1/3, quark softening s times the free widths 0.01524 a0 and 0.00653 a0; the stored runs use s = 100, launch radius 1 a0).
+Measured values are recalled from memory unless a source is named; semiclassical correspondences (action quantization, first-order perturbation with hydrogen wavefunctions, oscillator strengths) are standard-physics comparisons, not IDWT derivations.</p>
+<h2 id="main-result">Main result</h2>
+<p>The atom-sized quark softening (s = 100) conflicts with four independent measurements; a nucleus softened by less than about 0.2 fm passes them, but then the model's lines at 1 a0 are at 27.2 eV and 31.5 eV, not hydrogen lines. The second model line (delta + beta, the w oscillation) fails the isotope, Zeeman and positronium checks at any quark size.</p>
+<h2 id="item-1-cavity-emission">Item 1, cavity emission</h2>
+<p>Classical dipole near a perfect mirror, rate relative to free space, distance in wavelengths: parallel dipole 0.003 (0.01), 0.077 (0.05), 0.29 (0.1), 1.15 (0.25), 0.96 (0.5), 0.99 (1), 0.9996 (5); perpendicular 2.00, 1.96, 1.85, 1.30, 0.92, 0.98, 0.9992. c times the Lyman-alpha lifetime = 0.48 m.
+Reading: the surroundings change the escaping fraction within about one wavelength and leave the oscillator itself unchanged; this is the same classical antenna mathematics as the capture ratio. No prediction here separates a spanning structure with a travelling phase from the standard retarded field.</p>
+<h2 id="item-2-muonic-hydrogen">Item 2, muonic hydrogen</h2>
+<ul>
+<li>s = 100 model at r = 1 a0: angular momentum 0.156 hbar, energy -11.98 eV; the potential minimum is -12.34 eV (near 0.9 a0), so no state can be bound by hydrogen's measured 13.598 eV.</li>
+<li>Circular orbit with L = hbar (electron): -6.79 eV (s = 100), -13.23 (10), -13.602 (1), -13.606 (0.1 and below).</li>
+<li>A circular orbit at radius r exists only for s &lt; 110.35 r/a0. Muonic Bohr radius a0/185.84: s &lt; 0.594.</li>
+<li>Muon, L = hbar binding: 12.3 eV (s = 100), 839 (1), 2325 (0.1), 2525.9 (0.01), 2528.5 (0.001); measured 2528.5 eV.</li>
+<li>First-order 2S-2P shift from the softened core in muonic hydrogen: 0.89 meV (s = 1e-4), 6.75 (3e-4), 59.6 (1e-3), 410 (3e-3); the measured finite-size part is 3.69 meV, matched at s = 2.2e-4: softening radii 0.17 fm (up) and 0.075 fm (down), against 80,600 fm and 34,600 fm at s = 100.</li>
+</ul>
+<h2 id="item-3-positronium-and-muonium">Item 3, positronium and muonium</h2>
+<p>Central point attractor (no down term), tilt 10 degrees: planar orbit, delta = 0, one frequency. The second line and the precession exist only with the non-central down-quark term. Positronium and muonium have measured hydrogen-like spectra with no nucleus of that kind.</p>
+<h2 id="item-4-quantum-defects-semiclassical-action-ordinary-3d-plane">Item 4, quantum defects (semiclassical action, ordinary 3D plane)</h2>
+<p>delta(L = 0.5), delta(L = 1.5), difference, apsidal advance per radial period at L = 1, all at n = 2 (n = 3, 10 within 8 percent):
+s = 100: -0.574, -0.235, -0.339, -2.12 rad; s = 30: -0.207, -0.035, -0.171, -0.985; s = 10: -0.0615, -0.0043, -0.057, -0.231; s = 1: -1.16e-3, -4.4e-5, -1.12e-3, -2.8e-3; s = 0.1: -1.18e-5, -4.4e-7, -1.14e-5, -2.8e-5; scaling as s^2 below.
+Hydrogen's measured s-p level differences correspond to about 1e-6 to 1e-5; that needs s of 0.1 or less. Alkali defects are positive (sodium 1.35, 0.86, 0.015); a softened nucleus gives negative ones.</p>
+<h2 id="item-5-isotopes">Item 5, isotopes</h2>
+<ul>
+<li>Measured R_D/R_H - 1 = 2.721e-4. Model exponent p = dln(Omega)/dln(mu) at fixed L: -0.84 (s = 100), 0.17 (30), 0.84 (10), 0.998 (1), 1.000 (0.1). At s = 100 the predicted shift has the wrong sign.</li>
+<li>Deuteron charges (2, 1): at s = 100 and r = 1 a0 the net force in the ordinary plane is outward (-0.257); an orbit needs s &lt; 59.7 r/a0.</li>
+<li>Point-like quarks (s = 0.01), tilt 10 degrees, r = 1 a0: proton beta 0.0788, delta 1.0788, lines 0.99998 and 1.15758 Ha; deuteron beta 0.2108, delta 1.2108, lines 0.99996 and 1.42165 Ha. The first line agrees to 2e-5; the second differs by 23 percent. Measured hydrogen and deuterium lines differ by 0.027 percent.</li>
+</ul>
+<h2 id="item-6-zeeman">Item 6, Zeeman</h2>
+<ul>
+<li>Stored reference (s = 100, tilt 10): the 0.1546669 line is the (x1, x2) motion; the 0.4693522 line is the w motion; x3 has none.</li>
+<li>Field in the (1,2) plane with the Larmor-matched launch: the (x1, x2) line shifts by -0.997 w_L; the w line by +0.001 w_L. Rotations inside the ordinary three directions are symmetries of both potential terms, so Larmor's theorem holds exactly: normal Zeeman triplet for the first line, no Zeeman effect on the w line.</li>
+<li>Field in the (1,3) plane: sidebands not resolved at this run length (resolution equals w_L); theorem applies.</li>
+<li>Field in the (1,w) plane: shifts +0.040 w_L and +0.031 w_L, plus a cross line at 7e-4 of the power: no triplet.</li>
+<li>First run series (fixed lab launch velocity) gave -0.27/+0.31 w_L for the first line; that mixes a launch change into the result and is superseded.</li>
+</ul>
+<h2 id="item-7-emission-rates">Item 7, emission rates</h2>
+<ul>
+<li>Lyman-alpha: A = 6.268e8 /s, f = 0.4162; equals a classical dipole of amplitude 1.49 a0 at the photon frequency; escaping fraction 2.54e-7 per photon cycle, 7.6e-7 per n = 2 orbit; 3.94e6 cycles or 1.31e6 orbits per escaped photon.</li>
+<li>A classical electron oscillator loses (4 pi/3) alpha^3 omega = (8 pi^2/3) r_e/lambda per cycle (6.10e-7 at Lyman-alpha), independent of amplitude; r_e = 2.818 fm. Measured A = (oscillator strength) times that rate: 0.416 (2p-1s), 0.079 (3p-1s), 0.029 (4p-1s), 0.122 (3s-2p), 0.435 (3p-2s), 1.25 (3d-2p), 2.18 (4f-3d).</li>
+<li>A/omega^3 relative to Lyman-alpha: 0.16, 0.056, 1.59, 5.6, 16.3, 0.99, 2.1, 80.8: a fixed size with an omega^3 rule fails by up to three orders of magnitude.</li>
+<li>Oscillator strengths from 1s: 0.4162, 0.0791, 0.0290, 0.0139, 0.0078; discrete sum to n = 40: 0.5645; the full sum including the continuum is 1 (sum rule).</li>
+<li>Upper-orbit periods per escaped Lyman photon: 1.31e6 (n = 2), 1.46e6 (3), 1.51e6 (4).</li>
+</ul>
+<h2 id="item-8-harmonics">Item 8, harmonics</h2>
+<p>Classical Kepler ellipse, harmonics s = 1, 2, 3 averaged over eccentricity (e^2 uniform): f/n = 0.19077, 0.026332, 0.0081056. Asymptotic measured/quantum values (Menzel): 0.1908, 0.02633, 0.008106. Quantum at n = 10: 0.219, 0.0341, 0.0117. Ratio second to first: 0.138 classical, 0.156 at n = 10.</p>
+<h2 id="dipole-spin-orbit-run-on-the-s-100-orbit">Dipole (spin-orbit) run on the s = 100 orbit</h2>
+<p>Sign fixed by conservation of q^p + S for a central potential (2e-12 for one sign, 0.54 for the other). Relative shifts at the physical coupling, tilt 10 / 30 / 60: moment in the (1,2) plane: beta -2.8e-6 / -1.9e-6 / -7.2e-7, delta +8.6e-7 / +9.4e-7 / +4.3e-7, ratio +3.7e-6 / +2.9e-6 / +1.2e-6; (1,w) plane: ratio -2.5e-7 / -5.5e-7; (1,3) plane: 1e-11 or less. Linear in the coupling up to 100 times. No locking of the ratio. The secular drift of the angular-momentum bivector was not recorded.</p>
+<h2 id="addendum-1-9-november-2026-after-the-stated-review">Addendum 1 (9 November 2026, after the stated review)</h2>
+<ul>
+<li>Binding energy: the fourth-direction attraction is included (the up term acts on the four-direction distance). Global minimum over (r3, w), depth_check.py: -12.342 eV at r3 = 0.905 a0, w = 0, for s = 100; depth = 1234.2/s eV exactly. Hydrogen's 13.598 eV therefore needs only s &lt;= 90.8: s = 100 fails by about 10 percent. "No state can match" was true but the margin was not stated; this test alone is marginal.</li>
+<li>Muonic hydrogen without wavefunctions: a photon emitted between two bound states cannot exceed the well depth. Measured muonic X-ray line 1898 eV needs s &lt;= 0.65 (up softening &lt;= 524 fm); series limit 2528 eV needs s &lt;= 0.49 (394 fm). Mass-independent, no orbit rule. The 0.17 fm value used hydrogen-type wavefunctions and is withdrawn as evidence under the project's premises.</li>
+<li>Level pattern (item 4): rests on the Bohr-Sommerfeld action rule, an imported quantization rule; the model has no rule of its own for orbit sizes. Weak evidence.</li>
+<li>Deuterium (item 5): depends on the assumption that the deuteron's quark charges add as 2 (four directions) and 1 (three directions), and on reading delta + beta as a spectral line. No wavefunctions or orbit rule.</li>
+<li>Item 3: positronium (electron + positron) and muonium (electron + antimuon) contain no quarks; the statement concerns those atoms.</li>
+<li>Item 7: the measured quantity is the escaping rate (2.54e-7 per photon cycle for Lyman-alpha). The classical loss rate (4 pi/3) alpha^3 omega is three-dimensional linear radiation theory. The conclusion "about one internal exchange per cycle" applied that theory to the internal, never-detected exchange and is WITHDRAWN; the internal count is unknown. The escaping radiation's omega^3 law across lines is a measured three-dimensional behaviour of what escapes.</li>
+</ul>
+<p><a href="/research/notes/20261030-particle-geometry-readable-draft/">Return to the Case</a>.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261030-particle-geometry-readable-draft/">From Particle Masses to Shared Geometry — The Case for Investigating IDWT</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#main-result">Main result</a></li><li class="toc-level-2"><a href="#item-1-cavity-emission">Item 1, cavity emission</a></li><li class="toc-level-2"><a href="#item-2-muonic-hydrogen">Item 2, muonic hydrogen</a></li><li class="toc-level-2"><a href="#item-3-positronium-and-muonium">Item 3, positronium and muonium</a></li><li class="toc-level-2"><a href="#item-4-quantum-defects-semiclassical-action-ordinary-3d-plane">Item 4, quantum defects (semiclassical action, ordinary 3D plane)</a></li><li class="toc-level-2"><a href="#item-5-isotopes">Item 5, isotopes</a></li><li class="toc-level-2"><a href="#item-6-zeeman">Item 6, Zeeman</a></li><li class="toc-level-2"><a href="#item-7-emission-rates">Item 7, emission rates</a></li><li class="toc-level-2"><a href="#item-8-harmonics">Item 8, harmonics</a></li><li class="toc-level-2"><a href="#dipole-spin-orbit-run-on-the-s-100-orbit">Dipole (spin-orbit) run on the s = 100 orbit</a></li><li class="toc-level-2"><a href="#addendum-1-9-november-2026-after-the-stated-review">Addendum 1 (9 November 2026, after the stated review)</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

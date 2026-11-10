@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Molecular Angles and Bending Frequencies — IDWT V2</title>
+  <meta name="description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261110-case-molecular-angles-and-bends/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Molecular Angles and Bending Frequencies — IDWT V2">
+  <meta property="og:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261110-case-molecular-angles-and-bends/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Molecular Angles and Bending Frequencies — IDWT V2">
+  <meta name="twitter:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>Molecular Angles and Bending Frequencies</h1>
+      <p class="article-date">Updated <time datetime="2026-11-10">November 10, 2026</time></p>
+      <p class="scope-label">conditional research</p>
+      
+    </header>
+    
+    <div class="article-body">
+<p>Three documents and the dimension sweep, in order: bond angles (pressing and tilt), bending frequencies, and the one-at-a-time and grouped four-direction substitutions.</p>
+<h1 id="bond-angles-from-the-four-direction-orbit-picture-pressing-and-tilt">Bond Angles from the Four-Direction Orbit Picture: Pressing and Tilt</h1>
+<p>Document 1 of 3. 9 November 2026, revised after independent verification the same day.
+Author: the author. For assembly into the case. Scripts and outputs:
+bond_angles.py/.out/.json, bond_angles_followup.py/.out, projection_bend.py/.out,
+projection_survey.py/.out, tilt_dimensions.py/.out in agents/claude/periodic-table-10d-20261109/.
+Verification report: verification-doc-1.md. Measured angles were quoted from memory when the
+work was done; the verifier sourced every one (NIST CCCBDB, Kisiel's microwave tables, primary
+papers). Values that changed or need a phase label are marked. Measured values are test data,
+not inputs to any fit except where stated.</p>
+<h2 id="1-setting-and-premises">1. Setting and premises</h2>
+<p>Electrons in an atom follow orbits in four directions (the three observed and the fourth)
+around the nucleus. In a molecule a bonding pair orbits both nuclei (electron sharing is
+literal); a lone pair orbits the central nucleus only. Electrons do not change orbit size within
+a bond, so multiple bonds are electrons on equal orbits kept apart by phase. These are the
+stated premises, recorded in chemistry-note.md.</p>
+<p>Two consequences of the orbit picture are used:</p>
+<p>(a) Pressing. The pairs on the central atom's shell repel. A lone pair stays near the centre and
+counts fully; a shared pair spends part of its orbit near the other nucleus and counts for a
+fraction f near the centre.</p>
+<p>(b) Tilt. The four-direction distance from nucleus to electron is what the attraction fixes, so
+motion into the fourth direction forces the three observed directions to compensate. A bond
+that is a direction in four dimensions is seen as its projection into three. Lone pairs drive
+the tilt; by construction of the rule, bonds without lone pairs do not tilt.</p>
+<h2 id="2-pressing-the-calibration-on-water-and-ammonia">2. Pressing: the calibration on water and ammonia</h2>
+<p>Model: four pairs as points on the unit sphere, Coulomb repulsion, weights (f, f, 1, 1) for two
+bonds and two lone pairs, (f, f, f, 1) for three bonds and one lone pair; energy minimised over
+all directions with 24 random starts. The bond angle falls smoothly and monotonically with f:
+109.47 at f = 1 (tetrahedral), 104.4 at 0.80, 94.5 at 0.50, 85.2 at 0.30 for AX2E2; 109.47,
+106.7, 99.6, 90.5 for AX3E. A variant with the shared pair placed further out instead of
+lighter is not monotonic and was dropped.</p>
+<p>Result: water (104.4776) needs f = 0.803; ammonia (106.67) needs f = 0.799. Two molecules with
+different lone-pair counts fix the same number to half a percent. One shared-pair weight, 0.80,
+accounts for both.</p>
+<p>Extrapolation by electronegativity fails: O-H and N-H have the same f despite different
+electronegativity gaps, so every other hydride is predicted near 104 to 106 degrees against
+measured values near 90 to 93 for the third period and beyond. The weight each heavy hydride
+would need (H2S 0.443, PH3 0.352, H2Se 0.415, AsH3 0.326, SbH3 0.316, H2Te 0.402) falls with
+bond length, loosely (f x R^2 ranges from 0.71 to 1.11). Document 2 shows those small weights
+are inconsistent with the measured bending stiffness (relative to water they would make the
+heavy bends a factor two too soft); the heavy angles are not made by weaker repulsion. Halides
+(NF3, OF2, PF3, PCl3, SF2, SCl2, NCl3, Cl2O) need weights from 0.45 to above 1: larger ligands
+open the angle, which a model without ligand size cannot give.</p>
+<h2 id="3-tilt-the-compensation-geometry">3. Tilt: the compensation geometry</h2>
+<p>For unit bond directions with fourth components w1, w2 and four-direction angle Theta:</p>
+<pre><code>cos(theta_observed) = (cos Theta - w1 w2) / sqrt((1 - w1^2)(1 - w2^2)).
+</code></pre>
+<p>Opposite tilts (w1 = -w2 = s) close the observed angle; equal tilts open it.</p>
+<p>Two bonds at the tetrahedral four-direction angle, tilted oppositely:</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>s</th>
+<th>tilt</th>
+<th>observed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.10</td>
+<td>5.7 deg</td>
+<td>109.06</td>
+</tr>
+<tr>
+<td>0.20</td>
+<td>11.5 deg</td>
+<td>107.79</td>
+</tr>
+<tr>
+<td>1/3</td>
+<td>19.47 deg</td>
+<td>104.4775</td>
+</tr>
+<tr>
+<td>0.40</td>
+<td>23.6 deg</td>
+<td>101.91</td>
+</tr>
+<tr>
+<td>0.50</td>
+<td>30.0 deg</td>
+<td>96.38</td>
+</tr>
+</tbody>
+</table></div>
+<p>Water, 104.4776, is reproduced at s = 1/3 (cos theta = -1/4). This is a one-parameter
+calibration that lands on a simple number. Two other exact routes give the same number, five
+equidistant directions in four dimensions and the proton model's push/pull ratio 1/4; water
+alone does not distinguish them, and Document 3 argues against the push/pull route.</p>
+<h2 id="4-survey-of-two-bond-molecules-at-s-1-3">4. Survey of two-bond molecules at s = 1/3</h2>
+<p>Base angles: 120 with one lone pair, 109.47 with two. Measured values are the verifier's
+sourced gas-phase values.</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Molecule</th>
+<th>Predicted</th>
+<th>Measured</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>one lone pair</td>
+<td>O3</td>
+<td>115.94</td>
+<td>116.8</td>
+<td>-0.9</td>
+</tr>
+<tr>
+<td></td>
+<td>NO2-</td>
+<td>115.94</td>
+<td>117.5 +- 2 (gas phase; the earlier 115.4 was the sodium nitrite crystal value)</td>
+<td>-1.6</td>
+</tr>
+<tr>
+<td></td>
+<td>ClO2</td>
+<td>115.94</td>
+<td>117.40</td>
+<td>-1.5</td>
+</tr>
+<tr>
+<td></td>
+<td>SO2</td>
+<td>115.94</td>
+<td>119.5 (r0; r_e 119.33)</td>
+<td>-3.4</td>
+</tr>
+<tr>
+<td>two lone pairs</td>
+<td>H2O</td>
+<td>104.48</td>
+<td>104.4776</td>
+<td>calibration</td>
+</tr>
+<tr>
+<td></td>
+<td>OF2</td>
+<td>104.48</td>
+<td>103.1</td>
+<td>+1.4</td>
+</tr>
+<tr>
+<td></td>
+<td>NH2 radical</td>
+<td>104.48</td>
+<td>103.4</td>
+<td>+1.1</td>
+</tr>
+<tr>
+<td></td>
+<td>SCl2</td>
+<td>104.48</td>
+<td>102.71</td>
+<td>+1.8</td>
+</tr>
+</tbody>
+</table></div>
+<p>The one-lone-pair value 115.94 follows from the 120 base with water's tilt and was not fitted.
+With the gas-phase nitrite value, all four one-lone-pair molecules are under-predicted, by
+0.9 to 3.4 degrees: the 1/9 tilt is systematically a little too large for that class. The
+two-lone-pair non-hydrides are over-predicted by 1.1 to 1.8.</p>
+<p>No lone pairs means no tilt by construction, so CO2 at 180, BF3 at 120 and CH4 at 109.47 are
+consistency checks, not evidence; three bonds tilted by 1/3 without a lone pair would put BF3
+at 133.4.</p>
+<p>Heavy and carbene-type two-bond molecules need a larger tilt:</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Molecule</th>
+<th>Measured</th>
+<th>s needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H2S</td>
+<td>92.11</td>
+<td>0.555</td>
+</tr>
+<tr>
+<td>PH2 radical</td>
+<td>91.5</td>
+<td>0.562</td>
+</tr>
+<tr>
+<td>H2Se</td>
+<td>90.9</td>
+<td>0.568</td>
+</tr>
+<tr>
+<td>H2Te</td>
+<td>90.26</td>
+<td>0.574</td>
+</tr>
+<tr>
+<td>CF2 (singlet, base 120)</td>
+<td>104.86</td>
+<td>0.573</td>
+</tr>
+<tr>
+<td>CH2 (singlet)</td>
+<td>102.4</td>
+<td>0.603</td>
+</tr>
+<tr>
+<td>SiF2</td>
+<td>100.77</td>
+<td>0.620</td>
+</tr>
+<tr>
+<td>GeF2</td>
+<td>97.15</td>
+<td>0.654</td>
+</tr>
+<tr>
+<td>SnCl2</td>
+<td>95 (unverified; no authoritative gas-phase source found)</td>
+<td>0.673</td>
+</tr>
+<tr>
+<td>SiH2</td>
+<td>92</td>
+<td>0.694</td>
+</tr>
+<tr>
+<td>SF2</td>
+<td>98.05</td>
+<td>0.475</td>
+</tr>
+<tr>
+<td>Cl2O</td>
+<td>110.89</td>
+<td>none (above the base; opened by ligand size)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The heavy hydrides cluster at s = 0.555 to 0.574, near 1/sqrt(3) = 0.577: at s^2 = 1/3 the
+two-lone-pair base projects to exactly 90 degrees. Singlet CF2 at the same s shows the water
+angle from the 120 base.</p>
+<p>What the tilt values do and do not show. For the hydrides there are two values: s^2 = 1/9 for
+the oxygen and nitrogen hydrides and s^2 near 1/3 for the third-period and heavier hydrides.
+This is not a rule by period: singlet CF2 and CH2 are second-period centres and need the heavy
+value, while SCl2, SF2, SO2 and ClO2 are third-period centres and sit near or below 1/9. 1/9 is
+a fit to water and 1/3 was chosen to match the H2S to H2Te cluster. The reading is restricted
+to hydrides, and every heavy-hydride prediction at 1/3 (90 degrees) lies below the measured
+angle, by 0.3 to 2.1 degrees for the two-bond molecules: a systematic offset, not scatter.</p>
+<h2 id="5-pyramidal-molecules-tilt-into-two-hidden-directions">5. Pyramidal molecules: tilt into two hidden directions</h2>
+<p>Three equivalent bonds cannot tilt in mutually opposite senses in one hidden direction; equal
+tilts open the angle (s = 1/3 gives 120 against ammonia's 106.67). They can tilt into a hidden
+plane with tilt vectors 120 degrees apart, w_i . w_j = -|w|^2/2. Two natural normalisations
+exist: the same tilt magnitude as the two-bond case, |w| = s, which gives 108.21 for ammonia at
+s = 1/3; or the same tilt per hidden direction, |w|^2 = 2 s^2, which gives 106.60. The second
+was chosen after ammonia failed the one-direction rule, because it reproduces ammonia; that is
+disclosed here. With it:</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Molecule</th>
+<th>Rule</th>
+<th>Predicted</th>
+<th>Measured</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H2O</td>
+<td>one direction, s^2 = 1/9</td>
+<td>104.48</td>
+<td>104.4776</td>
+<td>sets s</td>
+</tr>
+<tr>
+<td>NH3</td>
+<td>two directions, 1/9 each</td>
+<td>106.60</td>
+<td>106.67</td>
+<td>-0.07</td>
+</tr>
+<tr>
+<td>H2S</td>
+<td>one direction, 1/3</td>
+<td>90.00</td>
+<td>92.11</td>
+<td>-2.1</td>
+</tr>
+<tr>
+<td>H2Se</td>
+<td>one direction, 1/3</td>
+<td>90.00</td>
+<td>90.9</td>
+<td>-0.9</td>
+</tr>
+<tr>
+<td>H2Te</td>
+<td>one direction, 1/3</td>
+<td>90.00</td>
+<td>90.26</td>
+<td>-0.3</td>
+</tr>
+<tr>
+<td>PH3</td>
+<td>two directions, 1/3 each</td>
+<td>90.00</td>
+<td>93.3</td>
+<td>-3.3</td>
+</tr>
+<tr>
+<td>AsH3</td>
+<td>two directions, 1/3 each</td>
+<td>90.00</td>
+<td>92.08</td>
+<td>-2.1</td>
+</tr>
+<tr>
+<td>SbH3</td>
+<td>two directions, 1/3 each</td>
+<td>90.00</td>
+<td>91.56</td>
+<td>-1.6</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ammonia is reproduced to 0.07 degrees from water's number under the chosen normalisation. The
+exact values 104.48 (cos -1/4), 106.60 (cos -2/7) and 90 all come from 1/9 and 1/3. All heavy
+pyramids are under-predicted, by 1.6 to 3.3 degrees, the same sign as the two-bond hydrides.</p>
+<p>Pyramidal halides, s^2 per hidden direction that each would need (not s): NCl3 0.072 (sourced
+angle 107.78; below 1/9), NF3 0.208 (r0 102.37) or 0.217 (r_e 101.85), XeO3 0.197 (crystal value
+103; no gas-phase value exists), PCl3 0.243, PBr3 0.230, PF3 0.272, AsCl3 0.262 (rs 98.9: 0.259),
+AsF3 0.287 (r_e 95.88: 0.290). H3O+ (about 113, cited second-hand) needs none. The halides sit
+between 1/9 and 1/3 except NCl3, which is below 1/9.</p>
+<p>The base has one fourth direction; a second hidden direction must be a pair direction, along
+which a nucleus's quarks are spread and so have no position. the stated readings: the electron,
+bound in six directions, herds the quarks enough to give the nucleus a position along a pair
+direction; or the electron moves into the pair directions on its own. Energy that moves out of
+the observed directions on one part of the orbit returns on another part or along another
+direction; the total is conserved. Not computed.</p>
+<h2 id="6-how-the-two-consequences-divide-the-work">6. How the two consequences divide the work</h2>
+<p>Document 2 (bending frequencies) shows that the small weights fitted to the heavy angles are
+inconsistent with the measured stiffness, and that one pressing strength, f = 0.80, is
+consistent with the heavy hydrides' bends (within 8% relative to water for the two-bond
+hydrides, within 3% among the heavy pyramids), under the assumption that whatever closes the
+heavy angles adds no stiffness. Combined with this document the reading is: pressing with
+f = 0.80 sets the angle for second-period centres; for heavier centres the pressing is the same
+and the further closure is the tilt, which changes the observed angle without changing the
+force. The frequencies exclude the alternative (weaker repulsion); they do not establish the
+tilt on their own. Ammonia's umbrella frequency is a separate, unexplained failure of the
+repulsion model (Document 2, section 6).</p>
+<h2 id="7-status">7. Status</h2>
+<p>Established arithmetic: the projection formula and every predicted or needed value in the
+tables (verified independently); the repulsion model's calibration values. Measured values:
+sourced by the verifier; six were corrected or labelled (NO2-, NCl3, H3O+, NF3 r_e, XeO3 phase,
+SnCl2 unverified). Supported: one pressing weight for water and ammonia; the heavy angles are
+not from weaker repulsion (with Document 2). Suggestive: the two-bond tilt at s^2 = 1/9 for
+oxygen and nitrogen hydrides and near 1/3 for heavier hydrides, with a systematic
+under-prediction of 0.3 to 3.3 degrees at 1/3; the pyramids' tilt into a hidden plane with the
+same tilt per direction, which reproduces ammonia under a normalisation chosen for that
+purpose. Open: what fixes 1/9 and 1/3; what gives a nucleus a position along a pair direction;
+the one-lone-pair class's 0.9 to 3.4 degree under-prediction; halide ligands (ligand size); the
+carbene-type scatter.</p>
+<hr>
+<h1 id="bending-frequencies-from-the-pair-repulsion-model">Bending Frequencies from the Pair-Repulsion Model</h1>
+<p>Document 2 of 3. 9 November 2026, revised after independent verification the same day.
+Author: the author. For assembly into the case. Scripts and outputs:
+bend_frequencies.py/.out, bend_frequencies_fixed_f.py/.out in
+agents/claude/periodic-table-10d-20261109/ (both rerun after the correction in section 2).
+Verification report: verification-doc-2.md in the same directory.</p>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>Molecular bending frequencies are among the most precisely measured quantities in chemistry.
+Document 1 gives a model for bond angles with one parameter, the shared-pair weight f. The
+same model has a stiffness, the curvature of its energy in the bond angle. This document
+converts that stiffness to a bending frequency with physical constants and compares it with
+measurement. No parameter is fitted to a frequency.</p>
+<h2 id="2-model">2. Model</h2>
+<p>Energy: four pairs on the central atom's shell, Coulomb repulsion, weights f for shared pairs
+and 1 for lone pairs, energy unit e^2/R with R the bond length (the shell radius is set equal
+to the bond length; this choice fixes the absolute scale of every prediction by the same
+factor, so ratios between molecules are the firmer result). Stiffness k: second derivative of
+the energy in the bond angle at the measured angle, lone pairs relaxed at each angle (central
+difference, step 0.5 degrees). Kinetic term: Wilson G-matrix element for the symmetric bend of
+XH2, G = 2/(m_H R^2) + 2(1 - cos theta)/(m_X R^2), omega^2 = k G (verified against a full
+B-matrix computation: rigid-bond and full treatments differ by 0.3% at most); for XH3 the
+symmetric umbrella motion with the bond angle converted exactly to the polar angle and the
+central atom's recoil along the axis included, inertia 3 m_H R^2 (1 - 3 m_H sin^2 beta /
+(m_X + 3 m_H)). The first version of this document had the recoil with the wrong sign (inertia
+raised instead of lowered); the verifier caught it, and the pyramid numbers below are the
+corrected ones (verified against a full B-matrix computation to 0.3%). Constants:
+e^2/(4 pi eps0) = 2.307077e-28 J m, u = 1.66053907e-27 kg, m_H = 1.00783 u.</p>
+<p>Inputs (angle, bond length in angstrom, bend in cm^-1) with the verifier's sourced values
+(NIST WebBook / Shimanouchi, CCCBDB) where they differ: H2O 104.48, 0.958, 1594.7 (harmonic
+1649); H2S 92.1, 1.336, 1182.6 (harmonic 1215); H2Se 90.9, 1.460, 1034.2; H2Te 90.3, 1.658
+(sourced r_e 1.651), 861.0; NH3 106.67, 1.012, 950.2 (centre of 932.4/968.1; sourced 932.5/968.3);
+PH3 93.5 (sourced 93.3), 1.420 (1.421), 992.1; AsH3 92.1, 1.511, 906.8 (sourced 906.0); SbH3
+91.5, 1.704 (sourced 1.700), 782.2 (sourced 781.5). None of the differences exceeds 0.5% in
+frequency or 0.01 angstrom; the largest effect on a prediction is 0.6% (H2Te, R^-1.5 scaling).</p>
+<h2 id="3-run-1-weight-as-fitted-to-each-molecule-s-angle-document-1-section-2">3. Run 1: weight as fitted to each molecule's angle (Document 1, section 2)</h2>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Molecule</th>
+<th>Angle</th>
+<th>f</th>
+<th>k (e^2/R per rad^2)</th>
+<th>Predicted (cm^-1)</th>
+<th>Measured</th>
+<th>Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H2O</td>
+<td>104.48</td>
+<td>0.803</td>
+<td>0.3081</td>
+<td>1714</td>
+<td>1594.7</td>
+<td>1.075</td>
+</tr>
+<tr>
+<td>H2S</td>
+<td>92.1</td>
+<td>0.443</td>
+<td>0.1336</td>
+<td>671</td>
+<td>1182.6</td>
+<td>0.567</td>
+</tr>
+<tr>
+<td>H2Se</td>
+<td>90.9</td>
+<td>0.415</td>
+<td>0.1217</td>
+<td>555</td>
+<td>1034.2</td>
+<td>0.536</td>
+</tr>
+<tr>
+<td>H2Te</td>
+<td>90.3</td>
+<td>0.402</td>
+<td>0.1164</td>
+<td>447</td>
+<td>861.0</td>
+<td>0.519</td>
+</tr>
+<tr>
+<td>NH3</td>
+<td>106.67</td>
+<td>0.799</td>
+<td>1.9053</td>
+<td>1832</td>
+<td>950.2</td>
+<td>1.928</td>
+</tr>
+<tr>
+<td>PH3</td>
+<td>93.5</td>
+<td>0.352</td>
+<td>0.3777</td>
+<td>584</td>
+<td>992.1</td>
+<td>0.589</td>
+</tr>
+<tr>
+<td>AsH3</td>
+<td>92.1</td>
+<td>0.326</td>
+<td>0.3312</td>
+<td>496</td>
+<td>906.8</td>
+<td>0.547</td>
+</tr>
+<tr>
+<td>SbH3</td>
+<td>91.5</td>
+<td>0.316</td>
+<td>0.3142</td>
+<td>403</td>
+<td>782.2</td>
+<td>0.516</td>
+</tr>
+</tbody>
+</table></div>
+<p>Relative to water, the six heavy hydrides are predicted a factor of about two softer than they
+are (ratios 0.52 to 0.59 against water's 1.075). This comparison does not depend on the
+absolute scale. The small weights that the heavy angles seemed to need (Document 1, section 2)
+are inconsistent with the measured stiffness: whatever closes the heavy angles, it is not
+weaker repulsion.</p>
+<h2 id="4-run-2-weight-held-at-the-second-period-value-angle-as-measured">4. Run 2: weight held at the second-period value, angle as measured</h2>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Molecule</th>
+<th>f</th>
+<th>Predicted (cm^-1)</th>
+<th>Measured</th>
+<th>Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H2O</td>
+<td>0.803</td>
+<td>1714</td>
+<td>1594.7</td>
+<td>1.075 (1.039 against harmonic 1649)</td>
+</tr>
+<tr>
+<td>H2S</td>
+<td>0.803</td>
+<td>1172</td>
+<td>1182.6</td>
+<td>0.991 (0.965 against harmonic 1215)</td>
+</tr>
+<tr>
+<td>H2Se</td>
+<td>0.803</td>
+<td>1032</td>
+<td>1034.2</td>
+<td>0.998</td>
+</tr>
+<tr>
+<td>H2Te</td>
+<td>0.803</td>
+<td>857</td>
+<td>861.0</td>
+<td>0.995</td>
+</tr>
+<tr>
+<td>NH3</td>
+<td>0.799</td>
+<td>1832</td>
+<td>950.2</td>
+<td>1.928</td>
+</tr>
+<tr>
+<td>PH3</td>
+<td>0.799</td>
+<td>1111</td>
+<td>992.1</td>
+<td>1.120</td>
+</tr>
+<tr>
+<td>AsH3</td>
+<td>0.799</td>
+<td>1010</td>
+<td>906.8</td>
+<td>1.114</td>
+</tr>
+<tr>
+<td>SbH3</td>
+<td>0.799</td>
+<td>845</td>
+<td>782.2</td>
+<td>1.081</td>
+</tr>
+</tbody>
+</table></div>
+<p>Within-family ratios, which do not depend on the scale choice: H2S : H2Se : H2Te relative to
+water predicted 0.684 : 0.602 : 0.500 against measured 0.742 : 0.649 : 0.540, about 8% low
+throughout; AsH3 : SbH3 relative to PH3 predicted 0.909 : 0.761 against measured 0.914 : 0.788.
+The near-exact absolute agreement for the heavy XH2 molecules in the table therefore rests on
+the shell-radius choice happening to land near water's 7.5% excess; the robust statement is
+the 8% within-family agreement.</p>
+<p>Run 2 evaluates the curvature at the measured angle, which for the heavy molecules is not the
+model's own minimum (at f = 0.80 the minimum is near 104 degrees). This presumes that whatever
+holds the heavy angle at 90 to 93 degrees does so without adding stiffness of its own. That is
+an assumption about the tilt of Document 1, not something these frequencies demonstrate.</p>
+<h2 id="5-interpretation">5. Interpretation</h2>
+<ul>
+<li>Robust: the fitted small weights are inconsistent with the stiffness (section 3). The heavy
+angles are not made by weaker repulsion.</li>
+<li>Suggestive: with one shared-pair weight, 0.80, for every hydride, the heavy two-bond hydrides
+are predicted within 8% relative to water and within 1% absolutely at the scale used; the
+heavy pyramids within 8 to 12% absolutely and within 3% relative to each other.</li>
+<li>Not demonstrated: that the heavy angles are geometric (the tilt). The frequencies are
+consistent with it, under the assumption in section 4, and they rule out the alternative of
+weaker repulsion. They do not establish the tilt on their own.</li>
+</ul>
+<h2 id="6-ammonia-an-unexplained-model-failure">6. Ammonia: an unexplained model failure</h2>
+<p>Ammonia's umbrella mode is predicted at 1832 cm^-1 against 950, a factor 1.93. The measured
+value is the centre of the inversion doublet (932.4 and 968.1), and the nitrogen does pass
+through the plane of the hydrogens over a barrier of about 2000 cm^-1 (not sourced here). A
+double well of that depth lowers the observed fundamental below the harmonic value by roughly
+7 to 10%; the harmonic umbrella frequency is about 1020 to 1060 cm^-1 (verifier's figure, from
+memory, not sourced). That accounts for a small part of the discrepancy and leaves a factor of
+about 1.75. Ammonia is a failure of this model, not an inversion effect. The pyramids of the
+third period and beyond, whose barriers are high, are described within 8 to 12%.</p>
+<h2 id="7-caveats">7. Caveats</h2>
+<p>The shell radius is taken as the bond length. The model gives a harmonic curvature and should
+be compared with harmonic frequencies where known (water and H2S above). Central masses are
+standard atomic weights (effect below 0.1%). Measured inputs are from memory, verified within
+the thresholds stated in section 2.</p>
+<h2 id="8-status">8. Status</h2>
+<p>Established arithmetic: the stiffnesses, the kinetic terms (XH2 exact to 0.3%; XH3 corrected
+and verified to 0.3%), the conversions. Supported: the fitted small weights are excluded by the
+stiffness. Suggestive: one pressing weight across both periods. Open: the ammonia factor 1.75;
+the shell radius; whether the tilt adds stiffness; a full G-matrix treatment.</p>
+<hr>
+<h1 id="switching-the-three-dimensional-formulas-to-four-directions-one-at-a-time-and-together">Switching the three-dimensional formulas to four directions, one at a time and together</h1>
+<p>9 November 2026. Scripts: force_law_test.py (.out/.json), dimension_sweep.py (.out/.json),
+hidden_separation.py (.out/.json), hidden_separation_abs.py (.out). Calculation: repeat the
+calculation changing one formula at a time to four dimensions, then in groupings, until the
+solutions appear. Score: bending frequency ratio to water against measured (scale-free), rms of
+log ratios; the ammonia value separately.</p>
+<h2 id="switches">Switches</h2>
+<p>law: pair potential 1/d (three-direction Coulomb) or 1/d^2 (four-direction Gauss form).
+length: bond length as measured, or the four-direction length R/sqrt(1 - |w|^2) from the tilt.
+angle: pairs at the observed angle with a three-direction kinetic term, or at the
+four-direction angle (tilt undone) with the four-direction kinetic term (the coordinate
+Jacobians cancel, so this is the four-direction frequency).
+separation (fourth switch): pair distances measured with the bonds' hidden components included
+(two bonds at +s, -s in the fourth direction; three bonds with tilt vectors 120 degrees apart in
+a hidden plane), lone pairs free in the full space.</p>
+<h2 id="results">Results</h2>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>law / length / angle</th>
+<th>weight water, ammonia</th>
+<th>heavy six rms log</th>
+<th>ammonia ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3D / 3D / 3D (original), one weight</td>
+<td>0.803, 0.799</td>
+<td>0.059</td>
+<td>1.80</td>
+</tr>
+<tr>
+<td>3D / 3D / 4D</td>
+<td>1.000 (tilt does everything)</td>
+<td>0.168</td>
+<td>1.83</td>
+</tr>
+<tr>
+<td>4D / 3D / 3D</td>
+<td>0.778, 0.772</td>
+<td>0.217</td>
+<td>1.66</td>
+</tr>
+<tr>
+<td>4D / 3D / 4D</td>
+<td>1.000</td>
+<td>0.387</td>
+<td>1.70</td>
+</tr>
+<tr>
+<td>3D / 4D / 3D</td>
+<td>0.803, 0.799</td>
+<td>0.538</td>
+<td>1.63</td>
+</tr>
+<tr>
+<td>3D / 4D / 4D</td>
+<td>1.000</td>
+<td>0.617</td>
+<td>1.66</td>
+</tr>
+<tr>
+<td>4D / 4D / 3D</td>
+<td>0.778, 0.772</td>
+<td>0.904</td>
+<td>1.46</td>
+</tr>
+<tr>
+<td>4D / 4D / 4D</td>
+<td>1.000</td>
+<td>1.045</td>
+<td>1.49</td>
+</tr>
+</tbody>
+</table></div>
+<p>Per-molecule fitted weights score worse than one weight in every configuration (heavy rms 0.68
+to 1.68), the factor-three softness of the fitted small weights persisting under every law.</p>
+<p>Fourth switch, hidden separations with the 1/d law, three-direction length and kinetic term:</p>
+<ul>
+<li>Weights: water 1.000, ammonia 1.005. With the bonds' hidden components in the separations,
+the shared-pair asymmetry disappears: equal pairs, tilted as Document 1 describes, give both
+angles. The heavy hydrides need 1.01 to 1.11 at their tilts (H2S 1.067, H2Se 1.028, H2Te
+1.008, PH3 1.111, AsH3 1.068, SbH3 1.049).</li>
+<li>Frequencies, equal weights, absolute: H2O 1825 (1.145), NH3 1887 (1.99), H2S 839 (0.71),
+H2Se 728 (0.70), H2Te 604 (0.70), PH3 647 (0.65), AsH3 571 (0.63), SbH3 473 (0.61). Relative to
+water the heavy six are 0.53 to 0.62 (stiffness about one third), ammonia 1.74.</li>
+</ul>
+<h2 id="what-was-found-and-what-was-not">What was found and what was not</h2>
+<ul>
+<li>No configuration of the three switches improves on the original. The original with one
+weight reproduces the six heavy bends to 6% relative to water; every four-direction
+substitution makes them worse, the bond length worst. The heavy hydrides' bending is
+three-dimensional in force law, length and motion.</li>
+<li>Ammonia's factor stays between 1.46 and 1.99 in every configuration, including the fourth
+switch. It is not an artefact of any of the four three-dimensional assumptions identified.
+Not solved.</li>
+<li>The fourth switch gives one new result for the angles: with hidden components included in
+the separations, no shared-pair weight is needed; equal pairs tilted by 1/9 (one direction)
+and 2/9 (two directions) give water and ammonia, and the heavy hydrides are within 1 to 11%
+of equal weight at their tilts. So the 0.80 of the pressing model may be the three-direction
+shadow of equal pairs separated in hidden directions. The same picture fails the frequencies:
+heavy stiffness one third of measured, ammonia twice to three times.</li>
+<li>The two pictures are complementary and inconsistent with each other: the three-direction
+pressing with f = 0.80 gets the frequencies and needs the tilt for the heavy angles; the
+tilted equal-pair picture gets all the angles and fails the frequencies by factors near
+sqrt(3) in both directions (heavy low, ammonia high).</li>
+</ul>
+<h2 id="remaining-candidates-not-formula-substitutions">Remaining candidates (not formula substitutions)</h2>
+<ul>
+<li>Ammonia's umbrella as a motion of the tilt vectors in the hidden plane rather than of the
+hydrogens in three directions; a rigid rotation of the tilt vectors preserves all separations
+and so has no restoring force in these models, and a change of tilt magnitude needs a law for
+what fixes the tilt, which is not known.</li>
+<li>A force law for the pair-pair tail from the field equation itself rather than any power law.</li>
+<li>The observed bend of the heavy hydrides treated as the three-direction projection of a mixed
+motion, with the tilt oscillating; needs the same unknown law.</li>
+</ul>
+<hr>
+<h2 id="independent-verification-of-the-bond-angle-document">Independent verification of the bond-angle document</h2>
+<h1 id="independent-verification-of-document-1-bond-angles-pressing-and-tilt">Independent verification of Document 1 (bond angles: pressing and tilt)</h1>
+<p>9 November 2026. Verifier: a separate Opus agent launched by the author at the stated
+instruction, read access to the packet and the web, no write access to the packet. Report
+summarised faithfully below (the full text is retained in the session archived record); the author's
+response follows.</p>
+<h2 id="verifier-s-findings">Verifier's findings</h2>
+<p>Formulas: all correct. The projection formula was derived independently and checked on random
+four-vectors to 1e-15; opposite tilts close and equal tilts open the angle; the hidden-plane
+case gives cos theta = (c + |w|^2/2)/(1 - |w|^2), so |w|^2 = 2/9 gives -2/7 (106.6015) and 2/3
+gives 90; five equidistant directions in four dimensions have cosine -1/4 (104.4775); CF2 at
+s^2 = 1/3 on the 120 base gives 104.4775; BF3 with an equal 1/3 tilt would be 133.43.</p>
+<p>Arithmetic: every number in the tilt table, the one-lone-pair prediction 115.94, every "s
+needed" value and every pyramidal per-direction value reproduces; the pressing-curve values and
+calibrations 0.803 and 0.799 match bond_angles.json; the three fast scripts rerun byte-identical
+through the compute runner; bond_angles_followup.out is consistent with bond_angles.json.</p>
+<p>Labelling errors: (a) the pyramidal halide list in section 5 gives s^2 per direction but the
+text calls them tilts next to tables that list s; (b) "between the two values" is false for
+NCl3, which is below 1/9.</p>
+<p>Measured values against sources (NIST CCCBDB experimental geometry pages; Kisiel's microwave
+tables quoting primary papers; primary papers where named). Hold within 0.3 degrees and
+0.01 angstrom: H2O 104.4776, NH3 106.67, H2S 92.11, PH3 93.3 (r0; r_e about 93.36), H2Se 90.9,
+AsH3 92.083, SbH3 91.557 (R 1.700), H2Te 90.26 (R 1.651), O3 116.8, SO2 119.5 (r0; r_e 119.33),
+ClO2 117.40, CF2 104.86, SiF2 100.77, GeF2 97.15, CH2 singlet 102.4 (from memory), SiH2 92,
+OF2 103.1, Cl2O 110.89, NH2 103.4, SCl2 102.71, SF2 98.05, PH2 91.5, NF3 102.37 (r0; r_e 101.85),
+PF3 97.7 (R 1.561), PCl3 100.1, PBr3 101, AsF3 96.2 (rg; r_e 95.88), AsCl3 98.6 (rs 98.9).
+Wrong or wrong phase: NO2- 117.5 +- 2 gas phase (Ervin, Ho and Lineberger 1988; 115.4 is the
+NaNO2 crystal value); NCl3 107.78 (Cazzoli, Favero and Dal Borgo 1974); H3O+ about 113 (Tang
+and Oka 1999, cited second-hand); XeO3 103 is crystal-only (Templeton et al. 1963); SnCl2 95
+unverified (no authoritative source found). No bond length off by more than 0.01 angstrom
+(largest PF3 0.009, H2Te 0.007, NF3 0.006), so the f x R^2 statements do not change.</p>
+<p>Recomputed: NO2- error -1.6 (s needed 0.267); NCl3 s^2 per direction 0.072; NF3 at r_e 0.217;
+AsF3 at r_e 0.290; AsCl3 at rs 0.259; PH3 error -3.3 to -3.4; PH2 s 0.562; H3O+ still none. With
+the gas-phase NO2- all four one-lone-pair molecules are under-predicted (O3 -0.9, NO2- -1.6,
+ClO2 -1.5, SO2 -3.4): the 1/9 tilt is systematically too large for that class and the NO2-
+match disappears.</p>
+<p>Overclaims: (1) "s^2 = 1/9 for the second period and 1/3 for heavier" is contradicted by the
+document's own tables: CF2 and CH2 (second period) need the heavy value; SCl2, SF2, SO2, ClO2
+(third-period centres) sit near or below 1/9. The rule holds for hydrides only. 1/9 is a fit to
+water; 1/3 was chosen to match the H2S to H2Te cluster. (2) Every 1/3 prediction (90) is below
+the measured angle (by 0.3 to 2.1 for two-bond, 1.5 to 3.5 for pyramids): a systematic offset,
+not scatter; "suggestive" fits better than "supported". (3) NH3 to 0.07 rests on choosing
+|w|^2 = 2 s^2 after ammonia failed the one-direction rule; the other natural normalisation
+|w| = s gives 108.21; the document should say so. (4) The measured column was unverified and
+contained crystal values. (5) Water at s = 1/3 is a one-parameter calibration landing on a
+simple number, correctly marked "sets s". (6) "Roughly as 1/R^2" is loose (f x R^2 from 0.71 to
+1.11); "no lone pairs means no tilt" is built into the rule, so CO2, BF3, CH4 are consistency
+checks, not evidence; the Open list is honest.</p>
+<p>Verdict: geometry and arithmetic correct; scripts reproduce; most measured values hold to 0.3
+degrees; six values wrong or wrong phase (NO2-, NCl3, H3O+, XeO3, NF3 at r_e, SnCl2 unverified);
+these do not affect water, ammonia or the heavy-hydride 1/3 cluster but remove the NO2-
+agreement and push NCl3 outside the halide band; main weakness interpretive: narrow the
+1/9-1/3 reading to hydrides, disclose the systematic under-prediction and the post-hoc
+normalisation choice; fix the section 5 label and sentence; replace or label the six values.</p>
+<h2 id="author-s-response">Author's response</h2>
+<p>Accepted in full. Document 1 was revised: measured values replaced (NO2- 117.5 gas phase, NCl3
+107.78, H3O+ about 113, NF3 r_e 101.85 alongside r0) or labelled by phase (XeO3 crystal, SnCl2
+unverified); the one-lone-pair class now reads as systematically under-predicted by 0.9 to 3.4
+degrees; the two-value reading is restricted to hydrides with the contradicting non-hydrides
+named; the systematic sign of the heavy-hydride errors is stated and the status lowered to
+suggestive; the |w|^2 = 2 s^2 choice is disclosed as one of two natural normalisations chosen
+after ammonia failed the one-direction rule, with the alternative's value given; the section 5
+label and sentence are fixed; CO2, BF3 and CH4 are described as consistency checks. The earlier
+notes (bond-angles-note.md, projection-survey-note.md, tilt-dimensions-note.md) are superseded
+by the document on these points and are left unchanged as frozen records.</p>
+<hr>
+<h2 id="independent-verification-of-the-bending-frequency-document">Independent verification of the bending-frequency document</h2>
+<h1 id="independent-verification-of-document-2-bending-frequencies">Independent verification of Document 2 (bending frequencies)</h1>
+<p>9 November 2026. Verifier: a separate Opus agent launched by the author at the stated
+instruction, with read access to the packet and the web, no write access to the packet. Report
+reproduced verbatim below; the author's response follows.</p>
+<h2 id="verifier-s-report">Verifier's report</h2>
+<p>Reruns: both scripts ran through scripts/agent-compute.py; outputs match the stored .out files
+exactly; the tables in sections 3 and 4 match.</p>
+<p>Physics: constants correct (e^2/4 pi eps0 = 2.307077e-28 J m, u = 1.66053907e-27 kg,
+m_H = 1.00783 u, nu = omega/(2 pi c)). The XH2 formula G = 2/(m_H R^2) + 2(1 - cos theta)/(m_X R^2),
+omega^2 = kG, is the standard Wilson element; a full numerical A1 G-matrix from the B-matrix
+agrees, rigid-bond elimination of the stretch changes the result by at most 0.3% (H2O
+1714 -&gt; 1711). The XH3 umbrella kinetic term had the recoil sign wrong: the script used
+I = 3 m_H R^2 (1 + 3 m_H sin^2 beta / m_X); recoil must lower the inertia; the correct value is
+I_beta = 3 m_Y R^2 (1 - 3 m_Y sin^2 beta / (m_X + 3 m_Y)) = 3 m_Y R^2 (m_X + 3 m_Y cos^2 beta)/(m_X + 3 m_Y),
+equivalently G_theta = (2/3)(1 + 2c)(m_X + 3 m_Y)/[(1 + c) m_Y R^2 (m_X + m_Y (1 + 2c))] with
+c = cos theta; a full B-matrix check agrees to 0.3%. The document's G was too small by 0.715 (NH3),
+0.877 (PH3), 0.947 (AsH3), 0.967 (SbH3). Corrected pyramid predictions at f = 0.799: NH3 1832,
+PH3 1111, AsH3 1010, SbH3 845 (ratios 1.93, 1.12, 1.11, 1.08); run-1 values PH3 584, AsH3 495,
+SbH3 404, NH3 1832. The bond-angle to polar-angle conversion is exact.</p>
+<p>Sourced values (NIST WebBook/Shimanouchi, CCCBDB): H2O bend 1594.59 (harmonic 1649), R 0.958,
+angle 104.4776; H2S 1182.7 (harmonic 1215), 1.336, 92.11; H2Se 1034.2, 1.460 (r0), 90.9; H2Te 861,
+R 1.651 (r_e; document 1.658), 90.26; NH3 950 (932.5/968.3), 1.012, 106.67; PH3 992.1, 1.421,
+93.3 (document 93.5); AsH3 906.0, 1.511, 92.083; SbH3 781.5, 1.700 (document 1.704), 91.557. No
+value exceeds the flag thresholds (0.5% frequency, 0.01 angstrom). Rescaled ratios with the
+corrected kinetic term: NH3 1.93, PH3 1.12, AsH3 1.115, SbH3 1.085. Central masses are standard
+atomic weights (effect below 0.1%). The model gives a harmonic curvature and should be compared
+with harmonic frequencies where known: H2O 1714/1649 = 1.039, H2S 1172/1215 = 0.965.</p>
+<p>Interpretation: "heavy pyramids within 5 to 8%" is wrong; corrected, 8 to 12% high, ammonia 93%
+high. The relative ratios do not support "one universal strength" as stated: the absolute scale
+is arbitrary (shell radius = R); within-family ratios miss by about 8% (XH2) and PH3/NH3 is
+predicted 0.606 against 1.044 measured. Run 2 evaluates curvature away from the model's minimum
+and assumes the tilt holds the angle without adding stiffness; that is an assumption, not
+demonstrated. Run 1's constant factor shows the small fitted weights are inconsistent with the
+bends but does not by itself discriminate in favour of the tilt. Ammonia facts correct (doublet
+932.4/968.1; barrier about 2000 cm^-1, about 2020 in the literature, not sourced; nitrogen passes
+through the plane), but a double well of that depth lowers the fundamental by roughly 7 to 10%
+(harmonic omega2 about 1020 to 1060 cm^-1, from memory); it cannot account for a factor 1.6 to
+1.9. The excess is a model failure, not an inversion effect.</p>
+<p>Verdict: arithmetic reproduces exactly; XH2 treatment and constants correct; measured data hold
+within thresholds (largest differences 0.007 angstrom for H2Te R, 0.09% for AsH3 and SbH3
+frequencies); XH3 recoil sign error must be fixed; the step to "one universal pressing strength,
+heavy angles are geometric" is not supported as stated; present run 2 as suggestive, compare
+against harmonic frequencies where available, treat ammonia as an unexplained model failure.</p>
+<h2 id="author-s-response-1">Author's response</h2>
+<p>Accepted in full. The recoil sign is corrected in both scripts and both were rerun; the
+document's tables now carry the corrected pyramid values. Sections 4 to 8 of the document were
+rewritten: the within-family ratios are given as the robust comparison, the absolute agreement
+is attributed to the scale choice, the non-stationary-curvature assumption is stated, the
+interpretation is reduced to "the fitted small weights are excluded; one weight is consistent;
+the tilt is not established by the frequencies", harmonic values are quoted for water and H2S,
+and ammonia is recorded as an unexplained model failure. The sourced input values are listed
+in section 2 of the document; the predictions were not rerun for them since the largest effect
+is 0.6%. Document 1's references to Document 2 were softened to match.</p>
+<p><a href="/research/notes/20261030-particle-geometry-readable-draft/">Return to the Case</a>.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261030-particle-geometry-readable-draft/">From Particle Masses to Shared Geometry — The Case for Investigating IDWT</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-1"><a href="#bond-angles-from-the-four-direction-orbit-picture-pressing-and-tilt">Bond Angles from the Four-Direction Orbit Picture: Pressing and Tilt</a></li><li class="toc-level-2"><a href="#1-setting-and-premises">1. Setting and premises</a></li><li class="toc-level-2"><a href="#2-pressing-the-calibration-on-water-and-ammonia">2. Pressing: the calibration on water and ammonia</a></li><li class="toc-level-2"><a href="#3-tilt-the-compensation-geometry">3. Tilt: the compensation geometry</a></li><li class="toc-level-2"><a href="#4-survey-of-two-bond-molecules-at-s-1-3">4. Survey of two-bond molecules at s = 1/3</a></li><li class="toc-level-2"><a href="#5-pyramidal-molecules-tilt-into-two-hidden-directions">5. Pyramidal molecules: tilt into two hidden directions</a></li><li class="toc-level-2"><a href="#6-how-the-two-consequences-divide-the-work">6. How the two consequences divide the work</a></li><li class="toc-level-2"><a href="#7-status">7. Status</a></li><li class="toc-level-1"><a href="#bending-frequencies-from-the-pair-repulsion-model">Bending Frequencies from the Pair-Repulsion Model</a></li><li class="toc-level-2"><a href="#1-purpose">1. Purpose</a></li><li class="toc-level-2"><a href="#2-model">2. Model</a></li><li class="toc-level-2"><a href="#3-run-1-weight-as-fitted-to-each-molecule-s-angle-document-1-section-2">3. Run 1: weight as fitted to each molecule's angle (Document 1, section 2)</a></li><li class="toc-level-2"><a href="#4-run-2-weight-held-at-the-second-period-value-angle-as-measured">4. Run 2: weight held at the second-period value, angle as measured</a></li><li class="toc-level-2"><a href="#5-interpretation">5. Interpretation</a></li><li class="toc-level-2"><a href="#6-ammonia-an-unexplained-model-failure">6. Ammonia: an unexplained model failure</a></li><li class="toc-level-2"><a href="#7-caveats">7. Caveats</a></li><li class="toc-level-2"><a href="#8-status">8. Status</a></li><li class="toc-level-1"><a href="#switching-the-three-dimensional-formulas-to-four-directions-one-at-a-time-and-together">Switching the three-dimensional formulas to four directions, one at a time and together</a></li><li class="toc-level-2"><a href="#switches">Switches</a></li><li class="toc-level-2"><a href="#results">Results</a></li><li class="toc-level-2"><a href="#what-was-found-and-what-was-not">What was found and what was not</a></li><li class="toc-level-2"><a href="#remaining-candidates-not-formula-substitutions">Remaining candidates (not formula substitutions)</a></li><li class="toc-level-2"><a href="#independent-verification-of-the-bond-angle-document">Independent verification of the bond-angle document</a></li><li class="toc-level-1"><a href="#independent-verification-of-document-1-bond-angles-pressing-and-tilt">Independent verification of Document 1 (bond angles: pressing and tilt)</a></li><li class="toc-level-2"><a href="#verifier-s-findings">Verifier's findings</a></li><li class="toc-level-2"><a href="#author-s-response">Author's response</a></li><li class="toc-level-2"><a href="#independent-verification-of-the-bending-frequency-document">Independent verification of the bending-frequency document</a></li><li class="toc-level-1"><a href="#independent-verification-of-document-2-bending-frequencies">Independent verification of Document 2 (bending frequencies)</a></li><li class="toc-level-2"><a href="#verifier-s-report">Verifier's report</a></li><li class="toc-level-2"><a href="#author-s-response-1">Author's response</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

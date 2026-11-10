@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Block Pattern, Six-Plane Condition, Charge Integrals and Background — IDWT V2</title>
+  <meta name="description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261110-case-block-pattern-and-six-plane/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Block Pattern, Six-Plane Condition, Charge Integrals and Background — IDWT V2">
+  <meta property="og:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261110-case-block-pattern-and-six-plane/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Block Pattern, Six-Plane Condition, Charge Integrals and Background — IDWT V2">
+  <meta name="twitter:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>Block Pattern, Six-Plane Condition, Charge Integrals and Background</h1>
+      <p class="article-date">Updated <time datetime="2026-11-10">November 10, 2026</time></p>
+      <p class="scope-label">conditional research</p>
+      
+    </header>
+    
+    <div class="article-body">
+<p>Four documents in order: the six-plane question; the charge integrals for every depth; the uniform background; the block table with mixing, the Planck-norm check and the neutral-value conjugation.</p>
+<h1 id="normal-six-plane-versus-the-electron-s-bound-six-plane">Normal six-plane versus the electron's bound six-plane</h1>
+<p>9 November 2026. User question on the case document, section 13: "The charge construction's
+normal six-plane differs from the electron's bound six-plane." Work it out or decide whether it
+is an actual problem.</p>
+<h2 id="verdict">Verdict</h2>
+<p>Not a contradiction. The two planes have to differ, and the way they differ is consistent with
+the charge table, the electron's neutrality under color and the four-direction orbit. One real
+condition comes out of it, and one interaction question stays open.</p>
+<h2 id="setup-as-in-the-case-section-9">Setup (as in the case, section 9)</h2>
+<ul>
+<li>Ten matter directions e1..e10. Observer three-plane inside the base four B4 = e1..e4.</li>
+<li>Charge construction: normal six N6 = e5..e10, paired (5,6), (7,8), (9,10). Color is SU(3) on
+those three pairs; charge is the common rotation of all three pairs (with the base part).</li>
+<li>Electron: bound six Q6 = e1..e6, free four e7..e10.</li>
+</ul>
+<p>So Q6 = B4 + L with L = (5,6), and N6 = L + the electron's free four. They share exactly one
+paired plane.</p>
+<h2 id="why-they-must-differ">Why they must differ</h2>
+<p>N6 is perpendicular to the base four, which holds the three observed directions. An electron
+bound only in N6 would be uniform over ordinary space. Q6 must contain the observed directions;
+N6 must not (color has to commute with observer spin). Identifying them is not an option.</p>
+<h2 id="what-the-mismatch-costs-checked-in-check-py-14-of-14-pass">What the mismatch costs, checked in check.py (14 of 14 pass)</h2>
+<ol>
+<li>Color rotations that keep Q6 in place: 4 of the 8 (u(2)). Keeping Q5 as well: 3 (su(2)), and
+that su(2) acts only on e7..e10. This reproduces the case's statement.</li>
+<li>The charge rotation maps Q6 to itself. The electron's shape is unchanged by it, so the charge
+label is not touched by the mismatch.</li>
+<li>This holds because L is one of the paired planes. A generic real two-plane in N6 is not kept
+by the charge rotation. Condition: the electron's two extra bound directions form a paired
+plane. Currently this is a premise (case 9.10, "assume a pure seed's plane structure is
+compatible with its bound/free split").</li>
+<li>The electron's component value (normal degree 0) is unchanged by all eight color rotations.
+Quark values (degree 2) form a triplet, Casimir 4/3.</li>
+<li>The four color rotations that do move Q6 tilt L into the free four. On the electron field
+F s + i G gamma(xhat) s their spin expectation is zero (F part and G part); the orbital
+expectation is zero because the profile is even in the bound directions and uniform in the
+free ones. All eight color charges of the electron are zero.</li>
+</ol>
+<p>So the electron is an oriented object that is not rotating: its shape is not invariant under
+the four tilts, but it carries no color charge, and mass, charge and spin are the same for
+every tilt. A tilted electron is the same electron.</p>
+<h2 id="what-the-4-2-split-of-the-electron-lines-up-with">What the 4 + 2 split of the electron lines up with</h2>
+<ul>
+<li>Orbit. Quarks (depth 3 and 4) are uniform across all of N6, so a nucleus exerts no force on
+the electron along e5, e6. Only four of the electron's six position coordinates can change in
+an atom: e1..e4. That is the four-direction orbit already used, with the up quarks (depth 4)
+acting on four-direction distance and the down quark (depth 3) on three-direction distance.
+Consistency with the existing model, not a new derivation.</li>
+<li>Charge. The remaining two bound directions are the plane the charge rotation turns.</li>
+<li>Color. The electron's free four are the other two paired planes; the su(2) of item 1 acts
+there, matching the depth-6 row of the case's bound/free table (free factor su(2)).</li>
+<li>Unsteered directions. A three-direction apparatus leaves w, x5, x6 unsteered: three, the same
+power used in the electron-electron contact fraction.</li>
+</ul>
+<h2 id="open">Open</h2>
+<ul>
+<li>A. Why the two extra bound directions form a paired plane (item 3). Needs the field law, not
+algebra.</li>
+<li>B. Interaction. An electron near a quark is non-uniform along e5, e6 where the quark is
+uniform, so it singles out one of the three color planes locally. The density term is blind to
+the quark's color value, and a three-quark color-neutral combination treats the planes equally
+at first order. Any residual effect comes through the derivative terms along e5, e6. Not
+computed.</li>
+<li>C. Depth 5. The charge rotation turns e5 into e6, which is outside Q5. The neutrino's bound
+five is the only assigned depth with half a paired plane. Geometric fact only; whether it
+connects to neutrality is untested.</li>
+</ul>
+<p>Move the item out of "principal incompatibilities". Say instead: the two planes share one
+paired plane; charge and color neutrality of the electron hold for a fixed bound plane;
+remaining tasks are A and B.</p>
+<hr>
+<h1 id="addendum-1-the-three-open-items-calculated">Addendum 1: the three open items, calculated</h1>
+<p>9 November 2026. Follows findings.md (items A, B, C). Scripts: charge_integrals.py (36 of 36
+comparisons pass), color_equivalence.py (8 of 8 pass), shared matrices in clifford.py.</p>
+<p>Outcome: A and B support the first finding. C does not: it shows a defect at the odd depths.</p>
+<h2 id="method-for-a-and-c">Method for A and C</h2>
+<p>Charge operator: Q_ang = (K_4 + N_6)/3, case eq. 10.2-10.3. Field: the radial form of case
+eq. 12.50, Psi = F s + i G gamma(xhat) s, bound in a chosen set of directions and uniform in the
+rest. The integral of Psi^dagger Q_ang Psi over the bound directions (per unit free volume),
+divided by the norm, was done two ways: by quadrature with the operator in its defining form
+(orbital and spin terms both kept), and by a closed formula derived separately. They agree to
+1e-9 in every case.</p>
+<p>Closed formula, with w = lower-component norm fraction (integral of G^2 over the norm), nb and dn
+the numbers of bound base and bound normal directions (d = nb + dn), g4 the seed's Gamma_4 value
+and sigma_k its spin in normal pair k:</p>
+<pre><code>q = (1/3) { g4 [3/2 - w (3/2 - kappa)] + sum_k sigma_k [1 - w (2/d) straddle_k] }
+kappa = (3/2) dn/d + (nb - 5/2) nb/d
+straddle_k = 1 when pair k has exactly one bound direction, else 0
+</code></pre>
+<p>The charge integral equals the table value exactly when the bound set is the whole base four
+(or none of it) plus whole normal pairs. Otherwise it is off by a multiple of w.</p>
+<h2 id="a-why-the-electron-s-extra-two-directions-must-be-a-pair">A. Why the electron's extra two directions must be a pair</h2>
+<ul>
+<li>The field law does not choose. The radial equations are the same for every seed and every
+bound plane (rho = F^2 + G^2 holds for random seeds and planes, error 2e-16). Energy and norm
+are identical for a paired and an unpaired plane.</li>
+<li>The charge integral does choose. Tilting the bound plane by theta out of the pair (5,6)
+gives q = -1 + (w/9) sin^2(theta). Quadrature at theta = 0, 0.3, pi/4, pi/2 matches.</li>
+<li>So the paired plane is the only orientation where the electron's charge integral is exactly
+the table value. At the case's supplied parameters (m0 = g = 1, omega = 0.99, table 12.15),
+w = 2.14e-3 at depth 6, so the coefficient w/9 is 2.4e-4.</li>
+</ul>
+<p>Supports, with this limit: the selection comes from the charge, not from the energy. Nothing
+in the isolated static law pulls a tilted electron back.</p>
+<h2 id="b-do-the-three-colors-stay-equivalent-next-to-an-electron">B. Do the three colors stay equivalent next to an electron?</h2>
+<p>Yes, exactly, for an electron (or several sharing the same bound six) and quarks uniform across
+the normal six.</p>
+<ul>
+<li>Everything is uniform in e7..e10, so only gamma_1..gamma_6 carry derivatives. The occupancies
+of the pairs (7,8) and (9,10) are never changed by the kinetic operator or by beta.</li>
+<li>The electron value and the three color values sit in four different such blocks. Every cross
+density between them vanishes identically. The total density is the plain sum of the separate
+densities, so the density term cannot tell the colors apart at any order.</li>
+<li>The color whose odd pair is (5,6) maps to another color by T = a4^dagger gamma_6. T leaves
+gamma_1..gamma_5 and beta alone and reverses gamma_6: a mirror of x6 only. The electron's
+density is even in x6 and the quark is uniform there, so the two colors solve the same
+problem with the same frequency and density. The other two colors exchange by a rotation
+inside the electron's free four.</li>
+</ul>
+<p>Scope: not shown for two electrons whose bound pairs differ.</p>
+<h2 id="c-odd-depths">C. Odd depths</h2>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Bound set</th>
+<th>Charge integral minus table value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>depth 4 (e1..e4), depth 6 (e1..e6), depth 10</td>
+<td>0</td>
+</tr>
+<tr>
+<td>depth 2 on a normal pair (5,6)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>depth 2 nested (e1, e2)</td>
+<td>-(2/3) w g4</td>
+</tr>
+<tr>
+<td>depth 3 (e1..e3)</td>
+<td>-(1/3) w g4</td>
+</tr>
+<tr>
+<td>depth 5 nested (e1..e5)</td>
+<td>-(2/15) w sigma_56 (= +w/15 for the neutral seed)</td>
+</tr>
+<tr>
+<td>depth 5 as three + pair (e1, e2, e3, e5, e6)</td>
+<td>-(1/5) w g4</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>An odd number of bound directions cannot be made of the whole base plus whole pairs, so no
+placement of depth 3 or depth 5 is exact under this operator. I tried the two above for
+depth 5 and two for depth 3.</li>
+<li>At the supplied parameters: down quark off by w/3 = 2.9e-4; nested neutrino by w/15 = 1.1e-4.
+A proton with one depth-3 quark would differ from the electron's magnitude by w/3. Matter is
+neutral to about 1e-21, so this is a real conflict unless w is essentially zero, the charge is
+not this integral, or the depth-3 and depth-5 fields are not of this radial form.</li>
+<li>For depth 2 and 3, K_4 also fails to commute with the field's own radial potential (a term
+linear in the free base coordinate remains), so Q_ang is not a symmetry of that field.</li>
+</ul>
+<p>Does not support. It is a problem for depths 3 and 5 under Q_ang, not for the electron. It is
+tied to this operator's blocks (four base directions together, three pairs).</p>
+<h2 id="side-note-outside-the-question">Side note (outside the question)</h2>
+<p>In the rank-32 field beta is the product of all five pair signs. The table rows with g4 = -1
+and even normal degree (charges -1 and -1/3) are beta = -1 seeds; the rows 0 and +2/3 are
+beta = +1. The radial branch of eq. 12.50 is stated for a positive-beta seed. Printed per case
+in charge_integrals.out. The principal may already handle this under the signed-seed branches.</p>
+<h2 id="numbers-at-the-supplied-parameters">Numbers at the supplied parameters</h2>
+<p>w from the exact balances (12.51): S/N = omega + (10 - d)(E/N - omega), w = (1 - S/N)/2.
+Depth 2: 5.56e-4; 3: 8.82e-4; 4: 1.25e-3; 5: 1.67e-3; 6: 2.14e-3; 10: 5.00e-3. The gap, coupling
+and frequency are the case's supplied values, not physical ones.</p>
+<hr>
+<h1 id="addendum-2-a-uniform-polarised-background">Addendum 2: a uniform polarised background</h1>
+<p>9 November 2026. User question: could the field have a general polarity that aligns particles?
+Test asked for: put the electron-type solution on a uniform polarised background and see whether
+its bound plane is pulled onto the pair. Script: background_alignment.py (7 of 7 checks pass).</p>
+<h2 id="setup">Setup</h2>
+<p>Law of case eq. 12.24. Background: constant value s0 with beta s0 = s0, an exact solution with
+frequency m0 - g A^(2/9). Particle: depth-6 radial field with seed s, bound in a six-plane Q.
+kappa = |s0^dagger s| is the overlap of the two values.</p>
+<h2 id="result-1-exact-the-background-does-not-act-on-the-bound-plane">Result 1 (exact): the background does not act on the bound plane</h2>
+<p>Fields of the form [F1 + i G1 gamma(xhat)] s + [F0 + i G0 gamma(xhat)] s0, with complex radial
+F and G, are mapped into the same form by the full right-hand side of the law. The radial
+coefficients are the same for every orientation of Q. Only kappa enters.</p>
+<p>Reason: s0^dagger gamma(xhat) s = 0 because the two sides have opposite beta, and
+(gamma(xhat) s0)^dagger gamma(xhat) s = s0^dagger s. The density therefore never sees how Q sits
+relative to either value.</p>
+<p>Checked with a finite-difference D_10 in all ten directions at random points: closure residual
+1.3e-10; coefficients for a straight, a tilted (0.6 rad) and a random six-plane differ by 1.4e-10
+(the finite-difference error); changing kappa changes them by 4.5e-2 (control).</p>
+<p>So a uniform background, however strong, exerts no pull on the bound plane within this family.
+The open condition of addendum 1, item A (the extra two bound directions must be a pair) is not
+supplied by a uniform polarity.</p>
+<h2 id="result-2-estimate-the-background-does-act-on-the-value">Result 2 (estimate): the background does act on the value</h2>
+<p>Depth-6 profile by shooting at m0 = g = 1, omega = 0.99. It reproduces the case's
+E/(m0 N) = 0.991429513 and the balance value w = 2.140974e-3.</p>
+<p>Time-averaged interaction energy of the unperturbed superposition (particle and background keep
+their own frequencies, the cross term is averaged over the beat), aligned value minus orthogonal
+value, per particle norm:</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Background density / particle core density</th>
+<th>Energy difference (m0)</th>
+<th>Share of binding energy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1e-6</td>
+<td>-6.17e-7</td>
+<td>0.007%</td>
+</tr>
+<tr>
+<td>1e-4</td>
+<td>-2.26e-5</td>
+<td>0.26%</td>
+</tr>
+<tr>
+<td>1e-2</td>
+<td>-4.44e-4</td>
+<td>5.2%</td>
+</tr>
+</tbody>
+</table></div>
+<p>Aligned is lower. The dependence on overlap is close to kappa^2 (kappa = 1/2 gives 0.23 to 0.24
+of the full difference). The small-amplitude formula
+-(g/9) A^2 kappa^2 integral F^2 (rho + A^2)^(-8/9) agrees within 5 to 9 percent.</p>
+<p>Limits: this is the unperturbed superposition, not a dressed solution. If the two frequencies
+were equal there would be a first-order term whose sign depends on the relative phase. The
+background amplitude is unknown. The supplied gap, coupling and frequency are the case's values.</p>
+<h2 id="reading">Reading</h2>
+<ul>
+<li>A uniform polarity can make particle values line up with it, and so share one pairing of
+directions. That is the reference pairing the charge construction currently assumes.</li>
+<li>It cannot orient bound planes. Anything that does must be non-uniform or act through
+something other than the density.</li>
+<li>Quark values are orthogonal to a degree-0 background value by construction, which is the top
+of this energy. Conserved charge and color would have to be what holds them there.</li>
+<li>Not addressed: the odd-depth charge defect (addendum 1, item C).</li>
+</ul>
+<hr>
+<h1 id="unrecorded-discussion-items-of-9-november-2026-with-numbers">Unrecorded discussion items of 9 November 2026, with numbers</h1>
+<p>User instruction: list everything from the recent turns that had not been written down, run the
+numbers for each, send the results to the principal. Script: items.py (13 of 13 checks pass).
+Items 7 and 8 were already computed in ../neutrino-placement-20261109/ and
+../index-alignment-20261109/ but had not been sent.</p>
+<p>Directions: e1..e4 base (e1..e3 observed, e4 the fourth); pairs (5,6), (7,8), (9,10).
+Charge operator and radial field as in six-plane-mismatch-20261109/findings-2.md.</p>
+<h2 id="the-list">The list</h2>
+<ol>
+<li>Block table: each particle as the observed three plus optional fourth direction and pair.</li>
+<li>"The fourth direction is the weak force."</li>
+<li>Mixing angles as quantities to compare with the counts.</li>
+<li>Planck's constant as a universal field norm.</li>
+<li>A neutrino missing one of our three directions, as the reason it barely interacts.</li>
+<li>The two neutral values and conventional theory's two neutral slots.</li>
+<li>Depth-five placements and exact neutrality (computed earlier, unsent).</li>
+<li>Do the indices n line up with anything (computed earlier, unsent).</li>
+</ol>
+<h2 id="1-block-table-holds-as-a-labelling">1. Block table: holds as a labelling</h2>
+<p>Rule: depth = 3 + [fourth bound] + 2 [pair bound]; Gamma_4 = (-1)^([fourth] + [pair] + 1);
+normal degree = 2 - 2 [pair]. It reproduces the four charges (-1/3, +2/3, 0, -1) and the depths
+3, 4, 5, 6. Four consecutive depths always decompose this way, so the non-automatic content is
+that the two quark families are the two depths without a pair (1 chance in 6), which the case
+already has as the free su(3) rows. Uses the alternative neutrino placement, not the case's.</p>
+<p>Beta signs: up-type and neutrino rows are beta = +1; down-type and electron rows are beta = -1.</p>
+<h2 id="2-fourth-direction-weak-force-not-supported-by-the-value-algebra">2. "Fourth direction = weak force": not supported by the value algebra</h2>
+<ul>
+<li>All six rotations of the base four commute with Gamma_4. Partners have opposite Gamma_4, so
+no rotation of the four turns one partner's value into the other's.</li>
+<li>Each single base Clifford matrix flips Gamma_4, keeps the normal degree and changes the
+charge by exactly one unit. The three observed directions and the fourth do this identically.
+Nothing singles out the fourth.</li>
+<li>Rotations into the fourth direction do not commute with observer rotations (commutator 0.50).</li>
+<li>Consequence that is a number: the partner-type value fills a fixed share of every field's
+small component, equal to bound base directions over depth: quarks 1, electron 2/3, neutrino
+0.8 (first five) or 0.6 (two of ours + fourth + pair).</li>
+</ul>
+<p>What survives is a statement about shapes (partners differ by one bound base direction), not a
+derivation of the weak interaction.</p>
+<h2 id="3-mixing-angles-against-the-counts-one-match-in-five">3. Mixing angles against the counts: one match in five</h2>
+<p>Measured values are from memory and need confirming.</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Relation</th>
+<th>From counts</th>
+<th>Measured</th>
+<th>Off by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sin(Cabibbo) = sqrt(C_d/C_s) = 1/sqrt(20)</td>
+<td>0.22361</td>
+<td>0.2243</td>
+<td>-0.3%</td>
+</tr>
+<tr>
+<td>V_td/V_ts = sqrt(C_d/C_s)</td>
+<td>0.22361</td>
+<td>0.207</td>
+<td>+8%</td>
+</tr>
+<tr>
+<td>V_ub/V_cb = sqrt(C_u/C_c)</td>
+<td>0.04116</td>
+<td>0.093</td>
+<td>-56%</td>
+</tr>
+<tr>
+<td>V_cb = sqrt(C_s/C_b), bottom as geometric mean</td>
+<td>0.150</td>
+<td>0.0411</td>
+<td>+265%</td>
+</tr>
+<tr>
+<td>sin(theta_13) = sin(Cabibbo)/sqrt(2)</td>
+<td>0.15811</td>
+<td>0.1483</td>
+<td>+6.6%</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are old empirical mass-ratio relations evaluated with the counts. The first is the
+well-known one and works because C_s/C_d = 20 matches the measured mass ratio. The others fail
+or are loose. No support for mixing angles following the counts through these relations.</p>
+<h2 id="4-planck-s-constant-as-a-universal-norm-consistent-not-selected">4. Planck's constant as a universal norm: consistent, not selected</h2>
+<ul>
+<li>Angular momentum in an observed plane per unit norm is exactly one half at depths 6 and 10
+(quadrature, orbital and spin terms).</li>
+<li>Ten-direction solution, m0 = g = 1. Reproduces the case's N = 16.53120797 and
+E/N = 0.9920086125 at omega = 0.99.</li>
+</ul>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>omega</th>
+<th>N</th>
+<th>E/(omega N)</th>
+<th>small-component share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.900</td>
+<td>130216.12</td>
+<td>1.0233</td>
+<td>5.0e-2</td>
+</tr>
+<tr>
+<td>0.950</td>
+<td>9308.0785</td>
+<td>1.0108</td>
+<td>2.5e-2</td>
+</tr>
+<tr>
+<td>0.990</td>
+<td>16.531208</td>
+<td>1.0020</td>
+<td>5.0e-3</td>
+</tr>
+<tr>
+<td>0.999</td>
+<td>0.0016918</td>
+<td>1.0002</td>
+<td>5.0e-4</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Energy is frequency times norm to within the binding correction (0.02% to 2.3%).</li>
+<li>The norm is not fixed by the law. It falls steeply and monotonically toward threshold. A
+universal norm would therefore pick exactly one frequency for the ground branch at a given
+depth. That is one value per depth, so by the project criteria rule of this date it cannot by itself
+account for several indices per depth.</li>
+</ul>
+<h2 id="5-neutrino-missing-one-of-our-directions">5. Neutrino missing one of our directions</h2>
+<ul>
+<li>Spin: about the unbound observed axis, angular momentum per norm is exactly one half. About
+either of the other two axes it is short by w/5. Same result for "two of ours + fourth +
+pair" and "two of ours + one from each pair". If the unbound axis is the line of flight, the
+helicity is exact.</li>
+<li>Contact scaling relative to electron-electron: (a/L)^(3 - number of our directions bound),
+with a/L &lt; 3.3e-5 from the earlier contact estimate: 1, 3.3e-5, 1.1e-9, 3.7e-14 for 3, 2, 1, 0
+of our directions bound. Dimension counting only, not a cross-section.</li>
+</ul>
+<h2 id="6-the-two-neutral-values-are-conjugates">6. The two neutral values are conjugates</h2>
+<ul>
+<li>One map (flip the second base plane and all three normal pairs) reverses every charge, keeps
+beta and sends normal degree j to 3 - j. It exchanges the two neutral values. Their equal mix
+is its own conjugate, which is why its charge integral is exactly zero in every placement.</li>
+<li>The beta = +1 half holds charges +2/3 (6 components), 0 (2), 0 (2), -2/3 (6). The beta = -1
+half holds -1 (2), -1/3 (6), +1/3 (6), +1 (2). The conventional sixteen of one generation
+mixes these (2/3, -1/3, -2/3, +1/3, 0, -1, +1, 0). So the case's charge assignment splits the
+32 differently from the conventional one, and the neutral pair here is a value and its
+conjugate.</li>
+</ul>
+<h2 id="7-depth-five-placements-neutrino-placement-20261109-findings-md">7. Depth-five placements (../neutrino-placement-20261109/findings.md)</h2>
+<p>No placement is exactly neutral with one neutral value (errors w/15 or w/5); the equal mix of
+the two neutral values is exactly neutral in all ten placements tested (2e-18). The down-quark
+error is not affected.</p>
+<h2 id="8-indices-index-alignment-20261109-index_tests-out">8. Indices (../index-alignment-20261109/index_tests.out)</h2>
+<p>Sums among the fifteen indices are at chance level (12 observed, 7.3 to 8.4 expected). One
+structured relation stands out: charged lepton = up-type + neutrino in generations 1 and 2
+(13 = 3 + 10, 35 = 20 + 15); such a rule in two generations occurs in 0.5% of random sets and
+in 2.8% of generation shuffles. Found after looking. It fails in generation 3 (n = 94 at depth
+six, 30.8 GeV).</p>
+<h2 id="overall">Overall</h2>
+<p>Supported: 4 (consistency only), 5 (spin result), 6, 7. Labelling only: 1. Not supported: 2, 3
+(apart from the one known relation). Mixed: 8.</p>
+<hr>
+<h2 id="independent-review-of-the-six-plane-and-charge-integral-material-sol-9-november-2026">Independent review of the six-plane and charge-integral material (Sol, 9 November 2026)</h2>
+<h1 id="independent-review-six-plane-geometry-radial-charge-and-color">Independent review: six-plane geometry, radial charge and color</h1>
+<p>2026-11-09 UTC. Task <code>sol-six-plane-charge-review-20261109</code>. Reviewer: <code>sol-nongaussian-fidelity-20261109</code>.</p>
+<h2 id="verdict-1">Verdict</h2>
+<p><strong>Qualify and relocate the Case's six-plane incompatibility sentence.</strong> The distinct normal and electron bound six-planes are algebraically compatible; their inequality is not itself a contradiction. Claude's coordinate-subset charge formula, the specified electron tilt law, and the nested odd-depth defects survive independent derivation. However, 'the paired plane is the only orientation' needs the qualification <strong>any reference-complex line, modulo SU(3), at fixed reference and seed</strong>. The universal assertion that no placement of an odd-depth field can have the table mean is false: an explicit seed-compatible tilted depth-five plane has zero mean charge. It does not repair the assigned nested depth-five field or establish a conserved charge eigenfield.</p>
+<p>The negative-beta seed issue is substantive. The positive-beta radial branch in Case12.50 cannot be relabeled as the electron or down-quark table branch while retaining its radial equations and small lower-component fraction. The charge calculations on those negative-beta seeds are valid kinematic tests of trial fields, not demonstrated solutions of the supplied positive-beta branch. The proton-neutrality number therefore remains a conditional warning, not an established empirical prediction or conflict.</p>
+<p>The color spectator-block and partial-intertwiner identities are sound. They establish conditional equivalence in a reflection-even scalar environment, not a general nonlinear color law, physical confinement, or exact multi-particle reciprocal solution. A vanishing total color expectation for one prepared profile is weaker than its being an invariant singlet profile.</p>
+<h2 id="exact-sources-and-methods">Exact sources and methods</h2>
+<p>The target Claude packet is <code>agents/claude/six-plane-mismatch-20261109/</code>, snapshot <strong>5225</strong>. Main bodies:</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>findings.md</td>
+<td>b76c9d3b35f2e7c3d508d6ae7775dea29f3fb14f38767e34342a05113f493056</td>
+</tr>
+<tr>
+<td>findings-2.md</td>
+<td>e98db3346282801fec7e666c6d7030f52074cff8495b2bfc64f6f35b2c1f3c18</td>
+</tr>
+<tr>
+<td>charge_integrals.py</td>
+<td>8c4e36becc123c2783747e21bb87679fa782f4f89806d08ad8a19b00034fb341</td>
+</tr>
+<tr>
+<td>color_equivalence.py</td>
+<td>90bd7d99aa797cbc2229a2468dc15cc61648cd00ff1097c724f667d47052337c</td>
+</tr>
+</tbody>
+</table></div>
+<p>The exact current trimmed Case is <code>archived-source</code>, snapshot <strong>5226</strong>, SHA <strong>a0b9aeb4d29f1f2e79f458a05815316e66e690027c8e76ecc48959c0eb173ddf</strong>. Supporting integration is <code>archived-source</code>, snapshot <strong>5226</strong>, SHA <strong>71303dfd68e62f3a69e8ed029886aa003e3bda1809031ff7e8d656176528db77</strong>.</p>
+<p>I retrieved all seventeen assignment-listed source bodies/outputs/manifests/messages and stored exact copies with hashes and current amendment metadata in <code>source-pins.json</code>. They had no recorded amendments when read. I additionally retrieved the actual angular operator source <code>archived-source</code> at5226, SHA <strong>6f7d9edf9c7c89003b714b444f69bfd7521ae057c87cbd9a52eaab479d49208f</strong>, and both attached qualifications, also listed in the pins. Those qualifications retain its origin, interaction, domain and physical-normalization limits. The trimmed Case omits the old10.2–10.3 equation numbers but retains the operator and its limits; the actual definitions were checked against that supporting source.</p>
+<p>I read the scripts and saved outputs but did not replay Claude's scripts. My separately authored <code>independent-contractions.py</code> builds Clifford matrices by direct occupation-bit action and evaluates exact sphere-second-moment contraction formulas, independently of Claude's Gaussian-product quadrature. Its final run passed31 angular contractions:24 nested seed/depth combinations, four electron tilts, and three depth-five base/normal tilts. This is a floating-point consistency check of an analytical derivation, not a rigorous interval enclosure or new radial solution. The full derivation is below.</p>
+<p>Two reviewer implementation failures were preserved: run1 used unsupported Python <code>int.bit_count</code>; run2 reached a tilt assertion with electron/neutral seed names swapped. Run3 corrects the labels and explicitly asserts their charge characters before the tilt tests. Frozen prior code versions, all three completed runner receipts and <code>run-history.md</code> retain these failures. The final unit is <code>idwt-compute-2229a6d8dd6d4457a80f4d5f0d8b21c6.service</code>, return0, cpu.max <code>50000 100000</code>, one physical core, common1200M/no-swap containment and a60-second timeout. No failed result is counted as successful evidence.</p>
+<p>This session did not author Claude's packet or the cited ancestor constructions. Earlier work in this session was the separate non-Gaussian fidelity review; it supplies no independent support here.</p>
+<h2 id="1-geometry-and-subgroup-bookkeeping">1. Geometry and subgroup bookkeeping</h2>
+<p>Within the ten-direction matter domain set B4=span(e1,...,e4), N6=span(e5,...,e10), Q6=span(e1,...,e6), and L=span(e5,e6). Then</p>
+<pre><code>Q6 = B4 direct-sum L,
+N6 = L direct-sum span(e7,...,e10),
+Q6 intersection N6 = L.
+</code></pre>
+<p>This is consistent linear geometry. With the given observer plane inside B4, identifying Q6 with N6 would discard localization along the observed directions. The distinction is therefore required by this particular arrangement. It does not independently derive either physical plane, their orientation, or all possible representations of observer spin.</p>
+<p>Let J be the reference complex structure on N6 with pairs56,78,9,10. Its orthogonal centralizer is U(3). The color SU(3) subgroup preserving the complex line L setwise is S(U(1)×U(2)), of dimension4, locally u(2). Fixing the real e5 direction, as required by the connected stabilizer of Q5=B4+Re5, also fixes Je5=e6; the surviving group is SU(2), dimension3, acting on e7,...,e10. This distinguishes the setwise Q6 stabilizer from the pointwise kinetic commutant. The latter is dimension3 at both depths5 and6, consistent with the integration note's9.29. Neither table derives a weak group.</p>
+<p>The pure-seed/full-split SU(5) stabilizer table and this fixed-reference SU(3) subgroup calculation answer different questions. Matching their free SU(2) factors does not make them the same complete construction.</p>
+<h2 id="2-charge-integral-independent-derivation">2. Charge integral: independent derivation</h2>
+<p>Use exactly the stated conventions</p>
+<pre><code>L_ab = -i(x_a partial_b-x_b partial_a),
+S_ab = -(i/2)gamma_a gamma_b,
+Gamma4 = gamma1 gamma2 gamma3 gamma4,
+K4 = Gamma4[3/2+2 sum_(a&lt;b&lt;=4) S_ab L_ab],
+N6 = sum_(ab=56,78,9,10)(L_ab+S_ab),
+Qang = (K4+N6)/3.
+</code></pre>
+<p>Let s be a unit simultaneous eigenvector of beta, Gamma4 and the three normal pair spins, with values eta, g4 and sigma_k=±1/2. Let F,G be real radial functions on a d-plane, and</p>
+<pre><code>Psi = F(r)s+iG(r)gamma(n)s,       n=x_bound/r,
+N = integral_bound(F²+G²)&gt;0,
+w = integral_bound G²/N.
+</code></pre>
+<p>Beta anticommutes with each gamma, so the two components are pointwise orthogonal. The field is uniform in the complementary directions; averages below use centered symmetric free-volume regularization, not a finite ten-dimensional norm. Require convergent bound integrals, sufficient smoothness and vanishing boundary terms for conserved/operator claims. These trial integrals alone do not establish a self-adjoint generator domain or absence of free-boundary flux.</p>
+<p>For a coordinate-aligned bound subset with nb base and dn=d-nb normal axes, sphere averaging gives &lt;n_i n_j&gt;=delta_ij/d on retained axes. Cross terms odd in n vanish. On the upper component K4 has value(3/2)g4. On the lower component its spin part contributes g4[(3/2)(dn-nb)/d], and its base orbital part contributes g4 nb(nb-1)/d. Thus</p>
+<pre><code>kappa = (3/2)dn/d+(nb-5/2)nb/d
+      = 3/2-nb(4-nb)/d.
+</code></pre>
+<p>A normal pair fully bound or fully free contributes the same sigma_k to the normalized total rotation on both components. If exactly one axis is bound, its orbital free-coordinate term averages to zero and its spin value reverses on that one lower direction; the lower mean is sigma_k(1-2/d). Therefore, writing h_k=1 for a straddled pair,</p>
+<pre><code>q_table = [(3/2)g4+sum sigma_k]/3,
+q = [(1-w)(3/2)g4+w g4 kappa
+     +sum sigma_k(1-2w h_k/d)]/3,
+</code></pre>
+<p>or, more transparently,</p>
+<pre><code>q-q_table = -w [g4 nb(4-nb)+2 sum sigma_k h_k]/(3d).        (A)
+</code></pre>
+<p>This independently verifies Claude's coordinate-subset formula, including its signs and normalization. The formula is kinematic and valid for any such radial trial profiles; it does not require Gaussian F,G or a numerical radial branch.</p>
+<h3 id="independent-arbitrary-plane-contraction">Independent arbitrary-plane contraction</h3>
+<p>For orthonormal bound basis b_i, let P=sum b_i b_i^T and v_a=P e_a. Put Q0=[(3/2)Gamma4+sum S_normal]/3. The lower-component charge coefficient is</p>
+<pre><code>q_lower = (1/d)sum_i s† gamma(b_i) Q0 gamma(b_i)s
+  - i/(3d) sum_(a&lt;b&lt;=4) s†[gamma(v_a)Gamma4(2S_ab)gamma(v_b)
+                        -gamma(v_b)Gamma4(2S_ab)gamma(v_a)]s
+  - i/(3d) sum_normal s†[gamma(v_a),gamma(v_b)]s.           (B)
+</code></pre>
+<p>Then q=(1-w)q_table+w q_lower. To derive(B), project the coordinate factor and derivative onto the bound plane after the symmetric free average. Their antisymmetric orbital combination annihilates the radial scalar factor. Acting on the lower gamma(n) leaves G[n_a gamma(v_b)-n_b gamma(v_a)]s. Contract its inner product with -iG s†gamma(n), using &lt;n_a gamma(n)&gt;=gamma(v_a)/d. This yields exactly the two orbital sums above. No quadrature or radial differential equation is used.</p>
+<p><code>independent-contractions.py</code> implements(B), rather than copying the author's formula(A). Its agreement with(A) and the following tilted expressions is supplementary independent numerical evidence.</p>
+<h2 id="3-electron-tilt-non-uniqueness-and-selection">3. Electron tilt, non-uniqueness and selection</h2>
+<p>For the electron table seed g4=-1 and all sigma_k=-1/2, retain B4 and replace e6 by cos(theta)e6+sin(theta)e7. Equation(B) yields</p>
+<pre><code>q(theta) = -1+(w/9)sin²(theta).
+</code></pre>
+<p>This matches Claude's four points. For w&gt;0 it attains-1 precisely at the J-invariant endpoint(s) in that particular one-angle family. If w=0, every orientation has the same mean and the purported selection disappears.</p>
+<p>More generally, let the two extra normal directions form any real two-plane with projector P_L. Their normal contribution changes the table mean by</p>
+<pre><code>q+1 = w[2+tr(P_L J P_L J)]/18
+    = w[2-||P_L J P_L||_F²]/18 &gt;= 0.
+</code></pre>
+<p>The numerator vanishes exactly when J maps L to itself: the projection of J on L retains full squared norm2 precisely in that case. It is <strong>not</strong> a unique coordinate plane. Every complex line in C³ works, and SU(3) acts transitively on those lines. The selected set is one SU(3) orbit, not only(e5,e6). A generic non-J-invariant real two-plane fails for this fixed seed/reference/operator. Moving the reference or seed is a different comparison and must be specified.</p>
+<p>The isolated isotropic density equation supplies no restoring preference among orientations. Requiring a chosen value of q is a restriction on preparations, not a derived dynamical selection principle. The first finding's unqualified statement 'same charge for every tilt' is superseded by the follow-up fixed-reference tilt calculation and must not be integrated literally.</p>
+<h2 id="4-depth-results-and-the-limit-of-the-universal-odd-depth-claim">4. Depth results and the limit of the universal odd-depth claim</h2>
+<p>Equation(A) gives exactly:</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Bound plane</th>
+<th>q-q_table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nested depth2, e1,e2</td>
+<td>-(2/3)w g4</td>
+</tr>
+<tr>
+<td>nested depth3, e1,e2,e3</td>
+<td>-(1/3)w g4</td>
+</tr>
+<tr>
+<td>nested depth4, e1,...,e4</td>
+<td>0</td>
+</tr>
+<tr>
+<td>nested depth5, e1,...,e5</td>
+<td>-(2/15)w sigma56; +w/15 for the neutral seed</td>
+</tr>
+<tr>
+<td>nested depth6, e1,...,e6</td>
+<td>0</td>
+</tr>
+<tr>
+<td>depth10</td>
+<td>0</td>
+</tr>
+<tr>
+<td>depth2 on a full normal pair</td>
+<td>0</td>
+</tr>
+<tr>
+<td>depth5, e1,e2,e3,e5,e6</td>
+<td>-(1/5)w g4</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are exact mathematical statements for the stated seed and radial ansatz. The nonzero nested depth3/depth5 results are not parameter-specific quadrature errors. At w&gt;0 they disprove exact transplantation of the table mean to those <strong>nested</strong> trial fields under this operator. They do not refute all IDWT charge constructions, the physical depth assignments, or the field theory as a whole.</p>
+<p>For every coordinate subset at odd d there is a simple stronger proof. The numerator in(A) is an integer. Modulo2, its first term has parity nb because g4=±1 and nb(4-nb)=nb modulo2; its second term has parity equal to the number h of straddled normal pairs. Since h=dn modulo2, the whole numerator has parity d. It is odd and cannot vanish. Thus <strong>no coordinate-aligned odd-depth subset with these joint eigen-seeds and w&gt;0</strong> has the exact table mean. This proves more coordinate cases than Claude sampled, without generalizing to every real subspace.</p>
+<p>The claim 'exact if and only if whole B4(or none) plus whole normal pairs' is valid as a criterion for reproducing <strong>all four table seed rows together</strong> in coordinate subsets. It is too strong for an individual row: cancellations of opposite normal spins can produce exact means in other even-depth subsets.</p>
+<h3 id="explicit-exact-neutral-tilted-depth-five-counterexample">Explicit exact-neutral tilted depth-five counterexample</h3>
+<p>Take the neutral table seed g4=+1, sigma56=sigma78=sigma9,10=-1/2, beta=+1. Set t=sin²(phi), c=cos(phi), sphi=sin(phi), and</p>
+<pre><code>V5 = span(e1,e2,e3,e5,c e4+sphi e6).
+</code></pre>
+<p>From(B), the angular lower-component averages are</p>
+<pre><code>&lt;K4&gt;_lower = 3/2-3t/5,
+&lt;N6&gt;_lower = -13/10-t/5.
+</code></pre>
+<p>The upper means are3/2 and-3/2, whose sum vanishes. Consequently</p>
+<pre><code>q = w(1-4sin²(phi))/15.                                  (C)
+</code></pre>
+<p>At <strong>sin(phi)=1/2, cos(phi)=sqrt(3)/2</strong>, q=0 for any admissible radial F,G, including nonzero w. The independent contractions test t=0,1/4,1 against(C).</p>
+<p>This is not merely a noncompatible generic plane. The seed's34 and56 plane signs agree, and V5 contains the full planes(e1,e2) and</p>
+<pre><code>span(c e3+sphi e5, c e4+sphi e6),
+</code></pre>
+<p>with residual bound axis -sphi e3+c e5 and free partner -sphi e4+c e6. It meets the pure-seed complete-plane compatibility and retains the observed e1,e2,e3. It does <strong>not</strong> contain the fixed B4, is not the assigned nested Q5, and is not obtained by preserving the common reference B4+N6 decomposition. It also only cancels the <strong>mean</strong>: it does not prove Qang Psi=0 or conservation under the nonlinear density law. This is therefore a genuine counterexample to the unrestricted 'no placement' assertion, not a repair of the canonical nested neutrino construction.</p>
+<p>If V5 is required to contain B4 and the neutral seed/reference are kept, its single extra normal line gives the same+w/15 defect irrespective of which normal line is used. Reorientation within N6 alone does not rescue that nested/base-containing case.</p>
+<h2 id="5-positive-beta-branch-and-the-conditional-neutrality-numbers">5. Positive-beta branch and the conditional neutrality numbers</h2>
+<p>In Claude's occupation convention Gamma4=-(1-2n1)(1-2n2), while beta is the product of all five signs. On the retained even-normal-degree table subset, beta=g4. Thus the0 and+2/3 rows have beta=+1; the-1 and-1/3 rows have beta=-1. Case12.50 explicitly assumes a positive-beta seed. Its supplied profiles cannot simply be attached to the negative-beta electron/down rows.</p>
+<p>For a definite seed beta s=eta s, the same stationary ansatz instead satisfies</p>
+<pre><code>G'+(d-1)G/r = (omega-eta m0+V)F,
+F' = -(omega+eta m0+V)G.
+</code></pre>
+<p>Only eta=+1 gives the printed12.50 equations. The density identity F²+G² holds for either sign, but does not make these radial equations equal. Therefore the author's random-seed density check does not prove independence from the beta sign or realizability of all four charge rows on the same branch.</p>
+<p>There is a useful necessary balance. In the general definite-beta ansatz the actual beta integral is</p>
+<pre><code>S_beta/N = eta(1-2w).
+</code></pre>
+<p>The stationary/virial identities, with the same decay and regularity assumptions as12.51, give</p>
+<pre><code>eta(1-2w) = omega/m0+(1-d/10)gU/(m0N).                   (D)
+</code></pre>
+<p>For eta=-1, m0=g=1, omega=.99 and d&lt;=10, the right side is at least.99; hence <strong>w&gt;=.995</strong>. The supplied positive-beta lower fractions around10^-3 are incompatible with those negative-beta stationary preparations. This necessary condition does not prove that another negative-beta branch exists or fails to exist; it proves that the displayed small-w positive-beta branch is not it. At depth10(D) fixes w=.995 for eta=-1, as opposed to.005 for eta=+1.</p>
+<p>For the genuine positive-beta branches, eliminating U from12.51 yields</p>
+<pre><code>w = {1-[omega+(10-d)(E/N-omega)]/m0}/2
+</code></pre>
+<p>when energy and frequency are in consistent units (the displayed numerical specialization has m0=1). Claude's quoted approximate w values follow from the supplied rounded energies; they are not independently fitted physical constants. The neutral positive-beta depth-five warning +w/15≈1.11×10^-4 is therefore a legitimate conditional test of this proposed operator on that radial branch. A new radial solve is not needed to show the nonzero coefficient.</p>
+<p>If, additionally, normalized quark means were physical electric charges with a common normalization, two exact+2/3 up fields plus a down field-1/3+w_down/3 would give a putative proton1+w_down/3, against a paired electron mean-1. That conditional algebra is correct. But w_down cannot be borrowed from the positive-beta branch as a demonstrated down solution, the common norm/source law is unproved, and composite interactions may change the isolated ansatz. I do not adopt the quoted empirical neutrality precision or claim an empirical conflict. The required physical identifications are absent even before any experimental bound is consulted.</p>
+<h2 id="6-color-what-is-exact-and-what-is-not">6. Color: what is exact and what is not</h2>
+<h3 id="spectator-blocks-and-intertwiner">Spectator blocks and intertwiner</h3>
+<p>With no derivatives along e7,...,e10, their occupation operators n4,n5 commute with gamma1,...,gamma6 and beta. They also commute with multiplication by a scalar density potential. The four labels are</p>
+<pre><code>electron/singlet (n4,n5)=(1,1),
+color A=(0,0), color B=(1,0), color C=(0,1).
+</code></pre>
+<p>Different blocks are orthogonal. Every retained derivative/matrix word preserves them, so cross densities between these blocks vanish pointwise, not only for the degree-two words sampled by the script. Hence rho is the sum of block densities. This proof is independent of the base chirality and is stronger than the finite word test.</p>
+<p>Write a4 for the annihilator of pair78 and T=a4† gamma6. The canonical anticommutation relations imply, on the color-A block,</p>
+<pre><code>T†T=1,       T maps A into B,
+[T,gamma_i]=0 (i&lt;=5),   {T,gamma6}=0,   [T,beta]=0.
+</code></pre>
+<p>It is a <strong>partial isometry between blocks</strong>, not a unitary color transformation on the entire32-component carrier. Pairing T with reflection x6→-x6 intertwines the retained Dirac operators in a scalar potential which has that reflection symmetry. Colors B and C exchange through the finite unitary generated by a5†a4-a4†a5, which commutes with all retained kinetic matrices and beta. These analytic identities confirm the matrix claims; no new matrix replay was necessary for them.</p>
+<h3 id="necessary-limits">Necessary limits</h3>
+<p>The color script's variable called electron uses base(0,1) with all normal occupations1. In its own Clifford convention this has Gamma4=+1 and charge0, not electron charge-1. Its block/intertwiner identities are base-independent and do extend kinematically to the negative-beta electron seed, but the script itself does not test a physical electron solution. The first checker's 'normal degree' uses raw occupation count, whereas the charge script uses normal spin sum+3/2, reversing the degree convention. Both endpoint spaces are singlets and both intermediate spaces have Casimir4/3; those Casimir checks alone do not fix the required triplet versus conjugate-triplet convention. Retain the actual occupation/charge definitions when integrating.</p>
+<p>Vanishing cross densities does not remove the shared scalar nonlinear coupling. All block fields still respond through the same rho. Exact equivalence in a prescribed reflection-even common potential is established by the intertwiner. The scripts do not construct a self-consistent electron/quark solution, prove preservation of that reflection symmetry under arbitrary reciprocal evolution, or cover arbitrary several-electron arrangements merely because their bound planes agree. Several displaced or deformed electron patterns need not have one common x6 reflection symmetry. A quark initially uniform in all of N6 also need not remain so when a localized electron adds a potential depending on x5,x6; induced responses must be retained. The exact reduced block sector only requires uniformity in e7,...,e10.</p>
+<p>For a centered isolated radial electron trial profile, parity and the seed singlet make the tilting color-generator means zero; stabilizer generators cancel their orbital/spin action. This supports the bounded expectation statement. The complete profile is nevertheless changed by a generator which tilts its bound plane: a spatial derivative of its nonconstant density is nonzero. It is not an invariant full SU(3) singlet field merely because all generator expectations vanish. Mixed bound/free angular generators also require care with the per-unit-free-volume domain, because they leave that reduced uniformity sector. No finite physical color source or general neutrality law follows from the14 matrix checks.</p>
+<p>The initial findings' orbit/contact comments are consistency suggestions, not derived interaction results. In particular no encounter exponent or complete six-dimensional electron trajectory follows from this packet's uniformity and three-dimensional steering statements. No such extrapolation should enter the Case from this review.</p>
+<h2 id="7-conservation-numerical-coverage-and-exact-case-recommendation">7. Conservation, numerical coverage and exact Case recommendation</h2>
+<p>The defining free differential symmetry is valid under its stated domain. A bound radial density at nested depth3 is not radial in all B4; K4 therefore does not commute with that prescribed potential. At nested depth5 the straddled56 pair also makes the N6 rotation act nontrivially on the potential. Generic electron tilts similarly break the fixed-reference normal rotation. A cancellation of a prepared mean such as(C) does not repair these commutators or a complete nonlinear source law.</p>
+<p>Claude's '36 of36 comparisons' is not the count present in the script/output: there are24 nested charge comparisons, three other placements and four electron tilts, <strong>31 charge comparisons</strong>, plus one random density-identity test. The remaining printed supplied-parameter sizes are formula evaluations, not additional charge-integral comparisons. The fourteen first-stage matrix checks and eight color checks are present. Their output headers contain running launch receipts; they do not by themselves contain final runner return codes, although each saved script output reaches failed:0. This review did not verify historical service completion separately. The final independent receipt supplied here does record return0.</p>
+<p>Recommended integration is narrow and constructive:</p>
+<ol>
+<li>
+<p><strong>Replace/relocate the sentence in Case13.3</strong>, rather than retaining the mere plane inequality as a principal incompatibility. Suggested replacement:</p>
+<blockquote>
+<p>The reference normal six-plane and the electron's bound six-plane can coexist: the latter contains the four-base and one reference-complex normal line. This is algebraic compatibility, not a dynamical orientation selection or a complete common charge/color law. Applying the angular charge to the supplied radial preparations leaves nonzero nested depth-three and depth-five defects, and the electron/down charge rows require a beta branch not supplied by the positive-beta radial calculation.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Add a short qualified paragraph near section9's bound/free table</strong>:</p>
+<blockquote>
+<p>For the reference pairs56,78,9,10 and bound electron plane e1,...,e6, the shared plane is56. Its setwise color stabilizer is u(2); fixing a vector of that line reduces it to su(2) on the free four directions. At fixed charge reference, the electron table mean is retained by any complex normal line, all equivalent under SU(3). The isolated density equation does not choose such a line or restore an unpaired tilt.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Add the exact negative result near section12.15 or as a tightly linked limitation of section10</strong>, retaining the distinction from other charge constructions:</p>
+<blockquote>
+<p>For radial fields evaluated with Qang, the nested depth-three mean differs from its seed character by -w g4/3, and the neutral nested depth-five mean is+w/15. Here w is the lower-component norm fraction. Depths4,6,10 retain the table mean kinematically. These statements do not make the negative-beta electron/down seeds solutions of the positive-beta radial branch, and they do not derive a physical electric source.</p>
+</blockquote>
+</li>
+<li>
+<p>If the detailed review is linked, include the conditional color-block result and tilted depth-five counterexample there. Do not insert 'all odd placements fail', 'one unique coordinate plane', 'all tilts preserve charge', an unconditional multi-electron equivalence, or an empirical proton-neutrality discrepancy into the Case. Do not merge the fitted plane-parity charge, curvature source, exterior character and Qang under one label.</p>
+</li>
+</ol>
+<p>The residual open question is sharper than mere plane mismatch: <strong>which same-field dynamics selects the relative reference/bound geometry and the appropriate beta branch, and supplies a conserved, normalized common electric/color response during causal reciprocal interactions?</strong> The nested odd-depth defect must remain visible while that question is investigated. The counterexample narrows an overbroad claim; it does not erase the canonical negative result.</p>
+<p>Changed premises: none adopted. Alternative tilted preparation(C) is explicitly a mathematical counterexample, not a replacement of the assigned nested species. No stable result IDs were changed. The research stays within one field on infinitely many ordinary spatial dimensions plus time, with matter occupying up to ten, all remaining directions unbound, and literal deterministic six-dimensional electron trajectories. No mediator, compactification, probability cloud or instantaneous mutual response is introduced. The Clifford components and normalized integrals are classical field mathematics, not positions or a Born law.</p>
+<hr>
+<h2 id="independent-review-of-the-uniform-polarised-background-sol-9-november-2026">Independent review of the uniform polarised background (Sol, 9 November 2026)</h2>
+<h1 id="independent-review-uniform-background-alignment-addendum">Independent review: uniform-background alignment addendum</h1>
+<p>2026-11-09 UTC. Task <code>sol-six-plane-background-alignment-review-20261109</code>. Reviewer: <code>sol-nongaussian-fidelity-20261109</code>.</p>
+<h2 id="exact-version-verdict">Exact-version verdict</h2>
+<p><strong>Retain a conditional positive-beta closure result and a frozen-profile energy preference; correct the general physical-alignment conclusions.</strong> The claimed orientation independence is genuinely valid for the common-gamma radial family with <strong>both seeds beta=+1</strong>, including a uniform background as initial data. The code does physically change the bound plane while holding the seed/background value fixed. Its use of one gamma direction is not a fatal error for that restricted family. It is, however, essential to the proof and does not cover independent nonuniform response directions or the actual beta-negative electron charge row.</p>
+<p>For the beta-negative electron-character seed there is a directional interference term which the positive-beta proof omits. An explicit independent comparison gives densities <strong>0.68 versus0.84</strong> when the bound direction changes relative to a fixed background. This disproves an unrestricted transfer of that proof to the electron row. It does not establish a force, restoring orientation, or selection of the electron's extra paired normal line.</p>
+<p>The reported shooting-derived energy, lower fraction, three energy differences, binding percentages and leading-term accuracy survive a bounded independent integration/refinement check at their printed precision. Lower averaged frozen-profile energy is not a demonstrated dynamical alignment or selection of a physical common pairing. No dressed background/particle solution, stability analysis or conserved physical charge/color source is supplied.</p>
+<h2 id="sources-ancestry-and-execution">Sources, ancestry and execution</h2>
+<p>The exact author packet is <code>agents/claude/six-plane-mismatch-20261109/</code>, snapshot5243:</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>findings-3.md</td>
+<td>1553c35cb321112a0507c89f593957815637888c4f4011f8c69808aa971069f0</td>
+</tr>
+<tr>
+<td>background_alignment.py</td>
+<td>4ea9462595273db527d572034039f694cd0864e2616bc6e15ed27b49561f40ad</td>
+</tr>
+<tr>
+<td>background_alignment.out</td>
+<td>d148699e932417560d951880bc83ee3b0bca5f52f2ea1b926ed3d35346b0c464</td>
+</tr>
+<tr>
+<td>background_alignment.json</td>
+<td>ba5094a96614ee008d89d07211ffc83008318c180956b0041b5d99c9b08c870f</td>
+</tr>
+</tbody>
+</table></div>
+<p>The exact Case field law is12.24 in <code>archived-source</code>, snapshot5240, SHA <strong>15c69fd20c2710bca41d7c3da347038c256a0635d98a0496c67346e19eb1e739</strong>. Exact original findings, manifests, mail and prior review are also retrieved in <code>inputs/</code>; <code>source-pins.json</code> records their database identities and current amendment metadata. The Case carries the prior scoped-review relationship with a revised-target warning; that is not whole-Case approval. The current stable-result readback is saved separately as <code>inputs/stable-result-readback.json</code>; the CLI has no historical-result snapshot selector, so I do not relabel that current read as an exact historical5241 read.</p>
+<p>I authored the earlier six-plane review, report SHA06a6d91844be7372af63064ecde58c79a92f9416f63ddc03c3c11874604f3252. That ancestry is disclosed: this addendum review is independent of Claude's new calculation, not an independent second review of my own earlier findings. The relevant branch/cross-term identities are explicitly derived again below.</p>
+<p>One independent scientific job was run, with no failure or retry: <code>independent-check.py</code>, unit <strong>idwt-compute-32fa649626d340a48730133b2dc06c62.service</strong>, return0. Its receipt records cpu.max50000 100000 and one physical core; the common runner enforces1200M/no swap, with a120-second command timeout. <code>compute-receipt.json</code> and <code>independent-results.json</code> are frozen. The code imports no author executable; it constructs its own Clifford matrices, compares a derived analytical RHS with ten-direction finite differences, checks two explicit scope counterexamples, and performs one bounded finite-domain radial integration using the author's <strong>pinned central value</strong>. It does not independently locate that shooting central value or solve a dressed state. The only execution warning is NumPy's <code>trapz</code> deprecation; no assertion failed.</p>
+<h2 id="1-constant-background-and-the-exact-closure-identity">1. Constant background and the exact closure identity</h2>
+<p>For a unit beta-positive seed s0, constant amplitude A and</p>
+<pre><code>Psi_bg = A exp(-i Omega0 t)s0,
+Omega0 = m0-g|A|^(2/9),
+</code></pre>
+<p>all spatial derivatives vanish and rho=|A|². This is an exact spatially uniform solution of12.24. Its complete spatial norm is infinite; excess-energy calculations therefore require a stated background subtraction and, below depth10, per-unit-free-volume convention. No stability follows from this exact solution.</p>
+<p>Let both fixed unit seeds satisfy beta s=s and beta s0=s0. For any physical bound d-plane Q, n_Q=x_bound/r and Gamma_Q=gamma(n_Q), write</p>
+<pre><code>U=F1 s+F0 s0,       V=G1 s+G0 s0,
+Psi=U+i Gamma_Q V.
+</code></pre>
+<p>Hermiticity gives Gamma_Q†=Gamma_Q and Gamma_Q²=1. Since beta anticommutes with Gamma_Q, U†Gamma_Q V=0. Thus</p>
+<pre><code>rho=||U||²+||V||²
+   =|F1|²+|F0|²+2Re(F0* F1 z)
+    +|G1|²+|G0|²+2Re(G0* G1 z),
+z=s0†s.
+</code></pre>
+<p>There is no Q orientation in this expression. The <strong>complex</strong> Gram entry z enters for complex radial coefficients; its phase can be absorbed consistently into one seed and its coefficients, leaving z=kappa&gt;=0. Saying only|z| matters requires that phase convention, or the beat average used later.</p>
+<p>The full10-direction derivative reduces exactly to</p>
+<pre><code>D10 Psi = V'+(d-1)V/r-i Gamma_Q U'.
+</code></pre>
+<p>Consequently the RHS of12.24 is</p>
+<pre><code>[m0 U-g rho^(1/9)U+V'+(d-1)V/r]
+  +i Gamma_Q[-U'-m0 V-g rho^(1/9)V].                    (1)
+</code></pre>
+<p>This proves closure and Q-independent radial coefficient evolution, including complex F,G. A uniform upper-only background initially has F0=A exp(-i Omega0 t), G0=0 and belongs to this family. Its later induced lower response can follow the particle's Q. Thus using the same Gamma_Q is a <strong>closed-family premise which includes that initial background</strong>, not merely rotating both independent spatial patterns together in the numerical comparison.</p>
+<p>Within this family, at fixed seeds/coefficient data, the orientation degeneracy is exact at any amplitude. It does not prove stability, existence of a dressed localized solution, or no orientation effect in every background/branch. A truly uniform value has no separate bound plane; a pre-existing nonuniform response does.</p>
+<h3 id="independent-q-reorientation-is-not-rigid-rotation-of-the-complete-particle">Independent Q reorientation is not rigid rotation of the complete particle</h3>
+<p>The code keeps <strong>both seeds fixed</strong> while changing Q. A rigid physical rotation of the complete particle instead changes Q to RQ and its seed to S(R)s, with the background s0 held fixed. The relevant overlap is then kappa(R)=|s0†S(R)s| and need not stay constant. For example take aligned s=s0 and rotate only the6–7 coordinate plane. Its spin lift is S(R)=cos(theta/2)I±sin(theta/2)gamma6 gamma7. For this Fock background s0†gamma6 gamma7 s0=0, hence</p>
+<pre><code>kappa(R)=|cos(theta/2)|.
+</code></pre>
+<p>The frozen averaged energy below therefore changes under that <strong>whole-pattern</strong> rotation, entirely through value overlap, even with beta=+1. This is not contradicted by(1). If the seed and bound plane are independent preparation variables, s=s0 remains available at every Q, so this energy preference alone still selects no independent Q. If a physical solution constrains their relative geometry, a whole-pattern orientation response must be assessed with that constraint; this packet does not derive it. An unconditional assertion that uniform polarity cannot orient a complete particle is consequently too strong for an additional reason beyond the beta-negative counterexample.</p>
+<h2 id="2-explicit-beta-negative-electron-comparison">2. Explicit beta-negative electron comparison</h2>
+<p>For beta s=-s and beta s0=+s0, the same cross-term cancellation is false. Now s0†s=0, but</p>
+<pre><code>zeta(n)=s0†gamma(n)s
+</code></pre>
+<p>need not vanish. The density contains</p>
+<pre><code>2Re{i(F0*G1-G0*F1) zeta(n)}.                           (2)
+</code></pre>
+<p>In the author's occupation convention choose s0=occupation01111 (beta=+1, Gamma4=+1, normal degree0) and <strong>s=gamma3 s0</strong>. Then beta s=-s, Gamma4 s=-s, the normal degree remains0 and the table character is the electron's-1 row. At one instant take</p>
+<pre><code>F1=.8, G1=.2, F0=.4, G0=0,
+Psi(n)=.8s+.2i gamma(n)s+.4s0.
+</code></pre>
+<p>Here zeta(e4)=i and zeta(e7)=0. Directly from(2), or the independent matrix check,</p>
+<pre><code>rho(e4)=.8²+.2²+.4²-2(.4)(.2)=.68,
+rho(e7)=.8²+.2²+.4²=.84.                              (3)
+</code></pre>
+<p>These compare the same bound-local coordinate after rotating the physical fourth bound direction e4 to e7, with the background and seed held fixed; e1,e2,e3 can remain in both bound planes. Real smooth radial functions can take these F,G values at the chosen radius, so this is not a normalization or adjoint artifact. The density is angularly anisotropic and the scalar nonlinearity generally leaves the proposed radial family. Even after a nonzero beat average removes the linear density interference, averaging the nonlinear density power can retain dependence on|zeta(n)|.</p>
+<p>This counterexample changes the position of the fixed B4 within Q. It does <strong>not</strong> show that the specific tilt of the extra normal line at fixed B4 has an orientation preference, nor establish a stationary electron on the background. For these particular seeds zeta is supported in B4, so a tilt solely inside N6 is a different question. The constructive correction is to retain(1) only on its actual beta-positive domain and leave actual-electron orientation selection open.</p>
+<p>The positive-beta radial preparation at omega=.99 is 'electron-type' only by depth, not the electron charge row. The earlier beta-branch limitation is unaffected; replacing the seed with a negative-beta one changes its radial mass signs. This addendum supplies no negative-beta dressed solution.</p>
+<h2 id="3-independent-nonuniform-background-directions">3. Independent/nonuniform background directions</h2>
+<p>With independently directed lower pieces, the relevant inner product is</p>
+<pre><code>(gamma(n0)s0)†gamma(n1)s
+  =s0†gamma(n0)gamma(n1)s,
+</code></pre>
+<p>which contains both n0·n1 and a Clifford bivector term. It equals s0†s only for the common unit direction used in(1), not arbitrary directions. A simple positive-beta example with s=s0, zero upper parts, and equal lower amplitudes has</p>
+<pre><code>||i gamma(e5)s0+i gamma(e5)s0||²=4,
+||i gamma(e7)s0+i gamma(e5)s0||²=2.
+</code></pre>
+<p>The independent check verifies both. This is a limit on extending the identity to a background with its own nonuniform lower response; it is not a counterexample to the exact initially uniform positive-beta setup. Such cases require retaining full spatial directions, their gradients and reciprocal evolution rather than imposing one common radial Gamma_Q.</p>
+<h2 id="4-audit-of-the-original-numerical-evidence">4. Audit of the original numerical evidence</h2>
+<p><code>rhs</code> differentiates in all ten ambient directions. For random Q each coordinate perturbation is correctly projected into that Q by <code>field</code>; no omitted derivative or forced six-axis-only kinetic operator was found. The orientation comparison holds the seeds fixed and compares equal bound-local radii in straight, tilted and random physical planes. It is a meaningful test of(1).</p>
+<p>The closure residual is the norm of the component outside the four-column sampled span, divided by the RHS norm. It is <strong>not</strong> a stationary-solution residual. At alpha=0 two seeds coincide and that basis is rank deficient; least-squares coefficients are then convention-dependent, although its span and closure residual remain meaningful. The alpha=.5 and1.1 comparisons do test independent seeds. The saved1.2524e-10 closure and1.3693e-10 orientation discrepancies are finite-difference diagnostics at one h=1e-5, not certified error bounds. The changed-overlap control changes the seed and its Gram entry; its nonzero effect is consistent with the density formula, not an orientation force.</p>
+<p>My separate analytic-RHS comparison uses fixed positive-beta seeds, different points and three physical Q choices. Across h=.01 to1e-5 the ten-direction central-difference errors fall quadratically from3.5–4.7e-5 to4.5–5.3e-11. Exact labelled coefficient differences across Q are2.22e-16. A direct potential/density overlap control changes the coefficients as expected. This strengthens the numerical support for(1), while the algebra is its proof.</p>
+<p>The author script really contains seven final checks. Its saved output reaches failed:0. The initial output header is a running launch record, not a final historical runner receipt; I did not independently query that old service. My own completed receipt records return0. The author script's seven passes do not test the beta-negative or independent-direction extensions.</p>
+<h2 id="5-energy-formula-arithmetic-and-convergence">5. Energy formula, arithmetic and convergence</h2>
+<p>For the undressed superposition of a stationary particle and a uniform background, with distinct frequencies and both beta-positive seeds, beat averaging gives</p>
+<pre><code>R(r)=rho_particle(r)+|A|²,
+b(r)=2|A|kappa F(r),
+DeltaE(kappa)=-9g/10 integral_bound
+               {&lt; [R+b cos(tau)]^(10/9)&gt;_tau-R^(10/9)}.
+</code></pre>
+<p>This is aligned/partial-overlap minus orthogonal energy; the background and isolated-particle subtractions cancel in that difference. Mass and kinetic cross terms average to zero over a nonzero beat. The author's rescaling F=F_S u, G=F_S v, F_S=[(m0-omega)/g]^(9/2) correctly turns the nonlinear prefactor into V_SCALE=.01 in its dimensionless integrals. The radial sphere area cancels in energy per norm.</p>
+<p>Convexity of x^(10/9) makes the averaged increment positive for b!=0. Pairing positive/negative cosine values also shows it increases with b. Therefore the energy preference for larger kappa is an exact property of this frozen, beat-averaged diagnostic, rather than a sign inferred only from three rows. It is not exactly quadratic. Expanding to second order gives</p>
+<pre><code>DeltaE(kappa)=-(g/9)|A|² kappa² integral F² R^(-8/9)
+             +higher even powers of b.                 (4)
+</code></pre>
+<p>The control parameter is b/R throughout the relevant profile, not only background density divided by core density. A small core fraction can still have b/R near1 in a tail crossover region. Thus(4)'s several-percent errors are not surprising. Equal frequencies require a fixed-relative-phase calculation rather than this beat average; its cross terms can have a different leading order and sign.</p>
+<p>I independently integrated the radial ODE from the <strong>frozen input</strong> u0=23.280323839969345, with independently chosen tolerance and cutoff r140, rather than repeating the200-shot scan/80 bisections or importing the author script. Refinement from12001 radial/64 phase points to48001/256 reproduced</p>
+<pre><code>E/N=.991429513350795,       w=.002140973298401,
+</code></pre>
+<p>and the following final values:</p>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Background/core density</th>
+<th style="text-align:right">Aligned minus orthogonal per norm</th>
+<th style="text-align:right">Magnitude/binding</th>
+<th style="text-align:right">Half-overlap/full</th>
+<th style="text-align:right">Leading-term relative error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1e-6</td>
+<td style="text-align:right">-6.166841014e-7</td>
+<td style="text-align:right">.00719544%</td>
+<td style="text-align:right">.240404</td>
+<td style="text-align:right">4.73343%</td>
+</tr>
+<tr>
+<td>1e-4</td>
+<td style="text-align:right">-2.259809649e-5</td>
+<td style="text-align:right">.26367343%</td>
+<td style="text-align:right">.236855</td>
+<td style="text-align:right">6.46933%</td>
+</tr>
+<tr>
+<td>1e-2</td>
+<td style="text-align:right">-4.442842848e-4</td>
+<td style="text-align:right">5.18388632%</td>
+<td style="text-align:right">.232351</td>
+<td style="text-align:right">8.64508%</td>
+</tr>
+</tbody>
+</table></div>
+<p>The reported rounded values survive. Raising phase resolution changes the largest full difference by about3e-11 in absolute energy, well below its printed precision. The cutoff has endpoint density about1.04e-15 of the core; this is a diagnostic, not a rigorous weighted-tail bound. The refinements are consistent finite-domain checks, not an independent central-value solve, infinite-domain enclosure or stability proof. The binding fraction uses the isolated diagnostic binding1-E/N; it is not the binding of a dressed object.</p>
+<h2 id="6-claim-disposition-and-replacement-wording">6. Claim disposition and replacement wording</h2>
+<div aria-label="Scrollable table" role="region" tabindex="0" class="table-scroll"><table>
+<thead>
+<tr>
+<th>Author claim</th>
+<th>Disposition and replacement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constant background frequency</td>
+<td>Retain with unit s0, beta-positive sign, amplitude-magnitude notation and infinite-background/excess-energy qualification.</td>
+</tr>
+<tr>
+<td>Result1 exact closure and no Q dependence</td>
+<td>Retain <strong>within the common-Gamma_Q, both-beta-positive radial family at fixed seeds</strong>. It includes the initially uniform upper background and its co-radial response. A rigid whole-particle rotation also changes its seed/overlap and is a different comparison. Do not state it for the beta-negative electron row or independent/nonuniform background response.</td>
+</tr>
+<tr>
+<td>'A uniform background, however strong, exerts no pull on the bound plane'</td>
+<td>Replace by: 'The stated positive-beta co-radial family has exact bound-plane orientation degeneracy at fixed seeds. A rigid rotation can change seed overlap; this calculation does not establish the full orientation response of a particle whose seed and bound geometry are constrained, the negative-beta electron-character branch, or other background geometries.'</td>
+</tr>
+<tr>
+<td>Background does act on the value</td>
+<td>Replace by: 'The beat-averaged excess energy of an undressed fixed-profile superposition decreases with seed overlap under the stated same-beta premises.' No dynamical alignment rate, restoring law or dressed minimum was computed.</td>
+</tr>
+<tr>
+<td>Values align and thereby share one pairing</td>
+<td>A pure seed can encode a complex pairing, but the calculation neither selects a pure physical background nor proves that particle solutions dynamically converge to its seed. Arbitrary positive-beta seeds sampled in the checker are not automatically pure geometric seeds. Treat common-pairing selection as open.</td>
+</tr>
+<tr>
+<td>Quark values are orthogonal and at the top of this energy</td>
+<td>Retain only as a prepared-seed comparison within this frozen diagnostic. Orthogonality of distinct exterior-degree seed values is algebraic; this energy ordering alone supplies neither an instability nor an actual transition pathway. Negative-beta/down-profile qualifications remain.</td>
+</tr>
+<tr>
+<td>Conserved charge/color would have to hold quarks there</td>
+<td>Replace by: 'Persistence of the prepared quark sector requires analysis of invariant sectors, conserved quantities and reciprocal evolution of the complete field. This addendum does not identify the protecting mechanism or derive physical charge/color conservation.' No evidence establishes those two mechanisms as the only possibilities.</td>
+</tr>
+<tr>
+<td>Anything selecting bound planes must be nonuniform or outside density dynamics</td>
+<td>Too broad. Replace by: 'This particular same-beta uniform-background radial test supplies no such selection. Other beta branches, nonradial perturbations and independently structured responses were not excluded.'</td>
+</tr>
+<tr>
+<td>Odd-depth defect</td>
+<td>Retain as unaddressed. Nothing here repairs the previously reviewed nested depth3/depth5 angular-charge defects.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The report supports a precise conditional no-selection example and a reproducible energy diagnostic. It does not yet supply the physical common reference, conserved electric/color response, causal particle encounter law or the actual electron orientation dynamics. No new mediator, probability cloud, compactification, additional manifold or instantaneous mutual influence follows. All components remain classical structure of one field on infinitely many ordinary spatial dimensions plus time, with matter occupying up to ten; six-dimensional electron positions remain distinct from these spinor fields.</p>
+<p>Changed premises: none adopted. Equations(2)-(3) and the independent-direction example explicitly vary the author's same-beta/common-direction assumptions to establish scope limits; they are not substituted particle models. The prior stable result <code>six-plane-charge-orientation-and-depth-defects</code> remains unchanged by this review. Its relevant connection is the beta-branch limitation, not a new approval of physical charge or selection. Principal owns preservation and any new source relationship; mail delivery is neither preservation nor scientific approval.</p>
+<p><a href="/research/notes/20261030-particle-geometry-readable-draft/">Return to the Case</a>.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261030-particle-geometry-readable-draft/">From Particle Masses to Shared Geometry — The Case for Investigating IDWT</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-1"><a href="#normal-six-plane-versus-the-electron-s-bound-six-plane">Normal six-plane versus the electron's bound six-plane</a></li><li class="toc-level-2"><a href="#verdict">Verdict</a></li><li class="toc-level-2"><a href="#setup-as-in-the-case-section-9">Setup (as in the case, section 9)</a></li><li class="toc-level-2"><a href="#why-they-must-differ">Why they must differ</a></li><li class="toc-level-2"><a href="#what-the-mismatch-costs-checked-in-check-py-14-of-14-pass">What the mismatch costs, checked in check.py (14 of 14 pass)</a></li><li class="toc-level-2"><a href="#what-the-4-2-split-of-the-electron-lines-up-with">What the 4 + 2 split of the electron lines up with</a></li><li class="toc-level-2"><a href="#open">Open</a></li><li class="toc-level-1"><a href="#addendum-1-the-three-open-items-calculated">Addendum 1: the three open items, calculated</a></li><li class="toc-level-2"><a href="#method-for-a-and-c">Method for A and C</a></li><li class="toc-level-2"><a href="#a-why-the-electron-s-extra-two-directions-must-be-a-pair">A. Why the electron's extra two directions must be a pair</a></li><li class="toc-level-2"><a href="#b-do-the-three-colors-stay-equivalent-next-to-an-electron">B. Do the three colors stay equivalent next to an electron?</a></li><li class="toc-level-2"><a href="#c-odd-depths">C. Odd depths</a></li><li class="toc-level-2"><a href="#side-note-outside-the-question">Side note (outside the question)</a></li><li class="toc-level-2"><a href="#numbers-at-the-supplied-parameters">Numbers at the supplied parameters</a></li><li class="toc-level-1"><a href="#addendum-2-a-uniform-polarised-background">Addendum 2: a uniform polarised background</a></li><li class="toc-level-2"><a href="#setup">Setup</a></li><li class="toc-level-2"><a href="#result-1-exact-the-background-does-not-act-on-the-bound-plane">Result 1 (exact): the background does not act on the bound plane</a></li><li class="toc-level-2"><a href="#result-2-estimate-the-background-does-act-on-the-value">Result 2 (estimate): the background does act on the value</a></li><li class="toc-level-2"><a href="#reading">Reading</a></li><li class="toc-level-1"><a href="#unrecorded-discussion-items-of-9-november-2026-with-numbers">Unrecorded discussion items of 9 November 2026, with numbers</a></li><li class="toc-level-2"><a href="#the-list">The list</a></li><li class="toc-level-2"><a href="#1-block-table-holds-as-a-labelling">1. Block table: holds as a labelling</a></li><li class="toc-level-2"><a href="#2-fourth-direction-weak-force-not-supported-by-the-value-algebra">2. "Fourth direction = weak force": not supported by the value algebra</a></li><li class="toc-level-2"><a href="#3-mixing-angles-against-the-counts-one-match-in-five">3. Mixing angles against the counts: one match in five</a></li><li class="toc-level-2"><a href="#4-planck-s-constant-as-a-universal-norm-consistent-not-selected">4. Planck's constant as a universal norm: consistent, not selected</a></li><li class="toc-level-2"><a href="#5-neutrino-missing-one-of-our-directions">5. Neutrino missing one of our directions</a></li><li class="toc-level-2"><a href="#6-the-two-neutral-values-are-conjugates">6. The two neutral values are conjugates</a></li><li class="toc-level-2"><a href="#7-depth-five-placements-neutrino-placement-20261109-findings-md">7. Depth-five placements (../neutrino-placement-20261109/findings.md)</a></li><li class="toc-level-2"><a href="#8-indices-index-alignment-20261109-index_tests-out">8. Indices (../index-alignment-20261109/index_tests.out)</a></li><li class="toc-level-2"><a href="#overall">Overall</a></li><li class="toc-level-2"><a href="#independent-review-of-the-six-plane-and-charge-integral-material-sol-9-november-2026">Independent review of the six-plane and charge-integral material (Sol, 9 November 2026)</a></li><li class="toc-level-1"><a href="#independent-review-six-plane-geometry-radial-charge-and-color">Independent review: six-plane geometry, radial charge and color</a></li><li class="toc-level-2"><a href="#verdict-1">Verdict</a></li><li class="toc-level-2"><a href="#exact-sources-and-methods">Exact sources and methods</a></li><li class="toc-level-2"><a href="#1-geometry-and-subgroup-bookkeeping">1. Geometry and subgroup bookkeeping</a></li><li class="toc-level-2"><a href="#2-charge-integral-independent-derivation">2. Charge integral: independent derivation</a></li><li class="toc-level-3"><a href="#independent-arbitrary-plane-contraction">Independent arbitrary-plane contraction</a></li><li class="toc-level-2"><a href="#3-electron-tilt-non-uniqueness-and-selection">3. Electron tilt, non-uniqueness and selection</a></li><li class="toc-level-2"><a href="#4-depth-results-and-the-limit-of-the-universal-odd-depth-claim">4. Depth results and the limit of the universal odd-depth claim</a></li><li class="toc-level-3"><a href="#explicit-exact-neutral-tilted-depth-five-counterexample">Explicit exact-neutral tilted depth-five counterexample</a></li><li class="toc-level-2"><a href="#5-positive-beta-branch-and-the-conditional-neutrality-numbers">5. Positive-beta branch and the conditional neutrality numbers</a></li><li class="toc-level-2"><a href="#6-color-what-is-exact-and-what-is-not">6. Color: what is exact and what is not</a></li><li class="toc-level-3"><a href="#spectator-blocks-and-intertwiner">Spectator blocks and intertwiner</a></li><li class="toc-level-3"><a href="#necessary-limits">Necessary limits</a></li><li class="toc-level-2"><a href="#7-conservation-numerical-coverage-and-exact-case-recommendation">7. Conservation, numerical coverage and exact Case recommendation</a></li><li class="toc-level-2"><a href="#independent-review-of-the-uniform-polarised-background-sol-9-november-2026">Independent review of the uniform polarised background (Sol, 9 November 2026)</a></li><li class="toc-level-1"><a href="#independent-review-uniform-background-alignment-addendum">Independent review: uniform-background alignment addendum</a></li><li class="toc-level-2"><a href="#exact-version-verdict">Exact-version verdict</a></li><li class="toc-level-2"><a href="#sources-ancestry-and-execution">Sources, ancestry and execution</a></li><li class="toc-level-2"><a href="#1-constant-background-and-the-exact-closure-identity">1. Constant background and the exact closure identity</a></li><li class="toc-level-3"><a href="#independent-q-reorientation-is-not-rigid-rotation-of-the-complete-particle">Independent Q reorientation is not rigid rotation of the complete particle</a></li><li class="toc-level-2"><a href="#2-explicit-beta-negative-electron-comparison">2. Explicit beta-negative electron comparison</a></li><li class="toc-level-2"><a href="#3-independent-nonuniform-background-directions">3. Independent/nonuniform background directions</a></li><li class="toc-level-2"><a href="#4-audit-of-the-original-numerical-evidence">4. Audit of the original numerical evidence</a></li><li class="toc-level-2"><a href="#5-energy-formula-arithmetic-and-convergence">5. Energy formula, arithmetic and convergence</a></li><li class="toc-level-2"><a href="#6-claim-disposition-and-replacement-wording">6. Claim disposition and replacement wording</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>

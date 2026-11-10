@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Detector Weights, Electron Contact and Fields into the Hidden Directions — IDWT V2</title>
+  <meta name="description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="canonical" href="https://idwt-v2.github.io/research/notes/20261110-case-detector-weights-contact-and-fields/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Detector Weights, Electron Contact and Fields into the Hidden Directions — IDWT V2">
+  <meta property="og:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <meta property="og:url" content="https://idwt-v2.github.io/research/notes/20261110-case-detector-weights-contact-and-fields/">
+  <meta property="og:site_name" content="IDWT V2">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Detector Weights, Electron Contact and Fields into the Hidden Directions — IDWT V2">
+  <meta name="twitter:description" content="Supporting calculations and their stated scope for the Case for Investigating IDWT.">
+  <link rel="stylesheet" href="/assets/reading.css">
+  <link rel="stylesheet" href="/assets/katex/katex.min.css">
+  <script type="module" src="/assets/reading.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="IDWT V2 overview">IDWT<span>V2</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="/" >Overview</a>
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/" >Sector Case</a>
+      <a href="/theory/" >Theory</a>
+      <a href="/research/" aria-current="page">Research</a>
+      <a href="/visualizations/" >Visualizations</a>
+      <a href="/evidence/" >Evidence</a>
+    </nav>
+    <a class="search-link" href="/search/">Search <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="article-shell" tabindex="-1">
+  <article class="article">
+    <header class="article-header">
+      <p class="eyebrow">Research</p>
+      <h1>Detector Weights, Electron Contact and Fields into the Hidden Directions</h1>
+      <p class="article-date">Updated <time datetime="2026-11-10">November 10, 2026</time></p>
+      <p class="scope-label">conditional research</p>
+      
+    </header>
+    
+    <div class="article-body">
+<h2 id="registered-weights">Registered weights</h2>
+<p>Candidate weights on the exact d = 6 branch: density-density and energy density converge over all six normal directions; the self-term rate rho^(2/9) converges over the three unresolved directions; rho^(1/9) does not. The crossover weight w(u) = (1+u)^(1/9) - 1 (u = density over ambient density) is Born-linear for small u.</p>
+<pre><code>density-density / density bilinear   p=1.0000  6D total vs cutoff ['0.002976', '0.002976', '0.002976', '0.002976']   3D marginal vs cutoff ['0.003857', '0.003857', '0.003857', '0.003857']   thresholds: total needs p&gt;1/3, marginal needs p&gt;1/6
+energy density (f^2)                 p=1.1111  6D total vs cutoff ['0.001984', '0.001984', '0.001984', '0.001984']   3D marginal vs cutoff ['0.002572', '0.002572', '0.002572', '0.002572']   thresholds: total needs p&gt;1/3, marginal needs p&gt;1/6
+self-term rate rho^(2/9)             p=0.2222  6D total vs cutoff ['45.88', '4991', '5e+05', '5e+07']   3D marginal vs cutoff ['0.6033', '0.6925', '0.7015', '0.7024']   thresholds: total needs p&gt;1/3, marginal needs p&gt;1/6
+self-term potential rho^(1/9)        p=0.1111  6D total vs cutoff ['2452', '2.5e+07', '2.5e+11', '2.5e+15']   3D marginal vs cutoff ['8.368', '98.26', '998.2', '9998']   thresholds: total needs p&gt;1/3, marginal needs p&gt;1/6
+
+/var/www/idwt-v2/agents/claude/observer-coupling-20261109/crossover.py:17: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
+  R2 = r[:, None] ** 2 + s[None, :] ** 2; u = uc * (1 + R2) ** -9; wt = u if born else w(u); m = np.trapz(wt * s[None, :] ** 2, s, axis=1); return m * r ** 2
+/var/www/idwt-v2/agents/claude/observer-coupling-20261109/crossover.py:13: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
+  P = P / np.trapz(P, r); Q = Q / np.trapz(Q, r); return 0.5 * np.trapz(np.abs(P - Q), r)
+u        p_eff
+   1e-04 1.0000
+   1e-02 0.9956
+   1e-01 0.9589
+   1e+00 0.7495
+   1e+01 0.4319
+   1e+03 0.2071
+   1e+06 0.1416
+   1e+12 0.1165
+   1e+24 0.1114
+
+u_c (core rho_s/rho_0)   TV(6D weight vs Born)   TV(3D marginal vs Born)   median r 6D (weight / Born)
+     1e-03              0.0000                   0.0000                   0.680 / 0.680
+     1e-01              0.0019                   0.0014                   0.680 / 0.680
+     1e+00              0.0163                   0.0123                   0.700 / 0.680
+     1e+01              0.0885                   0.0651                   0.740 / 0.680
+     1e+03              0.4192                   0.3014                   0.980 / 0.680
+     1e+06              0.7763                   0.6113                   1.540 / 0.680
+     1e+12              0.9687                   0.8921                   2.680 / 0.680
+     1e+24              0.9995                   0.9946                   15.993 / 0.680
+     1e+48              1.0000                   0.9997                   33.689 / 0.680
+</code></pre>
+<h2 id="electron-contact">Electron contact</h2>
+<p>Contact cross-section with three unsteered hidden offsets, using the computed pair-energy cross term.</p>
+<pre><code>mu=0 (density-density only): tail exponent -13.47, K5 = 0.2562 (a^5 units); sharp-cutoff comparison: a^5/5 = 0.2
+   L/a =   1e+01  r_eff = 1.748e-12 cm
+   L/a =   1e+02  r_eff = 5.528e-14 cm
+   L/a =   1e+04  r_eff = 5.528e-17 cm
+   L/a =   1e+06  r_eff = 5.528e-20 cm
+   L/a =   1e+08  r_eff = 5.528e-23 cm
+   r_eff &lt; 1e-17 cm needs L/a &gt; 3.126e+04  (L &gt; 2.415e-06 cm)
+mu=+1 (in phase): tail exponent -13.41, K5 = 0.4222 (a^5 units); sharp-cutoff comparison: a^5/5 = 0.2
+   L/a =   1e+01  r_eff = 2.244e-12 cm
+   L/a =   1e+02  r_eff = 7.097e-14 cm
+   L/a =   1e+04  r_eff = 7.097e-17 cm
+   L/a =   1e+06  r_eff = 7.097e-20 cm
+   L/a =   1e+08  r_eff = 7.097e-23 cm
+   r_eff &lt; 1e-17 cm needs L/a &gt; 3.693e+04  (L &gt; 2.852e-06 cm)
+</code></pre>
+<h2 id="field-of-a-current-loop-into-the-fourth-direction">Field of a current loop into the fourth direction</h2>
+<pre><code>D = 3
+   h/R =  0.00   F_xy(h)/F_xy(0) =   1.00000   F_xw/F_xy(0) =    0.00000
+D = 4
+   h/R =  0.01   F_xy(h)/F_xy(0) =   0.99954   F_xw/F_xy(0) =   -0.00759
+   h/R =  0.10   F_xy(h)/F_xy(0) =   0.95618   F_xw/F_xy(0) =   -0.07171
+   h/R =  0.30   F_xy(h)/F_xy(0) =   0.70091   F_xw/F_xy(0) =   -0.14337
+   h/R =  1.00   F_xy(h)/F_xy(0) =   0.14025   F_xw/F_xy(0) =   -0.04701
+   h/R =  3.00   F_xy(h)/F_xy(0) =   0.00624   F_xw/F_xy(0) =   -0.00115
+D = 6
+   h/R =  0.01   F_xy(h)/F_xy(0) =   0.99918   F_xw/F_xy(0) =   -0.00969
+   h/R =  0.10   F_xy(h)/F_xy(0) =   0.92276   F_xw/F_xy(0) =   -0.08886
+   h/R =  0.30   F_xy(h)/F_xy(0) =   0.52877   F_xw/F_xy(0) =   -0.14387
+   h/R =  1.00   F_xy(h)/F_xy(0) =   0.03259   F_xw/F_xy(0) =   -0.01668
+   h/R =  3.00   F_xy(h)/F_xy(0) =   0.00026   F_xw/F_xy(0) =   -0.00007
+
+a / R_loop = 0.01
+  D = 4: h/R=0.1: Fxy 0.9562, Fxw -0.0717   h/R=0.3: Fxy 0.7010, Fxw -0.1434   h/R=1.0: Fxy 0.1403, Fxw -0.0470   h/R=3.0: Fxy 0.0062, Fxw -0.0011
+  D = 6: h/R=0.1: Fxy 0.9562, Fxw -0.0717   h/R=0.3: Fxy 0.7010, Fxw -0.1434   h/R=1.0: Fxy 0.1403, Fxw -0.0470   h/R=3.0: Fxy 0.0062, Fxw -0.0011
+a / R_loop = 0.001
+  D = 4: h/R=0.1: Fxy 0.9562, Fxw -0.0717   h/R=0.3: Fxy 0.7009, Fxw -0.1434   h/R=1.0: Fxy 0.1402, Fxw -0.0470   h/R=3.0: Fxy 0.0062, Fxw -0.0011
+  D = 6: h/R=0.1: Fxy 0.9562, Fxw -0.0717   h/R=0.3: Fxy 0.7009, Fxw -0.1434   h/R=1.0: Fxy 0.1402, Fxw -0.0470   h/R=3.0: Fxy 0.0062, Fxw -0.0011
+</code></pre>
+<hr>
+<h2 id="independent-verification-opus-agent-10-november-2026">Independent verification (Opus agent, 10 November 2026)</h2>
+<p>Reproduced independently (closed forms, adaptive quadrature, finite differences): the convergence thresholds (6D total finite iff p &gt; 1/3, marginal iff p &gt; 1/6) and the table values at r0 = 0.5; p_eff; the 6D total-variation distances 0.0000, 0.0019, 0.0163, 0.0885, 0.4192, 0.7763, 0.9687, 0.9995, 1.0000 and the 3D marginal values 0.0123, 0.0651, 0.3014; the angular factor 8 pi^2/3 (numerical test with W = exp(-r^2)); sigma and r_eff; K5 = 0.2562 and 0.4222 (insensitive to the interpolation, about 85% from d &lt; 3), tail exponents -13.467 and -13.409, and L/a = 3.126e4 and 3.693e4 (24.1 and 28.5 nm for a = 7.7232e-11 cm); all loop-field ratios.</p>
+<p>Corrections accepted:</p>
+<ol>
+<li>Crossover medians. The median column was computed with an unweighted cumulative sum on a non-uniform grid cut at r = 40. Exact medians: Born 0.687; u_c = 1: 0.696; 10: 0.737; 1e3: 0.975; 1e6: 1.537; 1e12: 3.433 (page 2.68, wrong); 1e48: 343.9 (page 33.689, truncation artefact, the rho^(1/9) regime reaching r near 460). The total-variation values are unaffected. The Case uses only the total-variation values.</li>
+<li>The rate rho^(2/9) is finite over the three unresolved directions but its six-direction total diverges (as R^2/2). The energy-density weight rho^(10/9) is an assumption.</li>
+<li>'Born-linear' means a weight proportional to density; the factor 1/9 drops out on normalisation. The weight assumes the detector registers the increase of the self-term when densities (not amplitudes) add on a uniform ambient density. u_c is the core value.</li>
+<li>Contact: the normalised pair-energy cross term is taken as the contact measure, W(0) = 1, not derived from a scattering amplitude; offsets uniform in a three-ball and independent of the steered offsets; exactly three hidden directions; a = 2 reduced Compton wavelengths chosen; the tail exponent is fitted from the last two data points; L is not derived. The 1e-17 cm target is the high-energy compositeness bound; reading it as a geometric contact radius is the mapping. The same suppression would apply to other short-range contacts, which the page does not address. The Case states the result as a condition on L.</li>
+<li>Loop field: the law kernel agrees with the four-direction Laplace kernel because for a &lt;&lt; R it reduces to it (1/(1 + R^2/eps^2) is eps^2/R^2 up to O(eps^2/R^2)); the agreement with the six-direction Laplace kernel at h = 0.3 is a numerical coincidence (they differ by 24% at h = 0.1 and by a factor of 3 at h = 1). A_w = 0 follows for a planar loop. F_xw is the off-plane component of a potential from a postulated linear field (the field law contains no gauge field; the kernel is the pattern's self-potential profile reused as a propagator); the three-direction analogue with z as the displaced coordinate gives -0.126 at 0.3. A four-direction Laplace kernel gives a 1/R^2 potential in the resolved directions, which is not observed three-direction magnetostatics unless the hidden extent is bounded. The Case now states the postulate.</li>
+</ol>
+<p><a href="/research/notes/20261030-particle-geometry-readable-draft/">Return to the Case</a>.</p>
+</div>
+    
+    <section class="related-reading" aria-labelledby="related-heading">
+      <p class="eyebrow">Continue reading</p><h2 id="related-heading">Connected notes</h2>
+      <ul><li><a href="/research/notes/20261030-particle-geometry-readable-draft/">From Particle Masses to Shared Geometry — The Case for Investigating IDWT</a></li></ul>
+    </section>
+    
+  </article>
+  
+  <aside class="article-sidebar">
+    <details class="page-toc" open>
+      <summary>On this page</summary>
+      <nav aria-label="On this page"><ol><li class="toc-level-2"><a href="#registered-weights">Registered weights</a></li><li class="toc-level-2"><a href="#electron-contact">Electron contact</a></li><li class="toc-level-2"><a href="#field-of-a-current-loop-into-the-fourth-direction">Field of a current loop into the fourth direction</a></li><li class="toc-level-2"><a href="#independent-verification-opus-agent-10-november-2026">Independent verification (Opus agent, 10 November 2026)</a></li></ol></nav>
+    </details>
+  </aside>
+  
+</main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="/">IDWT<span>V2</span></a>
+    <p>One field. Ten spatial dimensions plus time. Patterns of different dimensionalities.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/research/notes/20261030-particle-geometry-readable-draft/">Sector Case</a>
+      <a href="/research/notes/20260906-research-status/">Research status</a>
+      <a href="/about/">About this edition</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </footer>
+</body>
+</html>
